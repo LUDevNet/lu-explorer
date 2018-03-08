@@ -7,15 +7,19 @@ import { environment } from '../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { MessageService } from './message.service';
-import { Zone, ZoneDetail } from './zone';
-import { ZONES } from './mock-zones';
+
+import { AccessoryDefaultLoc } from './cdclient';
+import { ZoneDetail } from './zone';
+
 
 @Injectable()
 export class LuJsonService {
 
   private baseUrl;
+  private apiUrl;
   private zonesBaseUrl;
   private zonesIndexUrl;
+  private accIndexUrl;
 
   constructor(
     private http: HttpClient,
@@ -29,9 +33,10 @@ export class LuJsonService {
       this.baseUrl = 'http://localhost:8000/';
     }
 
-    this.zonesBaseUrl = this.baseUrl + "lu-json/tables/ZoneTable/";
+    this.apiUrl = this.baseUrl + "lu-json/";
+    this.zonesBaseUrl = this.apiUrl + "tables/ZoneTable/";
     this.zonesIndexUrl = this.zonesBaseUrl + "index.json";
-
+    this.accIndexUrl = this.apiUrl + "tables/AccessoryDefaultLoc/index.json"
   }
 
   private log(message: string) {
@@ -58,8 +63,16 @@ export class LuJsonService {
     };
   }
 
-  getZones(): Observable<Zone[]> {
-    return this.http.get<Zone[]>(this.zonesIndexUrl).pipe(
+  getAccessoryDefaultLoc(): Observable<AccessoryDefaultLoc[]> {
+    return this.http.get<AccessoryDefaultLoc[]>(this.accIndexUrl).pipe(
+      map(acc => acc['_embedded']['AccessoryDefaultLoc']),
+      tap(acc => this.log(`fetched AccessoryDefaultLoc`)),
+      catchError(this.handleError('getAccessoryDefaultLoc', []))
+    )
+  }
+
+  getZones(): Observable<ZoneDetail[]> {
+    return this.http.get<ZoneDetail[]>(this.zonesIndexUrl).pipe(
       map(zones => zones['_embedded']['ZoneTable']),
       tap(zones => this.log(`fetched zones`)),
       catchError(this.handleError('getZones', []))

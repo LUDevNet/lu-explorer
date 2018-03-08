@@ -1,5 +1,9 @@
 <a class="link" (click)="goBack()">go back</a>
 <div *ngIf="zone">
+  <div *ngIf="zone.thumbnail">
+    <h2>{{ zone.DisplayDescription | uppercase }} Thumbnail</h2>
+    <img src="https://xiphoseer.github.io/lu-res/textures/ui/{{zone.thumbnail | replace:'dds':'png' }}">
+  </div>
   <h2>{{ zone.DisplayDescription | uppercase }} Details</h2>
   <table>
     <tr><td>zoneID</td><td>{{zone.zoneID}}</td></tr>

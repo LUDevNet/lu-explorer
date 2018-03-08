@@ -1,7 +1,7 @@
 <h2>Zone Index</h2>
 <ul class="zones">
   <li *ngFor="let zone of zones">
-    <a routerLink="/zones/{{zone.id}}">{{zone.display}}</a>
-    <span class="badge">{{zone.id}}</span> 
+    <a routerLink="/zones/{{zone.zoneID}}">{{zone.DisplayDescription}}</a>
+    <span class="badge">{{zone.zoneID}}</span> 
   </li>
 </ul>
