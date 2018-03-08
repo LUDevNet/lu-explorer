@@ -1,0 +1,33 @@
+<a class="link" (click)="goBack()">go back</a>
+<div *ngIf="zone">
+  <h2>{{ zone.DisplayDescription | uppercase }} Details</h2>
+  <table>
+    <tr><td>zoneID</td><td>{{zone.zoneID}}</td></tr>
+    <tr><td>locStatus</td><td>{{zone.locStatus}}</td></tr>
+    <tr><td>zoneName</td><td>{{zone.zoneName}}</td></tr>
+    <tr><td>scriptID</td><td>{{zone.scriptID}}</td></tr>
+    <tr><td>ghostdistance_min</td><td>{{zone.ghostdistance_min}}</td></tr>
+    <tr><td>ghostdistance</td><td>{{zone.ghostdistance}}</td></tr>
+    <tr><td>population_soft_cap</td><td>{{zone.population_soft_cap}}</td></tr>
+    <tr><td>population_hard_cap</td><td>{{zone.population_hard_cap}}</td></tr>
+    <tr><td>DisplayDescription</td><td>{{zone.DisplayDescription}}</td></tr>
+    <tr><td>mapFolder</td><td>{{zone.mapFolder}}</td></tr>
+    <tr><td>smashableMinDistance</td><td>{{zone.smashableMinDistance}}</td></tr>
+    <tr><td>smashableMaxDistance</td><td>{{zone.smashableMaxDistance}}</td></tr>
+    <tr><td>mixerProgram</td><td>{{zone.mixerProgram}}</td></tr>
+    <tr><td>clientPhysicsFramerate</td><td>{{zone.clientPhysicsFramerate}}</td></tr>
+    <tr><td>serverPhysicsFramerate</td><td>{{zone.serverPhysicsFramerate}}</td></tr>
+    <tr><td>zoneControlTemplate</td><td>{{zone.zoneControlTemplate}}</td></tr>
+    <tr><td>widthInChunks</td><td>{{zone.widthInChunks}}</td></tr>
+    <tr><td>heightInChunks</td><td>{{zone.heightInChunks}}</td></tr>
+    <tr><td>petsAllowed</td><td>{{zone.petsAllowed}}</td></tr>
+    <tr><td>localize</td><td>{{zone.localize}}</td></tr>
+    <tr><td>fZoneWeight</td><td>{{zone.fZoneWeight}}</td></tr>
+    <tr><td>thumbnail</td><td>{{zone.thumbnail}}</td></tr>
+    <tr><td>PlayerLoseCoinsOnDeath</td><td>{{zone.PlayerLoseCoinsOnDeath}}</td></tr>
+    <tr><td>disableSaveLoc</td><td>{{zone.disableSaveLoc}}</td></tr>
+    <tr><td>teamRadius</td><td>{{zone.teamRadius}}</td></tr>
+    <tr><td>gate_version</td><td>{{zone.gate_version}}</td></tr>
+    <tr><td>mountsAllowed</td><td>{{zone.mountsAllowed}}</td></tr>
+  </table>
+</div>
