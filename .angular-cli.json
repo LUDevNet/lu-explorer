@@ -6,10 +6,12 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "docs",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "nexus-force.png",
+        "404.html"
       ],
       "index": "index.html",
       "main": "main.ts",
