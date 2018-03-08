@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ReplacePipe } from './custom-pipes.pipe';
+
 import { AppComponent } from './app.component';
 import { LuJsonService } from './lu-json.service';
 import { ZonesComponent } from './zones/zones.component';
@@ -11,6 +13,7 @@ import { MessageService } from './message.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GithubSpaComponent } from './github-spa/github-spa.component';
+import { AccDefaultLocComponent } from './acc-default-loc/acc-default-loc.component';
 
 
 
@@ -21,7 +24,9 @@ import { GithubSpaComponent } from './github-spa/github-spa.component';
     ZoneDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    GithubSpaComponent
+    GithubSpaComponent,
+    AccDefaultLocComponent,
+    ReplacePipe
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,3 @@
-export class Zone
-{
-  id: number;
-  display: string;
-}
-
 export class ZoneDetail
 {
   zoneID: number;

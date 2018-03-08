@@ -1,0 +1,25 @@
+<h2>AccessoryDefaultLoc</h2>
+<div class="table-responsive">
+<table class="acc">
+  <tr>
+    <th>GroupID</th>
+    <th>Description</th>
+    <th>Pos_X</th>
+    <th>Pos_Y</th>
+    <th>Pos_Z</th>
+    <th>Rot_X</th>
+    <th>Rot_Y</th>
+    <th>Rot_Z</th>
+  </tr>
+  <tr *ngFor="let loc of acc">
+    <td>{{loc.GroupID}}</td>
+    <td>{{loc.Description}}</td>
+    <td>{{loc.Pos_X}}</td>
+    <td>{{loc.Pos_Y}}</td>
+    <td>{{loc.Pos_Z}}</td>
+    <td>{{loc.Rot_X}}</td>
+    <td>{{loc.Rot_Y}}</td>
+    <td>{{loc.Rot_Z}}</td>
+  </tr>
+</table>
+</div>

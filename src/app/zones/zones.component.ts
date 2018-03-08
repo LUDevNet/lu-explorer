@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Zone } from '../zone';
-import { ZONES } from '../mock-zones';
+import { ZoneDetail } from '../zone';
 import { LuJsonService } from '../lu-json.service';
 
 @Component({
@@ -16,13 +15,7 @@ export class ZonesComponent implements OnInit {
     this.getZones()
   }
 
-  zones: Zone[];
-
-  selectedZone: Zone;
-
-  onSelect(zone: Zone): void {
-    this.selectedZone = zone;
-  }
+  zones: ZoneDetail[];
 
   getZones(): void {
     this.luJsonService.getZones().subscribe(zones => this.zones = zones);
