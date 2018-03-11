@@ -1,16 +1,20 @@
 import { Pipe, PipeTransform } from '@angular/core';
-/*
- * Raise the value exponentially
- * Takes an exponent argument that defaults to 1.
- * Usage:
- *   value | exponentialStrength:exponent
- * Example:
- *   {{ 2 | exponentialStrength:10 }}
- *   formats to: 1024
-*/
+
 @Pipe({name: 'replace'})
 export class ReplacePipe implements PipeTransform {
   transform(value: string, pattern: string, instead:string): string {
     return value.replace(pattern, instead);
+  }
+}
+
+// https://stackoverflow.com/questions/35534959/access-key-and-value-of-object-using-ngfor
+@Pipe({name: 'keys'})
+export class KeysPipe implements PipeTransform {
+  transform(value, args:string[]) : any {
+    let keys = [];
+    for (let key in value) {
+      keys.push({key: key, value: value[key]});
+    }
+    return keys;
   }
 }

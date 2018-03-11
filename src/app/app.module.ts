@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ReplacePipe } from './custom-pipes.pipe';
+import { ReplacePipe, KeysPipe } from './custom-pipes.pipe';
 
 import { AppComponent } from './app.component';
 import { LuJsonService } from './lu-json.service';
@@ -14,6 +14,11 @@ import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GithubSpaComponent } from './github-spa/github-spa.component';
 import { AccDefaultLocComponent } from './acc-default-loc/acc-default-loc.component';
+import { BehaviorComponent } from './behavior/behavior.component';
+import { BehaviorDetailComponent } from './behavior/detail/detail.component';
+import { SkillComponent } from './skill/skill.component';
+import { IconComponent } from './icon/icon.component';
+import { BehaviorDetailAltComponent } from './behavior/detail-alt/detail-alt.component';
 
 
 
@@ -26,7 +31,13 @@ import { AccDefaultLocComponent } from './acc-default-loc/acc-default-loc.compon
     DashboardComponent,
     GithubSpaComponent,
     AccDefaultLocComponent,
-    ReplacePipe
+    ReplacePipe,
+    KeysPipe,
+    BehaviorComponent,
+    BehaviorDetailComponent,
+    SkillComponent,
+    IconComponent,
+    BehaviorDetailAltComponent
   ],
   imports: [
     BrowserModule,
