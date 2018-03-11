@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { MessageService } from './message.service';
 
-import { AccessoryDefaultLoc } from './cdclient';
+import { Icons, AccessoryDefaultLoc, Behavior, SkillBehavior } from './cdclient';
 import { ZoneDetail } from './zone';
 
 
@@ -17,6 +17,9 @@ export class LuJsonService {
 
   private baseUrl;
   private apiUrl;
+  private behaviorBaseUrl;
+  private skillBaseUrl;
+  private iconsBaseUrl;
   private zonesBaseUrl;
   private zonesIndexUrl;
   private accIndexUrl;
@@ -34,9 +37,12 @@ export class LuJsonService {
     }
 
     this.apiUrl = this.baseUrl + "lu-json/";
+    this.behaviorBaseUrl = this.apiUrl + "behaviors/";
+    this.skillBaseUrl = this.apiUrl + "tables/SkillBehavior/";
     this.zonesBaseUrl = this.apiUrl + "tables/ZoneTable/";
+    this.iconsBaseUrl = this.apiUrl + "tables/Icons/";
     this.zonesIndexUrl = this.zonesBaseUrl + "index.json";
-    this.accIndexUrl = this.apiUrl + "tables/AccessoryDefaultLoc/index.json"
+    this.accIndexUrl = this.apiUrl + "tables/AccessoryDefaultLoc/index.json";
   }
 
   private log(message: string) {
@@ -83,6 +89,28 @@ export class LuJsonService {
     return this.http.get<ZoneDetail>(this.zonesBaseUrl + id + ".json").pipe(
       tap(zone => this.log(`fetched zone id=${id}`)),
       catchError(this.handleError('getZone', undefined))
+    )
+  }
+
+  getBehavior(id: number): Observable<Behavior> {
+    let page = Math.floor(id / 1024);
+    return this.http.get<Behavior>(this.behaviorBaseUrl + page + "/" + id + ".json").pipe(
+      tap(behavior => this.log(`fetched behavior id=${id}`)),
+      catchError(this.handleError('getBehavior', undefined))
+    )
+  }
+
+  getSkill(id: number): Observable<SkillBehavior> {
+    return this.http.get<SkillBehavior>(this.skillBaseUrl + id + ".json").pipe(
+      tap(skill => this.log(`fetched skill id=${id}`)),
+      catchError(this.handleError('getSkill', undefined))
+    )
+  }
+
+  getIcon(id: number): Observable<Icons> {
+    return this.http.get<Icons>(this.iconsBaseUrl + id + ".json").pipe(
+      tap(icon => this.log(`fetched icon id=${id}`)),
+      catchError(this.handleError('getIcon', undefined))
     )
   }
 
