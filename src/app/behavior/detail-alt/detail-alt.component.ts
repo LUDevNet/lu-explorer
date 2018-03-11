@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 import { LuJsonService } from '../../lu-json.service';
 import { Behavior } from '../../cdclient';
@@ -23,10 +24,21 @@ export class BehaviorDetailAltComponent implements OnInit {
   max_level: number = 1;
   pending: number = 0;
 
+  baseUrl: string;
+
   selectedBehavior: Behavior;
 
   constructor(private route: ActivatedRoute,
-    private luJsonService: LuJsonService) {}
+    private luJsonService: LuJsonService) {
+
+    if (environment.production) {
+      // using public API
+      this.baseUrl = 'https://xiphoseer.github.io/';
+    } else {
+      // serving API locally
+      this.baseUrl = 'http://localhost:8000/';
+    }
+  }
 
   callback(id: number, level: number, behavior: Behavior) {
     level = this.nodes.find(node => node.id === id).level;
@@ -89,7 +101,7 @@ export class BehaviorDetailAltComponent implements OnInit {
     {
       node.label = "BasicAttack";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/knight_blade.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/knight_blade.png';
       this.add_child(id, behavior, level, 'on_success', 'success');
       this.add_child(id, behavior, level, 'on_failed_armor', 'failed armor');
       this.add_child(id, behavior, level, 'on_failed_blocked', 'failed blocked');
@@ -98,7 +110,7 @@ export class BehaviorDetailAltComponent implements OnInit {
     {
       node.label = "TacArc";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/skills_blow_dart.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/skills_blow_dart.png';
       this.add_child(id, behavior, level, 'action', '');
       this.add_child(id, behavior, level, 'blocked action', 'blocked');
     }
@@ -114,7 +126,7 @@ export class BehaviorDetailAltComponent implements OnInit {
     {
       node.label = "Projectile Attack";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/skills_flaming_arrow.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/skills_flaming_arrow.png';
     }
     else if (behavior.templateID == 5)
     {
@@ -133,20 +145,20 @@ export class BehaviorDetailAltComponent implements OnInit {
     {
       node.label = "AreaOfEffect";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/bubble_generator.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/bubble_generator.png';
       this.add_child(id, behavior, level, 'action', '');
     }
     else if (behavior.templateID == 8)
     {
       node.label = "Play Effect";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/disco_ball.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/disco_ball.png';
     }
     else if (behavior.templateID == 12)
     {
       node.label = "OverTime";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/spark_thrower.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/spark_thrower.png';
       this.add_child(id, behavior, level, 'action', '');
     }
     else if (behavior.templateID == 13)
@@ -162,26 +174,26 @@ export class BehaviorDetailAltComponent implements OnInit {
     {
       node.label = "Stun";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/bonedaddy.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/bonedaddy.png';
     }
     else if (behavior.templateID == 16)
     {
       node.label = "Duration";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/spark_thrower.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/spark_thrower.png';
       this.add_child(id, behavior, level, 'action', '');
     }
     else if (behavior.templateID == 17)
     {
       node.label = "Knockback";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/skills_repulsion.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/skills_repulsion.png';
     }
     else if (behavior.templateID == 18)
     {
       node.label = "AttackDelay";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/turtle_rush.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/turtle_rush.png';
       this.add_child(id, behavior, level, 'action', '');
     }
     else if (behavior.templateID == 22)
@@ -195,14 +207,14 @@ export class BehaviorDetailAltComponent implements OnInit {
     else if (behavior.templateID == 25)
     {
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/skills_lucky.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/skills_lucky.png';
       node.label = "LootBuff";
     }
     else if (behavior.templateID == 27) // e.g. 4417
     {
       node.label = "Spawn";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/crabby.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/crabby.png';
     }
     else if (behavior.templateID == 29)
     {
@@ -218,7 +230,7 @@ export class BehaviorDetailAltComponent implements OnInit {
     {
       node.label = "Skill Cast\nFailed";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/skills_marks_the_spot.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/skills_marks_the_spot.png';
     }
     else if (behavior.templateID == 38)
     {
@@ -232,7 +244,7 @@ export class BehaviorDetailAltComponent implements OnInit {
     else if (behavior.templateID == 39)
     {
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/skills_whirlwind.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/skills_whirlwind.png';
       node.label = "ChangeOrientation";
     }
     else if (behavior.templateID == 40)
@@ -243,13 +255,13 @@ export class BehaviorDetailAltComponent implements OnInit {
     {
       node.label = "Interrupt";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/skills_marks_the_spot.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/skills_marks_the_spot.png';
     }
     else if (behavior.templateID == 42)
     {
       node.label = "AlterCooldown";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/spark_thrower.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/spark_thrower.png';
     }
     else if (behavior.templateID == 43)
     {
@@ -270,7 +282,7 @@ export class BehaviorDetailAltComponent implements OnInit {
     {
       node.label = "Start";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/skills_freebuild.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/skills_freebuild.png';
       this.add_child(id, behavior, level, 'action');
     }
     else if (behavior.templateID == 46)
@@ -281,7 +293,7 @@ export class BehaviorDetailAltComponent implements OnInit {
     {
       node.label = "AlterChainDelay";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/spark_thrower.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/spark_thrower.png';
     }
     else if (behavior.templateID == 52)
     {
@@ -311,7 +323,7 @@ export class BehaviorDetailAltComponent implements OnInit {
     {
       node.label = "AirMovement";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/body_slam.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/body_slam.png';
       this.add_child(id, behavior, level, 'ground_action', 'ground');
       this.add_child(id, behavior, level, 'hit_action', 'hit');
       this.add_child(id, behavior, level, 'hit_action_enemy', 'hit enemy');
@@ -321,7 +333,7 @@ export class BehaviorDetailAltComponent implements OnInit {
     {
       node.label = "PullToPoint";
       node.shape = 'image';
-      node.image = 'http://localhost:8000/lu-res/textures/ui/inventory/skills/skills_snap_trap.png';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/skills_snap_trap.png';
     }
   }
 
