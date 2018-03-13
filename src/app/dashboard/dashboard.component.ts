@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  baseUrl: string;
+
+  constructor() {
+    if (environment.production) {
+      // using public API
+      this.baseUrl = 'https://xiphoseer.github.io/';
+    } else {
+      // serving API locally
+      this.baseUrl = 'http://localhost:8000/';
+    }
+  }
 
   ngOnInit() {
   }

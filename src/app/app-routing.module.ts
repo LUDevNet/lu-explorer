@@ -7,6 +7,7 @@ import { AccDefaultLocComponent } from './acc-default-loc/acc-default-loc.compon
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { BehaviorDetailAltComponent }   from './behavior/detail-alt/detail-alt.component';
 import { SkillComponent }   from './skill/skill.component';
+import { ObjectsComponent }   from './objects/objects.component';
 
 const routes: Routes = [
   { path: 'acc', component: AccDefaultLocComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'zones/:id', component: ZoneDetailComponent },
   { path: 'behaviors/:id', component: BehaviorDetailAltComponent },
   { path: 'skills/:id', component: SkillComponent },
+  { path: 'objects/:id', component: ObjectsComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: '', component: GithubSpaComponent, pathMatch: 'full' }
 ];

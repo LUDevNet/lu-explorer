@@ -1,0 +1,7 @@
+<ng-container *ngIf="component">
+  <h2>Render Component ({{id}})</h2>
+  
+  <!--<app-icon [iconID]="component.IconID"></app-icon>-->
+  <img class="icon" *ngIf="component.icon_asset"
+    src="{{baseUrl}}lu-res/textures/ui/{{(component.icon_asset | lowercase) | replace:'dds$':'png' }}" />
+</ng-container>

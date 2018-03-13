@@ -3,7 +3,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({name: 'replace'})
 export class ReplacePipe implements PipeTransform {
   transform(value: string, pattern: string, instead:string): string {
-    return value.replace(pattern, instead);
+    let re = new RegExp(pattern, 'g');
+    return value.replace(re, instead);
   }
 }
 

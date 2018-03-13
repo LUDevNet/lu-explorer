@@ -232,6 +232,12 @@ export class BehaviorDetailAltComponent implements OnInit {
       node.shape = 'image';
       node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/skills_marks_the_spot.png';
     }
+    else if (behavior.templateID == 37)
+    {
+      node.label = "ApplyBuff";
+      node.shape = 'image';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/skills_health_buff.png';
+    }
     else if (behavior.templateID == 38)
     {
       node.label = "Chain";
