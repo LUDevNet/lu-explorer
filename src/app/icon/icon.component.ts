@@ -12,6 +12,7 @@ import { Icons } from '../cdclient';
 export class IconComponent implements OnInit {
 
   @Input() iconID: number;
+  @Input() width: string = '64px';
   icon: Icons;
   baseUrl: string;
 

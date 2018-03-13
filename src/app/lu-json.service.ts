@@ -19,7 +19,9 @@ export class LuJsonService {
   private apiUrl;
   private behaviorBaseUrl;
   private skillBaseUrl;
+  private renderBaseUrl;
   private iconsBaseUrl;
+  private objectsBaseUrl;
   private zonesBaseUrl;
   private zonesIndexUrl;
   private accIndexUrl;
@@ -39,8 +41,10 @@ export class LuJsonService {
     this.apiUrl = this.baseUrl + "lu-json/";
     this.behaviorBaseUrl = this.apiUrl + "behaviors/";
     this.skillBaseUrl = this.apiUrl + "tables/SkillBehavior/";
+    this.renderBaseUrl = this.apiUrl + "tables/RenderComponent/";
     this.zonesBaseUrl = this.apiUrl + "tables/ZoneTable/";
     this.iconsBaseUrl = this.apiUrl + "tables/Icons/";
+    this.objectsBaseUrl = this.apiUrl + "objects/";
     this.zonesIndexUrl = this.zonesBaseUrl + "index.json";
     this.accIndexUrl = this.apiUrl + "tables/AccessoryDefaultLoc/index.json";
   }
@@ -92,6 +96,14 @@ export class LuJsonService {
     )
   }
 
+  getRenderComponent(id: number): Observable<any> {
+    let page = Math.floor(id / 256);
+    return this.http.get<any>(this.renderBaseUrl + page + "/" + id + ".json").pipe(
+      tap(component => this.log(`fetched render component id=${id}`)),
+      catchError(this.handleError('getRenderComponent', undefined))
+    )
+  }
+
   getBehavior(id: number): Observable<Behavior> {
     let page = Math.floor(id / 1024);
     return this.http.get<Behavior>(this.behaviorBaseUrl + page + "/" + id + ".json").pipe(
@@ -111,6 +123,17 @@ export class LuJsonService {
     return this.http.get<Icons>(this.iconsBaseUrl + id + ".json").pipe(
       tap(icon => this.log(`fetched icon id=${id}`)),
       catchError(this.handleError('getIcon', undefined))
+    )
+  }
+
+  getObject(id: number): Observable<any> {
+    let fold_a = Math.floor(id / 256);
+    let fold_b = Math.floor(fold_a / 256);
+    let url = this.objectsBaseUrl + fold_b + "/" + fold_a + "/" + id + ".json";
+
+    return this.http.get(url).pipe(
+      tap(object => this.log(`fetched object id=${id}`)),
+      catchError(this.handleError('getObject', undefined))
     )
   }
 

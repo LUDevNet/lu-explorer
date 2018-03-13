@@ -19,6 +19,8 @@ import { BehaviorDetailComponent } from './behavior/detail/detail.component';
 import { SkillComponent } from './skill/skill.component';
 import { IconComponent } from './icon/icon.component';
 import { BehaviorDetailAltComponent } from './behavior/detail-alt/detail-alt.component';
+import { ObjectsComponent } from './objects/objects.component';
+import { RenderComponent } from './objects/render/render.component';
 
 
 
@@ -37,7 +39,9 @@ import { BehaviorDetailAltComponent } from './behavior/detail-alt/detail-alt.com
     BehaviorDetailComponent,
     SkillComponent,
     IconComponent,
-    BehaviorDetailAltComponent
+    BehaviorDetailAltComponent,
+    ObjectsComponent,
+    RenderComponent
   ],
   imports: [
     BrowserModule,
