@@ -11,14 +11,12 @@ import { LuJsonService } from '../lu-json.service';
 export class ObjectsComponent implements OnInit {
 
   object: any;
-  skills: any[];
 
   constructor(private route: ActivatedRoute,
   	private luJsonService: LuJsonService) { }
 
   ngOnInit() {
     this.getObject();
-    this.skills = Array();
   }
 
   getObject():void {
@@ -28,17 +26,7 @@ export class ObjectsComponent implements OnInit {
 
   loadObject(object: any): void
   {
-    this.object = object;
-    for (let skillID in object.skills)
-    {
-      let sk = object.skills[skillID];
-      this.luJsonService.getSkill(sk.skillID).subscribe(skill => this.loadSkill(sk, skill));
-    }
-  }
-
-  loadSkill(skill: any, data: any): void
-  {
-    this.skills[skill.skillID] = data;
+    this.object = object; 
   }
 
 }

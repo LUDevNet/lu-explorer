@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ReplacePipe, KeysPipe } from './custom-pipes.pipe';
+import { ReplacePipe, KeysPipe, RemovePipe, NonNullPipe } from './custom-pipes.pipe';
 
 import { AppComponent } from './app.component';
 import { LuJsonService } from './lu-json.service';
@@ -21,6 +21,11 @@ import { IconComponent } from './icon/icon.component';
 import { BehaviorDetailAltComponent } from './behavior/detail-alt/detail-alt.component';
 import { ObjectsComponent } from './objects/objects.component';
 import { RenderComponent } from './objects/render/render.component';
+import { PackageComponent } from './objects/package/package.component';
+import { ItemComponent } from './objects/item/item.component';
+import { ObjectSkillComponent } from './objects/skill/skill.component';
+import { DataTableComponent } from './data-table/data-table.component';
+import { PhysicsComponent } from './objects/physics/physics.component';
 
 
 
@@ -35,13 +40,20 @@ import { RenderComponent } from './objects/render/render.component';
     AccDefaultLocComponent,
     ReplacePipe,
     KeysPipe,
+    RemovePipe,
+    NonNullPipe,
     BehaviorComponent,
     BehaviorDetailComponent,
     SkillComponent,
     IconComponent,
     BehaviorDetailAltComponent,
     ObjectsComponent,
-    RenderComponent
+    RenderComponent,
+    PackageComponent,
+    ItemComponent,
+    ObjectSkillComponent,
+    DataTableComponent,
+    PhysicsComponent
   ],
   imports: [
     BrowserModule,
