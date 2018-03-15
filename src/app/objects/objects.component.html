@@ -3,70 +3,16 @@
   
   <ng-container *ngFor="let entry of object.components | keys">
     <ng-container [ngSwitch]="entry.key">
+      <app-physics *ngSwitchCase="1" name="Controllable Physics" [id]="entry.value"></app-physics>
       <app-render *ngSwitchCase="2" [id]="entry.value"></app-render>
-      <h2 *ngSwitchCase="53">Package Component ({{entry.value}})</h2>
+      <app-physics *ngSwitchCase="3" name="Simple Physics" [id]="entry.value"></app-physics>
+      <app-skill-component *ngSwitchCase="9" [oskills]="object.skills" [id]="entry.value"></app-skill-component>
+      <app-item *ngSwitchCase="11" [id]="entry.value"></app-item>
+      <app-package *ngSwitchCase="53" [id]="entry.value"></app-package>
       <h2 *ngSwitchDefault>Unknown Component {{entry.key}} ({{entry.value}})</h2>
     </ng-container>
   </ng-container>
 
-  <h2>{{object.name | uppercase }} Skills</h2>
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>castOnType</th>
-      <!-- 3: Consume -->
-      <th>AiCombatWeight</th>
-      <th>Icon</th>
-      <th>Imagination Cost</th>
-      <th>Bonus Imagination</th>
-      <th>Bonus Health</th>
-      <th>Bonus Armor</th>
-      <th>Damage</th>
-      <th>Behavior</th>
-    </tr>
-    <tr *ngFor="let entry of object.skills">
-      <td><a routerLink="/skills/{{entry.skillID}}">{{entry.skillID}}</a></td>
-      <td>{{entry.castOnType}}</td><td>{{entry.AICombatWeight}}</td>
-      <td><span *ngIf="skills[entry.skillID]">
-        <app-icon [width]="'32px'" [iconID]="skills[entry.skillID].skillIcon"></app-icon></span>
-      </td>
-      <td>
-        <span *ngIf="skills[entry.skillID]">{{skills[entry.skillID].imaginationcost}}</span>
-      </td>
-      <td>
-        <span *ngIf="skills[entry.skillID]">{{skills[entry.skillID].imBonusUI}}</span>
-      </td>
-      <td>
-        <span *ngIf="skills[entry.skillID]">{{skills[entry.skillID].lifeBonusUI}}</span>
-      </td>
-      <td>
-        <span *ngIf="skills[entry.skillID]">{{skills[entry.skillID].armorBonusUI}}</span>
-      </td>
-      <td>
-        <span *ngIf="skills[entry.skillID]">{{skills[entry.skillID].damageUI}}</span>
-      </td>
-      <td>
-        <a *ngIf="skills[entry.skillID]" routerLink="/behaviors/{{skills[entry.skillID].behaviorID}}">
-          {{skills[entry.skillID].behaviorID}}
-        </a>
-      </td>
-    </tr>
-  </table>
-
   <h2>{{object.name | uppercase }} Details</h2>
-  <table>
-    <tr><th>Key</th><th>Value</th></tr>
-    <tr><td>description</td><td>{{object.description}}</td></tr>
-    <tr><td>displayName</td><td>{{object.displayName}}</td></tr>
-    <tr><td>gate_version</td><td>{{object.gate_version}}</td></tr>
-    <tr><td>id</td><td>{{object.id}}</td></tr>
-    <tr><td>interactionDistance</td><td>{{object.interactionDistance}}</td></tr>
-    <tr><td>locStatus</td><td>{{object.locStatus}}</td></tr>
-    <tr><td>localize</td><td>{{object.localize}}</td></tr>
-    <tr><td>name</td><td>{{object.name}}</td></tr>
-    <tr><td>nametag</td><td>{{object.nametag}}</td></tr>
-    <tr><td>npcTemplateID</td><td>{{object.npcTemplateID}}</td></tr>
-    <tr><td>placeable</td><td>{{object.placeable}}</td></tr>
-    <tr><td>type  </td><td>{{object.type  }}</td></tr>
-  </table>
+  <app-data-table [table]="object | remove:'components' | remove:'skills'"></app-data-table>
 </div>

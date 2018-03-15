@@ -17,10 +17,15 @@ export class LuJsonService {
 
   private baseUrl;
   private apiUrl;
+  private tablesUrl;
   private behaviorBaseUrl;
   private skillBaseUrl;
   private renderBaseUrl;
+  private physicsBaseUrl;
+  private itemBaseUrl;
+  private lootMatrixBaseUrl;
   private iconsBaseUrl;
+  private packBaseUrl;
   private objectsBaseUrl;
   private zonesBaseUrl;
   private zonesIndexUrl;
@@ -39,9 +44,14 @@ export class LuJsonService {
     }
 
     this.apiUrl = this.baseUrl + "lu-json/";
+    this.tablesUrl = this.apiUrl + "tables/";
     this.behaviorBaseUrl = this.apiUrl + "behaviors/";
-    this.skillBaseUrl = this.apiUrl + "tables/SkillBehavior/";
-    this.renderBaseUrl = this.apiUrl + "tables/RenderComponent/";
+    this.skillBaseUrl = this.tablesUrl + "SkillBehavior/";
+    this.renderBaseUrl = this.tablesUrl + "RenderComponent/";
+    this.physicsBaseUrl = this.tablesUrl + "PhysicsComponent/";
+    this.itemBaseUrl = this.tablesUrl + "ItemComponent/";
+    this.lootMatrixBaseUrl = this.tablesUrl + "LootMatrix/";
+    this.packBaseUrl = this.tablesUrl + "PackageComponent/";
     this.zonesBaseUrl = this.apiUrl + "tables/ZoneTable/";
     this.iconsBaseUrl = this.apiUrl + "tables/Icons/";
     this.objectsBaseUrl = this.apiUrl + "objects/";
@@ -135,6 +145,37 @@ export class LuJsonService {
       tap(object => this.log(`fetched object id=${id}`)),
       catchError(this.handleError('getObject', undefined))
     )
+  }
+
+  getPackageComponent(id: number): Observable<any> {
+    return this.getJsonData(this.packBaseUrl, id, 'PackageComponent');
+  }
+
+  getItemComponent(id: number): Observable<any> {
+    return this.getPagedJsonData(this.itemBaseUrl, id, 'ItemComponent');
+  }
+
+  getPhysicsComponent(id: number): Observable<any> {
+    return this.getPagedJsonData(this.physicsBaseUrl, id, 'PhysicsComponent');
+  }
+
+  getLootMatrix(id: number): Observable<any> {
+    return this.getPagedJsonData(this.lootMatrixBaseUrl, id, 'LootMatrix');
+  }
+
+  getJsonData(url: string, id: number, type: string): Observable<any> {
+    return this.http.get<Icons>(url + id + ".json").pipe(
+      tap(icon => this.log(`fetched ${type} id=${id}`)),
+      catchError(this.handleError(`get ${type}`, undefined))
+    ) 
+  }
+
+  getPagedJsonData(url: string, id: number, type: string): Observable<any> {
+    let page = Math.floor(id / 256);
+    return this.http.get<Icons>(url + page + "/" + id + ".json").pipe(
+      tap(icon => this.log(`fetched ${type} id=${id}`)),
+      catchError(this.handleError(`get ${type}`, undefined))
+    ) 
   }
 
 }

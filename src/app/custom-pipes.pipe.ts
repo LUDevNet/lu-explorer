@@ -19,3 +19,20 @@ export class KeysPipe implements PipeTransform {
     return keys;
   }
 }
+
+// https://stackoverflow.com/questions/35534959/access-key-and-value-of-object-using-ngfor
+@Pipe({name: 'remove'})
+export class RemovePipe implements PipeTransform {
+  transform(value, filter:string) : any {
+    let copy = Object.assign({}, value);
+    delete copy[filter];
+    return copy;
+  }
+}
+
+@Pipe({name: 'nonnull'})
+export class NonNullPipe implements PipeTransform {
+  transform(value) : any {
+    return value.filter(obj => obj.value != undefined);
+  }
+}

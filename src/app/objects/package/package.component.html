@@ -1,0 +1,29 @@
+<h2> Package Component ({{id}})</h2>
+<ng-container *ngIf="component">
+<h3>
+  Loot Matrix ({{component.LootMatrixIndex}})
+  <small>Type: {{component.packageType}}</small>
+</h3>
+<table *ngIf="lootmatrix">
+  <tr>
+    <th>LootTableIndex</th>
+    <th>RarityTableIndex</th>
+    <th>Percent</th>
+    <th>minToDrop</th>
+    <th>maxToDrop</th>
+    <th>id</th>
+    <th>flagID</th>
+    <th>gate_version</th>
+  </tr>
+  <tr *ngFor="let entry of lootmatrix.elements">
+    <td>{{entry.LootTableIndex}}</td>
+    <td>{{entry.RarityTableIndex}}</td>
+    <td>{{entry.percent}}</td>
+    <td>{{entry.minToDrop}}</td>
+    <td>{{entry.maxToDrop}}</td>
+    <td>{{entry.id}}</td>
+    <td>{{entry.flagID}}</td>
+    <td>{{entry.gate_version}}</td>
+  </tr>
+</table>
+</ng-container>
