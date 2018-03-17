@@ -1,0 +1,15 @@
+<h2>Loot Table ({{id}})</h2>
+<table *ngIf="lootTable">
+  <tr>
+    <th>id</th>
+    <th>itemid</th>
+    <th>MissionDrop</th>
+    <th>sortPriority</th>
+  </tr>
+  <tr *ngFor="let entry of lootTable.elements">
+    <td>{{entry.id}}</td>
+    <td><a routerLink="/objects/{{entry.itemid}}">{{entry.itemid}}</a></td>
+    <td>{{entry.MissionDrop}}</td>
+    <td>{{entry.sortPriority}}</td>
+  </tr>
+</table>

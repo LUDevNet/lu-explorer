@@ -301,6 +301,12 @@ export class BehaviorDetailAltComponent implements OnInit {
       node.shape = 'image';
       node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/spark_thrower.png';
     }
+    else if (behavior.templateID == 51)
+    {
+      node.label = "ModularBuild";
+      node.shape = 'image';
+      node.image = this.baseUrl + 'lu-res/textures/ui/inventory/hats/thinking_hat.png';
+    }
     else if (behavior.templateID == 52)
     {
       node.label = "NPC\nCombat\nSkill";

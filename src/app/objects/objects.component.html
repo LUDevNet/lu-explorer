@@ -6,13 +6,29 @@
       <app-physics *ngSwitchCase="1" name="Controllable Physics" [id]="entry.value"></app-physics>
       <app-render *ngSwitchCase="2" [id]="entry.value"></app-render>
       <app-physics *ngSwitchCase="3" name="Simple Physics" [id]="entry.value"></app-physics>
+      <h2 *ngSwitchCase="4">Character Component ({{entry.value}})</h2>
+      <app-script *ngSwitchCase="5" [id]="entry.value"></app-script>
+      <app-destroyable *ngSwitchCase="7" [id]="entry.value"></app-destroyable>
       <app-skill-component *ngSwitchCase="9" [oskills]="object.skills" [id]="entry.value"></app-skill-component>
       <app-item *ngSwitchCase="11" [id]="entry.value"></app-item>
+      <app-vendor *ngSwitchCase="16" [id]="entry.value"></app-vendor>
+      <h2 *ngSwitchCase="17">Inventory Component ({{entry.value}})</h2>
+      <h2 *ngSwitchCase="42">B3Behaviors Component ({{entry.value}})</h2>
+      <app-generic *ngSwitchCase="48" [id]="entry.value" table="Rebuild" [paged]="true"></app-generic>
       <app-package *ngSwitchCase="53" [id]="entry.value"></app-package>
+      <app-generic *ngSwitchCase="35" [id]="entry.value" table="Minifig" [paged]="true"></app-generic>
+      <h2 *ngSwitchCase="55">SoundAmbient2D Component ({{entry.value}})</h2>
+      <h2 *ngSwitchCase="73">Mission Offer Component ({{entry.value}})</h2>
+      <h2 *ngSwitchCase="68">Rocket Landing Component ({{entry.value}})</h2>
       <h2 *ngSwitchDefault>Unknown Component {{entry.key}} ({{entry.value}})</h2>
     </ng-container>
   </ng-container>
 
+  <h2>Icons</h2>
+  <div>
+    <app-icon *ngFor="let icon of object.icons" [iconID]="icon.iconID"></app-icon>
+  </div>
+
   <h2>{{object.name | uppercase }} Details</h2>
-  <app-data-table [table]="object | remove:'components' | remove:'skills'"></app-data-table>
+  <app-data-table [table]="object | remove:'components' | remove:'skills' | remove:'icons'"></app-data-table>
 </div>

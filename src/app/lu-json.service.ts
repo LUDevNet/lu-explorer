@@ -21,9 +21,11 @@ export class LuJsonService {
   private behaviorBaseUrl;
   private skillBaseUrl;
   private renderBaseUrl;
+  private scriptBaseUrl;
   private physicsBaseUrl;
   private itemBaseUrl;
   private lootMatrixBaseUrl;
+  private lootTableBaseUrl;
   private iconsBaseUrl;
   private packBaseUrl;
   private objectsBaseUrl;
@@ -48,9 +50,11 @@ export class LuJsonService {
     this.behaviorBaseUrl = this.apiUrl + "behaviors/";
     this.skillBaseUrl = this.tablesUrl + "SkillBehavior/";
     this.renderBaseUrl = this.tablesUrl + "RenderComponent/";
+    this.scriptBaseUrl = this.tablesUrl + "ScriptComponent/";
     this.physicsBaseUrl = this.tablesUrl + "PhysicsComponent/";
     this.itemBaseUrl = this.tablesUrl + "ItemComponent/";
     this.lootMatrixBaseUrl = this.tablesUrl + "LootMatrix/";
+    this.lootTableBaseUrl = this.tablesUrl + "LootTable/";
     this.packBaseUrl = this.tablesUrl + "PackageComponent/";
     this.zonesBaseUrl = this.apiUrl + "tables/ZoneTable/";
     this.iconsBaseUrl = this.apiUrl + "tables/Icons/";
@@ -159,8 +163,40 @@ export class LuJsonService {
     return this.getPagedJsonData(this.physicsBaseUrl, id, 'PhysicsComponent');
   }
 
+  getScriptComponent(id: number): Observable<any> {
+    return this.getPagedJsonData(this.scriptBaseUrl, id, 'ScriptComponent');
+  }
+
+  getDestructibleComponent(id: number): Observable<any> {
+    return this.getPagedJsonData(this.tablesUrl + "DestructibleComponent/", id, 'DestructibleComponent');
+  }
+
+  getLootTableGroupByIndex(id: number): Observable<any> {
+    return this.getPagedJsonData(this.lootTableBaseUrl + "groupBy/LootTableIndex/", id, 'LootTableGroupByIndex');
+  }
+
   getLootMatrix(id: number): Observable<any> {
     return this.getPagedJsonData(this.lootMatrixBaseUrl, id, 'LootMatrix');
+  }
+
+  getBrickColors(): Observable<any[]> {
+    return this.http.get<any[]>(this.tablesUrl + "BrickColors/index.json").pipe(
+      map(bc => bc['_embedded']['BrickColors'].sort((a,b) => a.id - b.id )),
+      tap(bc => this.log(`fetched Brick Colors`)),
+      catchError(this.handleError('getBrickColors', []))
+    )
+  }
+
+  getGeneric(id: number, table:string, paged:boolean): Observable<any>
+  {
+    if (paged)
+    {
+      return this.getPagedJsonData(this.tablesUrl + table + "/", id, table);
+    }
+    else
+    {
+      return this.getJsonData(this.tablesUrl + table + "/", id, table);
+    }
   }
 
   getJsonData(url: string, id: number, type: string): Observable<any> {

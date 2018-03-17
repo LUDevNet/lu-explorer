@@ -1,0 +1,15 @@
+<h2>Vendor Component ({{id}})</h2>
+<table *ngIf="component">
+  <tr>
+    <th>buyScalar</th>
+    <th>sellScalar</th>
+    <th>refreshTimeSeconds</th>
+  </tr>
+  <tr>
+    <td>{{component.buyScalar}}</td>
+    <td>{{component.sellScalar}}</td>
+    <td>{{component.refreshTimeSeconds}}</td>
+  </tr>
+</table>
+<h3>Loot Matrix ({{component.LootMatrixIndex}})</h3>
+<app-loot-matrix [id]="component.LootMatrixIndex"></app-loot-matrix>
