@@ -1,0 +1,23 @@
+<h2>Brick Colors</h2>
+
+<table *ngIf="table">
+  <tr>
+    <th>id</th>
+    <th>Color</th>
+    <th>description</th>
+    <th>factoryValid</th>
+    <th>legopaletteid</th>
+    <th>validCharacters</th>
+    <th>validTypes</th>
+  </tr>
+  <tr *ngFor="let color of table" id="{{color.id}}">
+    <td>{{color.id}}</td>
+    <td [style.background-color]="'rgba(' + color.red * 255 + ',' + color.green * 255 + ',' + color.blue * 255 + ',' + color.alpha + ')'">
+    </td>
+    <td>{{color.description}}</td>
+    <td>{{color.factoryValid}}</td>
+    <td>{{color.legopaletteid}}</td>
+    <td>{{color.validCharacters}}</td>
+    <td>{{color.validTypes}}</td>
+  </tr>
+</table>

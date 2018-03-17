@@ -3,15 +3,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import { LuJsonService } from '../../lu-json.service';
 
 @Component({
-  selector: 'app-package',
-  templateUrl: './package.component.html',
-  styleUrls: ['./package.component.css']
+  selector: 'app-vendor',
+  templateUrl: './vendor.component.html',
+  styleUrls: ['./vendor.component.css']
 })
-export class PackageComponent implements OnInit {
+export class VendorComponent implements OnInit {
 
   @Input() id: number;
   component: any;
-  lootmatrix: any;
 
   constructor(private luJsonService: LuJsonService) { }
 
@@ -21,8 +20,7 @@ export class PackageComponent implements OnInit {
 
   getComponent(): void
   {
-    this.luJsonService.getPackageComponent(this.id)
-      .subscribe(component => this.component = component);
+  	this.luJsonService.getGeneric(this.id, "VendorComponent", true)
+  	  .subscribe(component => this.component = component);
   }
-
 }

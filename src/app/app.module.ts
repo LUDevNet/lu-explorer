@@ -26,6 +26,13 @@ import { ItemComponent } from './objects/item/item.component';
 import { ObjectSkillComponent } from './objects/skill/skill.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { PhysicsComponent } from './objects/physics/physics.component';
+import { LootTableComponent } from './loot-table/loot-table.component';
+import { ScriptComponent } from './objects/script/script.component';
+import { DestroyableComponent } from './objects/destroyable/destroyable.component';
+import { GenericComponent } from './objects/generic/generic.component';
+import { VendorComponent } from './objects/vendor/vendor.component';
+import { LootMatrixComponent } from './loot-matrix/loot-matrix.component';
+import { BrickColorsComponent } from './brick-colors/brick-colors.component';
 
 
 
@@ -53,7 +60,14 @@ import { PhysicsComponent } from './objects/physics/physics.component';
     ItemComponent,
     ObjectSkillComponent,
     DataTableComponent,
-    PhysicsComponent
+    PhysicsComponent,
+    LootTableComponent,
+    ScriptComponent,
+    DestroyableComponent,
+    GenericComponent,
+    VendorComponent,
+    LootMatrixComponent,
+    BrickColorsComponent
   ],
   imports: [
     BrowserModule,
