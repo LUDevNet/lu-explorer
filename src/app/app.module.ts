@@ -12,10 +12,10 @@ import { ZonesComponent } from './zones/zones.component';
 import { ZoneDetailComponent } from './zone-detail/zone-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GithubSpaComponent } from './github-spa/github-spa.component';
-import { AccDefaultLocComponent } from './acc-default-loc/acc-default-loc.component';
+import { AccDefaultLocComponent } from './misc/acc-default-loc/acc-default-loc.component';
 import { BehaviorComponent } from './behavior/behavior.component';
 import { BehaviorDetailComponent } from './behavior/detail/detail.component';
 import { SkillComponent } from './skill/skill.component';
@@ -34,8 +34,8 @@ import { DestroyableComponent } from './objects/destroyable/destroyable.componen
 import { GenericComponent } from './objects/generic/generic.component';
 import { VendorComponent } from './objects/vendor/vendor.component';
 import { LootMatrixComponent } from './loot-matrix/loot-matrix.component';
-import { BrickColorsComponent } from './brick-colors/brick-colors.component';
-import { EventGatingComponent } from './event-gating/event-gating.component';
+import { BrickColorsComponent } from './misc/brick-colors/brick-colors.component';
+import { EventGatingComponent } from './misc/event-gating/event-gating.component';
 import { FactionsComponent } from './factions/factions.component';
 import { NpcIconComponent } from './objects/npc-icon/npc-icon.component';
 import { LuzComponent } from './zones/luz/luz.component';
@@ -51,6 +51,8 @@ import { MissionNpcComponent } from './objects/mission-npc/mission-npc.component
 import { MissionsComponent } from './missions/missions.component';
 import { ImageComponent } from './serialize/image/image.component';
 import { MissionDetailComponent } from './missions/detail/detail.component';
+import { ObjectDetailComponent } from './objects/detail/detail.component';
+import { MiscComponent } from './misc/misc.component';
 
 
 
@@ -103,7 +105,9 @@ import { MissionDetailComponent } from './missions/detail/detail.component';
     MissionNpcComponent,
     MissionsComponent,
     ImageComponent,
-    MissionDetailComponent
+    MissionDetailComponent,
+    ObjectDetailComponent,
+    MiscComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
 
 import { LuJsonService } from '../lu-json.service';
-import { component_names } from '../components';
+import { LocaleService } from '../locale.service';
 
 @Component({
   selector: 'app-objects',
@@ -11,34 +12,44 @@ import { component_names } from '../components';
 })
 export class ObjectsComponent implements OnInit {
 
-  object: any;
-  component_id: number;
+  objects: any = {};
+  filteredObjects: any = {};
+  needle: string = "";
 
-  constructor(private route: ActivatedRoute,
-  	private luJsonService: LuJsonService) { }
+  constructor(private luJsonService: LuJsonService, private localeService: LocaleService) { }
 
   ngOnInit() {
-    this.getObject();
+    this.getObjects();
   }
 
-  getObject():void {
-  	const id = +this.route.snapshot.paramMap.get('id');
-  	this.luJsonService.getObject(id).subscribe(object => this.loadObject(object));
-  }
-
-  loadObject(object: any): void
+  filter(obj: any, predicate: any, max_size: number)
   {
-    this.object = object;
+    let keys = Object.keys(obj).filter( key => predicate(obj[key]))
+    let to = Math.min(max_size, keys.length);
+    return keys.slice(0, to).reduce( (res, key) => (res[key] = obj[key], res), {});
   }
 
-  selectComponent(id: number)
+  updateFilterList()
   {
-    this.component_id = id;
+    this.filteredObjects = Object.assign({},this.filter(this.objects, object => object.name.includes(this.needle), 100));
   }
 
-  getName(id: number)
+  getObjects():void
   {
-    console.log("Test");
-    return component_names[id];
+  	this.localeService.getLocaleTable("Objects").subscribe(index => this.processObjectIndex(index));
+  }
+
+  processObjectIndex(index: any):void
+  {
+    for (let page of index.pages)
+    {
+      this.localeService.getLocalePage("Objects", page).subscribe(page => this.processObjectPage(page));
+    }
+  }
+
+  processObjectPage(page: any):void
+  {
+    this.objects = Object.assign({}, this.objects, page);
+    this.updateFilterList();
   }
 }
