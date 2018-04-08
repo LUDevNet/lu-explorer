@@ -1,0 +1,15 @@
+<ul class="breadcrumbs">
+  <li>Missions</li>
+</ul>
+
+<h2>Missions</h2>
+
+Name: <input type="text" [(ngModel)]="needle" (keyup)="updateFilterList()"/>
+
+<h3>Results</h3>
+
+<table>
+  <tr *ngFor="let mission of filteredMissions | keys">
+    <td>{{mission.key}}</td><td><a [routerLink]="['/missions/', mission.key]">{{mission.value.name}}</a></td>
+  </tr>
+</table>

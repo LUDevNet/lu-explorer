@@ -1,0 +1,14 @@
+<h2>Event Gating</h2>
+
+<table *ngIf="table">
+  <tr>
+    <th>eventName</th>
+    <th>date_start</th>
+    <th>date_end</th>
+  </tr>
+  <tr *ngFor="let date of table">
+    <td>{{date.eventName}}</td>
+    <td>{{date.date_start | todate}}</td>
+    <td>{{date.date_end | todate}}</td>
+  </tr>
+</table>

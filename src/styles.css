@@ -7,10 +7,29 @@
   unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
 }
 
+html
+{
+  background: url(https://vignette.wikia.nocookie.net/legouniverse/images/a/a5/Davekang_legouniverse43.jpg/revision/latest/scale-to-width-down/1000?cb=20170203015651) no-repeat center center fixed;
+  background-size: cover;
+  color: #fac117;
+  text-shadow: 2px 2px 0px #000;
+}
+
 html, body {
+  /*background-color: #111;
+  color: #fff;*/
+  font-family: "Nunito", sans-serif;
+  background-color: rgba(0,0,0,0.3);
+  margin: 0;
+}
+
+.content
+{
   background-color: #111;
   color: #fff;
-  font-family: "Nunito", sans-serif;
+  border-radius: 2rem;
+  padding: 1rem 2rem 2rem 2rem;
+  text-shadow: none;
 }
 
 body {
@@ -56,7 +75,8 @@ table {
   margin: -10px;
 }
 
-td {
+td
+{
   height: 20px;
   background-color: #000;
   padding: 0.5rem;
@@ -67,4 +87,183 @@ td {
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 0.2rem;
+}
+
+.sidemenu-pane
+{
+  display: flex;
+  flex-direction: row;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.sidemenu
+{
+  flex: 1 0 19rem;
+  padding-right: 1rem;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.sidemenu > ul
+{
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.sidemenu > ul > li
+{
+  padding: 0.3rem 0;
+}
+
+.sidemenu > ul > li:after
+{
+  content: "";
+  width: 0; 
+  height: 0; 
+  border-top: 1.2rem solid transparent;
+  border-bottom: 1.2rem solid transparent;
+  border-left: 1.2rem solid #000;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.sidemenu > ul > li a
+{
+  text-decoration: none;
+  background-color: #000;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  width: calc(100% - 3.4rem);
+}
+
+.sidemenu > ul > li.active a
+{
+  background-color: #fac117;
+}
+
+.sidemenu > ul > li.active:after
+{
+  border-left-color: #fac117;
+}
+
+.sidemenu > ul > li.active a
+{
+  color: #000;
+}
+
+.sidemenu-content
+{
+  flex: 1 1 100%;
+  padding-left: 1rem;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.sidemenu-content ng-container
+{
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.sidemenu-content > h3
+{
+  margin-top: 0;
+}
+
+.main-menu
+{
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  padding: 0.5rem 2.5rem 0 2.5rem;
+  background-color: #66f;
+  border-top-left-radius: 3rem;
+  border-top-right-radius: 3rem;
+  margin: 0 2.5rem;
+}
+
+.main-menu .main-menu-item
+{
+  flex: 1 0 auto;
+  display: block;
+  padding: 0.5rem;
+  padding-bottom: 0;
+  margin: 0 0.5rem;
+  text-align: center;
+  color: #fff !important;
+  font-size: 1.5rem;
+  box-sizing: border-box;
+}
+
+.main-menu .main-menu-item img
+{
+  margin: -1rem;
+  margin-bottom: -1.5rem;
+}
+
+.main-menu .main-menu-item:after
+{
+  display: block;
+  text-align: center;
+  content: "";
+  border-bottom: 1.5rem solid transparent;
+  border-left: 1.5rem solid transparent;
+  border-right: 1.5rem solid transparent;
+  width: 0;
+  height: 0;
+  margin: 0 auto;
+  margin-top: -0.5rem;
+}
+
+.main-menu .main-menu-item:hover:after
+{
+  border-bottom-color: #111;
+}
+
+.main-menu .main-menu-item:hover
+{
+  text-decoration: none;
+}
+
+.breadcrumbs
+{
+  list-style-type: none;
+  display: block;
+  font-size: 0;
+  padding: 0;
+}
+
+.breadcrumbs > *
+{
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.breadcrumbs > * + *:before
+{
+  content: "/";
+  padding: 0 0.3rem 0 0.35rem;
+  display: inline-block;
+  color: #aaa;
+}
+
+.stacked
+{
+  display: flex;
+  flex-direction: column;
+}
+
+.stacked > *
+{
+  flex: 1 0 auto;
+}
+
+.scroll-30
+{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  max-height: 30rem;
+  overflow-y: auto;  
 }

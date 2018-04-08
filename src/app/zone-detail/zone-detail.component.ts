@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+
 import { LuJsonService } from '../lu-json.service';
 import { ZoneDetail } from '../zone';
+
 
 @Component({
   selector: 'app-zone-detail',
@@ -12,6 +14,7 @@ import { ZoneDetail } from '../zone';
 export class ZoneDetailComponent implements OnInit {
 
   @Input() zone: ZoneDetail;
+  locale: any;
 
   constructor(
   	private route: ActivatedRoute,
@@ -25,8 +28,7 @@ export class ZoneDetailComponent implements OnInit {
 
   getZone(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.luJsonService.getZone(id)
-      .subscribe(zone => this.zone = zone);
+    this.luJsonService.getZone(id).subscribe(zone => this.zone = zone);
   }
 
   goBack(): void {

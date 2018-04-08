@@ -1,0 +1,64 @@
+<ng-container *ngIf="scene">
+  <h3>Scene {{ ref.name }}</h3>
+  <ng-container *ngFor="let chnk of scene.chunks">
+    <ng-container [ngSwitch]="chnk._type">
+      <ng-container *ngSwitchCase="1000">
+        <h4>Chunk Type 1000</h4>
+        <dl>
+          <dd>version</dd>
+          <dt>{{chnk.version}}</dt>
+          <dd>value_1</dd>
+          <dt>{{chnk.value_1}}</dt>
+          <dd>value_2</dd>
+          <dt>{{chnk.value_2}}</dt>
+          <dd>value_3</dd>
+          <dt>{{chnk.value_3}}</dt>
+          <dd>value_4</dd>
+          <dt>{{chnk.value_4}}</dt>
+        </dl>
+      </ng-container>
+      <ng-container *ngSwitchCase="2000">
+        <h4>Chunk Type 2000</h4>
+        <span *ngFor="let flt of chnk.floats">{{flt}}; </span>
+        <h5>Floats</h5>
+        <table>
+          <tr>
+            <th>id</th>
+            <th>float_1</th>
+            <th>float_2</th>
+          </tr>
+          <tr *ngFor="let id of chnk.ids">
+            <td>{{id.id}}</td>
+            <td>{{id.value_1}}</td>
+            <td>{{id.value_2}}</td>
+          </tr>
+        </table>
+        <h5>Sky</h5>
+        <ul>
+          <li *ngFor="let sk of chnk.sky">{{sk}}</li>
+        </ul>
+      </ng-container>
+      <ng-container *ngSwitchCase="2001">
+        <h4>Chunk Type 2001</h4>
+        <div class="sidemenu-pane" style="max-height: 30rem;">
+          <div class="sidemenu">
+            <ul>
+              <li *ngFor="let obj of chnk.objects" [class.active]="selected_object === obj">
+                <a (click)="selectObject(obj)">{{obj.id}}<span class="pull-right">LOT {{obj.lot}}</span></a></li>
+            </ul>
+          </div>
+          <div class="sidemenu-content">
+            <ng-container *ngIf="selected_object">
+              <h5>Object #{{selected_object.id}} / LOT: {{selected_object.lot}}</h5>
+              Position: <app-pos [pos]="selected_object.pos"></app-pos>
+              <app-data-table [table]="selected_object.settings"></app-data-table>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchCase="2002">
+        <h4>Chunk Type 2002</h4>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>

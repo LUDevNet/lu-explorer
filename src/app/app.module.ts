@@ -1,11 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule }    from '@angular/platform-browser';
+import { NgModule }         from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule }      from '@angular/forms';
 
-import { ReplacePipe, KeysPipe, RemovePipe, NonNullPipe } from './custom-pipes.pipe';
+import { ReplacePipe, KeysPipe, RemovePipe, NonNullPipe, DatePipe, HtmlPipe } from './custom-pipes.pipe';
 
 import { AppComponent } from './app.component';
 import { LuJsonService } from './lu-json.service';
+import { LocaleService } from './locale.service';
 import { ZonesComponent } from './zones/zones.component';
 import { ZoneDetailComponent } from './zone-detail/zone-detail.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -33,6 +35,22 @@ import { GenericComponent } from './objects/generic/generic.component';
 import { VendorComponent } from './objects/vendor/vendor.component';
 import { LootMatrixComponent } from './loot-matrix/loot-matrix.component';
 import { BrickColorsComponent } from './brick-colors/brick-colors.component';
+import { EventGatingComponent } from './event-gating/event-gating.component';
+import { FactionsComponent } from './factions/factions.component';
+import { NpcIconComponent } from './objects/npc-icon/npc-icon.component';
+import { LuzComponent } from './zones/luz/luz.component';
+import { LvlComponent } from './zone-detail/lvl/lvl.component';
+import { ScenesComponent } from './zone-detail/scenes/scenes.component';
+import { V3fComponent } from './serialize/v3f/v3f.component';
+import { PosComponent } from './serialize/pos/pos.component';
+import { RotComponent } from './serialize/rot/rot.component';
+import { ModuleComponent } from './objects/module/module.component';
+import { CollectibleComponent } from './objects/collectible/collectible.component';
+import { InventoryComponent } from './objects/inventory/inventory.component';
+import { MissionNpcComponent } from './objects/mission-npc/mission-npc.component';
+import { MissionsComponent } from './missions/missions.component';
+import { ImageComponent } from './serialize/image/image.component';
+import { MissionDetailComponent } from './missions/detail/detail.component';
 
 
 
@@ -49,6 +67,8 @@ import { BrickColorsComponent } from './brick-colors/brick-colors.component';
     KeysPipe,
     RemovePipe,
     NonNullPipe,
+    DatePipe,
+    HtmlPipe,
     BehaviorComponent,
     BehaviorDetailComponent,
     SkillComponent,
@@ -67,16 +87,34 @@ import { BrickColorsComponent } from './brick-colors/brick-colors.component';
     GenericComponent,
     VendorComponent,
     LootMatrixComponent,
-    BrickColorsComponent
+    BrickColorsComponent,
+    EventGatingComponent,
+    FactionsComponent,
+    NpcIconComponent,
+    LuzComponent,
+    LvlComponent,
+    ScenesComponent,
+    V3fComponent,
+    PosComponent,
+    RotComponent,
+    ModuleComponent,
+    CollectibleComponent,
+    InventoryComponent,
+    MissionNpcComponent,
+    MissionsComponent,
+    ImageComponent,
+    MissionDetailComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     LuJsonService,
-    MessageService
+    MessageService,
+    LocaleService
   ],
   bootstrap: [AppComponent]
 })

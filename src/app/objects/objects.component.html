@@ -1,33 +1,51 @@
 <div *ngIf="object">
-  <h2>{{object.name | uppercase }} Components</h2>
-  
-  <ng-container *ngFor="let entry of object.components | keys">
-    <ng-container [ngSwitch]="entry.key">
-      <app-physics *ngSwitchCase="1" name="Controllable Physics" [id]="entry.value"></app-physics>
-      <app-render *ngSwitchCase="2" [id]="entry.value"></app-render>
-      <app-physics *ngSwitchCase="3" name="Simple Physics" [id]="entry.value"></app-physics>
-      <h2 *ngSwitchCase="4">Character Component ({{entry.value}})</h2>
-      <app-script *ngSwitchCase="5" [id]="entry.value"></app-script>
-      <app-destroyable *ngSwitchCase="7" [id]="entry.value"></app-destroyable>
-      <app-skill-component *ngSwitchCase="9" [oskills]="object.skills" [id]="entry.value"></app-skill-component>
-      <app-item *ngSwitchCase="11" [id]="entry.value"></app-item>
-      <app-vendor *ngSwitchCase="16" [id]="entry.value"></app-vendor>
-      <h2 *ngSwitchCase="17">Inventory Component ({{entry.value}})</h2>
-      <h2 *ngSwitchCase="42">B3Behaviors Component ({{entry.value}})</h2>
-      <app-generic *ngSwitchCase="48" [id]="entry.value" table="Rebuild" [paged]="true"></app-generic>
-      <app-package *ngSwitchCase="53" [id]="entry.value"></app-package>
-      <app-generic *ngSwitchCase="35" [id]="entry.value" table="Minifig" [paged]="true"></app-generic>
-      <h2 *ngSwitchCase="55">SoundAmbient2D Component ({{entry.value}})</h2>
-      <h2 *ngSwitchCase="73">Mission Offer Component ({{entry.value}})</h2>
-      <h2 *ngSwitchCase="68">Rocket Landing Component ({{entry.value}})</h2>
-      <h2 *ngSwitchDefault>Unknown Component {{entry.key}} ({{entry.value}})</h2>
-    </ng-container>
-  </ng-container>
+  <h2>{{object.name | uppercase }}</h2>
+
+  <div class="sidemenu-pane" style="max-height: 30rem;">
+    <div class="sidemenu">
+      <h3>Components</h3>
+      <ul>
+        <li *ngFor="let entry of object.components | keys" [class.active]="component_id === entry.key">
+          <a (click)="selectComponent(entry.key)">{{getName(entry.key)}}
+            <span class="pull-right">({{entry.key}}:{{entry.value}})</span></a></li>
+      </ul>
+    </div>
+    <div class="sidemenu-content">
+      <ng-container [ngSwitch]="component_id" *ngIf="component_id">
+        <app-physics *ngSwitchCase="1" name="Controllable Physics" [id]="object.components[component_id]"></app-physics>
+        <app-render *ngSwitchCase="2" [id]="object.components[component_id]"></app-render>
+        <app-physics *ngSwitchCase="3" name="Simple Physics" [id]="object.components[component_id]"></app-physics>
+        <app-script *ngSwitchCase="5" [id]="object.components[component_id]"></app-script>
+        <app-destroyable *ngSwitchCase="7" [id]="object.components[component_id]"></app-destroyable>
+        <app-skill-component *ngSwitchCase="9" [oskills]="object.skills" [id]="object.components[component_id]">
+        </app-skill-component>
+        <app-item *ngSwitchCase="11" [id]="object.components[component_id]"></app-item>
+        <app-vendor *ngSwitchCase="16" [id]="object.components[component_id]"></app-vendor>
+        <app-inventory *ngSwitchCase="17" [id]="object.components[component_id]"></app-inventory>
+        <app-physics *ngSwitchCase="18" name="Projectile Physics" [id]="object.components[component_id]"></app-physics>
+        <app-collectible *ngSwitchCase="23" [id]="object.components[component_id]"></app-collectible>
+        <app-module *ngSwitchCase="28" [id]="object.components[component_id]"></app-module>
+        <app-generic *ngSwitchCase="31" [id]="object.components[component_id]" table="MovementAI" [paged]="true"></app-generic>
+        <app-generic *ngSwitchCase="35" [id]="object.components[component_id]" table="Minifig" [paged]="true"></app-generic>
+        <app-physics *ngSwitchCase="40" name="Phantom Physics" [id]="object.components[component_id]"></app-physics>
+        <app-generic *ngSwitchCase="48" [id]="object.components[component_id]" table="Rebuild" [paged]="true"></app-generic>
+        <app-package *ngSwitchCase="53" [id]="object.components[component_id]"></app-package>
+        <app-generic *ngSwitchCase="60" [id]="object.components[component_id]" table="BaseCombatAI" [paged]="true">
+        </app-generic>
+        <app-mission-npc *ngSwitchCase="73" [id]="object.components[component_id]"></app-mission-npc>
+        <div *ngSwitchDefault><h3>{{getName(component.key)}} Component ({{object.components[component_id]}})</h3></div>
+      </ng-container> 
+    </div>
+  </div>
 
   <h2>Icons</h2>
-  <div>
-    <app-icon *ngFor="let icon of object.icons" [iconID]="icon.iconID"></app-icon>
-  </div>
+  <table>
+    <tr *ngFor="let icon of object.icons">
+      <td>{{icon.iconState}}</td>
+      <td>{{icon.iconID}}</td>
+      <td><app-npc-icon [width]="'32px'" [id]="icon.iconID"></app-npc-icon></td>
+    </tr>
+  </table>
 
   <h2>{{object.name | uppercase }} Details</h2>
   <app-data-table [table]="object | remove:'components' | remove:'skills' | remove:'icons'"></app-data-table>

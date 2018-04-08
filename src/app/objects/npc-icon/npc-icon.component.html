@@ -1,0 +1,3 @@
+<ng-container *ngIf="icon">
+  <img [style.max-width]="width" src="{{baseUrl}}/lu-res/{{ (icon.Texture | lowercase) | replace:'dds$':'png' }}"/>
+</ng-container>
