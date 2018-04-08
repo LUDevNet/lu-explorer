@@ -1,0 +1,156 @@
+<ul class="breadcrumbs">
+  <li><a routerLink="/missions">Missions</a></li>
+  <li *ngIf="missionLocale">{{missionLocale.name}}</li>
+</ul>
+
+<h2>Mission ({{id}}) <small *ngIf="missionLocale">"{{missionLocale.name}}"</small></h2>
+
+<h3>General</h3>
+
+<table *ngIf="mission">
+  <tr>
+    <th>offer_objectID</th><td><a routerLink="/objects/{{mission.offer_objectID}}">{{mission.offer_objectID}}</a></td>
+    <th>inMOTD</th><td>{{mission.inMOTD}}</td>
+    <th>defined_type</th><td>{{mission.defined_type}}</td>
+  </tr>
+  <tr>
+    <th>target_objectID</th><td><a routerLink="/objects/{{mission.target_objectID}}">{{mission.target_objectID}}</a></td>
+    <th>isChoiceReward</th><td>{{mission.isChoiceReward}}</td>
+    <th>defined_subtype</th><td>{{mission.defined_subtype}}</td>
+  </tr>
+  <tr>
+    <th>prereqMissionID</th><td><a (click)="load(mission.prereqMissionID)">{{mission.prereqMissionID}}</a></td>
+    <th>isMission</th><td>{{mission.isMission}}</td>
+    <th>LegoScore</th><td>{{mission.LegoScore}}</td>
+  </tr>
+  <tr>
+    <th>repeatable</th><td>{{mission.repeatable}}</td>
+    <th>isRandom</th><td>{{mission.isRandom}}</td>
+    <th>UISortOrder</th><td>{{mission.UISortOrder}}</td>
+  </tr>
+</table>
+
+<h3>Tasks</h3>
+
+<table *ngIf="tasks">
+  <tr>
+    <th>locStatus</th>
+    <th>taskType</th>
+    <th>target</th>
+    <th>targetGroup</th>
+    <th>targetValue</th>
+    <th>taskParam1</th>
+    <th>largeTaskIcon</th>
+    <th>IconID</th>
+    <th>uid</th>
+    <th>largeTaskIconID</th>
+    <th>localize</th>
+    <th>gate_version</th>
+  </tr>
+  <tr *ngFor="let task of tasks">
+    <td>{{task.locStatus}}</td>
+    <td>{{task.taskType}}</td>
+    <td>{{task.target}}</td>
+    <td>{{task.targetGroup}}</td>
+    <td>{{task.targetValue}}</td>
+    <td>{{task.taskParam1}}</td>
+    <td><app-image [path]="task.largeTaskIcon"></app-image></td>
+    <td><app-icon [iconID]="task.IconID"></app-icon></td>
+    <td>{{task.uid}}</td>
+    <td><app-icon [iconID]="task.largeTaskIconID"></app-icon></td>
+    <td>{{task.localize}}</td>
+    <td>{{task.gate_version}}</td>
+  </tr>
+</table>
+
+<h3>Stat Rewards</h3>
+
+<table *ngIf="mission">
+  <tr>
+    <th>maxhealth</th><td>{{mission.reward_maxhealth}}</td>
+    <th>maxmodel</th><td>{{mission.reward_maxmodel}}</td>
+    <th>currency</th><td>{{mission.reward_currency}}</td>
+  </tr>
+  <tr>
+    <th>maximagination</th><td>{{mission.reward_maximagination}}</td>
+    <th>maxwallet</th><td>{{mission.reward_maxwallet}}</td>
+    <th>currency_repeatable</th><td>{{mission.reward_currency_repeatable}}</td>
+  </tr>
+  <tr>
+    <th>maxinventory</th><td>{{mission.reward_maxinventory}}</td>
+    <th>maxwidget</th><td>{{mission.reward_maxwidget}}</td>
+    <th>reputation</th><td>{{mission.reward_reputation}}</td>
+  </tr>
+</table>
+
+<h3>Inventory Rewards</h3>
+
+<table *ngIf="mission">
+  <tr>
+    <th></th>
+    <th>reward 1</th>
+    <th>reward 2</th>
+    <th>reward 3</th>
+    <th>reward 4</th>
+  </tr>
+  <tr>
+    <th>itemid</th>
+    <td>{{mission.reward_item1}}</td>
+    <td>{{mission.reward_item2}}</td>
+    <td>{{mission.reward_item3}}</td>
+    <td>{{mission.reward_item4}}</td>
+  </tr>
+  <tr>
+    <th>count</th>
+    <td>{{mission.reward_item1_count}}</td>
+    <td>{{mission.reward_item2_count}}</td>
+    <td>{{mission.reward_item3_count}}</td>
+    <td>{{mission.reward_item4_count}}</td>
+  </tr>
+  <tr>
+    <th>repeat_count</th>
+    <td>{{mission.reward_item1_repeat_count}}</td>
+    <td>{{mission.reward_item2_repeat_count}}</td>
+    <td>{{mission.reward_item3_repeat_count}}</td>
+    <td>{{mission.reward_item4_repeat_count}}</td>
+  </tr>
+  <tr>
+    <th>repeatable</th>
+    <td>{{mission.reward_item1_repeatable}}</td>
+    <td>{{mission.reward_item2_repeatable}}</td>
+    <td>{{mission.reward_item3_repeatable}}</td>
+    <td>{{mission.reward_item4_repeatable}}</td>
+  </tr>
+  <tr>
+    <th>emote</th>
+    <td>{{mission.reward_emote}}</td>
+    <td>{{mission.reward_emote2}}</td>
+    <td>{{mission.reward_emote3}}</td>
+    <td>{{mission.reward_emote4}}</td>
+  </tr>
+</table>
+
+<h3>Texts</h3>
+
+<ng-container *ngIf="text">
+  <app-icon [iconID]="text.turnInIconID"></app-icon>
+</ng-container>
+
+<div class="scroll-30">
+  <table *ngIf="textsLocale">
+    <tr *ngFor="let text of textsLocale | keys">
+      <td>{{text.key}}</td>
+      <td [innerHTML]="text.value"></td>
+    </tr>
+  </table>
+</div>
+
+<div style="max-height: 30rem; overflow-y: auto">
+  <app-data-table *ngIf="text" [table]="text"></app-data-table>
+</div>
+
+<h3>Details</h3>
+
+<div style="max-height: 30rem; overflow-y: auto">
+  <app-data-table *ngIf="mission" [table]="mission"></app-data-table>
+</div>

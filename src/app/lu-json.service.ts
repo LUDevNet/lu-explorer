@@ -18,6 +18,7 @@ export class LuJsonService {
   private baseUrl;
   private apiUrl;
   private tablesUrl;
+  private localeUrl;
   private behaviorBaseUrl;
   private skillBaseUrl;
   private renderBaseUrl;
@@ -47,6 +48,7 @@ export class LuJsonService {
 
     this.apiUrl = this.baseUrl + "lu-json/";
     this.tablesUrl = this.apiUrl + "tables/";
+    this.localeUrl = this.apiUrl + "locale/";
     this.behaviorBaseUrl = this.apiUrl + "behaviors/";
     this.skillBaseUrl = this.tablesUrl + "SkillBehavior/";
     this.renderBaseUrl = this.tablesUrl + "RenderComponent/";
@@ -159,6 +161,22 @@ export class LuJsonService {
     return this.getPagedJsonData(this.itemBaseUrl, id, 'ItemComponent');
   }
 
+  getModuleComponent(id: number): Observable<any> {
+    return this.getPagedJsonData(this.tablesUrl + "ModuleComponent/", id, 'ModuleComponent');
+  }
+
+  getMissionNPCComponent(id: number): Observable<any> {
+    return this.getPagedJsonData(this.tablesUrl + "MissionNPCComponent/", id, 'MissionNPCComponent');
+  }
+
+  getCollectibleComponent(id: number): Observable<any> {
+    return this.getPagedJsonData(this.tablesUrl + "CollectibleComponent/", id, 'CollectibleComponent');
+  }
+
+  getInventoryComponent(id: number): Observable<any> {
+    return this.getPagedJsonData(this.tablesUrl + "InventoryComponent/", id, 'InventoryComponent');
+  }
+
   getPhysicsComponent(id: number): Observable<any> {
     return this.getPagedJsonData(this.physicsBaseUrl, id, 'PhysicsComponent');
   }
@@ -179,11 +197,35 @@ export class LuJsonService {
     return this.getPagedJsonData(this.lootMatrixBaseUrl, id, 'LootMatrix');
   }
 
+  getNpcIcon(id: number): Observable<any> {
+    return this.getPagedJsonData(this.tablesUrl + "NpcIcons/", id, 'NpcIcons');
+  }
+
+  getMission(id: number): Observable<any> {
+    return this.getPagedJsonData(this.tablesUrl + "Missions/", id, 'Mission');
+  }
+
+  getMissionTasks(id: number): Observable<any> {
+    return this.getPagedJsonData(this.tablesUrl + "MissionTasks/", id, 'MissionTasks');
+  }
+
+  getMissionText(id: number): Observable<any> {
+    return this.getPagedJsonData(this.tablesUrl + "MissionText/", id, 'MissionText');
+  }
+
   getBrickColors(): Observable<any[]> {
     return this.http.get<any[]>(this.tablesUrl + "BrickColors/index.json").pipe(
       map(bc => bc['_embedded']['BrickColors'].sort((a,b) => a.id - b.id )),
       tap(bc => this.log(`fetched Brick Colors`)),
       catchError(this.handleError('getBrickColors', []))
+    )
+  }
+
+  getSingleTable(table: string): Observable<AccessoryDefaultLoc[]> {
+    return this.http.get<any[]>(this.tablesUrl + table + "/index.json").pipe(
+      map(tbl => tbl['_embedded'][table]),
+      tap(tbl => this.log(`fetched ${table}`)),
+      catchError(this.handleError(`get${table}`, []))
     )
   }
 
@@ -199,8 +241,25 @@ export class LuJsonService {
     }
   }
 
+  getLocale(table: string): Observable<any>
+  {
+    return this.getJsonResource("locale/" + table + "/", "index", "locale");
+  }
+
+  getLocalePage(table: string, page: number)
+  {
+    return this.getJsonResource("locale/" + table + "/", String(page), "locale page");
+  }
+
+  getJsonResource(prefix: string, url: string, type: string): Observable<any> {
+    return this.http.get<any>(this.apiUrl + prefix + url.toLowerCase() + ".json").pipe(
+      tap(icon => this.log(`fetched ${type} id=${url}`)),
+      catchError(this.handleError(`get ${type}`, undefined))
+    )
+  }
+
   getJsonData(url: string, id: number, type: string): Observable<any> {
-    return this.http.get<Icons>(url + id + ".json").pipe(
+    return this.http.get<any>(url + id + ".json").pipe(
       tap(icon => this.log(`fetched ${type} id=${id}`)),
       catchError(this.handleError(`get ${type}`, undefined))
     ) 
@@ -208,7 +267,7 @@ export class LuJsonService {
 
   getPagedJsonData(url: string, id: number, type: string): Observable<any> {
     let page = Math.floor(id / 256);
-    return this.http.get<Icons>(url + page + "/" + id + ".json").pipe(
+    return this.http.get<any>(url + page + "/" + id + ".json").pipe(
       tap(icon => this.log(`fetched ${type} id=${id}`)),
       catchError(this.handleError(`get ${type}`, undefined))
     ) 

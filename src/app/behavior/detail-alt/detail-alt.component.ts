@@ -103,8 +103,8 @@ export class BehaviorDetailAltComponent implements OnInit {
       node.shape = 'image';
       node.image = this.baseUrl + 'lu-res/textures/ui/inventory/skills/knight_blade.png';
       this.add_child(id, behavior, level, 'on_success', 'success');
-      this.add_child(id, behavior, level, 'on_failed_armor', 'failed armor');
-      this.add_child(id, behavior, level, 'on_failed_blocked', 'failed blocked');
+      this.add_child(id, behavior, level, 'on_fail_armor', 'fail armor');
+      this.add_child(id, behavior, level, 'on_fail_blocked', 'fail blocked');
     }
     else if (behavior.templateID == 2)
     {
@@ -225,6 +225,10 @@ export class BehaviorDetailAltComponent implements OnInit {
     else if (behavior.templateID == 30)
     {
       node.label = "Buff";
+    }
+    else if (behavior.templateID == 32)
+    {
+      node.label = "Skill\nEvent";
     }
     else if (behavior.templateID == 34)
     {

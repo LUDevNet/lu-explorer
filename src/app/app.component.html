@@ -1,10 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <h1>{{title}}</h1>
-<nav>
-  <a routerLink="/dashboard">Dashboard</a>
-  <a routerLink="/zones">Zones</a>
-  <a routerLink="/brick-colors">BrickColors</a>
-  <a routerLink="/acc">AccessoryDefaultLoc</a>
+<nav class="main-menu">
+  <a class="main-menu-item" routerLink="/dashboard"><span>Dashboard</span></a>
+  <a class="main-menu-item" routerLink="/zones"><img src="http://localhost:8000/lu-res/ui/ingame/passport_i7c.png" /></a>
+  <a class="main-menu-item" routerLink="/brick-colors"><span>BrickColors</span></a>
+  <a class="main-menu-item" routerLink="/event-gating"><span>EventGating</span></a>
+  <a class="main-menu-item" routerLink="/acc"><span>AccessoryDefaultLoc</span></a>
 </nav>
-<router-outlet></router-outlet>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
 <app-messages></app-messages>

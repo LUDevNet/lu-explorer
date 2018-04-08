@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { LuJsonService } from '../lu-json.service';
+import { component_names } from '../components';
 
 @Component({
   selector: 'app-objects',
@@ -11,6 +12,7 @@ import { LuJsonService } from '../lu-json.service';
 export class ObjectsComponent implements OnInit {
 
   object: any;
+  component_id: number;
 
   constructor(private route: ActivatedRoute,
   	private luJsonService: LuJsonService) { }
@@ -26,7 +28,17 @@ export class ObjectsComponent implements OnInit {
 
   loadObject(object: any): void
   {
-    this.object = object; 
+    this.object = object;
   }
 
+  selectComponent(id: number)
+  {
+    this.component_id = id;
+  }
+
+  getName(id: number)
+  {
+    console.log("Test");
+    return component_names[id];
+  }
 }
