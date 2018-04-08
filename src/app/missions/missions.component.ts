@@ -22,16 +22,16 @@ export class MissionsComponent implements OnInit {
     this.getMissions();
   }
 
-  filter(obj: any, predicate: any)
+  filter(obj: any, predicate: any, max_size: number)
   {
-    return Object.keys(obj)
-          .filter( key => predicate(obj[key]) )
-          .reduce( (res, key) => (res[key] = obj[key], res), {} );
+    let keys = Object.keys(obj).filter( key => predicate(obj[key]))
+    let to = Math.min(max_size, keys.length);
+    return keys.slice(0, to).reduce( (res, key) => (res[key] = obj[key], res), {});
   }
 
   updateFilterList()
   {
-    this.filteredMissions = Object.assign({},this.filter(this.missions, mission => mission.name.includes(this.needle)));
+    this.filteredMissions = Object.assign({},this.filter(this.missions, mission => mission.name.includes(this.needle), 100));
   }
 
   getMissions():void

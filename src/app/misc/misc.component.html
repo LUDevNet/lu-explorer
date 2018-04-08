@@ -1,0 +1,17 @@
+<div class="sidemenu-pane">
+  <div class="sidemenu">
+    <h2>Misc</h2>
+    <ul>
+      <li [class.active]="item == 1"><a (click)="select(1)">Brick Colors</a></li>
+      <li [class.active]="item == 2"><a (click)="select(2)">AccessoryDefaultLoc</a></li>
+      <li [class.active]="item == 3"><a (click)="select(3)">Event Gating</a></li>
+    </ul>
+  </div>
+  <div class="sidemenu-content">
+    <ng-container [ngSwitch]="item">
+      <app-brick-colors *ngSwitchCase="1"></app-brick-colors>
+      <app-acc-default-loc *ngSwitchCase="2"></app-acc-default-loc>
+      <app-event-gating *ngSwitchCase="3"></app-event-gating>
+    </ng-container>
+  </div>
+</div>
