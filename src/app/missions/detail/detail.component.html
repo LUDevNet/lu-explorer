@@ -51,7 +51,7 @@
     <td>{{task.locStatus}}</td>
     <td>{{task.taskType}}</td>
     <td>{{task.target}}</td>
-    <td>{{task.targetGroup}}</td>
+    <td>{{task.targetGroup | replace:",":", "}}</td>
     <td>{{task.targetValue}}</td>
     <td>{{task.taskParam1}}</td>
     <td><app-image [path]="task.largeTaskIcon"></app-image></td>

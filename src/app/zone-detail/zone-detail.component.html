@@ -7,7 +7,7 @@
 
   <div *ngIf="zone.thumbnail">
     <h3>Thumbnail</h3>
-    <img src="https://xiphoseer.github.io/lu-res/textures/ui/{{zone.thumbnail | replace:'dds':'png' }}">
+    <app-image [path]="zone.thumbnail" width="30rem"></app-image>
   </div>
   <h3>Zone-File</h3>
   <app-luz [path]="zone.zoneName"></app-luz>
