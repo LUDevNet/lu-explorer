@@ -14,7 +14,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `docs/` directory. Use the `--prod` flag for a production build. For building to github pages also use `--base-href=/lu-explorer/`.
 
-Usually, the `g build --prod --build-optimizer --base-href=/lu-explorer/` command is used.
+Usually, the `ng build --prod --build-optimizer --base-href=/lu-explorer/` command is used.
 
 ## Running unit tests
 
