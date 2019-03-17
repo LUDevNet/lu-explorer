@@ -175,6 +175,7 @@ td
 {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   list-style-type: none;
   padding: 0.5rem 2.5rem 0 2.5rem;
   background-color: #66f;
@@ -259,10 +260,14 @@ td
   flex: 1 0 auto;
 }
 
-.scroll-30
+@media (max-width: 30rem)
 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  max-height: 30rem;
-  overflow-y: auto;  
+  .scroll-30
+  {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-height: 30rem;
+    overflow-y: auto;  
+  }
 }
+

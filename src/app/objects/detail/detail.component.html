@@ -6,7 +6,7 @@
 
   <h2>{{object.name | uppercase }} <small *ngIf="objectLocale">"{{objectLocale.name}}"</small></h2>
 
-  <div class="sidemenu-pane" style="max-height: 30rem;">
+  <div class="sidemenu-pane scroll-30">
     <div class="sidemenu">
       <h3>Components</h3>
       <ul>
@@ -29,6 +29,7 @@
         <app-inventory *ngSwitchCase="17" [id]="object.components[component_id]"></app-inventory>
         <app-physics *ngSwitchCase="18" name="Projectile Physics" [id]="object.components[component_id]"></app-physics>
         <app-collectible *ngSwitchCase="23" [id]="object.components[component_id]"></app-collectible>
+        <app-generic *ngSwitchCase="26" [id]="object.components[component_id]" table="Pet" [paged]="false"></app-generic>
         <app-module *ngSwitchCase="28" [id]="object.components[component_id]"></app-module>
         <app-generic *ngSwitchCase="31" [id]="object.components[component_id]" table="MovementAI" [paged]="true"></app-generic>
         <app-generic *ngSwitchCase="35" [id]="object.components[component_id]" table="Minifig" [paged]="true"></app-generic>
@@ -37,8 +38,12 @@
         <app-package *ngSwitchCase="53" [id]="object.components[component_id]"></app-package>
         <app-generic *ngSwitchCase="60" [id]="object.components[component_id]" table="BaseCombatAI" [paged]="true">
         </app-generic>
+        <app-generic *ngSwitchCase="67" [id]="object.components[component_id]" table="RocketLaunchpadControl" [paged]="false">
+        </app-generic>
         <app-mission-npc *ngSwitchCase="73" [id]="object.components[component_id]"></app-mission-npc>
-        <div *ngSwitchDefault><h3>{{getName(component.key)}} Component ({{object.components[component_id]}})</h3></div>
+        <app-generic *ngSwitchCase="78" [id]="object.components[component_id]" table="ProximityMonitor" [paged]="false">
+        </app-generic>
+        <div *ngSwitchDefault><h3>{{getName(component_id)}} Component ({{object.components[component_id]}})</h3></div>
       </ng-container> 
     </div>
   </div>

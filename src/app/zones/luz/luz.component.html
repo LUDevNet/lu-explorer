@@ -148,15 +148,15 @@
                   <li>pos: {{selected_path.waypoints[selected_path_point] | json}}</li>
                 </ul>
                 <ul *ngSwitchCase="6">
-                  <li>pos: {{selected_path.waypoints[selected_path_point].pos | json}}</li>
+                  <li>pos: <app-pos [pos]="selected_path.waypoints[selected_path_point].pos"></app-pos></li>
                   <li>value_1: {{selected_path.waypoints[selected_path_point].value_1}}</li>
                   <li>value_2: {{selected_path.waypoints[selected_path_point].value_2}}</li>
                   <li>value_3: {{selected_path.waypoints[selected_path_point].value_3}}</li>
                   <li>value_4: {{selected_path.waypoints[selected_path_point].value_4}}</li>
                   <li>value_5: {{selected_path.waypoints[selected_path_point].value_5}}</li>
                 </ul>
-                <ul *ngSwitchCase="6">
-                  <li>pos: {{selected_path.waypoints[selected_path_point].pos | json}}</li>
+                <ul *ngSwitchCase="7">
+                  <li>pos: <app-pos [pos]="selected_path.waypoints[selected_path_point].pos"></app-pos></li>
                   <li>value_1: {{selected_path.waypoints[selected_path_point].value_1}}</li>
                   <li>value_2: {{selected_path.waypoints[selected_path_point].value_2}}</li>
                   <li>value_3: {{selected_path.waypoints[selected_path_point].value_3}}</li>
