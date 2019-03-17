@@ -9,12 +9,24 @@
 
 <table *ngIf="mission">
   <tr>
-    <th>offer_objectID</th><td><a routerLink="/objects/{{mission.offer_objectID}}">{{mission.offer_objectID}}</a></td>
+    <th>offer_objectID</th>
+    <td>
+      <a *ngIf="mission.offer_objectID != -1" routerLink="/objects/{{mission.offer_objectID}}">
+         {{mission.offer_objectID}}
+      </a>
+      <span *ngIf="mission.offer_objectID == -1">None (-1)</span>
+    </td>
     <th>inMOTD</th><td>{{mission.inMOTD}}</td>
     <th>defined_type</th><td>{{mission.defined_type}}</td>
   </tr>
   <tr>
-    <th>target_objectID</th><td><a routerLink="/objects/{{mission.target_objectID}}">{{mission.target_objectID}}</a></td>
+    <th>target_objectID</th>
+    <td>
+      <a *ngIf="mission.target_objectID != -1" routerLink="/objects/{{mission.target_objectID}}">
+        {{mission.target_objectID}}
+      </a>
+      <span *ngIf="mission.target_objectID == -1">None (-1)</span>
+    </td>
     <th>isChoiceReward</th><td>{{mission.isChoiceReward}}</td>
     <th>defined_subtype</th><td>{{mission.defined_subtype}}</td>
   </tr>
