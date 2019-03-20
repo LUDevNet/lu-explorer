@@ -1,0 +1,22 @@
+<ul class="breadcrumbs">
+  <li>Missions</li>
+</ul>
+
+<h2>Missions</h2>
+
+<section *ngFor="let declared_type of mission_types | keys">
+  <h3><a routerLink="/missions/{{declared_type.key}}">{{declared_type.key}}</a></h3>
+
+  <ul>
+    <li *ngFor="let declared_subtype of declared_type.value | keys">
+      <a *ngIf="declared_subtype.key != ''"
+         routerLink="/missions/{{declared_type.key}}/{{declared_subtype.key}}">
+        {{declared_subtype.key}}
+      </a>
+      <a *ngIf="declared_subtype.key == ''"
+         routerLink="/missions/{{declared_type.key}}">
+        General
+      </a>
+    </li>
+  </ul>
+</section>

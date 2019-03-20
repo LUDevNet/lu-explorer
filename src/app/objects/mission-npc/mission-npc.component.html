@@ -7,7 +7,7 @@
     <th>gate_version</th>
   </tr>
   <tr *ngFor="let mission of component.missions">
-    <td><a routerLink="/missions/{{mission.missionID}}">{{mission.missionID}}</a></td>
+    <td><a routerLink="/missions/detail/{{mission.missionID}}">{{mission.missionID}}</a></td>
     <td>{{mission.offersMission}}</td>
     <td>{{mission.acceptsMission}}</td>
     <td>{{mission.gate_version}}</td>

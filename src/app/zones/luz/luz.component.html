@@ -63,7 +63,7 @@
                   <li>value_1: {{selected_path.value_1}}</li>
                   <li>price: {{selected_path.price}}</li>
                   <li>rental_time: {{selected_path.rental_time}}</li>
-                  <li>zone: {{selected_path.zone}}</li>
+                  <li>zone: <a routerLink="/zones/{{selected_path.zone}}">{{selected_path.zone}}</a></li>
                   <li>name: {{selected_path.name}}</li>
                   <li>description: {{selected_path.description}}</li>
                   <li>value_2: {{selected_path.value_2}}</li>
@@ -85,7 +85,7 @@
               <div *ngSwitchCase="4">
                 <h3>Spawner: {{selected_path.name}}</h3>
                 <ul>
-                  <li>spawned_lot: {{selected_path.spawned_lot}}</li>
+                  <li>spawned_lot: <a routerLink="/objects/{{selected_path.spawned_lot}}">{{selected_path.spawned_lot}}</a></li>
                   <li>respawn_time: {{selected_path.respawn_time}}</li>
                   <li>max_to_spawn: {{selected_path.max_to_spawn}}</li>
                   <li>number_to_maintain: {{selected_path.number_to_maintain}}</li>

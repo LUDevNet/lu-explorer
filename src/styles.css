@@ -2,14 +2,14 @@
 @font-face {
   font-family: "Nunito";
   font-style: normal;
-  font-weight: 700;
-  src: local("Nunito Bold"), local("Nunito-Bold"), url("https://fonts.gstatic.com/s/nunito/v9/TttUCfJ272GBgSKaOaD7KltXRa8TVwTICgirnJhmVJw.woff2") format("woff2");
+  font-weight: 900;
+  /*src: local("Nunito Bold"), local("Nunito-Bold"), url("https://fonts.gstatic.com/s/nunito/v9/TttUCfJ272GBgSKaOaD7KltXRa8TVwTICgirnJhmVJw.woff2") format("woff2");*/
   unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2212, U+2215;
 }
 
 html
 {
-  background: url(https://vignette.wikia.nocookie.net/legouniverse/images/a/a5/Davekang_legouniverse43.jpg/revision/latest/scale-to-width-down/1000?cb=20170203015651) no-repeat center center fixed;
+  /*background: url(https://vignette.wikia.nocookie.net/legouniverse/images/a/a5/Davekang_legouniverse43.jpg/revision/latest/scale-to-width-down/1000?cb=20170203015651) no-repeat center center fixed;*/
   background-size: cover;
   color: #fac117;
   text-shadow: 2px 2px 0px #000;
@@ -119,8 +119,8 @@ td
 .sidemenu > ul > li:after
 {
   content: "";
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-top: 1.2rem solid transparent;
   border-bottom: 1.2rem solid transparent;
   border-left: 1.2rem solid #000;
@@ -267,7 +267,6 @@ td
     margin-top: 1rem;
     margin-bottom: 1rem;
     max-height: 30rem;
-    overflow-y: auto;  
+    overflow-y: auto;
   }
 }
-

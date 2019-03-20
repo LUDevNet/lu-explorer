@@ -3,7 +3,7 @@ import { NgModule }         from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }      from '@angular/forms';
 
-import { ReplacePipe, KeysPipe, RemovePipe, NonNullPipe, DatePipe, HtmlPipe } from './custom-pipes.pipe';
+import { BitSetPipe, NotPipe, ReplacePipe, KeysPipe, RemovePipe, NonNullPipe, DatePipe, HtmlPipe } from './custom-pipes.pipe';
 
 import { AppComponent } from './app.component';
 import { LuJsonService } from './lu-json.service';
@@ -51,10 +51,14 @@ import { MissionNpcComponent } from './objects/mission-npc/mission-npc.component
 import { MissionsComponent } from './missions/missions.component';
 import { ImageComponent } from './serialize/image/image.component';
 import { MissionDetailComponent } from './missions/detail/detail.component';
+import { MissionIndexComponent } from './missions/index/index.component';
 import { ObjectDetailComponent } from './objects/detail/detail.component';
 import { MiscComponent } from './misc/misc.component';
-
-
+import { MissionsByTypeComponent } from './missions/by-type/by-type.component';
+import { MissionsBySubtypeComponent } from './missions/by-subtype/by-subtype.component';
+import { MissionRefListComponent } from './missions/ref-list/ref-list.component';
+import { ObjectsByTypeComponent } from './objects/by-type/by-type.component';
+import { ObjectTypesIndexComponent } from './objects/types-index/types-index.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +69,8 @@ import { MiscComponent } from './misc/misc.component';
     DashboardComponent,
     GithubSpaComponent,
     AccDefaultLocComponent,
+    BitSetPipe,
+    NotPipe,
     ReplacePipe,
     KeysPipe,
     RemovePipe,
@@ -106,8 +112,14 @@ import { MiscComponent } from './misc/misc.component';
     MissionsComponent,
     ImageComponent,
     MissionDetailComponent,
+    MissionIndexComponent,
     ObjectDetailComponent,
-    MiscComponent
+    MiscComponent,
+    MissionsByTypeComponent,
+    MissionsBySubtypeComponent,
+    MissionRefListComponent,
+    ObjectsByTypeComponent,
+    ObjectTypesIndexComponent,
   ],
   imports: [
     BrowserModule,

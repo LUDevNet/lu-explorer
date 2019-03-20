@@ -10,6 +10,6 @@ Name: <input type="text" [(ngModel)]="needle" (keyup)="updateFilterList()"/>
 
 <table>
   <tr *ngFor="let mission of filteredMissions | keys">
-    <td>{{mission.key}}</td><td><a [routerLink]="['/missions/', mission.key]">{{mission.value.name}}</a></td>
+    <td>{{mission.key}}</td><td><a [routerLink]="['/missions/detail/', mission.key]">{{mission.value.name}}</a></td>
   </tr>
 </table>

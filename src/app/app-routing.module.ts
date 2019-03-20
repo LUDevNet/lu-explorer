@@ -16,8 +16,12 @@ import { SkillComponent } from './skill/skill.component';
 import { ObjectsComponent } from './objects/objects.component';
 import { ObjectDetailComponent } from './objects/detail/detail.component';
 import { MissionsComponent } from './missions/missions.component';
+import { MissionIndexComponent } from './missions/index/index.component';
 import { MissionDetailComponent } from './missions/detail/detail.component';
+import { MissionsByTypeComponent } from './missions/by-type/by-type.component';
+import { MissionsBySubtypeComponent } from './missions/by-subtype/by-subtype.component';
 import { LootTableComponent } from './loot-table/loot-table.component';
+import { ObjectTypesIndexComponent } from './objects/types-index/types-index.component';
 
 const routes: Routes = [
   { path: 'misc', component: MiscComponent },
@@ -29,15 +33,19 @@ const routes: Routes = [
   { path: 'skills/:id', component: SkillComponent },
   { path: 'loot-table/:id', component: LootTableComponent },
   { path: 'objects', component: ObjectsComponent },
+  { path: 'objects/types', component: ObjectTypesIndexComponent },
   { path: 'objects/:id', component: ObjectDetailComponent },
-  { path: 'missions', component: MissionsComponent },
-  { path: 'missions/:id', component: MissionDetailComponent },
+  { path: 'missions', component: MissionIndexComponent },
+  { path: 'missions/search', component: MissionsComponent },
+  { path: 'missions/detail/:id', component: MissionDetailComponent },
+  { path: 'missions/:type', component: MissionsByTypeComponent },
+  { path: 'missions/:type/:subtype', component: MissionsBySubtypeComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: '', component: GithubSpaComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
+  imports: [ RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}) ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}
