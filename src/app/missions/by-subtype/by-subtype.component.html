@@ -1,0 +1,16 @@
+<ul class="breadcrumbs">
+  <li><a routerLink="/missions">Missions</a></li>
+  <li><a routerLink="/missions/{{defined_type}}">{{defined_type}}</a></li>
+  <li>{{defined_subtype}}</li>
+</ul>
+
+<h2>Missions <small>{{defined_type}} - {{defined_subtype}}</small></h2>
+
+<table>
+  <tr *ngFor="let mission_id of mission_ids">
+    <td>{{mission_id}}</td>
+    <td><a [routerLink]="['/missions/detail/', mission_id]">
+      {{ mission_names && mission_names[mission_id] ? mission_names[mission_id].name : "[Unnamed]"}}
+    </a></td>
+  </tr>
+</table>

@@ -9,21 +9,23 @@ import { LuJsonService } from '../../lu-json.service';
 })
 export class LuzComponent implements OnInit {
 
-  @Input() path: string;
+  _path: string;
   selected_path: any;
   selected_path_point: number;
   zone: any;
 
   constructor(private luJsonService: LuJsonService) { }
 
-  ngOnInit() {
-  	this.getZone();
+  @Input() set path(value: string) {
+    this.getZone(value);
   }
 
-  getZone(): void
+  ngOnInit() {}
+
+  getZone(path: string): void
   {
-  	this.luJsonService.getJsonResource("maps/", this.path, "map")
-  	  .subscribe(zone => this.zone = zone);
+  	this.luJsonService.getJsonResource("maps/", path, "map")
+      .subscribe(zone => this.zone = zone);
   }
 
   selectPath(path: any)

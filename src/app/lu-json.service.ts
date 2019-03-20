@@ -30,6 +30,7 @@ export class LuJsonService {
   private iconsBaseUrl;
   private packBaseUrl;
   private objectsBaseUrl;
+  private objectsByTypeUrl;
   private zonesBaseUrl;
   private zonesIndexUrl;
   private accIndexUrl;
@@ -61,6 +62,7 @@ export class LuJsonService {
     this.zonesBaseUrl = this.apiUrl + "tables/ZoneTable/";
     this.iconsBaseUrl = this.apiUrl + "tables/Icons/";
     this.objectsBaseUrl = this.apiUrl + "objects/";
+    this.objectsByTypeUrl = this.objectsBaseUrl + "groupBy/type/";
     this.zonesIndexUrl = this.zonesBaseUrl + "index.json";
     this.accIndexUrl = this.apiUrl + "tables/AccessoryDefaultLoc/index.json";
   }
@@ -77,13 +79,13 @@ export class LuJsonService {
    */
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-  
+
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
-  
+
       // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
-  
+
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
@@ -213,6 +215,13 @@ export class LuJsonService {
     return this.getPagedJsonData(this.tablesUrl + "MissionText/", id, 'MissionText');
   }
 
+  getObjectTypes(): Observable<any> {
+    return this.http.get<any[]>(this.objectsByTypeUrl + "index.json").pipe(
+      tap(bc => this.log(`fetched ObjectsByType`)),
+      catchError(this.handleError('getObjectTypes', []))
+    )
+  }
+
   getBrickColors(): Observable<any[]> {
     return this.http.get<any[]>(this.tablesUrl + "BrickColors/index.json").pipe(
       map(bc => bc['_embedded']['BrickColors'].sort((a,b) => a.id - b.id )),
@@ -251,6 +260,11 @@ export class LuJsonService {
     return this.getJsonResource("locale/" + table + "/", String(page), "locale page");
   }
 
+  getMissionsByType()
+  {
+    return this.getJsonResource("tables/Missions/groupBy/", "type", "missions");
+  }
+
   getJsonResource(prefix: string, url: string, type: string): Observable<any> {
     return this.http.get<any>(this.apiUrl + prefix + url.toLowerCase() + ".json").pipe(
       tap(icon => this.log(`fetched ${type} id=${url}`)),
@@ -262,7 +276,7 @@ export class LuJsonService {
     return this.http.get<any>(url + id + ".json").pipe(
       tap(icon => this.log(`fetched ${type} id=${id}`)),
       catchError(this.handleError(`get ${type}`, undefined))
-    ) 
+    )
   }
 
   getPagedJsonData(url: string, id: number, type: string): Observable<any> {
@@ -270,7 +284,7 @@ export class LuJsonService {
     return this.http.get<any>(url + page + "/" + id + ".json").pipe(
       tap(icon => this.log(`fetched ${type} id=${id}`)),
       catchError(this.handleError(`get ${type}`, undefined))
-    ) 
+    )
   }
 
 }

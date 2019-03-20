@@ -1,0 +1,15 @@
+<span *ngIf="ref.type == 'lit'">Mission
+  <a routerLink="/missions/detail/{{ref.value}}">{{ref.value}}</a>
+</span>
+<dl *ngIf="ref.type == '|'">
+  <dt>Any of</dt>
+  <dd *ngFor="let item of ref.value">
+    <mission-ref-list [ref]="item"></mission-ref-list>
+  </dd>
+</dl>
+<dl *ngIf="ref.type == ','">
+  <dt>All of</dt>
+  <dd *ngFor="let item of ref.value">
+    <mission-ref-list [ref]="item"></mission-ref-list>
+  </dd>
+</dl>

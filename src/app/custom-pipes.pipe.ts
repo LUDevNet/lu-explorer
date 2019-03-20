@@ -3,8 +3,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({name: 'replace'})
 export class ReplacePipe implements PipeTransform {
   transform(value: string, pattern: string, instead:string): string {
-    let re = new RegExp(pattern, 'g');
-    return value.replace(re, instead);
+    if (value) {
+      let re = new RegExp(pattern, 'g');
+      return value.replace(re, instead);
+    }
+    return value;
   }
 }
 
@@ -30,6 +33,21 @@ export class RemovePipe implements PipeTransform {
   }
 }
 
+@Pipe({name: 'bitset'})
+export class BitSetPipe implements PipeTransform {
+  transform(value: any, key: number) : any {
+    let val = value ? +value : 0;
+    return (val & key) != 0;
+  }
+}
+
+@Pipe({name: 'not'})
+export class NotPipe implements PipeTransform {
+  transform(value: any) : any {
+    return !value;
+  }
+}
+
 @Pipe({name: 'nonnull'})
 export class NonNullPipe implements PipeTransform {
   transform(value) : any {
@@ -47,7 +65,7 @@ export class DatePipe implements PipeTransform {
 
 @Pipe({name: 'html'})
 export class HtmlPipe implements PipeTransform {
-  
+
   element: any = document.createElement('div');
 
   transform(str: string) : any

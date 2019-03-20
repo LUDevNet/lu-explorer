@@ -23,11 +23,10 @@ export class ZoneDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  	this.getZone();
+    this.route.paramMap.subscribe(map => this.getZone(+map.get('id')));
   }
 
-  getZone(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+  getZone(id: number): void {
     this.luJsonService.getZone(id).subscribe(zone => this.zone = zone);
   }
 

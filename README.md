@@ -1,5 +1,18 @@
 # LuExplorer
 
+## TODO
+
+* Figure out why some MissionTasks are null?
+* What does 'taskParam1' for an ObtainItem task?
+* Add locStatus, localized to mission tasks
+* Add links to racing mission tasks
+* Figure out what the ids in quickbuild tasks are
+* Investigate QuickBuild vs Minigame in mission 1434
+* Investigate emote rewards in Mission 1750
+* Mission Texts offerNPCIcon
+
+## General
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
 ## Development server

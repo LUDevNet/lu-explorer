@@ -13,6 +13,7 @@ export class IconComponent implements OnInit {
 
   @Input() iconID: number;
   @Input() width: string = '64px';
+  @Input() caption: boolean = true;
   icon: Icons;
   baseUrl: string;
 
