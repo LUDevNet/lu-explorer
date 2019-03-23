@@ -1,23 +1,42 @@
 <h2>Welcome to the LEGO Universe Explorer</h2>
 <p>
-  This webpage is designed to be a technical game guide for
-  all features of the latest published version of the now
-  discontinued game <b>LEGO Universe</b>. It features much of the
-  games content along with metadata from the original game
-  files, which make it possible to re-(discover) all the
-  amazing systems that were put into this game.
+  This web-application is designed to be an exhaustive resource on
+  the content of the latest published version of the now discontinued
+  game <b>LEGO Universe</b>. It is implemented as a wiki-esque interface
+  to <a href="https://github.com/xiphoseer/lu-json">LU-JSON</a>, which is
+  a machine-readable and preprocessed export of the games' database and files.
+  The images that this app uses are taken from
+  <a href="https://github.com/xiphoseer/lu-res">LU-RES</a>, which mirrors the
+  game resources but in modern / web-compatible formats.
 </p>
-<h3>Current Features</h3>
-<ul>
-  <li>Objects</li>
-  <li>Zones</li>
-  <li>Behaviors</li>
-  <li>Missions</li>
-</ul>
+<p>
+  This unique approach means that LU-EXPLORER is able to replicate much
+  of the content that would otherwise only be available in the traditional wiki at
+  <a href="https://legouniverse.fandom.com">legouniverse.fandom.com</a>, and also
+  provide the necessary technical detail and metadata to understand how the systems
+  in the game worked.
+</p>
 <h3>Roadmap</h3>
 <ul>
   <li>...</li>
 </ul>
+<h3>Changelog</h3>
+<h4>2019-03-22</h4>
+<ul>
+  <li>Added <a routerLink="/misc/release-version">Release Versions</a></li>
+  <li>Added <a routerLink="/misc/feature-gating">Feature Gating</a></li>
+  <li>Added <a routerLink="/misc/sub-pricing">Subscription Pricing</a></li>
+  <li>Added <a routerLink="/objects/types">Object by Type</a></li>
+  <li>Removed Messages</li>
+</ul>
+<h4>Initial Release</h4>
+<ul>
+  <li>Added Objects</li>
+  <li>Added Zone-List</li>
+  <li>Added Behaviors</li>
+  <li>Added Missions</li>
+</ul>
+
 <h2>Answer the Call &mdash; Save Imagination!</h2>
 <p style="display: flex">
   <img style="flex: 1 1 auto;" src="{{baseUrl}}lu-res/ui/ingame/factionmission_i2e.png"/>

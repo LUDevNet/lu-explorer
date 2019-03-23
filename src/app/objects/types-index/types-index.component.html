@@ -1,7 +1,13 @@
-<h1>Objects</h1>
+<ul class="breadcrumbs">
+  <li><a routerLink="/objects">Objects</a></li>
+  <li>Types</li>
+</ul>
 
-<h2>Types</h2>
+<h2>Objects</h2>
+
+<h3>Types</h3>
 
 <ul>
-  <li *ngFor="let type of types">{{type ? type : "[Unnamed]"}}</li>
+  <li *ngFor="let type of types">
+    <a routerLink="/objects/types/{{type}}">{{type ? type : "[Unnamed]"}}</a></li>
 </ul>

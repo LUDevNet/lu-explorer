@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-misc',
@@ -7,15 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MiscComponent implements OnInit {
 
-  item: number = 1;
+  type: string;
+  private defaultType: string = 'acc-default-loc';
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit(){}
+  ngOnInit(){
+    this.route.paramMap.subscribe(this.processRouteChange.bind(this));
+  }
 
-  select(item: number)
-  {
-  	this.item = item;
+  processRouteChange(map) {
+    if (map.has('type')) {
+      this.type = map.get('type');
+    } else {
+      this.type = this.defaultType;
+    }
   }
 
 }

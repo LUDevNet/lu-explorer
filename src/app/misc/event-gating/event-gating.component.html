@@ -3,12 +3,15 @@
 <table *ngIf="table">
   <tr>
     <th>eventName</th>
-    <th>date_start</th>
-    <th>date_end</th>
+    <th>date_start / date_end</th>
   </tr>
-  <tr *ngFor="let date of table">
-    <td>{{date.eventName}}</td>
-    <td>{{date.date_start | todate}}</td>
-    <td>{{date.date_end | todate}}</td>
-  </tr>
+  <ng-container *ngFor="let date of table">
+    <tr>
+      <td rowspan="2">{{date.eventName}}</td>
+      <td>{{date.date_start | todate}}</td>
+    </tr>
+    <tr>
+      <td>{{date.date_end | todate}}</td>
+    </tr>
+  </ng-container>
 </table>

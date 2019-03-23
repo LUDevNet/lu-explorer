@@ -1,0 +1,17 @@
+<h2>Subscription Pricing</h2>
+<table>
+  <tr>
+    <th>id</th>
+    <th>countryCode</th>
+    <th>monthlyFeeGold</th>
+    <th>monthlyFeeSilver</th>
+    <th>monthlyFeeBronze</th>
+  </tr>
+  <tr *ngFor="let pricing of table">
+    <td>{{pricing.id}}</td>
+    <td>{{pricing.countryCode}}</td>
+    <td>{{printValue(pricing.monthlyFeeGold, pricing.monetarySymbol, pricing.symbolIsAppended)}}</td>
+    <td>{{printValue(pricing.monthlyFeeSilver, pricing.monetarySymbol, pricing.symbolIsAppended)}}</td>
+    <td>{{printValue(pricing.monthlyFeeBronze, pricing.monetarySymbol, pricing.symbolIsAppended)}}</td>
+  </tr>
+</table>

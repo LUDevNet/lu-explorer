@@ -59,6 +59,10 @@ import { MissionsBySubtypeComponent } from './missions/by-subtype/by-subtype.com
 import { MissionRefListComponent } from './missions/ref-list/ref-list.component';
 import { ObjectsByTypeComponent } from './objects/by-type/by-type.component';
 import { ObjectTypesIndexComponent } from './objects/types-index/types-index.component';
+import { ReleaseVersionComponent } from './misc/release-version/release-version.component';
+import { FeatureGatingComponent } from './misc/feature-gating/feature-gating.component';
+import { SubscriptionPricingComponent } from './misc/subscription-pricing/subscription-pricing.component';
+import { BrickIdsComponent } from './misc/brick-ids/brick-ids.component';
 
 @NgModule({
   declarations: [
@@ -120,6 +124,10 @@ import { ObjectTypesIndexComponent } from './objects/types-index/types-index.com
     MissionRefListComponent,
     ObjectsByTypeComponent,
     ObjectTypesIndexComponent,
+    ReleaseVersionComponent,
+    FeatureGatingComponent,
+    SubscriptionPricingComponent,
+    BrickIdsComponent,
   ],
   imports: [
     BrowserModule,

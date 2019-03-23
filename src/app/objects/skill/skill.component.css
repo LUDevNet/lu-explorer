@@ -1,0 +1,17 @@
+.buff-icon {
+  width: 2.4rem;
+  height: 2rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: right;
+  font-size: 15pt;
+  font-weight: bold;
+  padding-top: 0.8rem;
+  box-sizing: border-box;
+}
+
+.skill-buffs {
+  vertical-align: middle;
+}

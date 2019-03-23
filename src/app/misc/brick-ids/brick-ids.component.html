@@ -1,0 +1,12 @@
+<h2>Brick ID Table</h2>
+
+<table>
+  <tr>
+    <th>NDObjectID</th>
+    <th>LEGOBrickID</th>
+  </tr>
+  <tr *ngFor="let brick of table">
+    <td><a routerLink="/objects/{{brick.NDObjectID}}">{{brick.NDObjectID}}</a></td>
+    <td>{{brick.LEGOBrickID}}</td>
+  </tr>
+</table>

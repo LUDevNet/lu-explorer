@@ -9,37 +9,36 @@
     <th>AiCombatWeight</th>
     <th>Icon</th>
     <th>Imagination Cost</th>
-    <th>Bonus Imagination</th>
-    <th>Bonus Health</th>
-    <th>Bonus Armor</th>
+    <th>BonusUI</th>
     <th>Damage</th>
     <th>Behavior</th>
   </tr>
-  <tr *ngFor="let entry of oskills">
-    <td><a routerLink="/skills/{{entry.skillID}}">{{entry.skillID}}</a></td>
-    <td>{{entry.castOnType}}</td><td>{{entry.AICombatWeight}}</td>
-    <td><span *ngIf="skills[entry.skillID]">
-      <app-icon [width]="'32px'" [iconID]="skills[entry.skillID].skillIcon"></app-icon></span>
-    </td>
-    <td>
-      <span *ngIf="skills[entry.skillID]">{{skills[entry.skillID].imaginationcost}}</span>
-    </td>
-    <td>
-      <span *ngIf="skills[entry.skillID]">{{skills[entry.skillID].imBonusUI}}</span>
-    </td>
-    <td>
-      <span *ngIf="skills[entry.skillID]">{{skills[entry.skillID].lifeBonusUI}}</span>
-    </td>
-    <td>
-      <span *ngIf="skills[entry.skillID]">{{skills[entry.skillID].armorBonusUI}}</span>
-    </td>
-    <td>
-      <span *ngIf="skills[entry.skillID]">{{skills[entry.skillID].damageUI}}</span>
-    </td>
-    <td>
-      <a *ngIf="skills[entry.skillID]" routerLink="/behaviors/{{skills[entry.skillID].behaviorID}}">
-        {{skills[entry.skillID].behaviorID}}
-      </a>
-    </td>
-  </tr>
+  <ng-container *ngFor="let entry of oskills">
+    <tr *ngIf="skills[entry.skillID]">
+      <td><a routerLink="/skills/{{entry.skillID}}">{{entry.skillID}}</a></td>
+      <td>{{entry.castOnType}}</td><td>{{entry.AICombatWeight}}</td>
+      <td>
+        <app-icon [width]="'32px'" [iconID]="skills[entry.skillID].skillIcon"></app-icon>
+      </td>
+      <td>
+        {{skills[entry.skillID].imaginationcost}}
+      </td>
+      <td class="skill-buffs">
+          <div *ngIf="skills[entry.skillID].lifeBonusUI" class="buff-icon" [style.background-image]="bgImage('textures/ui/inventory/common/heart.png')">
+            {{skills[entry.skillID].lifeBonusUI}}</div>
+          <div *ngIf="skills[entry.skillID].imBonusUI"  class="buff-icon" [style.background-image]="bgImage('textures/ui/inventory/common/imagination.png')">
+            {{skills[entry.skillID].imBonusUI}}</div>
+          <div *ngIf="skills[entry.skillID].armorBonusUI"  class="buff-icon" [style.background-image]="bgImage('textures/ui/inventory/common/armor.png')">
+            {{skills[entry.skillID].armorBonusUI}}</div>
+      </td>
+      <td>
+        {{skills[entry.skillID].damageUI}}
+      </td>
+      <td>
+        <a routerLink="/behaviors/{{skills[entry.skillID].behaviorID}}">
+          {{skills[entry.skillID].behaviorID}}
+        </a>
+      </td>
+    </tr>
+  </ng-container>
 </table>

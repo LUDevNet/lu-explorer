@@ -1,3 +1,14 @@
-<p>
-  by-type works!
-</p>
+<ul class="breadcrumbs">
+  <li><a routerLink="/objects">Objects</a></li>
+  <li><a routerLink="/objects/types">Types</a></li>
+  <li>{{type}}</li>
+</ul>
+
+<h2>Objects <small>Type: "{{type}}"</small></h2>
+
+<table>
+  <tr *ngFor="let object of objects">
+    <td>{{object.id}}</td>
+    <td><a routerLink="/objects/{{object.id}}">{{object.name ? object.name : '[Unnamed]'}}</a></td>
+  </tr>
+</table>

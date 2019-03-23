@@ -1,6 +1,8 @@
 <div *ngIf="object">
   <ul class="breadcrumbs">
     <li><a routerLink="/objects">Objects</a></li>
+    <li><a routerLink="/objects/types">Types</a></li>
+    <li><a routerLink="/objects/types/{{object.type}}">{{object.type}}</a></li>
     <li>{{object.name}}</li>
   </ul>
 
@@ -8,10 +10,10 @@
 
   <div class="sidemenu-pane scroll-30">
     <div class="sidemenu">
-      <h3>Components</h3>
+      <h3>Components ({{component_id}})</h3>
       <ul>
         <li *ngFor="let entry of object.components | keys" [class.active]="component_id === entry.key">
-          <a (click)="selectComponent(entry.key)">{{getName(entry.key)}}
+          <a [routerLink]="['/objects', object_id, entry.key]">{{getName(entry.key)}}
             <span class="pull-right">({{entry.key}}:{{entry.value}})</span></a></li>
       </ul>
     </div>
@@ -44,7 +46,7 @@
         <app-generic *ngSwitchCase="78" [id]="object.components[component_id]" table="ProximityMonitor" [paged]="false">
         </app-generic>
         <div *ngSwitchDefault><h3>{{getName(component_id)}} Component ({{object.components[component_id]}})</h3></div>
-      </ng-container> 
+      </ng-container>
     </div>
   </div>
 
