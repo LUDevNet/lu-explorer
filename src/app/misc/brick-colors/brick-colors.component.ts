@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 import { LuJsonService } from '../../lu-json.service';
 
@@ -17,9 +18,16 @@ export class BrickColorsComponent implements OnInit {
   	this.getTable();
   }
 
-  getTable(): void
-  {
-  	this.luJsonService.getBrickColors().subscribe(table => this.table = table);
+  getTable(): void {
+  	this.luJsonService
+      .getBrickColors()
+      .subscribe(table => this.table = table.sort(this.sortById.bind(this)));
+  }
+
+  sortById(a,b): number {
+    let idA = a.id;
+    let idB = b.id;
+    return idA - idB;
   }
 
 }

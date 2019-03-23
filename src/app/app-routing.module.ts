@@ -22,9 +22,11 @@ import { MissionsByTypeComponent } from './missions/by-type/by-type.component';
 import { MissionsBySubtypeComponent } from './missions/by-subtype/by-subtype.component';
 import { LootTableComponent } from './loot-table/loot-table.component';
 import { ObjectTypesIndexComponent } from './objects/types-index/types-index.component';
+import { ObjectsByTypeComponent } from './objects/by-type/by-type.component';
 
 const routes: Routes = [
   { path: 'misc', component: MiscComponent },
+  { path: 'misc/:type', component: MiscComponent },
   { path: 'factions', component: FactionsComponent },
   { path: 'zones', component: ZonesComponent },
   { path: 'zones/:id', component: ZoneDetailComponent },
@@ -34,7 +36,9 @@ const routes: Routes = [
   { path: 'loot-table/:id', component: LootTableComponent },
   { path: 'objects', component: ObjectsComponent },
   { path: 'objects/types', component: ObjectTypesIndexComponent },
+  { path: 'objects/types/:type', component: ObjectsByTypeComponent },
   { path: 'objects/:id', component: ObjectDetailComponent },
+  { path: 'objects/:id/:component', component: ObjectDetailComponent },
   { path: 'missions', component: MissionIndexComponent },
   { path: 'missions/search', component: MissionsComponent },
   { path: 'missions/detail/:id', component: MissionDetailComponent },

@@ -14,6 +14,7 @@ import { component_names } from '../../components';
 export class ObjectDetailComponent implements OnInit {
 
   object: any;
+  object_id: number;
   objectLocale: any;
   component_id: number;
 
@@ -23,11 +24,17 @@ export class ObjectDetailComponent implements OnInit {
 
   ngOnInit()
   {
-    this.getObject();
+    this.route.paramMap.subscribe(this.getObject.bind(this));
   }
 
-  getObject():void {
-  	const id = +this.route.snapshot.paramMap.get('id');
+  getObject(map: any):void {
+    if (map.has('component')) {
+      this.component_id = +map.get('component');
+    } else {
+      this.component_id = undefined;
+    }
+  	let id = +map.get('id');
+    this.object_id = id;
   	this.luJsonService.getObject(id).subscribe(object => this.loadObject(object));
     this.localeService.getLocaleEntry("Objects", id).subscribe(entry => this.objectLocale = entry);
   }
@@ -44,7 +51,6 @@ export class ObjectDetailComponent implements OnInit {
 
   getName(id: number)
   {
-    console.log("Test");
     return component_names[id];
   }
 

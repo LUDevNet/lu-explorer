@@ -14,12 +14,12 @@
   <tr *ngFor="let loc of acc">
     <td>{{loc.GroupID}}</td>
     <td>{{loc.Description}}</td>
-    <td>{{loc.Pos_X}}</td>
-    <td>{{loc.Pos_Y}}</td>
-    <td>{{loc.Pos_Z}}</td>
-    <td>{{loc.Rot_X}}</td>
-    <td>{{loc.Rot_Y}}</td>
-    <td>{{loc.Rot_Z}}</td>
+    <td>{{loc.Pos_X.toPrecision(4)}}</td>
+    <td>{{loc.Pos_Y.toPrecision(4)}}</td>
+    <td>{{loc.Pos_Z.toPrecision(4)}}</td>
+    <td>{{loc.Rot_X.toPrecision(4)}}</td>
+    <td>{{loc.Rot_Y.toPrecision(4)}}</td>
+    <td>{{loc.Rot_Z.toPrecision(4)}}</td>
   </tr>
 </table>
 </div>

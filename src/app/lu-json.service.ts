@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { ReplaySubject, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from '../environments/environment';
@@ -35,6 +34,8 @@ export class LuJsonService {
   private zonesIndexUrl;
   private accIndexUrl;
 
+  private jsonStore;
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService) {
@@ -46,11 +47,14 @@ export class LuJsonService {
       // serving API locally
       this.baseUrl = 'http://localhost:8000/';
     }
+    this.jsonStore = {};
 
     this.apiUrl = this.baseUrl + "lu-json/";
-    this.tablesUrl = this.apiUrl + "tables/";
-    this.localeUrl = this.apiUrl + "locale/";
-    this.behaviorBaseUrl = this.apiUrl + "behaviors/";
+
+    this.tablesUrl = "tables/";
+    this.localeUrl = "locale/";
+    this.behaviorBaseUrl = "behaviors/";
+    this.objectsBaseUrl = "objects/";
     this.skillBaseUrl = this.tablesUrl + "SkillBehavior/";
     this.renderBaseUrl = this.tablesUrl + "RenderComponent/";
     this.scriptBaseUrl = this.tablesUrl + "ScriptComponent/";
@@ -59,16 +63,29 @@ export class LuJsonService {
     this.lootMatrixBaseUrl = this.tablesUrl + "LootMatrix/";
     this.lootTableBaseUrl = this.tablesUrl + "LootTable/";
     this.packBaseUrl = this.tablesUrl + "PackageComponent/";
-    this.zonesBaseUrl = this.apiUrl + "tables/ZoneTable/";
-    this.iconsBaseUrl = this.apiUrl + "tables/Icons/";
-    this.objectsBaseUrl = this.apiUrl + "objects/";
+    this.zonesBaseUrl = this.tablesUrl + "ZoneTable/";
+    this.iconsBaseUrl = this.tablesUrl + "Icons/";
     this.objectsByTypeUrl = this.objectsBaseUrl + "groupBy/type/";
-    this.zonesIndexUrl = this.zonesBaseUrl + "index.json";
-    this.accIndexUrl = this.apiUrl + "tables/AccessoryDefaultLoc/index.json";
+    this.zonesIndexUrl = this.zonesBaseUrl + "index";
+    this.accIndexUrl = this.tablesUrl + "AccessoryDefaultLoc/index";
   }
 
   private log(message: string) {
     this.messageService.add('LuJsonService: ' + message);
+  }
+
+  private makeRequest(url: string, method: string): Observable<any> {
+    if (!this.jsonStore.hasOwnProperty(url)) {
+      let httpRequest = this.http.get(this.apiUrl + url + '.json')
+        .pipe(
+          tap(data => console.log(`Completed ${method}`)),
+          catchError(this.handleError(method, undefined))
+        )
+      let responseSubject = new ReplaySubject(1);
+      httpRequest.subscribe(responseSubject);
+      this.jsonStore[url] = responseSubject;
+    }
+    return this.jsonStore[url];
   }
 
   /**
@@ -81,7 +98,7 @@ export class LuJsonService {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      console.error(error.message); // log to console instead
 
       // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
@@ -91,68 +108,48 @@ export class LuJsonService {
     };
   }
 
+  clearJsonStore() {
+    this.jsonStore = {};
+  }
+
   getAccessoryDefaultLoc(): Observable<AccessoryDefaultLoc[]> {
-    return this.http.get<AccessoryDefaultLoc[]>(this.accIndexUrl).pipe(
-      map(acc => acc['_embedded']['AccessoryDefaultLoc']),
-      tap(acc => this.log(`fetched AccessoryDefaultLoc`)),
-      catchError(this.handleError('getAccessoryDefaultLoc', []))
-    )
+    return this.getSingleTable("AccessoryDefaultLoc");
   }
 
   getZones(): Observable<ZoneDetail[]> {
-    return this.http.get<ZoneDetail[]>(this.zonesIndexUrl).pipe(
-      map(zones => zones['_embedded']['ZoneTable']),
-      tap(zones => this.log(`fetched zones`)),
-      catchError(this.handleError('getZones', []))
-    )
+    return this.getSingleTable("ZoneTable");
   }
 
   getZone(id: number): Observable<ZoneDetail> {
-    return this.http.get<ZoneDetail>(this.zonesBaseUrl + id + ".json").pipe(
-      tap(zone => this.log(`fetched zone id=${id}`)),
-      catchError(this.handleError('getZone', undefined))
-    )
+    return this.makeRequest(this.zonesBaseUrl + id, 'getZone');
   }
 
   getRenderComponent(id: number): Observable<any> {
+    // TODO: paged
     let page = Math.floor(id / 256);
-    return this.http.get<any>(this.renderBaseUrl + page + "/" + id + ".json").pipe(
-      tap(component => this.log(`fetched render component id=${id}`)),
-      catchError(this.handleError('getRenderComponent', undefined))
-    )
+    return this.makeRequest(this.renderBaseUrl + page + "/" + id, 'getRenderComponent');
   }
 
   getBehavior(id: number): Observable<Behavior> {
+    // TODO: paged
     let page = Math.floor(id / 1024);
-    return this.http.get<Behavior>(this.behaviorBaseUrl + page + "/" + id + ".json").pipe(
-      tap(behavior => this.log(`fetched behavior id=${id}`)),
-      catchError(this.handleError('getBehavior', undefined))
-    )
+    return this.makeRequest(this.behaviorBaseUrl + page + "/" + id, `getBehavior(${id})`);
   }
 
   getSkill(id: number): Observable<SkillBehavior> {
-    return this.http.get<SkillBehavior>(this.skillBaseUrl + id + ".json").pipe(
-      tap(skill => this.log(`fetched skill id=${id}`)),
-      catchError(this.handleError('getSkill', undefined))
-    )
+    return this.makeRequest(this.skillBaseUrl + id, `getSkill(${id})`);
   }
 
   getIcon(id: number): Observable<Icons> {
-    return this.http.get<Icons>(this.iconsBaseUrl + id + ".json").pipe(
-      tap(icon => this.log(`fetched icon id=${id}`)),
-      catchError(this.handleError('getIcon', undefined))
-    )
+    return this.makeRequest(this.iconsBaseUrl + id, `getIcon(${id})`);
   }
 
   getObject(id: number): Observable<any> {
+    // TODO: double paged
     let fold_a = Math.floor(id / 256);
     let fold_b = Math.floor(fold_a / 256);
-    let url = this.objectsBaseUrl + fold_b + "/" + fold_a + "/" + id + ".json";
-
-    return this.http.get(url).pipe(
-      tap(object => this.log(`fetched object id=${id}`)),
-      catchError(this.handleError('getObject', undefined))
-    )
+    let url = this.objectsBaseUrl + fold_b + "/" + fold_a + "/" + id;
+    return this.makeRequest(url, `getObject(${id})`);
   }
 
   getPackageComponent(id: number): Observable<any> {
@@ -216,26 +213,21 @@ export class LuJsonService {
   }
 
   getObjectTypes(): Observable<any> {
-    return this.http.get<any[]>(this.objectsByTypeUrl + "index.json").pipe(
-      tap(bc => this.log(`fetched ObjectsByType`)),
-      catchError(this.handleError('getObjectTypes', []))
-    )
+    return this.makeRequest(this.objectsByTypeUrl + "index", `getObjectTypes()`);
+  }
+
+  getObjectType(type: string): Observable<any> {
+    return this.makeRequest(this.objectsByTypeUrl + type, `getObjectType(${type})`);
   }
 
   getBrickColors(): Observable<any[]> {
-    return this.http.get<any[]>(this.tablesUrl + "BrickColors/index.json").pipe(
-      map(bc => bc['_embedded']['BrickColors'].sort((a,b) => a.id - b.id )),
-      tap(bc => this.log(`fetched Brick Colors`)),
-      catchError(this.handleError('getBrickColors', []))
-    )
+    return this.getSingleTable('BrickColors');
   }
 
-  getSingleTable(table: string): Observable<AccessoryDefaultLoc[]> {
-    return this.http.get<any[]>(this.tablesUrl + table + "/index.json").pipe(
-      map(tbl => tbl['_embedded'][table]),
-      tap(tbl => this.log(`fetched ${table}`)),
-      catchError(this.handleError(`get${table}`, []))
-    )
+  getSingleTable(table: string): Observable<any[]> {
+    return this
+      .makeRequest(this.tablesUrl + table + "/index", `getSingleTable(${table})`)
+      .pipe(map(tbl => tbl['_embedded'][table]));
   }
 
   getGeneric(id: number, table:string, paged:boolean): Observable<any>
@@ -266,25 +258,16 @@ export class LuJsonService {
   }
 
   getJsonResource(prefix: string, url: string, type: string): Observable<any> {
-    return this.http.get<any>(this.apiUrl + prefix + url.toLowerCase() + ".json").pipe(
-      tap(icon => this.log(`fetched ${type} id=${url}`)),
-      catchError(this.handleError(`get ${type}`, undefined))
-    )
+    return this.makeRequest(prefix + url.toLowerCase(), `get${type}(${url})`);
   }
 
   getJsonData(url: string, id: number, type: string): Observable<any> {
-    return this.http.get<any>(url + id + ".json").pipe(
-      tap(icon => this.log(`fetched ${type} id=${id}`)),
-      catchError(this.handleError(`get ${type}`, undefined))
-    )
+    return this.makeRequest(url + id, `get${type}(${id})`);
   }
 
   getPagedJsonData(url: string, id: number, type: string): Observable<any> {
     let page = Math.floor(id / 256);
-    return this.http.get<any>(url + page + "/" + id + ".json").pipe(
-      tap(icon => this.log(`fetched ${type} id=${id}`)),
-      catchError(this.handleError(`get ${type}`, undefined))
-    )
+    return this.makeRequest(url + page + "/" + id, `getPaged${type}(${id})`);
   }
 
 }
