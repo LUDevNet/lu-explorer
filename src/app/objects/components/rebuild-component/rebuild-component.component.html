@@ -1,0 +1,6 @@
+<h3>Rebuild Component ({{id}})</h3>
+<p *ngIf="component">
+  This object is destroyed by default, and may be rebuilt to trigger
+  <a routerLink="/activities/{{component.activityID}}">Activity #{{component.activityID}}</a>
+</p>
+<app-data-table [table]="component"></app-data-table>

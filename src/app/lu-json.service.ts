@@ -188,6 +188,10 @@ export class LuJsonService {
     return this.getPagedJsonData(this.tablesUrl + "DestructibleComponent/", id, 'DestructibleComponent');
   }
 
+  getRebuildComponent(id: number): Observable<any> {
+    return this.getPagedJsonData(this.tablesUrl + "RebuildComponent/", id, 'RebuildComponent');
+  }
+
   getLootTableGroupByIndex(id: number): Observable<any> {
     return this.getPagedJsonData(this.lootTableBaseUrl + "groupBy/LootTableIndex/", id, 'LootTableGroupByIndex');
   }
@@ -255,6 +259,16 @@ export class LuJsonService {
   getMissionsByType()
   {
     return this.getJsonResource("tables/Missions/groupBy/", "type", "missions");
+  }
+
+  getActivityRewards(id: number)
+  {
+    return this.getGeneric(id, "ActivityRewards", true);
+  }
+
+  getCurrencyIndex(id: number)
+  {
+    return this.getGeneric(id, "CurrencyTable", true);
   }
 
   getJsonResource(prefix: string, url: string, type: string): Observable<any> {

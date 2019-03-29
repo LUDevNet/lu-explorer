@@ -1,0 +1,12 @@
+<div class="breadcrumbs">
+  <li>Activities</li>
+</div>
+
+<h2>Activities &amp; Quickbuilds</h2>
+
+<table>
+  <tr *ngFor="let activity of activities">
+    <td>{{activity.id}}</td>
+    <td><a routerLink="/activities/{{activity.id}}">{{getLocalized(activity.id).ActivityName}}</a></td>
+  </tr>
+</table>

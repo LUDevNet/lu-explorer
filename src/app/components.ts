@@ -2,7 +2,7 @@
 export let component_names: string[] =
 [
 	undefined,
-	"Controllable Physics",
+		"Controllable Physics",
     "Render",
     "Simple Physics",
     "Character",
@@ -119,4 +119,3 @@ export let component_names: string[] =
     undefined,
     "Culling Plane"
 ];
-    

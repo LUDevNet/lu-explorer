@@ -41,12 +41,14 @@ export class ObjectDetailComponent implements OnInit {
 
   loadObject(object: any): void
   {
-    this.object = object;
-  }
+    if (object && !this.component_id && object.hasOwnProperty('components')) {
+      let keys = Object.keys(object.components);
+      if (keys.length > 0) {
+        this.component_id = +keys[0];
+      }
+    }
 
-  selectComponent(id: number)
-  {
-    this.component_id = id;
+    this.object = object;
   }
 
   getName(id: number)

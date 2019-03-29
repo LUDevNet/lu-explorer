@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 import { LuJsonService } from '../../lu-json.service';
 import { LuResService } from '../../lu-res.service';
@@ -8,11 +8,11 @@ import { LuResService } from '../../lu-res.service';
   templateUrl: './skill.component.html',
   styleUrls: ['./skill.component.css']
 })
-export class ObjectSkillComponent implements OnInit {
+export class ObjectSkillComponent implements OnInit, OnChanges {
 
   @Input() oskills: any[];
   @Input() id: any;
-  skills: any;
+  skills: any = {};
 
   constructor(
     private luJsonService: LuJsonService,
@@ -20,7 +20,12 @@ export class ObjectSkillComponent implements OnInit {
 
   ngOnInit() {
   	this.getComponent();
-  	this.skills = [];
+  	this.skills = {};
+  }
+
+  ngOnChanges() {
+    this.getComponent();
+    this.skills = {};
   }
 
   getComponent(): void {
