@@ -1,0 +1,8 @@
+<ul *ngIf="loot_table">
+  <li *ngFor="let entry of loot_table">
+    Item <a routerLink="/objects/{{entry.itemid}}">#{{entry.itemid}}</a><!--
+ --><span *ngIf="entry.MissionDrop"> [MissionDrop]</span>,
+    sortPriority: {{entry.sortPriority}}
+    (id: {{entry.id}})
+  </li>
+</ul>

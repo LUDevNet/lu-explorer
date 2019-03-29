@@ -1,4 +1,21 @@
-<table *ngIf="lootmatrix">
+<section *ngIf="lootmatrix">
+  <dl>
+    <ng-container *ngFor="let entry of lootmatrix.elements">
+    <dt>
+      {{ entry.percent | percent }} chance of {{entry.minToDrop | to: entry.maxToDrop}}
+      item(s) of LootTableIndex
+      <a routerLink="/loot-table/{{entry.LootTableIndex}}">#{{entry.LootTableIndex}}</a>
+      with RarityTableIndex
+      <a routerLink="/rarity-table/{{entry.RarityTableIndex}}">#{{entry.RarityTableIndex}}</a>
+      ({{entry.id}})
+    </dt>
+    <dd *ngIf="entry.flagID">flagID: {{entry.flagID}}</dd>
+    <dd *ngIf="entry.gate_verion">Only available with feature <code>{{entry.gate_version}}</code></dd>
+    </ng-container>
+  </dl>
+</section>
+
+<!--<table *ngIf="lootmatrix">
   <tr>
     <th>LootTableIndex</th>
     <th>RarityTableIndex</th>
@@ -19,4 +36,4 @@
     <td>{{entry.flagID}}</td>
     <td>{{entry.gate_version}}</td>
   </tr>
-</table>
+</table>-->

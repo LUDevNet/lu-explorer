@@ -2,7 +2,9 @@
   <li>Missions</li>
 </ul>
 
-<h2>Missions</h2>
+<h2>Missions
+  <small><a routerLink="/missions/search">[Search]</a></small>
+</h2>
 
 <section *ngFor="let declared_type of mission_types | keys">
   <h3><a routerLink="/missions/{{declared_type.key}}">{{declared_type.key}}</a></h3>

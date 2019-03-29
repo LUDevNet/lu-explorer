@@ -14,6 +14,7 @@ export class MissionDetailComponent implements OnInit {
   mission: any;
   missionLocale: any;
   tasks: any;
+  tasksLocale: any;
   text: any;
   textsLocale: any;
   id: number;
@@ -28,10 +29,18 @@ export class MissionDetailComponent implements OnInit {
   getMission(id: number):void {
   	this.id = id;
     this.luJsonService.getMission(this.id).subscribe(mission => this.mission = mission);
-    this.luJsonService.getMissionTasks(this.id).subscribe(tasks => this.tasks = tasks.tasks.filter(task => task));
+    this.luJsonService.getMissionTasks(this.id).subscribe(this.processMissionTasks.bind(this));
     this.luJsonService.getMissionText(this.id).subscribe(text => this.text = text);
     this.localeService.getLocaleEntry("MissionText", this.id).subscribe(entry => this.textsLocale = entry);
     this.localeService.getLocaleEntry("Missions", this.id).subscribe(entry => this.missionLocale = entry);
+  }
+
+  processMissionTasks(tasks: any) {
+    let taskArray = tasks.tasks.filter(task => task);
+    taskArray.forEach(task => this.localeService
+      .getLocaleEntry("MissionTasks", task.uid)
+      .subscribe(entry => task.localizations = entry))
+    this.tasks = taskArray;
   }
 
   parsePrereqString(prereq: any): any

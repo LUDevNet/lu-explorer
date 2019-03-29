@@ -82,12 +82,12 @@
         Param: {{task.taskParam1}}
       </ng-container>
       <ng-container *ngSwitchCase="2">
-        <h4>{{task.uid}}: QuickBuild Task (2)</h4>
-        The player is required to quick-build {{task.targetValue}} object(s) of the
-        following type(s):
-        <a routerLink="/quickbuilds/{{task.target}}">{{task.target}}</a><!--
+        <h4>{{task.uid}}: Activity Task (2)</h4>
+        The player is required to score {{task.targetValue}} points at any of the
+        following activities:
+        <a routerLink="/activities/{{task.target}}">{{task.target}}</a><!--
         --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-        -->, <a routerLink="/quickbuilds/{{target}}">{{target}}</a>
+        -->, <a routerLink="/activities/{{target}}">{{target}}</a>
         </ng-container>
       </ng-container>
       <ng-container *ngSwitchCase="3">
@@ -171,7 +171,7 @@
       <ng-container *ngSwitchCase="14">
         <h4>{{task.uid}}: MinigameAchievement Task (14)</h4>
         The player needs to achieve at least <code>{{task.targetValue}}</code> at the
-        <code>{{task.targetGroup}}</code> statistic in the Minigame #{{task.target}}
+        <code>{{task.targetGroup}}</code> statistic in the <a routerLink="/activities/{{task.target}}">Activity #{{task.target}}</a>
       </ng-container>
       <ng-container *ngSwitchCase="15">
         <h4>{{task.uid}}: Interact Task (15)</h4>
@@ -267,6 +267,7 @@
           <p *ngSwitchCase="0">Hand in {{task.targetValue}} items at the nexus Jawbox. Target {{task.target}}, minigame???</p>
         </ng-container>
       </ng-container>
+      <blockquote *ngIf="task.localizations">{{task.localizations.description}}</blockquote>
       <p *ngIf="task.gate_version">
         This task is only available with feature update / gate <code>{{task.gate_version}}</code>
       </p>
@@ -320,6 +321,7 @@
     <li *ngIf="mission.reward_currency_repeatable > 0">The player recieves {{mission.reward_currency_repeatable}} coins on repeated missions</li>
     <li *ngIf="mission.reward_maxwallet > 0">The player's maximum coin count is increased by {{mission.reward_maxwallet}} coins</li>
     <li *ngIf="mission.reward_bankinventory > 0">The player's maximum vault inventory size is increased by {{mission.reward_bankinventory}}</li>
+    <li *ngIf="mission.LegoScore > 0">The player's score is increased by <code>{{mission.LegoScore}}</code></li>
   </ul>
 </section>
 

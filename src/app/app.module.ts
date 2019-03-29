@@ -3,7 +3,7 @@ import { NgModule }         from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }      from '@angular/forms';
 
-import { BitSetPipe, NotPipe, ReplacePipe, KeysPipe, RemovePipe, NonNullPipe, DatePipe, HtmlPipe } from './custom-pipes.pipe';
+import { BitSetPipe, NotPipe, ReplacePipe, ToPipe, PercentPipe, KeysPipe, RemovePipe, NonNullPipe, DatePipe, HtmlPipe } from './custom-pipes.pipe';
 
 import { AppComponent } from './app.component';
 import { LuJsonService } from './lu-json.service';
@@ -63,6 +63,14 @@ import { ReleaseVersionComponent } from './misc/release-version/release-version.
 import { FeatureGatingComponent } from './misc/feature-gating/feature-gating.component';
 import { SubscriptionPricingComponent } from './misc/subscription-pricing/subscription-pricing.component';
 import { BrickIdsComponent } from './misc/brick-ids/brick-ids.component';
+import { ActivitiesComponent } from './activities/activities.component';
+import { ActivityDetailComponent } from './activities/activity-detail.component';
+import { RebuildComponentComponent } from './objects/components/rebuild-component/rebuild-component.component';
+import { QuickBuildComponentComponent } from './objects/components/quick-build-component/quick-build-component.component';
+import { LootTableIndexComponent } from './loot-table/loot-table-index/loot-table-index.component';
+import { CurrencyTableComponent } from './currency-table/currency-table.component';
+import { ShootingGalleryComponentComponent } from './objects/components/shooting-gallery-component/shooting-gallery-component.component';
+import { ScriptedActivityComponentComponent } from './objects/components/scripted-activity-component/scripted-activity-component.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +84,8 @@ import { BrickIdsComponent } from './misc/brick-ids/brick-ids.component';
     BitSetPipe,
     NotPipe,
     ReplacePipe,
+    PercentPipe,
+    ToPipe,
     KeysPipe,
     RemovePipe,
     NonNullPipe,
@@ -128,6 +138,14 @@ import { BrickIdsComponent } from './misc/brick-ids/brick-ids.component';
     FeatureGatingComponent,
     SubscriptionPricingComponent,
     BrickIdsComponent,
+    ActivitiesComponent,
+    ActivityDetailComponent,
+    RebuildComponentComponent,
+    QuickBuildComponentComponent,
+    LootTableIndexComponent,
+    CurrencyTableComponent,
+    ShootingGalleryComponentComponent,
+    ScriptedActivityComponentComponent,
   ],
   imports: [
     BrowserModule,

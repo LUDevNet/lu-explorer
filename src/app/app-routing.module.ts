@@ -23,8 +23,12 @@ import { MissionsBySubtypeComponent } from './missions/by-subtype/by-subtype.com
 import { LootTableComponent } from './loot-table/loot-table.component';
 import { ObjectTypesIndexComponent } from './objects/types-index/types-index.component';
 import { ObjectsByTypeComponent } from './objects/by-type/by-type.component';
+import { ActivitiesComponent } from './activities/activities.component';
+import { ActivityDetailComponent } from './activities/activity-detail.component';
 
 const routes: Routes = [
+  { path: 'activities', component: ActivitiesComponent },
+  { path: 'activities/:id', component: ActivityDetailComponent },
   { path: 'misc', component: MiscComponent },
   { path: 'misc/:type', component: MiscComponent },
   { path: 'factions', component: FactionsComponent },

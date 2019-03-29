@@ -1,0 +1,6 @@
+<dl *ngIf="currency_table">
+  <ng-container *ngFor="let entry of currency_table">
+    <dt>Level {{ entry.npcminlevel }}:</dt>
+    <dd>{{entry.minvalue | to: entry.maxvalue }} coin(s)</dd>
+  </ng-container>
+</dl>

@@ -10,6 +10,7 @@
 * Investigate QuickBuild vs Minigame in mission 1434
 * Investigate emote rewards in Mission 1750
 * Mission Texts offerNPCIcon
+* display MissionTasks localization (e.g. Mission 282)
 
 ## General
 

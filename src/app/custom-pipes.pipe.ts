@@ -23,6 +23,22 @@ export class KeysPipe implements PipeTransform {
   }
 }
 
+@Pipe({name: 'percent'})
+export class PercentPipe implements PipeTransform {
+  transform(value) : any {
+    let percent = 100 * value;
+    return 100 + '%';
+  }
+}
+
+@Pipe({name: 'to'})
+export class ToPipe implements PipeTransform {
+  transform(value: number, other: number) : string {
+    if (value == other) return String(value);
+    return value + " to " + other;
+  }
+}
+
 // https://stackoverflow.com/questions/35534959/access-key-and-value-of-object-using-ngfor
 @Pipe({name: 'remove'})
 export class RemovePipe implements PipeTransform {

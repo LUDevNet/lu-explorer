@@ -23,6 +23,19 @@ html, body {
   margin: 0;
 }
 
+blockquote {
+  background-color: #000;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  margin: 0.5rem 0 0 0;
+}
+
+code {
+  background-color: #000;
+  padding: 0.2em 0.4em;
+  border-radius: 0.2em;
+}
+
 .content
 {
   background-color: #111;

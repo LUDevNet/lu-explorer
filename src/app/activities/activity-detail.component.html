@@ -1,0 +1,32 @@
+<div class="breadcrumbs">
+  <li><a routerLink="/activities">Activities</a></li>
+  <li>{{activity_id}}</li>
+</div>
+
+<h2>Activity #{{activity_id}} <small *ngIf="activity_loc">"{{activity_loc.ActivityName}}"</small></h2>
+
+<section>
+  <h3>Details</h3>
+  <app-data-table [table]="activity" *ngIf="activity"></app-data-table>
+</section>
+
+<section *ngIf="activity_rewards">
+  <h3>Rewards</h3>
+  <ng-container *ngFor="let reward of activity_rewards.activity_rewards">
+    <ng-container *ngIf="reward">
+      <h4>{{reward.description}} ({{reward.ActivityRewardIndex}})</h4>
+      <p>
+        Required Rating: {{reward.activityRating}}<br>
+        Challenge Rating: {{reward.ChallengeRating}}<br>
+      </p>
+      <ng-container *ngIf="reward.CurrencyIndex">
+        <h5>CurrencyIndex ({{reward.CurrencyIndex}})</h5>
+        <app-currency-table [id]="reward.CurrencyIndex"></app-currency-table>
+      </ng-container>
+      <ng-container *ngIf="reward.LootMatrixIndex">
+        <h5>LootMatrix ({{reward.LootMatrixIndex}})</h5>
+        <app-loot-matrix [id]="reward.LootMatrixIndex"></app-loot-matrix>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</section>

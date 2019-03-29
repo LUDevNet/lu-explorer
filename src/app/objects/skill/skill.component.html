@@ -14,7 +14,7 @@
     <th>Behavior</th>
   </tr>
   <ng-container *ngFor="let entry of oskills">
-    <tr *ngIf="skills[entry.skillID]">
+    <tr *ngIf="skills && skills[entry.skillID]">
       <td><a routerLink="/skills/{{entry.skillID}}">{{entry.skillID}}</a></td>
       <td>{{entry.castOnType}}</td><td>{{entry.AICombatWeight}}</td>
       <td>
