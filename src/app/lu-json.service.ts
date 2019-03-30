@@ -30,6 +30,7 @@ export class LuJsonService {
   private packBaseUrl;
   private objectsBaseUrl;
   private objectsByTypeUrl;
+  private objectsByComponentUrl;
   private zonesBaseUrl;
   private zonesIndexUrl;
   private accIndexUrl;
@@ -66,6 +67,7 @@ export class LuJsonService {
     this.zonesBaseUrl = this.tablesUrl + "ZoneTable/";
     this.iconsBaseUrl = this.tablesUrl + "Icons/";
     this.objectsByTypeUrl = this.objectsBaseUrl + "groupBy/type/";
+    this.objectsByComponentUrl = this.objectsBaseUrl + "groupBy/component/";
     this.zonesIndexUrl = this.zonesBaseUrl + "index";
     this.accIndexUrl = this.tablesUrl + "AccessoryDefaultLoc/index";
   }
@@ -222,6 +224,14 @@ export class LuJsonService {
 
   getObjectType(type: string): Observable<any> {
     return this.makeRequest(this.objectsByTypeUrl + type, `getObjectType(${type})`);
+  }
+
+  getObjectComponents(): Observable<any> {
+    return this.makeRequest(this.objectsByComponentUrl + "index", `getObjectComponents()`);
+  }
+
+  getObjectComponent(component: number): Observable<any> {
+    return this.makeRequest(this.objectsByComponentUrl + component, `getObjectComponent(${component})`);
   }
 
   getBrickColors(): Observable<any[]> {

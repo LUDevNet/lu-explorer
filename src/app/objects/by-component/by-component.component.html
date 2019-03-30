@@ -1,0 +1,15 @@
+<ul class="breadcrumbs">
+  <li><a routerLink="/objects">Objects</a></li>
+  <li><a routerLink="/objects/components">Components</a></li>
+  <li>{{component_name}}</li>
+</ul>
+
+<h2>{{component_name}} Component  ({{component_id}})</h2>
+
+<table>
+  <tr *ngFor="let object of objects">
+    <td>{{object.id}}</td>
+    <td><a routerLink="/objects/{{object.id}}">{{object.name ? object.name : '[Unnamed]'}}</a></td>
+    <td>{{object.comp_val}}</td>
+  </tr>
+</table>

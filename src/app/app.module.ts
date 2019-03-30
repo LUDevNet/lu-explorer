@@ -71,6 +71,8 @@ import { LootTableIndexComponent } from './loot-table/loot-table-index/loot-tabl
 import { CurrencyTableComponent } from './currency-table/currency-table.component';
 import { ShootingGalleryComponentComponent } from './objects/components/shooting-gallery-component/shooting-gallery-component.component';
 import { ScriptedActivityComponentComponent } from './objects/components/scripted-activity-component/scripted-activity-component.component';
+import { ObjectsByComponentComponent } from './objects/by-component/by-component.component';
+import { ObjectComponentsIndexComponent } from './objects/components-index/components-index.component';
 
 @NgModule({
   declarations: [
@@ -146,6 +148,8 @@ import { ScriptedActivityComponentComponent } from './objects/components/scripte
     CurrencyTableComponent,
     ShootingGalleryComponentComponent,
     ScriptedActivityComponentComponent,
+    ObjectsByComponentComponent,
+    ObjectComponentsIndexComponent,
   ],
   imports: [
     BrowserModule,
