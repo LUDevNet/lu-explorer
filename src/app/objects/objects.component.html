@@ -2,7 +2,10 @@
   <li>Objects</li>
 </ul>
 
-<h2>Objects <small><a routerLink="/objects/types">[By type]</a></small></h2>
+<h2>Objects <small>
+  <a routerLink="/objects/types">[By type]</a>
+  <a routerLink="/objects/components">[By component]</a>
+</small></h2>
 
 
 Name: <input type="text" [(ngModel)]="needle" (keyup)="updateFilterList()"/>
