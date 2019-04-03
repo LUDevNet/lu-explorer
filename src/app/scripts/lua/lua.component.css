@@ -1,0 +1,19 @@
+.lua-string-literal {
+  color: orange;
+}
+
+.lua-numeric-literal {
+  color: blue;
+}
+
+.lua-boolean-literal {
+  color: pink;
+}
+
+.lua-nil-literal {
+  color: lime;
+}
+
+.lua-keyword {
+  color: cyan;
+}
