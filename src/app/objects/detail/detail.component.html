@@ -8,6 +8,12 @@
 
   <h2>{{object.name | uppercase }} <small *ngIf="objectLocale">"{{objectLocale.name}}"</small></h2>
 
+  <section>
+    <blockquote *ngIf="object.description">
+      {{object.description}}
+    </blockquote>
+  </section>
+
   <div class="sidemenu-pane scroll-30">
     <div class="sidemenu">
       <h3>Components</h3>
@@ -26,7 +32,7 @@
         <app-destroyable *ngSwitchCase="7" [id]="object.components[component_id]"></app-destroyable>
         <app-skill-component *ngSwitchCase="9" [oskills]="object.skills" [id]="object.components[component_id]">
         </app-skill-component>
-        <app-item *ngSwitchCase="11" [id]="object.components[component_id]"></app-item>
+        <app-item-component *ngSwitchCase="11" [id]="object.components[component_id]"></app-item-component>
         <app-rebuild-component *ngSwitchCase="12" [id]="object.components[component_id]"></app-rebuild-component>
         <app-vendor *ngSwitchCase="16" [id]="object.components[component_id]"></app-vendor>
         <app-inventory *ngSwitchCase="17" [id]="object.components[component_id]"></app-inventory>

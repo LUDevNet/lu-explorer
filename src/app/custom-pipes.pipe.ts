@@ -58,6 +58,38 @@ export class BitSetPipe implements PipeTransform {
   }
 }
 
+@Pipe({name: 'bitand'})
+export class BitAndPipe implements PipeTransform {
+  transform(value: any, key: number) : any {
+    let val = value ? +value : 0;
+    return (val & key);
+  }
+}
+
+@Pipe({name: 'bitor'})
+export class BitOrPipe implements PipeTransform {
+  transform(value: any, key: number) : any {
+    let val = value ? +value : 0;
+    return (val | key);
+  }
+}
+
+@Pipe({name: 'bitshr'})
+export class BitShiftRightPipe implements PipeTransform {
+  transform(value: any, key: number) : any {
+    let val = value ? +value : 0;
+    return (val >> key);
+  }
+}
+
+@Pipe({name: 'bitshl'})
+export class BitShiftLeftPipe implements PipeTransform {
+  transform(value: any, key: number) : any {
+    let val = value ? +value : 0;
+    return (val << key);
+  }
+}
+
 @Pipe({name: 'not'})
 export class NotPipe implements PipeTransform {
   transform(value: any) : any {

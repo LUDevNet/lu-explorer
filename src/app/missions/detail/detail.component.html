@@ -12,7 +12,7 @@
 
 <section *ngIf="mission && mission.prereqMissionID">
   <h3>Prerequisites</h3>
-  <mission-ref-list [ref]="parsePrereqString(mission.prereqMissionID)"></mission-ref-list>
+  <app-prereq-list [string]="mission.prereqMissionID"></app-prereq-list>
 </section>
 
 <h3>General</h3>
