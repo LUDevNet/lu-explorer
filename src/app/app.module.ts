@@ -5,6 +5,10 @@ import { FormsModule }      from '@angular/forms';
 
 import {
   BitSetPipe,
+  BitAndPipe,
+  BitOrPipe,
+  BitShiftRightPipe,
+  BitShiftLeftPipe,
   DocsPipe,
   NotPipe,
   ReplacePipe,
@@ -37,7 +41,6 @@ import { BehaviorDetailAltComponent } from './behavior/detail-alt/detail-alt.com
 import { ObjectsComponent } from './objects/objects.component';
 import { RenderComponent } from './objects/render/render.component';
 import { ItemComponent } from './objects/item/item.component';
-import { ObjectSkillComponent } from './objects/skill/skill.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { PhysicsComponent } from './objects/physics/physics.component';
 import { LootTableComponent } from './loot-table/loot-table.component';
@@ -78,7 +81,9 @@ import { ActivitiesComponent } from './activities/activities.component';
 import { ActivityDetailComponent } from './activities/activity-detail.component';
 import { LootTableIndexComponent } from './loot-table/loot-table-index/loot-table-index.component';
 import { CurrencyTableComponent } from './currency-table/currency-table.component';
+
 import {
+  ItemComponentComponent,
   PackageComponentComponent,
   QuickBuildComponentComponent,
   RebuildComponentComponent,
@@ -87,11 +92,13 @@ import {
   ShootingGalleryComponentComponent,
   SkillComponentComponent
 } from './objects/components/components';
+
 import { ObjectsByComponentComponent } from './objects/by-component/by-component.component';
 import { ObjectComponentsIndexComponent } from './objects/components-index/components-index.component';
 import { ScriptsComponent } from './scripts/scripts.component';
 import { LuaComponent } from './scripts/lua/lua.component';
 import { ScriptFileComponent } from './scripts/script-file/script-file.component';
+import { PrereqListComponent } from './missions/prereq-list/prereq-list.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +110,10 @@ import { ScriptFileComponent } from './scripts/script-file/script-file.component
     GithubSpaComponent,
     AccDefaultLocComponent,
     BitSetPipe,
+    BitAndPipe,
+    BitOrPipe,
+    BitShiftLeftPipe,
+    BitShiftRightPipe,
     NotPipe,
     ReplacePipe,
     PercentPipe,
@@ -122,7 +133,6 @@ import { ScriptFileComponent } from './scripts/script-file/script-file.component
     RenderComponent,
     PackageComponentComponent,
     ItemComponent,
-    ObjectSkillComponent,
     DataTableComponent,
     PhysicsComponent,
     LootTableComponent,
@@ -173,7 +183,9 @@ import { ScriptFileComponent } from './scripts/script-file/script-file.component
     LuaComponent,
     ScriptFileComponent,
     ScriptComponentComponent,
-    SkillComponentComponent
+    SkillComponentComponent,
+    ItemComponentComponent,
+    PrereqListComponent
   ],
   imports: [
     BrowserModule,

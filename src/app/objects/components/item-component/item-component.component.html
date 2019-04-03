@@ -1,0 +1,133 @@
+<h3>Item Component #{{id}} (11)</h3>
+<p>
+  An object with this component can be stored and displayed in an inventory
+  and traded.
+  <a [href]="'components/011-item' | docs" target="_blank">Read more...</a>
+</p>
+<ng-container *ngIf="component | async; else loading; let item">
+  <h4>General</h4>
+  <dl>
+    <dd>Base Value: {{item.baseValue}} (<code>baseValue</code>)</dd>
+    <dd>Stack Size: {{item.stackSize}} (<code>stackSize</code>)</dd>
+    <dd>Rarity: {{item.rarity}} (<code>rarity</code>)</dd>
+    <dd>Rating: {{item.itemRating}} (<code>itemRating</code>)</dd>
+  </dl>
+
+  <section *ngIf="item.minNumRequired > 0">
+    You need to keep at least {{item.minNumRequired}} (<code>minNumRequired</code>)
+    of this item in your inventory at all times.
+  </section>
+
+  <section *ngIf="item.commendationLOT">
+    <h4>Commendation</h4>
+    <p>
+      This item may be bought from a commendation vendor for
+      {{item.commendationCost}} items of type
+      <a routerLink="/objects/{{item.commendationLOT}}">{{item.commendationLOT}}</a>.
+    </p>
+  </section>
+
+  <section *ngIf="item.equipLocation">
+    <h4>Equipment</h4>
+    <p>
+      This item can be equipped at <code>{{item.equipLocation}}</code>
+    </p>
+  </section>
+
+  <section *ngIf="item.color1 || item.decal">
+    <h4>Style</h4>
+    <table>
+      <tr><td>color1</td><td>{{item.color1}}</td></tr>
+      <tr><td>decal</td><td>{{item.decal}}</td></tr>
+    </table>
+  </section>
+
+  <section *ngIf="item.subItems">
+    <h4>SubItems</h4>
+    When this item is equipped, the following items are also considered equipped:
+    <ul>
+      <li *ngFor="let obj of item.subItems.trim().split(',')">
+        Object
+        <a routerLink="/objects/{{obj}}">{{obj}}</a>
+      </li>
+    </ul>
+  </section>
+
+  <section *ngIf="item.buildTypes">
+    <h4>BuildTypes</h4>
+
+    <ul>
+      <li *ngIf="item.buildTypes | bitset:1">Not Customized (1)</li>
+      <li *ngIf="item.buildTypes | bitset:2">Model (2)</li>
+      <li *ngIf="item.buildTypes | bitset:4">[Unused] (4)</li>
+      <li *ngIf="item.buildTypes | bitset:8">Rocket (8)</li>
+      <li *ngIf="item.buildTypes | bitset:16">Car (old) (16)</li>
+      <li *ngIf="item.buildTypes | bitset:32">Car (mod) (32)</li>
+      <li *ngIf="item.buildTypes | bitset:64">Car Module (64)</li>
+      <li *ngIf="item.buildTypes | bitset:128">[Unused:128] (128)</li>
+      <li *ngIf="item.buildTypes | bitset:256">Pet (256)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h4>Flags</h4>
+    <table>
+      <tr><td>inLootTable</td><td>{{item.inLootTable}}</td></tr>
+      <tr><td>inVendor</td><td>{{item.inVendor}}</td></tr>
+      <tr><td>isBOE</td><td>{{item.isBOE}}</td></tr>
+      <tr><td>isBOP</td><td>{{item.isBOP}}</td></tr>
+      <tr><td>isKitPiece</td><td>{{item.isKitPiece}}</td></tr>
+      <tr><td>isTwoHanded</td><td>{{item.isTwoHanded}}</td></tr>
+      <tr><td>isUnique</td><td>{{item.isUnique}}</td></tr>
+      <tr><td>noEquipAnimation</td><td>{{item.noEquipAnimation}}</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h4>Internal</h4>
+    <table>
+      <tr><td>readyForQA</td><td>{{item.readyForQA}}</td></tr>
+      <tr><td>locStatus</td><td>{{item.locStatus}}</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h4>Requirements</h4>
+    <table>
+      <tr><td>reqAchievementID</td><td>{{item.reqAchievementID}}</td></tr>
+      <tr><td>reqFlagID</td><td>{{item.reqFlagID}}</td></tr>
+      <tr><td>reqPrecondition</td><td>{{item.reqPrecondition}}</td></tr>
+      <tr><td>reqSpecRank</td><td>{{item.reqSpecRank}}</td></tr>
+      <tr><td>reqSpecialtyID</td><td>{{item.reqSpecialtyID}}</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h4>Unknown</h4>
+    <table>
+      <tr><td>delResIndex</td><td>{{item.delResIndex}}</td></tr>
+      <tr><td>itemInfo</td><td>{{item.itemInfo}}</td></tr>
+      <tr><td>offsetGroupID</td><td>{{item.offsetGroupID}}</td></tr>
+
+      <tr><td>animationFlag</td><td>{{item.animationFlag}}</td></tr>
+      <tr><td>equipEffects</td><td>{{item.equipEffects}}</td></tr>
+
+      <tr><td>currencyLOT</td><td>{{item.currencyLOT}}</td></tr>
+      <tr><td>currencyCosts</td><td>{{item.currencyCosts}}</td></tr>
+      <tr><td>altCurrencyCost</td><td>{{item.altCurrencyCost}}</td></tr>
+
+      <tr><td>audioEventUse</td><td>{{item.audioEventUse}}</td></tr>
+      <tr><td>audioEquipMetaEventSet</td><td>{{item.audioEquipMetaEventSet}}</td></tr>
+
+      <tr><td>ingredientInfo</td><td>{{item.ingredientInfo}}</td></tr>
+      <tr><td>forgeType</td><td>{{item.forgeType}}</td></tr>
+      <tr><td>SellMultiplier</td><td>{{item.SellMultiplier}}</td></tr>
+    </table>
+  </section>
+</ng-container>
+<ng-template #loading>
+  Loading...
+</ng-template>
+
+<!-- itemType 14: Factio Token -->
+<!-- itemType 15: Shirt -->
