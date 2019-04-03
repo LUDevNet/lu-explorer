@@ -18,6 +18,7 @@ export class LuJsonService {
   private apiUrl;
   private tablesUrl;
   private localeUrl;
+  private scriptsUrl;
   private behaviorBaseUrl;
   private skillBaseUrl;
   private renderBaseUrl;
@@ -54,8 +55,10 @@ export class LuJsonService {
 
     this.tablesUrl = "tables/";
     this.localeUrl = "locale/";
+    this.scriptsUrl = "scripts/";
     this.behaviorBaseUrl = "behaviors/";
     this.objectsBaseUrl = "objects/";
+
     this.skillBaseUrl = this.tablesUrl + "SkillBehavior/";
     this.renderBaseUrl = this.tablesUrl + "RenderComponent/";
     this.scriptBaseUrl = this.tablesUrl + "ScriptComponent/";
@@ -261,24 +264,24 @@ export class LuJsonService {
     return this.getJsonResource("locale/" + table + "/", "index", "locale");
   }
 
-  getLocalePage(table: string, page: number)
-  {
+  getLocalePage(table: string, page: number) {
     return this.getJsonResource("locale/" + table + "/", String(page), "locale page");
   }
 
-  getMissionsByType()
-  {
+  getMissionsByType() {
     return this.getJsonResource("tables/Missions/groupBy/", "type", "missions");
   }
 
-  getActivityRewards(id: number)
-  {
+  getActivityRewards(id: number) {
     return this.getGeneric(id, "ActivityRewards", true);
   }
 
-  getCurrencyIndex(id: number)
-  {
+  getCurrencyIndex(id: number) {
     return this.getGeneric(id, "CurrencyTable", true);
+  }
+
+  getScript(path: string): Observable<any> {
+    return this.getJsonResource(this.scriptsUrl, path, "Script");
   }
 
   getJsonResource(prefix: string, url: string, type: string): Observable<any> {

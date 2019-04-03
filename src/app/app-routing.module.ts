@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UrlMatcher, UrlMatchResult, Route, UrlSegmentGroup, UrlSegment } from '@angular/router';
 
 import { GithubSpaComponent } from './github-spa/github-spa.component';
 import { ZonesComponent } from './zones/zones.component';
@@ -27,6 +28,31 @@ import { ObjectsByComponentComponent } from './objects/by-component/by-component
 import { ObjectComponentsIndexComponent } from './objects/components-index/components-index.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ActivityDetailComponent } from './activities/activity-detail.component';
+import { ScriptsComponent } from './scripts/scripts.component';
+import { ScriptFileComponent } from './scripts/script-file/script-file.component';
+
+// https://stackblitz.com/edit/ignore-slash?file=src%2Fapp%2Fapp.module.ts
+const scriptMatcher: UrlMatcher = (
+  segments: UrlSegment[],
+  group: UrlSegmentGroup,
+  route: Route
+): UrlMatchResult => {
+  const { length } = segments;
+  console.log(segments);
+  if (length > 0) {
+    const firstSegment = segments[0];
+    console.log(firstSegment.parameters);
+    if (firstSegment.path === "scripts" && length >= 2) {
+      // candidate for match
+      const idSegments = segments.slice(1); // skip prefix
+      const idPaths = idSegments.map(segment => segment.path);
+      const mergedId = idPaths.join('/');// merge the splitted Id back together
+      const pathSegment: UrlSegment = new UrlSegment(mergedId, { id: mergedId });
+      return ({ consumed: segments, posParams: { path: pathSegment } });
+    }
+  }
+  return null;
+};
 
 const routes: Routes = [
   { path: 'activities', component: ActivitiesComponent },
@@ -52,6 +78,8 @@ const routes: Routes = [
   { path: 'missions/detail/:id', component: MissionDetailComponent },
   { path: 'missions/:type', component: MissionsByTypeComponent },
   { path: 'missions/:type/:subtype', component: MissionsBySubtypeComponent },
+  { path: 'scripts', component: ScriptsComponent },
+  { matcher: scriptMatcher, component: ScriptFileComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: '', component: GithubSpaComponent, pathMatch: 'full' }
 ];

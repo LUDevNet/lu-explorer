@@ -73,6 +73,9 @@ import { ShootingGalleryComponentComponent } from './objects/components/shooting
 import { ScriptedActivityComponentComponent } from './objects/components/scripted-activity-component/scripted-activity-component.component';
 import { ObjectsByComponentComponent } from './objects/by-component/by-component.component';
 import { ObjectComponentsIndexComponent } from './objects/components-index/components-index.component';
+import { ScriptsComponent } from './scripts/scripts.component';
+import { LuaComponent } from './scripts/lua/lua.component';
+import { ScriptFileComponent } from './scripts/script-file/script-file.component';
 
 @NgModule({
   declarations: [
@@ -150,6 +153,9 @@ import { ObjectComponentsIndexComponent } from './objects/components-index/compo
     ScriptedActivityComponentComponent,
     ObjectsByComponentComponent,
     ObjectComponentsIndexComponent,
+    ScriptsComponent,
+    LuaComponent,
+    ScriptFileComponent,
   ],
   imports: [
     BrowserModule,
