@@ -3,10 +3,23 @@ import { NgModule }         from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }      from '@angular/forms';
 
-import { BitSetPipe, NotPipe, ReplacePipe, ToPipe, PercentPipe, KeysPipe, RemovePipe, NonNullPipe, DatePipe, HtmlPipe } from './custom-pipes.pipe';
+import {
+  BitSetPipe,
+  DocsPipe,
+  NotPipe,
+  ReplacePipe,
+  ToPipe,
+  PercentPipe,
+  KeysPipe,
+  RemovePipe,
+  NonNullPipe,
+  DatePipe,
+  HtmlPipe
+} from './custom-pipes.pipe';
+
+import { LuDocsService, LuJsonService } from './services';
 
 import { AppComponent } from './app.component';
-import { LuJsonService } from './lu-json.service';
 import { LocaleService } from './locale.service';
 import { ZonesComponent } from './zones/zones.component';
 import { ZoneDetailComponent } from './zone-detail/zone-detail.component';
@@ -23,13 +36,11 @@ import { IconComponent } from './icon/icon.component';
 import { BehaviorDetailAltComponent } from './behavior/detail-alt/detail-alt.component';
 import { ObjectsComponent } from './objects/objects.component';
 import { RenderComponent } from './objects/render/render.component';
-import { PackageComponent } from './objects/package/package.component';
 import { ItemComponent } from './objects/item/item.component';
 import { ObjectSkillComponent } from './objects/skill/skill.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { PhysicsComponent } from './objects/physics/physics.component';
 import { LootTableComponent } from './loot-table/loot-table.component';
-import { ScriptComponent } from './objects/script/script.component';
 import { DestroyableComponent } from './objects/destroyable/destroyable.component';
 import { GenericComponent } from './objects/generic/generic.component';
 import { VendorComponent } from './objects/vendor/vendor.component';
@@ -65,12 +76,17 @@ import { SubscriptionPricingComponent } from './misc/subscription-pricing/subscr
 import { BrickIdsComponent } from './misc/brick-ids/brick-ids.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ActivityDetailComponent } from './activities/activity-detail.component';
-import { RebuildComponentComponent } from './objects/components/rebuild-component/rebuild-component.component';
-import { QuickBuildComponentComponent } from './objects/components/quick-build-component/quick-build-component.component';
 import { LootTableIndexComponent } from './loot-table/loot-table-index/loot-table-index.component';
 import { CurrencyTableComponent } from './currency-table/currency-table.component';
-import { ShootingGalleryComponentComponent } from './objects/components/shooting-gallery-component/shooting-gallery-component.component';
-import { ScriptedActivityComponentComponent } from './objects/components/scripted-activity-component/scripted-activity-component.component';
+import {
+  PackageComponentComponent,
+  QuickBuildComponentComponent,
+  RebuildComponentComponent,
+  ScriptComponentComponent,
+  ScriptedActivityComponentComponent,
+  ShootingGalleryComponentComponent,
+  SkillComponentComponent
+} from './objects/components/components';
 import { ObjectsByComponentComponent } from './objects/by-component/by-component.component';
 import { ObjectComponentsIndexComponent } from './objects/components-index/components-index.component';
 import { ScriptsComponent } from './scripts/scripts.component';
@@ -96,6 +112,7 @@ import { ScriptFileComponent } from './scripts/script-file/script-file.component
     NonNullPipe,
     DatePipe,
     HtmlPipe,
+    DocsPipe,
     BehaviorComponent,
     BehaviorDetailComponent,
     SkillComponent,
@@ -103,13 +120,12 @@ import { ScriptFileComponent } from './scripts/script-file/script-file.component
     BehaviorDetailAltComponent,
     ObjectsComponent,
     RenderComponent,
-    PackageComponent,
+    PackageComponentComponent,
     ItemComponent,
     ObjectSkillComponent,
     DataTableComponent,
     PhysicsComponent,
     LootTableComponent,
-    ScriptComponent,
     DestroyableComponent,
     GenericComponent,
     VendorComponent,
@@ -156,6 +172,8 @@ import { ScriptFileComponent } from './scripts/script-file/script-file.component
     ScriptsComponent,
     LuaComponent,
     ScriptFileComponent,
+    ScriptComponentComponent,
+    SkillComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -166,7 +184,8 @@ import { ScriptFileComponent } from './scripts/script-file/script-file.component
   providers: [
     LuJsonService,
     MessageService,
-    LocaleService
+    LocaleService,
+    LuDocsService
   ],
   bootstrap: [AppComponent]
 })
