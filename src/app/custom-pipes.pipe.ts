@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { LuDocsService } from './services';
 
 @Pipe({name: 'replace'})
 export class ReplacePipe implements PipeTransform {
@@ -78,6 +79,15 @@ export class DatePipe implements PipeTransform {
   }
 }
 
+@Pipe({name: 'docs'})
+export class DocsPipe implements PipeTransform {
+
+  constructor(private luDocs: LuDocsService) {}
+
+  transform(value: string) : any {
+    return this.luDocs.link(value);
+  }
+}
 
 @Pipe({name: 'html'})
 export class HtmlPipe implements PipeTransform {

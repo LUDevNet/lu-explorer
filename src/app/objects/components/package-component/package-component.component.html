@@ -1,0 +1,17 @@
+<h3> Package Component #{{id}} (53)</h3>
+
+This component is attached to items that can be 'opened'. Using them
+consumes the item, and the player is given a randomized selection
+of items.
+<a [href]="'components/053-package' | docs" target="_blank">Read more...</a>
+
+<ng-container *ngIf="component | async; else loading; let package">
+<h4>
+  Loot Matrix ({{package.LootMatrixIndex}})
+  <small>Type: {{package.packageType}}</small>
+</h4>
+<app-loot-matrix [id]="package.LootMatrixIndex"></app-loot-matrix>
+</ng-container>
+<ng-template #loading>
+  Loading...
+</ng-template>

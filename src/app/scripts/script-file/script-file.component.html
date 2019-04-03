@@ -1,9 +1,7 @@
 <ul class="breadcrumbs">
   <li><a routerLink="/scripts">Scripts</a></li>
   <li *ngFor="let segment of segments.slice(0,-1); let i = index">
-    <a [routerLink]="getLink(i, segment)">
-      {{segment}}
-    </a>
+    <a [routerLink]="getLink(i, segment)">{{segment}}</a>
   </li>
   <li>{{segments[segments.length - 1]}}</li>
 </ul>

@@ -4,7 +4,7 @@ import { LuJsonService } from '../../lu-json.service';
 import { LuResService } from '../../lu-res.service';
 
 @Component({
-  selector: 'app-skill-component',
+  selector: 'app-skill-component-old',
   templateUrl: './skill.component.html',
   styleUrls: ['./skill.component.css']
 })

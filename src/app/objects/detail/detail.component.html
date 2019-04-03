@@ -10,11 +10,11 @@
 
   <div class="sidemenu-pane scroll-30">
     <div class="sidemenu">
-      <h3>Components ({{component_id}})</h3>
+      <h3>Components</h3>
       <ul>
         <li *ngFor="let entry of object.components | keys" [class.active]="component_id == entry.key">
           <a [routerLink]="['/objects', object_id, entry.key]">{{getName(entry.key)}}
-            <span class="pull-right">({{entry.key}}:{{entry.value}})</span></a></li>
+            <span class="pull-right">#{{entry.value}} ({{entry.key}})</span></a></li>
       </ul>
     </div>
     <div class="sidemenu-content">
@@ -22,7 +22,7 @@
         <app-physics *ngSwitchCase="1" name="Controllable Physics" [id]="object.components[component_id]"></app-physics>
         <app-render *ngSwitchCase="2" [id]="object.components[component_id]"></app-render>
         <app-physics *ngSwitchCase="3" name="Simple Physics" [id]="object.components[component_id]"></app-physics>
-        <app-script *ngSwitchCase="5" [id]="object.components[component_id]"></app-script>
+        <app-script-component *ngSwitchCase="5" [id]="object.components[component_id]"></app-script-component>
         <app-destroyable *ngSwitchCase="7" [id]="object.components[component_id]"></app-destroyable>
         <app-skill-component *ngSwitchCase="9" [oskills]="object.skills" [id]="object.components[component_id]">
         </app-skill-component>
@@ -40,7 +40,7 @@
         <app-scripted-activity-component *ngSwitchCase="39" [id]="object.components[component_id]"></app-scripted-activity-component>
         <app-physics *ngSwitchCase="40" name="Phantom Physics" [id]="object.components[component_id]"></app-physics>
         <app-quick-build-component *ngSwitchCase="48" [id]="object.components[component_id]"></app-quick-build-component>
-        <app-package *ngSwitchCase="53" [id]="object.components[component_id]"></app-package>
+        <app-package-component *ngSwitchCase="53" [id]="object.components[component_id]"></app-package-component>
         <app-generic *ngSwitchCase="60" [id]="object.components[component_id]" table="BaseCombatAI" [paged]="true">
         </app-generic>
         <app-generic *ngSwitchCase="67" [id]="object.components[component_id]" table="RocketLaunchpadControl" [paged]="false">
