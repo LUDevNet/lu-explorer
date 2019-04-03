@@ -6,10 +6,7 @@ import { GithubSpaComponent } from './github-spa/github-spa.component';
 import { ZonesComponent } from './zones/zones.component';
 import { ZoneDetailComponent } from './zone-detail/zone-detail.component';
 import { ScenesComponent } from './zone-detail/scenes/scenes.component';
-//import { AccDefaultLocComponent } from './acc-default-loc/acc-default-loc.component';
 import { MiscComponent } from './misc/misc.component';
-//import { BrickColorsComponent } from './brick-colors/brick-colors.component';
-//import { EventGatingComponent } from './event-gating/event-gating.component';
 import { FactionsComponent } from './factions/factions.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BehaviorDetailAltComponent }   from './behavior/detail-alt/detail-alt.component';
@@ -31,21 +28,23 @@ import { ActivityDetailComponent } from './activities/activity-detail.component'
 import { ScriptsComponent } from './scripts/scripts.component';
 import { ScriptFileComponent } from './scripts/script-file/script-file.component';
 
+export function mapPath(segment: UrlSegment): string {
+  return segment.path;
+};
+
 // https://stackblitz.com/edit/ignore-slash?file=src%2Fapp%2Fapp.module.ts
-const scriptMatcher: UrlMatcher = (
+export function scriptMatcher(
   segments: UrlSegment[],
   group: UrlSegmentGroup,
   route: Route
-): UrlMatchResult => {
+): UrlMatchResult {
   const { length } = segments;
-  console.log(segments);
   if (length > 0) {
     const firstSegment = segments[0];
-    console.log(firstSegment.parameters);
     if (firstSegment.path === "scripts" && length >= 2) {
       // candidate for match
       const idSegments = segments.slice(1); // skip prefix
-      const idPaths = idSegments.map(segment => segment.path);
+      const idPaths = idSegments.map(mapPath);
       const mergedId = idPaths.join('/');// merge the splitted Id back together
       const pathSegment: UrlSegment = new UrlSegment(mergedId, { id: mergedId });
       return ({ consumed: segments, posParams: { path: pathSegment } });

@@ -40,7 +40,6 @@ import { IconComponent } from './icon/icon.component';
 import { BehaviorDetailAltComponent } from './behavior/detail-alt/detail-alt.component';
 import { ObjectsComponent } from './objects/objects.component';
 import { RenderComponent } from './objects/render/render.component';
-import { ItemComponent } from './objects/item/item.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { PhysicsComponent } from './objects/physics/physics.component';
 import { LootTableComponent } from './loot-table/loot-table.component';
@@ -132,7 +131,6 @@ import { PrereqListComponent } from './missions/prereq-list/prereq-list.componen
     ObjectsComponent,
     RenderComponent,
     PackageComponentComponent,
-    ItemComponent,
     DataTableComponent,
     PhysicsComponent,
     LootTableComponent,
