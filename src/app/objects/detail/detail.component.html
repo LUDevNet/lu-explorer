@@ -8,10 +8,16 @@
 
   <h2>{{object.name | uppercase }} <small *ngIf="objectLocale">"{{objectLocale.name}}"</small></h2>
 
-  <section>
+  <section class="clearfix">
+    <img *ngIf="object.HQ_valid"
+        class="pull-right img-tag"
+        [src]="'textures/ui/missions/faction_logos/nexus-force.png' | res"
+        alt="This object is valid for NexusHQ"
+        title="This object is valid for NexusHQ">
     <blockquote *ngIf="object.description">
       {{object.description}}
     </blockquote>
+    <div class="clearfix"></div>
   </section>
 
   <div class="sidemenu-pane">
@@ -26,7 +32,7 @@
     <div class="sidemenu-content">
       <ng-container [ngSwitch]="component_id" *ngIf="component_id">
         <app-physics *ngSwitchCase="1" name="Controllable Physics" [id]="object.components[component_id]"></app-physics>
-        <app-render *ngSwitchCase="2" [id]="object.components[component_id]"></app-render>
+        <app-render-component *ngSwitchCase="2" [id]="object.components[component_id]"></app-render-component>
         <app-physics *ngSwitchCase="3" name="Simple Physics" [id]="object.components[component_id]"></app-physics>
         <app-script-component *ngSwitchCase="5" [id]="object.components[component_id]"></app-script-component>
         <app-destroyable *ngSwitchCase="7" [id]="object.components[component_id]"></app-destroyable>

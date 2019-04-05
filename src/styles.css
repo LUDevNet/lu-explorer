@@ -36,6 +36,10 @@ code {
   border-radius: 0.2em;
 }
 
+img {
+  margin-bottom: 1rem;
+}
+
 .content
 {
   background-color: #111;
@@ -82,10 +86,14 @@ a:hover, .link:hover
   content: ")";
 }
 
+.clearfix {
+  clear: both;
+}
+
 table {
   border-spacing: 10px;
   border-collapse: separate;
-  margin: -10px;
+  margin: -10px -10px calc(1rem - 10px) -10px;
   box-sizing: border-box;
   min-width: 100%;
 }
@@ -109,8 +117,8 @@ td
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  overflow-y: auto;
-  min-height: 0;
+  /*overflow-y: auto;
+  min-height: 0;*/
 }
 
 .sidemenu
@@ -175,14 +183,14 @@ td
 {
   flex: 5 1 60%;
   padding-left: 0rem;
-  overflow-y: auto;
-  min-height: 0;
+  /*overflow-y: auto;
+  min-height: 0;*/
 }
 
 .sidemenu-content ng-container
 {
-  overflow-y: auto;
-  min-height: 0;
+  /*overflow-y: auto;
+  min-height: 0;*/
 }
 
 .sidemenu-content > *:first-child,
