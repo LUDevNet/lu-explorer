@@ -7,6 +7,7 @@ import { ScriptComponentComponent } from './script-component/script-component.co
 import { ScriptedActivityComponentComponent } from './scripted-activity-component/scripted-activity-component.component';
 import { ShootingGalleryComponentComponent } from './shooting-gallery-component/shooting-gallery-component.component';
 import { SkillComponentComponent } from './skill-component/skill-component.component';
+import { VendorComponentComponent } from './vendor-component/vendor-component.component';
 
 export {
   ItemComponentComponent,
@@ -17,5 +18,6 @@ export {
   ScriptComponentComponent,
   ScriptedActivityComponentComponent,
   ShootingGalleryComponentComponent,
-  SkillComponentComponent
+  SkillComponentComponent,
+  VendorComponentComponent
 };

@@ -70,6 +70,7 @@ const routes: Routes = [
   { path: 'objects/types/:type', component: ObjectsByTypeComponent },
   { path: 'objects/components', component: ObjectComponentsIndexComponent },
   { path: 'objects/components/:component', component: ObjectsByComponentComponent },
+  { path: 'objects/components/:component/page/:page', component: ObjectsByComponentComponent },
   { path: 'objects/:id', component: ObjectDetailComponent },
   { path: 'objects/:id/:component', component: ObjectDetailComponent },
   { path: 'missions', component: MissionIndexComponent },

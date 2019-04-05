@@ -185,6 +185,7 @@ td
   padding-left: 0rem;
   /*overflow-y: auto;
   min-height: 0;*/
+  max-width: 100%;
 }
 
 .sidemenu-content ng-container

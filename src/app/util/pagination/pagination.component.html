@@ -1,0 +1,9 @@
+<div>
+  <ul class="pagination" *ngIf="page_count > 0">
+    <li *ngFor="let _page of page_count | range">
+      <a [routerLink]="[prefix, 'page', _page]" [class.current]="_page == current">
+        {{_page}}
+      </a>
+    </li>
+  </ul>
+</div>
