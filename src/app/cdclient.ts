@@ -1,3 +1,10 @@
+// Reference Classes
+export class DB_ObjectRef_ByComponent {
+  comp_val: number;
+  id: number;
+  name: string;
+}
+
 // LU database definitions
 
 export class DB_mapItemTypes {
@@ -21,6 +28,14 @@ export class DB_BrickColors {
 
 export class DB_ItemComponent {
 
+}
+
+export class DB_VendorComponent {
+  id: number; // INT
+  buyScalar: number; // FLOAT
+  sellScalar: number; // FLOAT
+  refreshTimeSeconds: number; // FLOAT
+  LootMatrixIndex: number; // INTEGER
 }
 
 export class AccessoryDefaultLoc

@@ -8,10 +8,12 @@
 
 <div class="table-responsive">
   <table>
-    <tr *ngFor="let object of objects">
+    <tr *ngFor="let object of objects | async">
       <td>{{object.id}}</td>
       <td><a routerLink="/objects/{{object.id}}">{{object.name ? object.name : '[Unnamed]'}}</a></td>
       <td><a routerLink="/objects/{{object.id}}/{{component_id}}">{{object.comp_val}}</a></td>
     </tr>
   </table>
 </div>
+
+<app-pagination [prefix]="'/objects/components/' + component_id" [count]="page_count" [current]="page"></app-pagination>

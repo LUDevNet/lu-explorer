@@ -137,6 +137,17 @@ export class DatePipe implements PipeTransform {
   }
 }
 
+@Pipe({name: 'range'})
+export class RangePipe implements PipeTransform {
+  transform(range: number) : number[] {
+    var array = [];
+    for (var i = 0; i < range; i++) {
+      array.push(i);
+    }
+    return array;
+  }
+}
+
 @Pipe({name: 'docs'})
 export class DocsPipe implements PipeTransform {
 

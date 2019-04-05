@@ -1,0 +1,62 @@
+ul.pagination {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+ul.pagination  li {
+  display: inline-block;
+}
+
+ul.pagination::before {
+  background-image: url(assets/ui/behavioreditor_i3b.png);
+}
+
+ul.pagination::after {
+  background-image: url(assets/ui/behavioreditor_i3d.png);
+}
+
+ul.pagination::before,
+ul.pagination::after {
+  content: "";
+  padding: 0.5rem 0.2rem;
+  min-width: 2rem;
+  text-align: center;
+  color: #000;
+  display: inline-block;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+}
+
+ul.pagination li a,
+ul.pagination::before,
+ul.pagination::after {
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 1.4rem;
+  vertical-align: middle;
+}
+
+ul.pagination li a {
+  background-image: url(assets/ui/behavioreditor_i39.png);
+}
+
+ul.pagination li a {
+  padding: 0.5rem 0.2rem;
+  min-width: 2rem;
+  text-align: center;
+  color: #000;
+  display: inline-block;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+}
+
+ul.pagination li a:hover {
+  text-decoration: none;
+  background-image: url(assets/ui/behavioreditor_i2b.png);
+}
+
+ul.pagination li a.current {
+  color: #FFF;
+  background-image: url(assets/ui/behavioreditor_i2b.png);
+}

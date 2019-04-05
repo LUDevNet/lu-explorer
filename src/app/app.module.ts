@@ -15,6 +15,7 @@ import {
   ElementPipe,
   NotPipe,
   ReplacePipe,
+  RangePipe,
   SomePipe,
   ToPipe,
   PercentPipe,
@@ -48,7 +49,6 @@ import { PhysicsComponent } from './objects/physics/physics.component';
 import { LootTableComponent } from './loot-table/loot-table.component';
 import { DestroyableComponent } from './objects/destroyable/destroyable.component';
 import { GenericComponent } from './objects/generic/generic.component';
-import { VendorComponent } from './objects/vendor/vendor.component';
 import { LootMatrixComponent } from './loot-matrix/loot-matrix.component';
 import { BrickColorsComponent } from './misc/brick-colors/brick-colors.component';
 import { EventGatingComponent } from './misc/event-gating/event-gating.component';
@@ -93,7 +93,8 @@ import {
   ScriptComponentComponent,
   ScriptedActivityComponentComponent,
   ShootingGalleryComponentComponent,
-  SkillComponentComponent
+  SkillComponentComponent,
+  VendorComponentComponent
 } from './objects/components/components';
 
 import { ObjectsByComponentComponent } from './objects/by-component/by-component.component';
@@ -102,6 +103,7 @@ import { ScriptsComponent } from './scripts/scripts.component';
 import { LuaComponent } from './scripts/lua/lua.component';
 import { ScriptFileComponent } from './scripts/script-file/script-file.component';
 import { PrereqListComponent } from './missions/prereq-list/prereq-list.component';
+import { PaginationComponent } from './util/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +121,7 @@ import { PrereqListComponent } from './missions/prereq-list/prereq-list.componen
     BitShiftRightPipe,
     NotPipe,
     ReplacePipe,
+    RangePipe,
     PercentPipe,
     ToPipe,
     KeysPipe,
@@ -143,7 +146,7 @@ import { PrereqListComponent } from './missions/prereq-list/prereq-list.componen
     LootTableComponent,
     DestroyableComponent,
     GenericComponent,
-    VendorComponent,
+    VendorComponentComponent,
     LootMatrixComponent,
     BrickColorsComponent,
     EventGatingComponent,
@@ -191,7 +194,8 @@ import { PrereqListComponent } from './missions/prereq-list/prereq-list.componen
     ScriptComponentComponent,
     SkillComponentComponent,
     ItemComponentComponent,
-    PrereqListComponent
+    PrereqListComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
