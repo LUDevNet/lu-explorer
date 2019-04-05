@@ -5,17 +5,30 @@
   <a [href]="'components/011-item' | docs" target="_blank">Read more...</a>
 </p>
 <ng-container *ngIf="component | async; else loading; let item">
-  <h4>General</h4>
+  <h4>
+    General
+    <code>baseValue</code>,
+    <code>stackSize</code>,
+    <code>rarity</code>,
+    <code>itemRating</code>
+  </h4>
   <dl>
-    <dd>Base Value: {{item.baseValue}} (<code>baseValue</code>)</dd>
-    <dd>Stack Size: {{item.stackSize}} (<code>stackSize</code>)</dd>
-    <dd>Rarity: {{item.rarity}} (<code>rarity</code>)</dd>
-    <dd>Rating: {{item.itemRating}} (<code>itemRating</code>)</dd>
+    <dd>Base Value: {{item.baseValue}}</dd>
+    <dd>Stack Size: {{item.stackSize}}</dd>
+    <dd>Rarity: {{item.rarity}}</dd>
+    <dd>Rating: {{item.itemRating}}</dd>
   </dl>
 
   <section *ngIf="item.minNumRequired > 0">
     You need to keep at least {{item.minNumRequired}} (<code>minNumRequired</code>)
     of this item in your inventory at all times.
+  </section>
+
+  <section *ngIf="item.itemType || item.itemType == 0">
+    <h4>ItemType <code>itemType</code></h4>
+    This item has the following type:
+    <code>{{ (itemTypes | async | dict:"id")[item.itemType].description }}</code>
+    ({{item.itemType}}).
   </section>
 
   <section *ngIf="item.commendationLOT">
@@ -34,11 +47,19 @@
     </p>
   </section>
 
-  <section *ngIf="item.color1 || item.decal">
+  <section *ngIf="some(item.color1) || some(item.decal)">
     <h4>Style</h4>
     <table>
-      <tr><td>color1</td><td>{{item.color1}}</td></tr>
-      <tr><td>decal</td><td>{{item.decal}}</td></tr>
+      <tr *ngIf="some(item.color1)">
+        <td>color1</td>
+        <ng-container *ngFor="let color of [brickColors | async | dict:'id' | elem: item.color1]">
+          <td>{{color.description}} ({{item.color1}})</td>
+          <td [style.background-color]="toRGBA(color)"></td>
+        </ng-container>
+      </tr>
+      <tr *ngIf="some(item.decal)">
+        <td>decal</td>
+        <td>{{item.decal}}</td></tr>
     </table>
   </section>
 
@@ -128,6 +149,3 @@
 <ng-template #loading>
   Loading...
 </ng-template>
-
-<!-- itemType 14: Factio Token -->
-<!-- itemType 15: Shirt -->

@@ -7,7 +7,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { MessageService } from './message.service';
 
-import { Icons, AccessoryDefaultLoc, Behavior, SkillBehavior } from './cdclient';
+import {
+  Icons,
+  AccessoryDefaultLoc,
+  Behavior,
+  SkillBehavior,
+  DB_mapItemTypes,
+  DB_BrickColors
+} from './cdclient';
+
 import { ZoneDetail } from './zone';
 
 
@@ -237,11 +245,15 @@ export class LuJsonService {
     return this.makeRequest(this.objectsByComponentUrl + component, `getObjectComponent(${component})`);
   }
 
-  getBrickColors(): Observable<any[]> {
-    return this.getSingleTable('BrickColors');
+  getBrickColors(): Observable<DB_BrickColors[]> {
+    return this.getSingleTable<DB_BrickColors>('BrickColors');
   }
 
-  getSingleTable(table: string): Observable<any[]> {
+  getItemTypes(): Observable<DB_mapItemTypes[]> {
+    return this.getSingleTable<DB_mapItemTypes>('mapItemTypes');
+  }
+
+  getSingleTable<T>(table: string): Observable<T[]> {
     return this
       .makeRequest(this.tablesUrl + table + "/index", `getSingleTable(${table})`)
       .pipe(map(tbl => tbl['_embedded'][table]));

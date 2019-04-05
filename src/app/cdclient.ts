@@ -1,5 +1,28 @@
 // LU database definitions
 
+export class DB_mapItemTypes {
+  id: number;
+  description: string;
+  equipLocation: string;
+}
+
+export class DB_BrickColors {
+  id: number; // INT
+  red: number; // FLOAT
+  green: number; // FLOAT
+  blue: number; // FLOAT
+  alpha: number; // FLOAT
+  legopaletteid: number; // INT
+  description: string;
+  validTypes: number; // INT
+  validCharacters: number; // INT
+  factoryValid: boolean;
+}
+
+export class DB_ItemComponent {
+
+}
+
 export class AccessoryDefaultLoc
 {
   Description: string;
