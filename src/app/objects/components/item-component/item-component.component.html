@@ -20,15 +20,19 @@
   </dl>
 
   <section *ngIf="item.minNumRequired > 0">
-    You need to keep at least {{item.minNumRequired}} (<code>minNumRequired</code>)
-    of this item in your inventory at all times.
+    <p>
+      You need to keep at least {{item.minNumRequired}} (<code>minNumRequired</code>)
+      of this item in your inventory at all times.
+    </p>
   </section>
 
   <section *ngIf="item.itemType || item.itemType == 0">
     <h4>ItemType <code>itemType</code></h4>
-    This item has the following type:
-    <code>{{ (itemTypes | async | dict:"id")[item.itemType].description }}</code>
-    ({{item.itemType}}).
+    <p>
+      This item has the following type:
+      <code>{{ (itemTypes | async | dict:"id")[item.itemType].description }}</code>
+      ({{item.itemType}}).
+    </p>
   </section>
 
   <section *ngIf="item.commendationLOT">

@@ -11,6 +11,7 @@ import {
   BitShiftLeftPipe,
   DictPipe,
   DocsPipe,
+  ResourcePipe,
   ElementPipe,
   NotPipe,
   ReplacePipe,
@@ -42,7 +43,6 @@ import { SkillComponent } from './skill/skill.component';
 import { IconComponent } from './icon/icon.component';
 import { BehaviorDetailAltComponent } from './behavior/detail-alt/detail-alt.component';
 import { ObjectsComponent } from './objects/objects.component';
-import { RenderComponent } from './objects/render/render.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { PhysicsComponent } from './objects/physics/physics.component';
 import { LootTableComponent } from './loot-table/loot-table.component';
@@ -89,6 +89,7 @@ import {
   PackageComponentComponent,
   QuickBuildComponentComponent,
   RebuildComponentComponent,
+  RenderComponentComponent,
   ScriptComponentComponent,
   ScriptedActivityComponentComponent,
   ShootingGalleryComponentComponent,
@@ -128,6 +129,7 @@ import { PrereqListComponent } from './missions/prereq-list/prereq-list.componen
     HtmlPipe,
     DictPipe,
     DocsPipe,
+    ResourcePipe,
     ElementPipe,
     BehaviorComponent,
     BehaviorDetailComponent,
@@ -135,7 +137,6 @@ import { PrereqListComponent } from './missions/prereq-list/prereq-list.componen
     IconComponent,
     BehaviorDetailAltComponent,
     ObjectsComponent,
-    RenderComponent,
     PackageComponentComponent,
     DataTableComponent,
     PhysicsComponent,
@@ -176,6 +177,7 @@ import { PrereqListComponent } from './missions/prereq-list/prereq-list.componen
     ActivitiesComponent,
     ActivityDetailComponent,
     RebuildComponentComponent,
+    RenderComponentComponent,
     QuickBuildComponentComponent,
     LootTableIndexComponent,
     CurrencyTableComponent,

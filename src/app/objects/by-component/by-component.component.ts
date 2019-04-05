@@ -40,7 +40,8 @@ export class ObjectsByComponentComponent implements OnInit {
   }
 
   sortObjectComponentRefs(a,b) {
-    return a.id - b.id;
+    let diff = a.comp_val - b.comp_val;
+    return (diff == 0) ? a.id - b.id : diff;
   }
 
 }

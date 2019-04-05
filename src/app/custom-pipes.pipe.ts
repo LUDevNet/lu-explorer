@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { LuDocsService } from './services';
+import { LuDocsService, LuResService } from './services';
 
 @Pipe({name: 'replace'})
 export class ReplacePipe implements PipeTransform {
@@ -146,6 +146,17 @@ export class DocsPipe implements PipeTransform {
     return this.luDocs.link(value);
   }
 }
+
+@Pipe({name: 'res'})
+export class ResourcePipe implements PipeTransform {
+
+  constructor(private luRes: LuResService) {}
+
+  transform(value: string) : any {
+    return this.luRes.getResolvedResUrl(value);
+  }
+}
+
 
 @Pipe({name: 'html'})
 export class HtmlPipe implements PipeTransform {

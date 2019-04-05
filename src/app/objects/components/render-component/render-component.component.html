@@ -1,0 +1,13 @@
+<ng-container *ngFor="let render of [component | async]">
+  <h3>Render Component ({{id}})</h3>
+  <img class="icon" *ngIf="render.icon_asset"
+    [src]="'textures/ui/' + render.icon_asset | lowercase  | replace:'dds$':'png' | res" />
+  <p>
+    This component is attached to an object for it to be rendered in the
+    world, as an item on the ground or in someones inventory. Most objects
+    have a render component.
+  </p>
+  <!--<app-icon [iconID]="render.IconID"></app-icon>-->
+  <div style="clear: right;"></div>
+  <app-data-table [table]="render"></app-data-table>
+</ng-container>
