@@ -1,22 +1,24 @@
 <ng-container *ngIf="zone">
-  <table>
-    <tr>
-      <th>version</th>
-      <td>{{zone.version}}</td>
-      <th>world_id</th>
-      <td>{{zone.world_id}}</td>
-      <th>map_name</th>
-      <td>{{zone.map_name}}</td>
-    </tr>
-    <tr>
-      <th>revision</th>
-      <td>{{zone.revision}}</td>
-      <th>map_filename</th>
-      <td>{{zone.map_filename}}</td>
-      <th>map_description</th>
-      <td>{{zone.map_description}}</td>
-    </tr>
-  </table>
+  <div class="table-responsive">
+    <table>
+      <tr>
+        <th>version</th>
+        <td>{{zone.version}}</td>
+        <th>world_id</th>
+        <td>{{zone.world_id}}</td>
+        <th>map_name</th>
+        <td>{{zone.map_name}}</td>
+      </tr>
+      <tr>
+        <th>revision</th>
+        <td>{{zone.revision}}</td>
+        <th>map_filename</th>
+        <td>{{zone.map_filename}}</td>
+        <th>map_description</th>
+        <td>{{zone.map_description}}</td>
+      </tr>
+    </table>
+  </div>
   <h4>Scenes</h4>
   <div style="max-height: 30rem; overflow-y: auto;">
     <table>
@@ -35,8 +37,8 @@
     </table>
   </div>
   <h4>Paths</h4>
-  <div class="sidemenu-pane" style="max-height: 40rem;">
-    <div class="sidemenu">
+  <div class="sidemenu-pane">
+    <div class="sidemenu" style="max-height: 40rem;">
       <ul>
         <li *ngFor="let path of zone.paths" [class.active]="selected_path === path">
           <a (click)="selectPath(path)">{{path.name}}
@@ -45,7 +47,7 @@
     </div>
     <div class="sidemenu-content">
       <ng-container *ngIf="selected_path">
-        <div class="sidemenu-pane" style="max-height: 40rem;">
+        <div class="sidemenu-pane">
           <div class="sidemenu">
             <ng-container *ngIf="selected_path" [ngSwitch]="selected_path.type">
               <div *ngSwitchCase="0">
@@ -106,13 +108,56 @@
               <span>{{selected_path.value_1}}</span>
             </ng-container>
             <h4>Waypoints</h4>
-            <ul>
+            <ul style="max-height: 20rem;">
               <li *ngFor="let point of selected_path.waypoints | keys" [class.active]="selected_path_point === point.key">
                 <a (click)="selectPathPoint(point.key)">Point #{{point.key}}
                   <span class="pull-right"></span></a></li>
             </ul>
           </div>
-          <div class="sidemenu-content" style="max-height: inherit;">
+          <div class="sidemenu-content" style="max-height: 40rem;">
+            <svg *ngIf="zone" [attr.viewBox]="toViewBox(zoneRef)" class="map">
+              <g [attr.transform]="toTranslate(zoneRef)">
+                <ng-container [ngSwitch]="selected_path.type">
+                  <ng-container *ngSwitchCase="2">
+                    <svg:polygon [attr.points]="toPolygon(selected_path)" fill="green"/>
+                    <svg:circle [attr.cx]="selected_path.player_coord.x"
+                                [attr.cy]="-selected_path.player_coord.z"
+                                r="3" stroke="blue"/>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="3">
+                    <svg:polyline [attr.points]="toPolygon(selected_path)" stroke="green"/>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="4">
+                    <ng-container *ngFor="let point of selected_path.waypoints">
+
+                      {{point | json}}
+                      <svg:circle [attr.cx]="point.pos.pos.x"
+                                  [attr.cy]="-point.pos.pos.z"
+                                  r="3" stroke="red"/>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+                <ng-container *ngIf="selected_path_point">
+                  <ng-container [ngSwitch]="selected_path.type">
+                    <ng-container *ngSwitchCase="0">
+                      <svg:circle [attr.cx]="selected_path.waypoints[selected_path_point].pos.x"
+                                  [attr.cy]="-selected_path.waypoints[selected_path_point].pos.z"
+                                  r="3" />
+                    </ng-container>
+                    <ng-container *ngSwitchCase="2">
+                      <svg:circle [attr.cx]="selected_path.waypoints[selected_path_point].x"
+                                  [attr.cy]="-selected_path.waypoints[selected_path_point].z"
+                                  r="3" fill="red"/>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="3">
+                      <svg:circle [attr.cx]="selected_path.waypoints[selected_path_point].pos.x"
+                                  [attr.cy]="-selected_path.waypoints[selected_path_point].pos.z"
+                                  r="3" />
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </g>
+            </svg>
             <ng-container *ngIf="selected_path_point">
               <ng-container [ngSwitch]="selected_path.type">
                 <ul *ngSwitchCase="0">

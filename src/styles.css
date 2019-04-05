@@ -105,14 +105,16 @@ td
 {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   overflow-y: auto;
   min-height: 0;
 }
 
 .sidemenu
 {
-  flex: 1 0 19rem;
+  flex: 1 0 15rem;
   padding-right: 1rem;
+  margin-bottom: 1rem;
   overflow-y: auto;
   min-height: 0;
 }
@@ -167,7 +169,7 @@ td
 
 .sidemenu-content
 {
-  flex: 1 1 100%;
+  flex: 5 1 60%;
   padding-left: 1rem;
   overflow-y: auto;
   min-height: 0;
@@ -179,7 +181,8 @@ td
   min-height: 0;
 }
 
-.sidemenu-content > h3
+.sidemenu-content > h3:first-child,
+.sidemenu-content > h4:first-child
 {
   margin-top: 0;
 }

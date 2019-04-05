@@ -24,6 +24,32 @@ export class KeysPipe implements PipeTransform {
   }
 }
 
+@Pipe({name: 'dict'})
+export class DictPipe implements PipeTransform {
+  transform(value: Object[], arg: string) : any {
+    let dict = {};
+    for (var i = 0; i < value.length; i++) {
+      dict[String(value[i][arg])] = value[i];
+    }
+    return dict;
+  }
+}
+
+@Pipe({name: 'elem'})
+export class ElementPipe implements PipeTransform {
+  transform(value: Object, arg: string) : any {
+    return value[arg];
+  }
+}
+
+@Pipe({name: 'some'})
+export class SomePipe implements PipeTransform {
+  transform(value: Object) : any {
+    return value == 0 || Boolean(value);
+  }
+}
+
+
 @Pipe({name: 'percent'})
 export class PercentPipe implements PipeTransform {
   transform(value) : any {

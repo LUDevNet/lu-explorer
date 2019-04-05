@@ -1,9 +1,9 @@
 <ng-container *ngIf="scene">
-  <h3>Scene {{ ref.name }}</h3>
+  <h2>Scene {{ ref.name }}</h2>
   <ng-container *ngFor="let chnk of scene.chunks">
     <ng-container [ngSwitch]="chnk._type">
       <ng-container *ngSwitchCase="1000">
-        <h4>Chunk Type 1000</h4>
+        <h3>Chunk Type 1000</h3>
         <dl>
           <dd>version</dd>
           <dt>{{chnk.version}}</dt>
@@ -18,9 +18,9 @@
         </dl>
       </ng-container>
       <ng-container *ngSwitchCase="2000">
-        <h4>Chunk Type 2000</h4>
+        <h3>Chunk Type 2000</h3>
         <span *ngFor="let flt of chnk.floats">{{flt}}; </span>
-        <h5>Floats</h5>
+        <h4>Floats</h4>
         <table>
           <tr>
             <th>id</th>
@@ -33,23 +33,26 @@
             <td>{{id.value_2}}</td>
           </tr>
         </table>
-        <h5>Sky</h5>
+        <h4>Sky</h4>
         <ul>
           <li *ngFor="let sk of chnk.sky">{{sk}}</li>
         </ul>
       </ng-container>
       <ng-container *ngSwitchCase="2001">
-        <h4>Chunk Type 2001</h4>
-        <div class="sidemenu-pane" style="max-height: 30rem;">
-          <div class="sidemenu">
+        <h3>Chunk Type 2001</h3>
+        <div class="sidemenu-pane">
+          <div class="sidemenu" style="max-height: 30rem;">
             <ul>
               <li *ngFor="let obj of chnk.objects" [class.active]="selected_object === obj">
-                <a (click)="selectObject(obj)">{{obj.id}}<span class="pull-right">LOT {{obj.lot}}</span></a></li>
+                <a (click)="selectObject(obj)">{{objID(obj.id)}}<span class="pull-right">LOT {{obj.lot}}</span></a></li>
             </ul>
           </div>
-          <div class="sidemenu-content">
+          <div class="sidemenu-content" style="max-height: 30rem;">
             <ng-container *ngIf="selected_object">
-              <h5>Object #{{selected_object.id}} / LOT: {{selected_object.lot}}</h5>
+              <h4>
+                Object {{objID(selected_object.id)}} /
+                LOT: <a routerLink="/objects/{{selected_object.lot}}">{{selected_object.lot}}</a>
+              </h4>
               Position: <app-pos [pos]="selected_object.pos"></app-pos>
               <app-data-table [table]="selected_object.settings"></app-data-table>
             </ng-container>
@@ -57,7 +60,7 @@
         </div>
       </ng-container>
       <ng-container *ngSwitchCase="2002">
-        <h4>Chunk Type 2002</h4>
+        <h3>Chunk Type 2002</h3>
       </ng-container>
     </ng-container>
   </ng-container>

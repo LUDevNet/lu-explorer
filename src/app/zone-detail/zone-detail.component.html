@@ -10,7 +10,7 @@
     <app-image [path]="zone.thumbnail" width="30rem"></app-image>
   </div>
   <h3>Zone-File</h3>
-  <app-luz [path]="zone.zoneName"></app-luz>
+  <app-luz [path]="zone.zoneName" [zone-ref]="zone"></app-luz>
   <h3>Details</h3>
   <app-data-table [table]="zone | remove:'_links'"></app-data-table>
 </div>
