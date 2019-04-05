@@ -41,19 +41,21 @@
       <ng-container *ngSwitchCase="2001">
         <h3>Chunk Type 2001</h3>
         <div class="sidemenu-pane">
-          <div class="sidemenu" style="max-height: 30rem;">
-            <ul>
+          <div class="sidemenu">
+            <ul class="scroll-30">
               <li *ngFor="let obj of chnk.objects" [class.active]="selected_object === obj">
                 <a (click)="selectObject(obj)">{{objID(obj.id)}}<span class="pull-right">LOT {{obj.lot}}</span></a></li>
             </ul>
           </div>
-          <div class="sidemenu-content" style="max-height: 30rem;">
+          <div class="sidemenu-content">
             <ng-container *ngIf="selected_object">
               <h4>
                 Object {{objID(selected_object.id)}} /
                 LOT: <a routerLink="/objects/{{selected_object.lot}}">{{selected_object.lot}}</a>
               </h4>
-              Position: <app-pos [pos]="selected_object.pos"></app-pos>
+              <p>
+                Position: <app-pos [pos]="selected_object.pos"></app-pos>
+              </p>
               <app-data-table [table]="selected_object.settings"></app-data-table>
             </ng-container>
           </div>

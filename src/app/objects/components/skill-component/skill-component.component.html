@@ -1,48 +1,50 @@
 <h3>Skill Component ({{id}})</h3>
 
-<table>
-  <tr>
-    <th>ID</th>
-    <th>castOnType</th>
-    <th>AiCombatWeight</th>
-    <th>Icon</th>
-    <th>Imagination Cost</th>
-    <th>BonusUI</th>
-    <th>Damage</th>
-    <th>Behavior</th>
-  </tr>
-  <ng-container *ngFor="let entry of (skills | async | keys)">
+<div class="table-responsive">
+  <table>
     <tr>
-      <td><a routerLink="/skills/{{entry.key}}">{{entry.key}}</a></td>
-      <ng-container [ngSwitch]="entry.value.ref.castOnType">
-        <td *ngSwitchCase="0">Use (0)</td>
-        <td *ngSwitchCase="1">Equip (1)</td>
-        <td *ngSwitchCase="3">Consume (3)</td>
-        <td *ngSwitchDefault>[Unknown] ({{entry.value.ref.castOnType}})</td>
-      </ng-container>
-      <td>{{entry.value.ref.AICombatWeight}}</td>
-      <td>
-        <app-icon [width]="'32px'" [iconID]="entry.value.skill.skillIcon"></app-icon>
-      </td>
-      <td>
-        {{entry.value.skill.imaginationcost}}
-      </td>
-      <td class="skill-buffs">
-          <div *ngIf="entry.value.skill.lifeBonusUI" class="buff-icon" [style.background-image]="bgImage('textures/ui/inventory/common/heart.png')">
-            {{entry.value.skill.lifeBonusUI}}</div>
-          <div *ngIf="entry.value.skill.imBonusUI"  class="buff-icon" [style.background-image]="bgImage('textures/ui/inventory/common/imagination.png')">
-            {{entry.value.skill.imBonusUI}}</div>
-          <div *ngIf="entry.value.skill.armorBonusUI"  class="buff-icon" [style.background-image]="bgImage('textures/ui/inventory/common/armor.png')">
-            {{entry.value.skill.armorBonusUI}}</div>
-      </td>
-      <td>
-        {{entry.value.skill.damageUI}}
-      </td>
-      <td>
-        <a routerLink="/behaviors/{{entry.value.skill.behaviorID}}">
-          {{entry.value.skill.behaviorID}}
-        </a>
-      </td>
+      <th>ID</th>
+      <th>castOnType</th>
+      <th>AiCombatWeight</th>
+      <th>Icon</th>
+      <th>Imagination Cost</th>
+      <th>BonusUI</th>
+      <th>Damage</th>
+      <th>Behavior</th>
     </tr>
-  </ng-container>
-</table>
+    <ng-container *ngFor="let entry of (skills | async | keys)">
+      <tr>
+        <td><a routerLink="/skills/{{entry.key}}">{{entry.key}}</a></td>
+        <ng-container [ngSwitch]="entry.value.ref.castOnType">
+          <td *ngSwitchCase="0">Use (0)</td>
+          <td *ngSwitchCase="1">Equip (1)</td>
+          <td *ngSwitchCase="3">Consume (3)</td>
+          <td *ngSwitchDefault>[Unknown] ({{entry.value.ref.castOnType}})</td>
+        </ng-container>
+        <td>{{entry.value.ref.AICombatWeight}}</td>
+        <td>
+          <app-icon [width]="'32px'" [iconID]="entry.value.skill.skillIcon"></app-icon>
+        </td>
+        <td>
+          {{entry.value.skill.imaginationcost}}
+        </td>
+        <td class="skill-buffs">
+            <div *ngIf="entry.value.skill.lifeBonusUI" class="buff-icon" [style.background-image]="bgImage('textures/ui/inventory/common/heart.png')">
+              {{entry.value.skill.lifeBonusUI}}</div>
+            <div *ngIf="entry.value.skill.imBonusUI"  class="buff-icon" [style.background-image]="bgImage('textures/ui/inventory/common/imagination.png')">
+              {{entry.value.skill.imBonusUI}}</div>
+            <div *ngIf="entry.value.skill.armorBonusUI"  class="buff-icon" [style.background-image]="bgImage('textures/ui/inventory/common/armor.png')">
+              {{entry.value.skill.armorBonusUI}}</div>
+        </td>
+        <td>
+          {{entry.value.skill.damageUI}}
+        </td>
+        <td>
+          <a routerLink="/behaviors/{{entry.value.skill.behaviorID}}">
+            {{entry.value.skill.behaviorID}}
+          </a>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+</div>
