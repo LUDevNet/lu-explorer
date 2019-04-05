@@ -18,9 +18,11 @@
     </section>
   </ng-container>
   <ng-container *ngSwitchCase="'Chunk'">
-    <dl>
-      <dd *ngFor="let stmt of ast.body"><app-lua [ast]="stmt"></app-lua></dd>
-    </dl>
+    <div class="table-responsive lua-code">
+      <dl>
+        <dt *ngFor="let stmt of ast.body"><app-lua [ast]="stmt"></app-lua></dt>
+      </dl>
+    </div>
   </ng-container>
   <ng-container *ngSwitchCase="'AssignmentStatement'">
     <span *ngFor="let va of ast.variables; let isLast = last">

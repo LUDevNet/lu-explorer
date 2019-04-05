@@ -17,3 +17,7 @@
 .lua-keyword {
   color: cyan;
 }
+
+.lua-code {
+  white-space: nowrap;
+}
