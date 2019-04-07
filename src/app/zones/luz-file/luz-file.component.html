@@ -1,0 +1,219 @@
+<ng-container *ngIf="zone">
+  <div class="table-responsive">
+    <table>
+      <tr>
+        <th>version</th>
+        <td>{{zone.version}}</td>
+        <th>world_id</th>
+        <td>{{zone.world_id}}</td>
+        <th>map_name</th>
+        <td>{{zone.map_name}}</td>
+      </tr>
+      <tr>
+        <th>revision</th>
+        <td>{{zone.revision}}</td>
+        <th>map_filename</th>
+        <td>{{zone.map_filename}}</td>
+        <th>map_description</th>
+        <td>{{zone.map_description}}</td>
+      </tr>
+    </table>
+  </div>
+  <h4>Scenes</h4>
+  <div style="max-height: 30rem; overflow-y: auto;">
+    <table>
+      <tr>
+        <th>filename</th>
+        <th>id</th>
+        <th>is_audio</th>
+        <th>name</th>
+      </tr>
+      <tr *ngFor="let scene of zone.scenes">
+        <td>{{scene.filename}}</td>
+        <td>{{scene.id}}</td>
+        <td>{{scene.is_audio}}</td>
+        <td><a routerLink="/zones/{{zone.world_id}}/{{scene.id}}">{{scene.name}}</a></td>
+      </tr>
+    </table>
+  </div>
+  <h4>Paths</h4>
+  <div class="sidemenu-pane">
+    <div class="sidemenu">
+      <ul class="scroll-40">
+        <li *ngFor="let path of zone.paths" [class.active]="selected_path === path">
+          <a (click)="selectPath(path)">{{path.name}}
+            <span class="pull-right">{{path.path_version}}/{{path.type}}</span></a></li>
+      </ul>
+    </div>
+    <div class="sidemenu-content">
+      <ng-container *ngIf="selected_path">
+        <div class="sidemenu-pane">
+          <div class="sidemenu">
+            <ng-container *ngIf="selected_path" [ngSwitch]="selected_path.type">
+              <div *ngSwitchCase="0">
+                <h3>Movement: {{selected_path.name}}</h3>
+              </div>
+              <div *ngSwitchCase="1">
+                <h3>Moving Platform: {{selected_path.name}}</h3>
+                <ul>
+                  <li>travel_sound: {{selected_path.travel_sound}}</li>
+                </ul>
+              </div>
+              <div *ngSwitchCase="2">
+                <h3>Property: {{selected_path.name}}</h3>
+                <ul>
+                  <li>value_1: {{selected_path.value_1}}</li>
+                  <li>price: {{selected_path.price}}</li>
+                  <li>rental_time: {{selected_path.rental_time}}</li>
+                  <li>zone: <a routerLink="/zones/{{selected_path.zone}}">{{selected_path.zone}}</a></li>
+                  <li>name: {{selected_path.name}}</li>
+                  <li>description: {{selected_path.description}}</li>
+                  <li>value_2: {{selected_path.value_2}}</li>
+                  <li>clone_limit: {{selected_path.clone_limit}}</li>
+                  <li>reputation_multiplier: {{selected_path.reputation_multiplier}}</li>
+                  <li>rental_time_unit: {{selected_path.rental_time_unit}}</li>
+                  <li>req_achievement: {{selected_path.req_achievement}}</li>
+                  <li>player_coord: <app-v3f [v3f]="selected_path.player_coord"></app-v3f></li>
+                  <li>max_building_height: {{selected_path.max_building_height}}</li>
+                </ul>
+              </div>
+              <div *ngSwitchCase="3">
+                <h3>Camera: {{selected_path.name}}</h3>
+                <ul>
+                  <li>next_path: {{selected_path.next_path}}</li>
+                  <li>value_1: {{selected_path.value_1}}</li>
+                </ul>
+              </div>
+              <div *ngSwitchCase="4">
+                <h3>Spawner: {{selected_path.name}}</h3>
+                <ul>
+                  <li>spawned_lot: <a routerLink="/objects/{{selected_path.spawned_lot}}">{{selected_path.spawned_lot}}</a></li>
+                  <li>respawn_time: {{selected_path.respawn_time}}</li>
+                  <li>max_to_spawn: {{selected_path.max_to_spawn}}</li>
+                  <li>number_to_maintain: {{selected_path.number_to_maintain}}</li>
+                  <li>object_id: {{selected_path.object_id}}</li>
+                  <li>activate_on_load: {{selected_path.activate_on_load}}</li>
+                </ul>
+              </div>
+              <div *ngSwitchCase="5">
+                <h3>Showcase: {{selected_path.name}}</h3>
+              </div>
+              <div *ngSwitchCase="6">
+                <h3>Race: {{selected_path.name}}</h3>
+              </div>
+              <div *ngSwitchCase="7">
+                <h3>Rail: {{selected_path.name}}</h3>
+              </div>
+              <span>{{selected_path.behavior}}</span>
+              <span>{{selected_path.value_1}}</span>
+            </ng-container>
+            <h4>Waypoints</h4>
+            <ul style="max-height: 20rem;">
+              <li *ngFor="let point of selected_path.waypoints | keys" [class.active]="selected_path_point === point.key">
+                <a (click)="selectPathPoint(point.key)">Point #{{point.key}}
+                  <span class="pull-right"></span></a></li>
+            </ul>
+          </div>
+          <div class="sidemenu-content" style="max-height: 40rem;">
+            <svg *ngIf="zone" [attr.viewBox]="toViewBox(zoneRef)" class="map">
+              <g [attr.transform]="toTranslate(zoneRef)">
+                <ng-container [ngSwitch]="selected_path.type">
+                  <ng-container *ngSwitchCase="2">
+                    <svg:polygon [attr.points]="toPolygon(selected_path)" fill="green"/>
+                    <svg:circle [attr.cx]="selected_path.player_coord.x"
+                                [attr.cy]="-selected_path.player_coord.z"
+                                r="3" stroke="blue"/>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="3">
+                    <svg:polyline [attr.points]="toPolygon(selected_path)" stroke="green"/>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="4">
+                    <ng-container *ngFor="let point of selected_path.waypoints">
+
+                      {{point | json}}
+                      <svg:circle [attr.cx]="point.pos.pos.x"
+                                  [attr.cy]="-point.pos.pos.z"
+                                  r="3" stroke="red"/>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+                <ng-container *ngIf="selected_path_point">
+                  <ng-container [ngSwitch]="selected_path.type">
+                    <ng-container *ngSwitchCase="0">
+                      <svg:circle [attr.cx]="selected_path.waypoints[selected_path_point].pos.x"
+                                  [attr.cy]="-selected_path.waypoints[selected_path_point].pos.z"
+                                  r="3" />
+                    </ng-container>
+                    <ng-container *ngSwitchCase="2">
+                      <svg:circle [attr.cx]="selected_path.waypoints[selected_path_point].x"
+                                  [attr.cy]="-selected_path.waypoints[selected_path_point].z"
+                                  r="3" fill="red"/>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="3">
+                      <svg:circle [attr.cx]="selected_path.waypoints[selected_path_point].pos.x"
+                                  [attr.cy]="-selected_path.waypoints[selected_path_point].pos.z"
+                                  r="3" />
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </g>
+            </svg>
+            <ng-container *ngIf="selected_path_point">
+              <ng-container [ngSwitch]="selected_path.type">
+                <ul *ngSwitchCase="0">
+                  <li>pos: <app-v3f [v3f]="selected_path.waypoints[selected_path_point].pos"></app-v3f></li>
+                </ul>
+                <ul *ngSwitchCase="1">
+                  <li>pos: <app-pos [pos]="selected_path.waypoints[selected_path_point].pos"></app-pos></li>
+                  <li>lock_player: {{selected_path.waypoints[selected_path_point].lock_player}}</li>
+                  <li>speed: {{selected_path.waypoints[selected_path_point].speed}}</li>
+                  <li>wait: {{selected_path.waypoints[selected_path_point].wait}}</li>
+                  <li>depart_sound: {{selected_path.waypoints[selected_path_point].depart_sound}}</li>
+                  <li>arrive_sound: {{selected_path.waypoints[selected_path_point].arrive_sound}}</li>
+                </ul>
+                <ul *ngSwitchCase="2">
+                  <li>pos: <app-v3f [v3f]="selected_path.waypoints[selected_path_point]"></app-v3f></li>
+                </ul>
+                <ul *ngSwitchCase="3">
+                  <li>pos: <app-v3f [v3f]="selected_path.waypoints[selected_path_point].pos"></app-v3f></li>
+                  <li>value_1: {{+selected_path.waypoints[selected_path_point].value_1.toFixed(3)}}</li>
+                  <li>value_2: {{+selected_path.waypoints[selected_path_point].value_2.toFixed(3)}}</li>
+                  <li>value_3: {{+selected_path.waypoints[selected_path_point].value_3.toFixed(3)}}</li>
+                  <li>value_4: {{+selected_path.waypoints[selected_path_point].value_4.toFixed(3)}}</li>
+                  <li>time: {{selected_path.waypoints[selected_path_point].time}}</li>
+                  <li>value_5: {{selected_path.waypoints[selected_path_point].value_5}}</li>
+                  <li>tension: {{selected_path.waypoints[selected_path_point].tension}}</li>
+                  <li>continuity: {{selected_path.waypoints[selected_path_point].continuity}}</li>
+                  <li>bias: {{selected_path.waypoints[selected_path_point].bias}}</li>
+                </ul>
+                <ul *ngSwitchCase="4">
+                  <li>pos: <app-pos [pos]="selected_path.waypoints[selected_path_point].pos"></app-pos></li>
+                </ul>
+                <ul *ngSwitchCase="5">
+                  <li>pos: {{selected_path.waypoints[selected_path_point] | json}}</li>
+                </ul>
+                <ul *ngSwitchCase="6">
+                  <li>pos: <app-pos [pos]="selected_path.waypoints[selected_path_point].pos"></app-pos></li>
+                  <li>value_1: {{selected_path.waypoints[selected_path_point].value_1}}</li>
+                  <li>value_2: {{selected_path.waypoints[selected_path_point].value_2}}</li>
+                  <li>value_3: {{selected_path.waypoints[selected_path_point].value_3}}</li>
+                  <li>value_4: {{selected_path.waypoints[selected_path_point].value_4}}</li>
+                  <li>value_5: {{selected_path.waypoints[selected_path_point].value_5}}</li>
+                </ul>
+                <ul *ngSwitchCase="7">
+                  <li>pos: <app-pos [pos]="selected_path.waypoints[selected_path_point].pos"></app-pos></li>
+                  <li>value_1: {{selected_path.waypoints[selected_path_point].value_1}}</li>
+                  <li>value_2: {{selected_path.waypoints[selected_path_point].value_2}}</li>
+                  <li>value_3: {{selected_path.waypoints[selected_path_point].value_3}}</li>
+                  <li>value_4: {{selected_path.waypoints[selected_path_point].value_4}}</li>
+                  <li>value_5: {{selected_path.waypoints[selected_path_point].value_5}}</li>
+                </ul>
+              </ng-container>
+              <app-data-table [table]="selected_path.waypoints[selected_path_point].config"></app-data-table>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

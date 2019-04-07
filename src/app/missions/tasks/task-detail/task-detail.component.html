@@ -1,0 +1,32 @@
+<section class="mission-task" [ngSwitch]="task.taskType">
+  <div class="task-icon">
+    <app-icon [iconID]="task.IconID" [caption]="false"></app-icon>
+  </div>
+  <div class="task-description">
+    <app-smash-task *ngSwitchCase="0" [task]="task"></app-smash-task>
+    <app-script-task *ngSwitchCase="1" [task]="task"></app-script-task>
+    <app-activity-task *ngSwitchCase="2" [task]="task"></app-activity-task>
+    <app-collect-task *ngSwitchCase="3" [task]="task"></app-collect-task>
+    <app-npc-task *ngSwitchCase="4" [task]="task"></app-npc-task>
+    <app-emote-task *ngSwitchCase="5" [task]="task"></app-emote-task>
+    <app-consumable-task *ngSwitchCase="9" [task]="task"></app-consumable-task>
+    <app-skill-task *ngSwitchCase="10" [task]="task"></app-skill-task>
+    <app-item-task *ngSwitchCase="11" [task]="task"></app-item-task>
+    <app-poi-task *ngSwitchCase="12" [task]="task"></app-poi-task>
+    <app-minigame-task *ngSwitchCase="14" [task]="task"></app-minigame-task>
+    <app-interact-task *ngSwitchCase="15" [task]="task"></app-interact-task>
+    <app-mission-task *ngSwitchCase="16" [task]="task"></app-mission-task>
+    <app-reputation-task *ngSwitchCase="17" [task]="task"></app-reputation-task>
+    <app-powerup-task *ngSwitchCase="21" [task]="task"></app-powerup-task>
+    <app-pet-task *ngSwitchCase="22" [task]="task"></app-pet-task>
+    <app-racing-task *ngSwitchCase="23" [task]="task"></app-racing-task>
+    <app-flag-task *ngSwitchCase="24" [task]="task"></app-flag-task>
+    <app-property-task *ngSwitchCase="30" [task]="task"></app-property-task>
+    <app-donation-task *ngSwitchCase="32" [task]="task"></app-donation-task>
+    <blockquote *ngIf="task.localizations">{{task.localizations.description}}</blockquote>
+    <p *ngIf="task.gate_version">
+      This task is only available with feature update / gate <code>{{task.gate_version}}</code>
+    </p>
+  </div>
+  <div style="clear: left;"></div>
+</section>

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { LuJsonService } from '../../lu-json.service';
-import { LocaleService } from '../../locale.service';
+import { LuJsonService, LuLocaleService } from '../../services';
 
 @Component({
   selector: 'app-types-index',
@@ -12,7 +10,7 @@ export class ObjectTypesIndexComponent implements OnInit {
 
   types: any;
 
-  constructor(private luJsonService: LuJsonService, private localeService: LocaleService) { }
+  constructor(private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }
 
   ngOnInit() {
     this.luJsonService.getObjectTypes().subscribe(data => this.types = data['types']);

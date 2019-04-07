@@ -1,8 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { LuJsonService } from '../../lu-json.service';
-import { LocaleService } from '../../locale.service';
+import { LuJsonService, LuLocaleService } from '../../services';
 
 @Component({
   selector: 'app-by-type',
@@ -17,7 +16,7 @@ export class MissionsByTypeComponent implements OnInit {
   subtypes: Array<string> = [];
 
   constructor(private router: Router, private route: ActivatedRoute,
-  	private luJsonService: LuJsonService, private localeService: LocaleService,
+  	private luJsonService: LuJsonService, private luLocaleService: LuLocaleService,
     private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -43,14 +42,14 @@ export class MissionsByTypeComponent implements OnInit {
 
   getMissionNames():void
   {
-  	this.localeService.getLocaleTable("Missions").subscribe(index => this.processMissionNameIndex(index));
+  	this.luLocaleService.getLocaleTable("Missions").subscribe(index => this.processMissionNameIndex(index));
   }
 
   processMissionNameIndex(index: any):void
   {
     for (let page of index.pages)
     {
-      this.localeService.getLocalePage("Missions", page).subscribe(page => this.processMissionNamesPage(page));
+      this.luLocaleService.getLocalePage("Missions", page).subscribe(page => this.processMissionNamesPage(page));
     }
   }
 

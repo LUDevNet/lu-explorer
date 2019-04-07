@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { LuJsonService } from '../../lu-json.service';
-import { LocaleService } from '../../locale.service';
+import { LuJsonService, LuLocaleService } from '../../services';
 import { component_names } from '../../components';
-
 
 @Component({
   selector: 'app-object-detail',
@@ -20,7 +18,7 @@ export class ObjectDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
   	private luJsonService: LuJsonService,
-    private localeService: LocaleService) { }
+    private luLuLocaleService: LuLocaleService) { }
 
   ngOnInit()
   {
@@ -36,7 +34,7 @@ export class ObjectDetailComponent implements OnInit {
   	let id = +map.get('id');
     this.object_id = id;
   	this.luJsonService.getObject(id).subscribe(object => this.loadObject(object));
-    this.localeService.getLocaleEntry("Objects", id).subscribe(entry => this.objectLocale = entry);
+    this.luLuLocaleService.getLocaleEntry("Objects", id).subscribe(entry => this.objectLocale = entry);
   }
 
   loadObject(object: any): void

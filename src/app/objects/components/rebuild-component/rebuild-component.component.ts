@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LuJsonService } from '../../../lu-json.service';
+import { LuJsonService } from '../../../services';
 
 @Component({
   selector: 'app-rebuild-component',

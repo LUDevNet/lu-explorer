@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LuJsonService } from '../../../lu-json.service';
+import { LuJsonService } from '../../../services';
 import { ReplaySubject, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 

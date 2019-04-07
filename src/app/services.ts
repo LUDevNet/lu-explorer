@@ -1,11 +1,7 @@
-import { LuJsonService } from './lu-json.service';
-import { LuResService } from './lu-res.service';
-import { LocaleService } from './locale.service';
-import { LuDocsService } from './lu-docs.service';
-
-class LuLocaleService {
-  prototype = LocaleService;
-};
+import { LuJsonService } from './util/services/lu-json.service';
+import { LuResService } from './util/services/lu-res.service';
+import { LuLocaleService } from './util/services/lu-locale.service';
+import { LuDocsService } from './util/services/lu-docs.service';
 
 export {
   LuJsonService,

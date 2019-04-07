@@ -1,9 +1,9 @@
 <ul class="breadcrumbs">
   <li><a routerLink="/missions">Missions</a></li>
-  <li><a *ngIf="mission" routerLink="/missions/{{mission.defined_type}}">{{mission.defined_type}}</a></li>
+  <li><a *ngIf="mission" routerLink="/missions/type/{{mission.defined_type}}">{{mission.defined_type}}</a></li>
   <li>
-    <a *ngIf="mission && mission.defined_subtype" routerLink="/missions/{{mission.defined_type}}/{{mission.defined_subtype}}">{{mission.defined_subtype}}</a>
-    <a *ngIf="mission && !mission.defined_subtype" routerLink="/missions/{{mission.defined_type}}">General</a>
+    <a *ngIf="mission && mission.defined_subtype" routerLink="/missions/type/{{mission.defined_type}}/subtype/{{mission.defined_subtype}}">{{mission.defined_subtype}}</a>
+    <a *ngIf="mission && !mission.defined_subtype" routerLink="/missions/type/{{mission.defined_type}}">General</a>
   </li>
   <li *ngIf="missionLocale">{{missionLocale.name}}</li>
 </ul>
@@ -15,41 +15,44 @@
   <app-prereq-list [string]="mission.prereqMissionID"></app-prereq-list>
 </section>
 
-<h3>General</h3>
-<table *ngIf="mission">
-  <tr>
-    <th>offer_objectID</th>
-    <td>
-      <a *ngIf="mission.offer_objectID != -1" routerLink="/objects/{{mission.offer_objectID}}">
-         {{mission.offer_objectID}}
-      </a>
-      <span *ngIf="mission.offer_objectID == -1">None (-1)</span>
-    </td>
-    <th>inMOTD</th><td>{{mission.inMOTD}}</td>
-    <th>defined_type</th><td>{{mission.defined_type}}</td>
-  </tr>
-  <tr>
-    <th>target_objectID</th>
-    <td>
-      <a *ngIf="mission.target_objectID != -1" routerLink="/objects/{{mission.target_objectID}}">
-        {{mission.target_objectID}}
-      </a>
-      <span *ngIf="mission.target_objectID == -1">None (-1)</span>
-    </td>
-    <th>isChoiceReward</th><td>{{mission.isChoiceReward}}</td>
-    <th>defined_subtype</th><td>{{mission.defined_subtype}}</td>
-  </tr>
-  <tr>
-    <th>prereqMissionID</th><td>{{mission.prereqMissionID}}</td>
-    <th>isMission</th><td>{{mission.isMission}}</td>
-    <th>LegoScore</th><td>{{mission.LegoScore}}</td>
-  </tr>
-  <tr>
-    <th>repeatable</th><td>{{mission.repeatable}}</td>
-    <th>isRandom</th><td>{{mission.isRandom}}</td>
-    <th>UISortOrder</th><td>{{mission.UISortOrder}}</td>
-  </tr>
-</table>
+<section class="card card-right">
+  <h3 id="general">General</h3>
+  <table style="min-width: initial;" *ngIf="mission">
+    <tr>
+      <td>offer_objectID</td>
+      <td>
+        <a *ngIf="mission.offer_objectID != -1" routerLink="/objects/{{mission.offer_objectID}}">
+           {{mission.offer_objectID}}
+        </a>
+        <span *ngIf="mission.offer_objectID == -1">None (-1)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>target_objectID</td>
+      <td>
+        <a *ngIf="mission.target_objectID != -1" routerLink="/objects/{{mission.target_objectID}}">
+          {{mission.target_objectID}}
+        </a>
+        <span *ngIf="mission.target_objectID == -1">None (-1)</span>
+      </td>
+    </tr>
+    <tr><td>defined_type</td><td>{{mission.defined_type}}</td></tr>
+    <tr><td>defined_subtype</td><td>{{mission.defined_subtype}}</td></tr>
+    <tr><td>LegoScore</td><td>{{mission.LegoScore}}</td></tr>
+    <tr><td>UISortOrder</td><td>{{mission.UISortOrder}}</td></tr>
+  </table>
+</section>
+
+<section id="flags" class="">
+  <h3>Flags</h3>
+  <table style="width: initial; min-width: initial;">
+    <tr><th>isMission</th><td>{{mission.isMission}}</td></tr>
+    <tr><th>repeatable</th><td>{{mission.repeatable}}</td></tr>
+    <tr><th>isRandom</th><td>{{mission.isRandom}}</td></tr>
+    <tr><th>isChoiceReward</th><td>{{mission.isChoiceReward}}</td></tr>
+    <tr><th>inMOTD</th><td>{{mission.inMOTD}}</td></tr>
+  </table>
+</section>
 
 <section *ngIf="tasks">
   <h3>Tasks</h3>
@@ -57,255 +60,8 @@
   To complete this mission, the player needs to fulfill all of the
   following tasks!
 
-  <article class="mission-task" [ngSwitch]="task.taskType" *ngFor="let task of tasks">
-    <div class="task-icon">
-      <app-icon [iconID]="task.IconID" [caption]="false"></app-icon>
-    </div>
-    <div class="task-description">
-      <ng-container *ngSwitchCase="0">
-        <h4>{{task.uid}}: Smash Task (0)</h4>
-        The player needs to smash {{task.targetValue}} entities of any of the
-        following type(s):
-        <a routerLink="/objects/{{task.target}}">{{task.target}}</a><!--
-        --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-        -->, <a routerLink="/objects/{{target}}">{{target}}</a>
-        </ng-container>
-      </ng-container>
-      <ng-container *ngSwitchCase="1">
-        <h4>{{task.uid}}: Script Task (1)</h4>
-        This task is controlled by a script! Target:
-        <a routerLink="/objects/{{task.target}}">{{task.target}}</a><!--
-        --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-        -->, <a routerLink="/objects/{{target}}">{{target}}</a>
-        </ng-container>,
-        Value: {{task.targetValue}},
-        Param: {{task.taskParam1}}
-      </ng-container>
-      <ng-container *ngSwitchCase="2">
-        <h4>{{task.uid}}: Activity Task (2)</h4>
-        The player is required to score {{task.targetValue}} points at any of the
-        following activities:
-        <a routerLink="/activities/{{task.target}}">{{task.target}}</a><!--
-        --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-        -->, <a routerLink="/activities/{{target}}">{{target}}</a>
-        </ng-container>
-      </ng-container>
-      <ng-container *ngSwitchCase="3">
-        <h4>{{task.uid}}: Collect Task (3)</h4>
-        The player needs to collect (collide with) {{task.targetValue}} object(s) of
-        any of the following type(s):
-        <a routerLink="/objects/{{task.target}}">{{task.target}}</a><!--
-        --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-        -->, <a routerLink="/objects/{{target}}">{{target}}</a>
-        </ng-container>
-      </ng-container>
-      <ng-container *ngSwitchCase="4">
-        <h4>{{task.uid}}: GoToNPC Task (4)</h4>
-        The player needs to visit the NPC
-        <a routerLink="/objects/{{task.target}}">{{task.target}}</a>
-      </ng-container>
-      <ng-container *ngSwitchCase="5">
-        <h4>{{task.uid}}: UseEmote Task (5)</h4>
-        The player needs to use the emote #{{task.taskParam1}} near
-        an object of template
-        <a routerLink="/objects/{{task.target}}">{{task.target}}</a>
-      </ng-container>
-      <ng-container *ngSwitchCase="9">
-        <h4>{{task.uid}}: UseConsumable Task (9)</h4>
-        The player needs to consume {{task.targetValue}} of the following item(s):
-        <a routerLink="/objects/{{task.target}}">{{task.target}}</a><!--
-        --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-        -->, <a routerLink="/objects/{{target}}">{{target}}</a>
-        </ng-container>
-      </ng-container>
-      <ng-container *ngSwitchCase="10">
-        <h4>{{task.uid}}: UseSkill Task (10)</h4>
-        The player needs to trigger {{task.targetValue}} of the skill
-        <a routerLink="/skills/{{task.taskParam1}}">{{task.taskParam1}}</a>
-      </ng-container>
-      <ng-container *ngSwitchCase="11">
-        <h4>{{task.uid}}: ObtainItem Task (11)</h4>
-        <p>
-          The player needs to obtain {{task.targetValue}} of
-          <span *ngIf="task.taskParam1 | bitset:2">
-            the item <a routerLink="/objects/{{task.target}}">{{task.target}}</a>
-          </span>
-          <span *ngIf="task.taskParam1 | bitset:2 | not">
-            the items <a routerLink="/objects/{{task.target}}">{{task.target}}</a>
-            <ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-            -->, <a routerLink="/objects/{{target}}">{{target}}</a><!--
-            --></ng-container>
-          </span>
-        </p>
-        <dl *ngIf="task.targetGroup && task.taskParam1 | bitset:2">
-          <dt>The player needs to obtain the item by smashing objects of type(s):</dt>
-          <dd *ngFor="let target of task.targetGroup.split(',')">
-            Object <a routerLink="/objects/{{target}}">{{target}}</a>
-          </dd>
-        </dl>
-        <ul>
-          <li *ngIf="task.taskParam1 | bitset:1">
-            The item is not consumed on mission turnin
-          </li>
-          <li *ngIf="task.taskParam1 | bitset:1 | not">
-            The item is consumed on mission turnin
-          </li>
-          <li *ngIf="task.taskParam1 | bitset:2">
-            Something 2?
-          </li>
-          <li *ngIf="task.taskParam1 | bitset:2 | not">
-            Not something 2?
-          </li>
-          <li *ngIf="task.taskParam1 | bitset:4">
-            The item needs to be equipped (???)
-          </li>
-          <li *ngIf="task.taskParam1 | bitset:4 | not">
-            The item does not need to be equipped (???)
-          </li>
-        </ul>
-      </ng-container>
-      <ng-container *ngSwitchCase="12">
-        <h4>{{task.uid}}: Discover Task (12)</h4>
-        The player needs to travel to the area <code>{{task.targetGroup}}</code>
-      </ng-container>
-      <ng-container *ngSwitchCase="14">
-        <h4>{{task.uid}}: MinigameAchievement Task (14)</h4>
-        The player needs to achieve at least <code>{{task.targetValue}}</code> at the
-        <code>{{task.targetGroup}}</code> statistic in the <a routerLink="/activities/{{task.target}}">Activity #{{task.target}}</a>
-      </ng-container>
-      <ng-container *ngSwitchCase="15">
-        <h4>{{task.uid}}: Interact Task (15)</h4>
-        The player needs to interact {{task.targetValue}} times with object(s) of
-        the following type(s):
-        <a routerLink="/objects/{{task.target}}">{{task.target}}</a><!--
-        --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-        -->, <a routerLink="/objects/{{target}}">{{target}}</a>
-        </ng-container>
-      </ng-container>
-      <ng-container *ngSwitchCase="16">
-        <h4>{{task.uid}}: MissionComplete Task (16)</h4>
-        The player needs to fulfill all of the following missions:
-        <a routerLink="/missions/detail/{{task.target}}">{{task.target}}</a><!--
-        --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-        -->, <a routerLink="/missions/detail/{{target}}">{{target}}</a>
-        </ng-container>
-      </ng-container>
-      <ng-container *ngSwitchCase="17">
-        <h4>{{task.uid}}: EarnReputation Task (17)</h4>
-        Earn {{task.targetValue}} Reputation
-      </ng-container>
-      <ng-container *ngSwitchCase="21">
-        <h4>{{task.uid}}: CollectPowerup Task (21)</h4>
-        The player needs to collect {{task.targetValue}} of the powerup
-        <a routerLink="/skills/{{task.target}}">{{task.target}}</a><!--
-        --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-        -->, <a routerLink="/skills/{{target}}">{{target}}</a>
-        </ng-container>.
-      </ng-container>
-      <ng-container *ngSwitchCase="22">
-        <h4>{{task.uid}}: TamePet Task (22)</h4>
-        The player needs to tame {{task.targetValue}} pet(s) of any of the following
-        type(s):
-        <a routerLink="/objects/{{task.target}}">{{task.target}}</a><!--
-        --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-        -->, <a routerLink="/objects/{{target}}">{{target}}</a>
-        </ng-container>.
-        <span *ngIf="task.taskParam1">Taming needs to be done in less than {{task.taskParam1}} seconds</span>
-      </ng-container>
-      <ng-container *ngSwitchCase="23">
-        <h4>{{task.uid}}: Racing Task (23)</h4>
-        <p [ngSwitch]="task.taskParam1">
-          <span *ngSwitchCase="1">
-            Be at or above the {{task.targetValue}}. place in the race world specified by {{task.target}}
-          </span>
-          <span *ngSwitchCase="2">
-            Achieve a {{task.targetValue}} ms lap time or better in the race world {{task.target}}
-          </span>
-          <span *ngSwitchCase="3">
-            Achieve a {{task.targetValue}} ms time or better in the race world  {{task.target}}
-          </span>
-          <span *ngSwitchCase="5">
-            Achieve {{task.targetValue}} achievements of the ones in {{task.targetGroup}}.
-          </span>
-          <span *ngSwitchCase="10">
-            Complete a race at the race world {{task.target}} without (less than {{task.targetValue}} ???) wrecking.
-          </span>
-          <span *ngSwitchCase="12">
-            Collect {{task.targetValue}} imagination orbs in the racing worlds {{task.targetGroup}}
-          </span>
-          <span *ngSwitchCase="13">
-            Enter the race world {{task.target}}
-          </span>
-          <span *ngSwitchCase="14">
-            Win {{task.targetValue}} races at the world {{task.target}}
-          </span>
-          <span *ngSwitchCase="15">
-            Win {{task.targetValue}} races at the worlds {{task.targetGroup}}
-          </span>
-          <span *ngSwitchCase="17">
-            Smash {{task.targetValue}} of the object(s) {{task.targetGroup}}
-          </span>
-        </p>
-      </ng-container>
-      <ng-container *ngSwitchCase="24">
-        <h4>{{task.uid}}: Flags Task (24)</h4>
-        The player needs to activate {{task.targetValue}} of the flags
-        {{task.target}}, {{task.targetGroup}}
-      </ng-container>
-      <ng-container *ngSwitchCase="30">
-        <h4>{{task.uid}}: VisitProperty Task (30)</h4>
-        The player needs to visit {{task.targetValue}} different properties of the
-        following zones:
-        <a routerLink="/zones/{{task.target}}">{{task.target}}</a><!--
-        --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-        -->, <a routerLink="/zones/{{target}}">{{target}}</a>
-        </ng-container>
-      </ng-container>
-      <ng-container *ngSwitchCase="32">
-        <h4>{{task.uid}}: Donation Task (32)</h4>
-        <ng-container [ngSwitch]="task.taskParam1">
-          <p *ngSwitchCase="0">Hand in {{task.targetValue}} items at the nexus Jawbox. Target {{task.target}}, minigame???</p>
-        </ng-container>
-      </ng-container>
-      <blockquote *ngIf="task.localizations">{{task.localizations.description}}</blockquote>
-      <p *ngIf="task.gate_version">
-        This task is only available with feature update / gate <code>{{task.gate_version}}</code>
-      </p>
-    </div>
-    <div style="clear: left;"></div>
-  </article>
-
-  <h4>Details</h4>
-  <table>
-    <tr>
-      <th>locStatus</th>
-      <th>taskType</th>
-      <th>target</th>
-      <th>targetGroup</th>
-      <th>targetValue</th>
-      <th>taskParam1</th>
-      <th>largeTaskIcon</th>
-      <th>IconID</th>
-      <th>uid</th>
-      <th>largeTaskIconID</th>
-      <th>localize</th>
-      <th>gate_version</th>
-    </tr>
-    <tr *ngFor="let task of tasks">
-      <td>{{task.locStatus}}</td>
-      <td>{{task.taskType}}</td>
-      <td>{{task.target}}</td>
-      <td>{{task.targetGroup | replace:",":", "}}</td>
-      <td>{{task.targetValue}}</td>
-      <td>{{task.taskParam1}}</td>
-      <td><app-image [path]="task.largeTaskIcon"></app-image></td>
-      <td><app-icon [iconID]="task.IconID"></app-icon></td>
-      <td>{{task.uid}}</td>
-      <td><app-icon [iconID]="task.largeTaskIconID"></app-icon></td>
-      <td>{{task.localize}}</td>
-      <td>{{task.gate_version}}</td>
-    </tr>
-  </table>
+  <app-task-detail [task]="task" *ngFor="let task of tasks"></app-task-detail>
+  <app-task-table [tasks]="tasks"></app-task-table>
 </section>
 
 <section *ngIf="mission">
@@ -400,21 +156,17 @@
   <app-icon [iconID]="text.turnInIconID"></app-icon>
 </ng-container>
 
-<div class="scroll-30">
-  <table *ngIf="textsLocale">
-    <tr *ngFor="let text of textsLocale | keys">
-      <td>{{text.key}}</td>
-      <td [innerHTML]="text.value"></td>
-    </tr>
-  </table>
+<div *ngIf="textsLocale">
+  <ng-container *ngFor="let text of textsLocale | keys">
+    <h4 [id]="'text_' + text.key">{{text.key}}</h4>
+    <blockquote [innerHTML]="text.value"></blockquote>
+  </ng-container>
 </div>
 
-<div style="max-height: 30rem; overflow-y: auto">
-  <app-data-table *ngIf="text" [table]="text"></app-data-table>
-</div>
+<h4>Details</h4>
+
+<app-data-table *ngIf="text" [table]="text"></app-data-table>
 
 <h3>Details</h3>
 
-<div style="max-height: 30rem; overflow-y: auto">
-  <app-data-table *ngIf="mission" [table]="mission"></app-data-table>
-</div>
+<app-data-table *ngIf="mission" [table]="mission"></app-data-table>

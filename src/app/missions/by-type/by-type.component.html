@@ -10,7 +10,7 @@
 
   <ul>
     <li *ngFor="let subtype of subtypes">
-      <a routerLink="/missions/{{defined_type}}/{{subtype}}">{{subtype}}</a>
+      <a routerLink="/missions/type/{{defined_type}}/subtype/{{subtype}}">{{subtype}}</a>
     </li>
   </ul>
 </section>
@@ -21,7 +21,7 @@
   <table>
     <tr *ngFor="let mission_id of mission_ids">
       <td>{{mission_id}}</td>
-      <td><a [routerLink]="['/missions/detail/', mission_id]">
+      <td><a [routerLink]="['/missions/', mission_id]">
         {{ mission_names && mission_names[mission_id] ? mission_names[mission_id].name : [Unnamed]}}
       </a></td>
     </tr>

@@ -1,0 +1,39 @@
+<h4>{{task.uid}}: ObtainItem Task (11)</h4>
+<p>
+  The player needs to obtain {{task.targetValue}} of
+  <span *ngIf="task.taskParam1 | bitset:2">
+    the item <a routerLink="/objects/{{task.target}}">{{task.target}}</a>
+  </span>
+  <span *ngIf="task.taskParam1 | bitset:2 | not">
+    the items <a routerLink="/objects/{{task.target}}">{{task.target}}</a>
+    <ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
+    -->, <a routerLink="/objects/{{target}}">{{target}}</a><!--
+    --></ng-container>
+  </span>
+</p>
+<dl *ngIf="task.targetGroup && task.taskParam1 | bitset:2">
+  <dt>The player needs to obtain the item by smashing objects of type(s):</dt>
+  <dd *ngFor="let target of task.targetGroup.split(',')">
+    Object <a routerLink="/objects/{{target}}">{{target}}</a>
+  </dd>
+</dl>
+<ul>
+  <li *ngIf="task.taskParam1 | bitset:1">
+    The item is not consumed on mission turnin
+  </li>
+  <li *ngIf="task.taskParam1 | bitset:1 | not">
+    The item is consumed on mission turnin
+  </li>
+  <li *ngIf="task.taskParam1 | bitset:2">
+    Something 2?
+  </li>
+  <li *ngIf="task.taskParam1 | bitset:2 | not">
+    Not something 2?
+  </li>
+  <li *ngIf="task.taskParam1 | bitset:4">
+    The item needs to be equipped (???)
+  </li>
+  <li *ngIf="task.taskParam1 | bitset:4 | not">
+    The item does not need to be equipped (???)
+  </li>
+</ul>

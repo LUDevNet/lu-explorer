@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { LuJsonService } from '../../lu-json.service';
-import { LocaleService } from '../../locale.service';
+import { LuJsonService, LuLocaleService } from '../../services';
 
 @Component({
   selector: 'app-index',
@@ -13,7 +11,7 @@ export class MissionIndexComponent implements OnInit {
   missions: any = {};
   mission_types: any = {};
 
-  constructor(private luJsonService: LuJsonService, private localeService: LocaleService) { }
+  constructor(private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }
 
   ngOnInit() {
     this.getMissions();
@@ -22,7 +20,7 @@ export class MissionIndexComponent implements OnInit {
 
   getMissions():void
   {
-  	this.localeService.getLocaleTable("Missions").subscribe(index => this.processMissionIndex(index));
+  	this.luLocaleService.getLocaleTable("Missions").subscribe(index => this.processMissionIndex(index));
   }
 
   getMissionsByType():void
@@ -34,7 +32,7 @@ export class MissionIndexComponent implements OnInit {
   {
     for (let page of index.pages)
     {
-      this.localeService.getLocalePage("Missions", page).subscribe(page => this.processMissionPage(page));
+      this.luLocaleService.getLocalePage("Missions", page).subscribe(page => this.processMissionPage(page));
     }
   }
 

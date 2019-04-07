@@ -38,7 +38,7 @@ export class DB_VendorComponent {
   LootMatrixIndex: number; // INTEGER
 }
 
-export class AccessoryDefaultLoc
+export class DB_AccessoryDefaultLoc
 {
   Description: string;
   GroupID: number;
@@ -50,7 +50,7 @@ export class AccessoryDefaultLoc
   Rot_Z: number;
 }
 
-export class Behavior
+export class DB_Behavior
 {
   behaviorID: number;
   effectHandle: string;
@@ -59,7 +59,7 @@ export class Behavior
   parameters: any;
 }
 
-export class SkillBehavior
+export class DB_SkillBehavior
 {
   skillID: number;
   locStatus: number;
@@ -82,9 +82,46 @@ export class SkillBehavior
   cancelType: number;
 }
 
-export class Icons
+export class DB_Icons
 {
   IconID: number;
   IconPath: string;
   IconName: string;
+}
+
+export class DB_PhysicsComponent {
+  // TODO
+}
+
+export class DB_MissionNPCComponent {
+  // TODO
+}
+
+export class DB_InventoryComponent {
+  // TODO
+}
+
+export class DB_DestructibleComponent {
+  // TODO
+}
+
+export class DB_CollectibleComponent {
+  // TODO
+}
+
+export class DB_MissionTasks {
+  id: number; // INTEGER
+  locStatus: number; // INTEGER
+  target: number; // INTEGER
+  taskType: number; // INTEGER
+  targetGroup: string;
+  targetValue: number; // INTEGER
+  taskParam1: string;
+  largeTaskIcon: string;
+  IconID: number; // INTEGER
+  uid: number; // INTEGER
+  largeTaskIconID: number; // INTEGER
+  localize: boolean;
+  gate_version: string;
+  localizations ?: any;
 }

@@ -1,0 +1,33 @@
+<h4>Details</h4>
+<div class="table-responsive">
+  <table>
+    <tr>
+      <th>locStatus</th>
+      <th>taskType</th>
+      <th>target</th>
+      <th>targetGroup</th>
+      <th>targetValue</th>
+      <th>taskParam1</th>
+      <th>largeTaskIcon</th>
+      <th>IconID</th>
+      <th>uid</th>
+      <th>largeTaskIconID</th>
+      <th>localize</th>
+      <th>gate_version</th>
+    </tr>
+    <tr *ngFor="let task of tasks">
+      <td>{{task.locStatus}}</td>
+      <td>{{task.taskType}}</td>
+      <td>{{task.target}}</td>
+      <td>{{task.targetGroup | replace:",":", "}}</td>
+      <td>{{task.targetValue}}</td>
+      <td>{{task.taskParam1}}</td>
+      <td><app-image [path]="task.largeTaskIcon"></app-image></td>
+      <td><app-icon [iconID]="task.IconID"></app-icon></td>
+      <td>{{task.uid}}</td>
+      <td><app-icon [iconID]="task.largeTaskIconID"></app-icon></td>
+      <td>{{task.localize}}</td>
+      <td>{{task.gate_version}}</td>
+    </tr>
+  </table>
+</div>

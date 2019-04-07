@@ -1,0 +1,7 @@
+<h3>{{table}} Component ({{id}})</h3>
+<ng-container *ngIf="component | async; else loading; let generic">
+  <app-data-table [table]="generic"></app-data-table>
+</ng-container>
+<ng-template #loading>
+  Loading...
+</ng-template>

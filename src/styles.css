@@ -290,9 +290,29 @@ td
   flex: 1 0 auto;
 }
 
-.scroll-30
+.scroll-30, .scroll-40
 {
   margin-bottom: 1rem;
-  max-height: 30rem;
   overflow-y: auto;
+}
+
+.scroll-30
+{
+  max-height: 30rem;
+}
+
+.scroll-40 {
+  max-height: 40rem;
+}
+
+.card {
+  background-color: #222;
+  border-radius: 2rem;
+  padding: 2rem 1rem;
+}
+
+.card-right {
+  float: right;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
 }
