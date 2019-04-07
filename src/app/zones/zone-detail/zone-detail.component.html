@@ -1,0 +1,16 @@
+<div *ngIf="zone">
+  <ul class="breadcrumbs">
+    <li><a routerLink="/zones">Zones</a></li>
+    <li>{{zone.DisplayDescription}}</li>
+  </ul>
+  <h2>{{ zone.DisplayDescription | uppercase }}</h2>
+
+  <div *ngIf="zone.thumbnail">
+    <h3>Thumbnail</h3>
+    <app-image [path]="zone.thumbnail" width="30rem"></app-image>
+  </div>
+  <h3>Zone-File</h3>
+  <app-luz-file [path]="zone.zoneName" [zone-ref]="zone"></app-luz-file>
+  <h3>Details</h3>
+  <app-data-table [table]="zone | remove:'_links'"></app-data-table>
+</div>

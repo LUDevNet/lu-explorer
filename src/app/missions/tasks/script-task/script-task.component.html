@@ -1,0 +1,8 @@
+<h4>{{task.uid}}: Script Task (1)</h4>
+This task is controlled by a script! Target:
+<a routerLink="/objects/{{task.target}}">{{task.target}}</a><!--
+--><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
+-->, <a routerLink="/objects/{{target}}">{{target}}</a>
+</ng-container>,
+Value: {{task.targetValue}},
+Param: {{task.taskParam1}}

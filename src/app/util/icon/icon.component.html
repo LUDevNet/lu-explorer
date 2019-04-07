@@ -1,0 +1,3 @@
+<img *ngIf="icon && icon.IconPath" class="icon" [style.max-width]="width" src="{{baseUrl}}lu-res/textures/ui/{{(icon.IconPath | lowercase) | replace:'dds$':'png' }}" />
+<br>
+<i *ngIf="icon && caption">{{icon.IconName}}</i>

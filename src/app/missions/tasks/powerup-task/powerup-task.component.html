@@ -1,0 +1,6 @@
+<h4>{{task.uid}}: CollectPowerup Task (21)</h4>
+The player needs to collect {{task.targetValue}} of the powerup
+<a routerLink="/skills/{{task.target}}">{{task.target}}</a><!--
+--><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
+-->, <a routerLink="/skills/{{target}}">{{target}}</a>
+</ng-container>.

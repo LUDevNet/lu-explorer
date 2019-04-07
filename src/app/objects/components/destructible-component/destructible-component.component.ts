@@ -1,0 +1,40 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { ReplaySubject } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
+
+import { LuJsonService } from '../../../services';
+import { DB_DestructibleComponent } from '../../../cdclient';
+
+@Component({
+  selector: 'app-destructible-component',
+  templateUrl: './destructible-component.component.html',
+  styleUrls: ['./destructible-component.component.css']
+})
+export class DestructibleComponentComponent implements OnInit {
+
+  _ref: ReplaySubject<number>;
+  _id: number;
+  component: ReplaySubject<DB_DestructibleComponent>;
+
+  @Input() set id(value: number) {
+    this._ref.next(value);
+  }
+
+  get id(): number {
+    return this._id;
+  }
+
+  constructor(private luJsonService: LuJsonService) {
+    this._ref = new ReplaySubject(1);
+    this.component = new ReplaySubject(1);
+
+    this._ref.subscribe(id => this._id = id);
+    this._ref.pipe(
+      switchMap(ref => this.luJsonService.getDestructibleComponent(ref))
+    ).subscribe(this.component);
+  }
+
+  ngOnInit() {
+  }
+
+}

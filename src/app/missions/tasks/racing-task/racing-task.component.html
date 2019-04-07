@@ -1,0 +1,33 @@
+<h4>{{task.uid}}: Racing Task (23)</h4>
+<p [ngSwitch]="task.taskParam1">
+  <span *ngSwitchCase="1">
+    Be at or above the {{task.targetValue}}. place in the race world specified by {{task.target}}
+  </span>
+  <span *ngSwitchCase="2">
+    Achieve a {{task.targetValue}} ms lap time or better in the race world {{task.target}}
+  </span>
+  <span *ngSwitchCase="3">
+    Achieve a {{task.targetValue}} ms time or better in the race world  {{task.target}}
+  </span>
+  <span *ngSwitchCase="5">
+    Achieve {{task.targetValue}} achievements of the ones in {{task.targetGroup}}.
+  </span>
+  <span *ngSwitchCase="10">
+    Complete a race at the race world {{task.target}} without (less than {{task.targetValue}} ???) wrecking.
+  </span>
+  <span *ngSwitchCase="12">
+    Collect {{task.targetValue}} imagination orbs in the racing worlds {{task.targetGroup}}
+  </span>
+  <span *ngSwitchCase="13">
+    Enter the race world {{task.target}}
+  </span>
+  <span *ngSwitchCase="14">
+    Win {{task.targetValue}} races at the world {{task.target}}
+  </span>
+  <span *ngSwitchCase="15">
+    Win {{task.targetValue}} races at the worlds {{task.targetGroup}}
+  </span>
+  <span *ngSwitchCase="17">
+    Smash {{task.targetValue}} of the object(s) {{task.targetGroup}}
+  </span>
+</p>

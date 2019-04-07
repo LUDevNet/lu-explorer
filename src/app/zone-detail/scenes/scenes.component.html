@@ -1,8 +1,0 @@
-<ng-container *ngIf="scenes">
-  <ul class="breadcrumbs" *ngIf="zone">
-    <li><a routerLink="/zones">Zones</a></li>
-    <li><a routerLink="/zones/{{id}}">{{zone.DisplayDescription}}</a></li>
-    <li>Scenes #{{sc_id}}</li>
-  </ul>
-  <app-lvl *ngFor="let sc of scenes" [ref]="sc">{{sc}}</app-lvl>
-</ng-container>

@@ -1,0 +1,7 @@
+<h4>{{task.uid}}: Interact Task (15)</h4>
+The player needs to interact {{task.targetValue}} times with object(s) of
+the following type(s):
+<a routerLink="/objects/{{task.target}}">{{task.target}}</a><!--
+--><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
+-->, <a routerLink="/objects/{{target}}">{{target}}</a>
+</ng-container>

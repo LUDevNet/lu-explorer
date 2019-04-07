@@ -1,0 +1,7 @@
+<h4>{{task.uid}}: Activity Task (2)</h4>
+The player is required to score {{task.targetValue}} points at any of the
+following activities:
+<a routerLink="/activities/{{task.target}}">{{task.target}}</a><!--
+--><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
+-->, <a routerLink="/activities/{{target}}">{{target}}</a>
+</ng-container>

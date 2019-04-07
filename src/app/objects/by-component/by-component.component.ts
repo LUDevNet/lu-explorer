@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ReplaySubject, Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
-import { LuJsonService } from '../../lu-json.service';
+import { LuJsonService } from '../../services';
 import { component_names } from '../../components';
 import { DB_ObjectRef_ByComponent } from '../../cdclient';
 

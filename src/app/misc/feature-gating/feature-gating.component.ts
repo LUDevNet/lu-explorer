@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LuJsonService } from '../../lu-json.service';
+import { LuJsonService } from '../../services';
 
 @Component({
   selector: 'app-feature-gating',

@@ -1,0 +1,7 @@
+<h4>{{task.uid}}: Collect Task (3)</h4>
+The player needs to collect (collide with) {{task.targetValue}} object(s) of
+any of the following type(s):
+<a routerLink="/objects/{{task.target}}">{{task.target}}</a><!--
+--><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
+-->, <a routerLink="/objects/{{target}}">{{target}}</a>
+</ng-container>

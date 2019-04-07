@@ -1,0 +1,8 @@
+<h3>Destructible Component ({{id}})</h3>
+<ng-container *ngIf="component | async; else loading; let destructible">
+  <app-data-table [table]="destructible"></app-data-table>
+  <app-loot-matrix [id]="destructible.LootMatrixIndex"></app-loot-matrix>
+</ng-container>
+<ng-template #loading>
+  Loading...
+</ng-template>

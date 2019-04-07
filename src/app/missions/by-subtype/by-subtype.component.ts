@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { LuJsonService } from '../../lu-json.service';
-import { LocaleService } from '../../locale.service';
+import { LuJsonService, LuLocaleService } from '../../services';
 
 @Component({
   selector: 'app-by-subtype',
@@ -17,7 +16,7 @@ export class MissionsBySubtypeComponent implements OnInit {
   mission_names: any = {};
 
   constructor(private router: Router, private route: ActivatedRoute,
-  	private luJsonService: LuJsonService, private localeService: LocaleService) { }
+  	private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }
 
   ngOnInit() {
     this.defined_type = this.route.snapshot.paramMap.get('type');
@@ -37,14 +36,14 @@ export class MissionsBySubtypeComponent implements OnInit {
 
   getMissionNames():void
   {
-  	this.localeService.getLocaleTable("Missions").subscribe(index => this.processMissionNameIndex(index));
+  	this.luLocaleService.getLocaleTable("Missions").subscribe(index => this.processMissionNameIndex(index));
   }
 
   processMissionNameIndex(index: any):void
   {
     for (let page of index.pages)
     {
-      this.localeService.getLocalePage("Missions", page).subscribe(page => this.processMissionNamesPage(page));
+      this.luLocaleService.getLocalePage("Missions", page).subscribe(page => this.processMissionNamesPage(page));
     }
   }
 

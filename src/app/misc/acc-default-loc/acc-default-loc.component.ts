@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LuJsonService } from '../../lu-json.service';
-import { AccessoryDefaultLoc } from '../../cdclient';
+import { LuJsonService } from '../../services';
+import { DB_AccessoryDefaultLoc } from '../../cdclient';
 
 @Component({
   selector: 'app-acc-default-loc',
@@ -16,6 +16,6 @@ export class AccDefaultLocComponent implements OnInit {
   	this.luJsonService.getAccessoryDefaultLoc().subscribe(acc => this.acc = acc);
   }
 
-  acc: AccessoryDefaultLoc[];
+  acc: DB_AccessoryDefaultLoc[];
 
 }

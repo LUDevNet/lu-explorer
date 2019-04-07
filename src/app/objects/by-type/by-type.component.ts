@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { LuJsonService } from '../../lu-json.service';
-import { LocaleService } from '../../locale.service';
+import { LuJsonService, LuLocaleService } from '../../services';
 
 @Component({
   selector: 'app-by-type',
@@ -16,7 +15,7 @@ export class ObjectsByTypeComponent implements OnInit {
 
   constructor(
     private luJsonService: LuJsonService,
-    private localeService: LocaleService,
+    private luLocaleService: LuLocaleService,
     private route: ActivatedRoute
   ) { }
 

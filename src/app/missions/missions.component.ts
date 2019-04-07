@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 
-import { LuJsonService } from '../lu-json.service';
-import { LocaleService } from '../locale.service';
+import { LuJsonService, LuLocaleService } from '../services';
 
 @Component({
   selector: 'app-missions',
@@ -16,7 +15,7 @@ export class MissionsComponent implements OnInit {
   filteredMissions: any = {};
   needle: string = "";
 
-  constructor(private luJsonService: LuJsonService, private localeService: LocaleService) { }
+  constructor(private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }
 
   ngOnInit() {
     this.getMissions();
@@ -36,14 +35,14 @@ export class MissionsComponent implements OnInit {
 
   getMissions():void
   {
-  	this.localeService.getLocaleTable("Missions").subscribe(index => this.processMissionIndex(index));
+  	this.luLocaleService.getLocaleTable("Missions").subscribe(index => this.processMissionIndex(index));
   }
 
   processMissionIndex(index: any):void
   {
     for (let page of index.pages)
     {
-      this.localeService.getLocalePage("Missions", page).subscribe(page => this.processMissionPage(page));
+      this.luLocaleService.getLocalePage("Missions", page).subscribe(page => this.processMissionPage(page));
     }
   }
 

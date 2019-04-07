@@ -1,6 +1,6 @@
 <ul class="breadcrumbs">
   <li><a routerLink="/missions">Missions</a></li>
-  <li><a routerLink="/missions/{{defined_type}}">{{defined_type}}</a></li>
+  <li><a routerLink="/missions/type/{{defined_type}}">{{defined_type}}</a></li>
   <li>{{defined_subtype}}</li>
 </ul>
 
@@ -9,7 +9,7 @@
 <table>
   <tr *ngFor="let mission_id of mission_ids">
     <td>{{mission_id}}</td>
-    <td><a [routerLink]="['/missions/detail/', mission_id]">
+    <td><a [routerLink]="['/missions/', mission_id]">
       {{ mission_names && mission_names[mission_id] ? mission_names[mission_id].name : "[Unnamed]"}}
     </a></td>
   </tr>

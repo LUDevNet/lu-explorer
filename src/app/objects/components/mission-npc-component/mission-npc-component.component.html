@@ -1,0 +1,22 @@
+<h3>MissionNPC Component ({{id}})</h3>
+<ng-container *ngIf="component | async; else loading; let mission_npc">
+  <div class="table-responsive">
+    <table>
+      <tr>
+        <th>missionID</th>
+        <th>offersMission</th>
+        <th>acceptsMission</th>
+        <th>gate_version</th>
+      </tr>
+      <tr *ngFor="let mission of mission_npc.missions">
+        <td><a routerLink="/missions/{{mission.missionID}}">{{mission.missionID}}</a></td>
+        <td>{{mission.offersMission}}</td>
+        <td>{{mission.acceptsMission}}</td>
+        <td>{{mission.gate_version}}</td>
+      </tr>
+    </table>
+  </div>
+</ng-container>
+<ng-template #loading>
+  Loading...
+</ng-template>

@@ -1,0 +1,7 @@
+<h4>{{task.uid}}: VisitProperty Task (30)</h4>
+The player needs to visit {{task.targetValue}} different properties of the
+following zones:
+<a routerLink="/zones/{{task.target}}">{{task.target}}</a><!--
+--><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
+-->, <a routerLink="/zones/{{target}}">{{target}}</a>
+</ng-container>

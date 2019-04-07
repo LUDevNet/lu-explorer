@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 
-import { LuJsonService } from '../lu-json.service';
-import { LocaleService } from '../locale.service';
+import { LuJsonService, LuLocaleService } from '../services';
 
 @Component({
   selector: 'app-objects',
@@ -16,7 +15,7 @@ export class ObjectsComponent implements OnInit {
   filteredObjects: any = {};
   needle: string = "";
 
-  constructor(private luJsonService: LuJsonService, private localeService: LocaleService) { }
+  constructor(private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }
 
   ngOnInit() {
     this.getObjects();
@@ -36,14 +35,14 @@ export class ObjectsComponent implements OnInit {
 
   getObjects():void
   {
-  	this.localeService.getLocaleTable("Objects").subscribe(index => this.processObjectIndex(index));
+  	this.luLocaleService.getLocaleTable("Objects").subscribe(index => this.processObjectIndex(index));
   }
 
   processObjectIndex(index: any):void
   {
     for (let page of index.pages)
     {
-      this.localeService.getLocalePage("Objects", page).subscribe(page => this.processObjectPage(page));
+      this.luLocaleService.getLocalePage("Objects", page).subscribe(page => this.processObjectPage(page));
     }
   }
 

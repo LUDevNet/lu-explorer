@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LuJsonService } from '../../lu-json.service';
-import { LocaleService } from '../../locale.service';
-
+import { LuJsonService, LuLocaleService } from '../../services';
 import { component_names } from '../../components';
 
 @Component({
@@ -15,7 +13,7 @@ export class ObjectComponentsIndexComponent implements OnInit {
   components: any;
   component_names: any;
 
-  constructor(private luJsonService: LuJsonService,private localeService: LocaleService) { }
+  constructor(private luJsonService: LuJsonService,private luLocaleService: LuLocaleService) { }
 
   ngOnInit() {
     this.luJsonService

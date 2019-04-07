@@ -1,0 +1,28 @@
+<ng-container [ngSwitch]="component_id" *ngIf="component_id">
+  <app-physics-component *ngSwitchCase="1" name="Controllable Physics" [id]="id"></app-physics-component>
+  <app-render-component *ngSwitchCase="2" [id]="id"></app-render-component>
+  <app-physics-component *ngSwitchCase="3" name="Simple Physics" [id]="id"></app-physics-component>
+  <app-script-component *ngSwitchCase="5" [id]="id"></app-script-component>
+  <app-destructible-component *ngSwitchCase="7" [id]="id"></app-destructible-component>
+  <app-skill-component *ngSwitchCase="9" [oskills]="object.skills" [id]="id"></app-skill-component>
+  <app-item-component *ngSwitchCase="11" [id]="id"></app-item-component>
+  <app-rebuild-component *ngSwitchCase="12" [id]="id"></app-rebuild-component>
+  <app-vendor-component *ngSwitchCase="16" [id]="id"></app-vendor-component>
+  <app-inventory-component *ngSwitchCase="17" [id]="id"></app-inventory-component>
+  <app-physics-component *ngSwitchCase="18" name="Projectile Physics" [id]="id"></app-physics-component>
+  <app-shooting-gallery-component *ngSwitchCase="19" [id]="id"></app-shooting-gallery-component>
+  <app-collectible-component *ngSwitchCase="23" [id]="id"></app-collectible-component>
+  <app-generic-component *ngSwitchCase="26" [id]="id" table="Pet" [paged]="false"></app-generic-component>
+  <app-generic-component *ngSwitchCase="28" [id]="id" table="Module"></app-generic-component>
+  <app-generic-component *ngSwitchCase="31" [id]="id" table="MovementAI" [paged]="true"></app-generic-component>
+  <app-generic-component *ngSwitchCase="35" [id]="id" table="Minifig" [paged]="true"></app-generic-component>
+  <app-scripted-activity-component *ngSwitchCase="39" [id]="id"></app-scripted-activity-component>
+  <app-physics-component *ngSwitchCase="40" name="Phantom Physics" [id]="id"></app-physics-component>
+  <app-quick-build-component *ngSwitchCase="48" [id]="id"></app-quick-build-component>
+  <app-package-component *ngSwitchCase="53" [id]="id"></app-package-component>
+  <app-generic-component *ngSwitchCase="60" [id]="id" table="BaseCombatAI" [paged]="true"></app-generic-component>
+  <app-generic-component *ngSwitchCase="67" [id]="id" table="RocketLaunchpadControl" [paged]="false"></app-generic-component>
+  <app-mission-npc-component *ngSwitchCase="73" [id]="id"></app-mission-npc-component>
+  <app-generic-component *ngSwitchCase="78" [id]="id" table="ProximityMonitor" [paged]="false"></app-generic-component>
+  <div *ngSwitchDefault><h3>{{getName(component_id)}} Component ({{id}})</h3></div>
+</ng-container>
