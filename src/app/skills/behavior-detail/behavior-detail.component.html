@@ -1,6 +1,6 @@
 <section *ngIf="_behavior | async; else loading; let behavior">
   <span class="toggle link" [class.hidden]="hidden" (click)="toggle()"></span>
-  ID: <a routerLink="/behaviors/{{behaviorID}}">{{behaviorID}}</a>
+  ID: <a routerLink="/skills/behaviors/{{behaviorID}}">{{behaviorID}}</a>
   <span *ngIf="behavior.templateID==1">
     BasicAttack
     [
