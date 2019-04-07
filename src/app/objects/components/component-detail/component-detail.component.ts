@@ -10,6 +10,7 @@ export class ComponentDetailComponent implements OnInit {
 
   @Input() id: number;
   @Input() component_id: number;
+  @Input() object: any;
 
   constructor() { }
 
