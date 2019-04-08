@@ -1,0 +1,20 @@
+<section *ngIf="table | async; else loading; let levels">
+  <h2>Level Progression</h2>
+  <div class="table-responsive">
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>requiredUScore</th>
+        <th>BehaviorEffect</th>
+      </tr>
+      <tr *ngFor="let level of levels">
+        <td>{{level.id}}</td>
+        <td>{{level.requiredUScore}}</td>
+        <td>{{level.BehaviorEffect}}</td>
+      </tr>
+    </table>
+  </div>
+</section>
+<ng-template #loading>
+  Loading...
+</ng-template>
