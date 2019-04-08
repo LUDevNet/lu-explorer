@@ -1,16 +1,16 @@
 <h2>Feature Gating</h2>
 
-<table *ngIf="table">
-  <tr>
-    <th>featureName</th>
-    <th>version</th>
-    <th>description</th>
-  </tr>
-  <ng-container *ngFor="let feature of table">
+<div class="table-responsive">
+  <table *ngIf="table">
     <tr>
+      <th>featureName</th>
+      <th>version</th>
+      <th>description</th>
+    </tr>
+    <tr *ngFor="let feature of table">
       <td>{{feature.featureName}}</td>
       <td>{{feature.major}}.{{feature.current}}.{{feature.minor}}</td>
       <td>{{feature.description}}</td>
     </tr>
-  </ng-container>
-</table>
+  </table>
+</div>

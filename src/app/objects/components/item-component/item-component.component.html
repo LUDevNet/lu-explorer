@@ -51,6 +51,14 @@
         </li>
       </ul>
     </section>
+    <section *ngIf="item.itemType == '2'">
+      <h5>Hat Info</h5>
+      <ul>
+        <li *ngFor="let bit of item.itemInfo | bits">
+          {{bit}}
+        </li>
+      </ul>
+    </section>
   </section>
 
   <section *ngIf="item.commendationLOT">
@@ -117,8 +125,8 @@
     <table>
       <tr><td>inLootTable</td><td>{{item.inLootTable}}</td></tr>
       <tr><td>inVendor</td><td>{{item.inVendor}}</td></tr>
-      <tr><td>isBOE</td><td>{{item.isBOE}}</td></tr>
-      <tr><td>isBOP</td><td>{{item.isBOP}}</td></tr>
+      <tr><td>isBOE [Bound on Equip]</td><td>{{item.isBOE}}</td></tr>
+      <tr><td>isBOP [Bound on Pickup]</td><td>{{item.isBOP}}</td></tr>
       <tr><td>isKitPiece</td><td>{{item.isKitPiece}}</td></tr>
       <tr><td>isTwoHanded</td><td>{{item.isTwoHanded}}</td></tr>
       <tr><td>isUnique</td><td>{{item.isUnique}}</td></tr>

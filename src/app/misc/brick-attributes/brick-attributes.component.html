@@ -2,6 +2,14 @@
   <h2>Brick Attributes</h2>
   <div class="table-responsive">
     <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Icon</th>
+        <th>Icon Path</th>
+        <th>Display Order</th>
+        <th>locStatus</th>
+      </tr>
       <tr *ngFor="let attribute of attributes">
         <td>{{attribute.ID}}</td>
         <td>{{attribute.ID | loc:"brickAttributes" | async | elem:'name' }}</td>
@@ -13,6 +21,6 @@
     </table>
   </div>
 </section>
-<ng-template #template>
+<ng-template #loading>
   Loading...
 </ng-template>
