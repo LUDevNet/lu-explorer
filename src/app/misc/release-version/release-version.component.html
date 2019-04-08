@@ -1,12 +1,14 @@
 <h2>Release Version</h2>
 
-<table *ngIf="table">
-  <tr>
-    <th>ReleaseVersion</th>
-    <th>ReleaseDate</th>
-  </tr>
-  <tr *ngFor="let date of table">
-    <td>{{date.ReleaseVersion}}</td>
-    <td>{{date.ReleaseDate | todate}}</td>
-  </tr>
-</table>
+<div class="table-responsive">
+  <table *ngIf="table">
+    <tr>
+      <th>ReleaseVersion</th>
+      <th>ReleaseDate</th>
+    </tr>
+    <tr *ngFor="let date of table">
+      <td>{{date.ReleaseVersion}}</td>
+      <td>{{date.ReleaseDate | todate}}</td>
+    </tr>
+  </table>
+</div>

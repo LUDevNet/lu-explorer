@@ -1,17 +1,19 @@
 <h2>Event Gating</h2>
 
-<table *ngIf="table">
-  <tr>
-    <th>eventName</th>
-    <th>date_start / date_end</th>
-  </tr>
-  <ng-container *ngFor="let date of table">
+<div class="table-responsive">
+  <table *ngIf="table">
     <tr>
-      <td rowspan="2">{{date.eventName}}</td>
-      <td>{{date.date_start | todate}}</td>
+      <th>eventName</th>
+      <th>date_start / date_end</th>
     </tr>
-    <tr>
-      <td>{{date.date_end | todate}}</td>
-    </tr>
-  </ng-container>
-</table>
+    <ng-container *ngFor="let date of table">
+      <tr>
+        <td rowspan="2">{{date.eventName}}</td>
+        <td>{{date.date_start | todate}}</td>
+      </tr>
+      <tr>
+        <td>{{date.date_end | todate}}</td>
+      </tr>
+    </ng-container>
+  </table>
+</div>
