@@ -12,6 +12,7 @@ import { ReleaseVersionComponent } from './release-version/release-version.compo
 import { FeatureGatingComponent } from './feature-gating/feature-gating.component';
 import { SubscriptionPricingComponent } from './subscription-pricing/subscription-pricing.component';
 import { BrickIdsComponent } from './brick-ids/brick-ids.component';
+import { BrickAttributesComponent } from './brick-attributes/brick-attributes.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BrickIdsComponent } from './brick-ids/brick-ids.component';
     ReleaseVersionComponent,
     FeatureGatingComponent,
     SubscriptionPricingComponent,
-    BrickIdsComponent
+    BrickIdsComponent,
+    BrickAttributesComponent
   ],
   imports: [
     CommonModule,

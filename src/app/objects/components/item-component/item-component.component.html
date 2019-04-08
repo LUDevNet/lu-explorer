@@ -39,117 +39,15 @@
       <p>
         This item is a LEGO brick and belongs to the following categories:
       </p>
-      <ul class="brick-category-list">
+      <ul class="brick-category-list" *ngIf="brickAttrs | async | dict:'ID'; else loading; let attrs">
         <li *ngFor="let bit of item.itemInfo | bits">
-          <ng-container [ngSwitch]="bit">
-            <ng-container *ngSwitchCase="0">
-              <img [src]="'textures/ui/bricks/categories/basic.png' | res"/>
-              <span>Basic (0)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="1">
-              <img [src]="'textures/ui/bricks/categories/architecture.png' | res"/>
-              <span>Architecture (1)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="2">
-              <img [src]="'textures/ui/bricks/categories/transportation.png' | res"/>
-              <span>Transportation (Boats) (2)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="3">
-              <img [src]="'textures/ui/bricks/categories/space.png' | res"/>
-              <span>Space [old?] (3)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="4">
-              <img [src]="'textures/ui/bricks/categories/technic.png' | res"/>
-              <span>Technic (4)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="5">
-              <img [src]="'textures/ui/bricks/categories/brick.png' | res"/>
-              <span>Brick (5)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="6">
-              <img [src]="'textures/ui/bricks/categories/plate.png' | res"/>
-              <span>Plate (6)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="7">
-              <img [src]="'textures/ui/bricks/categories/slopes.png' | res"/>
-              <span>Slopes (7)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="8">
-              <img [src]="'textures/ui/bricks/categories/wedge.png' | res"/>
-              <span>Wedge (8)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="9">
-              <img [src]="'textures/ui/bricks/categories/curves.png' | res"/>
-              <span>Curves (9)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="10">
-              <img [src]="'textures/ui/bricks/categories/plants.png' | res"/>
-              <span>Plants (10)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="11">
-              <img [src]="'textures/ui/bricks/categories/creatures.png' | res"/>
-              <span>Creatures (11)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="12">
-              <img [src]="'textures/ui/bricks/categories/poles.png' | res"/>
-              <span>Poles (12)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="13">
-              <img [src]="'textures/ui/bricks/categories/hinge.png' | res"/>
-              <span>Hinge (13)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="14">
-              <img [src]="'textures/ui/bricks/categories/lattices_grills_vents.png' | res"/>
-              <span>Lattices, Grills, Vents (14)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="15">
-              <img [src]="'textures/ui/bricks/categories/hand_accessories.png' | res"/>
-              <span>Hand Accessories (15)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="16">
-              <img [src]="'textures/ui/bricks/categories/head_gear.png' | res"/>
-              <span>Head Gear (16)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="17">
-              <img [src]="'textures/ui/bricks/categories/misc_minifig_accessories.png' | res"/>
-              <span>Misc Minifig Accessories (17)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="18">
-              <img [src]="'textures/ui/bricks/categories/transportation.png' | res"/>
-              <span>Transportation / Space [new?] (18)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="19">
-              <img [src]="'textures/ui/bricks/categories/clip.png' | res"/>
-              <span>Clip (19)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="20">
-              <img [src]="'textures/ui/bricks/categories/knobs.png' | res"/>
-              <span>Knobs (20)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="21">
-              <img [src]="'textures/ui/bricks/categories/hollow_knobs.png' | res"/>
-              <span>Hollow Knobs (21)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="22">
-              <img [src]="'textures/ui/bricks/categories/axle_connection.png' | res"/>
-              <span>Axle Connection (22)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="23">
-              <img [src]="'textures/ui/bricks/categories/pin_connection.png' | res"/>
-              <span>Pin Connection (23)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="24">
-              <img [src]="'textures/ui/bricks/categories/direction_changers.png' | res"/>
-              <span>Direction Changers (24)</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="25">
-              <img [src]="'textures/ui/bricks/categories/gears.png' | res"/>
-              <span>Gears (25)</span>
-            </ng-container>
-            <ng-container *ngSwitchDefault>
-              <span>[Unknown] ({{bit}})</span>
-            </ng-container>
+          <ng-container *ngIf="attrs[bit]; else attrNotFound; let attr">
+            <img [src]="attr.icon_asset | lowercase | replace:'dds':'png' | res"/>
+            <span>{{attr.ID | loc:'brickAttributes' | async | elem:'name' }} ({{attr.ID}})</span>
           </ng-container>
+          <ng-template #attrNotFound>
+            Hidden Category ({{bit}})
+          </ng-template>
         </li>
       </ul>
     </section>

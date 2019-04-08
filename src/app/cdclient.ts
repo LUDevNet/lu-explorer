@@ -18,6 +18,13 @@ export class DB_mapItemTypes {
   equipLocation: string;
 }
 
+export class DB_brickAttributes {
+  ID: number;
+  icon_asset: string;
+  display_order: number;
+  loc_status: number;
+}
+
 export class DB_BrickColors {
   id: number; // INT
   red: number; // FLOAT

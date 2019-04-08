@@ -1,0 +1,18 @@
+<section *ngIf="table | async; else loading; let attributes">
+  <h2>Brick Attributes</h2>
+  <div class="table-responsive">
+    <table>
+      <tr *ngFor="let attribute of attributes">
+        <td>{{attribute.ID}}</td>
+        <td>{{attribute.ID | loc:"brickAttributes" | async | elem:'name' }}</td>
+        <td class="no-padding"><img class="no-margin" [src]="attribute.icon_asset | lowercase | replace:'dds':'png' | res"/></td>
+        <td>{{attribute.icon_asset}}</td>
+        <td>{{attribute.display_order}}</td>
+        <td>{{attribute.locStatus}}</td>
+      </tr>
+    </table>
+  </div>
+</section>
+<ng-template #template>
+  Loading...
+</ng-template>

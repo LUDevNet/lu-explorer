@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ReplaySubject, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { LuJsonService } from '../../../services';
-import { DB_mapItemTypes, DB_ItemComponent, DB_BrickColors } from '../../../cdclient';
+import { DB_mapItemTypes, DB_ItemComponent, DB_BrickColors, DB_brickAttributes } from '../../../cdclient';
 
 @Component({
   selector: 'app-item-component',
@@ -16,6 +16,7 @@ export class ItemComponentComponent {
   component: ReplaySubject<DB_ItemComponent>;
   itemTypes: Observable<DB_mapItemTypes[]>;
   brickColors: Observable<DB_BrickColors[]>;
+  brickAttrs: Observable<DB_brickAttributes[]>;
 
   constructor(private luJsonService: LuJsonService) {
     this._ref = new ReplaySubject(1);
@@ -28,6 +29,7 @@ export class ItemComponentComponent {
 
     this.itemTypes = this.luJsonService.getItemTypes();
     this.brickColors = this.luJsonService.getBrickColors();
+    this.brickAttrs = this.luJsonService.getSingleTable('brickAttributes');
   }
 
   @Input() set id(value: number) {
