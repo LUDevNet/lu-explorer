@@ -5,6 +5,11 @@ export class DB_ObjectRef_ByComponent {
   name: string;
 }
 
+export class DB_ObjectRef_ByType {
+  id: number;
+  name: string;
+}
+
 // LU database definitions
 
 export class DB_mapItemTypes {
