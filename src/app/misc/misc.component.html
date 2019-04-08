@@ -9,6 +9,7 @@
       <li [class.active]="type == 'feature-gating'"><a routerLink="/misc/feature-gating">Feature Gating</a></li>
       <li [class.active]="type == 'release-version'"><a routerLink="/misc/release-version">Release Version</a></li>
       <li [class.active]="type == 'sub-pricing'"><a routerLink="/misc/sub-pricing">Subscription Pricing</a></li>
+      <li [class.active]="type == 'brick-attributes'"><a routerLink="/misc/brick-attributes">Brick Attributes</a></li>
     </ul>
   </div>
   <div class="sidemenu-content">
@@ -20,6 +21,7 @@
       <app-feature-gating *ngSwitchCase="'feature-gating'"></app-feature-gating>
       <app-release-version *ngSwitchCase="'release-version'"></app-release-version>
       <app-subscription-pricing *ngSwitchCase="'sub-pricing'"></app-subscription-pricing>
+      <app-brick-attributes *ngSwitchCase="'brick-attributes'"></app-brick-attributes>
     </ng-container>
   </div>
 </div>

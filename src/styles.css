@@ -305,6 +305,14 @@ td
   max-height: 40rem;
 }
 
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
 .card {
   background-color: #222;
   border-radius: 2rem;

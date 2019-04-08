@@ -15,6 +15,7 @@ export class KeysPipe implements PipeTransform {
 @Pipe({name: 'dict'})
 export class DictPipe implements PipeTransform {
   transform(value: Object[], arg: string) : any {
+    if (value == null) return null;
     let dict = {};
     for (var i = 0; i < value.length; i++) {
       dict[String(value[i][arg])] = value[i];
