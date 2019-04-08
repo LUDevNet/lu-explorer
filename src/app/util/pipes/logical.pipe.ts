@@ -1,5 +1,22 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+
+@Pipe({name: 'bits'})
+export class BitsPipe implements PipeTransform {
+  transform(value: any) : any {
+    var flags = [];
+    var m = Math.floor(value);
+    for (var i = 0; i < 64; i++) {
+      if ((m % 2) == 1) {
+        flags.push(i);
+      }
+      if (m < 2) break;
+      m = Math.floor(m / 2);
+    }
+    return flags;
+  }
+}
+
 @Pipe({name: 'bitset'})
 export class BitSetPipe implements PipeTransform {
   transform(value: any, key: number) : any {

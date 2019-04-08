@@ -37,7 +37,7 @@ export class RangePipe implements PipeTransform {
 @Pipe({name: 'elem'})
 export class ElementPipe implements PipeTransform {
   transform(value: Object, arg: string) : any {
-    return value[arg];
+    return value ? value[arg] : null;
   }
 }
 

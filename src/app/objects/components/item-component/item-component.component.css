@@ -1,0 +1,21 @@
+.brick-category-list > * {
+  margin-bottom: 0.5rem;
+}
+
+.brick-category-list img {
+  vertical-align: middle;
+  border: 1px solid white;
+  border-radius: 3px;
+  margin-right: 1rem;
+  box-sizing: border-box;
+  margin-bottom: 0;
+}
+
+.brick-category-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.brick-category-list span {
+  vertical-align: middle;
+}

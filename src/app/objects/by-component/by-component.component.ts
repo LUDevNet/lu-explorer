@@ -31,6 +31,16 @@ export class ObjectsByComponentComponent implements OnInit {
       .pipe(map(this.mapRouteInfo),tap(this.tapRef.bind(this)),switchMap(this.loadDataObservable.bind(this)))
   }
 
+  mapRouteInfo(map) {
+    let comp_id_str = map.get('component');
+    if (map.has('page')) {
+      let page = map.get('page');
+      return {id: +comp_id_str, page: +page};
+    } else {
+      return {id: +comp_id_str, page: 0};
+    }
+  }
+
   tapRef(ref) {
     this.component_id = ref.id;
     this.page = ref.page;
@@ -57,15 +67,6 @@ export class ObjectsByComponentComponent implements OnInit {
     return sorted.slice(from, to);
   }
 
-  mapRouteInfo(map) {
-    let comp_id_str = map.get('component');
-    if (map.has('page')) {
-      let page = map.get('page');
-      return {id: +comp_id_str, page: +page};
-    } else {
-      return {id: +comp_id_str, page: 0};
-    }
-  }
 
   sortObjectComponentRefs(a,b) {
     let diff = a.comp_val - b.comp_val;

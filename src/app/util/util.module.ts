@@ -8,9 +8,9 @@ import { GithubSpaComponent } from './github-spa/github-spa.component';
 import { IconComponent } from './icon/icon.component';
 
 import { KeysPipe, DictPipe, RangePipe, ElementPipe, RemovePipe, NonNullPipe } from './pipes/data.pipe';
-import { BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe } from './pipes/logical.pipe';
+import { BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe } from './pipes/logical.pipe';
 import { DatePipe, HtmlPipe } from './pipes/output.pipe';
-import { DocsPipe, ResourcePipe } from './pipes/service.pipe';
+import { DocsPipe, ResourcePipe, LocalePipe } from './pipes/service.pipe';
 import { ReplacePipe, PercentPipe, ToPipe } from './pipes/strings.pipe';
 
 import { LuJsonService } from './services/lu-json.service';
@@ -22,9 +22,9 @@ import { LuLocaleService } from './services/lu-locale.service';
   declarations: [
     PaginationComponent, DataTableComponent, GithubSpaComponent, IconComponent,
     KeysPipe, DictPipe, RangePipe, ElementPipe, RemovePipe, NonNullPipe,
-    BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe,
+    BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe,
     DatePipe, HtmlPipe,
-    DocsPipe, ResourcePipe,
+    DocsPipe, ResourcePipe, LocalePipe,
     ReplacePipe, PercentPipe, ToPipe
   ],
   imports: [
@@ -34,9 +34,9 @@ import { LuLocaleService } from './services/lu-locale.service';
   exports: [
     PaginationComponent, DataTableComponent, GithubSpaComponent, IconComponent,
     KeysPipe, DictPipe, RangePipe, ElementPipe, RemovePipe, NonNullPipe,
-    BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe,
+    BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe,
     DatePipe, HtmlPipe,
-    DocsPipe, ResourcePipe,
+    DocsPipe, ResourcePipe, LocalePipe,
     ReplacePipe, PercentPipe, ToPipe
   ]
 })

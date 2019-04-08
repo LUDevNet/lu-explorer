@@ -16,6 +16,7 @@ const objectsRoutes = [
   { path: 'loot/table/:id', component: LootTableComponent },
   { path: 'types', component: ObjectTypesIndexComponent },
   { path: 'types/:type', component: ObjectsByTypeComponent },
+  { path: 'types/:type/page/:page', component: ObjectsByTypeComponent },
   { path: 'components', component: ObjectComponentsIndexComponent },
   { path: 'components/:component', component: ObjectsByComponentComponent },
   { path: 'components/:component/page/:page', component: ObjectsByComponentComponent },
