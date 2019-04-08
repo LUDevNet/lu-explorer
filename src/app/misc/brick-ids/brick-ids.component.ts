@@ -21,7 +21,11 @@ export class BrickIdsComponent implements OnInit {
   {
   	this.luJsonService
       .getSingleTable("BrickIDTable")
-      .subscribe(table => this.table = table);
+      .subscribe(table => this.table = table.sort(this.compareBrickIDs));
+  }
+
+  compareBrickIDs(a,b) {
+    return a.LEGOBrickID - b.LEGOBrickID;
   }
 
 }

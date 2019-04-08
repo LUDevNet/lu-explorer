@@ -12,6 +12,12 @@ export class DB_ObjectRef_ByType {
 
 // LU database definitions
 
+export class DB_LevelProgressionLookup {
+  id: number; // INT
+  requiredUScore: number; // INT
+  BehaviorEffect: string;
+}
+
 export class DB_mapItemTypes {
   id: number;
   description: string;

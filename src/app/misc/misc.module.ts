@@ -13,6 +13,7 @@ import { FeatureGatingComponent } from './feature-gating/feature-gating.componen
 import { SubscriptionPricingComponent } from './subscription-pricing/subscription-pricing.component';
 import { BrickIdsComponent } from './brick-ids/brick-ids.component';
 import { BrickAttributesComponent } from './brick-attributes/brick-attributes.component';
+import { LevelProgressionComponent } from './level-progression/level-progression.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { BrickAttributesComponent } from './brick-attributes/brick-attributes.co
     FeatureGatingComponent,
     SubscriptionPricingComponent,
     BrickIdsComponent,
-    BrickAttributesComponent
+    BrickAttributesComponent,
+    LevelProgressionComponent
   ],
   imports: [
     CommonModule,

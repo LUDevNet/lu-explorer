@@ -10,6 +10,8 @@
 
 <h2>Mission ({{id}}) <small *ngIf="missionLocale">"{{missionLocale.name}}"</small></h2>
 
+<app-icon class="mission-icon" [iconID]="mission.missionIconID" *ngIf="mission && mission.missionIconID"></app-icon>
+
 <section *ngIf="mission && mission.prereqMissionID">
   <h3>Prerequisites</h3>
   <app-prereq-list [string]="mission.prereqMissionID"></app-prereq-list>
