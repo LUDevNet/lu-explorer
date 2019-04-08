@@ -14,15 +14,11 @@ export class MiscComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(){
-    this.route.paramMap.subscribe(this.processRouteChange.bind(this));
+    this.route.url.subscribe(this.processRouteChange.bind(this));
   }
 
-  processRouteChange(map) {
-    if (map.has('type')) {
-      this.type = map.get('type');
-    } else {
-      this.type = this.defaultType;
-    }
+  processRouteChange(url) {
+    console.log(url);
   }
 
 }
