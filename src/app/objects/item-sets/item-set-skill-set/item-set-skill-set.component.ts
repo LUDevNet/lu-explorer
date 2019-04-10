@@ -41,7 +41,7 @@ export class ItemSetSkillSetComponent implements OnInit {
   }
 
   mapToRequest(id) {
-    return this.luJsonService.getGeneric(id, 'ItemSetSkills', false);
+    return this.luJsonService.getGeneric(id, 'ItemSetSkills', true);
   }
 
 }
