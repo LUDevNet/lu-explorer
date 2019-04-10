@@ -7,7 +7,7 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { GithubSpaComponent } from './github-spa/github-spa.component';
 import { IconComponent } from './icon/icon.component';
 
-import { KeysPipe, DictPipe, RangePipe, ElementPipe, RemovePipe, NonNullPipe } from './pipes/data.pipe';
+import { KeysPipe, DictPipe, RangePipe, ElementPipe, RemovePipe, NonNullPipe, DefaultPipe } from './pipes/data.pipe';
 import { BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe } from './pipes/logical.pipe';
 import { DatePipe, HtmlPipe } from './pipes/output.pipe';
 import { DocsPipe, ResourcePipe, LocalePipe } from './pipes/service.pipe';
@@ -21,7 +21,7 @@ import { LuLocaleService } from './services/lu-locale.service';
 @NgModule({
   declarations: [
     PaginationComponent, DataTableComponent, GithubSpaComponent, IconComponent,
-    KeysPipe, DictPipe, RangePipe, ElementPipe, RemovePipe, NonNullPipe,
+    KeysPipe, DictPipe, RangePipe, ElementPipe, RemovePipe, NonNullPipe, DefaultPipe,
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe,
     DatePipe, HtmlPipe,
     DocsPipe, ResourcePipe, LocalePipe,
@@ -33,7 +33,7 @@ import { LuLocaleService } from './services/lu-locale.service';
   ],
   exports: [
     PaginationComponent, DataTableComponent, GithubSpaComponent, IconComponent,
-    KeysPipe, DictPipe, RangePipe, ElementPipe, RemovePipe, NonNullPipe,
+    KeysPipe, DictPipe, RangePipe, ElementPipe, RemovePipe, NonNullPipe, DefaultPipe,
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe,
     DatePipe, HtmlPipe,
     DocsPipe, ResourcePipe, LocalePipe,

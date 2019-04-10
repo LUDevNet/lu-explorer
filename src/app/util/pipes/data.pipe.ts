@@ -42,6 +42,13 @@ export class ElementPipe implements PipeTransform {
   }
 }
 
+@Pipe({name: 'default'})
+export class DefaultPipe implements PipeTransform {
+  transform(value: Object, arg: string) : any {
+    return value == null ? arg : value;
+  }
+}
+
 // https://stackoverflow.com/questions/35534959/access-key-and-value-of-object-using-ngfor
 @Pipe({name: 'remove'})
 export class RemovePipe implements PipeTransform {

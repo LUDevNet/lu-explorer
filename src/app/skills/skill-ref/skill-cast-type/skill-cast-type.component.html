@@ -1,0 +1,6 @@
+<ng-container [ngSwitch]="castType">
+  <span *ngSwitchCase="0">Use (0)</span>
+  <span *ngSwitchCase="1">Equip (1)</span>
+  <span *ngSwitchCase="3">Consume (3)</span>
+  <span *ngSwitchDefault>[Unknown] ({{castType}})</span>
+</ng-container>

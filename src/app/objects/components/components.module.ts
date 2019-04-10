@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { UtilModule } from '../../util/util.module';
 import { LootModule } from '../loot/loot.module';
+import { SkillRefModule } from '../../skills/skill-ref/skill-ref.module';
 
 import { ItemComponentComponent } from './item-component/item-component.component';
 import { PackageComponentComponent } from './package-component/package-component.component';
@@ -49,6 +50,7 @@ import { ComponentDetailComponent } from './component-detail/component-detail.co
     CommonModule,
     UtilModule,
     LootModule,
+    SkillRefModule,
     RouterModule.forChild([])
   ],
   exports: [
