@@ -1,0 +1,38 @@
+<ul class="breadcrumbs">
+  <li><a routerLink="/objects">Objects</a></li>
+  <li><a routerLink="/objects/item-sets">Item Sets</a></li>
+  <li>Item Set #{{id}}</li>
+</ul>
+
+<section *ngIf="response | async; else loading; let set">
+  <h2>
+    Item Set #{{id}}:
+    <small>
+      {{id | loc:'ItemSets' | async | elem:'kitName' | default:'[Unnamed]' }}
+      <span *ngIf="set.kitRank">(Rank {{set.kitRank}})</span>
+    </small>
+  </h2>
+  <app-icon [iconID]="set.kitImage" [width]="256"></app-icon>
+  <h3>Items</h3>
+  <ul>
+    <li *ngFor="let itemID of set.itemIDs.split(',')">
+      <a routerLink="/objects/{{itemID.trim()}}">LOT {{itemID}}</a>
+    </li>
+  </ul>
+  <h3>Skill Set</h3>
+  <p>
+    INFO: Some factions skills here are fake and just display the icon.
+    The actual skill is triggered from a script attached to all the items.
+  </p>
+  <app-item-set-skill-set [id]="set.skillSetWith2" [count]="2" *ngIf="set.skillSetWith2"></app-item-set-skill-set>
+  <app-item-set-skill-set [id]="set.skillSetWith3" [count]="3" *ngIf="set.skillSetWith3"></app-item-set-skill-set>
+  <app-item-set-skill-set [id]="set.skillSetWith4" [count]="4" *ngIf="set.skillSetWith4"></app-item-set-skill-set>
+  <app-item-set-skill-set [id]="set.skillSetWith5" [count]="5" *ngIf="set.skillSetWith5"></app-item-set-skill-set>
+  <app-item-set-skill-set [id]="set.skillSetWith6" [count]="6" *ngIf="set.skillSetWith6"></app-item-set-skill-set>
+  <h3>Details</h3>
+  <app-data-table [table]="set"></app-data-table>
+</section>
+<ng-template #loading>
+  <h2>Item Set #{{id}}</h2>
+  Loading...
+</ng-template>

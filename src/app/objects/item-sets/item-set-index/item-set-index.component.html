@@ -1,0 +1,23 @@
+<ul class="breadcrumbs">
+  <li><a routerLink="/objects">Objects</a></li>
+  <li>Item Sets</li>
+</ul>
+
+<h2>Item Sets</h2>
+
+<p>
+Item sets are collections of items that when worn in any combination
+provide some additional skills per equipped item of that set.
+</p>
+
+<section id="item-set-index" *ngIf="table | async; else loading; let sets">
+  <table>
+    <tr *ngFor="let set of sets">
+      <td>{{set.id}}</td>
+      <td><a routerLink="/objects/item-sets/{{set.id}}">{{set.id | loc:'ItemSets' | async | elem:'kitName' | default:'[Unnamed]'}} Item Set</a></td>
+    </tr>
+  </table>
+</section>
+<ng-template #loading>
+  Loading...
+</ng-template>

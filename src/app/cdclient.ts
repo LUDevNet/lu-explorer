@@ -10,6 +10,10 @@ export class DB_ObjectRef_ByType {
   name: string;
 }
 
+export class DB_ItemSets_Ref {
+  id: number;
+}
+
 // LU database definitions
 
 export class DB_LevelProgressionLookup {
@@ -46,6 +50,30 @@ export class DB_BrickColors {
 
 export class DB_ItemComponent {
 
+}
+
+export class DB_ItemSets {
+  setID: number; //	INTEGER
+  locStatus: number; //	INTEGER
+  itemIDs: string;
+  kitType: number; //	INTEGER
+  kitRank: number; //	INTEGER
+  kitImage: number; //	INTEGER
+  skillSetWith2kitImage: number; //	INTEGER
+  skillSetWith3kitImage: number; //	INTEGER
+  skillSetWith4kitImage: number; //	INTEGER
+  skillSetWith5kitImage: number; //	INTEGER
+  skillSetWith6kitImage: number; //	INTEGER
+  localize: boolean;
+  gate_version: string;
+  kitID: number; // INTEGER
+  priority: number; // FLOAT
+}
+
+export class DB_ItemSetSkills {
+  SkillSetID: number; // INTEGER
+  SkillID: number; // INTEGER
+  SkillCastType: number; // INTEGER
 }
 
 export class DB_VendorComponent {

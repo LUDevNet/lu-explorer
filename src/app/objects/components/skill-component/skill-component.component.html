@@ -15,12 +15,7 @@
     <ng-container *ngFor="let entry of (skills | async | keys)">
       <tr>
         <td><a routerLink="/skills/{{entry.key}}">{{entry.key}}</a></td>
-        <ng-container [ngSwitch]="entry.value.ref.castOnType">
-          <td *ngSwitchCase="0">Use (0)</td>
-          <td *ngSwitchCase="1">Equip (1)</td>
-          <td *ngSwitchCase="3">Consume (3)</td>
-          <td *ngSwitchDefault>[Unknown] ({{entry.value.ref.castOnType}})</td>
-        </ng-container>
+        <td><app-skill-cast-type [castType]="entry.value.ref.castOnType"></app-skill-cast-type></td>
         <td>{{entry.value.ref.AICombatWeight}}</td>
         <td>
           <app-icon [width]="'32px'" [iconID]="entry.value.skill.skillIcon"></app-icon>

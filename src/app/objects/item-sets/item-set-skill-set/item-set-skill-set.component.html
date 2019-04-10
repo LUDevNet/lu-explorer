@@ -1,0 +1,22 @@
+<div *ngIf="response | async; else loading; let skillSet">
+  <h4>With {{count}} Items ({{skillSet.SkillSetID}})</h4>
+  <table>
+    <tr>
+      <td>Skill</td>
+      <td>
+        <a routerLink="/skills/{{skillSet.SkillID}}">
+          {{skillSet.SkillID | loc:"SkillBehavior" | async | elem:'name' | default: '[Unnamed]'}}
+          ({{skillSet.SkillID}})
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>SkillCastType</td>
+      <td><app-skill-cast-type [castType]="skillSet.SkillCastType"></app-skill-cast-type></td>
+    </tr>
+  </table>
+</div>
+<ng-template #loading>
+  <h4>With {{count}} Items</h4>
+  Loading...
+</ng-template>
