@@ -16,7 +16,10 @@
   <h3>Items</h3>
   <ul>
     <li *ngFor="let itemID of set.itemIDs.split(',')">
-      <a routerLink="/objects/{{itemID.trim()}}">LOT {{itemID}}</a>
+      <a routerLink="/objects/{{itemID.trim()}}">
+        {{itemID.trim() | loc:"Objects" | async | elem:'name' | default: '[Unnamed]'}}
+        ({{itemID.trim()}})
+      </a>
     </li>
   </ul>
   <h3>Skill Set</h3>

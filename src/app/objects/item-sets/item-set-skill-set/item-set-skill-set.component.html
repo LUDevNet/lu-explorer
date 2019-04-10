@@ -1,20 +1,16 @@
 <div *ngIf="response | async; else loading; let skillSet">
-  <h4>With {{count}} Items ({{skillSet.SkillSetID}})</h4>
-  <table>
-    <tr>
-      <td>Skill</td>
-      <td>
-        <a routerLink="/skills/{{skillSet.SkillID}}">
-          {{skillSet.SkillID | loc:"SkillBehavior" | async | elem:'name' | default: '[Unnamed]'}}
-          ({{skillSet.SkillID}})
+  <h4>With {{count}} Items ({{id}})</h4>
+  <dl>
+    <ng-container *ngFor="let cast_skills of skillSet.set_skills | group:'SkillCastType' | keys">
+      <dt>On <code>SkillCastType</code>: <app-skill-cast-type [castType]="cast_skills.key"></app-skill-cast-type></dt>
+      <dd *ngFor="let skill of cast_skills.value">
+        <a routerLink="/skills/{{skill.SkillID}}">
+          {{skill.SkillID | loc:"SkillBehavior" | async | elem:'name' | default: '[Unnamed]'}}
+          ({{skill.SkillID}})
         </a>
-      </td>
-    </tr>
-    <tr>
-      <td>SkillCastType</td>
-      <td><app-skill-cast-type [castType]="skillSet.SkillCastType"></app-skill-cast-type></td>
-    </tr>
-  </table>
+      </dd>
+    </ng-container>
+  </dl>
 </div>
 <ng-template #loading>
   <h4>With {{count}} Items</h4>

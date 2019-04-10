@@ -24,6 +24,22 @@ export class DictPipe implements PipeTransform {
   }
 }
 
+@Pipe({name: 'group'})
+export class GroupPipe implements PipeTransform {
+  transform(value: Object[], arg: string) : any {
+    if (value == null) return null;
+    let dict = {};
+    for (var i = 0; i < value.length; i++) {
+      let attr = String(value[i][arg]);
+      if (!dict.hasOwnProperty(attr)) {
+        dict[attr] = [];
+      }
+      dict[attr].push(value[i]);
+    }
+    return dict;
+  }
+}
+
 @Pipe({name: 'range'})
 export class RangePipe implements PipeTransform {
   transform(range: number) : number[] {
