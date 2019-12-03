@@ -5,14 +5,14 @@ import { GithubSpaComponent } from './util/github-spa/github-spa.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: 'misc', loadChildren: './misc/misc.module#MiscModule' },
-  { path: 'zones', loadChildren: './zones/zones.module#ZonesModule' },
-  { path: 'skills', loadChildren: './skills/skills.module#SkillsModule' },
-  { path: 'scripts', loadChildren: './scripts/scripts.module#ScriptsModule' },
-  { path: 'objects', loadChildren: './objects/objects.module#ObjectsModule' },
-  { path: 'missions', loadChildren: './missions/missions.module#MissionsModule' },
-  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-  { path: 'activities', loadChildren: './activities/activities.module#ActivitiesModule'  },
+  { path: 'misc', loadChildren: () => import('./misc/misc.module').then(m => m.MiscModule) },
+  { path: 'zones', loadChildren: () => import('./zones/zones.module').then(m => m.ZonesModule) },
+  { path: 'skills', loadChildren: () => import('./skills/skills.module').then(m => m.SkillsModule) },
+  { path: 'scripts', loadChildren: () => import('./scripts/scripts.module').then(m => m.ScriptsModule) },
+  { path: 'objects', loadChildren: () => import('./objects/objects.module').then(m => m.ObjectsModule) },
+  { path: 'missions', loadChildren: () => import('./missions/missions.module').then(m => m.MissionsModule) },
+  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+  { path: 'activities', loadChildren: () => import('./activities/activities.module').then(m => m.ActivitiesModule)  },
   { path: '', component: GithubSpaComponent, pathMatch: 'full' }
 ];
 

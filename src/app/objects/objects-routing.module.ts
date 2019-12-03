@@ -12,7 +12,7 @@ import { ObjectDetailComponent } from './detail/detail.component';
 import { ObjectsComponent } from './objects.component';
 
 const objectsRoutes = [
-  { path: 'item-sets', loadChildren: './item-sets/item-sets.module#ItemSetsModule' },
+  { path: 'item-sets', loadChildren: () => import('./item-sets/item-sets.module').then(m => m.ItemSetsModule) },
   { path: 'factions', component: FactionsComponent },
   { path: 'loot/table/:id', component: LootTableComponent },
   { path: 'types', component: ObjectTypesIndexComponent },
