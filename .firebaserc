@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "lu-explorer"
+  },
+  "targets": {
+    "lu-explorer": {
+      "hosting": {
+        "lu-explorer": [
+          "lu-explorer"
+        ]
+      }
+    }
   }
 }
