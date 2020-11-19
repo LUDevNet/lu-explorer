@@ -18,7 +18,7 @@
       "dom",
       "esnext.bigint"
     ],
-    "module": "esnext",
+    "module": "es2020",
     "baseUrl": "./"
   }
 }
