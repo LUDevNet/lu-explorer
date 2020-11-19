@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MissionNpcComponentComponent } from './mission-npc-component.component';
 
@@ -6,7 +6,7 @@ describe('MissionNpcComponentComponent', () => {
   let component: MissionNpcComponentComponent;
   let fixture: ComponentFixture<MissionNpcComponentComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MissionNpcComponentComponent ]
     })

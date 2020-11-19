@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PoiTaskComponent } from './poi-task.component';
 
@@ -6,7 +6,7 @@ describe('PoiTaskComponent', () => {
   let component: PoiTaskComponent;
   let fixture: ComponentFixture<PoiTaskComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PoiTaskComponent ]
     })

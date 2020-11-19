@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DestructibleComponentComponent } from './destructible-component.component';
 
@@ -6,7 +6,7 @@ describe('DestructibleComponentComponent', () => {
   let component: DestructibleComponentComponent;
   let fixture: ComponentFixture<DestructibleComponentComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DestructibleComponentComponent ]
     })

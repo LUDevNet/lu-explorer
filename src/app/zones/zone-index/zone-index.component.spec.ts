@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ZoneIndexComponent } from './zone-index.component';
 
@@ -6,7 +6,7 @@ describe('ZoneIndexComponent', () => {
   let component: ZoneIndexComponent;
   let fixture: ComponentFixture<ZoneIndexComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ZoneIndexComponent ]
     })

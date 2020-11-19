@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FeatureGatingComponent } from './feature-gating.component';
 
@@ -6,7 +6,7 @@ describe('FeatureGatingComponent', () => {
   let component: FeatureGatingComponent;
   let fixture: ComponentFixture<FeatureGatingComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FeatureGatingComponent ]
     })

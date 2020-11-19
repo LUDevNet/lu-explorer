@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ItemSetSkillSetComponent } from './item-set-skill-set.component';
 
@@ -6,7 +6,7 @@ describe('ItemSetSkillSetComponent', () => {
   let component: ItemSetSkillSetComponent;
   let fixture: ComponentFixture<ItemSetSkillSetComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ItemSetSkillSetComponent ]
     })

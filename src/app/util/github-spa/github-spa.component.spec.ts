@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { GithubSpaComponent } from './github-spa.component';
 
@@ -6,7 +6,7 @@ describe('GithubSpaComponent', () => {
   let component: GithubSpaComponent;
   let fixture: ComponentFixture<GithubSpaComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GithubSpaComponent ]
     })

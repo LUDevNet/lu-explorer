@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LevelProgressionComponent } from './level-progression.component';
 
@@ -6,7 +6,7 @@ describe('LevelProgressionComponent', () => {
   let component: LevelProgressionComponent;
   let fixture: ComponentFixture<LevelProgressionComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LevelProgressionComponent ]
     })

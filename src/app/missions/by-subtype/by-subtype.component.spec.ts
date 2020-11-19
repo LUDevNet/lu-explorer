@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MissionsBySubtypeComponent } from './by-subtype.component';
 
@@ -6,7 +6,7 @@ describe('MissionsBySubtypeComponent', () => {
   let component: MissionsBySubtypeComponent;
   let fixture: ComponentFixture<MissionsBySubtypeComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MissionsBySubtypeComponent ]
     })

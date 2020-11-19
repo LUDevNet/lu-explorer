@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ObjectTypesIndexComponent } from './types-index.component';
 
@@ -6,7 +6,7 @@ describe('ObjectTypesIndexComponent', () => {
   let component: ObjectTypesIndexComponent;
   let fixture: ComponentFixture<ObjectTypesIndexComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ObjectTypesIndexComponent ]
     })

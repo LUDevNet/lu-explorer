@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LootTableIndexComponent } from './loot-table-index.component';
 
@@ -6,7 +6,7 @@ describe('LootTableIndexComponent', () => {
   let component: LootTableIndexComponent;
   let fixture: ComponentFixture<LootTableIndexComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LootTableIndexComponent ]
     })

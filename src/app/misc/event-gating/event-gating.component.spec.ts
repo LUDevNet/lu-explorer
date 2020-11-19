@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { EventGatingComponent } from './event-gating.component';
 
@@ -6,7 +6,7 @@ describe('EventGatingComponent', () => {
   let component: EventGatingComponent;
   let fixture: ComponentFixture<EventGatingComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ EventGatingComponent ]
     })

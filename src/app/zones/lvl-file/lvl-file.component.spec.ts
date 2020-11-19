@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LvlFileComponent } from './lvl-file.component';
 
@@ -6,7 +6,7 @@ describe('LvlFileComponent', () => {
   let component: LvlFileComponent;
   let fixture: ComponentFixture<LvlFileComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LvlFileComponent ]
     })

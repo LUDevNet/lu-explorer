@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CollectibleComponentComponent } from './collectible-component.component';
 
@@ -6,7 +6,7 @@ describe('CollectibleComponentComponent', () => {
   let component: CollectibleComponentComponent;
   let fixture: ComponentFixture<CollectibleComponentComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CollectibleComponentComponent ]
     })
