@@ -26,7 +26,7 @@ import { ObjectsRoutingModule } from './objects-routing.module';
     ObjectsByComponentComponent,
     ObjectComponentsIndexComponent,
     ObjectDetailComponent,
-    ObjectsComponent
+    ObjectsComponent,
   ],
   imports: [
     CommonModule,

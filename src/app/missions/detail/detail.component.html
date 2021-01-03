@@ -2,7 +2,8 @@
   <li><a routerLink="/missions">Missions</a></li>
   <li><a *ngIf="mission" routerLink="/missions/type/{{mission.defined_type}}">{{mission.defined_type}}</a></li>
   <li>
-    <a *ngIf="mission && mission.defined_subtype" routerLink="/missions/type/{{mission.defined_type}}/subtype/{{mission.defined_subtype}}">{{mission.defined_subtype}}</a>
+    <a *ngIf="mission && mission.defined_subtype"
+      routerLink="/missions/type/{{mission.defined_type}}/subtype/{{mission.defined_subtype}}">{{mission.defined_subtype}}</a>
     <a *ngIf="mission && !mission.defined_subtype" routerLink="/missions/type/{{mission.defined_type}}">General</a>
   </li>
   <li *ngIf="missionLocale">{{missionLocale.name}}</li>
@@ -24,7 +25,7 @@
       <td>offer_objectID</td>
       <td>
         <a *ngIf="mission.offer_objectID != -1" routerLink="/objects/{{mission.offer_objectID}}">
-           {{mission.offer_objectID}}
+          {{mission.offer_objectID}}
         </a>
         <span *ngIf="mission.offer_objectID == -1">None (-1)</span>
       </td>
@@ -38,21 +39,57 @@
         <span *ngIf="mission.target_objectID == -1">None (-1)</span>
       </td>
     </tr>
-    <tr><td>defined_type</td><td>{{mission.defined_type}}</td></tr>
-    <tr><td>defined_subtype</td><td>{{mission.defined_subtype}}</td></tr>
-    <tr><td>LegoScore</td><td>{{mission.LegoScore}}</td></tr>
-    <tr><td>UISortOrder</td><td>{{mission.UISortOrder}}</td></tr>
+    <tr>
+      <td>defined_type</td>
+      <td>
+        <a *ngIf="mission.defined_type" routerLink="/missions/type/{{mission.defined_type}}">
+          {{mission.defined_type}}
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>defined_subtype</td>
+      <td>
+        <a *ngIf="mission.defined_type"
+          routerLink="/missions/type/{{mission.defined_type}}/subtype/{{mission.defined_subtype}}">
+          {{mission.defined_subtype}}
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>LegoScore</td>
+      <td>{{mission.LegoScore}}</td>
+    </tr>
+    <tr>
+      <td>UISortOrder</td>
+      <td>{{mission.UISortOrder}}</td>
+    </tr>
   </table>
 </section>
 
 <section id="flags" class="">
   <h3>Flags</h3>
   <table style="width: initial; min-width: initial;">
-    <tr><th>isMission</th><td>{{mission.isMission}}</td></tr>
-    <tr><th>repeatable</th><td>{{mission.repeatable}}</td></tr>
-    <tr><th>isRandom</th><td>{{mission.isRandom}}</td></tr>
-    <tr><th>isChoiceReward</th><td>{{mission.isChoiceReward}}</td></tr>
-    <tr><th>inMOTD</th><td>{{mission.inMOTD}}</td></tr>
+    <tr>
+      <th>isMission</th>
+      <td>{{mission.isMission}}</td>
+    </tr>
+    <tr>
+      <th>repeatable</th>
+      <td>{{mission.repeatable}}</td>
+    </tr>
+    <tr>
+      <th>isRandom</th>
+      <td>{{mission.isRandom}}</td>
+    </tr>
+    <tr>
+      <th>isChoiceReward</th>
+      <td>{{mission.isChoiceReward}}</td>
+    </tr>
+    <tr>
+      <th>inMOTD</th>
+      <td>{{mission.inMOTD}}</td>
+    </tr>
   </table>
 </section>
 
@@ -67,18 +104,26 @@
 </section>
 
 <section *ngIf="mission">
-<h3>Stat Rewards</h3>
+  <h3>Stat Rewards</h3>
   <ul>
-    <li *ngIf="mission.reward_maxhealth > 0">The player's maximum health is increased by {{mission.reward_maxhealth}}</li>
-    <li *ngIf="mission.reward_maximagination > 0">The player's maximum imagination is increased by {{mission.reward_maximagination}}</li>
-    <li *ngIf="mission.reward_maxinventory > 0">The player's backpack size is increased by {{mission.reward_maxinventory}}</li>
-    <li *ngIf="mission.reward_maxmodel > 0">The player's model backpack size is increased by {{mission.reward_maxmodel}}</li>
-    <li *ngIf="mission.reward_maxwidget > 0">The player's widget backpack size is increased by {{mission.reward_maxwidget}}</li>
+    <li *ngIf="mission.reward_maxhealth > 0">The player's maximum health is increased by {{mission.reward_maxhealth}}
+    </li>
+    <li *ngIf="mission.reward_maximagination > 0">The player's maximum imagination is increased by
+      {{mission.reward_maximagination}}</li>
+    <li *ngIf="mission.reward_maxinventory > 0">The player's backpack size is increased by
+      {{mission.reward_maxinventory}}</li>
+    <li *ngIf="mission.reward_maxmodel > 0">The player's model backpack size is increased by {{mission.reward_maxmodel}}
+    </li>
+    <li *ngIf="mission.reward_maxwidget > 0">The player's widget backpack size is increased by
+      {{mission.reward_maxwidget}}</li>
     <li *ngIf="mission.reward_reputation > 0">The player recieves {{mission.reward_reputation}} reputation</li>
     <li *ngIf="mission.reward_currency > 0">The player recieves {{mission.reward_currency}} coins</li>
-    <li *ngIf="mission.reward_currency_repeatable > 0">The player recieves {{mission.reward_currency_repeatable}} coins on repeated missions</li>
-    <li *ngIf="mission.reward_maxwallet > 0">The player's maximum coin count is increased by {{mission.reward_maxwallet}} coins</li>
-    <li *ngIf="mission.reward_bankinventory > 0">The player's maximum vault inventory size is increased by {{mission.reward_bankinventory}}</li>
+    <li *ngIf="mission.reward_currency_repeatable > 0">The player recieves {{mission.reward_currency_repeatable}} coins
+      on repeated missions</li>
+    <li *ngIf="mission.reward_maxwallet > 0">The player's maximum coin count is increased by
+      {{mission.reward_maxwallet}} coins</li>
+    <li *ngIf="mission.reward_bankinventory > 0">The player's maximum vault inventory size is increased by
+      {{mission.reward_bankinventory}}</li>
     <li *ngIf="mission.LegoScore > 0">The player's score is increased by <code>{{mission.LegoScore}}</code></li>
   </ul>
 </section>
@@ -89,10 +134,14 @@
   <dl>
     <dt *ngIf="mission.isChoiceReward">The player can choose one of:</dt>
     <dt *ngIf="!mission.isChoiceReward">The player recieves:</dt>
-    <dd *ngIf="mission.reward_item1 > -1">{{mission.reward_item1_count}} of <a routerLink="/objects/{{mission.reward_item1}}">{{mission.reward_item1}}</a></dd>
-    <dd *ngIf="mission.reward_item2 > -1">{{mission.reward_item2_count}} of <a routerLink="/objects/{{mission.reward_item2}}">{{mission.reward_item2}}</a></dd>
-    <dd *ngIf="mission.reward_item3 > -1">{{mission.reward_item3_count}} of <a routerLink="/objects/{{mission.reward_item3}}">{{mission.reward_item3}}</a></dd>
-    <dd *ngIf="mission.reward_item4 > -1">{{mission.reward_item4_count}} of <a routerLink="/objects/{{mission.reward_item4}}">{{mission.reward_item4}}</a></dd>
+    <dd *ngIf="mission.reward_item1 > -1">{{mission.reward_item1_count}} of <a
+        routerLink="/objects/{{mission.reward_item1}}">{{mission.reward_item1}}</a></dd>
+    <dd *ngIf="mission.reward_item2 > -1">{{mission.reward_item2_count}} of <a
+        routerLink="/objects/{{mission.reward_item2}}">{{mission.reward_item2}}</a></dd>
+    <dd *ngIf="mission.reward_item3 > -1">{{mission.reward_item3_count}} of <a
+        routerLink="/objects/{{mission.reward_item3}}">{{mission.reward_item3}}</a></dd>
+    <dd *ngIf="mission.reward_item4 > -1">{{mission.reward_item4_count}} of <a
+        routerLink="/objects/{{mission.reward_item4}}">{{mission.reward_item4}}</a></dd>
     <dd *ngIf="mission.reward_emote > -1">the emote #{{mission.reward_emote}}</dd>
     <dd *ngIf="mission.reward_emote2 > -1">the emote #{{mission.reward_emote2}}</dd>
     <dd *ngIf="mission.reward_emote3 > -1">the emote #{{mission.reward_emote3}}</dd>
@@ -102,13 +151,17 @@
   <dl *ngIf="mission.repeatable">
     <dt *ngIf="mission.isChoiceReward">On repeats, the player can choose one of:</dt>
     <dt *ngIf="!mission.isChoiceReward">On repeats, the player recieves:</dt>
-    <dd *ngIf="mission.reward_item1_repeatable > -1">{{mission.reward_item1_repeat_count}} of <a routerLink="/objects/{{mission.reward_item1_repeatable}}">{{mission.reward_item1_repeatable}}</a></dd>
-    <dd *ngIf="mission.reward_item2_repeatable > -1">{{mission.reward_item2_repeat_count}} of <a routerLink="/objects/{{mission.reward_item2_repeatable}}">{{mission.reward_item2_repeatable}}</a></dd>
-    <dd *ngIf="mission.reward_item3_repeatable > -1">{{mission.reward_item3_repeat_count}} of <a routerLink="/objects/{{mission.reward_item3_repeatable}}">{{mission.reward_item3_repeatable}}</a></dd>
-    <dd *ngIf="mission.reward_item4_repeatable > -1">{{mission.reward_item4_repeat_count}} of <a routerLink="/objects/{{mission.reward_item4_repeatable}}">{{mission.reward_item4_repeatable}}</a></dd>
+    <dd *ngIf="mission.reward_item1_repeatable > -1">{{mission.reward_item1_repeat_count}} of <a
+        routerLink="/objects/{{mission.reward_item1_repeatable}}">{{mission.reward_item1_repeatable}}</a></dd>
+    <dd *ngIf="mission.reward_item2_repeatable > -1">{{mission.reward_item2_repeat_count}} of <a
+        routerLink="/objects/{{mission.reward_item2_repeatable}}">{{mission.reward_item2_repeatable}}</a></dd>
+    <dd *ngIf="mission.reward_item3_repeatable > -1">{{mission.reward_item3_repeat_count}} of <a
+        routerLink="/objects/{{mission.reward_item3_repeatable}}">{{mission.reward_item3_repeatable}}</a></dd>
+    <dd *ngIf="mission.reward_item4_repeatable > -1">{{mission.reward_item4_repeat_count}} of <a
+        routerLink="/objects/{{mission.reward_item4_repeatable}}">{{mission.reward_item4_repeatable}}</a></dd>
   </dl>
 
-<!--  <table>
+  <!--  <table>
     <tr>
       <th></th>
       <th>itemid</th>

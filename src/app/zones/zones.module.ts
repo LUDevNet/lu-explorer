@@ -10,6 +10,7 @@ import { ZoneDetailComponent } from './zone-detail/zone-detail.component';
 import { ScenesComponent } from './scenes/scenes.component';
 import { LuzFileComponent } from './luz-file/luz-file.component';
 import { LvlFileComponent } from './lvl-file/lvl-file.component';
+import { ObjInstanceComponent } from './obj-instance/obj-instance.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LvlFileComponent } from './lvl-file/lvl-file.component';
     ZoneDetailComponent,
     ScenesComponent,
     LuzFileComponent,
-    LvlFileComponent
+    LvlFileComponent,
+    ObjInstanceComponent
   ],
   imports: [
     CommonModule,

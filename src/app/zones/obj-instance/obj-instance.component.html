@@ -1,0 +1,81 @@
+<div>
+    <p>Name: <code>{{ data.name }}</code></p>
+
+    <h4>General Settings</h4>
+    <b title="custom_config_names">Custom Config Names</b>:
+    <code *ngFor="let name of custom_config_names">{{ name }}</code>
+
+    <app-data-table [table]="generalSettings()"></app-data-table>
+
+    <div *ngIf="renderSettings() as render">
+        <h4>Render #{{data.components['2']}} (2)</h4>
+        <p>This object is rendered</p>
+        <app-data-table [table]="render"></app-data-table>
+    </div>
+
+    <div *ngIf="simplePhysicsSettings() as simplePhysics">
+        <h4>SimplePhysics #{{data.components['3']}} (3)</h4>
+        <p>This object has simple physics</p>
+        <app-data-table [table]="simplePhysics"></app-data-table>
+    </div>
+
+    <div *ngIf="scriptSettings() as script">
+        <h4>Script #{{data.components['5']}} (5)</h4>
+        <p>This object has scripts attached</p>
+        <app-data-table [table]="script"></app-data-table>
+    </div>
+
+    <div *ngIf="spawnerSettings() as spawner">
+        <h4>Spawner #{{data.components['10']}} (10)</h4>
+        <p>This object is a spawner that creates objects with template
+            <a routerLink="/objects/{{spawner.spawntemplate}}">{{spawner.spawntemplate}}</a>
+        </p>
+        <app-data-table [table]="spawner"></app-data-table>
+    </div>
+
+    <div *ngIf="itemSettings() as item">
+        <h4>Item #{{data.components['11']}} (11)</h4>
+        <p>This object is an item</p>
+        <app-data-table [table]="item"></app-data-table>
+    </div>
+
+    <div *ngIf="scriptedActivitySettings() as scriptedActivity">
+        <h4>ScriptedActivity #{{data.components['39']}} (39)</h4>
+        <p>This object manages a scripted activity</p>
+        <app-data-table [table]="scriptedActivity"></app-data-table>
+    </div>
+
+    <div *ngIf="phantomPhysicsSettings() as phantomPhysics">
+        <h4>PhantomPhysics #{{data.components['40']}} (40)</h4>
+        <p>This object has phantom physics</p>
+        <app-data-table [table]="phantomPhysics"></app-data-table>
+    </div>
+
+    <div *ngIf="hfLightDirectionGadgetSettings() as hfLightDirectionGadget">
+        <h4>HFLightDirectionGadget #{{data.components['66']}} (66)</h4>
+        <p>This light direction gadget</p>
+        <app-data-table [table]="hfLightDirectionGadget"></app-data-table>
+    </div>
+
+    <div *ngIf="rocketLaunchSettings() as rocketLaunch">
+        <h4>RocketLaunch #{{data.components['67']}} (67)</h4>
+        <p>This object is a rocket launchpad</p>
+        <app-data-table [table]="rocketLaunch"></app-data-table>
+    </div>
+
+    <div *ngIf="proximityMonitorSettings() as proximityMonitor">
+        <h4>ProximityMonitor #{{data.components['78']}} (78)</h4>
+        <p>This object has a proximity monitor</p>
+        <app-data-table [table]="proximityMonitor"></app-data-table>
+    </div>
+
+    <div>
+        <h4>Data</h4>
+        <p>Components: {{ data.components | json }}</p>
+        <p>Data: {{ data | json }}</p>
+    </div>
+    <div>
+        <h4>Settings</h4>
+        <app-data-table [table]="remainingSettings()"></app-data-table>
+    </div>
+</div>

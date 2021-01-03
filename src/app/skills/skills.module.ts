@@ -9,13 +9,15 @@ import { BehaviorDetailAltComponent } from './behavior-detail-alt/behavior-detai
 import { SkillComponent } from './skill/skill.component';
 
 import { SkillsRoutingModule } from './skills-routing.module';
+import { SkillsComponent } from './skills.component';
 
 @NgModule({
   declarations: [
     BehaviorComponent,
     BehaviorDetailComponent,
     BehaviorDetailAltComponent,
-    SkillComponent
+    SkillComponent,
+    SkillsComponent
   ],
   imports: [
     CommonModule,

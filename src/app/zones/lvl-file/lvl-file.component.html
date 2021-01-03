@@ -4,18 +4,12 @@
     <ng-container [ngSwitch]="chnk._type">
       <ng-container *ngSwitchCase="1000">
         <h3>Chunk Type 1000</h3>
-        <dl>
-          <dd>version</dd>
-          <dt>{{chnk.version}}</dt>
-          <dd>value_1</dd>
-          <dt>{{chnk.value_1}}</dt>
-          <dd>value_2</dd>
-          <dt>{{chnk.value_2}}</dt>
-          <dd>value_3</dd>
-          <dt>{{chnk.value_3}}</dt>
-          <dd>value_4</dd>
-          <dt>{{chnk.value_4}}</dt>
-        </dl>
+        <p>This chunk type contains the <code>version</code> and <code>revision</code> of the Level file as well as
+          the offsets of the chunk types <code>2000</code>, <code>2001</code> and <code>2002</code>.</p>
+        <p>
+          <b>Version:</b> {{chnk.version}}<br>
+          <b>Revision:</b> {{chnk.value_1}}
+        </p>
       </ng-container>
       <ng-container *ngSwitchCase="2000">
         <h3>Chunk Type 2000</h3>
@@ -56,13 +50,16 @@
               <p>
                 Position: <app-pos [pos]="selected_object.pos"></app-pos>
               </p>
-              <app-data-table [table]="selected_object.settings"></app-data-table>
+              <app-obj-instance
+               [objData]="selected_object_data | async"
+               [objSettings]="selected_object.settings"></app-obj-instance>
             </ng-container>
           </div>
         </div>
       </ng-container>
       <ng-container *ngSwitchCase="2002">
         <h3>Chunk Type 2002</h3>
+        <p>TODO</p>
       </ng-container>
     </ng-container>
   </ng-container>

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { LuJsonService } from '../../services';
 
 @Component({
@@ -11,11 +12,12 @@ export class LvlFileComponent implements OnInit {
   @Input() ref: any;
   scene: any;
   selected_object: any;
+  selected_object_data: Observable<any>;
 
   constructor(private luJsonService: LuJsonService) { }
 
   ngOnInit() {
-  	this.getScene();
+    this.getScene();
   }
 
   getScene(): void
@@ -27,6 +29,11 @@ export class LvlFileComponent implements OnInit {
   selectObject(obj: any)
   {
     this.selected_object = obj;
+    this.selected_object_data = this.luJsonService.getObject(obj.lot);
+  }
+
+  loadObject(id: number, object: any) {
+
   }
 
   objID(id) {
