@@ -37,22 +37,22 @@
         <div class="sidemenu-pane">
           <div class="sidemenu">
             <ul class="scroll-30">
-              <li *ngFor="let obj of chnk.objects" [class.active]="selected_object === obj">
-                <a (click)="selectObject(obj)">{{objID(obj.id)}}<span class="pull-right">LOT {{obj.lot}}</span></a></li>
+              <li *ngFor="let obj of chnk.objects" [class.active]="obj_id === obj.id">
+                <a [routerLink]="['/zones', zone_id, scene_id, obj.id]">{{objID(obj.id)}}
+                  <span class="pull-right">LOT {{obj.lot}}</span></a>
+                </li>
             </ul>
           </div>
           <div class="sidemenu-content">
-            <ng-container *ngIf="selected_object">
+            <ng-container *ngIf="hasObj(chnk.objects) as selected">
               <h4>
-                Object {{objID(selected_object.id)}} /
-                LOT: <a routerLink="/objects/{{selected_object.lot}}">{{selected_object.lot}}</a>
+                Object {{objID(selected.id)}} /
+                LOT: <a routerLink="/objects/{{selected.lot}}">{{selected.lot}}</a>
               </h4>
               <p>
-                Position: <app-pos [pos]="selected_object.pos"></app-pos>
+                Position: <app-pos [pos]="selected.pos"></app-pos>
               </p>
-              <app-obj-instance
-               [objData]="selected_object_data | async"
-               [objSettings]="selected_object.settings"></app-obj-instance>
+              <app-obj-instance [obj]="selected"></app-obj-instance>
             </ng-container>
           </div>
         </div>

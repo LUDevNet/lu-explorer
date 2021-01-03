@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { LuJsonService } from '../../services';
 
 const GENERAL_KEYS = [
   'loadOnClientOnly',
@@ -7,10 +9,19 @@ const GENERAL_KEYS = [
   'sceneIDOverrideEnabled',
   'sceneLayerIDOverride',
   'template',
-  'custom_config_names',
 ];
+interface GeneralSettings {
+  loadOnClientOnly: boolean,
+  loadSrvrOnly: boolean,
+  sceneIDOverride: number,
+  sceneIDOverrideEnabled: boolean,
+  sceneLayerIDOverride: number,
+  template: number,
+  custom_config_names: string[],
+}
 
 const RENDER_KEYS = [
+  'fxpriority',
   'renderDisabled',
   'renderCullingGroup',
   'ignoreCameraCollision',
@@ -32,6 +43,9 @@ const RENDER_KEYS = [
   'camPitchAngleDown',
   'camPitchAngleUp',
 ];
+interface RenderSettings {
+  renderDisabled?: boolean,
+}
 const SIMPLE_PHYSICS_KEYS = [
   'create_physics',
   'friction',
@@ -61,6 +75,9 @@ const SPAWNER_KEYS = [
   'spawnNetNameForSpawnGroupOnSmash',
   'groupID',
 ];
+interface SpawnerSettings {
+  spawntemplate: number,
+}
 const ITEM_KEYS = [];
 const SCRIPTED_ACTIVITY_KEYS = [
   'actIDovrd',
@@ -73,6 +90,19 @@ const PHANTOM_PHYSICS_KEYS = [
   'navmesh_carver',
   'is_smashable',
 ];
+const PROPERTY_ENTRANCE_KEYS = [
+  "propertyDefaultTargetZone",
+  "propertyLaunchNavGroupID",
+  "propertyLaunchPadOnPropertyMap",
+  "propertyName",
+  "mapID",
+];
+interface PropertyEntranceSettings {
+  propertyDefaultTargetZone: number,
+  propertyLaunchNavGroupID: string,
+  propertyLaunchPadOnPropertyMap: boolean,
+  propertyName: string,
+}
 const HF_LIGHT_DIRECTION_GADGET_KEYS = [
 
 ];
@@ -86,6 +116,11 @@ const ROCKET_LAUNCH_KEYS = [
   'targetScene',
   'targetZone',
   'playerAnim',
+  'rocketAltLandingPrecondition',
+  'rocketAltLandingSpawnName',
+  'rocketAnim',
+  'rocketUseAltLandingPrecondition',
+  'rocketUseLaunchPrecondition',
 ];
 const PROXMIMITY_MONITOR_KEYS = [];
 
@@ -98,6 +133,7 @@ const KEYS = {
   "11": ITEM_KEYS,
   "39": SCRIPTED_ACTIVITY_KEYS,
   "40": PHANTOM_PHYSICS_KEYS,
+  "43": PROPERTY_ENTRANCE_KEYS,
   "66": HF_LIGHT_DIRECTION_GADGET_KEYS,
   "67": ROCKET_LAUNCH_KEYS,
   "78": PROXMIMITY_MONITOR_KEYS,
@@ -110,110 +146,101 @@ const KEYS = {
 })
 export class ObjInstanceComponent implements OnInit {
   data: any;
+  dataAsync: Observable<any>;
   settings: Object;
-  custom_config_names: string[];
+  usedSettings: Set<string>;
 
-  constructor() { }
+  generalSettings: GeneralSettings;
+  hasCustomScript: boolean;
+  remainingSettings: object;
 
-  @Input() set objData(value: any) {
+  renderSettings: RenderSettings | undefined;
+  simplePhysicsSettings: object | undefined;
+  spawnerSettings?: SpawnerSettings;
+  scriptSettings: object | undefined;
+  componentSettings: object | undefined;
+  itemSettings: object | undefined;
+  scriptedActivitySettings: object | undefined;
+  phantomPhysicsSettings: object | undefined;
+  propertyEntranceSettings: object | undefined;
+  hfLightDirectionGadgetSettings: object | undefined;
+  rocketLaunchSettings: object | undefined;
+  proximityMonitorSettings: object | undefined;
+
+  constructor(private luJsonService: LuJsonService) { }
+
+  @Input() set obj(value: any) {
+    this.settings = value.settings;
+    this.dataAsync = this.luJsonService.getObject(value.lot);
+    this.dataAsync.subscribe(this.objData.bind(this));
+  }
+
+  objData(value: any) {
     this.data = value;
-  }
+    this.usedSettings = new Set();
 
-  @Input() set objSettings(value: any) {
-    this.settings = value;
-    if (this.settings['custom_config_names']) {
-      this.custom_config_names = this.settings['custom_config_names'].split('\x1D');
-    } else {
-      this.custom_config_names = [];
+    let setters = {
+      "2": x => this.renderSettings = x,
+      "3": x => this.simplePhysicsSettings = x, // TODO: phantomOnly, markedAsPhantom
+      "5": x => this.scriptSettings = x,
+      "10": x => this.spawnerSettings = x,
+      "11": x => this.itemSettings = x,
+      "39": x => this.scriptedActivitySettings = x,
+      "40": x => this.phantomPhysicsSettings = x,
+      "43": x => this.propertyEntranceSettings = x,
+      "66": x => this.hfLightDirectionGadgetSettings = x,
+      "67": x => this.rocketLaunchSettings = x,
+      "78": x => this.proximityMonitorSettings = x,
+    };
+    Object.values(setters).forEach(x => x(undefined));
+
+    // General settings
+    let customConfigNames = (this.settings['custom_config_names']) ? this.settings['custom_config_names'].split('\x1D') : [];
+    this.generalSettings = {
+      loadOnClientOnly: this.getSetting('loadOnClientOnly', false),
+      loadSrvrOnly: this.getSetting('loadSrvrOnly', false),
+      sceneIDOverride: this.getSetting('sceneIDOverride', 255),
+      sceneIDOverrideEnabled: this.getSetting('sceneIDOverrideEnabled', false),
+      sceneLayerIDOverride: this.getSetting('sceneLayerIDOverride', 0),
+      template: this.getSetting('template', -1),
+      custom_config_names: customConfigNames,
+    };
+    GENERAL_KEYS.forEach(e => this.usedSettings.add(e));
+
+    // Script
+    this.hasCustomScript = customConfigNames.includes("custom_script_client")
+      || customConfigNames.includes("custom_script_server");
+
+    if (this.hasCustomScript) {
+      SCRIPT_KEYS.forEach(e => this.usedSettings.add(e));
     }
-  }
 
-  hasCustomScript(): boolean {
-    return this.custom_config_names.includes("custom_script_client")
-      || this.custom_config_names.includes("custom_script_server");
-  }
-
-  hasComponent(id: number): boolean {
-    return this.data.components.hasOwnProperty(id + "")
-      || (id === 5 && this.hasCustomScript());
-  }
-
-  remainingSettings(): any {
-    let keys = new Set();
+    // Remaining settings
     Object.keys(this.data.components).forEach(key => {
       const k = KEYS[key];
-      if (k) k.forEach(e => keys.add(e));
+      if (k) {
+        k.forEach(e => this.usedSettings.add(e));
+        let data = {};
+        k.forEach(key => {
+          if (this.settings.hasOwnProperty(key)) {
+            data[key] = this.settings[key];
+          }
+        })
+        let sett = setters[key];
+        console.log(key, sett);
+        if (sett) sett(data);
+      }
     })
-    if (this.hasCustomScript()) {
-      SCRIPT_KEYS.forEach(e => keys.add(e));
-    }
-    GENERAL_KEYS.forEach(e => keys.add(e));
-    let settings = {};
+
+    this.remainingSettings = {};
     Object.entries(this.settings).forEach(arr => {
-      if (!keys.has(arr[0])) settings[arr[0]] = arr[1];
+      if (!this.usedSettings.has(arr[0])) this.remainingSettings[arr[0]] = arr[1];
     })
-    return settings;
   }
 
-  componentSettings(id: number, keys: string[]): any {
-    if (!this.hasComponent(id)) return;
-    let data = {};
-    keys.forEach(key => {
-      if (this.settings.hasOwnProperty(key)) {
-        data[key] = this.settings[key];
-      }
-    });
-    return data;
-  }
-
-  generalSettings(): any {
-    let data = {};
-    GENERAL_KEYS.forEach(key => {
-      if (this.settings.hasOwnProperty(key)) {
-        data[key] = this.settings[key];
-      }
-    });
-    return data;
-  }
-
-  renderSettings(): any {
-    return this.componentSettings(2, RENDER_KEYS);
-  }
-
-  simplePhysicsSettings(): any {
-    return this.componentSettings(3, SIMPLE_PHYSICS_KEYS);
-  }
-
-  scriptSettings(): any {
-    return this.componentSettings(5, SCRIPT_KEYS);
-  }
-
-  spawnerSettings(): any {
-    return this.componentSettings(10, SPAWNER_KEYS);
-  }
-
-  itemSettings(): any {
-    return this.componentSettings(11, ITEM_KEYS);
-  }
-
-  scriptedActivitySettings(): any {
-    return this.componentSettings(39, SCRIPTED_ACTIVITY_KEYS);
-  }
-
-  phantomPhysicsSettings(): any {
-    return this.componentSettings(40, PHANTOM_PHYSICS_KEYS);
-  }
-
-  hfLightDirectionGadgetSettings(): any {
-    return this.componentSettings(66, HF_LIGHT_DIRECTION_GADGET_KEYS);
-  }
-
-  rocketLaunchSettings(): any {
-    return this.componentSettings(67, ROCKET_LAUNCH_KEYS);
-  }
-
-  proximityMonitorSettings(): any {
-    return this.componentSettings(78, PROXMIMITY_MONITOR_KEYS);
+  getSetting<T>(key: string, fallback: T): T {
+    this.usedSettings.add(key);
+    return this.settings.hasOwnProperty(key) ? this.settings[key] : fallback;
   }
 
   ngOnInit(): void {

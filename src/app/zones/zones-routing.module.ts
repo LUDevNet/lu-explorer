@@ -8,6 +8,7 @@ import { ScenesComponent } from './scenes/scenes.component';
 const zonesRoutes: Routes = [
   { path: ':id', component: ZoneDetailComponent },
   { path: ':id/:sc', component: ScenesComponent },
+  { path: ':id/:sc/:obj', component: ScenesComponent },
   { path: '', component: ZoneIndexComponent }
 ]
 

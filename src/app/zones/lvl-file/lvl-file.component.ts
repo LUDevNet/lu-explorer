@@ -1,6 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LuJsonService } from '../../services';
+
+interface Object {
+  data: Observable<any>,
+  obj: any,
+}
 
 @Component({
   selector: 'app-lvl-file',
@@ -13,11 +19,15 @@ export class LvlFileComponent implements OnInit {
   scene: any;
   selected_object: any;
   selected_object_data: Observable<any>;
+  obj_id: number | undefined;
+  zone_id: number;
+  scene_id: number;
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private route: ActivatedRoute, private luJsonService: LuJsonService) { }
 
   ngOnInit() {
     this.getScene();
+    this.route.paramMap.subscribe(this.selectObject.bind(this))
   }
 
   getScene(): void
@@ -26,10 +36,24 @@ export class LvlFileComponent implements OnInit {
       .subscribe(scene => this.scene = scene);
   }
 
-  selectObject(obj: any)
+  selectObject(map: any)
   {
-    this.selected_object = obj;
-    this.selected_object_data = this.luJsonService.getObject(obj.lot);
+    console.log(map);
+    this.zone_id = +map.get('id');
+    this.scene_id = +map.get('sc');
+    if (map.has('obj')) {
+      this.obj_id = +map.get('obj');
+    } else {
+      this.obj_id = undefined;
+    }
+  }
+
+  hasObj(objects): any {
+    for (let element of objects) {
+      if (element.id == this.obj_id) {
+        return element;
+      }
+    }
   }
 
   loadObject(id: number, object: any) {
