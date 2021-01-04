@@ -69,6 +69,9 @@
                 This does not collide with the camera
                 (<code>ignoreCameraCollision == true</code>)
             </li>
+            <li *ngIf="render.setsRailCam !== undefined">
+                <code>setsRailCam</code>: {{render.setsRailCam}}
+            </li>
             <li><code>CamRl</code> config:
                 <ul>
                     <li><code>Bias</code>:
@@ -126,20 +129,54 @@
                 </ul>
             </li>
         </ul>
-
-        <!--<app-data-table [table]="render"></app-data-table>-->
     </div>
 
     <div *ngIf="simplePhysicsSettings as simplePhysics">
         <h4>SimplePhysics #{{data.components['3']}} (3)</h4>
-        <p>This object has simple physics</p>
-        <app-data-table [table]="simplePhysics"></app-data-table>
+        <ul>
+            <li>This object has simple physics</li>
+            <li *ngIf="simplePhysics.create_physics === true">The physics are created
+                (<code>create_physics == true</code>)</li>
+            <li *ngIf="simplePhysics.create_physics === false">The physics are not created
+                (<code>create_physics == false</code>)</li>
+            <li *ngIf="simplePhysics.friction !== undefined">
+                <code>friction</code>: {{simplePhysics.friction}}
+            </li>
+            <li *ngIf="simplePhysics.navmesh_carver !== undefined">
+                <code>navmesh_carver</code>: {{simplePhysics.navmesh_carver}}
+            </li>
+            <li *ngIf="simplePhysics.carver_only !== undefined">
+                <code>carver_only</code>: {{simplePhysics.carver_only}}
+            </li>
+            <li *ngIf="simplePhysics.add_to_navmesh !== undefined">
+                <code>add_to_navmesh</code>: {{simplePhysics.add_to_navmesh}}
+            </li>
+            <li *ngIf="simplePhysics.is_smashable !== undefined">
+                <code>is_smashable</code>: {{simplePhysics.is_smashable}}
+            </li>
+            <li *ngIf="simplePhysics.respawn !== undefined">
+                <code>respawn</code>: {{simplePhysics.respawn}}
+            </li>
+            <li *ngIf="simplePhysics.respawnVol !== undefined">
+                <code>respawnVol</code>: {{simplePhysics.respawnVol}}
+            </li>
+            <li *ngIf="simplePhysics.respawnVolName !== undefined">
+                <code>respawnVolName</code>: {{simplePhysics.respawnVolName}}
+            </li>
+        </ul>
     </div>
 
     <div *ngIf="scriptSettings as script">
         <h4>Script #{{data.components['5']}} (5)</h4>
         <p>This object has scripts attached</p>
         <app-data-table [table]="script"></app-data-table>
+    </div>
+
+    <div *ngIf="destructibleSettings as destructible">
+        <h4>Destructible #{{data.components['7']}} (7)</h4>
+        <ul>
+            <li>This object can be destroyed</li>
+        </ul>
     </div>
 
     <div *ngIf="spawnerSettings as spawner">
@@ -210,7 +247,31 @@
     <div *ngIf="itemSettings as item">
         <h4>Item #{{data.components['11']}} (11)</h4>
         <p>This object is an item</p>
-        <app-data-table [table]="item"></app-data-table>
+    </div>
+
+    <div *ngIf="collectibleSettings as collectible">
+        <h4>Collectible #{{data.components['23']}} (23)</h4>
+        <ul>
+            <li>This object is a collectible</li>
+        </ul>
+    </div>
+
+    <div *ngIf="propertySettings as property">
+        <h4>Property #{{data.components['36']}} (36)</h4>
+        <ul>
+            <li>This object manages a property</li>
+            <li *ngIf="property.propertyBordersLOT !== undefined">
+                <code title="propertyBordersLOT">propertyBorders</code>:
+                <a routerLink="/objects/{{property.propertyBordersLOT}}">LOT {{property.propertyBordersLOT}}</a>
+            </li>
+            <li *ngIf="property.propertyVendorLOT !== undefined">
+                <code title="propertyVendorLOT">propertyVendor</code>:
+                <a routerLink="/objects/{{property.propertyVendorLOT}}">LOT {{property.propertyVendorLOT}}</a>
+            </li>
+            <li *ngIf="property.propertyName !== undefined">
+                <code title="propertyName">propertyName</code>: <code>{{property.propertyName}}</code>
+            </li>
+        </ul>
     </div>
 
     <div *ngIf="scriptedActivitySettings as scriptedActivity">
@@ -222,13 +283,87 @@
     <div *ngIf="phantomPhysicsSettings as phantomPhysics">
         <h4>PhantomPhysics #{{data.components['40']}} (40)</h4>
         <p>This object has phantom physics</p>
-        <app-data-table [table]="phantomPhysics"></app-data-table>
+
+        <ul>
+            <li *ngIf="phantomPhysics.create_physics !== undefined"><code>create_physics</code>:
+                {{phantomPhysics.create_physics}}</li>
+            <li *ngIf="phantomPhysics.add_to_navmesh !== undefined"><code>add_to_navmesh</code>:
+                {{phantomPhysics.add_to_navmesh}}</li>
+            <li *ngIf="phantomPhysics.carver_only !== undefined"><code>carver_only</code>:
+                {{phantomPhysics.carver_only}}</li>
+            <li *ngIf="phantomPhysics.navmesh_carver !== undefined"><code>navmesh_carver</code>:
+                {{phantomPhysics.navmesh_carver}}</li>
+            <li *ngIf="phantomPhysics.is_smashable !== undefined"><code>is_smashable</code>:
+                {{phantomPhysics.is_smashable}}</li>
+            <li *ngIf="phantomPhysics.cancelBehaviorMovement !== undefined">
+                <code>cancelBehaviorMovement</code>:{{phantomPhysics.cancelBehaviorMovement}}
+            </li>
+            <li *ngIf="phantomPhysics.respawn !== undefined"><code>respawn</code>: {{phantomPhysics.respawn}}</li>
+            <li *ngIf="phantomPhysics.respawnVol !== undefined"><code>respawnVol</code>: {{phantomPhysics.respawnVol}}
+            </li>
+            <li *ngIf="phantomPhysics.respawnVol"><code>respawnVolName</code>:
+                {{phantomPhysics.respawnVolName}}</li>
+            <li *ngIf="phantomPhysics.rlLeadIn !== undefined"><code>rlLeadIn</code>: {{phantomPhysics.rlLeadIn}}</li>
+            <li *ngIf="phantomPhysics.rlLeadOut !== undefined"><code>rlLeadOut</code>: {{phantomPhysics.rlLeadOut}}</li>
+            <li *ngIf="phantomPhysics.rspPos !== undefined"><code>rspPos</code>: {{phantomPhysics.rspPos}}</li>
+            <li *ngIf="phantomPhysics.rspRot !== undefined"><code>rspRot</code>: {{phantomPhysics.rspRot}}</li>
+        </ul>
     </div>
 
     <div *ngIf="propertyEntranceSettings as propertyEntrance">
         <h4>PropertyEntrance #{{data.components['43']}} (43)</h4>
-        <p>This object can be used to access &amp; manage a property</p>
-        <app-data-table [table]="propertyEntrance"></app-data-table>
+        <ul>
+            <li>This object can be used to enter &amp; leave a property</li>
+            <li *ngIf="propertyEntrance.propertyLaunchPadOnPropertyMap === true">
+                This is the launchpad on the property map (<code>propertyLaunchPadOnPropertyMap == true</code>)
+            </li>
+            <li *ngIf="propertyEntrance.propertyLaunchPadOnPropertyMap === false">
+                This launchpad is not on the property map (<code>propertyLaunchPadOnPropertyMap == false</code>)
+            </li>
+            <li><code>propertyDefaultTargetZone</code>
+                <a routerLink="/zones/{{propertyEntrance.propertyDefaultTargetZone}}">Zone
+                    {{propertyEntrance.propertyDefaultTargetZone}}</a>
+            </li>
+            <li><code>propertyLaunchNavGroupID</code>
+                {{propertyEntrance.propertyLaunchNavGroupID}}</li>
+            <li><code>propertyName</code>
+                {{propertyEntrance.propertyName}}</li>
+            <li><code>mapID</code>
+                <a routerLink="/zones/{{propertyEntrance.mapID}}">Zone {{propertyEntrance.mapID}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="propertyManagementSettings as propertyManagement">
+        <h4>PropertyManagement #{{data.components['45']}} (45)</h4>
+        <p>This object can be used to manage a property</p>
+    </div>
+
+    <div *ngIf="soundAmbient3DSettings as soundAmbient3D">
+        <h4>SoundAmbient3D #{{data.components['56']}} (56)</h4>
+        <ul>
+            <li>This object produces 3D ambient sound</li>
+            <li *ngIf="soundAmbient3D.NDAEG">
+                The audio event GUID is set to <code>{{soundAmbient3D.NDAEG}}</code> (<code>NDAEG</code>)
+            </li>
+            <li *ngIf="soundAmbient3D.NDAudioEventGUID">
+                The audio event GUID is set to <code>{{soundAmbient3D.NDAudioEventGUID}}</code>
+                (<code>NDAudioEventGUID</code>)
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="propertyVendorSettings as propertyVendor">
+        <h4>PropertyVendor #{{data.components['65']}} (65)</h4>
+        <ul>
+            <li>This object is a property vendor</li>
+            <li *ngIf="propertyVendor.property_required_mission">
+                <code>property_required_mission</code>: <a
+                    routerLink="/missions/{{propertyVendor.property_required_mission}}">
+                    Mission #{{propertyVendor.property_required_mission}}
+                </a>
+            </li>
+        </ul>
     </div>
 
     <div *ngIf="hfLightDirectionGadgetSettings as hfLightDirectionGadget">
@@ -240,13 +375,48 @@
     <div *ngIf="rocketLaunchSettings as rocketLaunch">
         <h4>RocketLaunch #{{data.components['67']}} (67)</h4>
         <p>This object is a rocket launchpad</p>
-        <app-data-table [table]="rocketLaunch"></app-data-table>
+        <ul>
+            <li><code>rocketLaunchMusic</code>
+                {{rocketLaunch.rocketLaunchMusic}}</li>
+            <li><code>rocketLaunchPreCondition</code>
+                {{rocketLaunch.rocketLaunchPreCondition}}</li>
+            <li><code>rocketLaunchUseDBDefaults</code>
+                {{rocketLaunch.rocketLaunchUseDBDefaults}}</li>
+            <li><code>summaryCamera</code>
+                {{rocketLaunch.summaryCamera}}</li>
+            <li><code>playSummary</code>
+                {{rocketLaunch.playSummary}}</li>
+            <li><code>launchCamera</code>
+                {{rocketLaunch.launchCamera}}</li>
+            <li><code>targetScene</code>
+                {{rocketLaunch.targetScene}}</li>
+            <li><code>targetZone</code>
+                <a routerLink="/zones/{{rocketLaunch.targetZone}}">Zone {{rocketLaunch.targetZone}}</a>
+            </li>
+            <li><code>playerAnim</code>
+                {{rocketLaunch.playerAnim}}</li>
+            <li><code>rocketAltLandingPrecondition</code>
+                {{rocketLaunch.rocketAltLandingPrecondition}}</li>
+            <li><code>rocketAltLandingSpawnName</code>
+                {{rocketLaunch.rocketAltLandingSpawnName}}</li>
+            <li><code>rocketAnim</code>
+                {{rocketLaunch.rocketAnim}}</li>
+            <li><code>rocketUseAltLandingPrecondition</code>
+                {{rocketLaunch.rocketUseAltLandingPrecondition}}</li>
+            <li><code>rocketUseLaunchPrecondition</code>
+                {{rocketLaunch.rocketUseLaunchPrecondition}}</li>
+        </ul>
     </div>
 
     <div *ngIf="proximityMonitorSettings as proximityMonitor">
         <h4>ProximityMonitor #{{data.components['78']}} (78)</h4>
         <p>This object has a proximity monitor</p>
         <app-data-table [table]="proximityMonitor"></app-data-table>
+    </div>
+
+    <div *ngIf="propertyPlaqueSettings as propertyPlaque">
+        <h4>PropertyPlaque #{{data.components['113']}} (113)</h4>
+        <p>This object is a property plaque</p>
     </div>
 
     <div>
