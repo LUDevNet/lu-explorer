@@ -1,3 +1,10 @@
 .table-responsive td {
     width: 50%;
 }
+
+.spawner-inner {
+    margin-left: 1rem;
+    background-color: #222;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}

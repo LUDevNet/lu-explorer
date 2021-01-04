@@ -1,3 +1,4 @@
+import { InvokeFunctionExpr } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LuJsonService } from '../../services';
@@ -45,6 +46,26 @@ const RENDER_KEYS = [
 ];
 interface RenderSettings {
   renderDisabled?: boolean,
+  fxpriority?: number,
+  renderCullingGroup?: any,
+  ignoreCameraCollision?: any,
+  camPrefersToFadeObject?: any,
+  camGradSnap?: any,
+  CamRlBiasAmt?: any,
+  CamRlBiasBi?: any,
+  CamRlBiasFwd?: any,
+  CamRlBiasRet?: any,
+  CamRlCamPath?: any,
+  CamRlCamRetPath?: any,
+  CamRlFaceTgt?: any,
+  CamRlPosPath?: any,
+  camBehaviorDirectional?: any,
+  camBehaviorPitch?: any,
+  camBehaviorYaw?: any,
+  camDir?: any,
+  camLkDir?: any,
+  camPitchAngleDown?: any,
+  camPitchAngleUp?: any,
 }
 const SIMPLE_PHYSICS_KEYS = [
   'create_physics',
@@ -53,6 +74,9 @@ const SIMPLE_PHYSICS_KEYS = [
   'carver_only',
   'add_to_navmesh',
   'is_smashable',
+  'respawn',
+  'respawnVol',
+  'respawnVolName',
 ];
 const SCRIPT_KEYS = [
   'custom_script_client',
@@ -66,9 +90,6 @@ const SPAWNER_KEYS = [
   'max_to_spawn',
   'no_auto_spawn',
   'no_timed_spawn',
-  'respawn',
-  'respawnVol',
-  'respawnVolName',
   'spawner_node_id',
   'spawner_name',
   'spawnsGroupOnSmash',
@@ -77,6 +98,16 @@ const SPAWNER_KEYS = [
 ];
 interface SpawnerSettings {
   spawntemplate: number,
+  spawner_active_on_load?: boolean,
+  active_on_load?: boolean,
+  max_to_spawn?: number,
+  no_auto_spawn?: boolean,
+  no_timed_spawn?: boolean,
+  spawner_node_id?: number,
+  spawner_name?: string,
+  spawnsGroupOnSmash?: boolean,
+  spawnNetNameForSpawnGroupOnSmash?: string,
+  groupID?: any,
 }
 const ITEM_KEYS = [];
 const SCRIPTED_ACTIVITY_KEYS = [
@@ -145,6 +176,8 @@ const KEYS = {
   styleUrls: ['./obj-instance.component.css']
 })
 export class ObjInstanceComponent implements OnInit {
+  @Input() showGeneralSettings: boolean = true;
+
   data: any;
   dataAsync: Observable<any>;
   settings: Object;
@@ -154,18 +187,18 @@ export class ObjInstanceComponent implements OnInit {
   hasCustomScript: boolean;
   remainingSettings: object;
 
-  renderSettings: RenderSettings | undefined;
-  simplePhysicsSettings: object | undefined;
+  renderSettings?: RenderSettings;
+  simplePhysicsSettings?: object;
   spawnerSettings?: SpawnerSettings;
-  scriptSettings: object | undefined;
-  componentSettings: object | undefined;
-  itemSettings: object | undefined;
-  scriptedActivitySettings: object | undefined;
-  phantomPhysicsSettings: object | undefined;
-  propertyEntranceSettings: object | undefined;
-  hfLightDirectionGadgetSettings: object | undefined;
-  rocketLaunchSettings: object | undefined;
-  proximityMonitorSettings: object | undefined;
+  scriptSettings?: object;
+  componentSettings?: object;
+  itemSettings?: object;
+  scriptedActivitySettings?: object;
+  phantomPhysicsSettings?: object;
+  propertyEntranceSettings?: object;
+  hfLightDirectionGadgetSettings?: object;
+  rocketLaunchSettings?: object;
+  proximityMonitorSettings?: object;
 
   constructor(private luJsonService: LuJsonService) { }
 

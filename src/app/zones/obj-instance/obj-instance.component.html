@@ -1,7 +1,7 @@
 <div>
     <p>Name: <code *ngIf="data">{{ data.name }}</code></p>
 
-    <div *ngIf="generalSettings as general">
+    <div *ngIf="showGeneralSettings && generalSettings as general">
         <h4>General Settings</h4>
         <ul>
             <li *ngIf="!general.loadSrvrOnly && !general.loadOnClientOnly">
@@ -14,13 +14,15 @@
                 This object is not loaded on the server (<code>loadOnClientOnly == true</code>)
             </li>
             <li *ngIf="general.custom_config_names.length > 0">
-                This object is has {{ general.custom_config_names.length }} config value(s) that are not required by any of its components (<code>custom_config_names</code>):
+                This object is has {{ general.custom_config_names.length }} config value(s) that are not required by any
+                of its components (<code>custom_config_names</code>):
                 <ul>
                     <li *ngFor="let name of general.custom_config_names"><code>{{ name }}</code></li>
                 </ul>
             </li>
             <li *ngIf="general.custom_config_names.length == 0">
-                This object is has no config values that are not required by any of its components (<code>custom_config_names</code>)
+                This object is has no config values that are not required by any of its components
+                (<code>custom_config_names</code>)
             </li>
             <li *ngIf="general.sceneIDOverrideEnabled">
                 This object overrides its scene ID (<code>sceneIDOverrideEnabled == true</code>):
@@ -38,7 +40,8 @@
             <li *ngIf="general.template != -1">
                 This object does override its template:
                 <ul>
-                    <li><code>template</code>: <a routerLink="/objects/{{ general.template }}">{{ general.template }}</a></li>
+                    <li><code>template</code>: <a routerLink="/objects/{{ general.template }}">{{ general.template
+                            }}</a></li>
                 </ul>
             </li>
         </ul>
@@ -49,9 +52,82 @@
         <ul>
             <li *ngIf="render.renderDisabled">This object is not rendered (<code>renderDisabled == true</code>)</li>
             <li *ngIf="!render.renderDisabled">This object is rendered (<code>renderDisabled</code> not set)</li>
+            <li *ngIf="render.fxpriority === 0">This object has normal FX priority (<code>fxpriority == 0</code>)</li>
+            <li *ngIf="render.fxpriority">This object has incresed FX priority:
+                <ul>
+                    <li><code>fxpriority</code>: {{render.fxpriority}}</li>
+                </ul>
+            </li>
+            <li *ngIf="render.renderCullingGroup !== undefined">
+                This object belongs to <code>renderCullingGroup == {{render.renderCullingGroup}}</code>
+            </li>
+            <li *ngIf="render.ignoreCameraCollision === false">
+                This object collides with the camera
+                (<code>ignoreCameraCollision == false</code>)
+            </li>
+            <li *ngIf="render.ignoreCameraCollision === true">
+                This does not collide with the camera
+                (<code>ignoreCameraCollision == true</code>)
+            </li>
+            <li><code>CamRl</code> config:
+                <ul>
+                    <li><code>Bias</code>:
+                        <span *ngIf="render.CamRlBiasAmt !== undefined">
+                            [<code>Amt</code>:{{render.CamRlBiasAmt}}]
+                        </span>
+                        <span *ngIf="render.CamRlBiasBi !== undefined">
+                            [<code>Bi</code>: {{render.CamRlBiasBi}}]
+                        </span>
+                        <span *ngIf="render.CamRlBiasFwd !== undefined">
+                            [<code>Fwd</code>: {{render.CamRlBiasFwd}}]
+                        </span>
+                        <span *ngIf="render.CamRlBiasRet !== undefined">
+                            [<code>Ret</code>: {{render.CamRlBiasRet}}]
+                        </span>
+                    </li>
+                    <li *ngIf="render.CamRlCamPath"><code>CamPath</code>: {{render.CamRlCamPath}}</li>
+                    <li *ngIf="render.CamRlCamRetPath"><code>CamPath</code>: {{render.CamRlCamRetPath}}</li>
+                    <li *ngIf="render.CamRlPosPath"><code>PosPath</code>: {{render.CamRlPosPath}}</li>
+                    <li *ngIf="render.CamRlFaceTgt !== undefined"><code>FaceTgt</code>: {{render.CamRlFaceTgt}}</li>
+                </ul>
+            </li>
+            <li><code>cam</code> config
+                <ul>
+                    <li *ngIf="render.camPrefersToFadeObject !== undefined">
+                        <code>PrefersToFadeObject</code>: {{render.camPrefersToFadeObject}}
+                    </li>
+                    <li *ngIf="render.camGradSnap !== undefined">
+                        <code>GradSnap</code>: {{render.camGradSnap}}
+                    </li>
+                    <li
+                        *ngIf="render.camBehaviorDirectional !== undefined || render.camBehaviorPitch !== undefined || render.camBehaviorYaw !== undefined">
+                        <code>Behavior</code>:
+                        <span *ngIf="render.camBehaviorDirectional !== undefined">
+                            [<code>Directional</code>: {{render.camBehaviorDirectional}}]
+                        </span>
+                        <span *ngIf="render.camBehaviorPitch !== undefined">
+                            [<code>Pitch</code>: {{render.camBehaviorPitch}}]
+                        </span>
+                        <span *ngIf="render.camBehaviorYaw !== undefined">
+                            [<code>Yaw</code>: {{render.camBehaviorYaw}}]
+                        </span>
+                    </li>
+                    <li *ngIf="render.camDir !== undefined"><code>Dir</code>: {{render.camDir}}</li>
+                    <li *ngIf="render.camLkDir !== undefined"><code>LkDir</code>: {{render.camLkDir}}</li>
+                    <li *ngIf="render.camPitchAngleUp !== undefined || render.camPitchAngleDown !== undefined">
+                        <code>PitchAngle</code>:
+                        <span *ngIf="render.camPitchAngleUp !== undefined">
+                            [<code>Up</code>: {{render.camPitchAngleUp}}]
+                        </span>
+                        <span *ngIf="render.camPitchAngleDown !== undefined">
+                            [<code>Down</code>: {{render.camPitchAngleDown}}]
+                        </span>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
-        <app-data-table [table]="render"></app-data-table>
+        <!--<app-data-table [table]="render"></app-data-table>-->
     </div>
 
     <div *ngIf="simplePhysicsSettings as simplePhysics">
@@ -68,10 +144,67 @@
 
     <div *ngIf="spawnerSettings as spawner">
         <h4>Spawner #{{data.components['10']}} (10)</h4>
-        <p>This object is a spawner that creates objects with template
-            <a routerLink="/objects/{{spawner.spawntemplate}}">{{spawner.spawntemplate}}</a>
-        </p>
-        <app-data-table [table]="spawner"></app-data-table>
+        <ul>
+            <li>This object is a spawner that creates objects:
+                <ul>
+                    <li><code>spawntemplate</code>:
+                        <a routerLink="/objects/{{spawner.spawntemplate}}">{{spawner.spawntemplate}}</a>
+                    </li>
+                </ul>
+            </li>
+            <li *ngIf="spawner.spawner_active_on_load === true">
+                This spawner is active on load (<code>spawner_active_on_load == true</code>)
+            </li>
+            <li *ngIf="spawner.spawner_active_on_load === false">
+                This spawner is not active on load (<code>spawner_active_on_load == false</code>)
+            </li>
+            <li *ngIf="spawner.active_on_load === true">
+                This spawner is active on load (<code>active_on_load == true</code>)
+            </li>
+            <li *ngIf="spawner.active_on_load === false">
+                This spawner is not active on load (<code>active_on_load == false</code>)
+            </li>
+            <li *ngIf="spawner.max_to_spawn === -1">
+                This spawner is does not have a spawn cap (<code>max_to_spawn == -1</code>)
+            </li>
+            <li *ngIf="spawner.max_to_spawn !== undefined && spawner.max_to_spawn != -1">
+                This spawner is has a spawn cap:
+                <ul>
+                    <li><code>max_to_spawn</code>: {{spawner.max_to_spawn}}</li>
+                </ul>
+            </li>
+            <li *ngIf="spawner.no_auto_spawn === true">
+                This spawner does not spawn automatically (<code>no_auto_spawn == true</code>)
+            </li>
+            <li *ngIf="spawner.no_auto_spawn === false">
+                This spawner spawns automatically (<code>no_auto_spawn == false</code>)
+            </li>
+            <li *ngIf="spawner.no_timed_spawn === true">
+                This spawner does not spawn on a timer (<code>no_timed_spawn == true</code>)
+            </li>
+            <li *ngIf="spawner.no_timed_spawn === false">
+                This spawner spawns on a timer (<code>no_timed_spawn == false</code>)
+            </li>
+            <li *ngIf="spawner.spawner_node_id !== undefined">
+                <code>spawner_node_id</code>: {{spawner.spawner_node_id}}
+            </li>
+            <li *ngIf="spawner.spawner_name !== undefined">
+                <code>spawner_name</code>: {{spawner.spawner_name}}
+            </li>
+            <li *ngIf="spawner.spawnsGroupOnSmash !== undefined">
+                <code>spawnsGroupOnSmash</code>: {{spawner.spawnsGroupOnSmash}}
+            </li>
+            <li *ngIf="spawner.spawnNetNameForSpawnGroupOnSmash !== undefined">
+                <code>spawnNetNameForSpawnGroupOnSmash</code>: {{spawner.spawnNetNameForSpawnGroupOnSmash}}
+            </li>
+            <li *ngIf="spawner.groupID !== undefined">
+                <code>groupID</code>: <code>{{spawner.groupID}}</code>
+            </li>
+        </ul>
+        <div class="spawner-inner">
+            <app-obj-instance [obj]="{'settings': remainingSettings, 'lot': spawner.spawntemplate}"
+                [showGeneralSettings]="false"></app-obj-instance>
+        </div>
     </div>
 
     <div *ngIf="itemSettings as item">
