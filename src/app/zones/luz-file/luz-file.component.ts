@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { LuJsonService } from '../../services';
 
@@ -16,15 +17,18 @@ export class LuzFileComponent implements OnInit {
   selected_path: any;
   selected_path_point: number;
   zone: any;
+  zone_id: any;
   @Input('zone-ref') zoneRef: any;
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private route: ActivatedRoute, private luJsonService: LuJsonService) { }
 
   @Input() set path(value: string) {
     this.getZone(value);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.zone_id = this.route.snapshot.params['id'];
+  }
 
   getZone(path: string): void
   {
