@@ -15,4 +15,8 @@ export class SkillTaskComponent implements OnInit {
   ngOnInit() {
   }
 
+  skills(): number[] {
+    return this.task.taskParam1.split(',').map(x => +x);
+  }
+
 }

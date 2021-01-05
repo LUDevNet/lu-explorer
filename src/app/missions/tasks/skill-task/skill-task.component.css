@@ -1,0 +1,3 @@
+.skill-link + .skill-link::before {
+    content: ", "
+}
