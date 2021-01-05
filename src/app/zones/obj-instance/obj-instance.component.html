@@ -320,10 +320,6 @@
             <li *ngIf="propertyEntrance.propertyLaunchPadOnPropertyMap === false">
                 This launchpad is not on the property map (<code>propertyLaunchPadOnPropertyMap == false</code>)
             </li>
-            <li><code>propertyDefaultTargetZone</code>
-                <a routerLink="/zones/{{propertyEntrance.propertyDefaultTargetZone}}">Zone
-                    {{propertyEntrance.propertyDefaultTargetZone}}</a>
-            </li>
             <li><code>propertyLaunchNavGroupID</code>
                 {{propertyEntrance.propertyLaunchNavGroupID}}</li>
             <li><code>propertyName</code>
@@ -405,6 +401,10 @@
                 {{rocketLaunch.rocketUseAltLandingPrecondition}}</li>
             <li><code>rocketUseLaunchPrecondition</code>
                 {{rocketLaunch.rocketUseLaunchPrecondition}}</li>
+            <li><code>propertyDefaultTargetZone</code>
+                <a routerLink="/zones/{{rocketLaunch.propertyDefaultTargetZone}}">Zone
+                    {{rocketLaunch.propertyDefaultTargetZone}}</a>
+            </li>
         </ul>
     </div>
 

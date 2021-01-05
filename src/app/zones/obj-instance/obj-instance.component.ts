@@ -181,14 +181,12 @@ interface PhantomPhysicsSettings {
   rspRot: any,
 }
 const PROPERTY_ENTRANCE_KEYS = [ // 43
-  "propertyDefaultTargetZone",
   "propertyLaunchNavGroupID",
   "propertyLaunchPadOnPropertyMap",
   "propertyName",
   "mapID",
 ];
 interface PropertyEntranceSettings {
-  propertyDefaultTargetZone: number,
   propertyLaunchNavGroupID: string,
   propertyLaunchPadOnPropertyMap: boolean,
   propertyName: string,
@@ -232,6 +230,7 @@ const ROCKET_LAUNCH_KEYS = [
   'rocketAnim',
   'rocketUseAltLandingPrecondition',
   'rocketUseLaunchPrecondition',
+  "propertyDefaultTargetZone",
 ];
 interface RocketLaunchSettings {
   rocketLaunchMusic?: string,
@@ -248,6 +247,7 @@ interface RocketLaunchSettings {
   rocketAnim?: string,
   rocketUseAltLandingPrecondition?: boolean,
   rocketUseLaunchPrecondition?: boolean,
+  propertyDefaultTargetZone?: number,
 }
 const PROXMIMITY_MONITOR_KEYS = [];
 
