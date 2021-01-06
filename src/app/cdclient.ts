@@ -26,6 +26,21 @@ export class ObjectPod {
 
 // LU database definitions
 
+export class DB_LootMatrixElement {
+  id: number;
+  percent: number;
+  minToDrop: number;
+  maxToDrop: number;
+  LootTableIndex: number;
+  RarityTableIndex: number;
+  flagID: number;
+  gate_version: string;
+}
+
+export class DB_LootMatrix {
+  elements: DB_LootMatrixElement[];
+}
+
 export class DB_LevelProgressionLookup {
   id: number; // INT
   requiredUScore: number; // INT
@@ -164,7 +179,7 @@ export class DB_InventoryComponent {
 }
 
 export class DB_DestructibleComponent {
-  // TODO
+  LootMatrixIndex: number;
 }
 
 export class DB_CollectibleComponent {

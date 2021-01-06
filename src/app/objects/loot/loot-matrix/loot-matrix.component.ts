@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DB_LootMatrix } from '../../../cdclient';
 
 import { LuJsonService } from '../../../services';
 
@@ -10,7 +11,7 @@ import { LuJsonService } from '../../../services';
 export class LootMatrixComponent implements OnInit {
 
   @Input() id: number;
-  lootmatrix: any;
+  lootmatrix: DB_LootMatrix;
 
   constructor(private luJsonService: LuJsonService) { }
 

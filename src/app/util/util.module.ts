@@ -12,6 +12,7 @@ import { BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShif
 import { DatePipe, HtmlPipe } from './pipes/output.pipe';
 import { DocsPipe, ResourcePipe, LocalePipe } from './pipes/service.pipe';
 import { ReplacePipe, PercentPipe, ToPipe } from './pipes/strings.pipe';
+import { PcPipe } from './pipes/pc.pipe';
 
 import { LuJsonService } from './services/lu-json.service';
 import { LuResService } from './services/lu-res.service';
@@ -27,7 +28,8 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe,
     DatePipe, HtmlPipe,
     DocsPipe, ResourcePipe, LocalePipe,
-    ReplacePipe, PercentPipe, ToPipe
+    ReplacePipe, PercentPipe, ToPipe,
+    PcPipe,
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
     DatePipe, HtmlPipe,
     DocsPipe, ResourcePipe, LocalePipe,
     ReplacePipe, PercentPipe, ToPipe,
+    PcPipe,
   ]
 })
 export class UtilModule { }
