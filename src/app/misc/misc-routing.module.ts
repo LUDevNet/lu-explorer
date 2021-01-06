@@ -14,15 +14,15 @@ import { SubscriptionPricingComponent } from './subscription-pricing/subscriptio
 
 const miscRoutes = [
   { path: '', component: MiscComponent, children: [
-    { path: 'acc-default-loc', component: AccDefaultLocComponent },
-    { path: 'brick-attributes', component: BrickAttributesComponent },
-    { path: 'brick-colors', component: BrickColorsComponent },
-    { path: 'brick-ids', component: BrickIdsComponent },
-    { path: 'event-gating', component: EventGatingComponent },
-    { path: 'feature-gating', component: FeatureGatingComponent },
-    { path: 'level-progression', component: LevelProgressionComponent },
-    { path: 'release-version', component: ReleaseVersionComponent },
-    { path: 'sub-pricing', component: SubscriptionPricingComponent },
+    { path: 'acc-default-loc', component: AccDefaultLocComponent, data: { title: "Default Accessory Locations"} },
+    { path: 'brick-attributes', component: BrickAttributesComponent, data: { title: "Brick Attributes"} },
+    { path: 'brick-colors', component: BrickColorsComponent, data: { title: "Brick Colors"} },
+    { path: 'brick-ids', component: BrickIdsComponent, data: { title: "Brick IDs"} },
+    { path: 'event-gating', component: EventGatingComponent, data: { title: "Event Gating"} },
+    { path: 'feature-gating', component: FeatureGatingComponent, data: { title: "Feature Gating"} },
+    { path: 'level-progression', component: LevelProgressionComponent, data: { title: "Level Progression"} },
+    { path: 'release-version', component: ReleaseVersionComponent, data: { title: "Release Versions"} },
+    { path: 'sub-pricing', component: SubscriptionPricingComponent, data: { title: "Subscription Pricing"} },
     { path: '',   redirectTo: 'acc-default-loc', pathMatch: 'full' },
   ] }
 ];

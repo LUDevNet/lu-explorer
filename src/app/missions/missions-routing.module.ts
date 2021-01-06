@@ -9,11 +9,11 @@ import { MissionsBySubtypeComponent } from './by-subtype/by-subtype.component';
 
 
 const missionsRoutes = [
-  { path: 'search', component: MissionsComponent },
-  { path: ':id', component: MissionDetailComponent },
-  { path: 'type/:type', component: MissionsByTypeComponent },
-  { path: 'type/:type/subtype/:subtype', component: MissionsBySubtypeComponent },
-  { path: '', component: MissionIndexComponent },
+  { path: 'search', component: MissionsComponent, data: { title: "Search - Missions" } },
+  { path: ':id', component: MissionDetailComponent, data: { title: "Mission" } },
+  { path: 'type/:type', component: MissionsByTypeComponent, data: { title: "Mission Type" } },
+  { path: 'type/:type/subtype/:subtype', component: MissionsBySubtypeComponent, data: { title: "Mission Subtype" } },
+  { path: '', component: MissionIndexComponent, data: { title: "Missions" } },
 ];
 
 @NgModule({

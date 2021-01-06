@@ -28,8 +28,8 @@ export function scriptMatcher(
 };
 
 const scriptsRoutes = [
-  { matcher: scriptMatcher, component: ScriptFileComponent },
-  { path: '', component: ScriptsComponent },
+  { matcher: scriptMatcher, component: ScriptFileComponent, data: { title: "Script" } },
+  { path: '', component: ScriptsComponent, data: { title: "Scripts" } },
 ];
 
 @NgModule({

@@ -13,17 +13,17 @@ import { ObjectsComponent } from './objects.component';
 
 const objectsRoutes = [
   { path: 'item-sets', loadChildren: () => import('./item-sets/item-sets.module').then(m => m.ItemSetsModule) },
-  { path: 'factions', component: FactionsComponent },
-  { path: 'loot/table/:id', component: LootTableComponent },
-  { path: 'types', component: ObjectTypesIndexComponent },
-  { path: 'types/:type', component: ObjectsByTypeComponent },
-  { path: 'types/:type/page/:page', component: ObjectsByTypeComponent },
-  { path: 'components', component: ObjectComponentsIndexComponent },
-  { path: 'components/:component', component: ObjectsByComponentComponent },
-  { path: 'components/:component/page/:page', component: ObjectsByComponentComponent },
-  { path: ':id', component: ObjectDetailComponent },
-  { path: ':id/:component', component: ObjectDetailComponent },
-  { path: '', component: ObjectsComponent }
+  { path: 'factions', component: FactionsComponent, data: { title: "Factions" } },
+  { path: 'loot/table/:id', component: LootTableComponent, data: { title: "LootTable" } },
+  { path: 'types', component: ObjectTypesIndexComponent, data: { title: "Object Types" } },
+  { path: 'types/:type', component: ObjectsByTypeComponent, data: { title: "Object Type" } },
+  { path: 'types/:type/page/:page', component: ObjectsByTypeComponent, data: { title: "Object Type" } },
+  { path: 'components', component: ObjectComponentsIndexComponent, data: { title: "Components" } },
+  { path: 'components/:component', component: ObjectsByComponentComponent, data: { title: "Component" } },
+  { path: 'components/:component/page/:page', component: ObjectsByComponentComponent, data: { title: "Component" } },
+  { path: ':id', component: ObjectDetailComponent, data: { title: "Object" } },
+  { path: ':id/:component', component: ObjectDetailComponent, data: { title: "Component - Object" } },
+  { path: '', component: ObjectsComponent, data: { title: "Objects" } }
 ];
 
 @NgModule({

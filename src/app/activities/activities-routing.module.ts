@@ -5,8 +5,8 @@ import { ActivityDetailComponent } from './activity-detail/activity-detail.compo
 import { ActivitiesComponent } from './activities.component';
 
 const activitesRoutes = [
-    { path: ':id', component: ActivityDetailComponent },
-    { path: '', component: ActivitiesComponent },
+    { path: ':id', component: ActivityDetailComponent, data: { title: "Activity" } },
+    { path: '', component: ActivitiesComponent, data: { title: "Activities" } },
 ];
 
 @NgModule({

@@ -6,10 +6,10 @@ import { ZoneDetailComponent } from './zone-detail/zone-detail.component';
 import { ScenesComponent } from './scenes/scenes.component';
 
 const zonesRoutes: Routes = [
-  { path: ':id', component: ZoneDetailComponent },
-  { path: ':id/:sc', component: ScenesComponent },
-  { path: ':id/:sc/:obj', component: ScenesComponent },
-  { path: '', component: ZoneIndexComponent }
+  { path: ':id', component: ZoneDetailComponent, data: { title: "Zone" } },
+  { path: ':id/:sc', component: ScenesComponent, data: { title: "Scene" } },
+  { path: ':id/:sc/:obj', component: ScenesComponent, data: { title: "Object - Scene" } },
+  { path: '', component: ZoneIndexComponent, data: { title: "Zones" } }
 ]
 
 @NgModule({
