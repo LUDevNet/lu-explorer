@@ -19,6 +19,5 @@
       "esnext.bigint"
     ],
     "module": "es2020",
-    "baseUrl": "./"
   }
 }

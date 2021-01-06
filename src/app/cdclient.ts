@@ -14,6 +14,16 @@ export class DB_ItemSets_Ref {
   id: number;
 }
 
+export class SkillRef {
+  skillID: number;
+  AICombatWeight: number;
+  castOnType: number;
+}
+
+export class ObjectPod {
+  skills?: SkillRef[];
+}
+
 // LU database definitions
 
 export class DB_LevelProgressionLookup {
@@ -143,8 +153,14 @@ export class DB_MissionNPCComponent {
   // TODO
 }
 
+export class DB_InventoryItem {
+  count: number;
+  equip: any;
+  itemid: number;
+}
+
 export class DB_InventoryComponent {
-  // TODO
+  items: DB_InventoryItem[];
 }
 
 export class DB_DestructibleComponent {

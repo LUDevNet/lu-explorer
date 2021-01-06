@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ObjectPod } from '../../../cdclient';
 import { component_names } from '../../../components';
 
 @Component({
@@ -10,7 +11,7 @@ export class ComponentDetailComponent implements OnInit {
 
   @Input() id: number;
   @Input() component_id: number;
-  @Input() object: any;
+  @Input() object: ObjectPod;
 
   constructor() { }
 

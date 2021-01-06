@@ -1,19 +1,25 @@
 <h3>Inventory Component ({{id}})</h3>
 <ng-container *ngIf="component | async; else loading; let inventory">
-  <div class="table-responsive">
-    <table>
-      <tr>
-        <th>count</th>
-        <th>equip</th>
-        <th>itemid</th>
-      </tr>
-      <tr *ngFor="let item of inventory.items">
-        <td>{{item.count}}</td>
-        <td>{{item.equip}}</td>
-        <td><a routerLink="/objects/{{item.itemid}}">{{item.itemid}}</a></td>
-      </tr>
-    </table>
+  <div class="error" *ngIf="inventory.$error; else content">
+    {{inventory.$error}}
   </div>
+  <ng-template #content>
+    <div class="table-responsive">
+      {{ inventory | json }}
+      <table>
+        <tr>
+          <th>count</th>
+          <th>equip</th>
+          <th>itemid</th>
+        </tr>
+        <tr *ngFor="let item of inventory.data.items">
+          <td>{{item.count}}</td>
+          <td>{{item.equip}}</td>
+          <td><a routerLink="/objects/{{item.itemid}}">{{item.itemid}}</a></td>
+        </tr>
+      </table>
+    </div>
+  </ng-template>
 </ng-container>
 <ng-template #loading>
   Loading...

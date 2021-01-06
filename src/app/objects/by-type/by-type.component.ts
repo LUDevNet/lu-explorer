@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReplaySubject, Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
@@ -22,13 +22,14 @@ export class ObjectsByTypeComponent implements OnInit {
 
   constructor(
     private luJsonService: LuJsonService,
-    private luLocaleService: LuLocaleService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
     this.objects = this.route.paramMap
       .pipe(map(this.mapRouteInfo),tap(this.tapRef.bind(this)),switchMap(this.loadDataObservable.bind(this)))
+    this.objects.subscribe(x => this.cd.detectChanges());
   }
 
   mapRouteInfo(map) {
@@ -42,8 +43,10 @@ export class ObjectsByTypeComponent implements OnInit {
   }
 
   tapRef(ref) {
+    console.log(ref);
     this.type = ref.type;
     this.page = ref.page;
+    this.cd.detectChanges();
   }
 
   loadDataObservable(ref) {
@@ -60,7 +63,9 @@ export class ObjectsByTypeComponent implements OnInit {
     let sorted = data.sort(this.sortObjectTypeRefs);
     let from = this.page_size * ref.page;
     let to = from + this.page_size;
-    return sorted.slice(from, to);
+    let page = sorted.slice(from, to);
+    console.log(page);
+    return page;
   }
 
   sortObjectTypeRefs(a,b) {

@@ -4,10 +4,7 @@ import { map, combineAll, take, tap, switchMap } from 'rxjs/operators';
 import { from } from 'rxjs/observable/from';
 
 import { LuJsonService, LuResService } from '../../../services';
-
-class SkillRef {
-  skillID: number;
-}
+import { SkillRef } from '../../../cdclient';
 
 @Component({
   selector: 'app-skill-component',
@@ -27,22 +24,24 @@ export class SkillComponentComponent implements OnInit {
     this.skill_ref = new ReplaySubject<SkillRef[]>(1);
     this.skills = this.skill_ref
       .pipe(
-        switchMap(ref_list => {
-          return from(ref_list)
-            .pipe(
-              map(ref => {
-                let id = ref.skillID;
-                return this.luJsonService.getSkill(id)
-                  .pipe(map(data => {
-                    return {ref: ref, skill: data};
-                  }));
-              }),
-              combineAll((...values) => {
-                var dict = {};
-                values.forEach(data => dict[data.ref.skillID] = data);
-                return dict;
-              })
-            )
+        switchMap(this.mapRef.bind(this))
+      )
+  }
+
+  mapRef(ref_list: SkillRef[] = []) {
+    return from(ref_list)
+      .pipe(
+        map(ref => {
+          let id = ref.skillID;
+          return this.luJsonService.getSkill(id)
+            .pipe(map(data => {
+              return { ref: ref, skill: data };
+            }));
+        }),
+        combineAll((...values) => {
+          var dict = {};
+          values.forEach(data => dict[data.ref.skillID] = data);
+          return dict;
         })
       )
   }
@@ -56,16 +55,17 @@ export class SkillComponentComponent implements OnInit {
   }
 
   @Input() set oskills(ref_list: SkillRef[]) {
+    console.log(ref_list);
     this.skill_ref.next(ref_list);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   image(path: string): string {
     return this.luResService.getResolvedResUrl(path);
   }
 
-  bgImage(path:string) : string {
+  bgImage(path: string): string {
     return "url(" + this.image(path) + ")";
   }
 

@@ -4,6 +4,7 @@ import { switchMap, tap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../../services';
 import { DB_InventoryComponent } from '../../../cdclient';
+import { Optional } from '../../../util/services/lu-json.service';
 
 @Component({
   selector: 'app-inventory-component',
@@ -14,7 +15,7 @@ export class InventoryComponentComponent implements OnInit {
 
   _id: ReplaySubject<number>;
   __id: number;
-  component: ReplaySubject<DB_InventoryComponent>;
+  component: ReplaySubject<Optional<DB_InventoryComponent>>;
 
   @Input() set id(value: number) {
     this._id.next(value);

@@ -18,6 +18,10 @@ import {
 
 import { ZoneDetail } from '../../zone';
 
+export class Optional<T> {
+  data: T;
+  $error: string;
+}
 
 @Injectable()
 export class LuJsonService {
@@ -87,12 +91,13 @@ export class LuJsonService {
     this.messageService.add('LuJsonService: ' + message);
   }
 
-  private makeRequest(url: string, method: string): Observable<any> {
+  private makeRequest(url: string, method: string, wrapResult: boolean = false): Observable<any> {
     if (!this.jsonStore.hasOwnProperty(url)) {
       let httpRequest = this.http.get(this.apiUrl + url + '.json')
         .pipe(
           tap(data => console.log(`Completed ${method}`)),
-          catchError(this.handleError(method, undefined))
+          map(x => wrapResult ? { data: x } : x),
+          catchError(this.handleError(method, undefined, wrapResult)),
         )
       let responseSubject = new ReplaySubject(1);
       httpRequest.subscribe(responseSubject);
@@ -107,7 +112,7 @@ export class LuJsonService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T> (operation = 'operation', result?: T, wrapError: boolean = false) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
@@ -117,6 +122,9 @@ export class LuJsonService {
       this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
+      if (wrapError) {
+        return of({ $error: `${operation} failed: ${error.message}` } as unknown as T);
+      }
       return of(result as T);
     };
   }
@@ -185,8 +193,8 @@ export class LuJsonService {
     return this.getPagedJsonData(this.tablesUrl + "CollectibleComponent/", id, 'CollectibleComponent');
   }
 
-  getInventoryComponent(id: number): Observable<any> {
-    return this.getPagedJsonData(this.tablesUrl + "InventoryComponent/", id, 'InventoryComponent');
+  getInventoryComponent(id: number): Observable<Optional<any>> {
+    return this.getPagedJsonData(this.tablesUrl + "InventoryComponent/", id, 'InventoryComponent', true);
   }
 
   getPhysicsComponent(id: number): Observable<any> {
@@ -304,9 +312,9 @@ export class LuJsonService {
     return this.makeRequest(url + id, `get${type}(${id})`);
   }
 
-  getPagedJsonData(url: string, id: number, type: string): Observable<any> {
+  getPagedJsonData(url: string, id: number, type: string, rethrowError: boolean = false): Observable<any> {
     let page = Math.floor(id / 256);
-    return this.makeRequest(url + page + "/" + id, `getPaged${type}(${id})`);
+    return this.makeRequest(url + page + "/" + id, `getPaged${type}(${id})`, rethrowError);
   }
 
 }
