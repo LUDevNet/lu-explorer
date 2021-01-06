@@ -18,6 +18,8 @@ import { LuResService } from './services/lu-res.service';
 import { LuDocsService } from './services/lu-docs.service';
 import { LuLocaleService } from './services/lu-locale.service';
 
+export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
+
 @NgModule({
   declarations: [
     PaginationComponent, DataTableComponent, GithubSpaComponent, IconComponent,
@@ -37,7 +39,7 @@ import { LuLocaleService } from './services/lu-locale.service';
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe,
     DatePipe, HtmlPipe,
     DocsPipe, ResourcePipe, LocalePipe,
-    ReplacePipe, PercentPipe, ToPipe
+    ReplacePipe, PercentPipe, ToPipe,
   ]
 })
 export class UtilModule { }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LuJsonService } from './lu-json.service';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 

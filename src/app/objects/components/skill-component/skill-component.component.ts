@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ReplaySubject, Observable } from 'rxjs';
-import { map, combineAll, take, tap, switchMap } from 'rxjs/operators';
-import { from } from 'rxjs/observable/from';
+import { ReplaySubject, from } from 'rxjs';
+import { map, combineAll, switchMap } from 'rxjs/operators';
 
 import { LuJsonService, LuResService } from '../../../services';
 import { SkillRef } from '../../../cdclient';

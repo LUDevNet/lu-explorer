@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { GithubSpaComponent } from './util/github-spa/github-spa.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'misc', loadChildren: () => import('./misc/misc.module').then(m => m.MiscModule) },
