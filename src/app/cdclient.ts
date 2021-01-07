@@ -84,15 +84,29 @@ export class DB_ItemSets {
   kitType: number; //	INTEGER
   kitRank: number; //	INTEGER
   kitImage: number; //	INTEGER
-  skillSetWith2kitImage: number; //	INTEGER
-  skillSetWith3kitImage: number; //	INTEGER
-  skillSetWith4kitImage: number; //	INTEGER
-  skillSetWith5kitImage: number; //	INTEGER
-  skillSetWith6kitImage: number; //	INTEGER
+  skillSetWith2: number; //	INTEGER
+  skillSetWith3: number; //	INTEGER
+  skillSetWith4: number; //	INTEGER
+  skillSetWith5: number; //	INTEGER
+  skillSetWith6: number; //	INTEGER
   localize: boolean;
   gate_version: string;
   kitID: number; // INTEGER
   priority: number; // FLOAT
+
+  kitFaction(): string {
+    return [undefined, "Sentinel", "Assembly", "Paradox", "Venture"][this.kitType];
+  }
+  kitFactionColor(): string {
+    return [undefined, "#0061f8", "#f07200", "#800000", "#b4d600"][this.kitType];
+  }
+  kitFactionImageUrl(): string {
+    let faction = [undefined, "sentinel", "assembly", "paradox", "venture"][this.kitType];
+    if (faction) return `textures/ui/inventory/kits/kit_${faction}.png`;
+  }
+  isForKitFaction(): boolean {
+    return this.kitType > 0 && this.kitType < 5;
+  }
 }
 
 export class DB_ItemSetSkills {

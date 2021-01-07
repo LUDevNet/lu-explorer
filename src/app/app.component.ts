@@ -3,6 +3,10 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
+function isFunction(functionToCheck) {
+  return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+} 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -23,13 +27,13 @@ export class AppComponent {
     ).subscribe(() => {
       const rt = this.getChild(this.activatedRoute);
       rt.data.subscribe(data => {
-        console.log(data);
-        this.titleService.setTitle((data.title ? data.title : "LU-Explorer") + " - LU-Explorer")
+        let value = data.title ? (isFunction(data.title) ? data.title(rt.snapshot.params) : data.title) : "LU-Explorer";
+        this.titleService.setTitle(value + " - LU-Explorer")
       });
     });
   }
 
-  getChild(activatedRoute: ActivatedRoute) {
+  getChild(activatedRoute: ActivatedRoute): ActivatedRoute {
     if (activatedRoute.firstChild) {
       return this.getChild(activatedRoute.firstChild);
     } else {

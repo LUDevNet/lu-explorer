@@ -12,7 +12,15 @@
       <span *ngIf="set.kitRank">(Rank {{set.kitRank}})</span>
     </small>
   </h2>
+  <img *ngIf="set.isForKitFaction()" class="pull-right img-tag" [src]="set.kitFactionImageUrl() | res"
+    [alt]="set.kitFaction()" [title]="set.kitFaction()">
   <app-icon [iconID]="set.kitImage" [width]="256"></app-icon>
+  <h3>General</h3>
+  <ul>
+    <li *ngIf="set.isForKitFaction()">This Kit belongs to the <span [className]="'color' + set.kitFaction()">{{set.kitFaction()}}</span> Faction
+      (<code>kitType == {{set.kitType}}</code>)</li>
+    <li>This Kit is of Rank {{set.kitRank}} (<code>kitRank</code>)</li>
+  </ul>
   <h3>Items</h3>
   <ul>
     <li *ngFor="let itemID of set.itemIDs.split(',')">

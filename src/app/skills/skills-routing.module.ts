@@ -6,8 +6,8 @@ import { SkillComponent } from './skill/skill.component';
 import { SkillsComponent } from './skills.component';
 
 const skillsRoutes: Routes = [
-  { path: 'behaviors/:id', component: BehaviorDetailAltComponent, data: { title: "Behavior" } },
-  { path: ':id', component: SkillComponent, data: { title: "Skill" } },
+  { path: 'behaviors/:id', component: BehaviorDetailAltComponent, data: { title: params => `Behavior #${params['id']}` } },
+  { path: ':id', component: SkillComponent, data: { title: params => `Skill #${params['id']}` } },
   { path: '', component: SkillsComponent, data: { title: "Skills" } }
 ];
 

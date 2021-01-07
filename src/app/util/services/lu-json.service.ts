@@ -267,7 +267,7 @@ export class LuJsonService {
       .pipe(map(tbl => tbl['_embedded'][table]));
   }
 
-  getGeneric(id: number, table:string, paged:boolean): Observable<any>
+  getGeneric<T>(id: number, table:string, paged:boolean): Observable<T>
   {
     if (paged)
     {

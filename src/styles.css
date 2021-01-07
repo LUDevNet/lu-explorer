@@ -326,3 +326,8 @@ td
   margin-left: 1rem;
   margin-bottom: 1rem;
 }
+
+.img-tag {
+  width: 48px;
+  margin: 0;
+}

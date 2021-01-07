@@ -28,7 +28,7 @@ export function scriptMatcher(
 };
 
 const scriptsRoutes = [
-  { matcher: scriptMatcher, component: ScriptFileComponent, data: { title: "Script" } },
+  { matcher: scriptMatcher, component: ScriptFileComponent, data: { title: params => "Script " + params['path'] } },
   { path: '', component: ScriptsComponent, data: { title: "Scripts" } },
 ];
 

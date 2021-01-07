@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap, tap, map} from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 
 import { LuJsonService, LuLocaleService } from '../../../services';
 import { DB_ItemSets } from '../../../cdclient';
@@ -18,8 +18,9 @@ export class ItemSetDetailComponent implements OnInit {
 
   constructor(
     private luJsonService: LuJsonService,
-    private LuLocaleService: LuLocaleService,
-    private route: ActivatedRoute
+    //private LuLocaleService: LuLocaleService,
+    private route: ActivatedRoute,
+    private cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
@@ -34,12 +35,13 @@ export class ItemSetDetailComponent implements OnInit {
     return +map.get('id');
   }
 
-  mapToRequest(id) {
-    return this.luJsonService.getGeneric(id, 'ItemSets', false);
+  mapToRequest(id): Observable<DB_ItemSets> {
+    return this.luJsonService.getGeneric(id, 'ItemSets', false).pipe(map(x => Object.assign(new DB_ItemSets, x)));
   }
 
   tapId(id) {
     this.id = id;
+    this.cd.detectChanges();
   }
 
 }
