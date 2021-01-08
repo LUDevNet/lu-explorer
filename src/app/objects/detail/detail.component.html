@@ -6,14 +6,12 @@
     <li>{{object.name || "[Unnamed]" }}</li>
   </ul>
 
+  <img *ngIf="object.HQ_valid" class="pull-right img-tag"
+    [src]="'textures/ui/missions/faction_logos/nexus-force.png' | res" alt="This object is valid for NexusHQ"
+    title="This object is valid for NexusHQ">
   <h2>{{object.name | uppercase }} <small *ngIf="objectLocale">"{{objectLocale.name}}"</small></h2>
 
   <section class="clearfix">
-    <img *ngIf="object.HQ_valid"
-        class="pull-right img-tag"
-        [src]="'textures/ui/missions/faction_logos/nexus-force.png' | res"
-        alt="This object is valid for NexusHQ"
-        title="This object is valid for NexusHQ">
     <blockquote *ngIf="object.description">
       {{object.description}}
     </blockquote>
@@ -26,11 +24,13 @@
       <ul>
         <li *ngFor="let entry of object.components | keys" [class.active]="component_id == entry.key">
           <a [routerLink]="['/objects', object_id, entry.key]">{{getName(entry.key)}}
-            <span class="pull-right">#{{entry.value}} ({{entry.key}})</span></a></li>
+            <span class="pull-right">#{{entry.value}} ({{entry.key}})</span></a>
+        </li>
       </ul>
     </div>
     <div class="sidemenu-content">
-      <app-component-detail [id]="object.components[component_id]" [component_id]="component_id" [object]="object"></app-component-detail>
+      <app-component-detail [id]="object.components[component_id]" [component_id]="component_id" [object]="object">
+      </app-component-detail>
     </div>
   </div>
 
@@ -39,7 +39,9 @@
     <tr *ngFor="let icon of object.icons">
       <td>{{icon.iconState}}</td>
       <td>{{icon.iconID}}</td>
-      <td><app-npc-icon [width]="'32px'" [id]="icon.iconID"></app-npc-icon></td>
+      <td>
+        <app-npc-icon [width]="'32px'" [id]="icon.iconID"></app-npc-icon>
+      </td>
     </tr>
   </table>
 

@@ -14,6 +14,7 @@ import { MissionRefListComponent } from './ref-list/ref-list.component';
 
 import { TasksModule } from './tasks/tasks.module';
 import { MissionsRoutingModule } from './missions-routing.module';
+import { GroupIconComponent } from './group-icon/group-icon.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MissionsRoutingModule } from './missions-routing.module';
     MissionDetailComponent,
     MissionIndexComponent,
     PrereqListComponent,
-    MissionRefListComponent
+    MissionRefListComponent,
+    GroupIconComponent
   ],
   imports: [
     CommonModule,

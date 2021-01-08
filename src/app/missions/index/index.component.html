@@ -7,16 +7,16 @@
 </h2>
 
 <section *ngFor="let declared_type of mission_types | keys">
+  <app-group-icon [name]="declared_type.key"></app-group-icon>
   <h3><a routerLink="/missions/type/{{declared_type.key}}">{{declared_type.key}}</a></h3>
 
   <ul>
     <li *ngFor="let declared_subtype of declared_type.value | keys">
       <a *ngIf="declared_subtype.key != ''"
-         routerLink="/missions/type/{{declared_type.key}}/subtype/{{declared_subtype.key}}">
+        routerLink="/missions/type/{{declared_type.key}}/subtype/{{declared_subtype.key}}">
         {{declared_subtype.key}}
       </a>
-      <a *ngIf="declared_subtype.key == ''"
-         routerLink="/missions/type/{{declared_type.key}}">
+      <a *ngIf="declared_subtype.key == ''" routerLink="/missions/type/{{declared_type.key}}">
         General
       </a>
     </li>

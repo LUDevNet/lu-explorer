@@ -182,6 +182,61 @@ export class DB_MissionNPCComponent {
   // TODO
 }
 
+export class DB_Missions {
+  id: number;
+  defined_type: string;
+  defined_subtype: string;
+  UISortOrder: number;
+  offer_objectID: number;
+  target_objectID: number;
+  reward_currency: number; // bigint
+  LegoScore: number;
+  reward_reputation: number; // bigint
+  isChoiceReward: boolean;
+  reward_item1: number;
+  reward_item1_count: number;
+  reward_item2: number;
+  reward_item2_count: number;
+  reward_item3: number;
+  reward_item3_count: number;
+  reward_item4: number;
+  reward_item4_count: number;
+  reward_emote: number;
+  reward_emote2: number;
+  reward_emote3: number;
+  reward_emote4: number;
+  reward_maximagination: number;
+  reward_maxhealth: number;
+  reward_maxinventory: number;
+  reward_maxmodel: number;
+  reward_maxwidget: number;
+  reward_maxwallet: number; // bigint
+  repeatable: boolean;
+  reward_currency_repeatable: number; // bigint
+  reward_item1_repeatable: number;
+  reward_item1_repeat_count: number;
+  reward_item2_repeatable: number;
+  reward_item2_repeat_count: number;
+  reward_item3_repeatable: number;
+  reward_item3_repeat_count: number;
+  reward_item4_repeatable: number;
+  reward_item4_repeat_count: number;
+  time_limit: number;
+  isMission: boolean;
+  missionIconID: number;
+  prereqMissionID: string;
+  localize: boolean;
+  inMOTD: boolean;
+  cooldownTime: number; // bigint
+  isRandom: boolean;
+  randomPool: string;
+  UIPrereqID: number;
+  gate_version: string;
+  HUDStates: string;
+  locStatus: number;
+  reward_bankinventory: number;
+}
+
 export class DB_InventoryItem {
   count: number;
   equip: any;

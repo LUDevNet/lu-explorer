@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DB_Missions } from '../../cdclient';
 
 import { LuJsonService, LuLocaleService } from '../../services';
 
@@ -10,7 +11,7 @@ import { LuJsonService, LuLocaleService } from '../../services';
 })
 export class MissionDetailComponent implements OnInit {
 
-  mission: any;
+  mission: DB_Missions;
   missionLocale: any;
   tasks: any;
   tasksLocale: any;

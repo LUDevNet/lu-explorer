@@ -9,19 +9,13 @@
   <li *ngIf="missionLocale">{{missionLocale.name}}</li>
 </ul>
 
+<app-group-icon *ngIf="mission" [name]="mission.defined_type"></app-group-icon>
 <h2>Mission ({{id}}) <small *ngIf="missionLocale">"{{missionLocale.name}}"</small></h2>
 
-<app-icon class="mission-icon" [iconID]="mission.missionIconID" *ngIf="mission && mission.missionIconID"></app-icon>
-
-<section *ngIf="mission && mission.prereqMissionID">
-  <h3>Prerequisites</h3>
-  <app-prereq-list [string]="mission.prereqMissionID"></app-prereq-list>
-</section>
-
-<section class="card card-right">
+<section *ngIf="mission" class="card card-right clearfix">
   <h3 id="general">General</h3>
   <table style="min-width: initial;" *ngIf="mission">
-    <tr>
+    <tr *ngIf="mission.isMission">
       <td>offer_objectID</td>
       <td>
         <a *ngIf="mission.offer_objectID != -1" routerLink="/objects/{{mission.offer_objectID}}">
@@ -30,7 +24,7 @@
         <span *ngIf="mission.offer_objectID == -1">None (-1)</span>
       </td>
     </tr>
-    <tr>
+    <tr *ngIf="mission.isMission">
       <td>target_objectID</td>
       <td>
         <a *ngIf="mission.target_objectID != -1" routerLink="/objects/{{mission.target_objectID}}">
@@ -67,30 +61,36 @@
   </table>
 </section>
 
+<app-icon class="mission-icon" [iconID]="mission.missionIconID" *ngIf="mission && mission.missionIconID"></app-icon>
+
+<section *ngIf="mission && mission.prereqMissionID">
+  <h3>Prerequisites</h3>
+  <app-prereq-list [string]="mission.prereqMissionID"></app-prereq-list>
+</section>
+
 <section id="flags" class="">
   <h3>Flags</h3>
-  <table style="width: initial; min-width: initial;">
-    <tr>
-      <th>isMission</th>
-      <td>{{mission.isMission}}</td>
-    </tr>
-    <tr>
-      <th>repeatable</th>
-      <td>{{mission.repeatable}}</td>
-    </tr>
-    <tr>
-      <th>isRandom</th>
-      <td>{{mission.isRandom}}</td>
-    </tr>
-    <tr>
-      <th>isChoiceReward</th>
-      <td>{{mission.isChoiceReward}}</td>
-    </tr>
-    <tr>
-      <th>inMOTD</th>
-      <td>{{mission.inMOTD}}</td>
-    </tr>
-  </table>
+  <ul>
+    <li *ngIf="mission.isMission === false">This is an achievement (<code>isMission == false</code>)</li>
+    <li *ngIf="mission.isMission === true">This is a mission (<code>isMission == true</code>)</li>
+    <li *ngIf="mission.repeatable === false">The player can only complete this once (<code>repeatable == false</code>)
+    </li>
+    <li *ngIf="mission.repeatable === true">The player can complete this multiple times
+      (<code>repeatable == true</code>)</li>
+    <li><code>isRandom == {{mission.isRandom}}</code></li>
+    <li *ngIf="mission.isChoiceReward === false">The player cannot choose their reward
+      (<code>isChoiceReward == false</code>)</li>
+    <li *ngIf="mission.isChoiceReward === true">The player can choose their reward (<code>isChoiceReward == true</code>)
+    </li>
+    <li *ngIf="mission.inMOTD === false">This may not be a <em>mission-of-the-day</em> (<code>inMOTD == false</code>)
+    </li>
+    <li *ngIf="mission.inMOTD === true">This may be a <em>mission-of-the-day</em> (<code>inMOTD == true</code>)</li>
+    <li *ngIf="mission.gate_version">This task is only available with a feature update / gate (<code>gate_version</code>):
+      <ul>
+        <li><code>{{mission.gate_version}}</code></li>
+      </ul>
+    </li>
+  </ul>
 </section>
 
 <section *ngIf="tasks">

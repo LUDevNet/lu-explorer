@@ -3,7 +3,9 @@
   <li>{{defined_type}}</li>
 </ul>
 
-<h2>Missions <small>{{defined_type}}</small></h2>
+<h2>Missions <small>{{defined_type}}</small>
+  <app-group-icon [name]="defined_type"></app-group-icon>
+</h2>
 
 <section *ngIf="subtypes && subtypes.length > 0">
   <h3>Subtypes</h3>
@@ -22,7 +24,7 @@
     <tr *ngFor="let mission_id of mission_ids">
       <td>{{mission_id}}</td>
       <td><a [routerLink]="['/missions/', mission_id]">
-        {{ mission_names && mission_names[mission_id] ? mission_names[mission_id].name : [Unnamed]}}
+        {{ mission_names && mission_names[mission_id] ? mission_names[mission_id].name : "[Unnamed]"}}
       </a></td>
     </tr>
   </table>
