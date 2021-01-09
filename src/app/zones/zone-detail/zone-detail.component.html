@@ -5,6 +5,8 @@
   </ul>
   <h2>{{ zone.DisplayDescription | uppercase }}</h2>
 
+  <img *ngIf="zoneGif(); let gif" [src]="gif | res" />
+
   <div *ngIf="zone.thumbnail">
     <h3>Thumbnail</h3>
     <app-image [path]="zone.thumbnail" width="30rem"></app-image>
