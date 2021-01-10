@@ -41,6 +41,7 @@ export class DataPipe implements PipeTransform {
     let call = {
       object: x => this.luJson.getObject(x),
       renderComponent: x => this.luJson.getRenderComponent(x),
+      lootTable: x => this.luJson.getLootTableGroupByIndex(x),
     }[arg];
     if (arg) return call(value);
   }

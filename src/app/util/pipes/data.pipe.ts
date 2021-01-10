@@ -51,6 +51,18 @@ export class RangePipe implements PipeTransform {
   }
 }
 
+@Pipe({name: 'limit'})
+export class LimitPipe implements PipeTransform {
+  transform<T>(list: T[], limit: number) : T[] {
+    var array = [];
+    let max = Math.min(limit, list.length);
+    for (var i = 0; i < max; i++) {
+      array.push(list[i]);
+    }
+    return array;
+  }
+}
+
 @Pipe({name: 'elem'})
 export class ElementPipe implements PipeTransform {
   transform(value: Object, arg: string) : any {

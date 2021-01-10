@@ -1,0 +1,14 @@
+.more {
+    display: inline-block;
+    margin: 2px;
+    width: 64px;
+    height: 64px;
+    background: black;
+    border-radius: 10px;
+    vertical-align: middle;
+    padding: 2px;
+    box-sizing: border-box;
+    line-height: 60px;
+    font-weight: bold;
+    text-align: center;
+}
