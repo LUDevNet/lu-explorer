@@ -16,6 +16,7 @@ import { UtilModule } from '../util/util.module';
 import { ComponentsModule } from './components/components.module';
 import { LootModule } from './loot/loot.module';
 import { ObjectsRoutingModule } from './objects-routing.module';
+import { GuiModule } from '../gui/gui.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ObjectsRoutingModule } from './objects-routing.module';
     ComponentsModule,
     LootModule,
     UtilModule,
-    ObjectsRoutingModule
+    ObjectsRoutingModule,
+    GuiModule,
   ],
   exports: [
     LootModule,

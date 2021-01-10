@@ -24,6 +24,7 @@ import { InventoryComponentComponent } from './inventory-component/inventory-com
 import { MissionNpcComponentComponent } from './mission-npc-component/mission-npc-component.component';
 import { PhysicsComponentComponent } from './physics-component/physics-component.component';
 import { ComponentDetailComponent } from './component-detail/component-detail.component';
+import { GuiModule } from '../../gui/gui.module';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ComponentDetailComponent } from './component-detail/component-detail.co
     UtilModule,
     LootModule,
     SkillRefModule,
+    GuiModule,
     RouterModule.forChild([])
   ],
   exports: [

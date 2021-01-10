@@ -139,12 +139,12 @@
   "defaultProject": "lu-explorer",
   "schematics": {
     "@schematics/angular:component": {
-      "prefix": "app",
+      "prefix": "lux",
       "styleext": "css",
       "style": "css"
     },
     "@schematics/angular:directive": {
-      "prefix": "app"
+      "prefix": "lux"
     }
   }
 }

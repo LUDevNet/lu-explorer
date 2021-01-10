@@ -8,6 +8,7 @@ import { LootMatrixComponent } from './loot-matrix/loot-matrix.component';
 import { LootTableComponent } from './loot-table/loot-table.component';
 import { LootTableIndexComponent } from './loot-table-index/loot-table-index.component';
 import { CurrencyTableComponent } from './currency-table/currency-table.component';
+import { GuiModule } from '../../gui/gui.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CurrencyTableComponent } from './currency-table/currency-table.componen
     CurrencyTableComponent
   ],
   imports: [
+    GuiModule,
     CommonModule,
     UtilModule,
     RouterModule.forChild([])

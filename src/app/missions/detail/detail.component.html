@@ -68,7 +68,7 @@
   <app-prereq-list [string]="mission.prereqMissionID"></app-prereq-list>
 </section>
 
-<section id="flags" class="">
+<section id="flags" *ngIf="mission">
   <h3>Flags</h3>
   <ul>
     <li *ngIf="mission.isMission === false">This is an achievement (<code>isMission == false</code>)</li>
@@ -85,7 +85,8 @@
     <li *ngIf="mission.inMOTD === false">This may not be a <em>mission-of-the-day</em> (<code>inMOTD == false</code>)
     </li>
     <li *ngIf="mission.inMOTD === true">This may be a <em>mission-of-the-day</em> (<code>inMOTD == true</code>)</li>
-    <li *ngIf="mission.gate_version">This task is only available with a feature update / gate (<code>gate_version</code>):
+    <li *ngIf="mission.gate_version">This task is only available with a feature update / gate
+      (<code>gate_version</code>):
       <ul>
         <li><code>{{mission.gate_version}}</code></li>
       </ul>
@@ -134,14 +135,16 @@
   <dl>
     <dt *ngIf="mission.isChoiceReward">The player can choose one of:</dt>
     <dt *ngIf="!mission.isChoiceReward">The player recieves:</dt>
-    <dd *ngIf="mission.reward_item1 > -1">{{mission.reward_item1_count}} of <a
-        routerLink="/objects/{{mission.reward_item1}}">{{mission.reward_item1}}</a></dd>
-    <dd *ngIf="mission.reward_item2 > -1">{{mission.reward_item2_count}} of <a
-        routerLink="/objects/{{mission.reward_item2}}">{{mission.reward_item2}}</a></dd>
-    <dd *ngIf="mission.reward_item3 > -1">{{mission.reward_item3_count}} of <a
-        routerLink="/objects/{{mission.reward_item3}}">{{mission.reward_item3}}</a></dd>
-    <dd *ngIf="mission.reward_item4 > -1">{{mission.reward_item4_count}} of <a
-        routerLink="/objects/{{mission.reward_item4}}">{{mission.reward_item4}}</a></dd>
+    <dd>
+      <lux-gui-item *ngIf="mission.reward_item1 > -1" [id]="mission.reward_item1" [amount]="mission.reward_item1_count">
+      </lux-gui-item>
+      <lux-gui-item *ngIf="mission.reward_item2 > -1" [id]="mission.reward_item2" [amount]="mission.reward_item2_count">
+      </lux-gui-item>
+      <lux-gui-item *ngIf="mission.reward_item3 > -1" [id]="mission.reward_item3" [amount]="mission.reward_item3_count">
+      </lux-gui-item>
+      <lux-gui-item *ngIf="mission.reward_item4 > -1" [id]="mission.reward_item4" [amount]="mission.reward_item4_count">
+      </lux-gui-item>
+    </dd>
     <dd *ngIf="mission.reward_emote > -1">the emote #{{mission.reward_emote}}</dd>
     <dd *ngIf="mission.reward_emote2 > -1">the emote #{{mission.reward_emote2}}</dd>
     <dd *ngIf="mission.reward_emote3 > -1">the emote #{{mission.reward_emote3}}</dd>
@@ -151,14 +154,16 @@
   <dl *ngIf="mission.repeatable">
     <dt *ngIf="mission.isChoiceReward">On repeats, the player can choose one of:</dt>
     <dt *ngIf="!mission.isChoiceReward">On repeats, the player recieves:</dt>
-    <dd *ngIf="mission.reward_item1_repeatable > -1">{{mission.reward_item1_repeat_count}} of <a
-        routerLink="/objects/{{mission.reward_item1_repeatable}}">{{mission.reward_item1_repeatable}}</a></dd>
-    <dd *ngIf="mission.reward_item2_repeatable > -1">{{mission.reward_item2_repeat_count}} of <a
-        routerLink="/objects/{{mission.reward_item2_repeatable}}">{{mission.reward_item2_repeatable}}</a></dd>
-    <dd *ngIf="mission.reward_item3_repeatable > -1">{{mission.reward_item3_repeat_count}} of <a
-        routerLink="/objects/{{mission.reward_item3_repeatable}}">{{mission.reward_item3_repeatable}}</a></dd>
-    <dd *ngIf="mission.reward_item4_repeatable > -1">{{mission.reward_item4_repeat_count}} of <a
-        routerLink="/objects/{{mission.reward_item4_repeatable}}">{{mission.reward_item4_repeatable}}</a></dd>
+    <dd>
+      <lux-gui-item *ngIf="mission.reward_item1_repeatable > -1" [id]="mission.reward_item1_repeatable"
+        [amount]="mission.reward_item1_repeat_count"></lux-gui-item>
+      <lux-gui-item *ngIf="mission.reward_item2_repeatable > -1" [id]="mission.reward_item2_repeatable"
+        [amount]="mission.reward_item2_repeat_count"></lux-gui-item>
+      <lux-gui-item *ngIf="mission.reward_item3_repeatable > -1" [id]="mission.reward_item3_repeatable"
+        [amount]="mission.reward_item3_repeat_count"></lux-gui-item>
+      <lux-gui-item *ngIf="mission.reward_item4_repeatable > -1" [id]="mission.reward_item4_repeatable"
+        [amount]="mission.reward_item4_repeat_count"></lux-gui-item>
+    </dd>
   </dl>
 
   <!--  <table>

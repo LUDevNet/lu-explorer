@@ -15,6 +15,7 @@ import { MissionRefListComponent } from './ref-list/ref-list.component';
 import { TasksModule } from './tasks/tasks.module';
 import { MissionsRoutingModule } from './missions-routing.module';
 import { GroupIconComponent } from './group-icon/group-icon.component';
+import { GuiModule } from '../gui/gui.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { GroupIconComponent } from './group-icon/group-icon.component';
     FormsModule,
     UtilModule,
     TasksModule,
-    MissionsRoutingModule
+    MissionsRoutingModule,
+    GuiModule,
   ]
 })
 export class MissionsModule { }

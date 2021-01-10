@@ -13,7 +13,8 @@ import {
   DB_Behavior,
   DB_SkillBehavior,
   DB_mapItemTypes,
-  DB_BrickColors
+  DB_BrickColors,
+  DB_RenderComponent,
 } from '../../cdclient';
 
 import { ZoneDetail } from '../../zone';
@@ -145,7 +146,7 @@ export class LuJsonService {
     return this.makeRequest(this.zonesBaseUrl + id, 'getZone');
   }
 
-  getRenderComponent(id: number): Observable<any> {
+  getRenderComponent(id: number): Observable<DB_RenderComponent> {
     // TODO: paged
     let page = Math.floor(id / 256);
     return this.makeRequest(this.renderBaseUrl + page + "/" + id, 'getRenderComponent');

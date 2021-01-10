@@ -4,20 +4,8 @@
     {{inventory.$error}}
   </div>
   <ng-template #content>
-    <div class="table-responsive">
-      <table>
-        <tr>
-          <th>count</th>
-          <th>equip</th>
-          <th>itemid</th>
-        </tr>
-        <tr *ngFor="let item of inventory.data.items">
-          <td>{{item.count}}</td>
-          <td>{{item.equip}}</td>
-          <td><a routerLink="/objects/{{item.itemid}}">{{item.itemid}}</a></td>
-        </tr>
-      </table>
-    </div>
+    <lux-gui-item *ngFor="let item of inventory.data.items" [id]="item.itemid" [amount]="item.count"
+      [equipped]="item.equip"></lux-gui-item>
   </ng-template>
 </ng-container>
 <ng-template #loading>

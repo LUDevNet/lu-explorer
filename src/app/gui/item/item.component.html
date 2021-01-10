@@ -1,0 +1,10 @@
+<ng-container *ngIf="id | data:'object' | async; let object">
+    <a routerLink="/objects/{{id}}" class="link" [class.equipped]="equipped"
+        [luxTooltip]="id + ' ' + (object['displayName'] || object['name'])">
+        <ng-container *ngIf="object['components']['2'] | data:'renderComponent' | async; let render">
+            <img class="icon" *ngIf="render['icon_asset']; let icon_asset"
+                [src]="'textures/ui/' + icon_asset | lowercase | replace:'dds$':'png' | res" />
+        </ng-container>
+        <span class="number" *ngIf="amount > 0">{{amount}}</span>
+    </a>
+</ng-container>

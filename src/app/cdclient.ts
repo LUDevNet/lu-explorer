@@ -123,6 +123,37 @@ export class DB_VendorComponent {
   LootMatrixIndex: number; // INTEGER
 }
 
+export class DB_RenderComponent {
+  id: number;
+  render_asset: string; // TEXT
+  icon_asset: string; // TEXT
+  IconID: number;
+  shader_id: number;
+  effect1: number;
+  effect2: number;
+  effect3: number;
+  effect4: number;
+  effect5: number;
+  effect6: number;
+  animationGroupIDs: string; // TEXT
+  fade: boolean; // BOOLEAN
+  usedropshadow: boolean; // BOOLEAN
+  preloadAnimations: boolean; // BOOLEAN
+  fadeInTime: number; // FLOAT
+  maxShadowDistance: number; // FLOAT
+  ignoreCameraCollision: boolean; // BOOLEAN
+  renderComponentLOD1: number;
+  renderComponentLOD2: number;
+  gradualSnap: boolean; // BOOLEAN
+  animationFlag: number;
+  AudioMetaEventSet: string; // TEXT
+  billboardHeight: number; // FLOAT
+  chatBubbleOffset: number; // FLOAT
+  staticBillboard: boolean; // BOOLEAN
+  LXFMLFolder: string; // TEXT
+  attachIndicatorsToNode: boolean; // BOOLEAN
+}
+
 export class DB_AccessoryDefaultLoc
 {
   Description: string;
