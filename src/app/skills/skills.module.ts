@@ -10,6 +10,7 @@ import { SkillComponent } from './skill/skill.component';
 
 import { SkillsRoutingModule } from './skills-routing.module';
 import { SkillsComponent } from './skills.component';
+import { DescriptionUiComponent } from './description-ui/description-ui.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SkillsComponent } from './skills.component';
     BehaviorDetailComponent,
     BehaviorDetailAltComponent,
     SkillComponent,
-    SkillsComponent
+    SkillsComponent,
+    DescriptionUiComponent
   ],
   imports: [
     CommonModule,

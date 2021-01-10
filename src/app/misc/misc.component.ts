@@ -17,8 +17,6 @@ export class MiscComponent implements OnInit {
     this.route.url.subscribe(this.processRouteChange.bind(this));
   }
 
-  processRouteChange(url) {
-    console.log(url);
-  }
+  processRouteChange(url) {}
 
 }

@@ -1,15 +1,12 @@
-<h2>Skill #{{id}}</h2>
 <div *ngIf="_skill | async; else loading; let skill">
-  <div *ngIf="skill.skillIcon">
-    <h3>Icon</h3>
-    <app-icon [iconID]="skill.skillIcon"></app-icon>
-  </div>
+  <app-icon *ngIf="skill.skillIcon" class="pull-right img-tag" [iconID]="skill.skillIcon"></app-icon>
+  <h2>Skill #{{id}}</h2>
   <ng-container *ngIf="skill.skillID | loc:'SkillBehavior' | async; let texts">
     <h3>Texts</h3>
-    <h4>{{texts.name}}</h4>
-    <blockquote>
-      {{texts.descriptionUI}}
-    </blockquote>
+    <b>Name (<code>name</code>):</b>
+    <blockquote>{{texts['name']}}</blockquote>
+    <b>UI Description (<code>descriptionUI</code>):</b>
+    <app-description-ui [template]="texts['descriptionUI']"></app-description-ui>
   </ng-container>
   <h3>Behavior</h3>
   <app-behavior-detail [behaviorID]="skill.behaviorID"></app-behavior-detail>

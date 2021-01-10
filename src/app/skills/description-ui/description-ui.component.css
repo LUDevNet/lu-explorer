@@ -1,0 +1,4 @@
+:host ::ng-deep b.tooltip-header {
+    display: block;
+    margin: 5px 0;
+}

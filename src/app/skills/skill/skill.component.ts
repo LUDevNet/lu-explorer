@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
@@ -18,12 +18,16 @@ export class SkillComponent implements OnInit {
 
   constructor(
   	private route: ActivatedRoute,
-    private luJsonService: LuJsonService) { }
+    private luJsonService: LuJsonService,
+    private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this._skill = this.route.paramMap.pipe(
       map(map => +map.get('id')),
-      tap(id => this.id = id),
+      tap(id => {
+        this.id = id;
+        this.cd.detectChanges();
+      }),
       switchMap(id => this.luJsonService.getSkill(id))
     );
   }

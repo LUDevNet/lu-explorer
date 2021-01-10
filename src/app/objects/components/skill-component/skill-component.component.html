@@ -15,7 +15,9 @@
     <ng-container *ngFor="let entry of (skills | async | keys)">
       <tr>
         <td><a routerLink="/skills/{{entry.key}}">{{entry.key}}</a></td>
-        <td><app-skill-cast-type [castType]="entry.value.ref.castOnType"></app-skill-cast-type></td>
+        <td>
+          <app-skill-cast-type [castType]="entry.value.ref.castOnType"></app-skill-cast-type>
+        </td>
         <td>{{entry.value.ref.AICombatWeight}}</td>
         <td>
           <app-icon [width]="'32px'" [iconID]="entry.value.skill.skillIcon"></app-icon>
@@ -24,12 +26,16 @@
           {{entry.value.skill.imaginationcost}}
         </td>
         <td class="skill-buffs">
-            <div *ngIf="entry.value.skill.lifeBonusUI" class="buff-icon" [style.background-image]="bgImage('textures/ui/inventory/common/heart.png')">
-              {{entry.value.skill.lifeBonusUI}}</div>
-            <div *ngIf="entry.value.skill.imBonusUI"  class="buff-icon" [style.background-image]="bgImage('textures/ui/inventory/common/imagination.png')">
-              {{entry.value.skill.imBonusUI}}</div>
-            <div *ngIf="entry.value.skill.armorBonusUI"  class="buff-icon" [style.background-image]="bgImage('textures/ui/inventory/common/armor.png')">
-              {{entry.value.skill.armorBonusUI}}</div>
+          <div *ngIf="entry.value.skill.lifeBonusUI" class="buff-icon">
+            <img [src]="'textures/ui/inventory/common/heart.png' | res"/>
+            <span> +{{entry.value.skill.lifeBonusUI}}</span>
+          </div>
+          <div *ngIf="entry.value.skill.imBonusUI" class="buff-icon">
+            <img [src]="'textures/ui/inventory/common/imagination.png' | res" />
+            <span> +{{entry.value.skill.imBonusUI}}</span></div>
+          <div *ngIf="entry.value.skill.armorBonusUI" class="buff-icon">
+            <img [src]="'textures/ui/inventory/common/armor.png' | res" />
+            <span> +{{entry.value.skill.armorBonusUI}}</span></div>
         </td>
         <td>
           {{entry.value.skill.damageUI}}
