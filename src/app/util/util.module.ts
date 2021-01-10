@@ -10,7 +10,7 @@ import { IconComponent } from './icon/icon.component';
 import { DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, LimitPipe, NonNullPipe, RangePipe, RemovePipe } from './pipes/data.pipe';
 import { BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe } from './pipes/logical.pipe';
 import { DatePipe, HtmlPipe } from './pipes/output.pipe';
-import { DocsPipe, ResourcePipe, LocalePipe, DataPipe } from './pipes/service.pipe';
+import { DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe } from './pipes/service.pipe';
 import { ReplacePipe, PercentPipe, ToPipe } from './pipes/strings.pipe';
 import { PcPipe } from './pipes/pc.pipe';
 
@@ -27,7 +27,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
     DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, NonNullPipe, RangePipe, RemovePipe, LimitPipe,
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe,
     DatePipe, HtmlPipe,
-    DocsPipe, ResourcePipe, LocalePipe, DataPipe,
+    DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe,
     ReplacePipe, PercentPipe, ToPipe,
     PcPipe,
   ],
@@ -41,7 +41,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
     LimitPipe,
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe,
     DatePipe, HtmlPipe,
-    DocsPipe, ResourcePipe, LocalePipe, DataPipe,
+    DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe,
     ReplacePipe, PercentPipe, ToPipe,
     PcPipe,
   ]

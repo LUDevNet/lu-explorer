@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Observable } from 'rxjs';
 import { LuDocsService, LuResService, LuLocaleService, LuJsonService } from '../../services';
 
 @Pipe({ name: 'docs' })
@@ -28,6 +29,17 @@ export class LocalePipe implements PipeTransform {
 
   transform(value: number, arg: string): any {
     return this.luLocale.getLocaleEntry(arg, value);
+  }
+
+}
+
+@Pipe({ name: 'trans' })
+export class TranslatePipe implements PipeTransform {
+
+  constructor(private luLocale: LuLocaleService) { }
+
+  transform(value: string): Observable<string> {
+    return this.luLocale.translate(value);
   }
 
 }

@@ -31,9 +31,12 @@ export class LuResService {
 
   getXML(path: string): Observable<XMLDocument> {
     const parser = new DOMParser();
-    return this.http.get(this.getResolvedResUrl(path + '.xml'), { responseType: 'text'})
+    let url = this.getResolvedResUrl(path + '.xml');
+    return this.http.get(url, { responseType: 'text'})
     .pipe(map(xmlStr => {
-      return parser.parseFromString(xmlStr, "application/xml");
+      let xml = parser.parseFromString(xmlStr, "application/xml");
+      console.log(xml);
+      return xml;
     }));
   }
 }

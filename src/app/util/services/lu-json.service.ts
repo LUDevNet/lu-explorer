@@ -93,7 +93,7 @@ export class LuJsonService {
     this.messageService.add('LuJsonService: ' + message);
   }
 
-  private makeRequest(url: string, method: string, wrapResult: boolean = false): Observable<any> {
+  makeRequest(url: string, method: string, wrapResult: boolean = false): Observable<any> {
     if (!this.jsonStore.hasOwnProperty(url)) {
       let httpRequest = this.http.get(this.apiUrl + url + '.json')
         .pipe(
