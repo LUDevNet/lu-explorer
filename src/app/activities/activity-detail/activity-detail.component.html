@@ -3,9 +3,12 @@
   <li>{{activity_id}}</li>
 </div>
 
+<img *ngIf="activity && activity.leaderboardType == 1" class="header" [src]="'ui/ingame/instancelobby_i68.png' | res"
+  title="This activity is (likely) a race" />
+
 <h2>Activity #{{activity_id}} <small *ngIf="activity_loc">"{{activity_loc.ActivityName}}"</small></h2>
 
-<ul>
+<ul *ngIf="activity">
   <li *ngIf="activity.localize === false">This activity is not localized</li>
   <li *ngIf="activity.localize === true">This activity is localized (with
     <code>locStatus == {{activity.locStatus}}</code>)
@@ -39,7 +42,9 @@
       <span *ngSwitchCase="2">(Monument Race)</span>
       <span *ngSwitchCase="3">(Footpath)</span>
       <span *ngSwitchCase="5">(Survival AG)</span>
-      <span *ngSwitchCase="6">(Survival NS)<!-- Waves? --></span>
+      <span *ngSwitchCase="6">(Survival NS)
+        <!-- Waves? -->
+      </span>
     </ng-container>
   </li>
   <li *ngIf="activity.optionalCostLOT">The player needs to hand in the following item(s) to participate
