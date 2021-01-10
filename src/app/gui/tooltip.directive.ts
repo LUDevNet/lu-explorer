@@ -1,12 +1,13 @@
-import { ComponentFactory, ComponentFactoryResolver, ComponentRef, Directive, ElementRef, HostListener, Injector, Input, ReflectiveInjector, Renderer2, TemplateRef, Type, ViewContainerRef } from '@angular/core';
+import { ComponentFactory, ComponentFactoryResolver, ComponentRef, Directive, ElementRef, EmbeddedViewRef, HostListener, Injector, Input, ReflectiveInjector, Renderer2, TemplateRef, Type, ViewContainerRef } from '@angular/core';
 import { TooltipComponent } from './tooltip/tooltip.component';
 
 @Directive({
   selector: '[luxTooltip]'
 })
 export class TooltipDirective {
-  @Input('luxTooltip') content: string | TemplateRef<any> | Type<any>;
+  @Input('luxTooltip') content: /*string |*/ TemplateRef<any> /*| Type<any>*/;
 
+  private embeddedViewRef?: EmbeddedViewRef<TooltipComponent>;
   private componentRef: ComponentRef<TooltipComponent>;
   private factory: ComponentFactory<TooltipComponent>;
   private configInjector: Injector;
@@ -36,7 +37,8 @@ export class TooltipDirective {
     if (this.componentRef) return;
     console.log("enter!");
 
-    this.componentRef = this.vcr.createComponent(this.factory, 0, this.configInjector, this.generateNgContent());
+    this.componentRef = //this.vcr.createEmbeddedView(this.content);
+    this.vcr.createComponent(this.factory, 0, this.configInjector, this.generateNgContent());
   }
 
   generateNgContent() {
@@ -46,11 +48,12 @@ export class TooltipDirective {
     }
 
     if (this.content instanceof TemplateRef) {
-      const context = {};
-      const viewRef = this.content.createEmbeddedView(context);
+      console.log(this.content);
+      //const context = { id: 100 };
+      this.embeddedViewRef = this.content.createEmbeddedView(this.element);
       // In earlier versions, you may need to add this line
       // this.appRef.attachView(viewRef);
-      return [viewRef.rootNodes];
+      return [this.embeddedViewRef.rootNodes];
     }
 
     // Else it's a component
@@ -76,5 +79,9 @@ export class TooltipDirective {
 
   ngOnDestroy() {
     this.destroy();
+  }
+
+  ngDoCheck() {
+    if (this.embeddedViewRef) this.embeddedViewRef.detectChanges();
   }
 }

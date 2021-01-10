@@ -40,3 +40,13 @@
 .equipped .number {
     color: #000;
 }
+
+.tooltip-title {
+    display: block;
+    padding: 5px;
+    background: #555;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3px;
+}
