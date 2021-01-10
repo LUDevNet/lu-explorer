@@ -75,6 +75,7 @@ export class TooltipDirective {
   destroy() {
     this.componentRef && this.componentRef.destroy();
     this.componentRef = null;
+    this.embeddedViewRef = null;
   }
 
   ngOnDestroy() {

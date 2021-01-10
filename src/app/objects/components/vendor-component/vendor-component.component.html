@@ -1,19 +1,10 @@
-<section id="vendor-component" *ngFor="let vendor of [component | async]">
+<section id="vendor-component" *ngIf="component | async; let vendor">
   <h3>Vendor Component ({{id}})</h3>
-  <div class="table-responsive">
-    <table>
-      <tr>
-        <th>buyScalar</th>
-        <th>sellScalar</th>
-        <th>refreshTimeSeconds</th>
-      </tr>
-      <tr>
-        <td>{{vendor.buyScalar}}</td>
-        <td>{{vendor.sellScalar.toPrecision(4)}}</td>
-        <td>{{vendor.refreshTimeSeconds}}</td>
-      </tr>
-    </table>
-  </div>
-  <h4>Loot Matrix ({{vendor.LootMatrixIndex}})</h4>
+  <ul>
+    <li>This vendor takes {{vendor.refreshTimeSeconds}} seconds to refresh (<code>refreshTimeSeconds</code>)</li>
+    <li>This vendor buys at {{ vendor.buyScalar.toPrecision(4) }}x the base value (<code>buyScalar</code>)</li>
+    <li>This vendor sells at {{ vendor.sellScalar.toPrecision(4) }}x the base value (<code>sellScalar</code>)</li>
+  </ul>
+  <h4>Loot Matrix #{{vendor.LootMatrixIndex}} (<code>LootMatrixIndex</code>)</h4>
   <app-loot-matrix [id]="vendor.LootMatrixIndex"></app-loot-matrix>
 </section>

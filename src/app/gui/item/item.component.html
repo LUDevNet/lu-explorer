@@ -2,8 +2,7 @@
     <a routerLink="/objects/{{id}}" class="link" [class.equipped]="equipped"
         [luxTooltip]="tooltip">
         <ng-template #tooltip>
-            <span class="tooltip-title" *ngIf="object['displayName']">{{object['displayName']}}</span>
-            <span class="tooltip-title" *ngIf="!object['displayName']">{{object['name']}}</span>
+            <span class="tooltip-title">{{ object['displayName'] || object['name'] }}</span>
             Template ID: {{id}}
         </ng-template>
         <ng-container *ngIf="object['components']['2'] | data:'renderComponent' | async; let render">
