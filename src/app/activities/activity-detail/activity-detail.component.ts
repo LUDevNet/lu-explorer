@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ActivityRewardsPod, DB_Activities } from '../../cdclient';
 
 import { LuLocaleService, LuJsonService } from '../../services';
 
@@ -12,8 +13,8 @@ export class ActivityDetailComponent implements OnInit {
 
   activity_id: number = -1;
   activity_loc: any;
-  activity_rewards: {};
-  activity: any;
+  activity_rewards?: ActivityRewardsPod;
+  activity: DB_Activities;
 
   constructor(
     private luJsonService: LuJsonService,
@@ -30,7 +31,7 @@ export class ActivityDetailComponent implements OnInit {
       .getLocaleEntry('Activities', this.activity_id)
       .subscribe(entry => this.activity_loc = entry);
     this.luJsonService
-      .getGeneric(this.activity_id, 'Activities', true)
+      .getGeneric<DB_Activities>(this.activity_id, 'Activities', true)
       .subscribe(entry => this.activity = entry);
     this.luJsonService
       .getActivityRewards(this.activity_id)

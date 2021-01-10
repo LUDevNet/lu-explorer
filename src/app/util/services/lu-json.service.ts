@@ -15,6 +15,7 @@ import {
   DB_mapItemTypes,
   DB_BrickColors,
   DB_RenderComponent,
+  ActivityRewardsPod,
 } from '../../cdclient';
 
 import { ZoneDetail } from '../../zone';
@@ -293,7 +294,7 @@ export class LuJsonService {
     return this.getJsonResource("tables/Missions/groupBy/", "type", "missions");
   }
 
-  getActivityRewards(id: number) {
+  getActivityRewards(id: number): Observable<ActivityRewardsPod> {
     return this.getGeneric(id, "ActivityRewards", true);
   }
 

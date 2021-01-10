@@ -24,7 +24,43 @@ export class ObjectPod {
   skills?: SkillRef[];
 }
 
+export class ActivityRewardsPod {
+  activity_rewards: DB_ActivityRewards[];
+}
+
 // LU database definitions
+
+export class DB_Activities {
+  ActivityID: number; // INTEGER
+  locStatus: number; // INTEGER
+  instanceMapID: number; // INTEGER
+  minTeams: number; // INTEGER
+  maxTeams: number; // INTEGER
+  minTeamSize: number; // INTEGER
+  maxTeamSize: number; // INTEGER
+  waitTime: number; // INTEGER
+  startDelay: number; // INTEGER
+  requiresUniqueData: boolean;
+  leaderboardType: number; // INTEGER
+  localize: boolean;
+  optionalCostLOT: number; // INTEGER
+  optionalCostCount: number; // INTEGER
+  showUIRewards: boolean;
+  CommunityActivityFlagID: number; // INTEGER
+  gate_version: string; // TEXT
+  noTeamLootOnDeath: boolean;
+  optionalPercentage: number; // FLOAT
+}
+
+export class DB_ActivityRewards {
+  objectTemplate: number; // INTEGER
+  ActivityRewardIndex: number; // INTEGER
+  activityRating: number; // INTEGER
+  LootMatrixIndex: number; // INTEGER
+  CurrencyIndex: number; // INTEGER
+  ChallengeRating: number; // INTEGER
+  description: string; // TEXT
+}
 
 export class DB_LootMatrixElement {
   id: number;
@@ -209,8 +245,16 @@ export class DB_PhysicsComponent {
   // TODO
 }
 
+export class DB_NPCMission {
+  id: number; // INTEGER
+  missionID: number; // INTEGER
+  offersMission: boolean;
+  acceptsMission: boolean;
+  gate_version: string; // TEXT
+}
+
 export class DB_MissionNPCComponent {
-  // TODO
+  missions: DB_NPCMission[];
 }
 
 export class DB_Missions {

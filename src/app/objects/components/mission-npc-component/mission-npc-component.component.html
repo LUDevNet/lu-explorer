@@ -4,12 +4,14 @@
     <table>
       <tr>
         <th>missionID</th>
+        <th>name</th>
         <th>offersMission</th>
         <th>acceptsMission</th>
         <th>gate_version</th>
       </tr>
       <tr *ngFor="let mission of mission_npc.missions">
         <td><a routerLink="/missions/{{mission.missionID}}">{{mission.missionID}}</a></td>
+        <td>{{mission.missionID | loc:"Missions" | async | elem:"name" }}</td>
         <td>{{mission.offersMission}}</td>
         <td>{{mission.acceptsMission}}</td>
         <td>{{mission.gate_version}}</td>

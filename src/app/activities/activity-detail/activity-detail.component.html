@@ -5,6 +5,66 @@
 
 <h2>Activity #{{activity_id}} <small *ngIf="activity_loc">"{{activity_loc.ActivityName}}"</small></h2>
 
+<ul>
+  <li *ngIf="activity.localize === false">This activity is not localized</li>
+  <li *ngIf="activity.localize === true">This activity is localized (with
+    <code>locStatus == {{activity.locStatus}}</code>)
+  </li>
+  <li *ngIf="activity.instanceMapID">
+    This activity is played on <a [routerLink]="['/zones/', activity.instanceMapID]">Zone {{activity.instanceMapID}}</a>
+    (<code>instanceMapID</code>)
+  </li>
+  <li *ngIf="activity.minTeams">Teams: {{activity.minTeams}}<span *ngIf="activity.maxTeams > activity.minTeams"> to
+      {{activity.maxTeams}}</span></li>
+  <li *ngIf="activity.minTeamSize">Team Size: {{activity.minTeamSize}}<span
+      *ngIf="activity.maxTeamSize > activity.minTeamSize"> to
+      {{activity.maxTeamSize}}</span></li>
+  <li *ngIf="activity.waitTime">
+    The game waits {{activity.waitTime}}ms in the lobby before starting (<code>waitTime</code>)
+  </li>
+  <li *ngIf="activity.startDelay">
+    After joining the activity, the start is delayed by {{activity.startDelay}}ms. (<code>startDelay</code>)
+  </li>
+  <li *ngIf="activity.requiresUniqueData !== undefined">
+    <ng-container *ngIf="activity.requiresUniqueData === true">This activity requires unique data
+      (<code>requiresUniqueData == true</code>)</ng-container>
+    <ng-container *ngIf="activity.requiresUniqueData === false">This activity does not require unique data
+      (<code>requiresUniqueData == false</code>)</ng-container>
+  </li>
+  <li *ngIf="activity.leaderboardType !== null">
+    The leaderboard type is {{activity.leaderboardType}} (<code>leaderboardType</code>)
+    <ng-container [ngSwitch]="activity.leaderboardType">
+      <span *ngSwitchCase="0">(Shooting Gallery)</span>
+      <span *ngSwitchCase="1">(Racing)</span>
+      <span *ngSwitchCase="2">(Monument Race)</span>
+      <span *ngSwitchCase="3">(Footpath)</span>
+      <span *ngSwitchCase="5">(Survival AG)</span>
+      <span *ngSwitchCase="6">(Survival NS)<!-- Waves? --></span>
+    </ng-container>
+  </li>
+  <li *ngIf="activity.optionalCostLOT">The player needs to hand in the following item(s) to participate
+    (<code>optionalCostLOT</code>; <code>optionalCostCount</code>):<br>
+    <lux-gui-item [id]="activity.optionalCostLOT" [amount]="activity.optionalCostCount"></lux-gui-item>
+  </li>
+  <li *ngIf="activity.showUIRewards !== null">
+    <ng-container *ngIf="activity.showUIRewards === true">This activity shows rewards in the UI
+      (<code>showUIRewards == true</code>)</ng-container>
+    <ng-container *ngIf="activity.showUIRewards === false">This activity does not show rewards in the UI
+      (<code>showUIRewards == false</code>)</ng-container>
+  </li>
+  <li *ngIf="activity.CommunityActivityFlagID !== null"><code>CommunityActivityFlagID</code>:
+    {{activity.CommunityActivityFlagID}}</li>
+  <li *ngIf="activity.noTeamLootOnDeath !== null">
+    <ng-container *ngIf="activity.noTeamLootOnDeath === true">This activity does not give team loot on death
+      (<code>noTeamLootOnDeath == true</code>)</ng-container>
+    <ng-container *ngIf="activity.noTeamLootOnDeath === false">This activity does give team loot on death
+      (<code>noTeamLootOnDeath == false</code>)</ng-container>
+  </li>
+  <li *ngIf="activity.optionalPercentage">
+    <code>optionalPercentage</code>: {{activity.optionalPercentage | pc }}
+  </li>
+</ul>
+
 <section>
   <h3>Details</h3>
   <app-data-table [table]="activity" *ngIf="activity"></app-data-table>

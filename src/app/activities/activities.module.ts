@@ -7,6 +7,7 @@ import { LootModule } from '../objects/loot/loot.module';
 import { ActivitiesRoutingModule } from './activities-routing.module';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
 import { ActivitiesComponent } from './activities.component';
+import { GuiModule } from '../gui/gui.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ActivitiesComponent } from './activities.component';
     CommonModule,
     UtilModule,
     LootModule,
-    ActivitiesRoutingModule
+    GuiModule,
+    ActivitiesRoutingModule,
   ],
   exports: [
     ActivityDetailComponent,
