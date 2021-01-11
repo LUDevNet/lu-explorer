@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject, Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, find, map, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -16,6 +16,9 @@ import {
   DB_BrickColors,
   DB_RenderComponent,
   ActivityRewardsPod,
+  DB_ObjectRef_ByComponent,
+  FactionsPod,
+  DB_Factions,
 } from '../../cdclient';
 
 import { ZoneDetail } from '../../zone';
@@ -114,7 +117,7 @@ export class LuJsonService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T, wrapError: boolean = false) {
+  private handleError<T>(operation = 'operation', result?: T, wrapError: boolean = false) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
@@ -251,8 +254,12 @@ export class LuJsonService {
     return this.makeRequest(this.objectsByComponentUrl + "index", `getObjectComponents()`);
   }
 
-  getObjectComponent(component: number): Observable<any> {
+  getObjectComponent(component: number): Observable<DB_ObjectRef_ByComponent[]> {
     return this.makeRequest(this.objectsByComponentUrl + component, `getObjectComponent(${component})`);
+  }
+
+  getDestructibleComponentsByFaction(): Observable<Record<string, number[]>> {
+    return this.makeRequest(this.tablesUrl + "DestructibleComponent/byFaction", `getDestructibleComponentsByFaction`);
   }
 
   getBrickColors(): Observable<DB_BrickColors[]> {
@@ -269,20 +276,16 @@ export class LuJsonService {
       .pipe(map(tbl => tbl['_embedded'][table]));
   }
 
-  getGeneric<T>(id: number, table:string, paged:boolean): Observable<T>
-  {
-    if (paged)
-    {
+  getGeneric<T>(id: number, table: string, paged: boolean): Observable<T> {
+    if (paged) {
       return this.getPagedJsonData(this.tablesUrl + table + "/", id, table);
     }
-    else
-    {
+    else {
       return this.getJsonData(this.tablesUrl + table + "/", id, table);
     }
   }
 
-  getLocale(table: string): Observable<any>
-  {
+  getLocale(table: string): Observable<any> {
     return this.getJsonResource("locale/" + table + "/", "index", "locale");
   }
 
@@ -304,6 +307,14 @@ export class LuJsonService {
 
   getScript(path: string): Observable<any> {
     return this.getJsonResource(this.scriptsUrl, path, "Script");
+  }
+
+  getFactions(): Observable<DB_Factions[]> {
+    return this.getSingleTable("Factions");
+  }
+
+  getFaction(index: number): Observable<DB_Factions> {
+    return this.getFactions().pipe(map(factions => factions.find(v => v.faction == index)));
   }
 
   getJsonResource(prefix: string, url: string, type: string): Observable<any> {

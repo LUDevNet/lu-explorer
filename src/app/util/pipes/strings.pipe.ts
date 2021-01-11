@@ -26,3 +26,10 @@ export class ToPipe implements PipeTransform {
     return value + " to " + other;
   }
 }
+
+@Pipe({name: 'num'})
+export class ToNumPipe implements PipeTransform {
+  transform(value: string) : number {
+    return +value;
+  }
+}

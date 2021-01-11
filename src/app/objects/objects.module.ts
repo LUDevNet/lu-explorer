@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { NpcIconComponent } from './npc-icon/npc-icon.component';
-import { FactionsComponent } from './factions/factions.component';
 
 import { ObjectTypesIndexComponent } from './types-index/types-index.component';
 import { ObjectsByTypeComponent } from './by-type/by-type.component';
@@ -17,11 +16,11 @@ import { ComponentsModule } from './components/components.module';
 import { LootModule } from './loot/loot.module';
 import { ObjectsRoutingModule } from './objects-routing.module';
 import { GuiModule } from '../gui/gui.module';
+import { FactionsModule } from './factions/factions.module';
 
 @NgModule({
   declarations: [
     NpcIconComponent,
-    FactionsComponent,
     ObjectTypesIndexComponent,
     ObjectsByTypeComponent,
     ObjectsByComponentComponent,

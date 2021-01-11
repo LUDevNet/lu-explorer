@@ -1,0 +1,43 @@
+<ng-container *ngIf="$id | async; let idStr">
+    <ng-container *luxVar="idStr | num; let id">
+        <ul class="breadcrumbs">
+            <li><a routerLink="/objects">Objects</a></li>
+            <li><a routerLink="/objects/factions">Factions</a></li>
+            <li>Faction #{{id}}</li>
+        </ul>
+
+        <h1>Faction #{{id}}</h1>
+        <section *ngIf="id | data:'faction' | async; let faction">
+            <h2>General</h2>
+            <dl>
+                <dt>Faction (<code>factionList</code>;
+                    <code>factionListFriendly == {{faction['factionListFriendly']}}</code>):</dt>
+                <dd>
+                    <lux-faction-list [list]="faction['factionList']"></lux-faction-list>
+                </dd>
+                <dt>Enemies (<code>enemyList</code>):</dt>
+                <dd>
+                    <lux-faction-list [list]="faction['enemyList']"></lux-faction-list>
+                </dd>
+                <dt>Friends (<code>friendList</code>):</dt>
+                <dd>
+                    <lux-faction-list [list]="faction['friendList']"></lux-faction-list>
+                </dd>
+            </dl>
+        </section>
+
+        <section *ngIf="$objectsWithDestructible | async | group:'comp_val'; let objects">
+            <h2>Objects</h2>
+            <ul *ngIf="$destructibleByFaction | async; let dict">
+                <li *ngFor="let ref of dict[id + '']">
+                    DestructibleComponent #{{ref}}
+                    <ul *ngIf="objects[ref + '']; let objs">
+                        <li *ngFor="let obj of objs">
+                            <a [routerLink]="['/objects/', obj.id]">LOT {{obj.id}}: {{obj.name}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </ng-container>
+</ng-container>

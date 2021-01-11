@@ -28,6 +28,10 @@ export class ActivityRewardsPod {
   activity_rewards: DB_ActivityRewards[];
 }
 
+export class FactionsPod {
+  factions: DB_Factions[];
+}
+
 // LU database definitions
 
 export class DB_Activities {
@@ -60,6 +64,14 @@ export class DB_ActivityRewards {
   CurrencyIndex: number; // INTEGER
   ChallengeRating: number; // INTEGER
   description: string; // TEXT
+}
+
+export class DB_Factions {
+  faction: number; // INTEGER
+  factionList: string; // TEXT
+  factionListFriendly: boolean;
+  friendList: string; // TEXT
+  enemyList: string; // TEXT
 }
 
 export class DB_LootMatrixElement {
@@ -110,7 +122,48 @@ export class DB_BrickColors {
 }
 
 export class DB_ItemComponent {
-
+  id: number; // INTEGER
+  equipLocation: string; // TEXT
+  baseValue: number; // INTEGER
+  isKitPiece: boolean;
+  rarity: number; // INTEGER
+  itemType: number; // INTEGER
+  itemInfo: number; // BIGINT
+  inLootTable: boolean;
+  inVendor: boolean;
+  isUnique: boolean;
+  isBOP: boolean;
+  isBOE: boolean;
+  reqFlagID: number; // INTEGER
+  reqSpecialtyID: number; // INTEGER
+  reqSpecRank: number; // INTEGER
+  reqAchievementID: number; // INTEGER
+  stackSize: number; // INTEGER
+  color1: number; // INTEGER
+  decal: number; // INTEGER
+  offsetGroupID: number; // INTEGER
+  buildTypes: number; // INTEGER
+  reqPrecondition: string; // TEXT
+  animationFlag: number; // INTEGER
+  equipEffects: number; // INTEGER
+  readyForQA: boolean;
+  itemRating: number; // INTEGER
+  isTwoHanded: boolean;
+  minNumRequired: number; // INTEGER
+  delResIndex: number; // INTEGER
+  currencyLOT: number; // INTEGER
+  altCurrencyCost: number; // INTEGER
+  subItems: string; // TEXT
+  audioEventUse: string; // TEXT
+  noEquipAnimation: boolean;
+  commendationLOT: number; // INTEGER
+  commendationCost: number; // INTEGER
+  audioEquipMetaEventSet: string; // TEXT
+  currencyCosts: string; // TEXT
+  ingredientInfo: string; // TEXT
+  locStatus: number; // INTEGER
+  forgeType: number; // INTEGER
+  SellMultiplier: number; // FLOAT
 }
 
 export class DB_ItemSets {
@@ -323,7 +376,20 @@ export class DB_InventoryComponent {
 }
 
 export class DB_DestructibleComponent {
-  LootMatrixIndex: number;
+  id: number; // INTEGER
+  faction: number; // INTEGER
+  factionList: string; // TEXT
+  life: number; // INTEGER
+  imagination: number; // INTEGER
+  LootMatrixIndex: number; // INTEGER
+  CurrencyIndex: number; // INTEGER
+  level: number; // INTEGER
+  armor: number; // FLOAT
+  death_behavior: number; // INTEGER
+  isnpc: boolean;
+  attack_priority: number; // INTEGER
+  isSmashable: boolean;
+  difficultyLevel: number; // INTEGER
 }
 
 export class DB_CollectibleComponent {

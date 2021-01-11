@@ -51,7 +51,7 @@
         </li>
       </ul>
     </section>
-    <section *ngIf="item.itemType == '2'">
+    <section *ngIf="item.itemType == 2">
       <h5>Hat Info</h5>
       <ul>
         <li *ngFor="let bit of item.itemInfo | bits">
@@ -93,11 +93,11 @@
     </table>
   </section>
 
-  <section *ngIf="item.subItems">
+  <section *ngIf="item.subItems.trim(); let subItems">
     <h4>SubItems</h4>
     When this item is equipped, the following items are also considered equipped:
     <ul>
-      <li *ngFor="let obj of item.subItems.trim().split(',')">
+      <li *ngFor="let obj of subItems.split(',')">
         Object
         <a routerLink="/objects/{{obj}}">{{obj}}</a>
       </li>

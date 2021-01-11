@@ -1,0 +1,41 @@
+.buff-icon {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: right;
+    font-size: 15pt;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.level-icon {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: right;
+    font-weight: bold;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    background: black;
+    color: orange;
+    border-radius: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.level-icon>.level{
+    font-size: 25pt;
+    vertical-align: middle;
+    line-height: 25px;
+}
+
+.buff-icon>img {
+    height: 2rem;
+    margin: 0;
+}
+
+.buff-icon>img, .buff-icon>span {
+    vertical-align: middle;
+}
+
+.skill-buffs {
+    vertical-align: middle;
+}

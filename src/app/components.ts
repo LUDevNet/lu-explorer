@@ -1,3 +1,4 @@
+export const DESTRUCTIBLE_COMPONENT_ID = 7;
 
 export let component_names: string[] =
 [

@@ -25,6 +25,7 @@ import { MissionNpcComponentComponent } from './mission-npc-component/mission-np
 import { PhysicsComponentComponent } from './physics-component/physics-component.component';
 import { ComponentDetailComponent } from './component-detail/component-detail.component';
 import { GuiModule } from '../../gui/gui.module';
+import { FactionsModule } from '../factions/factions.module';
 
 @NgModule({
   declarations: [

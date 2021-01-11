@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { LuJsonService } from '../../services';
+import { LuJsonService } from '../../../services';
 
 declare var vis: any;
 
 @Component({
-  selector: 'app-factions',
+  selector: 'app-factions-graph',
   templateUrl: './factions.component.html',
   styleUrls: ['./factions.component.css']
 })
-export class FactionsComponent implements OnInit {
+export class FactionsGraphComponent implements OnInit {
 
   table: any[];
   network: any;
@@ -21,7 +21,7 @@ export class FactionsComponent implements OnInit {
 
   getTable(): void
   {
-    this.luJsonService.getSingleTable("Factions").subscribe(table => this.loadTable(table));
+    this.luJsonService.getFactions().subscribe(table => this.loadTable(table));
   }
 
   loadTable(table: any[]): void

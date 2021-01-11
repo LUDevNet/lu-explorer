@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LootTableComponent } from './loot/loot-table/loot-table.component';
-import { FactionsComponent } from './factions/factions.component';
 
 import { ObjectTypesIndexComponent } from './types-index/types-index.component';
 import { ObjectsByTypeComponent } from './by-type/by-type.component';
@@ -14,7 +13,7 @@ import { component_names } from '../components';
 
 const objectsRoutes = [
   { path: 'item-sets', loadChildren: () => import('./item-sets/item-sets.module').then(m => m.ItemSetsModule) },
-  { path: 'factions', component: FactionsComponent, data: { title: "Factions" } },
+  { path: 'factions', loadChildren: () => import('./factions/factions.module').then(m => m.FactionsModule) },
   { path: 'loot/table/:id', component: LootTableComponent, data: { title: params => `LootTable #${params.id}` } },
   { path: 'types', component: ObjectTypesIndexComponent, data: { title: "Object Types" } },
   {

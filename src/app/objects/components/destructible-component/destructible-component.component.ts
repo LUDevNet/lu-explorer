@@ -14,7 +14,7 @@ export class DestructibleComponentComponent implements OnInit {
 
   _ref: ReplaySubject<number>;
   _id: number;
-  component: ReplaySubject<DB_DestructibleComponent>;
+  $component: ReplaySubject<DB_DestructibleComponent>;
 
   @Input() set id(value: number) {
     this._ref.next(value);
@@ -26,12 +26,12 @@ export class DestructibleComponentComponent implements OnInit {
 
   constructor(private luJsonService: LuJsonService) {
     this._ref = new ReplaySubject(1);
-    this.component = new ReplaySubject(1);
+    this.$component = new ReplaySubject(1);
 
     this._ref.subscribe(id => this._id = id);
     this._ref.pipe(
       switchMap(ref => this.luJsonService.getDestructibleComponent(ref))
-    ).subscribe(this.component);
+    ).subscribe(this.$component);
   }
 
   ngOnInit() {

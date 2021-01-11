@@ -1,7 +1,34 @@
 <h3>Destructible Component ({{id}})</h3>
-<ng-container *ngIf="component | async; else loading; let destructible">
+<ng-container *ngIf="$component | async; else loading; let destructible">
+  <div class="stats">
+    <div *ngIf="destructible.level" class="level-icon" title="Level">
+      LEVEL<br>
+      <span class="level">{{destructible.level}}</span>
+    </div>
+    <div *ngIf="destructible.life" class="buff-icon">
+      <img [src]="'textures/ui/inventory/common/heart.png' | res" title="Life"/>
+      <span> {{destructible.life}}</span>
+    </div>
+    <div *ngIf="destructible.imagination" class="buff-icon">
+      <img [src]="'textures/ui/inventory/common/imagination.png' | res" title="Imagination"/>
+      <span> {{destructible.imagination}}</span>
+    </div>
+    <div *ngIf="destructible.armor" class="buff-icon">
+      <img [src]="'textures/ui/inventory/common/armor.png' | res" title="Armor"/>
+      <span> {{destructible.armor}}</span>
+    </div>
+  </div>
+  <h3>General</h3>
+  <ul>
+    <li *ngIf="destructible.faction !== null">Faction: <a [routerLink]="['/objects/factions', destructible.faction]">{{destructible.faction}}</a></li>
+    <li *ngIf="destructible.factionList">Faction List: <lux-faction-list [list]="destructible.factionList"></lux-faction-list></li>
+  </ul>
+  <section *ngIf="destructible.LootMatrixIndex">
+    <h3>Drops (<code>LootMatrixIndex</code>)</h3>
+    <app-loot-matrix [id]="destructible.LootMatrixIndex"></app-loot-matrix>
+  </section>
+  <h3>Details</h3>
   <app-data-table [table]="destructible"></app-data-table>
-  <app-loot-matrix [id]="destructible.LootMatrixIndex"></app-loot-matrix>
 </ng-container>
 <ng-template #loading>
   Loading...

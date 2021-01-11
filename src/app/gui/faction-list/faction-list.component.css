@@ -1,0 +1,3 @@
+.faction-id+.faction-id::before {
+    content: ", ";
+}
