@@ -1,14 +1,20 @@
-<ng-container *ngIf="id | data:'object' | async; let object">
-    <a routerLink="/objects/{{id}}" class="link" [class.equipped]="equipped"
+<ng-container *ngIf="id | data:'object' | async; else notFound; let object">
+    <a routerLink="/objects/{{id}}" class="slot" [class.equipped]="equipped"
         [luxTooltip]="tooltip">
         <ng-template #tooltip>
             <span class="tooltip-title">{{ object['displayName'] || object['name'] }}</span>
             Template ID: {{id}}
         </ng-template>
-        <ng-container *ngIf="object['components']['2'] | data:'renderComponent' | async; let render">
-            <img class="icon" *ngIf="render['icon_asset']; let icon_asset"
+        <ng-container *ngIf="object['components']['2'] | data:'renderComponent' | async; else noRender; let render">
+            <img class="icon" *ngIf="render['icon_asset']; else noRender; let icon_asset"
                 [src]="'textures/ui/' + icon_asset | lowercase | replace:'dds$':'png' | res" />
         </ng-container>
+        <ng-template #noRender><span class="id">{{id}}</span></ng-template>
         <span class="number" *ngIf="amount > 0">{{amount}}</span>
     </a>
 </ng-container>
+<ng-template #notFound>
+    <span class="slot">
+        <span class="id">{{id}}</span>
+    </span>
+</ng-template>

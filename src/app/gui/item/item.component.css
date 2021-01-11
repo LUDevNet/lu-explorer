@@ -6,7 +6,7 @@
     margin: 2px;
 }
 
-.link {
+.slot {
     position: relative;
     vertical-align: middle;
     display: inline-block;
@@ -15,6 +15,14 @@
     box-sizing: border-box;
     background-color: #000;
     border-radius: 10px;
+}
+
+.slot .id {
+    line-height: 64px;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    font-weight: bold;
 }
 
 .icon {
