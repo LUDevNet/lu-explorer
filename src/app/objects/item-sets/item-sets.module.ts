@@ -8,6 +8,7 @@ import { SkillRefModule } from '../../skills/skill-ref/skill-ref.module';
 import { ItemSetDetailComponent } from './item-set-detail/item-set-detail.component';
 import { ItemSetIndexComponent } from './item-set-index/item-set-index.component';
 import { ItemSetSkillSetComponent } from './item-set-skill-set/item-set-skill-set.component';
+import { GuiModule } from '../../gui/gui.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ItemSetSkillSetComponent } from './item-set-skill-set/item-set-skill-se
     CommonModule,
     UtilModule,
     SkillRefModule,
+    GuiModule,
     ItemSetsRoutingModule
   ]
 })

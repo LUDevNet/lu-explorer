@@ -21,15 +21,10 @@
       (<code>kitType == {{set.kitType}}</code>)</li>
     <li>This Kit is of Rank {{set.kitRank}} (<code>kitRank</code>)</li>
   </ul>
-  <h3>Items</h3>
-  <ul>
-    <li *ngFor="let itemID of set.itemIDs.split(',')">
-      <a routerLink="/objects/{{itemID.trim()}}">
-        {{itemID.trim() | loc:"Objects" | async | elem:'name' | default: '[Unnamed]'}}
-        ({{itemID.trim()}})
-      </a>
-    </li>
-  </ul>
+  <section>
+    <h3>Items</h3>
+    <lux-gui-item *ngFor="let itemID of set.itemIDs.split(',')" [id]="itemID.trim() | num"></lux-gui-item>
+  </section>
   <h3>Skill Set</h3>
   <p>
     INFO: Some factions skills here are fake and just display the icon.
