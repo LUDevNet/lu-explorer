@@ -54,7 +54,6 @@ export class SkillComponentComponent implements OnInit {
   }
 
   @Input() set oskills(ref_list: SkillRef[]) {
-    console.log(ref_list);
     this.skill_ref.next(ref_list);
   }
 

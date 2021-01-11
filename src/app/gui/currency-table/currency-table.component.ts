@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LuJsonService } from '../../../services';
+import { LuJsonService } from '../../services';
 
 @Component({
-  selector: 'app-currency-table',
+  selector: 'lux-currency-table',
   templateUrl: './currency-table.component.html',
   styleUrls: ['./currency-table.component.css']
 })
@@ -10,6 +10,8 @@ export class CurrencyTableComponent implements OnInit {
 
   currency_table: any;
   currency_index: number;
+
+  @Input() level?: number = 0;
 
   @Input() set id(value: number) {
     this.currency_index = value;

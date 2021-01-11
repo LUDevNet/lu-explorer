@@ -7,15 +7,13 @@ import { UtilModule } from '../../util/util.module';
 import { LootMatrixComponent } from './loot-matrix/loot-matrix.component';
 import { LootTableComponent } from './loot-table/loot-table.component';
 import { LootTableIndexComponent } from './loot-table-index/loot-table-index.component';
-import { CurrencyTableComponent } from './currency-table/currency-table.component';
 import { GuiModule } from '../../gui/gui.module';
 
 @NgModule({
   declarations: [
     LootMatrixComponent,
     LootTableComponent,
-    LootTableIndexComponent,
-    CurrencyTableComponent
+    LootTableIndexComponent
   ],
   imports: [
     GuiModule,
@@ -26,8 +24,7 @@ import { GuiModule } from '../../gui/gui.module';
   exports: [
     LootMatrixComponent,
     LootTableComponent,
-    LootTableIndexComponent,
-    CurrencyTableComponent
+    LootTableIndexComponent
   ]
 })
 export class LootModule { }
