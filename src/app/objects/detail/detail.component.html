@@ -18,7 +18,7 @@
     <div class="clearfix"></div>
   </section>
 
-  <div class="sidemenu-pane">
+  <div class="sidemenu-pane" *ngIf="object.components">
     <div class="sidemenu scroll-30">
       <h3>Components</h3>
       <ul>
@@ -29,7 +29,8 @@
       </ul>
     </div>
     <div class="sidemenu-content">
-      <app-component-detail [id]="object.components[component_id]" [component_id]="component_id" [object]="object">
+      <app-component-detail [id]="object.components[component_id]"
+        [component_id]="component_id" [object]="object">
       </app-component-detail>
     </div>
   </div>

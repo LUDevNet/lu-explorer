@@ -93,7 +93,7 @@
     </table>
   </section>
 
-  <section *ngIf="item.subItems.trim(); let subItems">
+  <section *ngIf="item.subItems?.trim(); let subItems">
     <h4>SubItems</h4>
     When this item is equipped, the following items are also considered equipped:
     <ul>
