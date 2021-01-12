@@ -5,10 +5,12 @@
     <tr>
       <th>NDObjectID</th>
       <th>LEGOBrickID</th>
+      <th>Name</th>
     </tr>
     <tr *ngFor="let brick of table">
       <td><a routerLink="/objects/{{brick.NDObjectID}}">{{brick.NDObjectID}}</a></td>
       <td>{{brick.LEGOBrickID}}</td>
+      <td>{{objects[brick.NDObjectID+'']?.name}}</td>
     </tr>
   </table>
 </div>
