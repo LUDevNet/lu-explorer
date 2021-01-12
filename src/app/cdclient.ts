@@ -28,6 +28,10 @@ export class ActivityRewardsPod {
   activity_rewards: DB_ActivityRewards[];
 }
 
+export class CurrencyTablePod {
+  currency_table: DB_CurrencyTable[];
+}
+
 export class FactionsPod {
   factions: DB_Factions[];
 }
@@ -64,6 +68,14 @@ export class DB_ActivityRewards {
   CurrencyIndex: number; // INTEGER
   ChallengeRating: number; // INTEGER
   description: string; // TEXT
+}
+
+export class DB_CurrencyTable {
+  currencyIndex: number; // INTEGER
+  npcminlevel: number; // INTEGER
+  minvalue: number; // INTEGER
+  maxvalue: number; // INTEGER
+  id: number; // INTEGER
 }
 
 export class DB_Factions {

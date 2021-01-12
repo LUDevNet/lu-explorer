@@ -1,9 +1,9 @@
 <dl *ngIf="currency_table">
   <ng-container *ngIf="level; else list">
-    <ng-container *luxVar="currency_table | dict:'npcminlevel'; let currency_dict">
-      <dt>Level {{ level }}:</dt>
-      <dd>{{currency_dict[level].minvalue | to: currency_dict[level].maxvalue }} coin(s)</dd>
-    </ng-container>
+    <dt>Level {{ level }}:</dt>
+    <dd *ngIf="currency_table | maxUpTo:'npcminlevel':level; let currency_entry">
+      {{currency_entry['minvalue'] | to: currency_entry['maxvalue'] }} coin(s) (<code>npcminlevel == {{currency_entry['npcminlevel']}}</code>)
+    </dd>
   </ng-container>
   <ng-template #list>
     <ng-container *ngFor="let entry of currency_table">

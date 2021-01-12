@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CurrencyTablePod, DB_CurrencyTable } from '../../cdclient';
 import { LuJsonService } from '../../services';
 
 @Component({
@@ -8,7 +9,7 @@ import { LuJsonService } from '../../services';
 })
 export class CurrencyTableComponent implements OnInit {
 
-  currency_table: any;
+  currency_table: DB_CurrencyTable[];
   currency_index: number;
 
   @Input() level?: number = 0;
@@ -33,8 +34,7 @@ export class CurrencyTableComponent implements OnInit {
       .subscribe(this.processCurrencyIndex.bind(this))
   }
 
-  processCurrencyIndex(table: any) {
+  processCurrencyIndex(table: CurrencyTablePod) {
     this.currency_table = table.currency_table;
   }
-
 }

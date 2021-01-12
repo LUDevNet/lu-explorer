@@ -1,20 +1,20 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 // https://stackoverflow.com/questions/35534959/access-key-and-value-of-object-using-ngfor
-@Pipe({name: 'keys'})
+@Pipe({ name: 'keys' })
 export class KeysPipe implements PipeTransform {
-  transform(value, args:string[]) : any {
+  transform(value, args: string[]): any {
     let keys = [];
     for (let key in value) {
-      keys.push({key: key, value: value[key]});
+      keys.push({ key: key, value: value[key] });
     }
     return keys;
   }
 }
 
-@Pipe({name: 'dict'})
+@Pipe({ name: 'dict' })
 export class DictPipe implements PipeTransform {
-  transform(value: Object[], arg: string) : any {
+  transform(value: Object[], arg: string): any {
     if (value == null) return null;
     let dict = {};
     for (var i = 0; i < value.length; i++) {
@@ -24,9 +24,9 @@ export class DictPipe implements PipeTransform {
   }
 }
 
-@Pipe({name: 'group'})
+@Pipe({ name: 'group' })
 export class GroupPipe implements PipeTransform {
-  transform(value: Object[], arg: string) : any {
+  transform(value: Object[], arg: string): any {
     if (value == null) return null;
     let dict = {};
     for (var i = 0; i < value.length; i++) {
@@ -40,9 +40,9 @@ export class GroupPipe implements PipeTransform {
   }
 }
 
-@Pipe({name: 'range'})
+@Pipe({ name: 'range' })
 export class RangePipe implements PipeTransform {
-  transform(range: number) : number[] {
+  transform(range: number): number[] {
     var array = [];
     for (var i = 0; i < range; i++) {
       array.push(i);
@@ -51,9 +51,9 @@ export class RangePipe implements PipeTransform {
   }
 }
 
-@Pipe({name: 'limit'})
+@Pipe({ name: 'limit' })
 export class LimitPipe implements PipeTransform {
-  transform<T>(list: T[], limit: number) : T[] {
+  transform<T>(list: T[], limit: number): T[] {
     var array = [];
     let max = Math.min(limit, list.length);
     for (var i = 0; i < max; i++) {
@@ -63,33 +63,33 @@ export class LimitPipe implements PipeTransform {
   }
 }
 
-@Pipe({name: 'elem'})
+@Pipe({ name: 'elem' })
 export class ElementPipe implements PipeTransform {
-  transform(value: Object, arg: string) : any {
+  transform(value: Object, arg: string): any {
     return value ? value[arg] : null;
   }
 }
 
-@Pipe({name: 'default'})
+@Pipe({ name: 'default' })
 export class DefaultPipe implements PipeTransform {
-  transform(value: Object, arg: string) : any {
+  transform(value: Object, arg: string): any {
     return value == null ? arg : value;
   }
 }
 
 // https://stackoverflow.com/questions/35534959/access-key-and-value-of-object-using-ngfor
-@Pipe({name: 'remove'})
+@Pipe({ name: 'remove' })
 export class RemovePipe implements PipeTransform {
-  transform(value, filter:string) : any {
+  transform(value, filter: string): any {
     let copy = Object.assign({}, value);
     delete copy[filter];
     return copy;
   }
 }
 
-@Pipe({name: 'nonnull'})
+@Pipe({ name: 'nonnull' })
 export class NonNullPipe implements PipeTransform {
-  transform(value) : any {
+  transform(value): any {
     return value.filter(obj => obj.value != undefined);
   }
 }
@@ -98,7 +98,7 @@ export class NonNullPipe implements PipeTransform {
 @Pipe({
   name: "sort"
 })
-export class ArraySortPipe  implements PipeTransform {
+export class ArraySortPipe implements PipeTransform {
   transform(array: any, field: string): any[] {
     if (!Array.isArray(array)) {
       return;
@@ -119,7 +119,7 @@ export class ArraySortPipe  implements PipeTransform {
 @Pipe({
   name: "sortNum"
 })
-export class ArraySortNumPipe  implements PipeTransform {
+export class ArraySortNumPipe implements PipeTransform {
   transform(array: any, field: string): any[] {
     if (!Array.isArray(array)) {
       return;
@@ -134,5 +134,27 @@ export class ArraySortNumPipe  implements PipeTransform {
       }
     });
     return array;
+  }
+}
+
+@Pipe({
+  name: "maxUpTo"
+})
+export class MaxUpToPipe implements PipeTransform {
+  transform<T>(array: T[], field: string, value: number): T {
+    if (!Array.isArray(array)) {
+      return;
+    }
+    let max = -1;
+    let curr = null;
+    for (let entry of array) {
+      let next = +entry[field];
+      console.log(entry, next, max);
+      if (next > max && next <= value) {
+        curr = entry;
+        max = next;
+      }
+    }
+    return curr;
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { DB_ObjectRef_ByComponent } from '../cdclient';
-import { SCRIPTED_ACTIVITY_COMPONENT_ID } from '../components';
+import { QUICK_BUILD_COMPONENT_ID, REBUILD_COMPONENT_ID, SCRIPTED_ACTIVITY_COMPONENT_ID } from '../components';
 
 import { LuJsonService, LuLocaleService } from '../services';
 
@@ -13,6 +13,9 @@ import { LuJsonService, LuLocaleService } from '../services';
 export class ActivitiesComponent implements OnInit {
 
   $objectsWithScriptedActivity: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
+  $objectsWithRebuild: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
+  $objectsWithQuickBuild: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
+  $rebuildByActivityID: ReplaySubject<Record<string, number[]>> = new ReplaySubject(1);
   activities: Array<any>;
   activityNames: any;
 
@@ -27,6 +30,9 @@ export class ActivitiesComponent implements OnInit {
       .getLocale("Activities")
       .subscribe(this.processActivitiesLocaleIndex.bind(this));
     this.luJsonService.getObjectComponent(SCRIPTED_ACTIVITY_COMPONENT_ID).subscribe(this.$objectsWithScriptedActivity);
+    this.luJsonService.getObjectComponent(REBUILD_COMPONENT_ID).subscribe(this.$objectsWithRebuild);
+    this.luJsonService.getObjectComponent(QUICK_BUILD_COMPONENT_ID).subscribe(this.$objectsWithQuickBuild);
+    this.luJsonService.getRebuildComponentsByActivityID().subscribe(this.$rebuildByActivityID);
   }
 
   processActivitiesIndex(table: any) {

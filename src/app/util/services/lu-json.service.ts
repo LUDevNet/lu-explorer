@@ -20,9 +20,12 @@ import {
   FactionsPod,
   DB_Factions,
   DB_Preconditions,
+  DB_CurrencyTable,
+  CurrencyTablePod,
 } from '../../cdclient';
 
 import { ZoneDetail } from '../../zone';
+import { CurrencyPipe } from '@angular/common';
 
 export class Optional<T> {
   data: T;
@@ -269,6 +272,10 @@ export class LuJsonService {
     return this.makeRequest(this.tablesUrl + "DestructibleComponent/byFaction", `getDestructibleComponentsByFaction`);
   }
 
+  getRebuildComponentsByActivityID(): Observable<Record<string, number[]>> {
+    return this.makeRequest(this.tablesUrl + "RebuildComponent/byActivityID", `getRebuildComponentsByActivityID`);
+  }
+
   getBrickColors(): Observable<DB_BrickColors[]> {
     return this.getSingleTable<DB_BrickColors>('BrickColors');
   }
@@ -308,7 +315,7 @@ export class LuJsonService {
     return this.getGeneric(id, "ActivityRewards", true);
   }
 
-  getCurrencyIndex(id: number) {
+  getCurrencyIndex(id: number): Observable<CurrencyTablePod> {
     return this.getGeneric(id, "CurrencyTable", true);
   }
 

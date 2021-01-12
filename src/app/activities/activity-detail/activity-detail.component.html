@@ -83,11 +83,9 @@
       <p>
         Required Rating: {{reward.activityRating}}<br>
         Challenge Rating: {{reward.ChallengeRating}}<br>
+        CurrencyIndex: {{reward.CurrencyIndex}}
       </p>
-      <ng-container *ngIf="reward.CurrencyIndex">
-        <h5>CurrencyIndex ({{reward.CurrencyIndex}})</h5>
-        <lux-currency-table [id]="reward.CurrencyIndex"></lux-currency-table>
-      </ng-container>
+      <lux-currency-table *ngIf="reward.CurrencyIndex" [id]="reward.CurrencyIndex" [level]="reward.ChallengeRating"></lux-currency-table>
       <ng-container *ngIf="reward.LootMatrixIndex">
         <h5>LootMatrix ({{reward.LootMatrixIndex}})</h5>
         <app-loot-matrix [id]="reward.LootMatrixIndex"></app-loot-matrix>
