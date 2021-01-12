@@ -46,13 +46,34 @@ img {
 {
   background-color: #111;
   color: #fff;
-  border-radius: 2rem;
   padding: 1rem 2rem 2rem 2rem;
   text-shadow: none;
+  border-radius: 2rem;
 }
 
 body {
   padding: 1rem;
+}
+
+@media (max-width: 700px) {
+  body {
+    padding: 0;
+  }
+
+  .content {
+    border-radius: 0;
+    padding: 1rem;
+  }
+
+  .main-title {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 300px) {
+  .content {
+    padding: 0.5rem;
+  }
 }
 
 section {
@@ -216,7 +237,7 @@ td
   flex-direction: row;
   flex-wrap: wrap;
   list-style-type: none;
-  padding: 0.5rem 2.5rem 0 2.5rem;
+  padding: 0.5rem 2.5rem/* 0 2.5rem*/;
   background-color: #66f;
   border-top-left-radius: 3rem;
   border-top-right-radius: 3rem;
@@ -228,12 +249,17 @@ td
   flex: 1 0 auto;
   display: block;
   padding: 0.5rem;
-  padding-bottom: 0;
+  /*padding-bottom: 0;*/
   margin: 0 0.5rem;
   text-align: center;
   color: #fff !important;
   font-size: 1.5rem;
   box-sizing: border-box;
+}
+
+.main-menu .main-menu-item span {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
 }
 
 .main-menu .main-menu-item img
@@ -242,7 +268,7 @@ td
   margin-bottom: -1.5rem;
 }
 
-.main-menu .main-menu-item:after
+/*.main-menu .main-menu-item:after
 {
   display: block;
   text-align: center;
@@ -254,16 +280,43 @@ td
   height: 0;
   margin: 0 auto;
   margin-top: -0.5rem;
+}*/
+
+.main-menu .main-menu-item.active span {
+  background: black;
 }
 
-.main-menu .main-menu-item:hover:after
-{
-  border-bottom-color: #111;
+.main-menu .main-menu-item:hover span,
+.main-menu .main-menu-item:active span {
+  background: #444;
 }
+
+.main-menu .main-menu-item:focus span {
+  background-color: #222;
+}
+
+/* {
+  background: orange;
+  color: black;
+  text-shadow: 2px 2px 2px #fff;
+}*/
+
+/*.main-menu .main-menu-item:hover:after
+{
+  z-index: 3;
+  border-bottom-color: #111;
+}*/
 
 .main-menu .main-menu-item:hover
 {
   text-decoration: none;
+}
+
+@media (max-width: 700px) {
+  .main-menu {
+    margin: 0 1rem;
+    padding: 0.5rem 1rem 0 1rem;
+  }
 }
 
 .breadcrumbs
