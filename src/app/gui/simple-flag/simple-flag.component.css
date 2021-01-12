@@ -10,6 +10,7 @@
 .flag-container .value {
     width: 64px;
     margin: 0;
+    vertical-align: middle;
 }
 
 .flag-container .key {

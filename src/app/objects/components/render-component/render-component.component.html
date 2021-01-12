@@ -8,8 +8,64 @@
     have a render component.
   </p>
   <!--<app-icon [iconID]="render.IconID"></app-icon>-->
-  <div style="clear: right;"></div>
-  <app-data-table [table]="render"></app-data-table>
+  <!--<div style="clear: right;"></div>-->
+  <section>
+    <h3>General</h3>
+    <lux-number-flag *ngIf="render.IconID" name="IconID" [value]="render.IconID"></lux-number-flag>
+    <lux-number-flag name="shader_id" [value]="render.shader_id"></lux-number-flag>
+  
+    <lux-number-flag *ngIf="render.effect1" name="effect1" [value]="render.effect1"></lux-number-flag>
+    <lux-number-flag *ngIf="render.effect2" name="effect2" [value]="render.effect2"></lux-number-flag>
+    <lux-number-flag *ngIf="render.effect3" name="effect3" [value]="render.effect3"></lux-number-flag>
+    <lux-number-flag *ngIf="render.effect4" name="effect4" [value]="render.effect4"></lux-number-flag>
+    <lux-number-flag *ngIf="render.effect5" name="effect5" [value]="render.effect5"></lux-number-flag>
+    <lux-number-flag *ngIf="render.effect6" name="effect6" [value]="render.effect6"></lux-number-flag>
+  </section>
+
+  <section>
+    <h3>Strings</h3>
+    <ng-container *ngIf="render.icon_asset">
+      <b>icon_asset</b>:
+      <blockquote>{{render.icon_asset}}</blockquote>
+    </ng-container>
+    <ng-container *ngIf="render.render_asset">
+      <b>render_asset</b>
+      <blockquote>{{render.render_asset}}</blockquote>
+    </ng-container>
+    <ng-container *ngIf="render.animationGroupIDs">
+      <b>animationGroupIDs</b>
+      <blockquote>{{render.animationGroupIDs}}</blockquote>
+    </ng-container>
+    <ng-container *ngIf="render.AudioMetaEventSet">
+      <b>AudioMetaEventSet</b>
+      <blockquote>{{render.AudioMetaEventSet}}</blockquote>
+    </ng-container>
+    <ng-container *ngIf="render.LXFMLFolder">
+      <b>LXFMLFolder</b>
+      <blockquote>{{render.LXFMLFolder}}</blockquote>
+    </ng-container>
+  </section>
+  
+  <section>
+    <h3>Flags</h3>
+    
+    <lux-simple-flag *ngIf="render.fade !== null" name="fade" [value]="render.fade"></lux-simple-flag>
+    <lux-simple-flag *ngIf="render.usedropshadow !== null" name="usedropshadow" [value]="render.usedropshadow"></lux-simple-flag>
+    <lux-simple-flag *ngIf="render.preloadAnimations !== null" name="preloadAnimations" [value]="render.preloadAnimations"></lux-simple-flag>
+    <lux-number-flag *ngIf="render.fadeInTime !== null" name="fadeInTime" [value]="render.fadeInTime"></lux-number-flag>
+    <lux-number-flag *ngIf="render.maxShadowDistance" name="maxShadowDistance" [value]="render.maxShadowDistance"></lux-number-flag>
+    <lux-simple-flag *ngIf="render.ignoreCameraCollision !== null" name="ignoreCameraCollision" [value]="render.ignoreCameraCollision"></lux-simple-flag>
+
+    <lux-number-flag *ngIf="render.renderComponentLOD1 !== null" name="renderComponentLOD1" [value]="render.renderComponentLOD1"></lux-number-flag>
+    <lux-number-flag *ngIf="render.renderComponentLOD2 !== null" name="renderComponentLOD2" [value]="render.renderComponentLOD2"></lux-number-flag>
+
+    <lux-simple-flag *ngIf="render.gradualSnap !== null" name="gradualSnap" [value]="render.gradualSnap"></lux-simple-flag>
+    <lux-number-flag *ngIf="render.animationFlag !== null" name="animationFlag" [value]="render.animationFlag"></lux-number-flag>
+    <lux-number-flag *ngIf="render.billboardHeight !== null" name="billboardHeight" [value]="render.billboardHeight"></lux-number-flag>
+    <lux-number-flag *ngIf="render.chatBubbleOffset !== null" name="chatBubbleOffset" [value]="render.chatBubbleOffset"></lux-number-flag>
+    <lux-simple-flag *ngIf="render.staticBillboard !== null" name="staticBillboard" [value]="render.staticBillboard"></lux-simple-flag>
+    <lux-simple-flag *ngIf="render.attachIndicatorsToNode !== null" name="attachIndicatorsToNode" [value]="render.attachIndicatorsToNode"></lux-simple-flag>
+  </section>
 </ng-container>
 <ng-template #loading>
   Loading...
