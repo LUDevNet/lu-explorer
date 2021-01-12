@@ -1,0 +1,9 @@
+.rarity {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.rarity img {
+    vertical-align: middle;
+    margin: 0;
+}

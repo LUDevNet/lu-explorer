@@ -13,10 +13,10 @@
     <code>itemRating</code>
   </h4>
   <dl>
-    <dd>Base Value: {{item.baseValue}}</dd>
+    <dd>Base Value: <lux-item-value [value]="item.baseValue"></lux-item-value></dd>
     <dd>Stack Size: {{item.stackSize}}</dd>
-    <dd>Rarity: {{item.rarity}}</dd>
-    <dd>Rating: {{item.itemRating}}</dd>
+    <dd>Rarity: <lux-item-rarity [rarity]="item.rarity"></lux-item-rarity> ({{item.rarity}})</dd>
+    <dd *ngIf="item.itemRating !== null">Rating: {{item.itemRating}}</dd>
   </dl>
 
   <section *ngIf="item.minNumRequired > 0">
@@ -27,7 +27,7 @@
   </section>
 
   <section *ngIf="item.itemType" id="lego-brick-info">
-    <h4>ItemType <code>itemType</code></h4>
+    <h4>ItemType (<code>itemType</code>)</h4>
     <p>
       This item has the following type:
       <code>{{ ($itemTypes | async | dict:"id")[item.itemType].description }}</code>
@@ -82,7 +82,7 @@
   </section>
 
   <section *ngIf="item.equipLocation">
-    <h4>Equipment</h4>
+    <h4>Equipment (<code>equipLocation</code>)</h4>
     <p>
       This item can be equipped at <code>{{item.equipLocation}}</code>
     </p>
@@ -90,19 +90,8 @@
 
   <section *ngIf="some(item.color1) || some(item.decal)">
     <h4>Style</h4>
-    <table>
-      <tr *ngIf="some(item.color1)">
-        <td>color1</td>
-        <ng-container *ngFor="let color of [$brickColors | async | dict:'id' | elem: item.color1]">
-          <td>{{color.description}} ({{item.color1}})</td>
-          <td [style.background-color]="toRGBA(color)"></td>
-        </ng-container>
-      </tr>
-      <tr *ngIf="some(item.decal)">
-        <td>decal</td>
-        <td>{{item.decal}}</td>
-      </tr>
-    </table>
+    <lux-color-flag *ngIf="item.color1 !== null" name="color1" [value]="item.color1"></lux-color-flag>
+    <lux-number-flag *ngIf="item.decal" name="decal" [value]="item.decal"></lux-number-flag>
   </section>
 
   <section *ngIf="item.subItems?.trim(); let subItems">
@@ -117,7 +106,7 @@
   </section>
 
   <section *ngIf="item.buildTypes">
-    <h4>BuildTypes</h4>
+    <h4>BuildTypes (<code>buildTypes</code>)</h4>
 
     <ul>
       <li *ngIf="item.buildTypes | bitset:1">Not Customized (1)</li>
@@ -134,54 +123,20 @@
 
   <section>
     <h4>Flags</h4>
-    <table>
-      <tr>
-        <td>inLootTable</td>
-        <td>{{item.inLootTable}}</td>
-      </tr>
-      <tr>
-        <td>inVendor</td>
-        <td>{{item.inVendor}}</td>
-      </tr>
-      <tr>
-        <td>isBOE [Bound on Equip]</td>
-        <td>{{item.isBOE}}</td>
-      </tr>
-      <tr>
-        <td>isBOP [Bound on Pickup]</td>
-        <td>{{item.isBOP}}</td>
-      </tr>
-      <tr>
-        <td>isKitPiece</td>
-        <td>{{item.isKitPiece}}</td>
-      </tr>
-      <tr>
-        <td>isTwoHanded</td>
-        <td>{{item.isTwoHanded}}</td>
-      </tr>
-      <tr>
-        <td>isUnique</td>
-        <td>{{item.isUnique}}</td>
-      </tr>
-      <tr>
-        <td>noEquipAnimation</td>
-        <td>{{item.noEquipAnimation}}</td>
-      </tr>
-    </table>
+    <lux-simple-flag name="inLootTable" [value]="item.inLootTable"></lux-simple-flag>
+    <lux-simple-flag name="inVendor" [value]="item.inVendor"></lux-simple-flag>
+    <lux-simple-flag name="isBOE" [value]="item.isBOE" title="Bound on Equip"></lux-simple-flag>
+    <lux-simple-flag name="isBOP" [value]="item.isBOP" title="Bound on Pickup"></lux-simple-flag>
+    <lux-simple-flag name="isKitPiece" [value]="item.isKitPiece"></lux-simple-flag>
+    <lux-simple-flag name="isTwoHanded" [value]="item.isTwoHanded"></lux-simple-flag>
+    <lux-simple-flag name="isUnique" [value]="item.isUnique"></lux-simple-flag>
+    <lux-simple-flag name="noEquipAnimation" [value]="item.noEquipAnimation"></lux-simple-flag>
   </section>
 
   <section>
     <h4>Internal</h4>
-    <table>
-      <tr>
-        <td>readyForQA</td>
-        <td>{{item.readyForQA}}</td>
-      </tr>
-      <tr>
-        <td>locStatus</td>
-        <td>{{item.locStatus}}</td>
-      </tr>
-    </table>
+    <lux-simple-flag *ngIf="item.readyForQA !== null" name="readyForQA" [value]="item.readyForQA"></lux-simple-flag>
+    <lux-number-flag *ngIf="item.locStatus !== null" name="locStatus" [value]="item.locStatus"></lux-number-flag>
   </section>
 
   <section>

@@ -11,7 +11,7 @@ import { ArraySortPipe, ArraySortNumPipe, DefaultPipe, DictPipe, ElementPipe, Gr
 import { BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe } from './pipes/logical.pipe';
 import { DatePipe, HtmlPipe } from './pipes/output.pipe';
 import { DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe } from './pipes/service.pipe';
-import { ReplacePipe, PercentPipe, ToPipe, ToNumPipe } from './pipes/strings.pipe';
+import { ReplacePipe, PercentPipe, ToPipe, ToNumPipe, ToRGBAPipe } from './pipes/strings.pipe';
 import { PcPipe } from './pipes/pc.pipe';
 
 import { LuJsonService } from './services/lu-json.service';
@@ -29,7 +29,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe,
     DatePipe, HtmlPipe,
     DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe,
-    ReplacePipe, PercentPipe, ToPipe, ToNumPipe,
+    ReplacePipe, PercentPipe, ToPipe, ToNumPipe, ToRGBAPipe,
     PcPipe,
     LuxVarDirective,
   ],
@@ -44,7 +44,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe,
     DatePipe, HtmlPipe,
     DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe,
-    ReplacePipe, PercentPipe, ToPipe, ToNumPipe,
+    ReplacePipe, PercentPipe, ToPipe, ToNumPipe, ToRGBAPipe,
     PcPipe,
     LuxVarDirective,
   ]

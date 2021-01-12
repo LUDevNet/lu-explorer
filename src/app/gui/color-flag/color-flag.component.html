@@ -1,0 +1,8 @@
+<span class="flag-container" [title]="title ? title : ''">
+    <ng-container *ngIf="$brickColors | async | dict:'id' | elem: value; let color">
+        <span class="value">{{color.description}} ({{value}})</span><br>
+        <span [style.background-color]="color | toRGBA" class="hint"></span><br>
+    </ng-container>
+    
+    <span class="key">{{name}}</span>
+  </span>

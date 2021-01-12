@@ -1,0 +1,25 @@
+.flag-container {
+    display: inline-block;
+    background: black;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+}
+
+.flag-container .value {
+    width: 64px;
+    margin: 0;
+}
+
+.flag-container .hint {
+    border-radius: 10px;
+    height: 32px;
+    width: 64px;
+    display: inline-block;
+    margin: 5px 0 0 0;
+}
+
+.flag-container .key {
+    font-weight: bold;
+}

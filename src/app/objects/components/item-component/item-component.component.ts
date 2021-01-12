@@ -40,13 +40,6 @@ export class ItemComponentComponent {
     return this._id;
   }
 
-  toRGBA(color: DB_BrickColors): string {
-    var comp = [color.red, color.green, color.blue];
-    comp = comp.map(x => x * 255);
-    comp.push(color.alpha);
-    return "rgba(" + comp.join(',') + ")";
-  }
-
   some(val: number): boolean {
     return val == 0 || Boolean(val);
   }

@@ -8,15 +8,34 @@ import { TooltipDirective } from './tooltip.directive';
 import { FactionListComponent } from './faction-list/faction-list.component';
 import { CurrencyTableComponent } from './currency-table/currency-table.component';
 import { PreconditionComponent } from './precondition/precondition.component';
+import { ItemRarityComponent } from './item-rarity/item-rarity.component';
+import { ItemValueComponent } from './item-value/item-value.component';
+import { SimpleFlagComponent } from './simple-flag/simple-flag.component';
+import { ColorFlagComponent } from './color-flag/color-flag.component';
+import { NumberFlagComponent } from './number-flag/number-flag.component';
 
 
 @NgModule({
-  declarations: [ItemComponent, TooltipComponent, TooltipDirective, FactionListComponent, CurrencyTableComponent, PreconditionComponent],
+  declarations: [
+    ItemComponent, TooltipComponent, TooltipDirective, FactionListComponent, CurrencyTableComponent, PreconditionComponent,
+    ItemRarityComponent,
+    ItemValueComponent,
+    SimpleFlagComponent,
+    ColorFlagComponent,
+    NumberFlagComponent,
+  ],
   imports: [
     CommonModule,
     UtilModule,
     RouterModule,
   ],
-  exports: [ItemComponent, TooltipComponent, TooltipDirective, FactionListComponent, CurrencyTableComponent, PreconditionComponent],
+  exports: [
+    ItemComponent, TooltipComponent, TooltipDirective, FactionListComponent, CurrencyTableComponent, PreconditionComponent,
+    ItemRarityComponent,
+    ItemValueComponent,
+    SimpleFlagComponent,
+    ColorFlagComponent,
+    NumberFlagComponent
+  ],
 })
 export class GuiModule { }

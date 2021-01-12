@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { DB_BrickColors } from '../../cdclient';
 
 @Pipe({name: 'replace'})
 export class ReplacePipe implements PipeTransform {
@@ -31,5 +32,15 @@ export class ToPipe implements PipeTransform {
 export class ToNumPipe implements PipeTransform {
   transform(value: string) : number {
     return +value;
+  }
+}
+
+@Pipe({name: 'toRGBA'})
+export class ToRGBAPipe implements PipeTransform {
+  transform(color: DB_BrickColors): string {
+    var comp = [color.red, color.green, color.blue];
+    comp = comp.map(x => x * 255);
+    comp.push(color.alpha);
+    return "rgba(" + comp.join(',') + ")";
   }
 }
