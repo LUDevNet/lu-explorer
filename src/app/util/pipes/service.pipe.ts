@@ -54,7 +54,8 @@ export class DataPipe implements PipeTransform {
       object: x => this.luJson.getObject(x),
       renderComponent: x => this.luJson.getRenderComponent(x),
       lootTable: x => this.luJson.getLootTableGroupByIndex(x),
-      faction: x => { console.log(`Faction #${x}`); let o = this.luJson.getFaction(x); o.subscribe(f => console.log(f)); return o; },
+      faction: x => this.luJson.getFaction(x),
+      activityRewards: x => this.luJson.getActivityRewards(x),
     }[arg];
     if (arg) return call(value);
   }

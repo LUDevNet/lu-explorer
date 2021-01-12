@@ -1,4 +1,5 @@
 export const DESTRUCTIBLE_COMPONENT_ID = 7;
+export const SCRIPTED_ACTIVITY_COMPONENT_ID = 39;
 
 export let component_names: string[] =
 [

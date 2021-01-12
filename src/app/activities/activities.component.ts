@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ReplaySubject } from 'rxjs';
+import { DB_ObjectRef_ByComponent } from '../cdclient';
+import { SCRIPTED_ACTIVITY_COMPONENT_ID } from '../components';
 
-import { LuJsonService } from '../services';
+import { LuJsonService, LuLocaleService } from '../services';
 
 @Component({
   selector: 'app-activities',
@@ -9,10 +12,11 @@ import { LuJsonService } from '../services';
 })
 export class ActivitiesComponent implements OnInit {
 
+  $objectsWithScriptedActivity: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
   activities: Array<any>;
   activityNames: any;
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private luJsonService: LuJsonService, private luLocale: LuLocaleService) { }
 
   ngOnInit() {
     this.activityNames = {};
@@ -22,10 +26,11 @@ export class ActivitiesComponent implements OnInit {
     this.luJsonService
       .getLocale("Activities")
       .subscribe(this.processActivitiesLocaleIndex.bind(this));
+    this.luJsonService.getObjectComponent(SCRIPTED_ACTIVITY_COMPONENT_ID).subscribe(this.$objectsWithScriptedActivity);
   }
 
   processActivitiesIndex(table: any) {
-    this.activities = table.sort((a,b) => a.id - b.id);
+    this.activities = table.sort((a, b) => a.id - b.id);
   }
 
   processActivitiesLocaleIndex(table: any) {
@@ -45,7 +50,7 @@ export class ActivitiesComponent implements OnInit {
     if (this.activityNames.hasOwnProperty(key)) {
       return this.activityNames[key];
     }
-    return {ActivityName: "[Unnamed]"};
+    return {};
   }
 
 }

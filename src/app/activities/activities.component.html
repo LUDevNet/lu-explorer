@@ -4,9 +4,26 @@
 
 <h2>Activities &amp; Quickbuilds</h2>
 
-<table>
+<table *luxVar="$objectsWithScriptedActivity | async | group:'comp_val'; let objects">
   <tr *ngFor="let activity of activities">
     <td>{{activity.id}}</td>
-    <td><a routerLink="/activities/{{activity.id}}">{{getLocalized(activity.id).ActivityName}}</a></td>
+    <td><a routerLink="/activities/{{activity.id}}">{{getLocalized(activity.id).ActivityName ||"[Unnamed]"}}</a></td>
+    <td>
+      <ng-container *ngIf="objects && objects[activity.id]; let objs">
+        <a class="activity-obj" routerLink="/objects/{{obj.id}}" *ngFor="let obj of objs">
+          {{obj.id}} {{obj.name}}
+        </a>
+      </ng-container>
+    </td>
+    <td>
+      <ng-container *ngIf="activity.id | data:'activityRewards' | async; let rewards">
+        <ng-container *ngFor="let reward of rewards['activity_rewards']">
+        <!--<p *ngFor="let rew of rewards['activity_rewards']">
+          {{ rew | data }}
+        </p>-->
+          <span class="activity-obj">{{ reward.description }}</span>
+        </ng-container>
+      </ng-container>
+    </td>
   </tr>
 </table>
