@@ -298,6 +298,19 @@ export class DB_PhysicsComponent {
   // TODO
 }
 
+export class DB_Preconditions {
+  id: number; // INTEGER
+  type: number; // INTEGER
+  targetLOT: string; // TEXT
+  targetGroup: string; // TEXT
+  targetCount: number; // INTEGER
+  iconID: number; // INTEGER
+  localize: boolean;
+  validContexts: number; // BIGINT
+  locStatus: number; // INTEGER
+  gate_version: string; // TEXT
+}
+
 export class DB_NPCMission {
   id: number; // INTEGER
   missionID: number; // INTEGER

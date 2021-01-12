@@ -13,23 +13,23 @@ export class ItemComponentComponent {
 
   _ref: ReplaySubject<number>;
   _id: number;
-  component: ReplaySubject<DB_ItemComponent>;
-  itemTypes: Observable<DB_mapItemTypes[]>;
-  brickColors: Observable<DB_BrickColors[]>;
-  brickAttrs: Observable<DB_brickAttributes[]>;
+  $component: ReplaySubject<DB_ItemComponent>;
+  $itemTypes: Observable<DB_mapItemTypes[]>;
+  $brickColors: Observable<DB_BrickColors[]>;
+  $brickAttrs: Observable<DB_brickAttributes[]>;
 
   constructor(private luJsonService: LuJsonService) {
     this._ref = new ReplaySubject(1);
-    this.component = new ReplaySubject(1);
+    this.$component = new ReplaySubject(1);
 
     this._ref.subscribe(id => this._id = id);
     this._ref.pipe(
       switchMap(ref => this.luJsonService.getItemComponent(ref))
-    ).subscribe(this.component);
+    ).subscribe(this.$component);
 
-    this.itemTypes = this.luJsonService.getItemTypes();
-    this.brickColors = this.luJsonService.getBrickColors();
-    this.brickAttrs = this.luJsonService.getSingleTable('brickAttributes');
+    this.$itemTypes = this.luJsonService.getItemTypes();
+    this.$brickColors = this.luJsonService.getBrickColors();
+    this.$brickAttrs = this.luJsonService.getSingleTable('brickAttributes');
   }
 
   @Input() set id(value: number) {

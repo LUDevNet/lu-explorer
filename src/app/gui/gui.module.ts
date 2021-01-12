@@ -7,15 +7,16 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 import { TooltipDirective } from './tooltip.directive';
 import { FactionListComponent } from './faction-list/faction-list.component';
 import { CurrencyTableComponent } from './currency-table/currency-table.component';
+import { PreconditionComponent } from './precondition/precondition.component';
 
 
 @NgModule({
-  declarations: [ItemComponent, TooltipComponent, TooltipDirective, FactionListComponent, CurrencyTableComponent],
+  declarations: [ItemComponent, TooltipComponent, TooltipDirective, FactionListComponent, CurrencyTableComponent, PreconditionComponent],
   imports: [
     CommonModule,
     UtilModule,
     RouterModule,
   ],
-  exports: [ItemComponent, TooltipComponent, TooltipDirective, FactionListComponent, CurrencyTableComponent],
+  exports: [ItemComponent, TooltipComponent, TooltipDirective, FactionListComponent, CurrencyTableComponent, PreconditionComponent],
 })
 export class GuiModule { }

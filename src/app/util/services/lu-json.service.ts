@@ -19,6 +19,7 @@ import {
   DB_ObjectRef_ByComponent,
   FactionsPod,
   DB_Factions,
+  DB_Preconditions,
 } from '../../cdclient';
 
 import { ZoneDetail } from '../../zone';
@@ -46,6 +47,7 @@ export class LuJsonService {
   private lootTableBaseUrl;
   private iconsBaseUrl;
   private packBaseUrl;
+  private precondBaseUrl;
   private objectsBaseUrl;
   private objectsByTypeUrl;
   private objectsByComponentUrl;
@@ -84,6 +86,7 @@ export class LuJsonService {
     this.lootMatrixBaseUrl = this.tablesUrl + "LootMatrix/";
     this.lootTableBaseUrl = this.tablesUrl + "LootTable/";
     this.packBaseUrl = this.tablesUrl + "PackageComponent/";
+    this.precondBaseUrl = this.tablesUrl + "Preconditions/";
     this.zonesBaseUrl = this.tablesUrl + "ZoneTable/";
     this.iconsBaseUrl = this.tablesUrl + "Icons/";
     this.objectsByTypeUrl = this.objectsBaseUrl + "groupBy/type/";
@@ -180,6 +183,10 @@ export class LuJsonService {
 
   getPackageComponent(id: number): Observable<any> {
     return this.getJsonData(this.packBaseUrl, id, 'PackageComponent');
+  }
+
+  getPrecondition(id: number): Observable<DB_Preconditions> {
+    return this.getJsonData(this.precondBaseUrl, id, 'Preconditions');
   }
 
   getItemComponent(id: number): Observable<any> {

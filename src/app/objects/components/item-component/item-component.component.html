@@ -4,7 +4,7 @@
   and traded.
   <a [href]="'components/011-item' | docs" target="_blank">Read more...</a>
 </p>
-<ng-container *ngIf="component | async; else loading; let item">
+<ng-container *ngIf="$component | async; else loading; let item">
   <h4>
     General
     <code>baseValue</code>,
@@ -30,7 +30,7 @@
     <h4>ItemType <code>itemType</code></h4>
     <p>
       This item has the following type:
-      <code>{{ (itemTypes | async | dict:"id")[item.itemType].description }}</code>
+      <code>{{ ($itemTypes | async | dict:"id")[item.itemType].description }}</code>
       ({{item.itemType}}).
     </p>
 
@@ -39,10 +39,10 @@
       <p>
         This item is a LEGO brick and belongs to the following categories:
       </p>
-      <ul class="brick-category-list" *ngIf="brickAttrs | async | dict:'ID'; else loading; let attrs">
+      <ul class="brick-category-list" *ngIf="$brickAttrs | async | dict:'ID'; else loading; let attrs">
         <li *ngFor="let bit of item.itemInfo | bits">
           <ng-container *ngIf="attrs[bit]; else attrNotFound; let attr">
-            <img [src]="attr.icon_asset | lowercase | replace:'dds':'png' | res"/>
+            <img [src]="attr.icon_asset | lowercase | replace:'dds':'png' | res" />
             <span>{{attr.ID | loc:'brickAttributes' | async | elem:'name' }} ({{attr.ID}})</span>
           </ng-container>
           <ng-template #attrNotFound>
@@ -59,6 +59,17 @@
         </li>
       </ul>
     </section>
+  </section>
+
+  <section *ngIf="item.currencyLOT || item.currencyCosts || item.altCurrencyCost">
+    <h4>Currency</h4>
+    <div *ngIf="item.currencyLOT">This items needs the following alternative currency to be bought
+        (<code>currencyLOT; altCurrencyCost</code>):<br>
+        <lux-gui-item [id]="item.currencyLOT" [amount]="item.altCurrencyCost"></lux-gui-item>
+    </div>
+    <p *ngIf="item.currencyCosts"><code>currencyCosts</code>: {{item.currencyCosts}}
+      <!--<li *ngIf="item.altCurrencyCost"><code>altCurrencyCost</code>: {{item.altCurrencyCost}}</li>-->
+    </p>
   </section>
 
   <section *ngIf="item.commendationLOT">
@@ -82,14 +93,15 @@
     <table>
       <tr *ngIf="some(item.color1)">
         <td>color1</td>
-        <ng-container *ngFor="let color of [brickColors | async | dict:'id' | elem: item.color1]">
+        <ng-container *ngFor="let color of [$brickColors | async | dict:'id' | elem: item.color1]">
           <td>{{color.description}} ({{item.color1}})</td>
           <td [style.background-color]="toRGBA(color)"></td>
         </ng-container>
       </tr>
       <tr *ngIf="some(item.decal)">
         <td>decal</td>
-        <td>{{item.decal}}</td></tr>
+        <td>{{item.decal}}</td>
+      </tr>
     </table>
   </section>
 
@@ -123,56 +135,132 @@
   <section>
     <h4>Flags</h4>
     <table>
-      <tr><td>inLootTable</td><td>{{item.inLootTable}}</td></tr>
-      <tr><td>inVendor</td><td>{{item.inVendor}}</td></tr>
-      <tr><td>isBOE [Bound on Equip]</td><td>{{item.isBOE}}</td></tr>
-      <tr><td>isBOP [Bound on Pickup]</td><td>{{item.isBOP}}</td></tr>
-      <tr><td>isKitPiece</td><td>{{item.isKitPiece}}</td></tr>
-      <tr><td>isTwoHanded</td><td>{{item.isTwoHanded}}</td></tr>
-      <tr><td>isUnique</td><td>{{item.isUnique}}</td></tr>
-      <tr><td>noEquipAnimation</td><td>{{item.noEquipAnimation}}</td></tr>
+      <tr>
+        <td>inLootTable</td>
+        <td>{{item.inLootTable}}</td>
+      </tr>
+      <tr>
+        <td>inVendor</td>
+        <td>{{item.inVendor}}</td>
+      </tr>
+      <tr>
+        <td>isBOE [Bound on Equip]</td>
+        <td>{{item.isBOE}}</td>
+      </tr>
+      <tr>
+        <td>isBOP [Bound on Pickup]</td>
+        <td>{{item.isBOP}}</td>
+      </tr>
+      <tr>
+        <td>isKitPiece</td>
+        <td>{{item.isKitPiece}}</td>
+      </tr>
+      <tr>
+        <td>isTwoHanded</td>
+        <td>{{item.isTwoHanded}}</td>
+      </tr>
+      <tr>
+        <td>isUnique</td>
+        <td>{{item.isUnique}}</td>
+      </tr>
+      <tr>
+        <td>noEquipAnimation</td>
+        <td>{{item.noEquipAnimation}}</td>
+      </tr>
     </table>
   </section>
 
   <section>
     <h4>Internal</h4>
     <table>
-      <tr><td>readyForQA</td><td>{{item.readyForQA}}</td></tr>
-      <tr><td>locStatus</td><td>{{item.locStatus}}</td></tr>
+      <tr>
+        <td>readyForQA</td>
+        <td>{{item.readyForQA}}</td>
+      </tr>
+      <tr>
+        <td>locStatus</td>
+        <td>{{item.locStatus}}</td>
+      </tr>
     </table>
   </section>
 
   <section>
     <h4>Requirements</h4>
+    <div *ngIf="item.reqPrecondition?.split(';'); let prec_list">
+      <h5>Preconditions (<code>reqPrecondition == {{item.reqPrecondition}}</code>)</h5>
+      <ul>
+        <li *ngFor="let prec_id of prec_list">
+          <h6>Precondition #{{ prec_id }}</h6>
+          <lux-precondition [id]="prec_id | num"></lux-precondition>
+        </li>
+      </ul>
+    </div>
     <table>
-      <tr><td>reqAchievementID</td><td>{{item.reqAchievementID}}</td></tr>
-      <tr><td>reqFlagID</td><td>{{item.reqFlagID}}</td></tr>
-      <tr><td>reqPrecondition</td><td>{{item.reqPrecondition}}</td></tr>
-      <tr><td>reqSpecRank</td><td>{{item.reqSpecRank}}</td></tr>
-      <tr><td>reqSpecialtyID</td><td>{{item.reqSpecialtyID}}</td></tr>
+      <tr>
+        <td>reqAchievementID</td>
+        <td>{{item.reqAchievementID}}</td>
+      </tr>
+      <tr>
+        <td>reqFlagID</td>
+        <td>{{item.reqFlagID}}</td>
+      </tr>
+      <tr>
+        <td>reqSpecRank</td>
+        <td>{{item.reqSpecRank}}</td>
+      </tr>
+      <tr>
+        <td>reqSpecialtyID</td>
+        <td>{{item.reqSpecialtyID}}</td>
+      </tr>
     </table>
   </section>
 
   <section>
     <h4>Unknown</h4>
     <table>
-      <tr><td>delResIndex</td><td>{{item.delResIndex}}</td></tr>
-      <tr><td>itemInfo</td><td>{{item.itemInfo}}</td></tr>
-      <tr><td>offsetGroupID</td><td>{{item.offsetGroupID}}</td></tr>
+      <tr>
+        <td>delResIndex</td>
+        <td>{{item.delResIndex}}</td>
+      </tr>
+      <tr>
+        <td>itemInfo</td>
+        <td>{{item.itemInfo}}</td>
+      </tr>
+      <tr>
+        <td>offsetGroupID</td>
+        <td>{{item.offsetGroupID}}</td>
+      </tr>
 
-      <tr><td>animationFlag</td><td>{{item.animationFlag}}</td></tr>
-      <tr><td>equipEffects</td><td>{{item.equipEffects}}</td></tr>
+      <tr>
+        <td>animationFlag</td>
+        <td>{{item.animationFlag}}</td>
+      </tr>
+      <tr>
+        <td>equipEffects</td>
+        <td>{{item.equipEffects}}</td>
+      </tr>
 
-      <tr><td>currencyLOT</td><td>{{item.currencyLOT}}</td></tr>
-      <tr><td>currencyCosts</td><td>{{item.currencyCosts}}</td></tr>
-      <tr><td>altCurrencyCost</td><td>{{item.altCurrencyCost}}</td></tr>
+      <tr>
+        <td>audioEventUse</td>
+        <td>{{item.audioEventUse}}</td>
+      </tr>
+      <tr>
+        <td>audioEquipMetaEventSet</td>
+        <td>{{item.audioEquipMetaEventSet}}</td>
+      </tr>
 
-      <tr><td>audioEventUse</td><td>{{item.audioEventUse}}</td></tr>
-      <tr><td>audioEquipMetaEventSet</td><td>{{item.audioEquipMetaEventSet}}</td></tr>
-
-      <tr><td>ingredientInfo</td><td>{{item.ingredientInfo}}</td></tr>
-      <tr><td>forgeType</td><td>{{item.forgeType}}</td></tr>
-      <tr><td>SellMultiplier</td><td>{{item.SellMultiplier}}</td></tr>
+      <tr>
+        <td>ingredientInfo</td>
+        <td>{{item.ingredientInfo}}</td>
+      </tr>
+      <tr>
+        <td>forgeType</td>
+        <td>{{item.forgeType}}</td>
+      </tr>
+      <tr>
+        <td>SellMultiplier</td>
+        <td>{{item.SellMultiplier}}</td>
+      </tr>
     </table>
   </section>
 </ng-container>
