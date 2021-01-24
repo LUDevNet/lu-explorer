@@ -9,10 +9,10 @@ import { MissionsBySubtypeComponent } from './by-subtype/by-subtype.component';
 
 
 const missionsRoutes = [
-  { path: 'search', component: MissionsComponent, data: { title: "Search - Missions" } },
+  { path: 'search', component: MissionsComponent, data: { title: "Search | Missions" } },
   { path: ':id', component: MissionDetailComponent, data: { title: params => `Mission #${params['id']}` } },
-  { path: 'type/:type', component: MissionsByTypeComponent, data: { title: params => `${params['type']} - Missions` } },
-  { path: 'type/:type/subtype/:subtype', component: MissionsBySubtypeComponent, data: { title: params => `${params['subtype']} - ${params['type']} - Missions` } },
+  { path: 'type/:type', component: MissionsByTypeComponent, data: { title: params => `${params['type']} | Missions` } },
+  { path: 'type/:type/subtype/:subtype', component: MissionsBySubtypeComponent, data: { title: params => `${params['subtype']} - ${params['type']} | Missions` } },
   { path: '', component: MissionIndexComponent, data: { title: "Missions" } },
 ];
 

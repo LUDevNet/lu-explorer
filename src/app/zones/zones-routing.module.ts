@@ -6,9 +6,9 @@ import { ZoneDetailComponent } from './zone-detail/zone-detail.component';
 import { ScenesComponent } from './scenes/scenes.component';
 
 const zonesRoutes: Routes = [
-  { path: ':id', component: ZoneDetailComponent, data: { title: "Zone" } },
-  { path: ':id/:sc', component: ScenesComponent, data: { title: "Scene" } },
-  { path: ':id/:sc/:obj', component: ScenesComponent, data: { title: "Object - Scene" } },
+  { path: ':id', component: ZoneDetailComponent, data: { title: params => `Zone #${params['id']}` } },
+  { path: ':id/:sc', component: ScenesComponent, data: { title: params => `Scene #${params['sc']} | Zone #${params['id']}` } },
+  { path: ':id/:sc/:obj', component: ScenesComponent, data: { title: params => `Object #${params['obj']} | Scene #${params['sc']} | Zone #${params['id']}` } },
   { path: '', component: ZoneIndexComponent, data: { title: "Zones" } }
 ]
 

@@ -5,19 +5,27 @@
 
 <h1>Factions</h1>
 
-<table *ngIf="$factions | async | sort:'faction'; let factions">
-    <tr>
-        <th>faction</th>
-        <th>factionList</th>
-        <th>factionListFriendly</th>
-        <th>friendList</th>
-        <th>enemyList</th>
-    </tr>
-    <tr *ngFor="let faction of factions">
-        <td><a [routerLink]="['/objects/factions', faction.faction]">#{{ faction.faction }}</a></td>
-        <td><lux-faction-list [list]="faction.factionList"></lux-faction-list></td>
-        <td>{{ faction.factionListFriendly }}</td>
-        <td><lux-faction-list [list]="faction.friendList"></lux-faction-list></td>
-        <td><lux-faction-list [list]="faction.enemyList"></lux-faction-list></td>
-    </tr>
-</table>
+<div *ngIf="$factions | async | sort:'faction'; let factions" class="table-responsive">
+    <table>
+        <tr>
+            <th>faction</th>
+            <th>factionList</th>
+            <th>factionListFriendly</th>
+            <th>friendList</th>
+            <th>enemyList</th>
+        </tr>
+        <tr *ngFor="let faction of factions">
+            <td><a [routerLink]="['/objects/factions', faction.faction]">#{{ faction.faction }}</a></td>
+            <td>
+                <lux-faction-list [list]="faction.factionList"></lux-faction-list>
+            </td>
+            <td>{{ faction.factionListFriendly }}</td>
+            <td>
+                <lux-faction-list [list]="faction.friendList"></lux-faction-list>
+            </td>
+            <td>
+                <lux-faction-list [list]="faction.enemyList"></lux-faction-list>
+            </td>
+        </tr>
+    </table>
+</div>

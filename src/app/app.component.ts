@@ -28,7 +28,7 @@ export class AppComponent {
       const rt = this.getChild(this.activatedRoute);
       rt.data.subscribe(data => {
         let value = data.title ? (isFunction(data.title) ? data.title(rt.snapshot.params) : data.title) : "LU-Explorer";
-        this.titleService.setTitle(value + " - LU-Explorer")
+        this.titleService.setTitle(value + " | LU-Explorer")
       });
     });
   }

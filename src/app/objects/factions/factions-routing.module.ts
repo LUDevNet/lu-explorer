@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { IndexComponent } from './index/index.component';
 
 const factionsRoutes = [
-  { path: 'graph', component: FactionsGraphComponent, data: { title: "Item Sets" } },
+  { path: 'graph', component: FactionsGraphComponent, data: { title: "Factions Graph" } },
   { path: ':id', component: ObjectsByFactionComponent, data: { title: params => `Faction #${params['id']}` } },
   { path: '', component: IndexComponent, data: { title: "Factions" } }
 ];
