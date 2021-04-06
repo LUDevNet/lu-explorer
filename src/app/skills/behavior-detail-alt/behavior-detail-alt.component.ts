@@ -13,6 +13,7 @@ declare var vis: any;
   styleUrls: ['./behavior-detail-alt.component.css', "../../../../node_modules/vis/dist/vis-network.min.css"]
 })
 export class BehaviorDetailAltComponent implements OnInit {
+  id: number;
 
   /*@Input()*/
   selectedBehaviorID: number;
@@ -27,6 +28,7 @@ export class BehaviorDetailAltComponent implements OnInit {
   baseUrl: string;
 
   selectedBehavior: DB_Behavior;
+  errors: number[] = [];
 
   constructor(private route: ActivatedRoute,
     private luJsonService: LuJsonService) {
@@ -97,6 +99,11 @@ export class BehaviorDetailAltComponent implements OnInit {
   children(id: number, behavior: DB_Behavior, level: number): void
   {
     let node = this.nodes.find(node => node.id === id);
+    if (!behavior) {
+      node.label = "NULL";
+      this.errors.push(id);
+      return;
+    }
     if (behavior.templateID == 1)
     {
       node.label = "BasicAttack";
@@ -357,10 +364,10 @@ export class BehaviorDetailAltComponent implements OnInit {
     this.behaviors = {};
     var connectionCount = [];
 
-    const id = +this.route.snapshot.paramMap.get('id');
+    this.id = +this.route.snapshot.paramMap.get('id');
 
-    this.nodes.push({id: id, label: String(id), level: 0});
-    this.process(id, 0);
+    this.nodes.push({id: this.id, label: String(this.id), level: 0});
+    this.process(this.id, 0);
 
     // create a network
     this.container = document.getElementById('mynetwork');
@@ -445,8 +452,13 @@ export class BehaviorDetailAltComponent implements OnInit {
   select(params: any): void
   {
     console.log(params);
-    this.selectedBehavior = this.behaviors[params.nodes[0]];
-    this.selectedBehaviorID = params.nodes[0];
+    if (params.nodes.length > 0) {
+      this.selectedBehavior = this.behaviors[params.nodes[0]];
+      this.selectedBehaviorID = params.nodes[0];
+    } else {
+      this.selectedBehavior = undefined;
+      this.selectedBehaviorID = undefined;
+    }
   }
 
 }

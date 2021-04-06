@@ -1,3 +1,4 @@
+<h2>Behavior #{{id}}</h2>
 <div id="mynetwork"></div>
 <table *ngIf="selectedBehavior">
   <tr><th>Key</th><th>Value</th></tr>
@@ -9,3 +10,11 @@
     <td>{{entry.key}}</td><td>{{entry.value}}</td>
   </tr>
 </table>
+<div *ngIf="errors.length > 0">
+  Failed to fetch data for behavior nodes:
+  <ul>
+    <li *ngFor="let x of errors">{{x}}</li>
+  </ul>
+  Please file an issue <a href="https://github.com/xiphoseer/lu-explorer/issues">on GitHub</a>
+  or send me an email at <code>xiphoseer AT mailbox DOT org</code>
+</div>
