@@ -11,9 +11,13 @@
   <!--<div style="clear: right;"></div>-->
   <section>
     <h3>General</h3>
+    <ng-container *ngIf="render.shader_id">
+      <b>shader_id</b>:
+      <blockquote><strong *ngIf="$shaders | async | dict:'id'; let shaders">{{shaders[render.shader_id].label}}</strong>
+        ({{render.shader_id}})
+      </blockquote>
+    </ng-container>
     <lux-number-flag *ngIf="render.IconID" name="IconID" [value]="render.IconID"></lux-number-flag>
-    <lux-number-flag name="shader_id" [value]="render.shader_id"></lux-number-flag>
-  
     <lux-number-flag *ngIf="render.effect1" name="effect1" [value]="render.effect1"></lux-number-flag>
     <lux-number-flag *ngIf="render.effect2" name="effect2" [value]="render.effect2"></lux-number-flag>
     <lux-number-flag *ngIf="render.effect3" name="effect3" [value]="render.effect3"></lux-number-flag>
@@ -45,26 +49,38 @@
       <blockquote>{{render.LXFMLFolder}}</blockquote>
     </ng-container>
   </section>
-  
+
   <section>
     <h3>Flags</h3>
-    
+
     <lux-simple-flag *ngIf="render.fade !== null" name="fade" [value]="render.fade"></lux-simple-flag>
-    <lux-simple-flag *ngIf="render.usedropshadow !== null" name="usedropshadow" [value]="render.usedropshadow"></lux-simple-flag>
-    <lux-simple-flag *ngIf="render.preloadAnimations !== null" name="preloadAnimations" [value]="render.preloadAnimations"></lux-simple-flag>
+    <lux-simple-flag *ngIf="render.usedropshadow !== null" name="usedropshadow" [value]="render.usedropshadow">
+    </lux-simple-flag>
+    <lux-simple-flag *ngIf="render.preloadAnimations !== null" name="preloadAnimations"
+      [value]="render.preloadAnimations"></lux-simple-flag>
     <lux-number-flag *ngIf="render.fadeInTime !== null" name="fadeInTime" [value]="render.fadeInTime"></lux-number-flag>
-    <lux-number-flag *ngIf="render.maxShadowDistance" name="maxShadowDistance" [value]="render.maxShadowDistance"></lux-number-flag>
-    <lux-simple-flag *ngIf="render.ignoreCameraCollision !== null" name="ignoreCameraCollision" [value]="render.ignoreCameraCollision"></lux-simple-flag>
+    <lux-number-flag *ngIf="render.maxShadowDistance" name="maxShadowDistance" [value]="render.maxShadowDistance">
+    </lux-number-flag>
+    <lux-simple-flag *ngIf="render.ignoreCameraCollision !== null" name="ignoreCameraCollision"
+      [value]="render.ignoreCameraCollision"></lux-simple-flag>
 
-    <lux-number-flag *ngIf="render.renderComponentLOD1 !== null" name="renderComponentLOD1" [value]="render.renderComponentLOD1"></lux-number-flag>
-    <lux-number-flag *ngIf="render.renderComponentLOD2 !== null" name="renderComponentLOD2" [value]="render.renderComponentLOD2"></lux-number-flag>
+    <lux-number-flag *ngIf="render.renderComponentLOD1 !== null" name="renderComponentLOD1"
+      [value]="render.renderComponentLOD1"></lux-number-flag>
+    <lux-number-flag *ngIf="render.renderComponentLOD2 !== null" name="renderComponentLOD2"
+      [value]="render.renderComponentLOD2"></lux-number-flag>
 
-    <lux-simple-flag *ngIf="render.gradualSnap !== null" name="gradualSnap" [value]="render.gradualSnap"></lux-simple-flag>
-    <lux-number-flag *ngIf="render.animationFlag !== null" name="animationFlag" [value]="render.animationFlag"></lux-number-flag>
-    <lux-number-flag *ngIf="render.billboardHeight !== null" name="billboardHeight" [value]="render.billboardHeight"></lux-number-flag>
-    <lux-number-flag *ngIf="render.chatBubbleOffset !== null" name="chatBubbleOffset" [value]="render.chatBubbleOffset"></lux-number-flag>
-    <lux-simple-flag *ngIf="render.staticBillboard !== null" name="staticBillboard" [value]="render.staticBillboard"></lux-simple-flag>
-    <lux-simple-flag *ngIf="render.attachIndicatorsToNode !== null" name="attachIndicatorsToNode" [value]="render.attachIndicatorsToNode"></lux-simple-flag>
+    <lux-simple-flag *ngIf="render.gradualSnap !== null" name="gradualSnap" [value]="render.gradualSnap">
+    </lux-simple-flag>
+    <lux-number-flag *ngIf="render.animationFlag !== null" name="animationFlag" [value]="render.animationFlag">
+    </lux-number-flag>
+    <lux-number-flag *ngIf="render.billboardHeight !== null" name="billboardHeight" [value]="render.billboardHeight">
+    </lux-number-flag>
+    <lux-number-flag *ngIf="render.chatBubbleOffset !== null" name="chatBubbleOffset" [value]="render.chatBubbleOffset">
+    </lux-number-flag>
+    <lux-simple-flag *ngIf="render.staticBillboard !== null" name="staticBillboard" [value]="render.staticBillboard">
+    </lux-simple-flag>
+    <lux-simple-flag *ngIf="render.attachIndicatorsToNode !== null" name="attachIndicatorsToNode"
+      [value]="render.attachIndicatorsToNode"></lux-simple-flag>
   </section>
 </ng-container>
 <ng-template #loading>
