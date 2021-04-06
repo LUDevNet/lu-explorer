@@ -24,7 +24,7 @@
     "@angular/router": "11.0.2",
     "core-js": "^2.6.12",
     "firebase": "^8.2.1",
-    "rxjs": "^6.6.3",
+    "rxjs": "^6.6.7",
     "tslib": "^2.1.0",
     "typeface-nunito": "0.0.72",
     "vis": "^4.21.0",
