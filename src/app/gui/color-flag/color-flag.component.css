@@ -12,6 +12,12 @@
     margin: 0;
 }
 
+.flag-container .value.num {
+    font-size: 30pt;
+    line-height: 64px;
+    font-weight: bold;
+}
+
 .flag-container .hint {
     border-radius: 10px;
     height: 32px;

@@ -1,8 +1,12 @@
 <span class="flag-container" [title]="title ? title : ''">
-    <ng-container *ngIf="$brickColors | async | dict:'id' | elem: value; let color">
+    <ng-container *ngIf="$brickColors | async | dict:'id' | elem: value; let color; else elseBlock">
         <span class="value">{{color.description}} ({{value}})</span><br>
         <span [style.background-color]="color | toRGBA" class="hint"></span><br>
     </ng-container>
-    
+    <ng-template #elseBlock>
+        <span *ngIf="value > 16383" class="value num">M{{value - 32767}}</span>
+        <span *ngIf="value <= 16383" class="value num">{{value}}</span>
+        <br>
+    </ng-template>
     <span class="key">{{name}}</span>
-  </span>
+</span>
