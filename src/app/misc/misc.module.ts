@@ -14,6 +14,7 @@ import { SubscriptionPricingComponent } from './subscription-pricing/subscriptio
 import { BrickIdsComponent } from './brick-ids/brick-ids.component';
 import { BrickAttributesComponent } from './brick-attributes/brick-attributes.component';
 import { LevelProgressionComponent } from './level-progression/level-progression.component';
+import { ShadersComponent } from './shaders/shaders.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LevelProgressionComponent } from './level-progression/level-progression
     SubscriptionPricingComponent,
     BrickIdsComponent,
     BrickAttributesComponent,
-    LevelProgressionComponent
+    LevelProgressionComponent,
+    ShadersComponent
   ],
   imports: [
     CommonModule,

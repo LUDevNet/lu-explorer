@@ -70,3 +70,10 @@ export class SomePipe implements PipeTransform {
     return value == 0 || Boolean(value);
   }
 }
+
+@Pipe({name: 'divceil'})
+export class DivCeilPipe implements PipeTransform {
+  transform(value: number, param: number) : any {
+    return Math.ceil(value / param);
+  }
+}

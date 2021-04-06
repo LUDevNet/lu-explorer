@@ -53,13 +53,17 @@ export class RangePipe implements PipeTransform {
 
 @Pipe({ name: 'limit' })
 export class LimitPipe implements PipeTransform {
-  transform<T>(list: T[], limit: number): T[] {
-    var array = [];
-    let max = Math.min(limit, list.length);
-    for (var i = 0; i < max; i++) {
-      array.push(list[i]);
+  transform<T>(list: T[], limit: number, skip?: number): T[] {
+    if (list) {
+      console.log(skip);
+      var array = [];
+      let min = Math.min(skip || 0, list.length);
+      let max = Math.min(min + limit, list.length);
+      for (var i = min; i < max; i++) {
+        array.push(list[i]);
+      }
+      return array;
     }
-    return array;
   }
 }
 
@@ -96,14 +100,14 @@ export class NonNullPipe implements PipeTransform {
 
 // https://stackoverflow.com/questions/35158817/orderby-pipe-issue
 @Pipe({
-  name: "sort"
+  name: "sort",
 })
 export class ArraySortPipe implements PipeTransform {
   transform(array: any, field: string): any[] {
     if (!Array.isArray(array)) {
       return;
     }
-    array.sort((a: any, b: any) => {
+    return array.slice(0).sort((a: any, b: any) => {
       if (a[field] < b[field]) {
         return -1;
       } else if (a[field] > b[field]) {
@@ -112,7 +116,6 @@ export class ArraySortPipe implements PipeTransform {
         return 0;
       }
     });
-    return array;
   }
 }
 

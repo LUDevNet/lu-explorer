@@ -11,6 +11,7 @@ import { FeatureGatingComponent } from './feature-gating/feature-gating.componen
 import { LevelProgressionComponent } from './level-progression/level-progression.component';
 import { ReleaseVersionComponent } from './release-version/release-version.component';
 import { SubscriptionPricingComponent } from './subscription-pricing/subscription-pricing.component';
+import { ShadersComponent } from './shaders/shaders.component';
 
 const miscRoutes = [
   { path: '', component: MiscComponent, children: [
@@ -18,10 +19,12 @@ const miscRoutes = [
     { path: 'brick-attributes', component: BrickAttributesComponent, data: { title: "Brick Attributes"} },
     { path: 'brick-colors', component: BrickColorsComponent, data: { title: "Brick Colors"} },
     { path: 'brick-ids', component: BrickIdsComponent, data: { title: "Brick IDs"} },
+    { path: 'brick-ids/page/:page', component: BrickIdsComponent, data: { title: "Brick IDs"} },
     { path: 'event-gating', component: EventGatingComponent, data: { title: "Event Gating"} },
     { path: 'feature-gating', component: FeatureGatingComponent, data: { title: "Feature Gating"} },
     { path: 'level-progression', component: LevelProgressionComponent, data: { title: "Level Progression"} },
     { path: 'release-version', component: ReleaseVersionComponent, data: { title: "Release Versions"} },
+    { path: 'shaders', component: ShadersComponent, data: { title: "Shaders"} },
     { path: 'sub-pricing', component: SubscriptionPricingComponent, data: { title: "Subscription Pricing"} },
     { path: '',   redirectTo: 'acc-default-loc', pathMatch: 'full' },
   ] }

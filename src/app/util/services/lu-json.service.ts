@@ -22,6 +22,7 @@ import {
   DB_Preconditions,
   DB_CurrencyTable,
   CurrencyTablePod,
+  DB_mapShaders,
 } from '../../cdclient';
 
 import { ZoneDetail } from '../../zone';
@@ -278,6 +279,10 @@ export class LuJsonService {
 
   getBrickColors(): Observable<DB_BrickColors[]> {
     return this.getSingleTable<DB_BrickColors>('BrickColors');
+  }
+
+  getShadersMap(): Observable<DB_mapShaders[]> {
+    return this.getSingleTable<DB_mapShaders>('mapShaders');
   }
 
   getItemTypes(): Observable<DB_mapItemTypes[]> {

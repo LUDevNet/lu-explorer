@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterState } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { DB_BrickIDTable } from '../../cdclient';
 
 import { LuJsonService, LuLocaleService } from '../../services';
 
@@ -9,10 +13,15 @@ import { LuJsonService, LuLocaleService } from '../../services';
 })
 export class BrickIdsComponent implements OnInit {
 
-  table: any[];
+  $table: Observable<DB_BrickIDTable[]>;
+  sort: string = 'LEGOBrickID';
+  limit: number = 50;
   objects: any = {};
+  $page: Observable<number>;
 
-  constructor(private luJsonService: LuJsonService, private luLocale: LuLocaleService) { }
+  constructor(private luJsonService: LuJsonService, private luLocale: LuLocaleService, private route: ActivatedRoute) {
+    this.$page = route.params.pipe(map(p => Number(p.page || 0)));
+  }
 
   ngOnInit() {
     this.getTable();
@@ -27,15 +36,11 @@ export class BrickIdsComponent implements OnInit {
     Object.assign(this.objects, page);
   }
 
-  getTable(): void
-  {
-  	this.luJsonService
-      .getSingleTable("BrickIDTable")
-      .subscribe(table => this.table = table.sort(this.compareBrickIDs));
+  getTable(): void {
+    this.$table = this.luJsonService.getSingleTable("BrickIDTable");
   }
 
-  compareBrickIDs(a,b) {
-    return a.LEGOBrickID - b.LEGOBrickID;
+  setSort(key: string) {
+    this.sort = key;
   }
-
 }

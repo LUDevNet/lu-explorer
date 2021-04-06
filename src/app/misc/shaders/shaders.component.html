@@ -1,0 +1,17 @@
+<h2>Shaders</h2>
+
+<div class="table-responsive">
+  <table *ngIf="$table | async | sort:sort ; let table">
+    <tr>
+      <th><a (click)="setSort('id')">id</a></th>
+      <th><a (click)="setSort('label')">label</a></th>
+      <th><a (click)="setSort('gameValue')">gameValue</a></th>
+      <th><a (click)="setSort('priority')">priority</a></th>
+    </tr>
+    <tr *ngFor="let shader of table" id="{{shader.id}}">
+        <td>{{shader.id}}</td>
+        <td>{{shader.label}}</td>
+        <td>{{shader.gameValue}}</td>
+        <td>{{shader.priority}}</td>
+    </tr>
+</table>

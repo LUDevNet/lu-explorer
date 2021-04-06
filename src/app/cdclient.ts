@@ -70,6 +70,11 @@ export class DB_ActivityRewards {
   description: string; // TEXT
 }
 
+export class DB_BrickIDTable {
+  NDObjectID: number;
+  LEGOBrickID: number;
+}
+
 export class DB_CurrencyTable {
   currencyIndex: number; // INTEGER
   npcminlevel: number; // INTEGER
@@ -111,6 +116,13 @@ export class DB_mapItemTypes {
   id: number;
   description: string;
   equipLocation: string;
+}
+
+export class DB_mapShaders {
+  id: number;
+  label: string;
+  gameValue: number;
+  priority?: number;
 }
 
 export class DB_brickAttributes {
