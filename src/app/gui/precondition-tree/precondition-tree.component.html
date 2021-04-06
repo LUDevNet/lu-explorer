@@ -1,0 +1,16 @@
+<div *ngIf="ref.type == 'lit'">
+    <h6>Precondition #{{ ref.value }}</h6>
+    <lux-precondition [id]="ref.value"></lux-precondition>
+</div>
+<dl *ngIf="ref.type == '|'">
+  <dt>Any of</dt>
+  <dd *ngFor="let item of ref.value">
+    <lux-precondition-tree [ref]="item"></lux-precondition-tree>
+  </dd>
+</dl>
+<dl *ngIf="ref.type == ','">
+  <dt>All of</dt>
+  <dd *ngFor="let item of ref.value">
+    <lux-precondition-tree [ref]="item"></lux-precondition-tree>
+  </dd>
+</dl>

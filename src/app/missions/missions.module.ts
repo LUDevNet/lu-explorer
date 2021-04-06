@@ -9,7 +9,6 @@ import { MissionsByTypeComponent } from './by-type/by-type.component';
 import { MissionsBySubtypeComponent } from './by-subtype/by-subtype.component';
 import { MissionDetailComponent } from './detail/detail.component';
 import { MissionIndexComponent } from './index/index.component';
-import { PrereqListComponent } from './prereq-list/prereq-list.component';
 import { MissionRefListComponent } from './ref-list/ref-list.component';
 
 import { TasksModule } from './tasks/tasks.module';
@@ -24,7 +23,6 @@ import { GuiModule } from '../gui/gui.module';
     MissionsBySubtypeComponent,
     MissionDetailComponent,
     MissionIndexComponent,
-    PrereqListComponent,
     MissionRefListComponent,
     GroupIconComponent
   ],

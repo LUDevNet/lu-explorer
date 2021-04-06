@@ -10,7 +10,11 @@
 </ul>
 
 <app-group-icon *ngIf="mission" [name]="mission.defined_type"></app-group-icon>
-<h2>Mission ({{id}}) <small *ngIf="missionLocale">"{{missionLocale.name}}"</small></h2>
+<h2>
+  <ng-container *ngIf="mission && !mission.isMission; else headingElse">Achievement</ng-container> #{{id}} <small
+    *ngIf="missionLocale">"{{missionLocale.name}}"</small>
+</h2>
+<ng-template #headingElse>Mission</ng-template>
 
 <section *ngIf="mission" class="card card-right clearfix">
   <h3 id="general">General</h3>
@@ -65,7 +69,7 @@
 
 <section *ngIf="mission && mission.prereqMissionID">
   <h3>Prerequisites</h3>
-  <app-prereq-list [string]="mission.prereqMissionID"></app-prereq-list>
+  <mission-ref-list [ref]="mission.prereqMissionID | condast"></mission-ref-list>
 </section>
 
 <section id="flags" *ngIf="mission">

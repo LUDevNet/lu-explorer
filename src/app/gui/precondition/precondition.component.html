@@ -1,41 +1,43 @@
-<div *ngIf="$precondition | async; let precondition">
-    <app-icon *ngIf="precondition.iconID" [iconID]="precondition.iconID"></app-icon>
-    <ng-container [ngSwitch]="precondition.type">
-        <div *ngSwitchCase="0">Item Equipped</div>
-        <div *ngSwitchCase="1">Item Not Equipped</div>
-        <div *ngSwitchCase="2">Player has item</div>
-        <div *ngSwitchCase="3">Player does not have item</div>
-        <div *ngSwitchCase="4">Player has <a [routerLink]="['/missions', precondition.targetLOT]">achievement
-                {{precondition.targetLOT}}</a></div>
-        <div *ngSwitchCase="5">Mission available to player</div>
-        <div *ngSwitchCase="6">Player on Mission</div>
-        <div *ngSwitchCase="7">Player completed mission</div>
-        <div *ngSwitchCase="8">Player has a pet deployed</div>
-        <div *ngSwitchCase="9">Player has flag <span class="val">{{precondition.targetLOT}}</span> set</div>
-        <div *ngSwitchCase="10">Player within some shape thing (see Craig)</div>
-        <div *ngSwitchCase="11">Player is engaged in the right kind of Build</div>
-        <div *ngSwitchCase="12">Minigame Team Check</div>
-        <div *ngSwitchCase="13">Player Is In Pet Taming Minigame</div>
-        <div *ngSwitchCase="14">Has faction</div>
-        <div *ngSwitchCase="15">Does not have faction</div>
-        <div *ngSwitchCase="16">Has racing license</div>
-        <div *ngSwitchCase="17">Does not have license</div>
-        <div *ngSwitchCase="18">Is a LEGO Club Member</div>
-        <div *ngSwitchCase="19">NoInteraction</div><!-- Uchu? -->
-        <div *ngSwitchCase="20">???? (20)</div>
-        <div *ngSwitchCase="21">???? (21)</div>
-        <div *ngSwitchCase="22">Player has Level <span class="val">{{precondition.targetLOT}}</span> or
-            greater</div>
-    </ng-container>
-    <p *ngIf="precondition.gate_version">
-        This precondition only applies with gate / feature version <code>{{precondition.gate_version}}</code>
-    </p>
-    <p *ngIf="precondition.validContexts">This precondition only applies in the context of {{precondition.validContexts}}
-        <!-- are we sure about that ??? -->
-        <span *ngIf="precondition.validContexts | loc:'Preconditions' | async; let ctx">
-        ({{ ctx['FailureReason'] }})
-        </span>
-    </p>
+<div class="precondition" *ngIf="$precondition | async; let precondition">
+    <app-icon class="icon" *ngIf="precondition.iconID" [iconID]="precondition.iconID"></app-icon>
+    <div>
+        <ng-container [ngSwitch]="precondition.type">
+            <div *ngSwitchCase="0">Item Equipped</div>
+            <div *ngSwitchCase="1">Item Not Equipped</div>
+            <div *ngSwitchCase="2">Player has item</div>
+            <div *ngSwitchCase="3">Player does not have item</div>
+            <div *ngSwitchCase="4">Player has <a [routerLink]="['/missions', precondition.targetLOT]">achievement
+                    {{precondition.targetLOT}}</a></div>
+            <div *ngSwitchCase="5">Mission available to player</div>
+            <div *ngSwitchCase="6">Player on Mission</div>
+            <div *ngSwitchCase="7">Player completed mission</div>
+            <div *ngSwitchCase="8">Player has a pet deployed</div>
+            <div *ngSwitchCase="9">Player has flag <span class="val">{{precondition.targetLOT}}</span> set</div>
+            <div *ngSwitchCase="10">Player within some shape thing (see Craig)</div>
+            <div *ngSwitchCase="11">Player is engaged in the right kind of Build</div>
+            <div *ngSwitchCase="12">Minigame Team Check</div>
+            <div *ngSwitchCase="13">Player Is In Pet Taming Minigame</div>
+            <div *ngSwitchCase="14">Has faction</div>
+            <div *ngSwitchCase="15">Does not have faction</div>
+            <div *ngSwitchCase="16">Has racing license</div>
+            <div *ngSwitchCase="17">Does not have license</div>
+            <div *ngSwitchCase="18">Is a LEGO Club Member</div>
+            <div *ngSwitchCase="19">NoInteraction</div><!-- Uchu? -->
+            <div *ngSwitchCase="20">???? (20)</div>
+            <div *ngSwitchCase="21">???? (21)</div>
+            <div *ngSwitchCase="22">Player has Level <span class="val">{{precondition.targetLOT}}</span> or
+                greater</div>
+        </ng-container>
+        <p *ngIf="precondition.gate_version">
+            This precondition only applies with gate / feature version <code>{{precondition.gate_version}}</code>
+        </p>
+        <p *ngIf="precondition.validContexts">This precondition only applies in the context of {{precondition.validContexts}}
+            <!-- are we sure about that ??? -->
+            <span *ngIf="precondition.validContexts | loc:'Preconditions' | async; let ctx">
+            ({{ ctx['FailureReason'] }})
+            </span>
+        </p>
+    </div>
 </div>
 <blockquote *ngIf="$locale | async; let locale">
     {{locale.FailureReason}}

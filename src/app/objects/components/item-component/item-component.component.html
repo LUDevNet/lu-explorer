@@ -141,14 +141,9 @@
 
   <section>
     <h4>Requirements</h4>
-    <div *ngIf="item.reqPrecondition?.split(';'); let prec_list">
+    <div *ngIf="item.reqPrecondition">
       <h5>Preconditions (<code>reqPrecondition == {{item.reqPrecondition}}</code>)</h5>
-      <ul>
-        <li *ngFor="let prec_id of prec_list">
-          <h6>Precondition #{{ prec_id }}</h6>
-          <lux-precondition [id]="prec_id | num"></lux-precondition>
-        </li>
-      </ul>
+      <lux-precondition-tree [ref]="item.reqPrecondition | condast"></lux-precondition-tree>
     </div>
     <table>
       <tr>

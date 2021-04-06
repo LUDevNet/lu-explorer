@@ -13,6 +13,7 @@ import { DatePipe, HtmlPipe } from './pipes/output.pipe';
 import { DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe } from './pipes/service.pipe';
 import { ReplacePipe, PercentPipe, ToPipe, ToNumPipe, ToRGBAPipe } from './pipes/strings.pipe';
 import { PcPipe } from './pipes/pc.pipe';
+import { CondAstPipe } from './pipes/conditions.pipe';
 
 import { LuJsonService } from './services/lu-json.service';
 import { LuResService } from './services/lu-res.service';
@@ -30,7 +31,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
     DatePipe, HtmlPipe,
     DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe,
     ReplacePipe, PercentPipe, ToPipe, ToNumPipe, ToRGBAPipe,
-    PcPipe,
+    PcPipe, CondAstPipe,
     LuxVarDirective,
   ],
   imports: [
@@ -45,7 +46,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
     DatePipe, HtmlPipe,
     DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe,
     ReplacePipe, PercentPipe, ToPipe, ToNumPipe, ToRGBAPipe,
-    PcPipe,
+    PcPipe, CondAstPipe,
     LuxVarDirective,
   ]
 })

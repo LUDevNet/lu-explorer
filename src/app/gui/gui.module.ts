@@ -13,6 +13,7 @@ import { ItemValueComponent } from './item-value/item-value.component';
 import { SimpleFlagComponent } from './simple-flag/simple-flag.component';
 import { ColorFlagComponent } from './color-flag/color-flag.component';
 import { NumberFlagComponent } from './number-flag/number-flag.component';
+import { PreconditionTreeComponent } from './precondition-tree/precondition-tree.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { NumberFlagComponent } from './number-flag/number-flag.component';
     SimpleFlagComponent,
     ColorFlagComponent,
     NumberFlagComponent,
+    PreconditionTreeComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import { NumberFlagComponent } from './number-flag/number-flag.component';
   ],
   exports: [
     ItemComponent, TooltipComponent, TooltipDirective, FactionListComponent, CurrencyTableComponent, PreconditionComponent,
+    PreconditionTreeComponent,
     ItemRarityComponent,
     ItemValueComponent,
     SimpleFlagComponent,
