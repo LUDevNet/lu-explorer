@@ -144,6 +144,7 @@ export interface LuaLocalStatement {
 export interface LuaLogicalExpression {
     type: LuaStmtKind.LogicalExpression;
     inParens: boolean;
+    operator: string;
     left: LuaStmt;
     right: LuaStmt;
 }
