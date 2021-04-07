@@ -153,7 +153,9 @@
   <span *ngIf="behavior.templateID==30">
     Buff
     [
-      imag: {{behavior.parameters['imag']}}
+      <ng-container *ngFor="let x of ['armor', 'brain', 'imag', 'life', 'run_speed']">
+        <span class="behavior-attr" *ngIf="behavior.parameters[x]">{{x}}: {{behavior.parameters[x]}}</span>  
+      </ng-container>
     ]
   </span>
   <span *ngIf="behavior.templateID==34">
