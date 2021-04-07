@@ -1,0 +1,7 @@
+<div class="table-responsive lua-code">
+    <dl>
+        <dt *ngFor="let stmt of ast.body">
+            <app-lua [ast]="stmt"></app-lua>
+        </dt>
+    </dl>
+</div>

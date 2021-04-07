@@ -1,0 +1,6 @@
+<span *ngFor="let va of ast.variables; let isLast = last">
+    <app-lua [ast]="va"></app-lua>
+    {{isLast ? '' : ','}}
+</span>
+=
+<app-lua *ngFor="let in of ast.init" [ast]="in"></app-lua>

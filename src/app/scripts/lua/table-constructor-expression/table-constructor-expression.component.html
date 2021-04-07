@@ -1,0 +1,9 @@
+{{ '{' }} <ng-container *luxVar="allSimple(ast.fields); let simple">
+    <br *ngIf="!simple">
+    <div class="TableConstructorExpression" [class.complex]="!simple">
+        <span *ngFor="let field of ast.fields; let isLast=last">
+            <app-lua [ast]="field"></app-lua>{{isLast ? '' : ','}}
+        </span>
+    </div>
+    <br *ngIf="!simple">
+</ng-container> {{ '}' }}

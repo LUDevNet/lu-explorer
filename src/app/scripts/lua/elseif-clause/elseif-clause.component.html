@@ -1,0 +1,8 @@
+<span class="lua-keyword">elseif </span>
+<app-lua [ast]="ast.condition"></app-lua>
+<span class="lua-keyword"> then</span>
+<dl>
+    <dd *ngFor="let stmt of ast.body">
+        <app-lua [ast]="stmt"></app-lua>
+    </dd>
+</dl>

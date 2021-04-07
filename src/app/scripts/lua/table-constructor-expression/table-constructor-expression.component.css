@@ -1,0 +1,9 @@
+.TableConstructorExpression {
+    display: inline-block;
+}
+
+.TableConstructorExpression.complex {
+    display: inline-flex;
+    flex-direction: column;
+    padding-left: 1rem;
+}

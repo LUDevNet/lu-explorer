@@ -1,0 +1,16 @@
+<section *ngIf="ast.dirs.length > 0">
+    <h3>Directories</h3>
+    <ul>
+        <li *ngFor="let dir of ast.dirs">
+            <a [routerLink]="dir">{{dir}}</a>
+        </li>
+    </ul>
+</section>
+<section *ngIf="ast.files.length > 0">
+    <h3>Files</h3>
+    <ul>
+        <li *ngFor="let file of ast.files">
+            <a [routerLink]="file">{{file}}</a>
+        </li>
+    </ul>
+</section>

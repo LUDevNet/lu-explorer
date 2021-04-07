@@ -1,0 +1,8 @@
+<span class="lua-keyword">local </span>
+<span *ngFor="let va of ast.variables; let isLast = last">
+    <app-lua [ast]="va"></app-lua>
+    {{isLast ? '' : ','}}
+</span>
+<ng-container *ngIf="ast.init.length > 0">
+    = <app-lua *ngFor="let in of ast.init" [ast]="in"></app-lua>
+</ng-container>

@@ -1,0 +1,12 @@
+<span *ngIf="ast.isLocal" class="lua-keyword">local </span>
+<span class="lua-keyword">function </span>
+<app-lua *ngIf="ast.identifier" [ast]="ast.identifier"></app-lua>(
+<span *ngFor="let param of ast.parameters; let isLast = last">
+    <app-lua [ast]="param"></app-lua>{{isLast ? '' : ', '}}
+</span>)
+<dl>
+    <dd *ngFor="let stmt of ast.body">
+        <app-lua [ast]="stmt"></app-lua>
+    </dd>
+</dl>
+<span class="lua-keyword">end</span>

@@ -1,0 +1,9 @@
+<span class="lua-keyword">while</span>
+<app-lua [ast]="ast.condition"></app-lua>
+<span>do</span>
+<dl>
+    <dd *ngFor="let stmt of ast.body">
+        <app-lua [ast]="stmt"></app-lua>
+    </dd>
+</dl>
+end

@@ -1,0 +1,5 @@
+{{ ast.inParens ? '(' : '' }}
+<app-lua [ast]="ast.left"></app-lua>
+{{ast.operator}}
+<app-lua [ast]="ast.right"></app-lua>
+{{ ast.inParens ? ')' : '' }}

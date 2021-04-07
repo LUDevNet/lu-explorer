@@ -1,0 +1,12 @@
+<span class="lua-keyword">for </span>
+<app-lua [ast]="ast.variable"></app-lua>
+= <app-lua [ast]="ast.start"></app-lua>
+, <app-lua [ast]="ast.end"></app-lua>
+<span *ngIf="ast.step">, <app-lua [ast]="ast.step"></app-lua></span>
+<span class="lua-keyword"> do</span>
+<dl>
+    <dd *ngFor="let stmt of ast.body">
+        <app-lua [ast]="stmt"></app-lua>
+    </dd>
+</dl>
+<span class="lua-keyword">end</span>

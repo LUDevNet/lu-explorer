@@ -1,0 +1,7 @@
+<app-lua [ast]="ast.base"></app-lua>
+(
+<span *ngFor="let arg of ast.arguments; let isLast = last">
+    <app-lua [ast]="arg"></app-lua>
+    {{isLast ? '' : ','}}
+</span>
+)

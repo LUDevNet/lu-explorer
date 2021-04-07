@@ -1,23 +1,23 @@
-.lua-string-literal {
+:host ::ng-deep .lua-string-literal {
   color: orange;
 }
 
-.lua-numeric-literal {
+:host ::ng-deep .lua-numeric-literal {
   color: #22a3ff;
 }
 
-.lua-boolean-literal {
+:host ::ng-deep .lua-boolean-literal {
   color: pink;
 }
 
-.lua-nil-literal {
+:host ::ng-deep .lua-nil-literal {
   color: lime;
 }
 
-.lua-keyword {
+:host ::ng-deep .lua-keyword {
   color: cyan;
 }
 
-.lua-code {
+:host ::ng-deep .lua-code {
   white-space: nowrap;
 }
