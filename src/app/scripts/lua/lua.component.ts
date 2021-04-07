@@ -2,12 +2,14 @@ import { Component, OnInit, Input, TemplateRef, ViewChild, ComponentFactoryResol
 import { LuaAssignmentStatementComponent } from './assignment-statement/assignment-statement.component';
 import { LuaBinaryExpressionComponent } from './binary-expression/binary-expression.component';
 import { LuaBooleanLiteralComponent } from './boolean-literal/boolean-literal.component';
+import { LuaBreakStatementComponent } from './break-statement/break-statement.component';
 import { LuaCallExpressionComponent } from './call-expression/call-expression.component';
 import { LuaCallStatementComponent } from './call-statement/call-statement.component';
 import { LuaChunkComponent } from './chunk/chunk.component';
 import { LuaDirectoryComponent } from './directory/directory.component';
 import { LuaElseClauseComponent } from './else-clause/else-clause.component';
 import { LuaElseifClauseComponent } from './elseif-clause/elseif-clause.component';
+import { LuaForGenericStatementComponent } from './for-generic-statement/for-generic-statement.component';
 import { LuaForNumericStatementComponent } from './for-numeric-statement/for-numeric-statement.component';
 import { LuaFunctionDeclarationComponent } from './function-declaration/function-declaration.component';
 import { LuaIdentifierComponent } from './identifier/identifier.component';
@@ -42,10 +44,12 @@ const COMPONENTS: { [key: string]: Type<LuaStmtComponent> } = {
   'AssignmentStatement': LuaAssignmentStatementComponent,
   'BinaryExpression': LuaBinaryExpressionComponent,
   'BooleanLiteral': LuaBooleanLiteralComponent,
+  'BreakStatement': LuaBreakStatementComponent,
   'CallExpression': LuaCallExpressionComponent,
   'CallStatement': LuaCallStatementComponent,
   'ElseifClause': LuaElseifClauseComponent,
   'ElseClause': LuaElseClauseComponent,
+  'ForGenericStatement': LuaForGenericStatementComponent,
   'ForNumericStatement': LuaForNumericStatementComponent,
   'FunctionDeclaration': LuaFunctionDeclarationComponent,
   'Identifier': LuaIdentifierComponent,

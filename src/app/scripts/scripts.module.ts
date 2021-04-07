@@ -37,6 +37,8 @@ import { LuaElseClauseComponent } from './lua/else-clause/else-clause.component'
 import { LuaUnaryExpressionComponent } from './lua/unary-expression/unary-expression.component';
 import { LuaBinaryExpressionComponent } from './lua/binary-expression/binary-expression.component';
 import { LuaIndexExpressionComponent } from './lua/index-expression/index-expression.component';
+import { LuaForGenericStatementComponent } from './lua/for-generic-statement/for-generic-statement.component';
+import { LuaBreakStatementComponent } from './lua/break-statement/break-statement.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import { LuaIndexExpressionComponent } from './lua/index-expression/index-expres
     LuaElseClauseComponent,
     LuaUnaryExpressionComponent,
     LuaBinaryExpressionComponent,
-    LuaIndexExpressionComponent
+    LuaIndexExpressionComponent,
+    LuaForGenericStatementComponent,
+    LuaBreakStatementComponent
   ],
   imports: [
     CommonModule,

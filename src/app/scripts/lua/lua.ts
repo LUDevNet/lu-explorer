@@ -4,10 +4,12 @@ export enum LuaStmtKind {
     AssignmentStatement = "AssignmentStatement",
     BinaryExpression = "BinaryExpression",
     BooleanLiteral = "BooleanLiteral",
+    BreakStatement = "BreakStatement",
     CallExpression = "CallExpression",
     CallStatement = "CallStatement",
     ElseifClause = "ElseifClause",
     ElseClause = "ElseClause",
+    ForGenericStatement = "ForGenericStatement",
     ForNumericStatement = "ForNumericStatement",
     FunctionDeclaration = "FunctionDeclaration",
     Identifier = "Identifier",
@@ -61,6 +63,10 @@ export interface LuaBooleanLiteral {
     value: boolean;
 }
 
+export interface LuaBreakStatement {
+    type: LuaStmtKind.BreakStatement;
+}
+
 export interface LuaCallExpression {
     type: LuaStmtKind.CallExpression;
     base: LuaStmt;
@@ -80,6 +86,13 @@ export interface LuaElseifClause {
 
 export interface LuaElseClause {
     type: LuaStmtKind.ElseClause;
+    body: LuaStmt[];
+}
+
+export interface LuaForGenericStatement {
+    type: LuaStmtKind.ForGenericStatement;
+    variables: LuaStmt[];
+    iterators: LuaStmt[];
     body: LuaStmt[];
 }
 
@@ -210,11 +223,13 @@ export type LuaStmt = LuaChunk
     | LuaAssignmentStatement
     | LuaBinaryExpression
     | LuaBooleanLiteral
+    | LuaBreakStatement
     | LuaCallExpression
     | LuaCallStatement
     | LuaElseifClause
     | LuaElseClause
     | LuaForNumericStatement
+    | LuaForGenericStatement
     | LuaFunctionDeclaration
     | LuaIdentifier
     | LuaIfStatement
