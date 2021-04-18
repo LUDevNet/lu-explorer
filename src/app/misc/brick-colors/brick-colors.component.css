@@ -1,0 +1,11 @@
+.color {
+    font-family: monospace;
+    font-size: 12pt;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.color.dark {
+    color: black;
+}

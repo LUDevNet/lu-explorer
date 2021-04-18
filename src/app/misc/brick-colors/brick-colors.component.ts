@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { DB_BrickColors } from '../../cdclient';
 
 import { LuJsonService } from '../../services';
 
@@ -9,7 +11,8 @@ import { LuJsonService } from '../../services';
 })
 export class BrickColorsComponent implements OnInit {
 
-  table: any[];
+  $table: Observable<DB_BrickColors[]>;
+  sortKey: string = "id";
 
   constructor(private luJsonService: LuJsonService) { }
 
@@ -17,16 +20,25 @@ export class BrickColorsComponent implements OnInit {
   	this.getTable();
   }
 
+  sort(key: string) {
+    this.sortKey = key;
+  }
+
   getTable(): void {
-  	this.luJsonService
-      .getBrickColors()
-      .subscribe(table => this.table = table.sort(this.sortById.bind(this)));
+  	this.$table = this.luJsonService.getBrickColors();
   }
 
-  sortById(a,b): number {
-    let idA = a.id;
-    let idB = b.id;
-    return idA - idB;
+  colorRGBA(color: DB_BrickColors): string {
+    return `rgba(${color.red * 255},${color.green * 255},${color.blue * 255},${color.alpha})`;
   }
 
+  colorHex(color: DB_BrickColors): string {
+    const map = (p) => Math.round(p * 255).toString(16).padStart(2,'0');
+    return `#${map(color.red)}${map(color.green)}${map(color.blue)}`;
+  }
+
+  useDarkText(color: DB_BrickColors): boolean {
+    let L = 0.2126 * color.red + 0.7152 * color.green + 0.0722 * color.blue;
+    return L > 0.179;
+  }
 }

@@ -1,25 +1,26 @@
 <h2>Brick Colors</h2>
 
 <div class="table-responsive">
-  <table *ngIf="table">
+  <table *ngIf="$table | async | sort:sortKey; let table">
     <tr>
-      <th>id</th>
+      <th><a (click)="sort('id')">id</a></th>
       <th>Color</th>
-      <th>description</th>
+      <th><a (click)="sort('description')">description</a></th>
       <th>factoryValid</th>
-      <th>legopaletteid</th>
+      <th><a (click)="sort('legopaletteid')">legopaletteid</a></th>
       <th>validCharacters</th>
       <th>validTypes</th>
     </tr>
     <tr *ngFor="let color of table" id="{{color.id}}">
       <td>{{color.id}}</td>
-      <td [style.background-color]="'rgba(' + color.red * 255 + ',' + color.green * 255 + ',' + color.blue * 255 + ',' + color.alpha + ')'">
+      <td class="color" [class.dark]="useDarkText(color)" [style.background-color]="colorRGBA(color)">
+        {{colorHex(color)}}<ng-container *ngIf="color.alpha &lt; 1.0"> ({{color.alpha | pc}})</ng-container>
       </td>
       <td>{{color.description}}</td>
       <td>{{color.factoryValid}}</td>
       <td>{{color.legopaletteid}}</td>
       <td>{{color.validCharacters}}</td>
-      <td>{{color.validTypes}}</td>
+      <td>{{color.validTypes | bits}}</td>
     </tr>
   </table>
 </div>
