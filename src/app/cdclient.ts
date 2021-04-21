@@ -288,6 +288,21 @@ export class DB_Behavior
   parameters: any;
 }
 
+export class DB_BehaviorTemplate
+{
+  behaviorID: number;
+  effectHandle: string;
+  effectID: number;
+  templateID: number;
+}
+
+export class DB_BehaviorParameter
+{
+  behaviorID: number;
+  parameterID: string;
+  value: number;
+}
+
 export class DB_SkillBehavior
 {
   skillID: number;
