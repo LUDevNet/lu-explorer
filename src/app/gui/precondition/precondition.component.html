@@ -31,12 +31,8 @@
         <p *ngIf="precondition.gate_version">
             This precondition only applies with gate / feature version <code>{{precondition.gate_version}}</code>
         </p>
-        <p *ngIf="precondition.validContexts">This precondition only applies in the context of {{precondition.validContexts}}
-            <!-- are we sure about that ??? -->
-            <span *ngIf="precondition.validContexts | loc:'Preconditions' | async; let ctx">
-            ({{ ctx['FailureReason'] }})
-            </span>
-        </p>
+        <p *ngIf="precondition.validContexts">This precondition only applies in contexts
+            <code>{{precondition.validContexts | bits }}</code></p>
     </div>
 </div>
 <blockquote *ngIf="$locale | async; let locale">
