@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class LuCoreDataService {
   // The base URL for this API
-  apiUrl: string = 'https://lu.lcdruniverse.org:10001/';
+  apiUrl: string = 'https://lu.lcdruniverse.org/explorer/api/';
   // The cache for the requests
   cache: { [key: string]: ReplaySubject<any> } = {};
 
@@ -44,6 +44,6 @@ export class LuCoreDataService {
   }
 
   getTableEntry(table: string, key: string | number): Observable<any[]> {
-    return this.get(`api/v0/tables/${table}/${key}`);
+    return this.get(`v0/tables/${table}/${key}`);
   }
 }
