@@ -14,7 +14,6 @@ export class RenderComponentComponent {
 
   $shaders: Observable<DB_mapShaders[]>;
   component: Observable<DB_RenderComponent>;
-  baseUrl: string;
   _ref: ReplaySubject<number>;
   _id: number;
 

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject, Observable, of } from 'rxjs';
 import { catchError, find, map, tap } from 'rxjs/operators';
 
-import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { MessageService } from './message.service';
@@ -36,7 +35,6 @@ export class Optional<T> {
 @Injectable()
 export class LuJsonService {
 
-  private baseUrl;
   private apiUrl;
   private tablesUrl;
   private localeUrl;
@@ -65,10 +63,9 @@ export class LuJsonService {
     private http: HttpClient,
     private messageService: MessageService) {
 
-    this.baseUrl = environment.data.baseUrl;
     this.jsonStore = {};
 
-    this.apiUrl = this.baseUrl + "lu-json/";
+    this.apiUrl = "/lu-json/";
 
     this.tablesUrl = "tables/";
     this.localeUrl = "locale/";

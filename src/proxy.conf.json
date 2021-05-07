@@ -1,0 +1,15 @@
+
+{
+  "/lu-docs": {
+    "target": "http://localhost:8000",
+    "secure": false
+  },
+  "/lu-json": {
+    "target": "http://localhost:8000",
+    "secure": false
+  },
+  "/lu-res": {
+    "target": "http://localhost:8000",
+    "secure": false
+  }
+}

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { environment } from '../../../environments/environment';
 
 import { LuJsonService } from '../../services';
 import { DB_Icons } from '../../cdclient';
@@ -15,10 +14,8 @@ export class IconComponent implements OnInit {
   @Input() width: string = '64px';
   @Input() caption: boolean = true;
   icon: DB_Icons;
-  baseUrl: string;
 
   constructor(private luJsonService: LuJsonService) {
-    this.baseUrl = environment.data.baseUrl;
   }
 
   ngOnInit() {
