@@ -8,7 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SimpleFlagComponent implements OnInit {
   @Input() name: string;
   @Input() value: boolean;
-  @Input() title: string;
+  @Input() title: string = "";
+  @Input() trueTitle: string = "";
+  @Input() falseTitle: string = "";
 
   private trueImg: string;
   private falseImg: string;
@@ -24,4 +26,14 @@ export class SimpleFlagComponent implements OnInit {
     return this.value ? this.trueImg : this.falseImg;
   }
 
+  valueTitle() {
+    if (this.title) {
+      return this.title;
+    }
+    if (this.value) {
+      return this.trueTitle;
+    } else {
+      return this.falseTitle;
+    }
+  }
 }
