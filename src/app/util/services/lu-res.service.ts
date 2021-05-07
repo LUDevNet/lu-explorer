@@ -11,10 +11,6 @@ export class LuResService {
   constructor(private http: HttpClient) {
   }
 
-  getBaseUrl(): string {
-    return "/";
-  }
-
   getResolvedResUrl(path: string): string {
     return "/lu-res/" + path;
   }

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ReplaySubject, from } from 'rxjs';
 import { map, combineAll, switchMap } from 'rxjs/operators';
 
-import { LuJsonService, LuResService } from '../../../services';
+import { LuJsonService } from '../../../services';
 import { SkillRef } from '../../../cdclient';
 
 @Component({
@@ -17,8 +17,7 @@ export class SkillComponentComponent implements OnInit {
   skill_ref: ReplaySubject<SkillRef[]>;
 
   constructor(
-    private luJsonService: LuJsonService,
-    private luResService: LuResService) {
+    private luJsonService: LuJsonService) {
 
     this.skill_ref = new ReplaySubject<SkillRef[]>(1);
     this.skills = this.skill_ref
@@ -59,12 +58,8 @@ export class SkillComponentComponent implements OnInit {
 
   ngOnInit() { }
 
-  image(path: string): string {
-    return this.luResService.getResolvedResUrl(path);
-  }
-
   bgImage(path: string): string {
-    return "url(" + this.image(path) + ")";
+    return "url(/lu-res/" + path + ")";
   }
 
 }

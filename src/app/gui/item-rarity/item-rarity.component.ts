@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LuResService } from '../../services';
 
 @Component({
   selector: 'lux-item-rarity',
@@ -11,11 +10,11 @@ export class ItemRarityComponent implements OnInit {
   private onImg: string;
   private offImg: string;
 
-  constructor(private luRes: LuResService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.onImg = this.luRes.getResolvedResUrl('ui/ingame/itemrollover_i8e.png');
-    this.offImg = this.luRes.getResolvedResUrl('ui/ingame/itemrollover_i8f.png');
+    this.onImg = "/lu-res/ui/ingame/itemrollover_i8e.png";
+    this.offImg = "/lu-res/ui/ingame/itemrollover_i8f.png";
   }
 
   img(val: number) {

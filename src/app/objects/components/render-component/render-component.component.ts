@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LuJsonService, LuResService } from '../../../services';
+import { LuJsonService } from '../../../services';
 import { Observable, ReplaySubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { DB_mapShaders, DB_RenderComponent } from '../../../cdclient';

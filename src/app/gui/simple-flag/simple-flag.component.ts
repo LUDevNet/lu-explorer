@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LuResService } from '../../services';
 
 @Component({
   selector: 'lux-simple-flag',
@@ -14,11 +13,11 @@ export class SimpleFlagComponent implements OnInit {
   private trueImg: string;
   private falseImg: string;
 
-  constructor(private luRes: LuResService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.trueImg = this.luRes.getResolvedResUrl('ui/ingame/propertymanagement_i7.png');
-    this.falseImg = this.luRes.getResolvedResUrl('ui/ingame/propertymanagement_i20.png');
+    this.trueImg = "/lu-res/ui/ingame/propertymanagement_i7.png";
+    this.falseImg = "/lu-res/ui/ingame/propertymanagement_i20.png";
   }
 
   valueImg() {
