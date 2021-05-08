@@ -7,6 +7,7 @@ export const environment = {
   production: false,
   data: {
     baseUrl: "http://localhost:8000/",
+    apiUrl: "https://lu.lcdruniverse.org/explorer/api/"
   },
   firebase: {
     apiKey: "AIzaSyCxUJm4DFGfimoeGKPGT7-9f7gD0frJZ64",

@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LuCoreDataService {
   // The base URL for this API
-  apiUrl: string = 'https://lu.lcdruniverse.org/explorer/api/';
+  apiUrl: string = environment.data.apiUrl;
   // The cache for the requests
   cache: { [key: string]: ReplaySubject<any> } = {};
 
