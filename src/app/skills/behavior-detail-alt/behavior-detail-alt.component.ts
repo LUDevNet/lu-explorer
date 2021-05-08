@@ -36,14 +36,7 @@ export class BehaviorDetailAltComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private luJsonService: LuJsonService,
     private luCoreData: LuCoreDataService) {
-
-    if (environment.production) {
-      // using public API
-      this.baseUrl = 'https://xiphoseer.github.io/';
-    } else {
-      // serving API locally
-      this.baseUrl = 'http://localhost:8000/';
-    }
+    this.baseUrl = environment.data.baseUrl;
   }
 
   callback(id: number, level: number, behavior: DB_Behavior) {

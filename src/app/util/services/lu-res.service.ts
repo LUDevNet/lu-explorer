@@ -12,13 +12,7 @@ export class LuResService {
   private baseUrl: string = "";
 
   constructor(private http: HttpClient) {
-    if (environment.production) {
-      // using public API
-      this.baseUrl = 'https://xiphoseer.github.io/';
-    } else {
-      // serving API locally
-      this.baseUrl = 'http://localhost:8000/';
-    }
+    this.baseUrl = environment.data.baseUrl;
   }
 
   getBaseUrl(): string {

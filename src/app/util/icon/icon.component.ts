@@ -18,13 +18,7 @@ export class IconComponent implements OnInit {
   baseUrl: string;
 
   constructor(private luJsonService: LuJsonService) {
-    if (environment.production) {
-      // using public API
-      this.baseUrl = 'https://xiphoseer.github.io/';
-    } else {
-      // serving API locally
-      this.baseUrl = 'http://localhost:8000/';
-    }
+    this.baseUrl = environment.data.baseUrl;
   }
 
   ngOnInit() {

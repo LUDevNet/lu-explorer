@@ -11,13 +11,7 @@ export class DashboardComponent implements OnInit {
   baseUrl: string;
 
   constructor() {
-    if (environment.production) {
-      // using public API
-      this.baseUrl = 'https://xiphoseer.github.io/';
-    } else {
-      // serving API locally
-      this.baseUrl = 'http://localhost:8000/';
-    }
+    this.baseUrl = environment.data.baseUrl;
   }
 
   ngOnInit() {

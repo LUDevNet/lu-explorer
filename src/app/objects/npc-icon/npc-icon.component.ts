@@ -19,13 +19,7 @@ export class NpcIconComponent implements OnInit {
 
   ngOnInit() {
   	this.getIcon();
-  	if (environment.production) {
-      // using public API
-      this.baseUrl = 'https://xiphoseer.github.io/';
-    } else {
-      // serving API locally
-      this.baseUrl = 'http://localhost:8000/';
-    }
+    this.baseUrl = environment.data.baseUrl;
   }
 
   getIcon(): void

@@ -1,5 +1,8 @@
 export const environment = {
   production: true,
+  data: {
+    baseUrl: "https://xiphoseer.de/"
+  },
   firebase: {
     apiKey: "AIzaSyCxUJm4DFGfimoeGKPGT7-9f7gD0frJZ64",
     authDomain: "lu-explorer.firebaseapp.com",
