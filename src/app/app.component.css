@@ -1,0 +1,44 @@
+.footer {
+    text-align: center;
+    padding: 1rem 2rem;
+    text-shadow: none;
+    background-color: #990000;
+    color: white;
+    margin: 0 2rem;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}
+
+.clear-margin {
+    clear: both;
+    display: block;
+    height: 2rem;
+}
+
+@media (max-width: 700px) {
+    .footer {
+        margin: 0 1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .clear-margin {
+        height: 1rem;
+    }
+}
+
+@media (max-width: 300px) {
+    .footer {
+        margin: 0;
+        padding: 0.2rem 0.5rem;
+        border-radius: 0;
+    }
+
+    .clear-margin {
+        height: 0rem;
+    }
+}
+
+.footer>a {
+    color: lightgray;
+    font-weight: bold;
+}

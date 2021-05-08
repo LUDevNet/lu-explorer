@@ -11,12 +11,16 @@ const routes: Routes = [
   { path: 'objects', loadChildren: () => import('./objects/objects.module').then(m => m.ObjectsModule) },
   { path: 'missions', loadChildren: () => import('./missions/missions.module').then(m => m.MissionsModule) },
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
-  { path: 'activities', loadChildren: () => import('./activities/activities.module').then(m => m.ActivitiesModule)  },
+  { path: 'activities', loadChildren: () => import('./activities/activities.module').then(m => m.ActivitiesModule) },
   { path: '', component: GithubSpaComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload', relativeLinkResolution: 'legacy' }) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes, {
+    onSameUrlNavigation: 'reload',
+    relativeLinkResolution: 'legacy',
+    anchorScrolling: 'enabled'
+  })],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

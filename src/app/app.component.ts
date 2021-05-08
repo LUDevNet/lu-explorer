@@ -13,7 +13,7 @@ function isFunction(functionToCheck) {
   styleUrls: ['../../node_modules/typeface-nunito/index.css', './app.component.css']
 })
 export class AppComponent {
-  title = 'LEGO Universe Explorer';
+  title = 'LEGO® Universe Explorer';
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
