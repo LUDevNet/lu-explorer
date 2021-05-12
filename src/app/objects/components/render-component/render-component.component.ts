@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LuJsonService, LuResService } from '../../../services';
+import { LuJsonService } from '../../../services';
 import { Observable, ReplaySubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { DB_mapShaders, DB_RenderComponent } from '../../../cdclient';
@@ -14,7 +14,6 @@ export class RenderComponentComponent {
 
   $shaders: Observable<DB_mapShaders[]>;
   component: Observable<DB_RenderComponent>;
-  baseUrl: string;
   _ref: ReplaySubject<number>;
   _id: number;
 

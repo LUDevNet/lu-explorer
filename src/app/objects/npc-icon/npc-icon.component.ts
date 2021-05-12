@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { LuJsonService } from '../../services';
-import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-npc-icon',
@@ -13,13 +12,11 @@ export class NpcIconComponent implements OnInit {
   @Input() id: number;
   @Input() width: string = '64px';
   icon: any;
-  baseUrl: string;
 
   constructor(private luJsonService: LuJsonService) { }
 
   ngOnInit() {
   	this.getIcon();
-    this.baseUrl = environment.data.baseUrl;
   }
 
   getIcon(): void

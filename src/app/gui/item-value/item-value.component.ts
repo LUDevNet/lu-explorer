@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LuResService } from '../../services';
 
 @Component({
   selector: 'lux-item-value',
@@ -8,12 +7,10 @@ import { LuResService } from '../../services';
 })
 export class ItemValueComponent implements OnInit {
   @Input() value: number;
-  coinImage: string;
 
-  constructor(private luRes: LuResService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.coinImage = this.luRes.getResolvedResUrl('ui/ingame/itemrollover_i64.png');
   }
 
 }
