@@ -1,3 +1,14 @@
+.currency-rewards {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 10px;
+}
+
+.currency-rewards li {
+    display: block;
+    padding-right: 1.5rem;
+}
+
 @media (max-width: 500px) {
     #mission-card {
         float: none;

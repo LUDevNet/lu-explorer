@@ -100,7 +100,7 @@
 </section>
 
 <section *ngIf="mission">
-  <h3>Stat Rewards</h3>
+  <h3>Rewards</h3>
   <ul>
     <li *ngIf="mission.reward_maxhealth > 0">The player's maximum health is increased by {{mission.reward_maxhealth}}
     </li>
@@ -112,24 +112,15 @@
     </li>
     <li *ngIf="mission.reward_maxwidget > 0">The player's widget backpack size is increased by
       {{mission.reward_maxwidget}}</li>
-    <li *ngIf="mission.reward_reputation > 0">The player recieves {{mission.reward_reputation}} reputation</li>
-    <li *ngIf="mission.reward_currency > 0">The player recieves {{mission.reward_currency}} coins</li>
-    <li *ngIf="mission.reward_currency_repeatable > 0">The player recieves {{mission.reward_currency_repeatable}} coins
-      on repeated missions</li>
     <li *ngIf="mission.reward_maxwallet > 0">The player's maximum coin count is increased by
       {{mission.reward_maxwallet}} coins</li>
     <li *ngIf="mission.reward_bankinventory > 0">The player's maximum vault inventory size is increased by
       {{mission.reward_bankinventory}}</li>
-    <li *ngIf="mission.LegoScore > 0">The player's score is increased by <code>{{mission.LegoScore}}</code></li>
   </ul>
-</section>
-
-<section *ngIf="mission">
-  <h3>Inventory Rewards</h3>
 
   <dl>
     <dt *ngIf="mission.isChoiceReward">The player can choose one of:</dt>
-    <dt *ngIf="!mission.isChoiceReward">The player recieves:</dt>
+    <dt *ngIf="!mission.isChoiceReward">The player receives:</dt>
     <dd>
       <lux-gui-item *ngIf="mission.reward_item1 > -1" [id]="mission.reward_item1" [amount]="mission.reward_item1_count">
       </lux-gui-item>
@@ -146,9 +137,15 @@
     <dd *ngIf="mission.reward_emote4 > -1">the emote #{{mission.reward_emote4}}</dd>
   </dl>
 
+  <ul class="currency-rewards">
+    <li *ngIf="mission.reward_currency > 0"><lux-coins [count]="mission.reward_currency"></lux-coins></li>
+    <li *ngIf="mission.reward_reputation > 0"><lux-reputation [count]="mission.reward_reputation"></lux-reputation></li>
+    <li *ngIf="mission.LegoScore > 0"><lux-uscore [count]="mission.LegoScore"></lux-uscore></li>
+  </ul>
+
   <dl *ngIf="mission.repeatable">
     <dt *ngIf="mission.isChoiceReward">On repeats, the player can choose one of:</dt>
-    <dt *ngIf="!mission.isChoiceReward">On repeats, the player recieves:</dt>
+    <dt *ngIf="!mission.isChoiceReward">On repeats, the player receives:</dt>
     <dd>
       <lux-gui-item *ngIf="mission.reward_item1_repeatable > -1" [id]="mission.reward_item1_repeatable"
         [amount]="mission.reward_item1_repeat_count"></lux-gui-item>
@@ -160,6 +157,12 @@
         [amount]="mission.reward_item4_repeat_count"></lux-gui-item>
     </dd>
   </dl>
+
+  <ul class="currency-rewards" *ngIf="mission.repeatable">
+    <li *ngIf="mission.reward_currency_repeatable > 0"><lux-coins [count]="mission.reward_currency_repeatable"></lux-coins></li>
+    <li *ngIf="mission.reward_reputation > 0"><lux-reputation [count]="mission.reward_reputation"></lux-reputation></li>
+    <li *ngIf="mission.LegoScore > 0"><lux-uscore [count]="mission.LegoScore"></lux-uscore></li>
+  </ul>
 
   <!--  <table>
     <tr>
