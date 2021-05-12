@@ -9,6 +9,18 @@
     "ignore": [
       "**/.*"
     ],
+    "redirects": [
+      {
+        "source": "/lu-json/:tail*",
+        "destination": "https://xiphoseer.de/lu-json/:tail",
+        "type": 301
+      },
+      {
+        "source": "/lu-res/:tail*",
+        "destination": "https://xiphoseer.de/lu-res/:tail",
+        "type": 301
+      }
+    ],
     "headers": [
       {
         "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
