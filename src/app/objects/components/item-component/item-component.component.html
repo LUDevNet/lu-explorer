@@ -125,8 +125,8 @@
     <h4>Flags</h4>
     <lux-simple-flag name="inLootTable" [value]="item.inLootTable"></lux-simple-flag>
     <lux-simple-flag name="inVendor" [value]="item.inVendor"></lux-simple-flag>
-    <lux-simple-flag name="isBOE" [value]="item.isBOE" title="Bound on Equip"></lux-simple-flag>
-    <lux-simple-flag name="isBOP" [value]="item.isBOP" title="Bound on Pickup"></lux-simple-flag>
+    <lux-simple-flag name="isBOE" [value]="item.isBOE" trueTitle="This item cannot be traded once it has been equipped (bound on equip)." falseTitle="This item is not bound on equip."></lux-simple-flag>
+    <lux-simple-flag name="isBOP" [value]="item.isBOP" trueTitle="This item cannot be traded (bound on pickup)." falseTitle="This item is not bound on pickup."></lux-simple-flag>
     <lux-simple-flag name="isKitPiece" [value]="item.isKitPiece"></lux-simple-flag>
     <lux-simple-flag name="isTwoHanded" [value]="item.isTwoHanded"></lux-simple-flag>
     <lux-simple-flag name="isUnique" [value]="item.isUnique"></lux-simple-flag>
