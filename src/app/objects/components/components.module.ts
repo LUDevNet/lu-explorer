@@ -26,6 +26,7 @@ import { PhysicsComponentComponent } from './physics-component/physics-component
 import { ComponentDetailComponent } from './component-detail/component-detail.component';
 import { GuiModule } from '../../gui/gui.module';
 import { FactionTriggerComponentComponent } from './faction-trigger-component/faction-trigger-component.component';
+import { BaseCombatAiComponentComponent } from './base-combat-ai-component/base-combat-ai-component.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { FactionTriggerComponentComponent } from './faction-trigger-component/fa
     MissionNpcComponentComponent,
     PhysicsComponentComponent,
     ComponentDetailComponent,
-    FactionTriggerComponentComponent
+    FactionTriggerComponentComponent,
+    BaseCombatAiComponentComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,36 @@
+<h3>BaseCombatAI Component ({{id}})</h3>
+
+<section *ngIf="$component | async; let ai">
+    <lux-number-flag *ngIf="ai.behaviorType != null" name="behaviorType" [value]="ai.behaviorType"></lux-number-flag>
+    <lux-number-flag *ngIf="ai.minRoundLength != null" name="minRoundLength" [value]="ai.minRoundLength">
+    </lux-number-flag>
+    <lux-number-flag *ngIf="ai.maxRoundLength != null" name="maxRoundLength" [value]="ai.maxRoundLength">
+    </lux-number-flag>
+    <lux-number-flag *ngIf="ai.pursuitSpeed != null" name="pursuitSpeed" [value]="ai.pursuitSpeed"></lux-number-flag>
+    <lux-number-flag *ngIf="ai.spawnTimer != null" name="spawnTimer" [value]="ai.spawnTimer"></lux-number-flag>
+    
+    <h3>Tether</h3>
+    <lux-number-flag *ngIf="ai.tetherSpeed != null" name="tetherSpeed" [value]="ai.tetherSpeed"></lux-number-flag>
+    <lux-number-flag *ngIf="ai.softTetherRadius != null" name="softTetherRadius" [value]="ai.softTetherRadius">
+    </lux-number-flag>
+    <lux-number-flag *ngIf="ai.hardTetherRadius != null" name="hardTetherRadius" [value]="ai.hardTetherRadius">
+    </lux-number-flag>
+    
+    <lux-number-flag *ngIf="ai.tetherEffectID != null" name="tetherEffectID" [value]="ai.tetherEffectID">
+    </lux-number-flag>
+
+    <h3>Combat</h3>
+    <lux-number-flag *ngIf="ai.combatRoundLength != null" name="combatRoundLength" [value]="ai.combatRoundLength">
+    </lux-number-flag>
+    <lux-number-flag *ngIf="ai.combatRole != null" name="combatRole" [value]="ai.combatRole"></lux-number-flag>
+    <lux-number-flag *ngIf="ai.combatStartDelay != null" name="combatStartDelay"
+        [value]="ai.combatStartDelay | fixednum:4"></lux-number-flag>
+    <lux-number-flag *ngIf="ai.aggroRadius != null" name="aggroRadius" [value]="ai.aggroRadius"></lux-number-flag>
+
+    <h3>Ignores</h3>
+    <lux-simple-flag *ngIf="ai.ignoreMediator != null" name="ignoreMediator" [value]="ai.ignoreMediator">
+    </lux-simple-flag>
+    <lux-simple-flag *ngIf="ai.ignoreStatReset != null" name="ignoreStatReset" [value]="ai.ignoreStatReset">
+    </lux-simple-flag>
+    <lux-simple-flag *ngIf="ai.ignoreParent != null" name="ignoreParent" [value]="ai.ignoreParent"></lux-simple-flag>
+</section>

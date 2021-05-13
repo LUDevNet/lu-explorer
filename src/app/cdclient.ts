@@ -279,6 +279,26 @@ export class DB_AccessoryDefaultLoc
   Rot_Z: number;
 }
 
+export class DB_BaseCombatAIComponent {
+  id: number; // INTEGER
+  behaviorType: number; // INTEGER
+  combatRoundLength: number; // FLOAT
+  combatRole: number; // INTEGER
+  minRoundLength: number; // FLOAT
+  maxRoundLength: number; // FLOAT
+  tetherSpeed: number; // FLOAT
+  pursuitSpeed: number; // FLOAT
+  combatStartDelay: number; // FLOAT
+  softTetherRadius: number; // FLOAT
+  hardTetherRadius: number; // FLOAT
+  spawnTimer: number; // FLOAT
+  tetherEffectID: number; // INTEGER
+  ignoreMediator: boolean; // BOOLEAN
+  aggroRadius: number; // FLOAT
+  ignoreStatReset: boolean; // BOOLEAN
+  ignoreParent: boolean; // BOOLEAN
+}
+
 export class DB_Behavior
 {
   behaviorID: number;
