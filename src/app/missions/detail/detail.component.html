@@ -16,7 +16,7 @@
 </h2>
 <ng-template #headingElse>Mission</ng-template>
 
-<section *ngIf="mission" class="card card-right clearfix">
+<section id="mission-card" *ngIf="mission" class="card card-right clearfix">
   <h3 id="general">General</h3>
   <table style="min-width: initial;" *ngIf="mission">
     <tr *ngIf="mission.isMission">

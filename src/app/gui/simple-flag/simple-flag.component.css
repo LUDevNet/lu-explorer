@@ -16,3 +16,27 @@
 .flag-container .key {
     font-weight: bold;
 }
+
+@media(max-width: 500px) {
+    .flag-container {
+        display: block;
+        text-align: left;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .flag-container::after {
+        content: attr(title);
+        display: block;
+    }
+
+    .flag-container br {
+        display: none;
+    }
+
+    .flag-container .value {
+        width: 24px;
+        margin-right: 0.3em;
+        vertical-align: middle;
+    }
+}
