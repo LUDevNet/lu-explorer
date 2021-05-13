@@ -1,22 +1,10 @@
 <h3>Destructible Component ({{id}})</h3>
 <ng-container *ngIf="$component | async; else loading; let destructible">
   <section class="stats">
-    <div *ngIf="destructible.level" class="level-icon" title="Level">
-      LEVEL<br>
-      <span class="level">{{destructible.level}}</span>
-    </div>
-    <div *ngIf="destructible.life" class="buff-icon">
-      <img src="/lu-res/textures/ui/inventory/common/heart.png" title="Life" />
-      <span> {{destructible.life}}</span>
-    </div>
-    <div *ngIf="destructible.imagination" class="buff-icon">
-      <img src="/lu-res/textures/ui/inventory/common/imagination.png" title="Imagination" />
-      <span> {{destructible.imagination}}</span>
-    </div>
-    <div *ngIf="destructible.armor" class="buff-icon">
-      <img src="/lu-res/textures/ui/inventory/common/armor.png" title="Armor" />
-      <span> {{destructible.armor}}</span>
-    </div>
+    <lux-number-flag *ngIf="destructible.level" name="level" [value]="destructible.level"></lux-number-flag>
+    <lux-buff-flag *ngIf="destructible.life" name="life" [value]="destructible.life" kind="heart"></lux-buff-flag>
+    <lux-buff-flag *ngIf="destructible.imagination" name="imagination" [value]="destructible.imagination" kind="imagination"></lux-buff-flag>
+    <lux-buff-flag *ngIf="destructible.armor" name="armor" [value]="destructible.armor" kind="armor"></lux-buff-flag>
   </section>
   <section>
     <h3>General</h3>
@@ -27,17 +15,15 @@
         <lux-faction-list [list]="destructible.factionList">
         </lux-faction-list>
       </li>
-      <li><code>death_behavior</code>: {{destructible.death_behavior}}<ng-container
-          [ngSwitch]="destructible.death_behavior">
-          <span *ngSwitchCase="2"> (Die)</span>
-        </ng-container>
-      </li>
-      <li><code>isnpc</code>: {{destructible.isnpc}}</li>
-      <li><code>attack_priority</code>: {{destructible.attack_priority}}</li>
-      <li><code>isSmashable</code>: {{destructible.isSmashable}}</li>
-      <li *ngIf="destructible.difficultyLevel !== null"><code>difficultyLevel</code>: {{destructible.difficultyLevel}}
-      </li>
     </ul>
+  </section>
+  <section>
+    <h3>Flags</h3>
+    <lux-simple-flag *ngIf="destructible.isnpc !== null" name="isnpc" [value]="destructible.isnpc"></lux-simple-flag>
+    <lux-simple-flag *ngIf="destructible.isSmashable !== null" name="isSmashable" [value]="destructible.isSmashable"></lux-simple-flag>
+    <lux-number-flag *ngIf="destructible.difficultyLevel !== null" name="difficultyLevel" [value]="destructible.difficultyLevel"></lux-number-flag>
+    <lux-number-flag *ngIf="destructible.attack_priority !== null" name="attack_priority" [value]="destructible.attack_priority"></lux-number-flag>
+    <lux-number-flag *ngIf="destructible.death_behavior !== null" name="death_behavior" [value]="destructible.death_behavior"></lux-number-flag>
   </section>
   <section *ngIf="destructible.CurrencyIndex !== null">
     <h3>Coins (<code>CurrencyIndex</code> #{{destructible.CurrencyIndex}})</h3>

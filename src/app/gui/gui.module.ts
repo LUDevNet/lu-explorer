@@ -14,6 +14,7 @@ import { SimpleFlagComponent } from './simple-flag/simple-flag.component';
 import { ColorFlagComponent } from './color-flag/color-flag.component';
 import { NumberFlagComponent } from './number-flag/number-flag.component';
 import { PreconditionTreeComponent } from './precondition-tree/precondition-tree.component';
+import { BuffFlagComponent } from './buff-flag/buff-flag.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { PreconditionTreeComponent } from './precondition-tree/precondition-tree
     ColorFlagComponent,
     NumberFlagComponent,
     PreconditionTreeComponent,
+    BuffFlagComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { PreconditionTreeComponent } from './precondition-tree/precondition-tree
     ItemValueComponent,
     SimpleFlagComponent,
     ColorFlagComponent,
-    NumberFlagComponent
+    NumberFlagComponent,
+    BuffFlagComponent
   ],
 })
 export class GuiModule { }
