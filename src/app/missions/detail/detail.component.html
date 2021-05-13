@@ -74,21 +74,12 @@
 
 <section id="flags" *ngIf="mission">
   <h3>Flags</h3>
-  <ul>
-    <li *ngIf="mission.isMission === false">This is an achievement (<code>isMission == false</code>)</li>
-    <li *ngIf="mission.isMission === true">This is a mission (<code>isMission == true</code>)</li>
-    <li *ngIf="mission.repeatable === false">The player can only complete this once (<code>repeatable == false</code>)
-    </li>
-    <li *ngIf="mission.repeatable === true">The player can complete this multiple times
-      (<code>repeatable == true</code>)</li>
-    <li><code>isRandom == {{mission.isRandom}}</code></li>
-    <li *ngIf="mission.isChoiceReward === false">The player cannot choose their reward
-      (<code>isChoiceReward == false</code>)</li>
-    <li *ngIf="mission.isChoiceReward === true">The player can choose their reward (<code>isChoiceReward == true</code>)
-    </li>
-    <li *ngIf="mission.inMOTD === false">This may not be a <em>mission-of-the-day</em> (<code>inMOTD == false</code>)
-    </li>
-    <li *ngIf="mission.inMOTD === true">This may be a <em>mission-of-the-day</em> (<code>inMOTD == true</code>)</li>
+  <lux-simple-flag name="isMission" [value]="mission.isMission" trueTitle="This is a mission." falseTitle="This is an achievement."></lux-simple-flag>
+  <lux-simple-flag name="repeatable" [value]="mission.repeatable" trueTitle="The player can complete this multiple times." falseTitle="The player can only complete this once."></lux-simple-flag>
+  <lux-simple-flag name="isRandom" [value]="mission.isRandom" trueTitle="This mission is part of a random pool." falseTitle="This mission is not part of a random pool."></lux-simple-flag>
+  <lux-simple-flag name="isChoiceReward" [value]="mission.isChoiceReward" trueTitle="The player must choose one of the reward items offered." falseTitle="The player receives all rewards."></lux-simple-flag>
+  <lux-simple-flag name="inMOTD" [value]="mission.inMOTD" trueTitle="This may be a mission-of-the-day." falseTitle="This may not be a mission-of-the-day."></lux-simple-flag>
+	<ul>
     <li *ngIf="mission.gate_version">This task is only available with a feature update / gate
       (<code>gate_version</code>):
       <ul>
