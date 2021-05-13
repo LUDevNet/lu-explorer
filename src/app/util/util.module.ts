@@ -9,7 +9,7 @@ import { IconComponent } from './icon/icon.component';
 
 import { ArraySortPipe, ArraySortNumPipe, DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, LimitPipe, NonNullPipe, RangePipe, RemovePipe, MaxUpToPipe } from './pipes/data.pipe';
 import { BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe, DivCeilPipe } from './pipes/logical.pipe';
-import { DatePipe, HtmlPipe } from './pipes/output.pipe';
+import { DatePipe, HtmlPipe, FixedNumPipe } from './pipes/output.pipe';
 import { DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe } from './pipes/service.pipe';
 import { ReplacePipe, PercentPipe, ToPipe, ToNumPipe, ToRGBAPipe } from './pipes/strings.pipe';
 import { PcPipe } from './pipes/pc.pipe';
@@ -28,7 +28,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
     PaginationComponent, DataTableComponent, GithubSpaComponent, IconComponent,
     DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, NonNullPipe, RangePipe, RemovePipe, LimitPipe, ArraySortPipe, ArraySortNumPipe, MaxUpToPipe,
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe, DivCeilPipe,
-    DatePipe, HtmlPipe,
+    DatePipe, HtmlPipe, FixedNumPipe,
     DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe,
     ReplacePipe, PercentPipe, ToPipe, ToNumPipe, ToRGBAPipe,
     PcPipe, CondAstPipe,
@@ -43,7 +43,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
     DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, NonNullPipe, RangePipe, RemovePipe, ArraySortPipe, ArraySortNumPipe,
     LimitPipe, MaxUpToPipe,
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe, DivCeilPipe,
-    DatePipe, HtmlPipe,
+    DatePipe, HtmlPipe, FixedNumPipe,
     DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe,
     ReplacePipe, PercentPipe, ToPipe, ToNumPipe, ToRGBAPipe,
     PcPipe, CondAstPipe,

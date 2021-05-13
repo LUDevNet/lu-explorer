@@ -5,14 +5,14 @@
 <dl>
   <ng-container *ngIf="component.client_script_name">
     <dt>Client Script</dt>
-    <dd><a [routerLink]="link(component.client_script_name)">
+    <dd><blockquote><a [routerLink]="link(component.client_script_name)">
       {{component.client_script_name}}
-    </a></dd>
+    </a></blockquote></dd>
   </ng-container>
   <ng-container *ngIf="component.script_name">
     <dt>Script</dt>
-    <dd><a [routerLink]="link(component.script_name)">
+    <dd><blockquote><a [routerLink]="link(component.script_name)">
       {{component.script_name}}
-    </a></dd>
+    </a></blockquote></dd>
   </ng-container>
 </dl>

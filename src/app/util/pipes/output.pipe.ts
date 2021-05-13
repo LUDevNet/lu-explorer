@@ -7,6 +7,13 @@ export class DatePipe implements PipeTransform {
   }
 }
 
+@Pipe({name: 'fixednum'})
+export class FixedNumPipe implements PipeTransform {
+  transform(value: number, precision: number): unknown {
+    return value.toPrecision(precision).replace(/\.?0+$/, "");
+  }
+}
+
 @Pipe({name: 'html'})
 export class HtmlPipe implements PipeTransform {
 

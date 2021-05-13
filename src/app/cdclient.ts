@@ -334,7 +334,22 @@ export class DB_Icons
 }
 
 export class DB_PhysicsComponent {
-  // TODO
+  id: number; // INTEGER
+  static: number; // FLOAT
+  physics_asset: string; // TEXT
+  jump: number; // FLOAT
+  doublejump: number; // FLOAT
+  speed: number; // FLOAT
+  rotSpeed: number; // FLOAT
+  playerHeight: number; // FLOAT
+  playerRadius: number; // FLOAT
+  pcShapeType: number; // INTEGER
+  collisionGroup: number; // INTEGER
+  airSpeed: number; // FLOAT
+  boundaryAsset: string; // TEXT
+  jumpAirSpeed: number; // FLOAT
+  friction: number; // FLOAT
+  gravityVolumeAsset: string; // TEXT
 }
 
 export class DB_Preconditions {

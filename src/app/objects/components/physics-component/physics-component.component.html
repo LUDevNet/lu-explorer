@@ -1,6 +1,30 @@
 <h3>{{name}} Component ({{id}})</h3>
-<ng-container *ngIf="component | async; else loading; let physics">
-  <app-data-table [table]="physics"></app-data-table>
+<ng-container *ngIf="$component | async; else loading; let physics">
+  <lux-number-flag *ngIf="physics.static !== null" [value]="physics.static" name="static"></lux-number-flag>
+  <lux-number-flag *ngIf="physics.jump !== null" [value]="physics.jump | fixednum:4" name="jump"></lux-number-flag>
+  <lux-number-flag *ngIf="physics.doublejump !== null" [value]="physics.doublejump | fixednum:4" name="doublejump"></lux-number-flag>
+  <lux-number-flag *ngIf="physics.speed !== null" [value]="physics.speed | fixednum:4" name="speed"></lux-number-flag>
+  <lux-number-flag *ngIf="physics.rotSpeed !== null" [value]="physics.rotSpeed | fixednum:4" name="rotSpeed"></lux-number-flag>
+  <lux-number-flag *ngIf="physics.playerHeight !== null" [value]="physics.playerHeight | fixednum:4" name="playerHeight"></lux-number-flag>
+  <lux-number-flag *ngIf="physics.playerRadius !== null" [value]="physics.playerRadius | fixednum:4" name="playerRadius"></lux-number-flag>
+  <lux-number-flag *ngIf="physics.pcShapeType !== null" [value]="physics.pcShapeType" name="pcShapeType"></lux-number-flag>
+  <lux-number-flag *ngIf="physics.collisionGroup !== null" [value]="physics.collisionGroup" name="collisionGroup"></lux-number-flag>
+  <lux-number-flag *ngIf="physics.airSpeed !== null" [value]="physics.airSpeed" name="airSpeed"></lux-number-flag>
+  <lux-number-flag *ngIf="physics.boundaryAsset !== null" [value]="physics.boundaryAsset" name="boundaryAsset"></lux-number-flag>
+  <lux-number-flag *ngIf="physics.jumpAirSpeed !== null" [value]="physics.jumpAirSpeed" name="jumpAirSpeed"></lux-number-flag>
+  <lux-number-flag *ngIf="physics.friction !== null" [value]="physics.friction" name="friction"></lux-number-flag>
+
+  <h3>Strings</h3>
+  <section *ngIf="physics.physics_asset !== null">
+    <b>physics_asset</b>:
+    <blockquote>{{physics.physics_asset}}</blockquote>
+  </section>
+  <section *ngIf="physics.gravityVolumeAsset !== null">
+    <b>gravityVolumeAsset</b>:
+    <blockquote>{{physics.gravityVolumeAsset}}</blockquote>
+  </section>
+  
+  <!--<app-data-table [table]="physics"></app-data-table>-->
 </ng-container>
 <ng-template #loading>
   Loading...

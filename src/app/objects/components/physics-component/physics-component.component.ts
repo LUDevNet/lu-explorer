@@ -15,7 +15,7 @@ export class PhysicsComponentComponent implements OnInit {
 
   _id: ReplaySubject<number>;
   __id: number;
-  component: ReplaySubject<DB_PhysicsComponent>;
+  $component: ReplaySubject<DB_PhysicsComponent>;
   @Input() name: string;
 
   @Input() set id(value: number) {
@@ -28,12 +28,12 @@ export class PhysicsComponentComponent implements OnInit {
 
   constructor(private luJsonService: LuJsonService) {
     this._id = new ReplaySubject(1);
-    this.component = new ReplaySubject(1);
+    this.$component = new ReplaySubject(1);
 
     this._id.pipe(
       tap(id => this.__id = id),
       switchMap(ref => this.luJsonService.getPhysicsComponent(ref))
-    ).subscribe(this.component);
+    ).subscribe(this.$component);
   }
 
   ngOnInit() {
