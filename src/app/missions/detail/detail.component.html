@@ -160,7 +160,6 @@
 
   <ul class="currency-rewards" *ngIf="mission.repeatable">
     <li *ngIf="mission.reward_currency_repeatable > 0"><lux-coins [count]="mission.reward_currency_repeatable"></lux-coins></li>
-    <li *ngIf="mission.reward_reputation > 0"><lux-reputation [count]="mission.reward_reputation"></lux-reputation></li>
     <li *ngIf="mission.LegoScore > 0"><lux-uscore [count]="mission.LegoScore"></lux-uscore></li>
   </ul>
 
