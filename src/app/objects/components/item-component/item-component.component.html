@@ -123,14 +123,16 @@
 
   <section>
     <h4>Flags</h4>
-    <lux-simple-flag name="inLootTable" [value]="item.inLootTable"></lux-simple-flag>
-    <lux-simple-flag name="inVendor" [value]="item.inVendor"></lux-simple-flag>
-    <lux-simple-flag name="isBOE" [value]="item.isBOE" trueTitle="This item cannot be traded once it has been equipped (bound on equip)." falseTitle="This item is not bound on equip."></lux-simple-flag>
-    <lux-simple-flag name="isBOP" [value]="item.isBOP" trueTitle="This item cannot be traded (bound on pickup)." falseTitle="This item is not bound on pickup."></lux-simple-flag>
-    <lux-simple-flag name="isKitPiece" [value]="item.isKitPiece"></lux-simple-flag>
-    <lux-simple-flag name="isTwoHanded" [value]="item.isTwoHanded"></lux-simple-flag>
-    <lux-simple-flag name="isUnique" [value]="item.isUnique"></lux-simple-flag>
-    <lux-simple-flag name="noEquipAnimation" [value]="item.noEquipAnimation"></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.inLootTable !== null"  name="inLootTable" [value]="item.inLootTable"></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.inVendor !== null"  name="inVendor" [value]="item.inVendor"></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.isBOE !== null"  name="isBOE" [value]="item.isBOE" trueTitle="This item cannot be traded once it has been equipped (bound on equip)." falseTitle="This item is not bound on equip."></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.isBOP !== null"  name="isBOP" [value]="item.isBOP" trueTitle="This item cannot be traded (bound on pickup)." falseTitle="This item is not bound on pickup."></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.isKitPiece !== null"  name="isKitPiece" [value]="item.isKitPiece"></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.isTwoHanded !== null"  name="isTwoHanded" [value]="item.isTwoHanded"></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.isUnique !== null"  name="isUnique" [value]="item.isUnique"></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.noEquipAnimation !== null"  name="noEquipAnimation" [value]="item.noEquipAnimation"></lux-simple-flag>
+    <lux-number-flag *ngIf="item.delResIndex != null" [value]="item.delResIndex" name="delResIndex"></lux-number-flag>
+    <lux-number-flag *ngIf="item.offsetGroupID != null" [value]="item.offsetGroupID" name="offsetGroupID"></lux-number-flag>
   </section>
 
   <section>
@@ -141,46 +143,25 @@
 
   <section>
     <h4>Requirements</h4>
+    <div style="margin-bottom: 0.5rem;">
+      <lux-number-flag *ngIf="item.reqAchievementID !== null" name="reqAchievementID" [value]="item.reqAchievementID"></lux-number-flag>
+      <lux-number-flag *ngIf="item.reqFlagID !== null" name="reqFlagID" [value]="item.reqFlagID"></lux-number-flag>
+      <lux-number-flag *ngIf="item.reqSpecRank !== null" name="reqSpecRank" [value]="item.reqSpecRank"></lux-number-flag>
+      <lux-number-flag *ngIf="item.reqSpecialtyID !== null" name="reqSpecialtyID" [value]="item.reqSpecialtyID"></lux-number-flag>
+    </div>
     <div *ngIf="item.reqPrecondition">
       <h5>Preconditions (<code>reqPrecondition == {{item.reqPrecondition}}</code>)</h5>
       <lux-precondition-tree [ref]="item.reqPrecondition | condast"></lux-precondition-tree>
     </div>
-    <table>
-      <tr>
-        <td>reqAchievementID</td>
-        <td>{{item.reqAchievementID}}</td>
-      </tr>
-      <tr>
-        <td>reqFlagID</td>
-        <td>{{item.reqFlagID}}</td>
-      </tr>
-      <tr>
-        <td>reqSpecRank</td>
-        <td>{{item.reqSpecRank}}</td>
-      </tr>
-      <tr>
-        <td>reqSpecialtyID</td>
-        <td>{{item.reqSpecialtyID}}</td>
-      </tr>
-    </table>
   </section>
 
   <section>
     <h4>Unknown</h4>
     <table>
       <tr>
-        <td>delResIndex</td>
-        <td>{{item.delResIndex}}</td>
-      </tr>
-      <tr>
         <td>itemInfo</td>
         <td>{{item.itemInfo}}</td>
       </tr>
-      <tr>
-        <td>offsetGroupID</td>
-        <td>{{item.offsetGroupID}}</td>
-      </tr>
-
       <tr>
         <td>animationFlag</td>
         <td>{{item.animationFlag}}</td>
