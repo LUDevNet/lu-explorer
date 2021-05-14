@@ -16,21 +16,26 @@ import {
   DB_RenderComponent,
   ActivityRewardsPod,
   DB_ObjectRef_ByComponent,
-  FactionsPod,
   DB_Factions,
   DB_Preconditions,
-  DB_CurrencyTable,
   CurrencyTablePod,
   DB_mapShaders,
+  DB_Objects,
 } from '../../cdclient';
 
 import { ZoneDetail } from '../../zone';
-import { CurrencyPipe } from '@angular/common';
 
 export class Optional<T> {
   data: T;
   $error: string;
 }
+
+export interface APIObject extends DB_Objects {
+  skills: any[],
+  components: any[],
+  icons: any[],
+}
+
 
 @Injectable()
 export class LuJsonService {

@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 // https://stackoverflow.com/questions/35534959/access-key-and-value-of-object-using-ngfor
 @Pipe({ name: 'keys' })
 export class KeysPipe implements PipeTransform {
-  transform(value, args: string[]): any {
+  transform(value): any {
     let keys = [];
     for (let key in value) {
       keys.push({ key: key, value: value[key] });
@@ -69,7 +69,7 @@ export class LimitPipe implements PipeTransform {
 
 @Pipe({ name: 'elem' })
 export class ElementPipe implements PipeTransform {
-  transform(value: Object, arg: string): any {
+  transform(value: Object, arg: string | number): any {
     return value ? value[arg] : null;
   }
 }

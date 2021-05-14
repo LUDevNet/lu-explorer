@@ -30,7 +30,7 @@
     <h4>ItemType (<code>itemType</code>)</h4>
     <p>
       This item has the following type:
-      <code>{{ ($itemTypes | async | dict:"id")[item.itemType].description }}</code>
+      <code>{{ ($itemTypes | async | dict:"id")[item.itemType]?.description || "&lt;unknown&gt;" }}</code>
       ({{item.itemType}}).
     </p>
 

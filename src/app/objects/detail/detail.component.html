@@ -29,23 +29,41 @@
       </ul>
     </div>
     <div class="sidemenu-content">
-      <app-component-detail [id]="object.components[component_id]"
-        [component_id]="component_id" [object]="object">
+      <app-component-detail [id]="object.components[component_id]" [component_id]="component_id" [object]="object">
       </app-component-detail>
     </div>
   </div>
 
-  <h2>Icons</h2>
-  <table>
-    <tr *ngFor="let icon of object.icons">
-      <td>{{icon.iconState}}</td>
-      <td>{{icon.iconID}}</td>
-      <td>
-        <app-npc-icon [width]="'32px'" [id]="icon.iconID"></app-npc-icon>
-      </td>
-    </tr>
-  </table>
+  <section *ngIf="object.icons?.length > 0">
+    <h2>Icons</h2>
+    <table>
+      <tr *ngFor="let icon of object.icons">
+        <td>{{icon.iconState}}</td>
+        <td>{{icon.iconID}}</td>
+        <td>
+          <app-npc-icon [width]="'32px'" [id]="icon.iconID"></app-npc-icon>
+        </td>
+      </tr>
+    </table>
+  </section>
 
   <h2>Details</h2>
-  <app-data-table [table]="object | remove:'components' | remove:'skills' | remove:'icons'"></app-data-table>
+  <blockquote *ngIf="object.name !== null"><b>name</b>: {{object.name}}</blockquote>
+  <blockquote *ngIf="object.type !== null"><b>type</b>: {{object.type}}</blockquote>
+  <blockquote *ngIf="object.description !== null"><b>description</b>: {{object.description}}</blockquote>
+  <blockquote *ngIf="object.displayName !== null"><b>displayName</b>: {{object.displayName}}</blockquote>
+  <blockquote *ngIf="object._internalNotes !== null"><b>_internalNotes</b>: {{object._internalNotes}}</blockquote>
+  <blockquote *ngIf="object.gate_version !== null"><b>gate_version</b>: {{object.gate_version}}</blockquote>
+
+  <h3>Flags</h3>
+  <lux-simple-flag *ngIf="object.placeable !== null" name="placeable" [value]="object.placeable"></lux-simple-flag>
+  <lux-simple-flag *ngIf="object.nametag !== null" name="nametag" [value]="object.nametag"></lux-simple-flag>
+  <lux-simple-flag *ngIf="object.HQ_valid !== null" name="HQ_valid" [value]="object.HQ_valid"></lux-simple-flag>
+
+  <lux-simple-flag *ngIf="object.localize !== null" name="localize" [value]="object.localize"></lux-simple-flag>
+  <lux-number-flag *ngIf="object.locStatus !== null" name="locStatus" [value]="object.locStatus"></lux-number-flag>
+  <lux-number-flag *ngIf="object.npcTemplateID !== null" name="npcTemplateID" [value]="object.npcTemplateID">
+  </lux-number-flag>
+  <lux-number-flag *ngIf="object.interactionDistance !== null" name="interactionDistance"
+    [value]="object.interactionDistance"></lux-number-flag>
 </div>

@@ -12,6 +12,7 @@ export class DB_ObjectRef_ByType {
 
 export class DB_ItemSets_Ref {
   id: number;
+  rank: number;
 }
 
 export class SkillRef {
@@ -37,6 +38,23 @@ export class FactionsPod {
 }
 
 // LU database definitions
+
+export interface DB_Objects {
+  id: number; // INTEGER
+  name: string; // TEXT
+  placeable: boolean; // BOOLEAN
+  type: string; // TEXT
+  description: string; // TEXT
+  localize: boolean; // BOOLEAN
+  npcTemplateID: number; // INTEGER
+  displayName: string; // TEXT
+  interactionDistance: number; // FLOAT
+  nametag: boolean; // BOOLEAN
+  _internalNotes: string; // TEXT
+  locStatus: number; // INTEGER
+  gate_version: string; // TEXT
+  HQ_valid: boolean; // BOOLEAN
+}
 
 export class DB_Activities {
   ActivityID: number; // INTEGER
@@ -129,7 +147,7 @@ export class DB_brickAttributes {
   ID: number;
   icon_asset: string;
   display_order: number;
-  loc_status: number;
+  locStatus: number;
 }
 
 export class DB_BrickColors {
@@ -480,7 +498,8 @@ export class DB_DestructibleComponent {
 }
 
 export class DB_CollectibleComponent {
-  // TODO
+  id: number; // INTEGER
+  requirement_mission: number; // INTEGER
 }
 
 export class DB_MissionTasks {

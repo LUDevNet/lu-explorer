@@ -7,7 +7,7 @@ export interface CondAst {
 
 @Pipe({ name: 'condast' })
 export class CondAstPipe implements PipeTransform {
-  transform(value, args: string[]): any {
+  transform(value): any {
     return parsePrereqString(value);
   }
 }

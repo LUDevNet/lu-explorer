@@ -14,7 +14,7 @@
       <span *ngIf="set.kitRank">(Rank {{set.kitRank}})</span>
     </small>
   </h2>
-  <app-icon [iconID]="set.kitImage" [width]="256"></app-icon>
+  <app-icon [iconID]="set.kitImage" width="256px"></app-icon>
   <h3>General</h3>
   <ul>
     <li *ngIf="set.isForKitFaction()">This Kit belongs to the <span [className]="'color' + set.kitFaction()">{{set.kitFaction()}}</span> Faction

@@ -41,7 +41,7 @@ export interface LuaAssignmentStatement {
 
 export interface LuaChunk {
     type: LuaStmtKind.Chunk;
-    body: LuaStmt;
+    body: LuaStmt[];
 }
 
 export interface LuaDirectory {
@@ -110,7 +110,7 @@ export interface LuaFunctionDeclaration {
     isLocal: boolean;
     identifier: LuaStmt;
     parameters: LuaStmt[];
-    body: LuaStmt;
+    body: LuaStmt[];
 }
 
 export interface LuaIdentifier {
@@ -183,7 +183,7 @@ export interface LuaTableCallExpression {
 
 export interface LuaTableConstructorExpression {
     type: LuaStmtKind.TableConstructorExpression;
-    fields: LuaStmtKind[];
+    fields: LuaStmt[];
 }
 
 export interface LuaTableKey {

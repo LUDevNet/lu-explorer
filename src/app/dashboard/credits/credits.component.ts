@@ -8,12 +8,16 @@ import { LuResService } from '../../services';
 })
 export class CreditsComponent implements OnInit {
 
-  $credits: Observable<Document>;
+  $credits: Observable<XMLDocument>;
 
   constructor(private luRes: LuResService) { }
 
   ngOnInit(): void {
     this.$credits = this.luRes.getXML('ui/credits/creditslist');
+  }
+
+  iter(c: HTMLCollection): Element[] {
+    return Array.from(c);
   }
 
 }

@@ -9,7 +9,7 @@ export class DatePipe implements PipeTransform {
 
 @Pipe({name: 'fixednum'})
 export class FixedNumPipe implements PipeTransform {
-  transform(value: number, precision: number): unknown {
+  transform(value: number, precision: number): string {
     return value.toPrecision(precision).replace(/\.?0+$/, "");
   }
 }

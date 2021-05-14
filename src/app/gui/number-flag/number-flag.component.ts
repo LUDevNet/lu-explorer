@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NumberFlagComponent implements OnInit {
   @Input() name: string;
-  @Input() value: number;
+  @Input() value: number | string;
   @Input() title: string;
 
   constructor() { }

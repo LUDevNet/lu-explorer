@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { LuJsonService, LuLocaleService } from '../../services';
 import { component_names } from '../../components';
+import { APIObject } from '../../util/services/lu-json.service';
 
 @Component({
   selector: 'app-object-detail',
@@ -11,7 +12,7 @@ import { component_names } from '../../components';
 })
 export class ObjectDetailComponent implements OnInit {
 
-  object: any;
+  object?: APIObject;
   object_id: number;
   objectLocale: any;
   component_id: number;
@@ -37,7 +38,7 @@ export class ObjectDetailComponent implements OnInit {
     this.luLuLocaleService.getLocaleEntry("Objects", id).subscribe(entry => this.objectLocale = entry);
   }
 
-  loadObject(object: any): void
+  loadObject(object: APIObject): void
   {
     if (object && !this.component_id && object.hasOwnProperty('components')) {
       let keys = Object.keys(object.components);

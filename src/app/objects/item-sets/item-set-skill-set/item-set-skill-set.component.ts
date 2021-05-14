@@ -14,7 +14,7 @@ export class ItemSetSkillSetComponent implements OnInit {
 
   _id: ReplaySubject<number>;
   __id: number;
-  response: Observable<DB_ItemSetSkills>;
+  response: Observable<{set_skills: DB_ItemSetSkills[]}>;
 
   @Input() count: number;
   @Input() set id(value: number) {
