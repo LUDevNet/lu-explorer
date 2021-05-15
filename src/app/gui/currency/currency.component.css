@@ -1,0 +1,13 @@
+.currency {
+    display: inline-block;
+    font-weight: 600;
+    height: 24px;
+    line-height: 22px;
+    margin: 0;
+}
+
+.currency img {
+    margin: 0;
+    width: 26px;
+    vertical-align: top;
+}

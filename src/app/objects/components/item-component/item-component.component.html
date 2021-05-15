@@ -13,7 +13,7 @@
     <code>itemRating</code>
   </h4>
   <dl>
-    <dd>Base Value: <lux-item-value [value]="item.baseValue"></lux-item-value></dd>
+    <dd>Base Value: <lux-coins [count]="item.baseValue"></lux-coins></dd>
     <dd>Stack Size: {{item.stackSize}}</dd>
     <dd>Rarity: <lux-item-rarity [rarity]="item.rarity"></lux-item-rarity> ({{item.rarity}})</dd>
     <dd *ngIf="item.itemRating !== null">Rating: {{item.itemRating}}</dd>
