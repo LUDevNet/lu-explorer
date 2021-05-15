@@ -17,6 +17,7 @@ import { PreconditionTreeComponent } from './precondition-tree/precondition-tree
 import { BuffFlagComponent } from './buff-flag/buff-flag.component';
 import { ReputationComponent } from './reputation/reputation.component';
 import { UscoreComponent } from './uscore/uscore.component';
+import { SlotComponent } from './slot/slot.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { UscoreComponent } from './uscore/uscore.component';
     BuffFlagComponent,
     ReputationComponent,
     UscoreComponent,
+    SlotComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ import { UscoreComponent } from './uscore/uscore.component';
     BuffFlagComponent,
     ReputationComponent,
     UscoreComponent,
+    SlotComponent,
   ],
 })
 export class GuiModule { }
