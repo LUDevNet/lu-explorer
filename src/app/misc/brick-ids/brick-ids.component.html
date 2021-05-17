@@ -5,6 +5,7 @@
   <ng-container *ngIf="$table | async | sort:sort; let table; else loading">
     <table>
       <tr>
+        <th>Icon</th>
         <th><a (click)="setSort('LEGOBrickID')">LEGOBrickID</a></th>
         <th><a (click)="setSort('NDObjectID')">NDObjectID</a></th>
         <th>Name</th>
@@ -12,6 +13,7 @@
       <ng-container *luxVar="$page | async; let page">
         <ng-container *luxVar="limit * (page || 0); let skip">
           <tr *ngFor="let brick of table | limit:limit:skip">
+            <td><img class="brick-icon" [src]="'/lu-res/textures/ui/bricks/dds/m' + brick.LEGOBrickID + '.png'"></td>
             <td>{{brick.LEGOBrickID}}</td>
             <td><a routerLink="/objects/{{brick.NDObjectID}}">{{brick.NDObjectID}}</a></td>
             <td>{{objects[brick.NDObjectID+'']?.name}}</td>
