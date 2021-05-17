@@ -1,0 +1,27 @@
+<h3>Minifig Component ({{id}})</h3>
+<ng-container *ngIf="$torso | async; else loading; let torso">
+    <img class="decal" [src]="'/lu-res' + (torso.High_path | lowercase | replace:'.swf':'_i5.png')">
+</ng-container>
+<ng-container *ngIf="$component | async; else loading; let minifig">
+  <lux-number-flag name="chestdecal" [value]="minifig.chestdecal"></lux-number-flag>
+  <lux-number-flag name="hairstyle" [value]="minifig.hairstyle"></lux-number-flag>
+  <lux-number-flag name="eyebrowstyle" [value]="minifig.eyebrowstyle"></lux-number-flag>
+  <lux-number-flag name="eyesstyle" [value]="minifig.eyesstyle"></lux-number-flag>
+  <lux-number-flag name="mouthstyle" [value]="minifig.mouthstyle"></lux-number-flag>
+
+  <h3>Colors</h3>  <!--<app-data-table [table]="minifig"></app-data-table>-->
+  <lux-color-flag name="chest" [value]="minifig.chest"></lux-color-flag>
+  <lux-color-flag name="legs" [value]="minifig.legs"></lux-color-flag>
+  <lux-color-flag name="haircolor" [value]="minifig.haircolor"></lux-color-flag>
+
+  <h3>Other</h3>
+  <lux-number-flag name="head" [value]="minifig.head"></lux-number-flag>
+  <lux-number-flag name="headcolor" [value]="minifig.headcolor"></lux-number-flag>
+  <lux-number-flag name="lefthand" [value]="minifig.lefthand"></lux-number-flag>
+  <lux-number-flag name="righthand" [value]="minifig.righthand"></lux-number-flag>
+
+  <p>Note that some colors may not appear as specified in the game because the decal hides them.</p>
+</ng-container>
+<ng-template #loading>
+  Loading...
+</ng-template>

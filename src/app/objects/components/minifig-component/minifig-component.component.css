@@ -1,0 +1,13 @@
+.decal {
+    float: right;
+    max-width: 300px;
+    border: 3px solid black;
+    box-sizing: border-box;
+}
+
+@media (max-width: 500px) {
+    .decal {
+        float: none;
+        max-width: 100%;
+    }
+}
