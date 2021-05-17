@@ -13,6 +13,46 @@
   </div>
   <h3>Zone-File</h3>
   <app-luz-file [path]="zone.zoneName" [zone-ref]="zone"></app-luz-file>
+  <h3>Flags</h3>
+  <lux-simple-flag [value]="zone.PlayerLoseCoinsOnDeath" name="PlayerLoseCoinsOnDeath"></lux-simple-flag>
+  <lux-simple-flag [value]="zone.disableSaveLoc" name="disableSaveLoc"></lux-simple-flag>
+  <lux-simple-flag [value]="zone.mountsAllowed" name="mountsAllowed"></lux-simple-flag>
+  <lux-simple-flag [value]="zone.petsAllowed" name="petsAllowed"></lux-simple-flag>
+
+  <h3>Numbers</h3>
+  <div class="flags-box">
+    <lux-number-flag [value]="zone.fZoneWeight | fixednum:6" name="fZoneWeight"></lux-number-flag>
+    <lux-number-flag [value]="zone.ghostdistance" name="ghostdistance"></lux-number-flag>
+    <lux-number-flag [value]="zone.ghostdistance_min" name="ghostdistance_min"></lux-number-flag>
+    <lux-number-flag [value]="zone.heightInChunks" name="heightInChunks"></lux-number-flag>
+    <lux-number-flag [value]="zone.widthInChunks" name="widthInChunks"></lux-number-flag>
+    <lux-number-flag [value]="zone.population_soft_cap" name="population_soft_cap"></lux-number-flag>
+    <lux-number-flag [value]="zone.population_hard_cap" name="population_hard_cap"></lux-number-flag>
+    <lux-number-flag [value]="zone.scriptID" name="scriptID"></lux-number-flag>
+    <lux-number-flag [value]="zone.zoneID" name="zoneID"></lux-number-flag>
+    <lux-number-flag *ngIf="zone.teamRadius != null" [value]="zone.teamRadius" name="teamRadius"></lux-number-flag>
+    <a *ngIf="zone.zoneControlTemplate != null" [routerLink]="['/objects', zone.zoneControlTemplate]">
+    <lux-number-flag  [value]="zone.zoneControlTemplate" name="zoneControlTemplate"></lux-number-flag>
+    </a>
+  </div>
+  
+  <h3>Internal</h3>
+  <lux-simple-flag [value]="zone.localize" name="localize"></lux-simple-flag>
+  <lux-number-flag [value]="zone.locStatus" name="locStatus"></lux-number-flag>
+
   <h3>Details</h3>
-  <app-data-table [table]="zone | remove:'_links'"></app-data-table>
+  <b>DisplayDescription</b>:
+  <blockquote>{{zone.DisplayDescription}}</blockquote>
+  <div *ngIf="zone.mixerProgram !== null">
+    <b>mixerProgram</b>:
+    <blockquote>{{zone.mixerProgram}}</blockquote>
+  </div>
+  <div *ngIf="zone.gate_version !== null">
+    <b>gate_version</b>:
+    <blockquote>{{zone.gate_version}}</blockquote>
+  </div>
+  <b>zoneName</b>:
+  <blockquote>{{zone.zoneName}}</blockquote>
+
+  <!--<app-data-table [table]="zone | remove:'_links'"></app-data-table>-->
 </div>

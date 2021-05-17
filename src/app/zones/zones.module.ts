@@ -11,6 +11,7 @@ import { ScenesComponent } from './scenes/scenes.component';
 import { LuzFileComponent } from './luz-file/luz-file.component';
 import { LvlFileComponent } from './lvl-file/lvl-file.component';
 import { ObjInstanceComponent } from './obj-instance/obj-instance.component';
+import { GuiModule } from '../gui/gui.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ObjInstanceComponent } from './obj-instance/obj-instance.component';
     CommonModule,
     SerializeModule,
     UtilModule,
-    ZonesRoutingModule
+    ZonesRoutingModule,
+    GuiModule
   ]
 })
 export class ZonesModule { }

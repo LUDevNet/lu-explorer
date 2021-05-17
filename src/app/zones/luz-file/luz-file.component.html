@@ -114,7 +114,7 @@
                   <span class="pull-right"></span></a></li>
             </ul>
           </div>
-          <div class="sidemenu-content" style="max-height: 40rem;">
+          <div class="sidemenu-content" style="max-height: 40rem; overflow-y: auto;">
             <svg *ngIf="zone" [attr.viewBox]="toViewBox(zoneRef)" class="map">
               <g [attr.transform]="toTranslate(zoneRef)">
                 <ng-container [ngSwitch]="selected_path.type">
