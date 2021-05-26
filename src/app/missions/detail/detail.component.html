@@ -113,17 +113,17 @@
       </lux-gui-item>
       <lux-gui-item *ngIf="mission.reward_item4 > -1" [id]="mission.reward_item4" [amount]="mission.reward_item4_count">
       </lux-gui-item>
-      <lux-slot *ngIf="mission.reward_maxhealth > 0" icon="/lu-res/textures/ui/rewards/maxheart.png" [count]="mission.reward_maxhealth">Life Point</lux-slot>
-      <lux-slot *ngIf="mission.reward_maximagination > 0" icon="/lu-res/textures/ui/rewards/maximagination.png" [count]="mission.reward_maximagination">Imagination Point</lux-slot>
-      <lux-slot *ngIf="mission.reward_maxinventory > 0" icon="/lu-res/textures/ui/rewards/maxinventory.png" [count]="mission.reward_maxinventory">Extra Backpack Space</lux-slot>
-      <lux-slot *ngIf="mission.reward_maxmodel > 0" icon="/lu-res/textures/ui/rewards/maxmodel.png" [count]="mission.reward_maxmodel">Extra Model Space</lux-slot>
-      <lux-slot *ngIf="mission.reward_maxwidget > 0" icon="/lu-res/textures/ui/rewards/maxwidget.png" [count]="mission.reward_maxwidget">Extra Behavior Space</lux-slot>
-      <lux-slot *ngIf="mission.reward_maxwallet > 0" icon="/lu-res/textures/ui/rewards/maxwallet.png" [count]="mission.reward_maxwallet">Extra Wallet Space"</lux-slot>
-      <lux-slot *ngIf="mission.reward_bankinventory > 0" icon="/lu-res/textures/ui/rewards/maxbank.png" [count]="mission.reward_bankinventory">Extra Vault Space</lux-slot>
-      <lux-slot *ngIf="mission.reward_emote > -1" icon="/lu-res/textures/ui/achievements/general_social.png">Emote #{{mission.reward_emote}}</lux-slot>
-      <lux-slot *ngIf="mission.reward_emote2 > -1" icon="/lu-res/textures/ui/achievements/general_social.png">Emote #{{mission.reward_emote2}}</lux-slot>
-      <lux-slot *ngIf="mission.reward_emote3 > -1" icon="/lu-res/textures/ui/achievements/general_social.png">Emote #{{mission.reward_emote3}}</lux-slot>
-      <lux-slot *ngIf="mission.reward_emote4 > -1" icon="/lu-res/textures/ui/achievements/general_social.png">Emote #{{mission.reward_emote4}}</lux-slot>
+      <lux-slot *ngIf="mission.reward_maxhealth > 0" icon="/lu-res/textures/ui/rewards/maxheart.png" [count]="mission.reward_maxhealth" luxTooltip="Life Point"></lux-slot>
+      <lux-slot *ngIf="mission.reward_maximagination > 0" icon="/lu-res/textures/ui/rewards/maximagination.png" [count]="mission.reward_maximagination" luxTooltip="Imagination Point"></lux-slot>
+      <lux-slot *ngIf="mission.reward_maxinventory > 0" icon="/lu-res/textures/ui/rewards/maxinventory.png" [count]="mission.reward_maxinventory" luxTooltip="Extra Backpack Space"></lux-slot>
+      <lux-slot *ngIf="mission.reward_maxmodel > 0" icon="/lu-res/textures/ui/rewards/maxmodel.png" [count]="mission.reward_maxmodel" luxTooltip="Extra Model Space"></lux-slot>
+      <lux-slot *ngIf="mission.reward_maxwidget > 0" icon="/lu-res/textures/ui/rewards/maxwidget.png" [count]="mission.reward_maxwidget" luxTooltip="Extra Behavior Space"></lux-slot>
+      <lux-slot *ngIf="mission.reward_maxwallet > 0" icon="/lu-res/textures/ui/rewards/maxwallet.png" [count]="mission.reward_maxwallet" luxTooltip="Extra Wallet Space"></lux-slot>
+      <lux-slot *ngIf="mission.reward_bankinventory > 0" icon="/lu-res/textures/ui/rewards/maxbank.png" [count]="mission.reward_bankinventory" luxTooltip="Extra Vault Space"></lux-slot>
+      <lux-slot *ngIf="mission.reward_emote > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote}}"></lux-slot>
+      <lux-slot *ngIf="mission.reward_emote2 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote2}}"></lux-slot>
+      <lux-slot *ngIf="mission.reward_emote3 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote3}}"></lux-slot>
+      <lux-slot *ngIf="mission.reward_emote4 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote4}}"></lux-slot>
     </dd>
   </dl>
 

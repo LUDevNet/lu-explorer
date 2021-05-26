@@ -1,7 +1,4 @@
-<a [routerLink]="link" [luxTooltip]="tooltip">
-	<ng-template #tooltip>
-		<ng-content></ng-content>
-	</ng-template>
+<a [routerLink]="link">
   <img class="icon" [src]="icon"/>
   <span class="count" *ngIf="count > 1">{{count}}</span>
 </a>

@@ -1,10 +1,11 @@
 <ng-container *ngIf="id | data:'object' | async; else error; let object">
   <ng-container *ngIf="object['components']['2'] | data:'renderComponent' | async; else error; let render">
     <ng-container *ngIf="render['icon_asset']; else error; let icon_asset">
-      <lux-slot [count]="amount" [equipped]="equipped" link="/objects/{{id}}" [icon]="'textures/ui/' + icon_asset | lowercase | replace:'dds$':'png' | res">
+      <lux-slot [count]="amount" [equipped]="equipped" link="/objects/{{id}}" [icon]="'textures/ui/' + icon_asset | lowercase | replace:'dds$':'png' | res" [luxTooltip]="tooltip"></lux-slot>
+      <ng-template #tooltip>
         <span class="tooltip-title">{{ object['displayName'] || object['name'] }}</span>
         Template ID: {{id}}
-      </lux-slot>
+      </ng-template>
     </ng-container>
   </ng-container>
 </ng-container>
