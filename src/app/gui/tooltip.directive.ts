@@ -5,7 +5,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
   selector: '[luxTooltip]'
 })
 export class TooltipDirective {
-  @Input('luxTooltip') content: /*string |*/ TemplateRef<any> /*| Type<any>*/;
+  @Input('luxTooltip') content: string | TemplateRef<any> /*| Type<any>*/;
 
   private embeddedViewRef?: EmbeddedViewRef<TooltipComponent>;
   private componentRef: ComponentRef<TooltipComponent>;
