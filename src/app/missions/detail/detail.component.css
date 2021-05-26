@@ -9,6 +9,35 @@
     padding-right: 1.5rem;
 }
 
+.chat-bubble {
+    background-image: url("/assets/ui/chat-bubble.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: solid 1px #ea6102;
+    border-radius: 11px;
+    color: black;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1.1;
+    max-width: 200px;
+    padding: 0.6rem 0.8rem;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+#chat-bubbles {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#chat-bubbles > div {
+    width: 250px;
+}
+
+#chat-bubbles dt {
+    text-align: center;
+}
+
 @media (max-width: 500px) {
     #mission-card {
         float: none;

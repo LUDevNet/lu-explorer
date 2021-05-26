@@ -155,17 +155,62 @@
 </section>
 
 <h3>Texts</h3>
+<ng-container *ngIf="mission && textsLocale">
+  <dl id="chat-bubbles">
+    <div *ngIf="textsLocale.chat_state_1">
+      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_1" [innerHTML]="textsLocale.chat_state_1"></blockquote></dt>
+      <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when approached before the mission is offered.</dd>
+    </div>
+    <div *ngIf="textsLocale.accept_chat_bubble">
+      <dt><blockquote class="chat-bubble" luxTooltip="accept_chat_bubble" [innerHTML]="textsLocale.accept_chat_bubble"></blockquote></dt>
+      <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when the mission is accepted.</dd>
+    </div>
+    <div *ngIf="textsLocale.chat_state_2">
+      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_2" [innerHTML]="textsLocale.chat_state_2"></blockquote></dt>
+      <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when approached while the mission is in progress.</dd>
+    </div>
+    <div *ngIf="textsLocale.chat_state_3">
+      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_3" [innerHTML]="textsLocale.chat_state_3"></blockquote></dt>
+      <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when approached when the mission is ready to be completed.</dd>
+    </div>
+    <div *ngIf="textsLocale.chat_state_3_turnin">
+      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_3_turnin" [innerHTML]="textsLocale.chat_state_3_turnin"></blockquote></dt>
+      <dd>Spoken by <lux-object [luxFetch]="mission.target_objectID"></lux-object> when approached when the mission is ready to be completed.</dd>
+    </div>
+    <div *ngIf="textsLocale.chat_state_4">
+      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_4" [innerHTML]="textsLocale.chat_state_4"></blockquote></dt>
+      <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when approached when the mission is complete.</dd>
+    </div>
+    <div *ngIf="textsLocale.chat_state_4_turnin">
+      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_4_turnin" [innerHTML]="textsLocale.chat_state_4_turnin"></blockquote></dt>
+      <dd>Spoken by <lux-object [luxFetch]="mission.target_objectID"></lux-object> when approached when the mission is complete.</dd>
+    </div>
+  </dl>
 
-<ng-container *ngIf="text">
-  <app-icon [iconID]="text.turnInIconID"></app-icon>
-</ng-container>
-
-<div *ngIf="textsLocale">
-  <ng-container *ngFor="let text of textsLocale | keys">
-    <h4 [id]="'text_' + text.key">{{text.key}}</h4>
-    <blockquote [innerHTML]="text.value"></blockquote>
+  <ng-container *ngIf="text">
+    <app-icon [iconID]="text.turnInIconID"></app-icon>
   </ng-container>
-</div>
+  <dl>
+    <ng-container *ngIf="textsLocale.completion_succeed_tip">
+      <dt><blockquote luxTooltip="completion_succeed_tip" [innerHTML]="textsLocale.completion_succeed_tip"></blockquote></dt>
+    </ng-container>
+    <ng-container *ngIf="textsLocale.description">
+      <dt><blockquote luxTooltip="description" [innerHTML]="textsLocale.description"></blockquote></dt>
+    </ng-container>
+    <ng-container *ngIf="textsLocale.in_progress">
+      <dt><blockquote luxTooltip="in_progress" [innerHTML]="textsLocale.in_progress"></blockquote></dt>
+    </ng-container>
+    <ng-container *ngIf="textsLocale.offer">
+      <dt><blockquote luxTooltip="offer" [innerHTML]="textsLocale.offer"></blockquote></dt>
+    </ng-container>
+    <ng-container *ngIf="textsLocale.offer_repeatable">
+      <dt><blockquote luxTooltip="offer_repeatable" [innerHTML]="textsLocale.offer_repeatable"></blockquote></dt>
+    </ng-container>
+    <ng-container *ngIf="textsLocale.ready_to_complete">
+      <dt><blockquote luxTooltip="ready_to_complete" [innerHTML]="textsLocale.ready_to_complete"></blockquote></dt>
+    </ng-container>
+  </dl>
+</ng-container>
 
 <h4>Details</h4>
 
