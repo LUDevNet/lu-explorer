@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 function isFunction(functionToCheck) {
   return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
-} 
+}
 
 @Component({
   selector: 'app-root',
@@ -16,6 +16,7 @@ export class AppComponent {
   title = 'LEGO® Universe Explorer';
 
   constructor(private router: Router,
+    private viewContainerRef: ViewContainerRef,
     private activatedRoute: ActivatedRoute,
     private titleService: Title) {
 
