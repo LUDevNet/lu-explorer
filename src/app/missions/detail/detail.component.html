@@ -65,11 +65,15 @@
   </table>
 </section>
 
-<app-icon class="mission-icon" [iconID]="mission.missionIconID" *ngIf="mission && mission.missionIconID"></app-icon>
+<section id="mission-display">
+  <lux-mission [luxFetch]="id" [status]="2"></lux-mission>
+</section>
 
 <section *ngIf="mission && mission.prereqMissionID">
   <h3>Prerequisites</h3>
-  <mission-ref-list [ref]="mission.prereqMissionID | condast"></mission-ref-list>
+  <div id="mission-prereqs">
+    <mission-ref-list [ref]="mission.prereqMissionID | condast"></mission-ref-list>
+  </div>
 </section>
 
 <section id="flags" *ngIf="mission">
