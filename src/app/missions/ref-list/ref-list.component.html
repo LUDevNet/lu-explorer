@@ -1,15 +1,22 @@
-<span *ngIf="ref.type == 'lit'">Mission
-  <a routerLink="/missions/{{ref.value}}">{{ref.value}}</a>
+<span *ngIf="ref.type == 'lit'">
+  <lux-mission [luxFetch]="ref.value"></lux-mission>
 </span>
-<dl *ngIf="ref.type == '|'">
-  <dt>Any of</dt>
-  <dd *ngFor="let item of ref.value">
-    <mission-ref-list [ref]="item"></mission-ref-list>
-  </dd>
-</dl>
-<dl *ngIf="ref.type == ','">
-  <dt>All of</dt>
-  <dd *ngFor="let item of ref.value">
-    <mission-ref-list [ref]="item"></mission-ref-list>
-  </dd>
-</dl>
+<span *ngIf="ref.type == ':'">
+  <lux-mission [luxFetch]="ref.value.id" [status]="ref.value.status"></lux-mission>
+</span>
+<div *ngIf="ref.type == '|'">
+  <p>Any of</p>
+  <ul>
+    <li *ngFor="let item of ref.value">
+      <mission-ref-list [ref]="item"></mission-ref-list>
+    </li>
+  </ul>
+</div>
+<div *ngIf="ref.type == ','">
+  <p>All of</p>
+  <ul>
+    <li *ngFor="let item of ref.value">
+      <mission-ref-list [ref]="item"></mission-ref-list>
+    </li>
+  </ul>
+</div>
