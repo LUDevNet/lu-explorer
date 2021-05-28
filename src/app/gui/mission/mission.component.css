@@ -1,0 +1,94 @@
+:host {
+    display: inline-block;
+    position: relative;
+    transition: transform 0.1s, filter 0.1s;
+}
+
+:host(:hover) {
+    transform: scale(105%);
+    filter: brightness(115%);
+}
+
+a {
+    text-decoration: none;
+}
+
+.status {
+    color: #fff;
+    left: 0;
+    right: 0;
+}
+
+.achievement {
+    position: relative;
+    width: 300px;
+}
+
+.achievement .slot {
+    background-image: url("/lu-res/ui/ingame/passport_ic.png");
+    background-size: 100% 100%;
+    padding-bottom: 17.1675%;
+    width: 100%;
+}
+
+.achievement .slot.complete {
+    background-image: url("/lu-res/ui/ingame/passport_i12.png");
+}
+
+.achievement .slot > * {
+    position: absolute;
+}
+
+.achievement .icon {
+    left: 5%;
+    top: 7%;
+    width: 15.625%;
+}
+
+.achievement .title {
+    align-items: center;
+    bottom: 0;
+    color: #fff;
+    display: flex;
+    font-weight: 600;
+    justify-content: center;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 5%;
+    width: 53.90%;
+}
+
+.mission {
+    width: 128px;
+}
+
+.mission .slot > * {
+    position: absolute;
+}
+
+.mission .slot {
+    background-image: url("/lu-res/ui/ingame/passport_i5a.png");
+    background-size: 100% 100%;
+    padding-bottom: 100%;
+    position: relative;
+}
+
+.mission .slot.complete {
+    background-image: url("/lu-res/ui/ingame/passport_i5d.png");
+}
+
+.mission .icon {
+    position: absolute;
+    left: 3.5%;
+    right: 9.5%;
+    top: 2.5%;
+}
+
+.mission .title {
+    color: #ccc;
+    font-weight: 600;
+    text-align: center;
+}

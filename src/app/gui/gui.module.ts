@@ -22,6 +22,8 @@ import { ObjectComponent } from './object/object.component';
 import { ObjectDirective } from './object/object.directive';
 import { MissiondisplayRewardComponent } from './missiondisplay-reward/missiondisplay-reward.component';
 import { BuffComponent } from './buff/buff.component';
+import { MissionComponent } from './mission/mission.component';
+import { MissionDirective } from './mission/mission.directive';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { BuffComponent } from './buff/buff.component';
     ObjectDirective,
     MissiondisplayRewardComponent,
     BuffComponent,
+    MissionComponent,
+    MissionDirective,
   ],
   imports: [
     CommonModule,
@@ -62,6 +66,8 @@ import { BuffComponent } from './buff/buff.component';
     ObjectComponent,
     ObjectDirective,
     MissiondisplayRewardComponent,
+    MissionComponent,
+    MissionDirective,
   ],
 })
 export class GuiModule { }
