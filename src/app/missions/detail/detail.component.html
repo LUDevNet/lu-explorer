@@ -79,7 +79,7 @@
   <lux-simple-flag name="isRandom" [value]="mission.isRandom" trueTitle="This mission is part of a random pool." falseTitle="This mission is not part of a random pool."></lux-simple-flag>
   <lux-simple-flag name="isChoiceReward" [value]="mission.isChoiceReward" trueTitle="The player must choose one of the reward items offered." falseTitle="The player receives all rewards."></lux-simple-flag>
   <lux-simple-flag name="inMOTD" [value]="mission.inMOTD" trueTitle="This may be a mission-of-the-day." falseTitle="This may not be a mission-of-the-day."></lux-simple-flag>
-	<ul>
+  <ul>
     <li *ngIf="mission.gate_version">This task is only available with a feature update / gate
       (<code>gate_version</code>):
       <ul>
@@ -101,23 +101,6 @@
 
 <section *ngIf="mission">
   <h3>Rewards</h3>
-  <ul>
-    <li *ngIf="mission.reward_maxhealth > 0">The player's maximum health is increased by {{mission.reward_maxhealth}}
-    </li>
-    <li *ngIf="mission.reward_maximagination > 0">The player's maximum imagination is increased by
-      {{mission.reward_maximagination}}</li>
-    <li *ngIf="mission.reward_maxinventory > 0">The player's backpack size is increased by
-      {{mission.reward_maxinventory}}</li>
-    <li *ngIf="mission.reward_maxmodel > 0">The player's model backpack size is increased by {{mission.reward_maxmodel}}
-    </li>
-    <li *ngIf="mission.reward_maxwidget > 0">The player's widget backpack size is increased by
-      {{mission.reward_maxwidget}}</li>
-    <li *ngIf="mission.reward_maxwallet > 0">The player's maximum coin count is increased by
-      {{mission.reward_maxwallet}} coins</li>
-    <li *ngIf="mission.reward_bankinventory > 0">The player's maximum vault inventory size is increased by
-      {{mission.reward_bankinventory}}</li>
-  </ul>
-
   <dl>
     <dt *ngIf="mission.isChoiceReward">The player can choose one of:</dt>
     <dt *ngIf="!mission.isChoiceReward">The player receives:</dt>
@@ -130,11 +113,18 @@
       </lux-gui-item>
       <lux-gui-item *ngIf="mission.reward_item4 > -1" [id]="mission.reward_item4" [amount]="mission.reward_item4_count">
       </lux-gui-item>
+      <lux-slot *ngIf="mission.reward_maxhealth > 0" icon="/lu-res/textures/ui/rewards/maxheart.png" [count]="mission.reward_maxhealth">Life Point</lux-slot>
+      <lux-slot *ngIf="mission.reward_maximagination > 0" icon="/lu-res/textures/ui/rewards/maximagination.png" [count]="mission.reward_maximagination">Imagination Point</lux-slot>
+      <lux-slot *ngIf="mission.reward_maxinventory > 0" icon="/lu-res/textures/ui/rewards/maxinventory.png" [count]="mission.reward_maxinventory">Extra Backpack Space</lux-slot>
+      <lux-slot *ngIf="mission.reward_maxmodel > 0" icon="/lu-res/textures/ui/rewards/maxmodel.png" [count]="mission.reward_maxmodel">Extra Model Space</lux-slot>
+      <lux-slot *ngIf="mission.reward_maxwidget > 0" icon="/lu-res/textures/ui/rewards/maxwidget.png" [count]="mission.reward_maxwidget">Extra Behavior Space</lux-slot>
+      <lux-slot *ngIf="mission.reward_maxwallet > 0" icon="/lu-res/textures/ui/rewards/maxwallet.png" [count]="mission.reward_maxwallet">Extra Wallet Space"</lux-slot>
+      <lux-slot *ngIf="mission.reward_bankinventory > 0" icon="/lu-res/textures/ui/rewards/maxbank.png" [count]="mission.reward_bankinventory">Extra Vault Space</lux-slot>
+      <lux-slot *ngIf="mission.reward_emote > -1" icon="/lu-res/textures/ui/achievements/general_social.png">Emote #{{mission.reward_emote}}</lux-slot>
+      <lux-slot *ngIf="mission.reward_emote2 > -1" icon="/lu-res/textures/ui/achievements/general_social.png">Emote #{{mission.reward_emote2}}</lux-slot>
+      <lux-slot *ngIf="mission.reward_emote3 > -1" icon="/lu-res/textures/ui/achievements/general_social.png">Emote #{{mission.reward_emote3}}</lux-slot>
+      <lux-slot *ngIf="mission.reward_emote4 > -1" icon="/lu-res/textures/ui/achievements/general_social.png">Emote #{{mission.reward_emote4}}</lux-slot>
     </dd>
-    <dd *ngIf="mission.reward_emote > -1">the emote #{{mission.reward_emote}}</dd>
-    <dd *ngIf="mission.reward_emote2 > -1">the emote #{{mission.reward_emote2}}</dd>
-    <dd *ngIf="mission.reward_emote3 > -1">the emote #{{mission.reward_emote3}}</dd>
-    <dd *ngIf="mission.reward_emote4 > -1">the emote #{{mission.reward_emote4}}</dd>
   </dl>
 
   <ul class="currency-rewards">
@@ -162,49 +152,6 @@
     <li *ngIf="mission.reward_currency_repeatable > 0"><lux-coins [count]="mission.reward_currency_repeatable"></lux-coins></li>
     <li *ngIf="mission.LegoScore > 0"><lux-uscore [count]="mission.LegoScore"></lux-uscore></li>
   </ul>
-
-  <!--  <table>
-    <tr>
-      <th></th>
-      <th>itemid</th>
-      <th>count</th>
-      <th>repeat_count</th>
-      <th>repeatable</th>
-      <th>emote</th>
-    </tr>
-    <tr>
-      <th>reward 1</th>
-      <td>{{mission.reward_item1}}</td>
-      <td>{{mission.reward_item1_count}}</td>
-      <td>{{mission.reward_item1_repeat_count}}</td>
-      <td>{{mission.reward_item1_repeatable}}</td>
-      <td>{{mission.reward_emote}}</td>
-    </tr>
-    <tr>
-      <th>reward 2</th>
-      <td>{{mission.reward_item2}}</td>
-      <td>{{mission.reward_item2_count}}</td>
-      <td>{{mission.reward_item2_repeat_count}}</td>
-      <td>{{mission.reward_item2_repeatable}}</td>
-      <td>{{mission.reward_emote2}}</td>
-    </tr>
-    <tr>
-      <th>reward 3</th>
-      <td>{{mission.reward_item3}}</td>
-      <td>{{mission.reward_item3_count}}</td>
-      <td>{{mission.reward_item3_repeat_count}}</td>
-      <td>{{mission.reward_item3_repeatable}}</td>
-      <td>{{mission.reward_emote3}}</td>
-    </tr>
-    <tr>
-      <th>reward 4</th>
-      <td>{{mission.reward_item4}}</td>
-      <td>{{mission.reward_item4_count}}</td>
-      <td>{{mission.reward_item4_repeat_count}}</td>
-      <td>{{mission.reward_item4_repeatable}}</td>
-      <td>{{mission.reward_emote4}}</td>
-    </tr>
-  </table>-->
 </section>
 
 <h3>Texts</h3>

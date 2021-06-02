@@ -1,15 +1,20 @@
-.tooltip-container {
+:host {
     /* Position the tooltip text */
     position: absolute;
     top: 0;
     left: 70px;
     z-index: 100;
 
-    background-color: black;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    min-width: 200px;
+    display: block;
+    width: 450px;
+}
 
-    border: 1px solid white;
+.tooltip-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+		display: inline-block;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-align: center;
 }
