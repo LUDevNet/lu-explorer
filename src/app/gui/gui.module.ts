@@ -18,7 +18,8 @@ import { BuffFlagComponent } from './buff-flag/buff-flag.component';
 import { ReputationComponent } from './reputation/reputation.component';
 import { UscoreComponent } from './uscore/uscore.component';
 import { SlotComponent } from './slot/slot.component';
-
+import { ObjectComponent } from './object/object.component';
+import { ObjectDirective } from './object/object.directive';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,8 @@ import { SlotComponent } from './slot/slot.component';
     ReputationComponent,
     UscoreComponent,
     SlotComponent,
+    ObjectComponent,
+    ObjectDirective,
   ],
   imports: [
     CommonModule,
@@ -51,6 +54,8 @@ import { SlotComponent } from './slot/slot.component';
     ReputationComponent,
     UscoreComponent,
     SlotComponent,
+    ObjectComponent,
+    ObjectDirective,
   ],
 })
 export class GuiModule { }
