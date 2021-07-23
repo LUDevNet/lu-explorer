@@ -358,12 +358,19 @@ export class BehaviorDetailAltComponent implements OnInit {
       nodes: {
         font: {
           size: 30,
-          face: 'nunito'
+          face: 'nunito',
+          color: '#fff',
         },
         shape: 'box',
         shapeProperties: {
           borderRadius: 10
-        }
+        },
+        color: {
+          background: '#66f',
+          highlight: {
+            background: '#4c4cff',
+          },
+        },
       },
       edges: {
         smooth: {
@@ -380,6 +387,10 @@ export class BehaviorDetailAltComponent implements OnInit {
         },
         arrows: {
           to: true
+        },
+        color: {
+          color: '#9999ff',
+          highlight: '#4c4cff',
         },
         arrowStrikethrough: false
       },
