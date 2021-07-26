@@ -14,7 +14,7 @@
     <app-image [path]="zone.thumbnail" width="30rem"></app-image>
   </div>
   <h3>Zone-File</h3>
-  <app-luz-file [path]="zone.zoneName" [zone-ref]="zone"></app-luz-file>
+  <app-luz-file [path]="zone.zoneName" [width]="zone.widthInChunks" [height]="zone.heightInChunks"></app-luz-file>
   <h3>Flags</h3>
   <lux-simple-flag [value]="zone.PlayerLoseCoinsOnDeath" name="PlayerLoseCoinsOnDeath"></lux-simple-flag>
   <lux-simple-flag [value]="zone.disableSaveLoc" name="disableSaveLoc"></lux-simple-flag>
@@ -37,7 +37,7 @@
     <lux-number-flag  [value]="zone.zoneControlTemplate" name="zoneControlTemplate"></lux-number-flag>
     </a>
   </div>
-  
+
   <h3>Internal</h3>
   <lux-simple-flag [value]="zone.localize" name="localize"></lux-simple-flag>
   <lux-number-flag [value]="zone.locStatus" name="locStatus"></lux-number-flag>

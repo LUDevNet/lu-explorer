@@ -1,0 +1,23 @@
+#waypoints-list {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#waypoints-list > li {
+	display: block;
+	width: 3rem;
+}
+
+#waypoints-list > li > a {
+	background-color: black;
+	border: 1px solid grey;
+	display: block;
+	padding: 1rem 0;
+	text-align: center;
+	width: 100%;
+}
+
+#waypoints-list > li > a:hover {
+	background-color: grey;
+	text-decoration: none;
+}

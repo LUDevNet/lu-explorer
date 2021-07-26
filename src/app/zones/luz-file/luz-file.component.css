@@ -1,8 +1,15 @@
-.map {
-  background-color: #333;
-  max-width: 40rem;
+
+#map-pane {
+    display: flex;
+    height: 80vh;
 }
 
-.path_point {
-  overflow-y: auto;
+#map-inspector {
+    flex: 4;
+    overflow-y: auto;
+}
+
+#map {
+    background-color: transparent;
+    flex: 6;
 }
