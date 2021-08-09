@@ -1,9 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Directive, ViewChild, ElementRef, Inject } from '@angular/core';
-
-@Directive({
-  selector: '.tooltip-container'
-})
-export class TooltipContainerDirective {}
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input, Directive, ViewChild, ElementRef, Inject } from '@angular/core';
 
 @Component({
   selector: 'lux-tooltip',
@@ -12,24 +7,29 @@ export class TooltipContainerDirective {}
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TooltipComponent implements OnInit {
-  top : string = "64px";
+  top: number = 10;
+  left: number = 10;
 
-  @ViewChild(TooltipContainerDirective, { read: ElementRef })
-  private tooltipContainer!: ElementRef;
+  @ViewChild("tooltipContainer")
+  private tooltipContainer: ElementRef;
 
-  constructor( @Inject('tooltipConfig') private config ) {}
-  
+  constructor(@Inject('tooltipConfig') private config, private changeDetector: ChangeDetectorRef) {}
+
   ngOnInit() {}
 
   ngAfterViewInit() {
-    // For simplicity, we calculate only the top.
-    const { top } = this.config.host.getBoundingClientRect();
-    if (this.tooltipContainer) {
-      const { height } = this.tooltipContainer.nativeElement.getBoundingClientRect();
-      //this.top = `${top - height}px`;
-    } else {
-      console.log(this.tooltipContainer);
-    }
+    // position tooltip at top center of host
+    const hostRect = this.config.host.getBoundingClientRect();
+    this.top = window.scrollY + hostRect.top;
+    this.left = window.scrollX + hostRect.left + hostRect.width/2;
+    const tooltipRect = this.tooltipContainer.nativeElement.getBoundingClientRect();
+    // shift tooltip to be fully above referenced element
+    this.top -= tooltipRect.height;
+    // shift tooltip to be centered properly
+    this.left -= tooltipRect.width/2;
+    // clamp to window dimensions to avoid tooltips going out of bounds
+    this.left = Math.max(10, Math.min(window.innerWidth - 10 - tooltipRect.width, this.left));
+    this.changeDetector.detectChanges();
   }
 
 }

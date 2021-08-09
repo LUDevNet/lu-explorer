@@ -1,18 +1,10 @@
-:host {
-    /* Position the tooltip text */
-    position: absolute;
-    top: 0;
-    left: 70px;
-    z-index: 100;
-
-    display: block;
-    width: 450px;
-}
-
 .tooltip-container {
+    position: absolute;
+    z-index: 100;
+    max-width: 430px;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
-		display: inline-block;
+    display: inline-block;
     font-weight: 600;
     padding: 4px 10px;
     border-radius: 20px;
