@@ -156,6 +156,7 @@
 
 <h3>Texts</h3>
 <ng-container *ngIf="mission && textsLocale">
+	<h4>Chat Bubbles</h4>
   <dl id="chat-bubbles">
     <div *ngIf="textsLocale.chat_state_1">
       <dt><blockquote class="chat-bubble" luxTooltip="chat_state_1" [innerHTML]="textsLocale.chat_state_1"></blockquote></dt>
@@ -186,29 +187,58 @@
       <dd>Spoken by <lux-object [luxFetch]="mission.target_objectID"></lux-object> when approached when the mission is complete.</dd>
     </div>
   </dl>
-
-  <ng-container *ngIf="text">
-    <app-icon [iconID]="text.turnInIconID"></app-icon>
-  </ng-container>
+</ng-container>
+<div>
+	<h4>Completion Tooltip</h4>
+	<dl>
+		<ng-container *ngIf="mission">
+			<ng-container *ngIf="mission.isMission; else achievementTooltip">
+				<dt class="mission-tooltip" luxTooltip="completion_succeed_tip">
+					<app-icon class="mission-tooltip-icon" *ngIf="text" [iconID]="text.turnInIconID"></app-icon>
+					<img class="mission-tooltip-arrow" src="/lu-res/ui/ingame/missioncompletemessage_ic.png" alt="" />
+					<img class="mission-tooltip-arrow" src="/lu-res/ui/ingame/missioncompletemessage_ic.png" alt="" style="opacity: 0.75;" />
+					<img class="mission-tooltip-arrow" src="/lu-res/ui/ingame/missioncompletemessage_ic.png" alt="" style="opacity: 0.5;" />
+					<blockquote *ngIf="textsLocale && textsLocale.completion_succeed_tip" class="mission-tooltip-text" [innerHTML]="textsLocale.completion_succeed_tip"></blockquote>
+				</dt>
+			</ng-container>
+			<ng-template #achievementTooltip>
+				<dt class="achievement-tooltip" luxTooltip="completion_succeed_tip">
+					<app-icon class="achievement-tooltip-icon" [iconID]="mission.missionIconID"></app-icon>
+					<blockquote *ngIf="textsLocale && textsLocale.completion_succeed_tip" class="achievement-tooltip-text" [innerHTML]="textsLocale.completion_succeed_tip"></blockquote>
+				</dt>
+			</ng-template>
+		</ng-container>
+		<dd>Displayed once the player has completed all tasks.</dd>
+	</dl>
+</div>
+<ng-container *ngIf="mission && !mission.isMission && textsLocale">
+	<h4>Achievement Description</h4>
   <dl>
-    <ng-container *ngIf="textsLocale.completion_succeed_tip">
-      <dt><blockquote luxTooltip="completion_succeed_tip" [innerHTML]="textsLocale.completion_succeed_tip"></blockquote></dt>
-    </ng-container>
-    <ng-container *ngIf="textsLocale.description">
+    <div *ngIf="textsLocale.description">
       <dt><blockquote luxTooltip="description" [innerHTML]="textsLocale.description"></blockquote></dt>
-    </ng-container>
-    <ng-container *ngIf="textsLocale.in_progress">
-      <dt><blockquote luxTooltip="in_progress" [innerHTML]="textsLocale.in_progress"></blockquote></dt>
-    </ng-container>
-    <ng-container *ngIf="textsLocale.offer">
-      <dt><blockquote luxTooltip="offer" [innerHTML]="textsLocale.offer"></blockquote></dt>
-    </ng-container>
-    <ng-container *ngIf="textsLocale.offer_repeatable">
-      <dt><blockquote luxTooltip="offer_repeatable" [innerHTML]="textsLocale.offer_repeatable"></blockquote></dt>
-    </ng-container>
-    <ng-container *ngIf="textsLocale.ready_to_complete">
-      <dt><blockquote luxTooltip="ready_to_complete" [innerHTML]="textsLocale.ready_to_complete"></blockquote></dt>
-    </ng-container>
+      <dd>Displayed in the passport as the achievement's description.</dd>
+    </div>
+	</dl>
+</ng-container>
+<ng-container *ngIf="mission && mission.isMission && textsLocale">
+	<h4>Mission Dialogs</h4>
+  <dl id="mission-dialogs">
+    <div *ngIf="textsLocale.in_progress">
+      <dt><blockquote class="mission-dialog" luxTooltip="in_progress" [innerHTML]="textsLocale.in_progress"></blockquote></dt>
+      <dd>Displayed when interacting with <lux-object [luxFetch]="mission.offer_objectID"></lux-object> while the mission is in progress, as well when selecting the mission in the passport.</dd>
+    </div>
+    <div *ngIf="textsLocale.offer">
+      <dt><blockquote class="mission-dialog" luxTooltip="offer" [innerHTML]="textsLocale.offer"></blockquote></dt>
+      <dd>Displayed when interacting with <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when the mission is available.</dd>
+    </div>
+    <div *ngIf="textsLocale.offer_repeatable">
+      <dt><blockquote class="mission-dialog" luxTooltip="offer_repeatable" [innerHTML]="textsLocale.offer_repeatable"></blockquote></dt>
+      <dd>Displayed when interacting with <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when the mission is again available after the mission has already been completed.</dd>
+    </div>
+    <div *ngIf="textsLocale.ready_to_complete">
+      <dt><blockquote class="mission-dialog" luxTooltip="ready_to_complete" [innerHTML]="textsLocale.ready_to_complete"></blockquote></dt>
+      <dd>Displayed when interacting with <lux-object [luxFetch]="mission.target_objectID"></lux-object> when the mission is ready to be completed.</dd>
+    </div>
   </dl>
 </ng-container>
 

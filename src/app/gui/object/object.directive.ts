@@ -1,6 +1,6 @@
 import { Directive, Input } from "@angular/core";
 import { ObjectComponent } from "./object.component";
-import { LuJsonService, LuLocaleService } from "../../services";
+import { LuJsonService } from "../../services";
 
 @Directive({
   selector: "lux-object[luxFetch]"
@@ -10,12 +10,12 @@ export class ObjectDirective {
   @Input("luxFetch") set id(id: number) {
     this.objectComponent.id = id;
     this.objectComponent.title = `#${id}`;
-    this.luJson.getObject(id).subscribe(this.onObject);
+    this.luJson.getObject(id).subscribe(this.onObject.bind(this));
   }
 
-  constructor(private luJson: LuJsonService, private luLocale: LuLocaleService, private objectComponent: ObjectComponent) { }
+  constructor(private luJson: LuJsonService, private objectComponent: ObjectComponent) { }
 
-  onObject = (object: any) => {
+  onObject(object: any) {
     if (object.displayName) {
       this.objectComponent.title = object.displayName;
     } else if (object.name) {
