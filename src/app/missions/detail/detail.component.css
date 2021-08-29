@@ -9,6 +9,107 @@
     padding-right: 1.5rem;
 }
 
+.chat-bubble {
+    background-image: url("/assets/ui/chat-bubble.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: solid 1px #ea6102;
+    border-radius: 11px;
+    color: black;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1.1;
+    max-width: 200px;
+    padding: 0.6rem 0.8rem;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.achievement-tooltip {
+    background-image: url("/lu-res/ui/ingame/achievements_i1e.png");
+    background-size: 130% 175%;
+    display: flex;
+		max-width: 256px;
+    padding: 0.5rem;
+    padding-left: 1rem;
+}
+
+.achievement-tooltip-icon {
+    align-self: center;
+}
+
+.achievement-tooltip-text {
+    align-self: center;
+    background-color: transparent;
+    color: black;
+    font-size: 1.1rem;
+    font-weight: bold;
+		line-height: 1rem;
+}
+
+.mission-tooltip {
+    background-color: rgb(227, 121, 8);
+    border-radius: 2rem;
+    display: inline-flex;
+    overflow: clip;
+}
+
+.mission-tooltip-icon {
+    align-self: end;
+    height: 57px;
+    margin-right: 2px;
+}
+
+.mission-tooltip-arrow {
+    align-self: center;
+    margin: 0;
+    margin-left: -2px;
+}
+
+.mission-tooltip-text {
+    align-self: center;
+    background-color: transparent;
+    color: black;
+    font-weight: 600;
+    padding-left: 1rem;
+    padding-right: 1.5rem;
+    margin: 0;
+}
+
+.mission-dialog {
+    background-color: rgba(245, 249, 245, 0.9);
+    border-radius: 1rem;
+    color: #999;
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 1.3rem;
+    margin: 15px;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+#chat-bubbles {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#chat-bubbles > div {
+    width: 250px;
+}
+
+#chat-bubbles dt {
+    text-align: center;
+}
+
+#mission-dialogs {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#mission-dialogs > div {
+    width: 500px;
+}
+
 @media (max-width: 500px) {
     #mission-card {
         float: none;
