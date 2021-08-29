@@ -10,9 +10,10 @@
 }
 
 .chat-bubble {
-    background-image: url("/assets/ui/chat-bubble.svg");
+    background-image: url("../../../assets/ui/chat-bubble.svg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    background-color: #ea6102;
     border: solid 1px #ea6102;
     border-radius: 11px;
     color: black;
