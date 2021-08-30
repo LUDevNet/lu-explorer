@@ -4,6 +4,16 @@ import { DB_Missions } from '../../cdclient';
 
 import { LuJsonService, LuLocaleService } from '../../services';
 
+const CHAT_BUBBLE_KEYS: string[] = [
+  "chat_state_1",
+  "accept_chat_bubble",
+  "chat_state_2",
+  "chat_state_3",
+  "chat_state_3_turnin",
+  "chat_state_4",
+  "chat_state_4_turnin",
+];
+
 @Component({
   selector: 'app-mission-detail',
   templateUrl: './detail.component.html',
@@ -41,6 +51,10 @@ export class MissionDetailComponent implements OnInit {
       .getLocaleEntry("MissionTasks", task.uid)
       .subscribe(entry => task.localizations = entry))
     this.tasks = taskArray;
+  }
+
+  anyChatBubble(texts: any): boolean {
+    return CHAT_BUBBLE_KEYS.some((key) => texts.hasOwnProperty(key));
   }
 
 }

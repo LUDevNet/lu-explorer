@@ -20,6 +20,7 @@ import { UscoreComponent } from './uscore/uscore.component';
 import { SlotComponent } from './slot/slot.component';
 import { ObjectComponent } from './object/object.component';
 import { ObjectDirective } from './object/object.directive';
+import { MissiondisplayRewardComponent } from './missiondisplay-reward/missiondisplay-reward.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ObjectDirective } from './object/object.directive';
     SlotComponent,
     ObjectComponent,
     ObjectDirective,
+    MissiondisplayRewardComponent,
   ],
   imports: [
     CommonModule,
@@ -56,6 +58,7 @@ import { ObjectDirective } from './object/object.directive';
     SlotComponent,
     ObjectComponent,
     ObjectDirective,
+    MissiondisplayRewardComponent,
   ],
 })
 export class GuiModule { }

@@ -141,7 +141,6 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "lux",
-      "styleext": "css",
       "style": "css"
     },
     "@schematics/angular:directive": {

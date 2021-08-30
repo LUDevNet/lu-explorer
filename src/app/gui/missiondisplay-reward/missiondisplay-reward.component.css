@@ -1,0 +1,30 @@
+:host.coins {
+    background-image: url("../../../assets/ui/missiondisplay_i1d.png");
+}
+
+:host.uscore {
+    background-image: url("../../../assets/ui/missiondisplay_i22.png");
+}
+
+:host.reputation {
+    background-image: url("../../../assets/ui/missiondisplay_i26.png");
+}
+
+:host {
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 48px 72px;
+    padding: 0;
+    display: inline-block;
+    font-weight: bold;
+    /*min-width: 32px;*/
+    vertical-align: middle;
+}
+
+:host span {
+    display: inline-block;
+    padding-top: 1.4em;
+    padding-left: 24px;
+    padding-right: 8px;
+    /*vertical-align: bottom;*/
+}

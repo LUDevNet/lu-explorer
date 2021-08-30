@@ -1,3 +1,28 @@
+.mission-rewards {
+    background-color: rgba(230.912, 90.368, 0.0, 0.9);
+    border-radius: 2rem;
+    padding: 0.7rem 1rem;
+    display: inline-block;
+    margin: 0.2rem 0;
+}
+
+.mission-rewards > dt,dd {
+    display: inline-block;
+}
+
+.mission-rewards > dt {
+    margin: 0 1rem;
+}
+
+.mission-rewards > dd {
+    margin-left: 0;
+}
+
+.mission-rewards ::ng-deep lux-slot {
+    background-image: url("../../../assets/ui/mission_i35.png");
+    background-color: unset;
+}
+
 .currency-rewards {
     display: flex;
     flex-wrap: wrap;

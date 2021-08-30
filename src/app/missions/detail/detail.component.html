@@ -101,62 +101,71 @@
 
 <section *ngIf="mission">
   <h3>Rewards</h3>
-  <dl>
-    <dt *ngIf="mission.isChoiceReward">The player can choose one of:</dt>
-    <dt *ngIf="!mission.isChoiceReward">The player receives:</dt>
-    <dd>
-      <lux-gui-item *ngIf="mission.reward_item1 > -1" [id]="mission.reward_item1" [amount]="mission.reward_item1_count">
-      </lux-gui-item>
-      <lux-gui-item *ngIf="mission.reward_item2 > -1" [id]="mission.reward_item2" [amount]="mission.reward_item2_count">
-      </lux-gui-item>
-      <lux-gui-item *ngIf="mission.reward_item3 > -1" [id]="mission.reward_item3" [amount]="mission.reward_item3_count">
-      </lux-gui-item>
-      <lux-gui-item *ngIf="mission.reward_item4 > -1" [id]="mission.reward_item4" [amount]="mission.reward_item4_count">
-      </lux-gui-item>
-      <lux-slot *ngIf="mission.reward_maxhealth > 0" icon="/lu-res/textures/ui/rewards/maxheart.png" [count]="mission.reward_maxhealth" luxTooltip="Life Point"></lux-slot>
-      <lux-slot *ngIf="mission.reward_maximagination > 0" icon="/lu-res/textures/ui/rewards/maximagination.png" [count]="mission.reward_maximagination" luxTooltip="Imagination Point"></lux-slot>
-      <lux-slot *ngIf="mission.reward_maxinventory > 0" icon="/lu-res/textures/ui/rewards/maxinventory.png" [count]="mission.reward_maxinventory" luxTooltip="Extra Backpack Space"></lux-slot>
-      <lux-slot *ngIf="mission.reward_maxmodel > 0" icon="/lu-res/textures/ui/rewards/maxmodel.png" [count]="mission.reward_maxmodel" luxTooltip="Extra Model Space"></lux-slot>
-      <lux-slot *ngIf="mission.reward_maxwidget > 0" icon="/lu-res/textures/ui/rewards/maxwidget.png" [count]="mission.reward_maxwidget" luxTooltip="Extra Behavior Space"></lux-slot>
-      <lux-slot *ngIf="mission.reward_maxwallet > 0" icon="/lu-res/textures/ui/rewards/maxwallet.png" [count]="mission.reward_maxwallet" luxTooltip="Extra Wallet Space"></lux-slot>
-      <lux-slot *ngIf="mission.reward_bankinventory > 0" icon="/lu-res/textures/ui/rewards/maxbank.png" [count]="mission.reward_bankinventory" luxTooltip="Extra Vault Space"></lux-slot>
-      <lux-slot *ngIf="mission.reward_emote > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote}}"></lux-slot>
-      <lux-slot *ngIf="mission.reward_emote2 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote2}}"></lux-slot>
-      <lux-slot *ngIf="mission.reward_emote3 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote3}}"></lux-slot>
-      <lux-slot *ngIf="mission.reward_emote4 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote4}}"></lux-slot>
-    </dd>
-  </dl>
+  <section>
+    <h4 *ngIf="mission.repeatable">On first completion</h4>
+    <dl class="mission-rewards">
+      <dd>
+        <lux-missiondisplay-reward [luxTooltip]="'reward_currency'" *ngIf="mission.reward_currency > 0" class="coins">{{mission.reward_currency}}</lux-missiondisplay-reward>
+        <lux-missiondisplay-reward [luxTooltip]="'LegoScore'" *ngIf="mission.LegoScore > 0" class="uscore">{{mission.LegoScore}}</lux-missiondisplay-reward>
+        <lux-missiondisplay-reward [luxTooltip]="'reward_reputation'" *ngIf="mission.reward_reputation > 0" class="reputation">{{mission.reward_reputation}}</lux-missiondisplay-reward>
+      </dd>
+      <dt *ngIf="mission.isChoiceReward">and one of:</dt>
+      <dt *ngIf="!mission.isChoiceReward">and all of:</dt>
+      <dd>
+        <lux-gui-item *ngIf="mission.reward_item1 > -1" [id]="mission.reward_item1" [amount]="mission.reward_item1_count">
+        </lux-gui-item>
+        <lux-gui-item *ngIf="mission.reward_item2 > -1" [id]="mission.reward_item2" [amount]="mission.reward_item2_count">
+        </lux-gui-item>
+        <lux-gui-item *ngIf="mission.reward_item3 > -1" [id]="mission.reward_item3" [amount]="mission.reward_item3_count">
+        </lux-gui-item>
+        <lux-gui-item *ngIf="mission.reward_item4 > -1" [id]="mission.reward_item4" [amount]="mission.reward_item4_count">
+        </lux-gui-item>
+        <lux-slot *ngIf="mission.reward_maxhealth > 0" icon="/lu-res/textures/ui/rewards/maxheart.png" [count]="mission.reward_maxhealth" luxTooltip="Life Point"></lux-slot>
+        <lux-slot *ngIf="mission.reward_maximagination > 0" icon="/lu-res/textures/ui/rewards/maximagination.png" [count]="mission.reward_maximagination" luxTooltip="Imagination Point"></lux-slot>
+        <lux-slot *ngIf="mission.reward_maxinventory > 0" icon="/lu-res/textures/ui/rewards/maxinventory.png" [count]="mission.reward_maxinventory" luxTooltip="Extra Backpack Space"></lux-slot>
+        <lux-slot *ngIf="mission.reward_maxmodel > 0" icon="/lu-res/textures/ui/rewards/maxmodel.png" [count]="mission.reward_maxmodel" luxTooltip="Extra Model Space"></lux-slot>
+        <lux-slot *ngIf="mission.reward_maxwidget > 0" icon="/lu-res/textures/ui/rewards/maxwidget.png" [count]="mission.reward_maxwidget" luxTooltip="Extra Behavior Space"></lux-slot>
+        <lux-slot *ngIf="mission.reward_maxwallet > 0" icon="/lu-res/textures/ui/rewards/maxwallet.png" [count]="mission.reward_maxwallet" luxTooltip="Extra Wallet Space"></lux-slot>
+        <lux-slot *ngIf="mission.reward_bankinventory > 0" icon="/lu-res/textures/ui/rewards/maxbank.png" [count]="mission.reward_bankinventory" luxTooltip="Extra Vault Space"></lux-slot>
+        <lux-slot *ngIf="mission.reward_emote > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote}}"></lux-slot>
+        <lux-slot *ngIf="mission.reward_emote2 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote2}}"></lux-slot>
+        <lux-slot *ngIf="mission.reward_emote3 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote3}}"></lux-slot>
+        <lux-slot *ngIf="mission.reward_emote4 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote4}}"></lux-slot>
+      </dd>
+    </dl>
+  </section>
 
-  <ul class="currency-rewards">
-    <li *ngIf="mission.reward_currency > 0"><lux-coins [count]="mission.reward_currency"></lux-coins></li>
-    <li *ngIf="mission.reward_reputation > 0"><lux-reputation [count]="mission.reward_reputation"></lux-reputation></li>
-    <li *ngIf="mission.LegoScore > 0"><lux-uscore [count]="mission.LegoScore"></lux-uscore></li>
-  </ul>
+  <section *ngIf="mission.repeatable">
+    <h4>On repeats</h4>
+    <dl class="mission-rewards">
+      <dd>
+        <lux-missiondisplay-reward [luxTooltip]="'reward_currency_repeatable'" *ngIf="mission.reward_currency_repeatable > 0" class="coins">{{mission.reward_currency_repeatable}}</lux-missiondisplay-reward>
+        <lux-missiondisplay-reward [luxTooltip]="'LegoScore'" *ngIf="mission.LegoScore > 0" class="uscore">{{mission.LegoScore}}</lux-missiondisplay-reward>
+      </dd>
+      <dt *ngIf="mission.isChoiceReward">and one of:</dt>
+      <dt *ngIf="!mission.isChoiceReward">and all of:</dt>
+      <dd>
+        <lux-gui-item *ngIf="mission.reward_item1_repeatable > -1" [id]="mission.reward_item1_repeatable"
+          [amount]="mission.reward_item1_repeat_count"></lux-gui-item>
+        <lux-gui-item *ngIf="mission.reward_item2_repeatable > -1" [id]="mission.reward_item2_repeatable"
+          [amount]="mission.reward_item2_repeat_count"></lux-gui-item>
+        <lux-gui-item *ngIf="mission.reward_item3_repeatable > -1" [id]="mission.reward_item3_repeatable"
+          [amount]="mission.reward_item3_repeat_count"></lux-gui-item>
+        <lux-gui-item *ngIf="mission.reward_item4_repeatable > -1" [id]="mission.reward_item4_repeatable"
+          [amount]="mission.reward_item4_repeat_count"></lux-gui-item>
+      </dd>
+    </dl>
+  </section>
 
-  <dl *ngIf="mission.repeatable">
-    <dt *ngIf="mission.isChoiceReward">On repeats, the player can choose one of:</dt>
-    <dt *ngIf="!mission.isChoiceReward">On repeats, the player receives:</dt>
-    <dd>
-      <lux-gui-item *ngIf="mission.reward_item1_repeatable > -1" [id]="mission.reward_item1_repeatable"
-        [amount]="mission.reward_item1_repeat_count"></lux-gui-item>
-      <lux-gui-item *ngIf="mission.reward_item2_repeatable > -1" [id]="mission.reward_item2_repeatable"
-        [amount]="mission.reward_item2_repeat_count"></lux-gui-item>
-      <lux-gui-item *ngIf="mission.reward_item3_repeatable > -1" [id]="mission.reward_item3_repeatable"
-        [amount]="mission.reward_item3_repeat_count"></lux-gui-item>
-      <lux-gui-item *ngIf="mission.reward_item4_repeatable > -1" [id]="mission.reward_item4_repeatable"
-        [amount]="mission.reward_item4_repeat_count"></lux-gui-item>
-    </dd>
-  </dl>
-
-  <ul class="currency-rewards" *ngIf="mission.repeatable">
+  <!--<ul class="currency-rewards" *ngIf="mission.repeatable">
     <li *ngIf="mission.reward_currency_repeatable > 0"><lux-coins [count]="mission.reward_currency_repeatable"></lux-coins></li>
     <li *ngIf="mission.LegoScore > 0"><lux-uscore [count]="mission.LegoScore"></lux-uscore></li>
-  </ul>
+  </ul>-->
 </section>
 
 <h3>Texts</h3>
-<ng-container *ngIf="mission && textsLocale">
-	<h4>Chat Bubbles</h4>
+<section *ngIf="mission && textsLocale && anyChatBubble(textsLocale)">
+  <h4>Chat Bubbles</h4>
   <dl id="chat-bubbles">
     <div *ngIf="textsLocale.chat_state_1">
       <dt><blockquote class="chat-bubble" luxTooltip="chat_state_1" [innerHTML]="textsLocale.chat_state_1"></blockquote></dt>
@@ -187,7 +196,7 @@
       <dd>Spoken by <lux-object [luxFetch]="mission.target_objectID"></lux-object> when approached when the mission is complete.</dd>
     </div>
   </dl>
-</ng-container>
+</section>
 <div>
 	<h4>Completion Tooltip</h4>
 	<dl>
