@@ -5,4 +5,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci && npm run test
+      - run: npm ci
+      - run: npm run test -- --configuration ci

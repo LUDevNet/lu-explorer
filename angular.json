@@ -91,6 +91,13 @@
               "src/nexus-force.png",
               "src/404.html"
             ]
+          },
+          "configurations": {
+            "ci": {
+              "watch": false,
+              "progress": false,
+              "browsers": "ChromeHeadlessCI"
+            }
           }
         },
         "lint": {
