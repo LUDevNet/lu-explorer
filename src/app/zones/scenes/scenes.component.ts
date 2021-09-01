@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { LuJsonService } from '../../services';
-import { ZoneDetail } from '../../zone';
+import { LevelFileRef } from '../lvl-file/lvl-file.component';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { ZoneDetail } from '../../zone';
 })
 export class ScenesComponent implements OnInit {
 
-  scenes: string[];
+  scenes: LevelFileRef[];
   zone: any;
   sc_id: number;
   id: number;
@@ -32,13 +32,11 @@ export class ScenesComponent implements OnInit {
       .subscribe(zone => { this.zone = zone; this.getZoneData(zone.zoneName); });
   }
 
-  toRef(sc: any, dir:string): any
-  {
-    return {name: sc.name, path: (dir + sc.filename)}
+  toRef(sc: any, dir: string): LevelFileRef {
+    return { name: sc.name, path: (dir + sc.filename) }
   }
 
-  getZoneData(file: string): void
-  {
+  getZoneData(file: string): void {
     let dir = file.substring(0, file.lastIndexOf("/") + 1);
     this.sc_id = +this.route.snapshot.paramMap.get('sc');
     this.luJsonService.getJsonResource("maps/", file, "map")

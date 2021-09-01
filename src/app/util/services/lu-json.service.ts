@@ -1,8 +1,8 @@
-import { Injectable, Type } from '@angular/core';
-import { ReplaySubject, Observable, of, throwError, scheduled } from 'rxjs';
-import { catchError, find, flatMap, map, switchMap, tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ReplaySubject, Observable, of, throwError } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { MessageService } from './message.service';
 
@@ -25,7 +25,6 @@ import {
 
 import { ZoneDetail } from '../../zone';
 import { environment } from '../../../environments/environment';
-import { env } from 'process';
 
 export class Optional<T> {
   data: T;
