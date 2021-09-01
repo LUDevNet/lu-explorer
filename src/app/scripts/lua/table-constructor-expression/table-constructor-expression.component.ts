@@ -15,7 +15,7 @@ export class LuaTableConstructorExpressionComponent implements OnInit {
   }
 
   isSimple(ast: any): boolean {
-    console.log(ast.type);
+    //console.log(ast.type);
     if (['NumericLiteral', 'StringLiteral'].includes(ast.type)) {
       return true;
     } else if (['TableValue'].includes(ast.type)) {

@@ -87,7 +87,7 @@ export class FactionsGraphComponent implements OnInit {
 
   select(params: any): void
   {
-    console.log(params);
+    //console.log(params);
   }
 
 }

@@ -36,7 +36,13 @@ export class LuLocaleService {
 
   getLocaleEntry(table: string, id: number): Observable<any> {
     let idKey = String(id);
-    return this.getLocalePage(table, Math.floor(id / 256)).pipe(map(page => page[idKey]));
+    return this.getLocalePage(table, Math.floor(id / 256)).pipe(map((page: {[key: string]: string}) => {
+      if (page && idKey in page) {
+        return page[idKey];
+      } else {
+        return "[missing]";
+      }
+    }));
   }
 
   translate(value: string): Observable<string> {

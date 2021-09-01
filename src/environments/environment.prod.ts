@@ -1,7 +1,9 @@
 export const environment = {
   production: true,
   data: {
-    apiUrl: "https://lu.lcdruniverse.org/explorer/api/"
+    apiUrl: "https://lu.lcdruniverse.org/explorer/api/",
+    jsonUrl: "https://xiphoseer.de/lu-json/",
+    resUrl: "https://xiphoseer.de/lu-res/"
   },
   firebase: {
     apiKey: "AIzaSyCxUJm4DFGfimoeGKPGT7-9f7gD0frJZ64",

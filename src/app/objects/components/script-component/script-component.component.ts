@@ -12,7 +12,7 @@ export class ScriptComponentComponent implements OnInit {
   _component: any;
 
   @Input() set id(value: number) {
-    console.log("Script", value);
+    //console.log("Script", value);
     this._id = value;
     this.getComponent(value);
   }

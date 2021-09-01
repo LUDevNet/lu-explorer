@@ -1,20 +1,23 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { ServicesModule } from '../../util/services/services.module';
 
-import { DetailComponent } from './detail.component';
+import { MissionDetailComponent } from './detail.component';
 
-describe('DetailComponent', () => {
-  let component: DetailComponent;
-  let fixture: ComponentFixture<DetailComponent>;
+describe('MissionDetailComponent', () => {
+  let component: MissionDetailComponent;
+  let fixture: ComponentFixture<MissionDetailComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetailComponent ]
+      imports: [RouterModule.forRoot([]), ServicesModule],
+      declarations: [ MissionDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DetailComponent);
+    fixture = TestBed.createComponent(MissionDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

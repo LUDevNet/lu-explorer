@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { ServicesModule } from '../../util/services/services.module';
 
 import { ZoneDetailComponent } from './zone-detail.component';
 
@@ -8,6 +10,7 @@ describe('ZoneDetailComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule, RouterModule.forRoot([])],
       declarations: [ ZoneDetailComponent ]
     })
     .compileComponents();

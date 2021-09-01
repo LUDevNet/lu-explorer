@@ -1,4 +1,4 @@
-<section *ngIf="table | async; else loading; let levels">
+<section *ngIf="table | async; else missing; let levels">
   <h2>Level Progression</h2>
   <div class="table-responsive">
     <table>
@@ -15,6 +15,11 @@
     </table>
   </div>
 </section>
+<ng-template #missing>
+  <div *ngIf="error; else loading" class="error">
+    Failed to load level progression data
+  </div>
+</ng-template>
 <ng-template #loading>
   Loading...
 </ng-template>

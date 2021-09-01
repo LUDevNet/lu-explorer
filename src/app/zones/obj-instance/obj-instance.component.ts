@@ -383,7 +383,7 @@ export class ObjInstanceComponent implements OnInit {
           }
         })
         let sett = setters[key];
-        console.log(key, sett);
+        //console.log(key, sett);
         if (sett) sett(data);
       }
     })

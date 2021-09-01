@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { LuJsonService } from '../../services';
@@ -16,7 +16,8 @@ export class ScriptFileComponent implements OnInit {
 
   constructor(
     private luJsonService: LuJsonService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(this.updateRoute.bind(this))
@@ -27,11 +28,14 @@ export class ScriptFileComponent implements OnInit {
     this.segments = this.path.split('/');
     this.luJsonService
       .getScript(this.path)
-      .subscribe(file => this.file = file)
+      .subscribe(file => {
+        this.file = file;
+        this.cd.detectChanges();
+      });
   }
 
   getLink(i: number, segment: string): Array<string> {
-    return ['/scripts'].concat(this.segments.slice(0,i + 1));
+    return ['/scripts'].concat(this.segments.slice(0, i + 1));
   }
 
 }

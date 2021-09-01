@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { of } from 'rxjs';
 
 import { MiscComponent } from './misc.component';
 
@@ -7,8 +9,17 @@ describe('MiscComponent', () => {
   let fixture: ComponentFixture<MiscComponent>;
 
   beforeEach(waitForAsync(() => {
+    let params = {};
     TestBed.configureTestingModule({
-      declarations: [ MiscComponent ]
+      declarations: [ MiscComponent ],
+      providers: [
+        {
+          provide: ActivatedRoute, useValue: {
+            paramMap: of(convertToParamMap(params)),
+            params: of(params),
+          }
+        }
+      ]
     })
     .compileComponents();
   }));

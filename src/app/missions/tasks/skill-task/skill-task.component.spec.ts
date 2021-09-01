@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { UtilModule } from '../../../util/util.module';
 
 import { SkillTaskComponent } from './skill-task.component';
 
@@ -8,14 +10,30 @@ describe('SkillTaskComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SkillTaskComponent ]
+      imports: [UtilModule, RouterTestingModule.withRoutes([])],
+      declarations: [SkillTaskComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SkillTaskComponent);
     component = fixture.componentInstance;
+    component.task = {
+      id: 100,
+      localize: true,
+      locStatus: 2,
+      target: 1000,
+      targetGroup: "",
+      taskType: 10,
+      targetValue: 1,
+      uid: 1000,
+      taskParam1: "120",
+      largeTaskIcon: null,
+      IconID: null,
+      largeTaskIconID: null,
+      gate_version: "mock",
+    };
     fixture.detectChanges();
   });
 

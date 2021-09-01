@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ServicesModule } from '../../util/services/services.module';
 
 import { PreconditionComponent } from './precondition.component';
 
@@ -8,6 +9,7 @@ describe('PreconditionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ServicesModule],
       declarations: [ PreconditionComponent ]
     })
     .compileComponents();

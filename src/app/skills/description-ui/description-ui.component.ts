@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./description-ui.component.css']
 })
 export class DescriptionUiComponent implements OnInit {
-  @Input() template: string;
+  @Input() template: string = "[missing]";
 
   constructor() { }
 

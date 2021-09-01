@@ -8,6 +8,11 @@ interface Object {
   obj: any,
 }
 
+export interface LevelFileRef {
+  path: string,
+  name: string,
+}
+
 @Component({
   selector: 'app-lvl-file',
   templateUrl: './lvl-file.component.html',
@@ -15,7 +20,7 @@ interface Object {
 })
 export class LvlFileComponent implements OnInit {
 
-  @Input() ref: any;
+  @Input() ref: LevelFileRef;
   scene: any;
   selected_object: any;
   selected_object_data: Observable<any>;
@@ -38,7 +43,7 @@ export class LvlFileComponent implements OnInit {
 
   selectObject(map: any)
   {
-    console.log(map);
+    //console.log(map);
     this.zone_id = +map.get('id');
     this.scene_id = +map.get('sc');
     if (map.has('obj')) {

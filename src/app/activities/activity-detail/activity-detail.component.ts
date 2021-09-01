@@ -12,9 +12,9 @@ import { LuLocaleService, LuJsonService } from '../../services';
 export class ActivityDetailComponent implements OnInit {
 
   activity_id: number = -1;
-  activity_loc: any;
+  activity_loc?: any;
   activity_rewards?: ActivityRewardsPod;
-  activity: DB_Activities;
+  activity?: DB_Activities;
 
   constructor(
     private luJsonService: LuJsonService,

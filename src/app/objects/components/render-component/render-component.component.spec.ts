@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ServicesModule } from '../../../util/services/services.module';
 
-import { RenderComponentComponent } from './render.component';
+import { RenderComponentComponent } from './render-component.component';
 
 describe('RenderComponentComponent', () => {
   let component: RenderComponentComponent;
@@ -8,6 +9,7 @@ describe('RenderComponentComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule],
       declarations: [ RenderComponentComponent ]
     })
     .compileComponents();

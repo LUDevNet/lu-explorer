@@ -15,7 +15,7 @@
   </li>
   <!-- teams -->
   <!-- team size -->
-  <li *ngIf="activity.leaderboardType !== null">
+  <li *ngIf="activity && activity.leaderboardType !== null">
     The leaderboard type is {{activity.leaderboardType}} (<code>leaderboardType</code>)
     <ng-container [ngSwitch]="activity.leaderboardType">
       <span *ngSwitchCase="0">(Shooting Gallery)</span>
@@ -29,10 +29,11 @@
     </ng-container>
   </li>
 
-  <li *ngIf="activity.CommunityActivityFlagID !== null"><code>CommunityActivityFlagID</code>:
+  <li *ngIf="activity && activity.CommunityActivityFlagID !== null"><code>CommunityActivityFlagID</code>:
     {{activity.CommunityActivityFlagID}}</li>
 </ul>
 
+<ng-container *ngIf="activity">
 <lux-number-flag *ngIf="activity.minTeams" name="Team(s)"
   [value]="(activity.maxTeams != activity.minTeams) ? activity.minTeams + ' to ' + activity.maxTeams : activity.minTeams">
 </lux-number-flag>
@@ -61,6 +62,7 @@
   <p>The player needs to hand in the following item(s) to participate:</p>
   <lux-gui-item [id]="activity.optionalCostLOT" [amount]="activity.optionalCostCount"></lux-gui-item>
 </section>
+</ng-container>
 
 <section>
   <h3>Details</h3>

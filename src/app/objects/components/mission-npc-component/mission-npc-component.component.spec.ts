@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ServicesModule } from '../../../util/services/services.module';
 
 import { MissionNpcComponentComponent } from './mission-npc-component.component';
 
@@ -8,6 +9,7 @@ describe('MissionNpcComponentComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule],
       declarations: [ MissionNpcComponentComponent ]
     })
     .compileComponents();

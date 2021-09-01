@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ServicesModule } from '../../util/services/services.module';
 
 import { ObjectComponentsIndexComponent } from './components-index.component';
 
@@ -8,6 +9,7 @@ describe('ObjectComponentsIndexComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule],
       declarations: [ ObjectComponentsIndexComponent ]
     })
     .compileComponents();

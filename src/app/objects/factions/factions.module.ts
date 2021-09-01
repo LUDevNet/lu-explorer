@@ -5,7 +5,7 @@ import { FactionsGraphComponent } from './graph/factions.component';
 import { ObjectsByFactionComponent } from './objects-by-faction/objects-by-faction.component';
 import { FactionsRoutingModule } from './factions-routing.module';
 import { UtilModule } from '../../util/util.module';
-import { IndexComponent } from './index/index.component';
+import { FactionIndexComponent } from './index/index.component';
 import { GuiModule } from '../../gui/gui.module';
 
 
@@ -13,7 +13,7 @@ import { GuiModule } from '../../gui/gui.module';
   declarations: [
     FactionsGraphComponent,
     ObjectsByFactionComponent,
-    IndexComponent,
+    FactionIndexComponent,
   ],
   imports: [
     CommonModule,

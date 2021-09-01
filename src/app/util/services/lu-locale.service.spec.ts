@@ -1,11 +1,16 @@
+import { HttpClientModule } from '@angular/common/http';
 import { TestBed, inject } from '@angular/core/testing';
+import { LuJsonService } from './lu-json.service';
 
 import { LuLocaleService } from './lu-locale.service';
+import { MessageService } from './message.service';
+import { ServicesModule } from './services.module';
 
 describe('LuLocaleService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LuLocaleService]
+      imports: [HttpClientModule],
+      providers: [LuLocaleService, LuJsonService, MessageService],
     });
   });
 

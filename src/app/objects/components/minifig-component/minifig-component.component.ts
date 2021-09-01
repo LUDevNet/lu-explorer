@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, of, ReplaySubject } from 'rxjs';
 import { LuJsonService } from '../../../services';
 
 interface DB_MinifigComponent {
@@ -33,6 +33,10 @@ export class MinifigComponentComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.$component = this.luJsonService.getGeneric(this.id, "MinifigComponent", true);
     this.$component.subscribe(minifig => {
+      if (!minifig) {
+        this.$torso = of(null);
+        return;
+      }
       this.$torso = this.luJsonService.getPagedJsonData('tables/MinifigDecals/Torsos/', minifig.chestdecal, "chestdecal");
     });
   }

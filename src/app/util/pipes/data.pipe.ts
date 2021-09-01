@@ -55,7 +55,7 @@ export class RangePipe implements PipeTransform {
 export class LimitPipe implements PipeTransform {
   transform<T>(list: T[], limit: number, skip?: number): T[] {
     if (list) {
-      console.log(skip);
+      //console.log(skip);
       var array = [];
       let min = Math.min(skip || 0, list.length);
       let max = Math.min(min + limit, list.length);
@@ -152,7 +152,7 @@ export class MaxUpToPipe implements PipeTransform {
     let curr = null;
     for (let entry of array) {
       let next = +entry[field];
-      console.log(entry, next, max);
+      //console.log(entry, next, max);
       if (next > max && next <= value) {
         curr = entry;
         max = next;

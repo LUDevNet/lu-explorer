@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ServicesModule } from '../../../util/services/services.module';
 
 import { ScriptComponentComponent } from './script-component.component';
 
@@ -8,6 +9,7 @@ describe('ScriptComponentComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule],
       declarations: [ ScriptComponentComponent ]
     })
     .compileComponents();

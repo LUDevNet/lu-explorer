@@ -27,9 +27,9 @@ export class HtmlPipe implements PipeTransform {
       str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
       //str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
       this.element.innerHTML = str;
-      console.log(str);
+      //console.log(str);
       //str = this.element.textContent;
-      console.log(str);
+      //console.log(str);
       this.element.textContent = '';
     }
 

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ServicesModule } from '../../util/services/services.module';
 
 import { CurrencyTableComponent } from './currency-table.component';
 
@@ -8,6 +9,7 @@ describe('CurrencyTableComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule],
       declarations: [ CurrencyTableComponent ]
     })
     .compileComponents();

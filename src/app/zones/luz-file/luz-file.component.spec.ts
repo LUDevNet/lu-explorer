@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { ServicesModule } from '../../util/services/services.module';
 
 import { LuzFileComponent } from './luz-file.component';
 
@@ -8,6 +10,10 @@ describe('LuzFileComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [
+        ServicesModule,
+        RouterModule.forRoot([])
+      ],
       declarations: [ LuzFileComponent ]
     })
     .compileComponents();

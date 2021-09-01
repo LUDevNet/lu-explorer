@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { ServicesModule } from '../../../util/services/services.module';
 
 import { ItemSetDetailComponent } from './item-set-detail.component';
 
@@ -8,6 +10,7 @@ describe('ItemSetDetailComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule, RouterModule.forRoot([])],
       declarations: [ ItemSetDetailComponent ]
     })
     .compileComponents();

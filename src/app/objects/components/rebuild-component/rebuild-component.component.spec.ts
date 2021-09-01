@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ServicesModule } from '../../../util/services/services.module';
 
 import { RebuildComponentComponent } from './rebuild-component.component';
 
@@ -8,6 +9,7 @@ describe('RebuildComponentComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule],
       declarations: [ RebuildComponentComponent ]
     })
     .compileComponents();

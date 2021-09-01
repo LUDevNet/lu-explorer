@@ -16,6 +16,7 @@ describe("ReputationComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ReputationComponent);
     component = fixture.componentInstance;
+    component.count = 100;
     fixture.detectChanges();
   });
 

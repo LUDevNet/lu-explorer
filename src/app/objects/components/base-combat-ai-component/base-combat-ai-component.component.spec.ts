@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ServicesModule } from '../../../util/services/services.module';
 
 import { BaseCombatAiComponentComponent } from './base-combat-ai-component.component';
 
@@ -8,6 +9,7 @@ describe('BaseCombatAiComponentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ServicesModule],
       declarations: [ BaseCombatAiComponentComponent ]
     })
     .compileComponents();

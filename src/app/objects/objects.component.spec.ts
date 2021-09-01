@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ServicesModule } from '../util/services/services.module';
+import { UtilModule } from '../util/util.module';
 
 import { ObjectsComponent } from './objects.component';
 
@@ -8,6 +11,7 @@ describe('ObjectsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule, UtilModule, RouterTestingModule.withRoutes([])],
       declarations: [ ObjectsComponent ]
     })
     .compileComponents();

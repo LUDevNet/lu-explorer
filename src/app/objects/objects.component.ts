@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 
@@ -15,7 +15,7 @@ export class ObjectsComponent implements OnInit {
   filteredObjects: any = {};
   needle: string = "";
 
-  constructor(private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }
+  constructor(private luLocaleService: LuLocaleService, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.getObjects();
@@ -31,6 +31,7 @@ export class ObjectsComponent implements OnInit {
   updateFilterList()
   {
     this.filteredObjects = Object.assign({},this.filter(this.objects, object => object.name.includes(this.needle), 100));
+    this.cd.detectChanges();
   }
 
   getObjects():void

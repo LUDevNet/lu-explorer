@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { UtilModule } from '../../util/util.module';
 
 import { ChangelogComponent } from './changelog.component';
 
@@ -8,6 +9,7 @@ describe('ChangelogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [UtilModule],
       declarations: [ ChangelogComponent ]
     })
     .compileComponents();

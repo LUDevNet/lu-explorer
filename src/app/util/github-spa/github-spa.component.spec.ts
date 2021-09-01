@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { GithubSpaComponent } from './github-spa.component';
 
@@ -8,6 +9,9 @@ describe('GithubSpaComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule.withRoutes([
+        {path: "dashboard", redirectTo: "https://lu-explorer.xiphoseer.de" }
+      ])],
       declarations: [ GithubSpaComponent ]
     })
     .compileComponents();

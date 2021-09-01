@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ServicesModule } from '../../util/services/services.module';
+import { UtilModule } from '../../util/util.module';
 
 import { BrickColorsComponent } from './brick-colors.component';
 
@@ -8,6 +10,7 @@ describe('BrickColorsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule, UtilModule],
       declarations: [ BrickColorsComponent ]
     })
     .compileComponents();

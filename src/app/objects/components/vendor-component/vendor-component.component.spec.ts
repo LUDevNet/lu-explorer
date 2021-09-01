@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ServicesModule } from '../../../util/services/services.module';
 
-import { VendorComponentComponent } from './vendor.component';
+import { VendorComponentComponent } from './vendor-component.component';
 
 describe('VendorComponentComponent', () => {
   let component: VendorComponentComponent;
@@ -8,6 +9,7 @@ describe('VendorComponentComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule],
       declarations: [ VendorComponentComponent ]
     })
     .compileComponents();
