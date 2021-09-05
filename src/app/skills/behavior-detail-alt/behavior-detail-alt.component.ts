@@ -366,9 +366,11 @@ export class BehaviorDetailAltComponent implements OnInit {
           borderRadius: 10
         },
         color: {
-          background: '#66f',
+          background: '#6161FF',
+          border: '#6161FF',
           highlight: {
-            background: '#4c4cff',
+            background: '#D14600',
+            border: '#D14600',
           },
         },
       },
@@ -389,8 +391,8 @@ export class BehaviorDetailAltComponent implements OnInit {
           to: true
         },
         color: {
-          color: '#9999ff',
-          highlight: '#4c4cff',
+          color: '#6161FF',
+          highlight: '#D14600',
         },
         arrowStrikethrough: false
       },
