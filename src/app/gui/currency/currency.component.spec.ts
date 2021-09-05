@@ -16,6 +16,7 @@ describe("CurrencyComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CurrencyComponent);
     component = fixture.componentInstance;
+    component.count = 100;
     fixture.detectChanges();
   });
 

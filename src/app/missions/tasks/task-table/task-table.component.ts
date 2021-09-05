@@ -8,7 +8,7 @@ import { DB_MissionTasks } from '../../../cdclient';
 })
 export class TaskTableComponent implements OnInit {
 
-  @Input() tasks: DB_MissionTasks[];
+  @Input() tasks: DB_MissionTasks[] = [];
 
   constructor() { }
 

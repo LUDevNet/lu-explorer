@@ -8,9 +8,9 @@ describe('NumberFlagComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NumberFlagComponent ]
+      declarations: [NumberFlagComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

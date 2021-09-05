@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   data: {
     apiUrl: "https://lu.lcdruniverse.org/explorer/api/",
     jsonUrl: "https://xiphoseer.de/lu-json/",

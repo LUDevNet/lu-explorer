@@ -14,7 +14,7 @@ import { DB_SkillBehavior } from '../../cdclient';
 export class SkillComponent implements OnInit {
 
   id: number;
-  _skill: Observable<DB_SkillBehavior>;
+  $skill: Observable<DB_SkillBehavior>;
 
   constructor(
   	private route: ActivatedRoute,
@@ -22,7 +22,7 @@ export class SkillComponent implements OnInit {
     private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this._skill = this.route.paramMap.pipe(
+    this.$skill = this.route.paramMap.pipe(
       map(map => +map.get('id')),
       tap(id => {
         this.id = id;
@@ -30,5 +30,9 @@ export class SkillComponent implements OnInit {
       }),
       switchMap(id => this.luJsonService.getSkill(id))
     );
+    this.$skill.subscribe({
+      next: x => this.cd.detectChanges(),
+      error: x => { throw x },
+    });
   }
 }

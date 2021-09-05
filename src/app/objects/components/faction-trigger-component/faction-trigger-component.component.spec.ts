@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ServicesModule } from '../../../util/services/services.module';
 
 import { FactionTriggerComponentComponent } from './faction-trigger-component.component';
 
@@ -8,6 +9,7 @@ describe('FactionTriggerComponentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ServicesModule],
       declarations: [ FactionTriggerComponentComponent ]
     })
     .compileComponents();

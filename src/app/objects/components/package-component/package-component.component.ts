@@ -25,7 +25,7 @@ export class PackageComponentComponent implements OnInit {
   }
 
   @Input() set id(value: number) {
-    console.log(value);
+    //console.log(value);
     this._ref.next(value);
   }
 

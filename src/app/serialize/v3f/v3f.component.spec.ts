@@ -16,6 +16,7 @@ describe('V3fComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(V3fComponent);
     component = fixture.componentInstance;
+    component.v3f = {x: 100, y: 100, z: 100};
     fixture.detectChanges();
   });
 

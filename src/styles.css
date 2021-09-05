@@ -15,6 +15,15 @@ html
   text-shadow: 2px 2px 0px #000;
 }
 
+.jasmine_html-reporter {
+  text-shadow: none;
+  margin-bottom: 1rem;
+}
+
+#root0 {
+  margin-top: 1rem;
+}
+
 html, body {
   /*background-color: #111;
   color: #fff;*/
@@ -42,7 +51,7 @@ img {
   margin-bottom: 1rem;
 }
 
-.content
+.content, #root0
 {
   background-color: #111;
   color: #fff;

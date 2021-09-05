@@ -16,6 +16,7 @@ describe("UscoreComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UscoreComponent);
     component = fixture.componentInstance;
+    component.count = 100;
     fixture.detectChanges();
   });
 

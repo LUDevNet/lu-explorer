@@ -43,7 +43,7 @@ export class ObjectsByTypeComponent implements OnInit {
   }
 
   tapRef(ref) {
-    console.log(ref);
+    //console.log(ref);
     this.type = ref.type;
     this.page = ref.page;
     this.cd.detectChanges();
@@ -64,7 +64,7 @@ export class ObjectsByTypeComponent implements OnInit {
     let from = this.page_size * ref.page;
     let to = from + this.page_size;
     let page = sorted.slice(from, to);
-    console.log(page);
+    //console.log(page);
     return page;
   }
 

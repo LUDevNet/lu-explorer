@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReplaySubject, Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
@@ -6,6 +6,11 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import { LuJsonService } from '../../services';
 import { component_names } from '../../components';
 import { DB_ObjectRef_ByComponent } from '../../cdclient';
+
+interface Ref {
+  id: number,
+  page: number,
+};
 
 @Component({
   selector: 'app-by-component',
@@ -24,14 +29,15 @@ export class ObjectsByComponentComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private luJsonService: LuJsonService) {}
+    private luJsonService: LuJsonService,
+    private c: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.objects = this.route.paramMap
       .pipe(map(this.mapRouteInfo),tap(this.tapRef.bind(this)),switchMap(this.loadDataObservable.bind(this)))
   }
 
-  mapRouteInfo(map) {
+  mapRouteInfo(map): Ref {
     let comp_id_str = map.get('component');
     if (map.has('page')) {
       let page = map.get('page');
@@ -41,26 +47,28 @@ export class ObjectsByComponentComponent implements OnInit {
     }
   }
 
-  tapRef(ref) {
+  tapRef(ref: Ref) {
     this.component_id = ref.id;
     this.page = ref.page;
     let comp_id_str = String(ref.id);
     if (component_names.hasOwnProperty(comp_id_str)) {
       this.component_name = component_names[ref.id];
     }
+    this.c.detectChanges();
   }
 
-  loadDataObservable(ref) {
+  loadDataObservable(ref: Ref) {
     return this.luJsonService
       .getObjectComponent(ref.id)
       .pipe(tap(this.setPageCounters.bind(this, ref)), map(this.processData.bind(this, ref)));
   }
 
-  setPageCounters(ref, data) {
+  setPageCounters(ref: Ref, data: DB_ObjectRef_ByComponent[]) {
     this.page_count = Math.ceil(data.length / this.page_size);
+    this.c.detectChanges();
   }
 
-  processData(ref, data) {
+  processData(ref: Ref, data: DB_ObjectRef_ByComponent[]) {
     let sorted = data.sort(this.sortObjectComponentRefs);
     let from = this.page_size * ref.page;
     let to = from + this.page_size;

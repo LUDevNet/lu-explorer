@@ -11,7 +11,7 @@ import { LuJsonService } from '../../../services';
 export class LootMatrixComponent implements OnInit {
 
   @Input() id: number;
-  lootmatrix: DB_LootMatrix;
+  lootmatrix?: DB_LootMatrix;
 
   constructor(private luJsonService: LuJsonService) { }
 

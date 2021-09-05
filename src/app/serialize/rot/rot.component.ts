@@ -1,5 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+
+export interface Quaternion {
+  w: number,
+  x: number,
+  y: number,
+  z: number,
+};
+
 @Component({
   selector: 'app-rot',
   templateUrl: './rot.component.html',
@@ -7,7 +15,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RotComponent implements OnInit {
 
-  @Input() rot: any;
+  @Input() rot: Quaternion;
 
   constructor() { }
 

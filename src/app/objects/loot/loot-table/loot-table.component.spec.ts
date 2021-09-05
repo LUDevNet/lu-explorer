@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { ServicesModule } from '../../../util/services/services.module';
 
 import { LootTableComponent } from './loot-table.component';
 
@@ -8,6 +10,7 @@ describe('LootTableComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule, RouterModule.forRoot([])],
       declarations: [ LootTableComponent ]
     })
     .compileComponents();

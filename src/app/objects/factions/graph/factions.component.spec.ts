@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ServicesModule } from '../../../util/services/services.module';
 
 import { FactionsGraphComponent } from './factions.component';
 
@@ -8,6 +9,7 @@ describe('FactionsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule],
       declarations: [ FactionsGraphComponent ]
     })
     .compileComponents();

@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { ServicesModule } from '../../util/services/services.module';
 
 import { LvlFileComponent } from './lvl-file.component';
 
@@ -8,14 +10,19 @@ describe('LvlFileComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ LvlFileComponent ]
+      imports: [ServicesModule, RouterModule.forRoot([])],
+      declarations: [LvlFileComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LvlFileComponent);
     component = fixture.componentInstance;
+    component.ref = {
+      path: "foo",
+      name: "bar",
+    };
     fixture.detectChanges();
   });
 

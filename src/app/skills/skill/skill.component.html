@@ -1,4 +1,4 @@
-<div *ngIf="_skill | async; else loading; let skill">
+<div *ngIf="$skill | async; else loading; let skill">
   <app-icon *ngIf="skill.skillIcon" class="pull-right img-tag" [iconID]="skill.skillIcon"></app-icon>
   <h2>Skill #{{id}}</h2>
   <ng-container *ngIf="skill.skillID | loc:'SkillBehavior' | async; let texts">

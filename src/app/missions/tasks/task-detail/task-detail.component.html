@@ -1,3 +1,4 @@
+<ng-container *ngIf="task; else missing">
 <section class="mission-task" [ngSwitch]="task.taskType">
   <div class="task-icon">
     <app-icon [iconID]="task.IconID" [caption]="false"></app-icon>
@@ -30,3 +31,7 @@
   </div>
   <div style="clear: left;"></div>
 </section>
+</ng-container>
+<ng-template #missing>
+  Failed to load mission task!
+</ng-template>

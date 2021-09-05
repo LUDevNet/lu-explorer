@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject, Observable, of } from 'rxjs';
-import { catchError, find, map, tap } from 'rxjs/operators';
+import { ReplaySubject, Observable, of, throwError } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { MessageService } from './message.service';
 
@@ -24,6 +24,7 @@ import {
 } from '../../cdclient';
 
 import { ZoneDetail } from '../../zone';
+import { environment } from '../../../environments/environment';
 
 export class Optional<T> {
   data: T;
@@ -36,31 +37,42 @@ export interface APIObject extends DB_Objects {
   icons: any[],
 }
 
+class SingleTableError extends TypeError {
+  data?: any;
+  table: string;
+
+  constructor(message: string, table: string, data?: any) {
+    super(`In table '${table}': ${message}`)
+    this.table = table;
+    this.data = data;
+  }
+};
+
 
 @Injectable()
 export class LuJsonService {
 
-  private apiUrl;
-  private tablesUrl;
-  private localeUrl;
-  private scriptsUrl;
-  private behaviorBaseUrl;
-  private skillBaseUrl;
-  private renderBaseUrl;
-  private scriptBaseUrl;
-  private physicsBaseUrl;
-  private itemBaseUrl;
-  private lootMatrixBaseUrl;
-  private lootTableBaseUrl;
-  private iconsBaseUrl;
-  private packBaseUrl;
-  private precondBaseUrl;
-  private objectsBaseUrl;
-  private objectsByTypeUrl;
-  private objectsByComponentUrl;
-  private zonesBaseUrl;
-  private zonesIndexUrl;
-  private accIndexUrl;
+  private apiUrl: string;
+  private tablesUrl: string;
+  private localeUrl: string;
+  private scriptsUrl: string;
+  private behaviorBaseUrl: string;
+  private skillBaseUrl: string;
+  private renderBaseUrl: string;
+  private scriptBaseUrl: string;
+  private physicsBaseUrl: string;
+  private itemBaseUrl: string;
+  private lootMatrixBaseUrl: string;
+  private lootTableBaseUrl: string;
+  private iconsBaseUrl: string;
+  private packBaseUrl: string;
+  private precondBaseUrl: string;
+  private objectsBaseUrl: string;
+  private objectsByTypeUrl: string;
+  private objectsByComponentUrl: string;
+  private zonesBaseUrl: string;
+  private zonesIndexUrl: string;
+  private accIndexUrl: string;
 
   private jsonStore;
 
@@ -71,6 +83,9 @@ export class LuJsonService {
     this.jsonStore = {};
 
     this.apiUrl = "/lu-json/";
+    if (environment.data.jsonUrl) {
+      this.apiUrl = environment.data.jsonUrl;
+    }
 
     this.tablesUrl = "tables/";
     this.localeUrl = "locale/";
@@ -288,7 +303,15 @@ export class LuJsonService {
   getSingleTable<T>(table: string): Observable<T[]> {
     return this
       .makeRequest(this.tablesUrl + table + "/index", `getSingleTable(${table})`)
-      .pipe(map(tbl => tbl['_embedded'][table]));
+      .pipe(switchMap(tbl => {
+        if (!tbl) {
+          return throwError(new SingleTableError("Missing object", table, tbl));
+        }
+        if (!tbl.hasOwnProperty('_embedded')) {
+          return throwError(new SingleTableError("Missing key '_embedded'", table, tbl));
+        }
+        return of(tbl['_embedded'][table]);
+      }));
   }
 
   getGeneric<T>(id: number, table: string, paged: boolean): Observable<T> {

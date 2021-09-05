@@ -16,6 +16,7 @@ describe('PreconditionTreeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PreconditionTreeComponent);
     component = fixture.componentInstance;
+    component.ref = {type: 'lit', value: 1000};
     fixture.detectChanges();
   });
 

@@ -15,7 +15,7 @@ export class MissionsBySubtypeComponent implements OnInit {
   mission_ids: Array<number> = [];
   mission_names: any = {};
 
-  constructor(private router: Router, private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
   	private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }
 
   ngOnInit() {

@@ -31,7 +31,6 @@ export class BehaviorDetailAltComponent implements OnInit {
   errors: number[] = [];
 
   constructor(private route: ActivatedRoute,
-    private luJsonService: LuJsonService,
     private luCoreData: LuCoreDataService) {
   }
 
@@ -418,7 +417,7 @@ export class BehaviorDetailAltComponent implements OnInit {
   }
 
   select(params: any): void {
-    console.log(params);
+    //console.log(params);
     if (params.nodes.length > 0) {
       this.selectedBehavior = this.behaviors[params.nodes[0]];
       this.selectedBehaviorID = params.nodes[0];

@@ -16,6 +16,7 @@ describe('MissionRefListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MissionRefListComponent);
     component = fixture.componentInstance;
+    component.ref = {type: 'lit', value: 1000};
     fixture.detectChanges();
   });
 

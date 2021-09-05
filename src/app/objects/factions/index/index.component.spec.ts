@@ -1,20 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ServicesModule } from '../../../util/services/services.module';
+import { UtilModule } from '../../../util/util.module';
 
-import { IndexComponent } from './index.component';
+import { FactionIndexComponent } from './index.component';
 
-describe('IndexComponent', () => {
-  let component: IndexComponent;
-  let fixture: ComponentFixture<IndexComponent>;
+describe('FactionIndexComponent', () => {
+  let component: FactionIndexComponent;
+  let fixture: ComponentFixture<FactionIndexComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IndexComponent ]
+      imports: [ServicesModule, UtilModule],
+      declarations: [ FactionIndexComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IndexComponent);
+    fixture = TestBed.createComponent(FactionIndexComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

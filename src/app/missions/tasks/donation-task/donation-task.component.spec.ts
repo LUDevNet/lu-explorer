@@ -16,6 +16,21 @@ describe('DonationTaskComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DonationTaskComponent);
     component = fixture.componentInstance;
+    component.task = {
+      id: 100,
+      localize: true,
+      locStatus: 2,
+      target: 1000,
+      targetGroup: "",
+      taskType: 32,
+      targetValue: 1,
+      uid: 1000,
+      taskParam1: null,
+      largeTaskIcon: null,
+      IconID: null,
+      largeTaskIconID: null,
+      gate_version: "mock",
+    };
     fixture.detectChanges();
   });
 

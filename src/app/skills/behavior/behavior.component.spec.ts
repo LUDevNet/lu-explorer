@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { ServicesModule } from '../../util/services/services.module';
 
 import { BehaviorComponent } from './behavior.component';
 
@@ -8,9 +10,10 @@ describe('BehaviorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ BehaviorComponent ]
+      imports: [ServicesModule, RouterModule.forRoot([])],
+      declarations: [BehaviorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

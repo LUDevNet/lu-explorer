@@ -1,4 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MessageService } from '../../../util/services/message.service';
+import { LuJsonService, UtilModule } from '../../../util/util.module';
+import { ComponentsModule } from '../components.module';
 
 import { CollectibleComponentComponent } from './collectible-component.component';
 
@@ -8,9 +12,11 @@ describe('CollectibleComponentComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CollectibleComponentComponent ]
+      providers: [LuJsonService, MessageService],
+      imports: [ComponentsModule, UtilModule, HttpClientModule],
+      declarations: [CollectibleComponentComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

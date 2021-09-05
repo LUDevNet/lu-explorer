@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ServicesModule } from '../../../util/services/services.module';
 
 import { MinifigComponentComponent } from './minifig-component.component';
 
@@ -8,9 +9,10 @@ describe('MinifigComponentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MinifigComponentComponent ]
+      imports: [ServicesModule],
+      declarations: [MinifigComponentComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -8,7 +8,7 @@ import { LuJsonService } from '../../../services';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent implements OnInit {
+export class FactionIndexComponent implements OnInit {
   $factions: Observable<DB_Factions[]>;
 
   constructor(private luJson: LuJsonService) { }

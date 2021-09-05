@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { UtilModule } from '../util/util.module';
+import { ChangelogComponent } from './changelog/changelog.component';
 
 import { DashboardComponent } from './dashboard.component';
 
@@ -8,9 +11,10 @@ describe('DashboardComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      imports: [UtilModule, RouterTestingModule.withRoutes([])],
+      declarations: [DashboardComponent, ChangelogComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

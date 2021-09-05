@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ServicesModule } from '../../../util/services/services.module';
 
 import { GenericComponentComponent } from './generic-component.component';
 
@@ -8,6 +9,7 @@ describe('GenericComponentComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule],
       declarations: [ GenericComponentComponent ]
     })
     .compileComponents();

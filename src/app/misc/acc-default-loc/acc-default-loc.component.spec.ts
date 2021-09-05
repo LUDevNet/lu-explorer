@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ServicesModule } from '../../util/services/services.module';
 
 import { AccDefaultLocComponent } from './acc-default-loc.component';
 
@@ -8,6 +9,7 @@ describe('AccDefaultLocComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule],
       declarations: [ AccDefaultLocComponent ]
     })
     .compileComponents();

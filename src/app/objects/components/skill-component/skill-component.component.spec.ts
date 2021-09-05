@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ServicesModule } from '../../../util/services/services.module';
+import { UtilModule } from '../../../util/util.module';
 
 import { SkillComponentComponent } from './skill-component.component';
 
@@ -8,9 +10,10 @@ describe('SkillComponentComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SkillComponentComponent ]
+      imports: [ServicesModule, UtilModule],
+      declarations: [SkillComponentComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

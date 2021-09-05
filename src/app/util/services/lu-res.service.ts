@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,11 @@ export class LuResService {
   }
 
   getResolvedResUrl(path: string): string {
-    return "/lu-res/" + path;
+    if (environment.data.resUrl) {
+      return environment.data.resUrl + path;
+    } else {
+      return "/lu-res/" + path;
+    }
   }
 
   getXML(path: string): Observable<XMLDocument> {
@@ -21,7 +26,7 @@ export class LuResService {
     return this.http.get(url, { responseType: 'text'})
     .pipe(map(xmlStr => {
       let xml = parser.parseFromString(xmlStr, "application/xml");
-      console.log(xml);
+      //console.log(xml);
       return xml;
     }));
   }

@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ServicesModule } from '../../../util/services/services.module';
+import { UtilModule } from '../../../util/util.module';
 
 import { PackageComponentComponent } from './package-component.component';
 
@@ -8,6 +10,7 @@ describe('PackageComponentComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ServicesModule, UtilModule],
       declarations: [ PackageComponentComponent ]
     })
     .compileComponents();
