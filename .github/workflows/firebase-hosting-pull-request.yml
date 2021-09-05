@@ -5,6 +5,7 @@ name: Deploy to Firebase Hosting on PR
 'on': pull_request
 jobs:
   build_and_preview:
+    if: github.repository == 'Xiphoseer/lu-explorer' # (the firebase secret isn't provided to forks)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
