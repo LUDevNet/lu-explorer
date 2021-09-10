@@ -15,9 +15,37 @@
     </a>
   </p>
   <!--<app-behavior-detail [behaviorID]="skill.behaviorID"></app-behavior-detail>-->
+</div>
+<section *ngIf="$rev_skill | async; let rev_skill">
+  <h3>Used in</h3>
+  <section *ngIf="rev_skill.mission_tasks.length > 0">
+    <h4>UseSkill MissionTasks</h4>
+    <p>The following mission tasks require you to cast this skill:</p>
+    <dl>
+    <ng-container *ngFor="let task_id of rev_skill.mission_tasks">
+      <ng-container *ngIf="rev_skill._embedded.MissionTasks| elem: task_id.toString(); let task">
+        <dt>Mission <a routerLink="/missions/{{task.id}}">#{{task.id}}</a>:</dt>
+        <dd><app-task-detail [task]="task"></app-task-detail></dd>
+      </ng-container>
+    </ng-container>
+    </dl>
+  </section>
+  <section *ngIf="rev_skill.objects.length > 0">
+    <h4>ObjectSkills</h4>
+    <p>The following objects can cast this skill:</p>
+    <ng-container *ngFor="let object_id of rev_skill.objects">
+      <lux-gui-item [id]="object_id"></lux-gui-item>
+    </ng-container>
+  </section>
+  <section *ngIf="rev_skill.item_sets.length > 0">
+    <h4>ItemSet SkillSets</h4>
+    {{rev_skill.item_sets}}
+  </section>
+</section>
+<section *ngIf="_skill | async; let skill">
   <h3>Details</h3>
   <app-data-table [table]="skill"></app-data-table>
-</div>
+</section>
 <ng-template #loading>
   Loading...
 </ng-template>
