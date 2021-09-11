@@ -4,6 +4,11 @@ import { FormControl } from '@angular/forms';
 
 import { LuJsonService, LuLocaleService } from '../services';
 
+interface Locale_Object {
+  name?: string;
+}
+type ObjectDict = {[key: string]: Locale_Object};
+
 @Component({
   selector: 'app-objects',
   templateUrl: './objects.component.html',
@@ -11,8 +16,8 @@ import { LuJsonService, LuLocaleService } from '../services';
 })
 export class ObjectsComponent implements OnInit {
 
-  objects: any = {};
-  filteredObjects: any = {};
+  objects: ObjectDict = {};
+  filteredObjects: ObjectDict = {};
   needle: string = "";
 
   constructor(private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }

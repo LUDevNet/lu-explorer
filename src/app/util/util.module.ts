@@ -7,7 +7,7 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { GithubSpaComponent } from './github-spa/github-spa.component';
 import { IconComponent } from './icon/icon.component';
 
-import { ArraySortPipe, ArraySortNumPipe, DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, LimitPipe, NonNullPipe, RangePipe, RemovePipe, MaxUpToPipe } from './pipes/data.pipe';
+import { ArraySortPipe, ArraySortNumPipe, DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, LimitPipe, NonNullPipe, RangePipe, RemovePipe, MaxUpToPipe, ArrKeysPipe } from './pipes/data.pipe';
 import { BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe, DivCeilPipe } from './pipes/logical.pipe';
 import { DatePipe, HtmlPipe, FixedNumPipe } from './pipes/output.pipe';
 import { DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe } from './pipes/service.pipe';
@@ -26,7 +26,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
 @NgModule({
   declarations: [
     PaginationComponent, DataTableComponent, GithubSpaComponent, IconComponent,
-    DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, NonNullPipe, RangePipe, RemovePipe, LimitPipe, ArraySortPipe, ArraySortNumPipe, MaxUpToPipe,
+    DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, ArrKeysPipe, NonNullPipe, RangePipe, RemovePipe, LimitPipe, ArraySortPipe, ArraySortNumPipe, MaxUpToPipe,
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe, DivCeilPipe,
     DatePipe, HtmlPipe, FixedNumPipe,
     DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe,
@@ -40,7 +40,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
   ],
   exports: [
     PaginationComponent, DataTableComponent, GithubSpaComponent, IconComponent,
-    DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, NonNullPipe, RangePipe, RemovePipe, ArraySortPipe, ArraySortNumPipe,
+    DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, ArrKeysPipe, NonNullPipe, RangePipe, RemovePipe, ArraySortPipe, ArraySortNumPipe,
     LimitPipe, MaxUpToPipe,
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe, DivCeilPipe,
     DatePipe, HtmlPipe, FixedNumPipe,

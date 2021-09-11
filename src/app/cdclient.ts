@@ -323,7 +323,7 @@ export class DB_Behavior
   effectHandle: string;
   effectID: number;
   templateID: number;
-  parameters: any;
+  parameters: {[key: string]: number};
 }
 
 export class DB_BehaviorTemplate
@@ -517,4 +517,12 @@ export class DB_MissionTasks {
   localize: boolean;
   gate_version: string;
   localizations ?: any;
+}
+
+export class DB_WhatsCoolItemSpotlight {
+  id: number; // INTEGER
+  itemID: number; // INTEGER
+  localize: boolean; // BOOLEAN
+  gate_version: string; // TEXT
+  locStatus: number; // INTEGER
 }

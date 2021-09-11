@@ -1,12 +1,28 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+interface KeyValue<K, T> {
+  key: K,
+  value: T,
+}
+
 // https://stackoverflow.com/questions/35534959/access-key-and-value-of-object-using-ngfor
 @Pipe({ name: 'keys' })
 export class KeysPipe implements PipeTransform {
-  transform(value): any {
-    let keys = [];
+  transform<V>(value: {[key: string]: V}): KeyValue<string, V>[] {
+    let keys: KeyValue<string, V>[] = [];
     for (let key in value) {
       keys.push({ key: key, value: value[key] });
+    }
+    return keys;
+  }
+}
+
+@Pipe({ name: 'arrkeys' })
+export class ArrKeysPipe implements PipeTransform {
+  transform<V>(value: V[]): KeyValue<number, V>[] {
+    let keys: KeyValue<number, V>[] = [];
+    for (let key in value) {
+      keys.push({ key: Number(key), value: value[key] });
     }
     return keys;
   }
@@ -26,7 +42,7 @@ export class DictPipe implements PipeTransform {
 
 @Pipe({ name: 'group' })
 export class GroupPipe implements PipeTransform {
-  transform(value: Object[], arg: string): any {
+  transform<T>(value: T[], arg: string): {[key: string]: T[]} {
     if (value == null) return null;
     let dict = {};
     for (var i = 0; i < value.length; i++) {
