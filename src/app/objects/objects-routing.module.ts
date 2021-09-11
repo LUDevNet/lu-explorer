@@ -15,7 +15,7 @@ import { WhatsCoolItemsComponent } from './whats-cool-items/whats-cool-items.com
 const objectsRoutes = [
   { path: 'item-sets', loadChildren: () => import('./item-sets/item-sets.module').then(m => m.ItemSetsModule) },
   { path: 'factions', loadChildren: () => import('./factions/factions.module').then(m => m.FactionsModule) },
-  { path: 'whats-cool/items', component: WhatsCoolItemsComponent, data: {
+  { path: 'item-spotlight', component: WhatsCoolItemsComponent, data: {
     title: "What's Cool: Item Spotlight"
   } },
   { path: 'loot/table/:id', component: LootTableComponent, data: { title: params => `LootTable #${params.id}` } },

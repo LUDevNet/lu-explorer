@@ -1,0 +1,15 @@
+.cool {
+    font-size: 120%;
+    font-weight: bold;
+    margin-left: 5rem;
+}
+
+.left {
+    float: left;
+    margin-top: -0.5rem;
+}
+
+.item {
+    clear: both;
+    margin: 1rem 0 2rem 0;
+}
