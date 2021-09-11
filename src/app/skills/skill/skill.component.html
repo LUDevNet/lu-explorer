@@ -15,6 +15,30 @@
     </a>
   </p>
   <!--<app-behavior-detail [behaviorID]="skill.behaviorID"></app-behavior-detail>-->
+  <section>
+    <h3>Flags</h3>
+
+    <lux-number-flag *ngIf="skill.skillID !== null" [value]="skill.skillID" name="skillID"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.locStatus !== null" [value]="skill.locStatus" name="locStatus"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.behaviorID !== null" [value]="skill.behaviorID" name="behaviorID"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.imaginationcost !== null" [value]="skill.imaginationcost" name="imaginationcost"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.cooldowngroup !== null" [value]="skill.cooldowngroup" name="cooldowngroup"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.cooldown !== null" [value]="skill.cooldown" name="cooldown"></lux-number-flag>
+    <lux-simple-flag *ngIf="skill.inNpcEditor !== null" [value]="skill.inNpcEditor" name="inNpcEditor"></lux-simple-flag>
+    <lux-number-flag *ngIf="skill.skillIcon !== null" [value]="skill.skillIcon" name="skillIcon"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.oomBehaviorEffectID !== null" [value]="skill.oomBehaviorEffectID" name="oomBehaviorEffectID"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.castTypeDesc !== null" [value]="skill.castTypeDesc" name="castTypeDesc"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.imBonusUI !== null" [value]="skill.imBonusUI" name="imBonusUI"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.lifeBonusUI !== null" [value]="skill.lifeBonusUI" name="lifeBonusUI"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.armorBonusUI !== null" [value]="skill.armorBonusUI" name="armorBonusUI"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.damageUI !== null" [value]="skill.damageUI" name="damageUI"></lux-number-flag>
+    <lux-simple-flag *ngIf="skill.hideIcon !== null" [value]="skill.hideIcon" name="hideIcon"></lux-simple-flag>
+    <lux-simple-flag *ngIf="skill.localize !== null" [value]="skill.localize" name="localize"></lux-simple-flag>
+    <lux-number-flag *ngIf="skill.cancelType !== null" [value]="skill.cancelType" name="cancelType"></lux-number-flag>
+
+    <blockquote *ngIf="skill.oomSkillID !== null"><b>oomSkillID:</b> {{skill.oomSkillID}}</blockquote>
+    <blockquote *ngIf="skill.gate_version !== null"><b>gate_version:</b> {{skill.gate_version}}</blockquote>
+  </section>
 </div>
 <section *ngIf="$rev_skill | async; let rev_skill">
   <h3>Used in</h3>
@@ -34,7 +58,7 @@
     <h4>ObjectSkills</h4>
     <p>The following objects can cast this skill:</p>
     <ng-container *ngFor="let object_id of rev_skill.objects">
-      <lux-gui-item [id]="object_id"></lux-gui-item>
+      <lux-slot [luxFetchItem]="object_id"></lux-slot>
     </ng-container>
   </section>
   <section *ngIf="rev_skill.item_sets.length > 0">
@@ -42,10 +66,10 @@
     {{rev_skill.item_sets}}
   </section>
 </section>
-<section *ngIf="_skill | async; let skill">
+<!--<section *ngIf="_skill | async; let skill">
   <h3>Details</h3>
   <app-data-table [table]="skill"></app-data-table>
-</section>
+</section>-->
 <ng-template #loading>
   Loading...
 </ng-template>

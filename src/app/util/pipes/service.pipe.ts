@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { LuDocsService, LuResService, LuLocaleService, LuJsonService } from '../../services';
 
 @Pipe({ name: 'docs' })
@@ -57,7 +57,7 @@ export class DataPipe implements PipeTransform {
       faction: x => this.luJson.getFaction(x),
       activityRewards: x => this.luJson.getActivityRewards(x),
     }[arg];
-    if (arg) return call(value);
+    return arg ? call(value) : of(null);
   }
 
 }
