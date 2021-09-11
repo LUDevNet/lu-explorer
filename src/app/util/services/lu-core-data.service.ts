@@ -4,6 +4,12 @@ import { Observable, of, ReplaySubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
+export interface LocaleNode {
+  value: string,
+  int_keys: number[],
+  str_keys: string[],
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -42,6 +48,14 @@ export class LuCoreDataService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  getLocaleSubtree<T>(key: string): Observable<{[key: string]: T}> {
+    return this.get(`v0/locale/${key.replace('_', '/')}/$all`);
+  }
+
+  getLocaleEntry(key: string): Observable<LocaleNode> {
+    return this.get(`v0/locale/${key.replace('_', '/')}`);
   }
 
   getTableEntry<T>(table: string, key: string | number): Observable<T[]> {
