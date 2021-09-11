@@ -47,4 +47,8 @@ export class LuCoreDataService {
   getTableEntry(table: string, key: string | number): Observable<any[]> {
     return this.get(`v0/tables/${table}/${key}`);
   }
+
+  getRevEntry<T>(table: string, key: string | number): Observable<T> {
+    return this.get(`v0/rev/${table}/${key}`);
+  }
 }
