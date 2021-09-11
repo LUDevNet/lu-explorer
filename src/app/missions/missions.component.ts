@@ -4,6 +4,11 @@ import { FormControl } from '@angular/forms';
 
 import { LuJsonService, LuLocaleService } from '../services';
 
+interface Locale_Mission {
+  name?: string;
+};
+type MissionDict = {[key: string]: Locale_Mission};
+
 @Component({
   selector: 'app-missions',
   templateUrl: './missions.component.html',
@@ -11,8 +16,8 @@ import { LuJsonService, LuLocaleService } from '../services';
 })
 export class MissionsComponent implements OnInit {
 
-  missions: any = {};
-  filteredMissions: any = {};
+  missions: MissionDict = {};
+  filteredMissions: MissionDict = {};
   needle: string = "";
 
   constructor(private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }

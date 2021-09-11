@@ -37,6 +37,13 @@ export interface APIObject extends DB_Objects {
 }
 
 
+export interface DB_MissionsBySubtype {
+  [defined_subtype: string]: number[];
+}
+export interface DB_MissionsByType {
+  [defined_type: string]: DB_MissionsBySubtype;
+}
+
 @Injectable()
 export class LuJsonService {
 
@@ -308,7 +315,7 @@ export class LuJsonService {
     return this.getJsonResource("locale/" + table + "/", String(page), "locale page");
   }
 
-  getMissionsByType() {
+  getMissionsByType(): Observable<DB_MissionsByType> {
     return this.getJsonResource("tables/Missions/groupBy/", "type", "missions");
   }
 

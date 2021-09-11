@@ -22,7 +22,7 @@
     <div class="sidemenu scroll-30">
       <h3>Components</h3>
       <ul>
-        <li *ngFor="let entry of object.components | keys" [class.active]="component_id == entry.key">
+        <li *ngFor="let entry of object.components | arrkeys" [class.active]="component_id == entry.key">
           <a [routerLink]="['/objects', object_id, entry.key]">{{getName(entry.key)}}
             <span class="pull-right">#{{entry.value}} ({{entry.key}})</span></a>
         </li>

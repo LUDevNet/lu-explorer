@@ -16,7 +16,6 @@ import { ComponentsModule } from './components/components.module';
 import { LootModule } from './loot/loot.module';
 import { ObjectsRoutingModule } from './objects-routing.module';
 import { GuiModule } from '../gui/gui.module';
-import { FactionsModule } from './factions/factions.module';
 
 @NgModule({
   declarations: [

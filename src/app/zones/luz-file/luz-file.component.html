@@ -109,7 +109,7 @@
             </ng-container>
             <h4>Waypoints</h4>
             <ul style="max-height: 20rem;">
-              <li *ngFor="let point of selected_path.waypoints | keys" [class.active]="selected_path_point === point.key">
+              <li *ngFor="let point of selected_path.waypoints | arrkeys" [class.active]="selected_path_point === point.key">
                 <a (click)="selectPathPoint(point.key)">Point #{{point.key}}
                   <span class="pull-right"></span></a></li>
             </ul>

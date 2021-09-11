@@ -49,8 +49,8 @@ export class BehaviorDetailAltComponent implements OnInit {
 
   process(id: number, level: number): void {
     this.pending += 1;
-    let params = this.luCoreData.getTableEntry('BehaviorParameter', id);
-    let template = this.luCoreData.getTableEntry('BehaviorTemplate', id);
+    let params = this.luCoreData.getTableEntry<DB_BehaviorParameter>('BehaviorParameter', id);
+    let template = this.luCoreData.getTableEntry<DB_BehaviorTemplate>('BehaviorTemplate', id);
     let both: Observable<[DB_BehaviorTemplate[], DB_BehaviorParameter[]]> = zip(template, params);
     let res = both.pipe(map(([template, params]) => {
       let parameters = {};

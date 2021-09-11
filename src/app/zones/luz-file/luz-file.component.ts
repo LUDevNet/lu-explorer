@@ -2,9 +2,84 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { LuJsonService } from '../../services';
+import { Position, Quaternion, Vector3f } from '../../zone';
 
 const mapHScale = 128;
 const mapVScale = 128;
+
+
+export interface LUZ_File_Position {
+  pos?: Vector3f;
+  rot?: Quaternion;
+  x?: number;
+  y?: number;
+  z?: number;
+}
+
+export interface LUZ_File_Waypoint {
+  config: {[key: string]: any};
+  pos: LUZ_File_Position; // FIXME
+
+  // FIXME: is this right?
+  x?: number;
+  y?: number;
+  z?: number;
+
+  // Moving Platform
+  lock_player?: any;
+  speed?: any;
+  wait?: any;
+  depart_sound?: any;
+  arrive_sound?: any;
+
+  // Camera
+  time?: any;
+  value_1?: number;
+  value_2?: number;
+  value_3?: number;
+  value_4?: number;
+  value_5?: number;
+  tension?: any;
+  continuity?: any;
+  bias?: any;
+}
+
+export interface LUZ_File_Path {
+  type: number,
+  name: string,
+  travel_sound: string,
+  waypoints: LUZ_File_Waypoint[];
+
+  behavior?: number;
+
+  // Property
+  value_1?: number;
+  value_2?: any;
+  price?: number;
+  rental_time?: number;
+  zone?: string;
+  description?: string;
+  clone_limit?: number;
+  reputation_multiplier?: number;
+  rental_time_unit?: any;
+  req_achievement?: number;
+  player_coord?: Vector3f;
+  max_building_height?: number;
+
+  // Camera
+  next_path?: string;
+
+  // Spawner
+  spawned_lot?: any;
+  respawn_time?: any;
+  max_to_spawn?: any;
+  number_to_maintain?: any;
+  object_id?: any;
+  activate_on_load?: any;
+};
+export interface LUZ_File {
+  paths: LUZ_File_Path[];
+};
 
 @Component({
   selector: 'app-luz-file',
@@ -14,7 +89,7 @@ const mapVScale = 128;
 export class LuzFileComponent implements OnInit {
 
   _path: string;
-  selected_path: any;
+  selected_path: LUZ_File_Path;
   selected_path_point: number;
   zone: any;
   zone_id: any;

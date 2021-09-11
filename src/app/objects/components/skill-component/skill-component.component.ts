@@ -1,9 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ReplaySubject, from } from 'rxjs';
+import { ReplaySubject, from, Observable } from 'rxjs';
 import { map, combineAll, switchMap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../../services';
-import { SkillRef } from '../../../cdclient';
+import { DB_SkillBehavior, SkillRef } from '../../../cdclient';
+
+interface Skill {
+  ref: SkillRef;
+  skill: DB_SkillBehavior;
+};
 
 @Component({
   selector: 'app-skill-component',
@@ -13,7 +18,7 @@ import { SkillRef } from '../../../cdclient';
 export class SkillComponentComponent implements OnInit {
 
   _id: number;
-  skills: any = {};
+  skills: Observable<{[id: number]: Skill}>;
   skill_ref: ReplaySubject<SkillRef[]>;
 
   constructor(

@@ -44,4 +44,8 @@ export class ItemSetSkillSetComponent implements OnInit {
     return this.luJsonService.getGeneric(id, 'ItemSetSkills', true);
   }
 
+  num(v: any): number {
+    return Number(v);
+  }
+
 }

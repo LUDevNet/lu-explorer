@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LuJsonService, LuLocaleService } from '../../services';
+import { DB_MissionsByType } from '../../util/services/lu-json.service';
 
 @Component({
   selector: 'app-index',
@@ -9,7 +10,7 @@ import { LuJsonService, LuLocaleService } from '../../services';
 export class MissionIndexComponent implements OnInit {
 
   missions: any = {};
-  mission_types: any = {};
+  mission_types: DB_MissionsByType = {};
 
   constructor(private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }
 
