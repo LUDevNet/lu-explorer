@@ -1,13 +1,36 @@
 <h2>Behavior #{{id}}</h2>
+<section *ngIf="skill && skill.length > 0">
+  <p>Skills: <span class="skill-link" *ngFor="let skill_id of skill">
+      <a routerLink="/skills/{{skill_id}}"> #{{skill_id}}</a>
+    </span>
+  </p>
+  <hr>
+</section>
 <div id="mynetwork"></div>
 <table *ngIf="selectedBehavior">
-  <tr><th>Key</th><th>Value</th></tr>
-  <tr><td>behaviorID</td><td>{{selectedBehaviorID}}</td></tr>
-  <tr><td>templateID</td><td>{{selectedBehavior.templateID}}</td></tr>
-  <tr><td>effectID</td><td>{{selectedBehavior.effectID}}</td></tr>
-  <tr><td>effectHandle</td><td>{{selectedBehavior.effectHandle}}</td></tr>
-  <tr *ngFor="let entry of selectedBehavior.parameters | keys">           
-    <td>{{entry.key}}</td><td>{{entry.value}}</td>
+  <tr>
+    <th>Key</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>behaviorID</td>
+    <td>{{selectedBehaviorID}}</td>
+  </tr>
+  <tr>
+    <td>templateID</td>
+    <td>{{selectedBehavior.templateID}}</td>
+  </tr>
+  <tr>
+    <td>effectID</td>
+    <td>{{selectedBehavior.effectID}}</td>
+  </tr>
+  <tr>
+    <td>effectHandle</td>
+    <td>{{selectedBehavior.effectHandle}}</td>
+  </tr>
+  <tr *ngFor="let entry of selectedBehavior.parameters | keys">
+    <td>{{entry.key}}</td>
+    <td>{{entry.value}}</td>
   </tr>
 </table>
 <div *ngIf="errors.length > 0">

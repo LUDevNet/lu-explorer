@@ -1,13 +1,23 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { LuJsonService } from '../../services';
-import { DB_Behavior, DB_BehaviorParameter, DB_BehaviorTemplate } from '../../cdclient';
+import { DB_Behavior, DB_BehaviorTemplate } from '../../cdclient';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
-import { Observable, zip } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 declare var vis: any;
+
+
+interface Behavior {
+  template: DB_BehaviorTemplate,
+  parameters: {[key: string]: number},
+}
+
+interface Rev_Behavior {
+  uses: number[],
+  used_by: number[],
+  skill: number[],
+  _embedded: {[key: string]: Behavior}
+}
 
 @Component({
   selector: 'app-behavior-detail-alt',
@@ -17,7 +27,6 @@ declare var vis: any;
 export class BehaviorDetailAltComponent implements OnInit {
   id: number;
 
-  /*@Input()*/
   selectedBehaviorID: number;
   nodes: any[] = [];
   edges: any[] = [];
@@ -27,43 +36,30 @@ export class BehaviorDetailAltComponent implements OnInit {
   max_level: number = 1;
   pending: number = 0;
 
+  processed: Set<number>;
+  skill: number[];
+
   selectedBehavior: DB_Behavior;
   errors: number[] = [];
 
   constructor(private route: ActivatedRoute,
-    private luJsonService: LuJsonService,
     private luCoreData: LuCoreDataService) {
-  }
-
-  callback(id: number, level: number, behavior: DB_Behavior) {
-    level = this.nodes.find(node => node.id === id).level;
-    if (!this.behaviors.hasOwnProperty(id)) {
-      this.behaviors[id] = behavior;
-      this.children(id, behavior, level + 1);
-    }
-    this.pending -= 1;
-    if (this.pending == 0) {
-      this.redraw();
-    }
   }
 
   process(id: number, level: number): void {
     this.pending += 1;
-    let params = this.luCoreData.getTableEntry<DB_BehaviorParameter>('BehaviorParameter', id);
-    let template = this.luCoreData.getTableEntry<DB_BehaviorTemplate>('BehaviorTemplate', id);
-    let both: Observable<[DB_BehaviorTemplate[], DB_BehaviorParameter[]]> = zip(template, params);
-    let res = both.pipe(map(([template, params]) => {
-      let parameters = {};
-      for (let p of params) {
-        parameters[p.parameterID] = p.value;
-      }
-      let behavior: DB_Behavior = Object.assign({ parameters: parameters }, template[0]);
-      return behavior;
-    }));
-    // res.subscribe(behavior => console.log(`[new] behavior ${id}:`, behavior));
-    // let old = this.luJsonService.getBehavior(id);
-    res.subscribe(behavior => this.callback(id, level, behavior));
-    // old.subscribe(behavior => console.log(`[old] behavior ${id}:`, behavior));
+
+    level = this.nodes.find(node => node.id === id).level;
+    if (!this.processed.has(id)) {
+      this.processed.add(id);
+      let behavior = this.behaviors[id];
+      this.children(id, behavior, level + 1);
+    }
+
+    this.pending -= 1;
+    if (this.pending == 0) {
+      this.redraw();
+    }
   }
 
   fix_level(id: number, node: any, level: number): void {
@@ -320,16 +316,18 @@ export class BehaviorDetailAltComponent implements OnInit {
 
   ngOnInit() {
     this.behaviors = {};
-    var connectionCount = [];
+    this.processed = new Set();
 
     this.id = +this.route.snapshot.paramMap.get('id');
-
-    this.nodes.push({ id: this.id, label: String(this.id), level: 0 });
-    this.process(this.id, 0);
-
-    // create a network
     this.container = document.getElementById('mynetwork');
-    this.redraw();
+
+    this.luCoreData.getRevEntry<Rev_Behavior>('behaviors', this.id).subscribe(x => {
+      this.behaviors = x._embedded;
+      this.skill = x.skill;
+      this.nodes.push({ id: this.id, label: String(this.id), level: 0 });
+      this.process(this.id, 0);
+      this.redraw();
+    });
   }
 
   redraw(): void {
@@ -418,7 +416,6 @@ export class BehaviorDetailAltComponent implements OnInit {
   }
 
   select(params: any): void {
-    console.log(params);
     if (params.nodes.length > 0) {
       this.selectedBehavior = this.behaviors[params.nodes[0]];
       this.selectedBehaviorID = params.nodes[0];
