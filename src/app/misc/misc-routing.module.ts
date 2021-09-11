@@ -12,6 +12,7 @@ import { LevelProgressionComponent } from './level-progression/level-progression
 import { ReleaseVersionComponent } from './release-version/release-version.component';
 import { SubscriptionPricingComponent } from './subscription-pricing/subscription-pricing.component';
 import { ShadersComponent } from './shaders/shaders.component';
+import { NewsAndTipsComponent } from './news-and-tips/news-and-tips.component';
 
 const miscRoutes = [
   { path: '', component: MiscComponent, children: [
@@ -23,6 +24,7 @@ const miscRoutes = [
     { path: 'event-gating', component: EventGatingComponent, data: { title: "Event Gating"} },
     { path: 'feature-gating', component: FeatureGatingComponent, data: { title: "Feature Gating"} },
     { path: 'level-progression', component: LevelProgressionComponent, data: { title: "Level Progression"} },
+    { path: 'news-and-tips', component: NewsAndTipsComponent, data: { title: "News & Tips"} },
     { path: 'release-version', component: ReleaseVersionComponent, data: { title: "Release Versions"} },
     { path: 'shaders', component: ShadersComponent, data: { title: "Shaders"} },
     { path: 'sub-pricing', component: SubscriptionPricingComponent, data: { title: "Subscription Pricing"} },

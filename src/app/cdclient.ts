@@ -526,3 +526,12 @@ export class DB_WhatsCoolItemSpotlight {
   gate_version: string; // TEXT
   locStatus: number; // INTEGER
 }
+
+export class DB_WhatsCoolNewsAndTips {
+  id: number; // INTEGER
+  iconID: number; // INTEGER
+  type: number; // INTEGER
+  localize: boolean; // BOOLEAN
+  gate_version: string; // TEXT
+  locStatus: number; // INTEGER
+}
