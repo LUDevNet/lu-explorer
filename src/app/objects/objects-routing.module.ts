@@ -10,6 +10,7 @@ import { ObjectComponentsIndexComponent } from './components-index/components-in
 import { ObjectDetailComponent } from './detail/detail.component';
 import { ObjectsComponent } from './objects.component';
 import { component_names } from '../components';
+import { WhatsCoolItemsComponent } from './whats-cool-items/whats-cool-items.component';
 
 const objectsRoutes = [
   { path: 'item-sets', loadChildren: () => import('./item-sets/item-sets.module').then(m => m.ItemSetsModule) },
