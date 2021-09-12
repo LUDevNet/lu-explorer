@@ -11,6 +11,11 @@ function codeSort(a: DB_RewardCodes, b: DB_RewardCodes) {
   return a.code.localeCompare(b.code);
 }
 
+interface Locale_RewardCodes {
+  subjectText: string,
+  bodyText: string,
+}
+
 @Component({
   selector: 'lux-reward-codes',
   templateUrl: './reward-codes.component.html',
@@ -19,6 +24,7 @@ function codeSort(a: DB_RewardCodes, b: DB_RewardCodes) {
 export class RewardCodesComponent implements OnInit {
 
   $code_groups: Observable<RewardCodeDict>;
+  $loc: Observable<{[key: string]: Locale_RewardCodes}>;
 
   constructor(private luCoreData: LuCoreDataService) { }
 
@@ -26,8 +32,8 @@ export class RewardCodesComponent implements OnInit {
     this.$code_groups = this.luCoreData.getTableEntry<DB_RewardCodes>("RewardCodes", "all").pipe(map(list => {
       let dict: { [key: string]: DB_RewardCodes[] } = {};
       for (let code of list) {
-        let gate = code.gate_version;
-        if (!dict.hasOwnProperty(code.gate_version)) {
+        let gate = code.gate_version || '';
+        if (!dict.hasOwnProperty(gate)) {
           dict[gate] = [];
         };
         dict[gate].push(code);
@@ -36,6 +42,12 @@ export class RewardCodesComponent implements OnInit {
         return { gate_version: gate, codes: dict[gate].sort(codeSort) }
       });
     }));
+    this.$loc = this.luCoreData.getLocaleSubtree("RewardCodes");
+  }
+
+  loc(key: number): Observable<Locale_RewardCodes> {
+    const str = String(key);
+    return this.$loc.pipe(map(all => all[str]));
   }
 
 }

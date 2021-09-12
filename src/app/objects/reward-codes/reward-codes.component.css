@@ -1,3 +1,15 @@
+.item {
+    float: left;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.code-desc {
+    margin-left: 5rem;
+}
+
 .code-flag {
     display: inline-flex;
     flex-direction: column;
