@@ -15,6 +15,7 @@ export class DescriptionUiComponent implements OnInit {
 
   html(): string {
     return this.template
+      .replace("%(AltCombo)", "<b class=\"tooltip-header\">Alt. Combo:</b>")
       .replace("%(ChargeUp)", "<b class=\"tooltip-header\">Charge Up:</b>")
       .replace("%(DamageCombo)", "<b class=\"tooltip-header\">Damage Combo:</b>")
       .replace("%(Description)", "<b class=\"tooltip-header\">Description:</b>");
