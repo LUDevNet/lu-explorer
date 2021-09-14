@@ -12,6 +12,7 @@ import { ObjectsComponent } from './objects.component';
 import { component_names } from '../../defs/components';
 import { WhatsCoolItemsComponent } from './whats-cool-items/whats-cool-items.component';
 import { RewardCodesComponent } from './reward-codes/reward-codes.component';
+import { ObjectsSearchComponent } from './search/search.component';
 
 const objectsRoutes = [
   { path: 'item-sets', loadChildren: () => import('./item-sets/item-sets.module').then(m => m.ItemSetsModule) },
@@ -27,6 +28,7 @@ const objectsRoutes = [
     }
   },
   { path: 'loot/table/:id', component: LootTableComponent, data: { title: params => `LootTable #${params.id}` } },
+  { path: 'search', component: ObjectsSearchComponent, data: { title: "Search" } },
   {
     path: 'types/:type', component: ObjectsByTypeComponent, data: {
       title: params => `Objects (${params['type']})`

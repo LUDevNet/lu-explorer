@@ -18,6 +18,7 @@ import { ObjectsRoutingModule } from './objects-routing.module';
 import { GuiModule } from '../gui/gui.module';
 import { WhatsCoolItemsComponent } from './whats-cool-items/whats-cool-items.component';
 import { RewardCodesComponent } from './reward-codes/reward-codes.component';
+import { ObjectsSearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { RewardCodesComponent } from './reward-codes/reward-codes.component';
     ObjectsComponent,
     WhatsCoolItemsComponent,
     RewardCodesComponent,
+    ObjectsSearchComponent,
   ],
   imports: [
     CommonModule,

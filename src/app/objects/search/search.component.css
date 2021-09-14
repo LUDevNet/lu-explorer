@@ -1,0 +1,14 @@
+.query {
+    margin-bottom: 1rem;
+}
+
+.result {
+    background-color: #050505;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    margin-bottom: 0.3rem;
+}
+
+.result p {
+    margin: 0;
+}

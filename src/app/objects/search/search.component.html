@@ -1,0 +1,18 @@
+<ul class="breadcrumbs">
+    <li><a routerLink="/objects">Objects</a></li>
+    <li>Search</li>
+</ul>
+<section>
+    <h3>Search</h3>
+    <div class="query">
+        <input *ngIf="ready" type="text" (input)="updateSearch($event)">
+    </div>
+    <h4>Results</h4>
+    <section>
+        <div class="result" *ngFor="let doc of results">
+            <b><a routerLink="/objects/{{doc.id}}">Object #{{doc.id}}: {{doc.doc.name}}</a></b>
+            <p>{{doc.doc.description}}</p>
+        </div>
+    </section>
+    <a (click)="loadMore()" [hidden]="!_hasMore" #more>Load more...</a>
+</section>
