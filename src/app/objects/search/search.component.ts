@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { TouchSequence } from 'selenium-webdriver';
 import { Locale_Objects } from '../../locale';
-import { SearchService } from '../../util/services/search.service';
+import { SearchService, Search_Object } from '../../util/services/search.service';
 
 export interface BasicSearchResult {
   field: string,
@@ -17,15 +17,16 @@ export interface Doc<T> {
 
 export interface EnrichedSearchResult {
   field: string,
-  result: Doc<Locale_Objects>[],
+  result: Doc<Search_Object>[],
 }
 
 const BATCH_SIZE: number = 10;
 
-type Docs = { [key: string]: Locale_Objects };
+type Docs = Map<number, Search_Object>;
+
 class SearchState {
   term: string;
-  results: Doc<Locale_Objects>[];
+  results: Search_Object[];
   keys: Set<number>;
   offset: number = 0;
   hasMore: boolean;
@@ -42,16 +43,16 @@ class SearchState {
     this.offset += BATCH_SIZE;
     this.hasMore = false;
     for (let res of result) {
+      console.log("Loading batch field", res.field, "size", res.result.length);
       if (res.result.length == BATCH_SIZE) {
         this.hasMore = true;
       }
       for (let id of res.result) {
         if (!this.keys.has(id)) {
           this.keys.add(id);
-          this.results.push({
-            id: id,
-            doc: docs[String(id)]
-          });
+          const doc = docs.get(id);
+          console.log("push result", )
+          this.results.push(doc);
         }
       }
     }
@@ -68,8 +69,6 @@ export class ObjectsSearchComponent implements OnInit {
   query: Subject<string> = new Subject();
 
   state: SearchState;
-
-  offset: number = 0;
 
   interactionObserver: IntersectionObserver;
 
@@ -99,9 +98,10 @@ export class ObjectsSearchComponent implements OnInit {
   }
 
   loadMore() {
+    console.log("Loading more");
     const state = this.state;
     state.hasMore = false;
-    let batch = this.findObject(state.term, this.offset);
+    let batch = this.findObject(state.term, state.offset);
     state.pushBatch(batch, this.search.objects);
   }
 

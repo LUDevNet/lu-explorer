@@ -10,9 +10,9 @@
     <h4>Results</h4>
     <section *ngIf="state">
         <div class="result" *ngFor="let doc of state.results">
-            <b><a routerLink="/objects/{{doc.id}}">Object #{{doc.id}}: {{doc.doc.name}}</a></b>
-            <p>{{doc.doc.description}}</p>
+            <b><a routerLink="/objects/{{doc.id}}">Object #{{doc.id}}: {{doc.name}}</a></b>
+            <p>{{doc.description}}</p>
         </div>
     </section>
-    <a (click)="loadMore()" [hidden]="!state.hasMore" #more>Load more...</a>
+    <a (click)="loadMore()" [hidden]="!state || !state.hasMore" #more>Load more...</a>
 </section>
