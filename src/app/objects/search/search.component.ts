@@ -20,7 +20,43 @@ export interface EnrichedSearchResult {
   result: Doc<Locale_Objects>[],
 }
 
-const BATCH_SIZE: number =  10;
+const BATCH_SIZE: number = 10;
+
+type Docs = { [key: string]: Locale_Objects };
+class SearchState {
+  term: string;
+  results: Doc<Locale_Objects>[];
+  keys: Set<number>;
+  offset: number = 0;
+  hasMore: boolean;
+
+  constructor(term: string) {
+    this.term = term;
+    this.results = []
+    this.keys = new Set();
+    this.offset = 0;
+    this.hasMore = false;
+  }
+
+  pushBatch(result: BasicSearchResult[], docs: Docs) {
+    this.offset += BATCH_SIZE;
+    this.hasMore = false;
+    for (let res of result) {
+      if (res.result.length == BATCH_SIZE) {
+        this.hasMore = true;
+      }
+      for (let id of res.result) {
+        if (!this.keys.has(id)) {
+          this.keys.add(id);
+          this.results.push({
+            id: id,
+            doc: docs[String(id)]
+          });
+        }
+      }
+    }
+  }
+}
 
 @Component({
   selector: 'lux-search',
@@ -31,10 +67,7 @@ export class ObjectsSearchComponent implements OnInit {
   ready: boolean = false;
   query: Subject<string> = new Subject();
 
-  results: Doc<Locale_Objects>[] = [];
-  resultKeys: Set<number> = new Set();
-  active_term?: string;
-  _hasMore: boolean = false;
+  state: SearchState;
 
   offset: number = 0;
 
@@ -46,31 +79,13 @@ export class ObjectsSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.search.loadObjectSearch();
-    this.search.$object_index_ready.subscribe(x => this.ready = x )
+    this.search.$object_index_ready.subscribe(x => this.ready = x)
     this.query.pipe(debounceTime(200)).subscribe(term => {
       const result = this.findObject(term, 0);
-      this.pushBatch(result);
-      this.active_term = term;
+      const newState = new SearchState(term);
+      newState.pushBatch(result, this.search.objects);
+      this.state = newState;
     });
-  }
-
-  pushBatch(result: BasicSearchResult[]) {
-    this.offset += BATCH_SIZE;
-    this._hasMore = false;
-    for(let res of result) {
-      if (res.result.length == BATCH_SIZE) {
-        this._hasMore = true;
-      }
-      for (let id of res.result) {
-        if (!this.resultKeys.has(id)) {
-          this.resultKeys.add(id);
-          this.results.push({
-            id: id,
-            doc: this.search.objects[String(id)]
-          });
-        }
-      }
-    }
   }
 
   ngAfterViewInit() {
@@ -83,17 +98,14 @@ export class ObjectsSearchComponent implements OnInit {
     this.interactionObserver.observe(this.moreElement.nativeElement);
   }
 
-  loadMore(): void {
-    this._hasMore = false;
-    console.log(this.active_term, this.offset);
-    let batch = this.findObject(this.active_term, this.offset);
-    this.pushBatch(batch);
+  loadMore() {
+    const state = this.state;
+    state.hasMore = false;
+    let batch = this.findObject(state.term, this.offset);
+    state.pushBatch(batch, this.search.objects);
   }
 
   updateSearch(event: Event) {
-    this.results = [];
-    this.resultKeys.clear();
-    this.offset = 0;
     this.query.next((event.target as HTMLInputElement).value);
   }
 

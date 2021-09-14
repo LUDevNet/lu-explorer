@@ -19,7 +19,7 @@ export class SearchService {
       tokenize: "full",
       document: {
         id: "id",
-        index: ["name", "description"],
+        index: ["name", "description", "id"],
       },
     });
     console.log(this.object_index);
@@ -36,7 +36,7 @@ export class SearchService {
       this.objectsLoadingState = "done";
       for (const [key, value] of Object.entries(x)) {
         const id = Number(key);
-        this.object_index.add(id, value);
+        this.object_index.add(id, Object.assign(value, {id: id}));
       }
       this.$object_index_ready.next(true);
     });

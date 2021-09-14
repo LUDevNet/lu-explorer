@@ -8,11 +8,11 @@
         <input *ngIf="ready" type="text" (input)="updateSearch($event)">
     </div>
     <h4>Results</h4>
-    <section>
-        <div class="result" *ngFor="let doc of results">
+    <section *ngIf="state">
+        <div class="result" *ngFor="let doc of state.results">
             <b><a routerLink="/objects/{{doc.id}}">Object #{{doc.id}}: {{doc.doc.name}}</a></b>
             <p>{{doc.doc.description}}</p>
         </div>
     </section>
-    <a (click)="loadMore()" [hidden]="!_hasMore" #more>Load more...</a>
+    <a (click)="loadMore()" [hidden]="!state.hasMore" #more>Load more...</a>
 </section>
