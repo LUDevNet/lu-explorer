@@ -1,0 +1,33 @@
+.item {
+    float: left;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.code-desc {
+    margin-left: 5rem;
+}
+
+.code-flag {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 0.5rem;
+    margin: 0.2rem;
+    background-color: #080808;
+    border-radius: 0.7rem;
+}
+
+.code-flag > *:first-child {
+    max-width: min-content;
+}
+
+.code-flag code {
+    margin-top: 0.5rem;
+    font-size: 110%;
+    font-weight: bold;
+    display: inline-block;
+}

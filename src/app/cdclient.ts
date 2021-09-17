@@ -285,6 +285,14 @@ export class DB_RenderComponent {
   attachIndicatorsToNode: boolean; // BOOLEAN
 }
 
+export class DB_RewardCodes {
+  id: number; // INTEGER
+  code: string; // TEXT
+  attachmentLOT: number; // INTEGER
+  locStatus: number; // INTEGER
+  gate_version: string; // TEXT
+}
+
 export class DB_AccessoryDefaultLoc
 {
   Description: string;
