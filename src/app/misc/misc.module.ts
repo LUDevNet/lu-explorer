@@ -15,6 +15,7 @@ import { BrickIdsComponent } from './brick-ids/brick-ids.component';
 import { BrickAttributesComponent } from './brick-attributes/brick-attributes.component';
 import { LevelProgressionComponent } from './level-progression/level-progression.component';
 import { ShadersComponent } from './shaders/shaders.component';
+import { NewsAndTipsComponent } from './news-and-tips/news-and-tips.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ShadersComponent } from './shaders/shaders.component';
     BrickIdsComponent,
     BrickAttributesComponent,
     LevelProgressionComponent,
-    ShadersComponent
+    ShadersComponent,
+    NewsAndTipsComponent
   ],
   imports: [
     CommonModule,

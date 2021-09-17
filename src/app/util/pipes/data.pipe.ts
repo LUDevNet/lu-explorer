@@ -17,6 +17,28 @@ export class KeysPipe implements PipeTransform {
   }
 }
 
+@Pipe({ name: 'keyset' })
+export class KeySetPipe implements PipeTransform {
+  transform<V>(value: {[key: string]: V}): Set<string> {
+    let keyset: Set<string> = new Set();
+    for (let key in value) {
+      keyset.add(key);
+    }
+    return keyset;
+  }
+}
+
+@Pipe({ name: 'paramset' })
+export class ParamSetPipe implements PipeTransform {
+  transform(value: {[key: string]: any}, arg: string): Set<string> {
+    let keyset: Set<string> = new Set();
+    for (let key in value) {
+      keyset.add(value[key][arg] || "");
+    }
+    return keyset;
+  }
+}
+
 @Pipe({ name: 'arrkeys' })
 export class ArrKeysPipe implements PipeTransform {
   transform<V>(value: V[]): KeyValue<number, V>[] {
@@ -46,7 +68,7 @@ export class GroupPipe implements PipeTransform {
     if (value == null) return null;
     let dict = {};
     for (var i = 0; i < value.length; i++) {
-      let attr = String(value[i][arg]);
+      let attr = String(value[i][arg] || "");
       if (!dict.hasOwnProperty(attr)) {
         dict[attr] = [];
       }
@@ -153,6 +175,15 @@ export class ArraySortNumPipe implements PipeTransform {
       }
     });
     return array;
+  }
+}
+
+@Pipe({
+  name: "as_array"
+})
+export class AsArrayPipe implements PipeTransform {
+  transform<T>(input: Iterable<T>): T[] {
+    return Array(...input);
   }
 }
 
