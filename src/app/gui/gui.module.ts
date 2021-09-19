@@ -21,6 +21,7 @@ import { SlotComponent } from './slot/slot.component';
 import { ObjectComponent } from './object/object.component';
 import { ObjectDirective } from './object/object.directive';
 import { MissiondisplayRewardComponent } from './missiondisplay-reward/missiondisplay-reward.component';
+import { BuffComponent } from './buff/buff.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MissiondisplayRewardComponent } from './missiondisplay-reward/missiondi
     ObjectComponent,
     ObjectDirective,
     MissiondisplayRewardComponent,
+    BuffComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +55,7 @@ import { MissiondisplayRewardComponent } from './missiondisplay-reward/missiondi
     ColorFlagComponent,
     NumberFlagComponent,
     BuffFlagComponent,
+    BuffComponent,
     ReputationComponent,
     UscoreComponent,
     SlotComponent,

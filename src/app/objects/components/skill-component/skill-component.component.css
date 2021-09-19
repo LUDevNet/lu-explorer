@@ -1,22 +1,3 @@
-.buff-icon {
-  background-size: contain;
-  background-repeat: no-repeat;
-  display: inline-block;
-  vertical-align: middle;
-  text-align: right;
-  font-size: 15pt;
-  font-weight: bold;
-  box-sizing: border-box;
-}
-
-.buff-icon > img {
-  height: 2rem;
-  margin: 0;
-}
-.buff-icon > img, .buff-icon > span {
-  vertical-align: middle;
-}
-
 .skill-buffs {
   vertical-align: middle;
 }

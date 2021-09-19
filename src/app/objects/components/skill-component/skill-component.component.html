@@ -26,16 +26,9 @@
           {{entry.value.skill.imaginationcost}}
         </td>
         <td class="skill-buffs">
-          <div *ngIf="entry.value.skill.lifeBonusUI" class="buff-icon">
-            <img src="/lu-res/textures/ui/inventory/common/heart.png"/>
-            <span> +{{entry.value.skill.lifeBonusUI}}</span>
-          </div>
-          <div *ngIf="entry.value.skill.imBonusUI" class="buff-icon">
-            <img src="/lu-res/textures/ui/inventory/common/imagination.png" />
-            <span> +{{entry.value.skill.imBonusUI}}</span></div>
-          <div *ngIf="entry.value.skill.armorBonusUI" class="buff-icon">
-            <img src="/lu-res/textures/ui/inventory/common/armor.png" />
-            <span> +{{entry.value.skill.armorBonusUI}}</span></div>
+          <lux-buff [value]="entry.value.skill.lifeBonusUI" kind="heart"></lux-buff>
+          <lux-buff [value]="entry.value.skill.imBonusUI" kind="imagination"></lux-buff>
+          <lux-buff [value]="entry.value.skill.armorBonusUI" kind="armor"></lux-buff>
         </td>
         <td>
           {{entry.value.skill.damageUI}}
