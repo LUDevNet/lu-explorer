@@ -25,7 +25,7 @@ export class SearchService {
       tokenize: "full",
       document: {
         id: "id",
-        index: ["name", "description", "id"],
+        index: ["id", "name", "description"],
       },
     });
     console.log(this.object_index);
