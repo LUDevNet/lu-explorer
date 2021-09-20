@@ -285,6 +285,15 @@ export class DB_RenderComponent {
   attachIndicatorsToNode: boolean; // BOOLEAN
 }
 
+export class DB_Rewards {
+  id: number; //INTEGER
+  LevelID: number; //INTEGER
+  MissionID: number; //INTEGER
+  RewardType: number; //INTEGER
+  value: number; //INTEGER
+  count: number; //INTEGER
+}
+
 export class DB_RewardCodes {
   id: number; // INTEGER
   code: string; // TEXT

@@ -16,6 +16,8 @@ import { BrickAttributesComponent } from './brick-attributes/brick-attributes.co
 import { LevelProgressionComponent } from './level-progression/level-progression.component';
 import { ShadersComponent } from './shaders/shaders.component';
 import { NewsAndTipsComponent } from './news-and-tips/news-and-tips.component';
+import { LevelRewardsComponent } from './level-rewards/level-rewards.component';
+import { GuiModule } from '../gui/gui.module';
 
 @NgModule({
   declarations: [
@@ -29,13 +31,15 @@ import { NewsAndTipsComponent } from './news-and-tips/news-and-tips.component';
     BrickIdsComponent,
     BrickAttributesComponent,
     LevelProgressionComponent,
+    LevelRewardsComponent,
+    NewsAndTipsComponent,
     ShadersComponent,
-    NewsAndTipsComponent
   ],
   imports: [
     CommonModule,
     UtilModule,
-    MiscRoutingModule
+    MiscRoutingModule,
+    GuiModule,
   ],
   exports: [
     MiscComponent

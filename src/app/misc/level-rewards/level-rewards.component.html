@@ -1,0 +1,36 @@
+<section>
+    <h2>Level Rewards</h2>
+
+    <p>
+        Wiki Article: <a href="https://legouniverse.fandom.com/wiki/Player_Leveling">Player Leveling</a>
+    </p>
+
+    <div class="table-responsive">
+        <table *ngIf="$list | async; let list">
+            <tr>
+                <th><code>id</code></th>
+                <th><code>LevelID</code></th>
+                <th><code>MissionID</code></th>
+                <th><code>RewardType</code></th>
+                <th><code>value</code>, <code>count</code></th>
+            </tr>
+            <tr *ngFor="let reward of list">
+                <td>{{reward.id}}</td>
+                <td>{{reward.LevelID}}</td>
+                <td>{{reward.MissionID}}</td>
+                <td>{{reward.RewardType}} ({{typeName(reward.RewardType)}})</td>
+                <td [ngSwitch]="reward.RewardType">
+                    <lux-gui-item *ngSwitchCase="0" [amount]="reward.count" [id]="reward.value"></lux-gui-item>
+                    <lux-buff *ngSwitchCase="4" kind="maxinventory" [value]="reward.value"></lux-buff>
+                    <lux-buff *ngSwitchCase="9" kind="speed" [value]="reward.value"></lux-buff>
+                    <lux-buff *ngSwitchCase="11" kind="heart" [value]="reward.value"></lux-buff>
+                    <lux-buff *ngSwitchCase="12" kind="imagination" [value]="reward.value"></lux-buff>
+                    <ng-container *ngSwitchDefault>
+                        {{reward.value}}
+                    </ng-container>
+                </td>
+                <!--<td>{{reward.count}}</td>-->
+            </tr>
+        </table>
+    </div>
+</section>
