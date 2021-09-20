@@ -65,10 +65,6 @@
   </table>
 </section>
 
-<section id="mission-display">
-  <lux-mission [luxFetch]="id" [status]="2"></lux-mission>
-</section>
-
 <section *ngIf="mission && mission.prereqMissionID">
   <h3>Prerequisites</h3>
   <div id="mission-prereqs">

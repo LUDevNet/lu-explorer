@@ -23,8 +23,9 @@
     background-color: unset;
 }
 
-#mission-display, #mission-prereqs {
-    text-align: center;
+#mission-prereqs {
+    display: flex;
+    justify-content: center;
 }
 
 .currency-rewards {
