@@ -23,6 +23,11 @@
     background-color: unset;
 }
 
+#mission-prereqs {
+    display: flex;
+    justify-content: center;
+}
+
 .currency-rewards {
     display: flex;
     flex-wrap: wrap;

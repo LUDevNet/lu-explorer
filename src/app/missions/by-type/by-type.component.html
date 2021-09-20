@@ -20,12 +20,8 @@
 <section *ngIf="mission_ids && mission_ids.length > 0">
   <h3>Missions</h3>
 
-  <table>
-    <tr *ngFor="let mission_id of mission_ids">
-      <td>{{mission_id}}</td>
-      <td><a [routerLink]="['/missions/', mission_id]">
-        {{ mission_names && mission_names[mission_id] ? mission_names[mission_id].name : "[Unnamed]"}}
-      </a></td>
-    </tr>
-  </table>
+  <div class="mission-list">
+    <div class="mission-separator"></div>
+    <lux-mission [luxFetch]="mission_id" *ngFor="let mission_id of mission_ids"></lux-mission>
+  </div>
 </section>

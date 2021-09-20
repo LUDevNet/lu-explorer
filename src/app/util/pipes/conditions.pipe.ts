@@ -37,7 +37,7 @@ function tokenizePrereqString(prereq: string): Array<string>
       }
       res.push(['&', ';'].includes(c) ? ',' : c);
       buf = "";
-    } else if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].includes(c)) {
+    } else if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ':'].includes(c)) {
       buf += c;
     } else {
       throw SyntaxError("Unexpected character '" + c + "' in '" + prereq + "'");
@@ -73,14 +73,23 @@ function checkPrereqNesting(tokens: Array<String>): any {
 }
 
 function parseMissionStringElem(e: any): any {
-  return Array.isArray(e) ? parseMissionString(e) : {type: "lit", value: Number(e)};
+  if (Array.isArray(e)) {
+    return parseMissionString(e);
+  }
+
+  const parts = e.split(":");
+  if (parts.length == 1) {
+    return {type: "lit", value: Number(parts[0])};
+  } else {
+    return {type: ":", value: {id: Number(parts[0]), status: Number(parts[1])}};
+  }
 }
 
 function parseMissionString(ast: any): any {
   if (ast.length == 0) {
     throw SyntaxError("Mission AST may not be empty");
   } else if (ast.length == 1) {
-    return {type: "lit", value: Number(ast[0])};
+    return parseMissionStringElem(ast[0]);
   } else if (ast.length % 2 == 0) {
     throw SyntaxError("Mission AST must have uneven number of elements");
   } else {
