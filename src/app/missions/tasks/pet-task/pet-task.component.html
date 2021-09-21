@@ -1,8 +1,13 @@
 <h4>{{task.uid}}: TamePet Task (22)</h4>
-The player needs to tame {{task.targetValue}} pet(s) of any of the following
-type(s):
-<a routerLink="/objects/{{task.target}}">{{task.target}}</a><!--
---><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
--->, <a routerLink="/objects/{{target}}">{{target}}</a>
+The player needs to tame <b luxTooltip="targetValue">{{task.targetValue}}</b> pet<ng-container *ngIf="task.targetValue > 1">s</ng-container>
+<ng-container *ngIf="task.targetGroup; else singleType">
+  of any of the following types:
+</ng-container>
+<ng-template #singleType>
+  of the following type:
+</ng-template>
+<lux-object [luxFetch]="task.target"></lux-object>
+<ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
+  !-->, <lux-object [luxFetch]="target | num"></lux-object>
 </ng-container>.
-<span *ngIf="task.taskParam1">Taming needs to be done in less than {{task.taskParam1}} seconds</span>
+<span *ngIf="task.taskParam1">Taming needs to be done in less than <b luxTooltip="taskParam1">{{task.taskParam1}}</b> seconds.</span>
