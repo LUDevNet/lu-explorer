@@ -1,7 +1,13 @@
 <h4>{{task.uid}}: Collect Task (3)</h4>
-The player needs to collect (collide with) {{task.targetValue}} object(s) of
-any of the following type(s):
-<a routerLink="/objects/{{task.target}}">{{task.target}}</a><!--
---><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
--->, <a routerLink="/objects/{{target}}">{{target}}</a>
+The player needs to collide with {{task.targetValue}}
+object<ng-container *ngIf="task.targetValue > 1">s</ng-container>
+<ng-container *ngIf="task.targetGroup; else singleType">
+  of any of the following types:
+</ng-container>
+<ng-template #singleType>
+  of the following type:
+</ng-template>
+<lux-object [luxFetch]="task.target"></lux-object>
+<ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
+  !-->, <lux-object [luxFetch]="target | num"></lux-object>
 </ng-container>

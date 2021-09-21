@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { GuiModule } from '../../gui/gui.module';
 import { UtilModule } from '../../util/util.module';
 import { SerializeModule } from '../../serialize/serialize.module';
 
@@ -55,6 +56,7 @@ import { TaskTableComponent } from './task-table/task-table.component';
   ],
   imports: [
     CommonModule,
+    GuiModule,
     UtilModule,
     SerializeModule,
     RouterModule.forChild([])
