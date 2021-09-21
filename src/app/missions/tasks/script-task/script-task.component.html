@@ -1,8 +1,12 @@
 <h4>{{task.uid}}: Script Task (1)</h4>
-This task is controlled by a script! Target:
-<a routerLink="/objects/{{task.target}}">{{task.target}}</a><!--
---><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
--->, <a routerLink="/objects/{{target}}">{{target}}</a>
-</ng-container>,
-Value: {{task.targetValue}},
-Param: {{task.taskParam1}}
+This task is controlled by a script!
+<ul>
+  <li>Target<ng-container *ngIf="task.targetGroup">s</ng-container>:
+    <lux-object [luxFetch]="task.target"></lux-object><!--
+    --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
+    -->, <lux-object [luxFetch]="target | num"></lux-object>
+    </ng-container>
+  </li>
+  <li>Value: {{task.targetValue}}</li>
+  <li>Param: {{task.taskParam1}}</li>
+</ul>
