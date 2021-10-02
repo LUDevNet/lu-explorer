@@ -26,9 +26,6 @@ export class ActivitiesComponent implements OnInit {
     this.luJsonService
       .getSingleTable("Activities")
       .subscribe(this.processActivitiesIndex.bind(this));
-    this.luJsonService
-      .getLocale("Activities")
-      .subscribe(this.processActivitiesLocaleIndex.bind(this));
     this.luJsonService.getObjectComponent(SCRIPTED_ACTIVITY_COMPONENT_ID).subscribe(this.$objectsWithScriptedActivity);
     this.luJsonService.getObjectComponent(REBUILD_COMPONENT_ID).subscribe(this.$objectsWithRebuild);
     this.luJsonService.getObjectComponent(QUICK_BUILD_COMPONENT_ID).subscribe(this.$objectsWithQuickBuild);
@@ -37,18 +34,6 @@ export class ActivitiesComponent implements OnInit {
 
   processActivitiesIndex(table: any) {
     this.activities = table.sort((a, b) => a.id - b.id);
-  }
-
-  processActivitiesLocaleIndex(table: any) {
-    table.pages.forEach(page => {
-      this.luJsonService
-        .getLocalePage("Activities", page)
-        .subscribe(this.processActivitiesLocalePage.bind(this))
-    });
-  }
-
-  processActivitiesLocalePage(table: any) {
-    this.activityNames = Object.assign(this.activityNames, table);
   }
 
   getLocalized(index: number): any {

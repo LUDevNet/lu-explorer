@@ -18,7 +18,7 @@
           </tr>
           <tr *ngFor="let activity of activities">
             <td>{{activity.id}}</td>
-            <td><a routerLink="/activities/{{activity.id}}">{{getLocalized(activity.id).ActivityName ||"[Unnamed]"}}</a>
+            <td><a routerLink="/activities/{{activity.id}}">{{ activity.id | loc:"Activities" | async | elem: "ActivityName" ||"[Unnamed]"}}</a>
             </td>
             <td>
               <ng-container *ngIf="objectsScriptedActivity && objectsScriptedActivity[activity.id]; let objs">

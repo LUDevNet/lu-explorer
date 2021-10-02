@@ -4,6 +4,7 @@ import { LuJsonService } from './lu-json.service';
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { KeyValuePipe } from '@angular/common';
+import { LuCoreDataService } from './lu-core-data.service';
 
 
 @Injectable()
@@ -14,7 +15,7 @@ export class LuLocaleService {
 
   credits: Observable<{}>;
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private luJsonService: LuJsonService, private luCoreDataService: LuCoreDataService) { }
 
   getLocaleTable(table: string): Observable<any> {
     if (!(table in this.tables)) {
@@ -35,8 +36,7 @@ export class LuLocaleService {
   }
 
   getLocaleEntry(table: string, id: number): Observable<any> {
-    let idKey = String(id);
-    return this.getLocalePage(table, Math.floor(id / 256)).pipe(map(page => page[idKey]));
+    return this.luCoreDataService.getLocaleSubtree(`${table}_${id}`)
   }
 
   translate(value: string): Observable<string> {

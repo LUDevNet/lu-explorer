@@ -11,7 +11,7 @@ export class DB_ObjectRef_ByType {
 }
 
 export class DB_ItemSets_Ref {
-  id: number;
+  setID: number;
   rank: number;
 }
 
@@ -54,6 +54,16 @@ export interface DB_Objects {
   locStatus: number; // INTEGER
   gate_version: string; // TEXT
   HQ_valid: boolean; // BOOLEAN
+}
+
+export interface DB_ObjectSkills {
+
+}
+
+export interface DB_ComponentsRegistry {
+  id: number;
+  component_type: number;
+  component_id: number;
 }
 
 export class DB_Activities {

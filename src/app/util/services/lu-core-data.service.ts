@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
 export interface LocaleNode {
@@ -60,6 +60,10 @@ export class LuCoreDataService {
 
   getTableEntry<T>(table: string, key: string | number): Observable<T[]> {
     return this.get(`v0/tables/${table}/${key}`);
+  }
+
+  getSingleTableEntry<T>(table: string, key: string | number): Observable<T> {
+    return this.getTableEntry<T>(table, key).pipe(map(x => x[0]));
   }
 
   getRevEntry<T>(table: string, key: string | number): Observable<T> {
