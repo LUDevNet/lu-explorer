@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { LuJsonService } from '../../services';
-import { ZoneDetail } from '../../zone';
 
 
 @Component({

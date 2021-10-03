@@ -33,9 +33,9 @@ export class TooltipDirective {
 
   @HostListener('mouseenter')
   mouseenter() {
-    console.log("enter");
+    //console.log("enter");
     if (this.componentRef) return;
-    console.log("enter!");
+    //console.log("enter!");
 
     this.componentRef = //
     this.getRootViewContainerRef().createComponent(this.factory, 0, this.configInjector, this.generateNgContent());
@@ -59,7 +59,7 @@ export class TooltipDirective {
     }
 
     if (this.content instanceof TemplateRef) {
-      console.log(this.content);
+      //console.log(this.content);
       //const context = { id: 100 };
       this.embeddedViewRef = this.content.createEmbeddedView(this.element);
       // In earlier versions, you may need to add this line

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { LuJsonService } from '../../services';
-import { ZoneDetail } from '../../zone';
+import { DB_ZoneTable } from '../../cdclient';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { ZoneDetail } from '../../zone';
 })
 export class ZoneDetailComponent implements OnInit {
 
-  @Input() zone: ZoneDetail;
+  @Input() zone: DB_ZoneTable;
   locale: any;
   zone_id: number;
 

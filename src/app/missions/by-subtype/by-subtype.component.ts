@@ -1,8 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 import { LuJsonService, LuLocaleService } from '../../services';
+import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 
+interface TypeKey {
+  type: string;
+  subtype: string;
+}
+
+interface TypeData {
+  mission_ids: number[];
+}
 @Component({
   selector: 'app-by-subtype',
   templateUrl: './by-subtype.component.html',
@@ -10,22 +21,31 @@ import { LuJsonService, LuLocaleService } from '../../services';
 })
 export class MissionsBySubtypeComponent implements OnInit {
 
-  defined_type: string = "";
-  defined_subtype: string = "";
-  mission_ids: Array<number> = [];
-  mission_names: any = {};
+  $defined: Observable<TypeKey>;
+  $typeData: Observable<TypeData>;
+  //defined_type: string = "";
+  //defined_subtype: string = "";
+  //mission_ids: Array<number> = [];
+  //mission_names: any = {};
 
-  constructor(private router: Router, private route: ActivatedRoute,
-  	private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }
+  constructor(private route: ActivatedRoute, private luCoreDataService: LuCoreDataService) { }
 
   ngOnInit() {
-    this.defined_type = this.route.snapshot.paramMap.get('type');
-    this.defined_subtype = this.route.snapshot.paramMap.get('subtype');
+    this.$defined = this.route.paramMap.pipe(map(map => {
+      return {
+        type: map.get('type'),
+        subtype: map.get('subtype'),
+      };
+    }));
+    this.$typeData = this.$defined.pipe(switchMap(defined => {
+      return this.luCoreDataService.getRevEntry<TypeData>('mission_types', `${defined.type}/${defined.subtype}`);
+    }));
 
-    this.getMissionNames();
-    this.getMissions();
+    //this.getMissionNames();
+    //this.getMissions();
   }
 
+  /*
   getMissions() {
     this.luJsonService.getMissionsByType().subscribe(missions => this.processMissions(missions));
   }
@@ -50,5 +70,5 @@ export class MissionsBySubtypeComponent implements OnInit {
   processMissionNamesPage(page: any):void
   {
     this.mission_names = Object.assign({}, this.mission_names, page);
-  }
+  }*/
 }

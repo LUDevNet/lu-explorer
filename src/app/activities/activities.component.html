@@ -13,29 +13,31 @@
             <th>ID</th>
             <th>Name</th>
             <th>ScriptedActivity</th>
-            <th>Rewards</th>
             <th>Quick Build</th>
           </tr>
           <tr *ngFor="let activity of activities">
-            <td>{{activity.id}}</td>
-            <td><a routerLink="/activities/{{activity.id}}">{{ activity.id | loc:"Activities" | async | elem: "ActivityName" ||"[Unnamed]"}}</a>
+            <td>{{activity.ActivityID}}</td>
+            <td>
+              <a routerLink="/activities/{{activity.ActivityID}}">
+                <ng-container *luxVar="localize(activity) | async | elem: 'ActivityName'; let name">
+                  <span *ngIf="name; else rewardName">{{name}}</span>
+                  <ng-template #rewardName>
+                    <ng-container *ngIf="$activityRewards(activity.ActivityID) | async; let rewards">
+                      {{ commonPrefix(rewards, "description") }}
+                    </ng-container>
+                  </ng-template>
+                </ng-container>
+              </a>
             </td>
             <td>
-              <ng-container *ngIf="objectsScriptedActivity && objectsScriptedActivity[activity.id]; let objs">
+              <ng-container *ngIf="objectsScriptedActivity && objectsScriptedActivity[activity.ActivityID]; let objs">
                 <a class="activity-obj" routerLink="/objects/{{obj.id}}" *ngFor="let obj of objs">
                   {{obj.id}} {{obj.name}}
                 </a>
               </ng-container>
             </td>
             <td>
-              <ng-container *ngIf="activity.id | data:'activityRewards' | async; let rewards">
-                <ng-container *ngFor="let reward of rewards['activity_rewards']">
-                  <span *ngIf="reward" class="activity-obj">{{ reward.description }}</span>
-                </ng-container>
-              </ng-container>
-            </td>
-            <td>
-              <ng-container *ngIf="rebuildByActivity[activity.id]; let rebuild_list">
+              <ng-container *ngIf="rebuildByActivity | elem: activity.ActivityID; let rebuild_list">
                 <dl>
                 <ng-container *ngFor="let rebuild_id of rebuild_list">
                   <ng-container *ngIf="objectsRebuild[rebuild_id]; let rebuild">

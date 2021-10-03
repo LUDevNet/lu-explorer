@@ -41,7 +41,7 @@ export class LuLocaleService {
 
   translate(value: string): Observable<string> {
     // TODO: generalize
-    if (!this.credits) this.credits = this.luJsonService.makeRequest("locale/UI/CREDITS", "%[UI_CREDITS]");
+    if (!this.credits) this.credits = this.luCoreDataService.getLocaleSubtree("UI_CREDITS"); // , "%[UI_CREDITS]"
     return this.credits.pipe(map(dict => {
       return value.replace(/%\[([0-9A-Z_]+)\]/g, (_match, key) => {
         let shortKey = key.replace("UI_CREDITS_", "");

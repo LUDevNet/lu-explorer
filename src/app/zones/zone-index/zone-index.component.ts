@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ZoneDetail } from '../../zone';
+import { DB_ZoneTable } from '../../cdclient';
 import { LuJsonService } from '../../services';
 
 @Component({
@@ -15,7 +15,7 @@ export class ZoneIndexComponent implements OnInit {
     this.getZones()
   }
 
-  zones: ZoneDetail[];
+  zones: DB_ZoneTable[];
 
   getZones(): void {
     this.luJsonService.getZones().subscribe(zones => this.zones = zones);

@@ -23,9 +23,11 @@ import {
   DB_Objects,
   DB_ObjectSkills,
   DB_ComponentsRegistry,
+  DB_ZoneTable,
+  DB_ActivityRewards,
+  DB_MissionTasks,
 } from '../../cdclient';
 
-import { ZoneDetail } from '../../zone';
 import { LuCoreDataService } from './lu-core-data.service';
 
 export class Optional<T> {
@@ -156,12 +158,12 @@ export class LuJsonService {
     return this.getSingleTable("AccessoryDefaultLoc");
   }
 
-  getZones(): Observable<ZoneDetail[]> {
-    return this.getSingleTable("ZoneTable");
+  getZones(): Observable<DB_ZoneTable[]> {
+    return this.getSingleTable<DB_ZoneTable>("ZoneTable");
   }
 
-  getZone(id: number): Observable<ZoneDetail> {
-    return this.makeRequest(this.zonesBaseUrl + id, 'getZone');
+  getZone(id: number): Observable<DB_ZoneTable> {
+    return this.luCoreDataService.getSingleTableEntry('ZoneTable', id);
   }
 
   getRenderComponent(id: number): Observable<DB_RenderComponent> {
@@ -253,11 +255,11 @@ export class LuJsonService {
   }
 
   getMission(id: number): Observable<any> {
-    return this.getPagedJsonData(this.tablesUrl + "Missions/", id, 'Mission');
+    return this.getPagedJsonData(this.tablesUrl + "Missions/", id, 'Missions');
   }
 
-  getMissionTasks(id: number): Observable<any> {
-    return this.getPagedJsonData(this.tablesUrl + "MissionTasks/", id, 'MissionTasks');
+  getMissionTasks(id: number): Observable<DB_MissionTasks[]> {
+    return this.luCoreDataService.getTableEntry<DB_MissionTasks>('MissionTasks', id);
   }
 
   getMissionText(id: number): Observable<any> {
@@ -326,7 +328,8 @@ export class LuJsonService {
   }
 
   getActivityRewards(id: number): Observable<ActivityRewardsPod> {
-    return this.getGeneric(id, "ActivityRewards", true);
+    return this.luCoreDataService.getTableEntry<DB_ActivityRewards>("ActivityRewards", id)
+      .pipe(map(x => Object.assign({ activity_rewards: x })));
   }
 
   getCurrencyIndex(id: number): Observable<CurrencyTablePod> {

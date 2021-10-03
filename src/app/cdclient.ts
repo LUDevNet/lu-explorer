@@ -312,8 +312,7 @@ export class DB_RewardCodes {
   gate_version: string; // TEXT
 }
 
-export class DB_AccessoryDefaultLoc
-{
+export class DB_AccessoryDefaultLoc {
   Description: string;
   GroupID: number;
   Pos_X: number;
@@ -344,32 +343,28 @@ export class DB_BaseCombatAIComponent {
   ignoreParent: boolean; // BOOLEAN
 }
 
-export class DB_Behavior
-{
+export class DB_Behavior {
   behaviorID: number;
   effectHandle: string;
   effectID: number;
   templateID: number;
-  parameters: {[key: string]: number};
+  parameters: { [key: string]: number };
 }
 
-export class DB_BehaviorTemplate
-{
+export class DB_BehaviorTemplate {
   behaviorID: number;
   effectHandle: string;
   effectID: number;
   templateID: number;
 }
 
-export class DB_BehaviorParameter
-{
+export class DB_BehaviorParameter {
   behaviorID: number;
   parameterID: string;
   value: number;
 }
 
-export class DB_SkillBehavior
-{
+export class DB_SkillBehavior {
   skillID: number;
   locStatus: number;
   behaviorID: number;
@@ -391,8 +386,7 @@ export class DB_SkillBehavior
   cancelType: number;
 }
 
-export class DB_Icons
-{
+export class DB_Icons {
   IconID: number;
   IconPath: string;
   IconName: string;
@@ -543,7 +537,7 @@ export class DB_MissionTasks {
   largeTaskIconID: number; // INTEGER
   localize: boolean;
   gate_version: string;
-  localizations ?: any;
+  localizations?: any;
 }
 
 export class DB_WhatsCoolItemSpotlight {
@@ -561,4 +555,34 @@ export class DB_WhatsCoolNewsAndTips {
   localize: boolean; // BOOLEAN
   gate_version: string; // TEXT
   locStatus: number; // INTEGER
+}
+
+export interface DB_ZoneTable {
+  zoneID: number;
+  locStatus: number;
+  zoneName: string;
+  scriptID: number;
+  ghostdistance_min: number;
+  ghostdistance: number;
+  population_soft_cap: number;
+  population_hard_cap: number;
+  DisplayDescription: string;
+  mapFolder: string;
+  smashableMinDistance: number;
+  smashableMaxDistance: number;
+  mixerProgram: string;
+  clientPhysicsFramerate: string;
+  serverPhysicsFramerate: string;
+  zoneControlTemplate: number;
+  widthInChunks: number;
+  heightInChunks: number;
+  petsAllowed: boolean;
+  localize: boolean;
+  fZoneWeight: number;
+  thumbnail: string;
+  PlayerLoseCoinsOnDeath: boolean;
+  disableSaveLoc: boolean;
+  teamRadius: number;
+  gate_version: string;
+  mountsAllowed: boolean;
 }
