@@ -266,12 +266,12 @@ export class LuJsonService {
     return this.getPagedJsonData(this.tablesUrl + "MissionText/", id, 'MissionText');
   }
 
-  getObjectTypes(): Observable<any> {
-    return this.makeRequest(this.objectsByTypeUrl + "index", `getObjectTypes()`);
+  getObjectTypes(): Observable<string[]> {
+    return this.luCoreDataService.getRev('object_types');
   }
 
-  getObjectType(type: string): Observable<any> {
-    return this.makeRequest(this.objectsByTypeUrl + type, `getObjectType(${type})`);
+  getObjectType(type: string): Observable<number[]> {
+    return this.luCoreDataService.getRevEntry('object_types', type);
   }
 
   getObjectComponents(): Observable<any> {

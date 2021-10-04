@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   data: {
-    apiUrl: "https://explorer.lu-dev.net/api/"
+    apiUrl: "/api/"
   },
   firebase: {
     apiKey: "AIzaSyCxUJm4DFGfimoeGKPGT7-9f7gD0frJZ64",

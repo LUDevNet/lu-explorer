@@ -28,7 +28,7 @@ export class ObjectsByTypeComponent implements OnInit {
 
   ngOnInit() {
     this.objects = this.route.paramMap
-      .pipe(map(this.mapRouteInfo),tap(this.tapRef.bind(this)),switchMap(this.loadDataObservable.bind(this)))
+      .pipe(map(this.mapRouteInfo), tap(this.tapRef.bind(this)), switchMap(this.loadDataObservable.bind(this)))
     this.objects.subscribe(x => this.cd.detectChanges());
   }
 
@@ -36,9 +36,9 @@ export class ObjectsByTypeComponent implements OnInit {
     let type = map.get('type');
     if (map.has('page')) {
       let page = map.get('page');
-      return {type: type, page: +page};
+      return { type: type, page: +page };
     } else {
-      return {type: type, page: 0};
+      return { type: type, page: 0 };
     }
   }
 
@@ -52,7 +52,13 @@ export class ObjectsByTypeComponent implements OnInit {
   loadDataObservable(ref) {
     return this.luJsonService
       .getObjectType(ref.type)
-      .pipe(tap(this.setPageCounters.bind(this, ref)), map(this.processData.bind(this, ref)));
+      .pipe(
+        map((x: number[]) => x.map(id => {
+          return { id, name: "???" };
+        })),
+        tap(this.setPageCounters.bind(this, ref)),
+        map(this.processData.bind(this, ref))
+      );
   }
 
   setPageCounters(ref, data) {
@@ -68,7 +74,7 @@ export class ObjectsByTypeComponent implements OnInit {
     return page;
   }
 
-  sortObjectTypeRefs(a,b) {
+  sortObjectTypeRefs(a, b) {
     return a.id - b.id;
   }
 

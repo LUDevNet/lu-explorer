@@ -8,6 +8,6 @@
 <h3>Types</h3>
 
 <ul>
-  <li *ngFor="let type of types">
+  <li *ngFor="let type of ($types | async)">
     <a routerLink="/objects/types/{{type}}">{{type ? type : "[Unnamed]"}}</a></li>
 </ul>
