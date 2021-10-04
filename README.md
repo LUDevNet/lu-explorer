@@ -33,6 +33,7 @@ This needs a `paradox.toml` config file in the working directory – a minimal e
 4. Put at least `locale/locale.xml` and `res/cdclient.fdb` from an LU client into this `client` folder
 5. You can now build the `lu-explorer` web-app continuously with
    ```shell
+   $ cd lu-explorer
    $ npm install
    $ ng build --watch
    ```
