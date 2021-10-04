@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>LU-Explorer - Redirect</title>
+    <script type="text/javascript">
+      var segmentCount = 1;
+
+      var l = window.location;
+      l.replace(
+        'https://explorer.lu-dev.net/' +
+        l.pathname.slice(1).split('/').slice(segmentCount).join('/') +
+        l.search +
+        l.hash
+      );
+
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
