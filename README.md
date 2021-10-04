@@ -1,4 +1,4 @@
-# LuExplorer
+# LU-Explorer
 
 ![Example](img/item-membership-reward.png)
 
