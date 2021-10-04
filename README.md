@@ -1,5 +1,7 @@
 # LuExplorer
 
+![Example](img/item-membership-reward.png)
+
 ## General
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
