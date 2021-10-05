@@ -65,9 +65,9 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `docs/` directory. Use the `--prod` flag for a production build. For building to github pages also use `--base-href=/lu-explorer/`.
+Run `ng build` to build the project. The build artifacts will be stored in the `docs/` directory. Use the `--configuration production` flag for a production build. For building to github pages also use `--base-href=/lu-explorer/`.
 
-Usually, the `ng build --prod --build-optimizer --base-href=/lu-explorer/` command is used.
+Usually, the `ng build --configuration production` command is used.
 
 ## Running unit tests
 
@@ -80,7 +80,3 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-## Release
-
-`git push origin (git subtree split --prefix docs gh-pages):gh-pages --force`
