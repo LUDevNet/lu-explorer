@@ -1,7 +1,6 @@
 <div *ngIf="object">
   <ul class="breadcrumbs">
     <li><a routerLink="/objects">Objects</a></li>
-    <li><a routerLink="/objects/types">Types</a></li>
     <li><a routerLink="/objects/types/{{object.type}}">{{object.type}}</a></li>
     <li>{{object.name || "[Unnamed]" }}</li>
   </ul>

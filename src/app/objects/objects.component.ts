@@ -23,9 +23,10 @@ export class ObjectsComponent implements OnInit {
   constructor(private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }
 
   ngOnInit() {
-    this.getObjects();
+    //this.getObjects();
   }
 
+  /*
   filter(obj: any, predicate: any, max_size: number)
   {
     let keys = Object.keys(obj).filter( key => predicate(obj[key]))
@@ -55,5 +56,5 @@ export class ObjectsComponent implements OnInit {
   {
     this.objects = Object.assign({}, this.objects, page);
     this.updateFilterList();
-  }
+  }*/
 }

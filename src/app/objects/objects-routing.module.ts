@@ -23,12 +23,12 @@ const objectsRoutes = [
     title: "Reward codes"
   } },
   { path: 'loot/table/:id', component: LootTableComponent, data: { title: params => `LootTable #${params.id}` } },
-  { path: 'types', component: ObjectTypesIndexComponent, data: { title: "Object Types" } },
   {
     path: 'types/:type', component: ObjectsByTypeComponent, data: {
       title: params => `Objects (${params['type']})`
     }
   },
+  { path: 'types', redirectTo: "/objects" },
   {
     path: 'types/:type/page/:page', component: ObjectsByTypeComponent, data: {
       title: params => `Objects (${params['type']}; Page ${params['page']})`

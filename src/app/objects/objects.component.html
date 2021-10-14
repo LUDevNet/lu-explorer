@@ -3,7 +3,6 @@
 </ul>
 
 <h2>Objects <small>
-  <a routerLink="/objects/types">[By type]</a>
   <a routerLink="/objects/components">[By component]</a>
   <a routerLink="/objects/item-sets">[Item Sets]</a>
   <a routerLink="/objects/item-spotlight">[Item Spotlight]</a>
@@ -11,14 +10,6 @@
   <a routerLink="/objects/factions">[Factions]</a>
 </small></h2>
 
-<p>
-  Name: <input type="text" [(ngModel)]="needle" (keyup)="updateFilterList()"/>
-</p>
+<p><b>Note:</b> Object search is currently unavailable, see <a target="_blank" href="https://github.com/Xiphoseer/lu-explorer/pull/70">PR #70</a></p>
 
-<h3>Results</h3>
-
-<table>
-  <tr *ngFor="let object of filteredObjects | keys">
-    <td>{{object.key}}</td><td><a [routerLink]="['/objects/', object.key]">{{object.value.name}}</a></td>
-  </tr>
-</table>
+<app-types-index></app-types-index>
