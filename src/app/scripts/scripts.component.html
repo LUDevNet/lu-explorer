@@ -3,4 +3,4 @@
 </ul>
 
 <h2>Script</h2>
-<app-lua *ngIf="index" [ast]="index"></app-lua>
+<app-lua *ngIf="$index | async; let index" [ast]="index"></app-lua>

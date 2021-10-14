@@ -336,10 +336,6 @@ export class LuJsonService {
     return this.getGeneric(id, "CurrencyTable", true);
   }
 
-  getScript(path: string): Observable<any> {
-    return this.getJsonResource(this.scriptsUrl, path, "Script");
-  }
-
   getFactions(): Observable<DB_Factions[]> {
     return this.getSingleTable("Factions");
   }

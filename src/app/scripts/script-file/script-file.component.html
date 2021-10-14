@@ -7,4 +7,4 @@
 </ul>
 
 <h2>Script</h2>
-<app-lua *ngIf="file" [ast]="file"></app-lua>
+<app-lua *ngIf="$file | async; let file" [ast]="file"></app-lua>

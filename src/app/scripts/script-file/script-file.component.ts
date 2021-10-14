@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
-import { LuJsonService } from '../../services';
+import { LuCoreDataService, LuJsonService } from '../../services';
+import { LuaStmt } from '../lua/lua';
 
 @Component({
   selector: 'app-script-file',
@@ -10,12 +12,12 @@ import { LuJsonService } from '../../services';
 })
 export class ScriptFileComponent implements OnInit {
 
-  file: any;
+  $file: Observable<LuaStmt>;
   path: string;
   segments: Array<string>;
 
   constructor(
-    private luJsonService: LuJsonService,
+    private luCoreData: LuCoreDataService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -25,9 +27,7 @@ export class ScriptFileComponent implements OnInit {
   updateRoute(map) {
     this.path = map.get('path');
     this.segments = this.path.split('/');
-    this.luJsonService
-      .getScript(this.path)
-      .subscribe(file => this.file = file)
+    this.$file = this.luCoreData.getScript(this.path);
   }
 
   getLink(i: number, segment: string): Array<string> {
