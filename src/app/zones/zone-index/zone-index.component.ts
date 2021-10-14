@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { DB_ZoneTable } from '../../cdclient';
 import { LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../util/services/lu-core-data.service';
+
+interface Locale_ZoneTable {
+  DisplayDescription: string;
+}
 
 @Component({
   selector: 'app-zone-index',
@@ -9,10 +15,14 @@ import { LuJsonService } from '../../services';
 })
 export class ZoneIndexComponent implements OnInit {
 
-  constructor(private luJsonService: LuJsonService) { }
+  $zones: Observable<{[key: string]: Locale_ZoneTable}>;
+
+  constructor(
+    private luCoreData: LuCoreDataService,
+    private luJsonService: LuJsonService) { }
 
   ngOnInit() {
-    this.getZones()
+    this.$zones = this.luCoreData.getLocaleSubtree<Locale_ZoneTable>('ZoneTable');
   }
 
   zones: DB_ZoneTable[];

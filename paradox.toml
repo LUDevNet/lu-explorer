@@ -5,6 +5,7 @@ domain = "localhost"
 
 [data]
 lu_res_cache = "../lu-res"
+lu_json_cache = "../lu-json"
 cdclient = "../client/res/cdclient.fdb"
 locale = "../client/locale/locale.xml"
 explorer_spa = "docs"

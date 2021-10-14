@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { DB_ZoneTable } from '../../cdclient';
 
-import { LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../services';
 import { Position, Quaternion, Vector3f } from '../../zone';
 
 const mapHScale = 128;
@@ -50,6 +51,8 @@ export interface LUZ_File_Path {
   travel_sound: string,
   waypoints: LUZ_File_Waypoint[];
 
+  path_version: number;
+
   behavior?: number;
 
   // Property
@@ -78,7 +81,17 @@ export interface LUZ_File_Path {
   activate_on_load?: any;
 };
 export interface LUZ_File {
+  map_description: string;
+  map_filename: string;
+  map_name: string;
   paths: LUZ_File_Path[];
+  revision: number;
+  scenes: any[];
+  something: string,
+  spawnpoint: Position;
+  transitions: any[];
+  version: number;
+  world_id: number;
 };
 
 @Component({
@@ -91,24 +104,21 @@ export class LuzFileComponent implements OnInit {
   _path: string;
   selected_path: LUZ_File_Path;
   selected_path_point: number;
-  zone: any;
-  zone_id: any;
-  @Input('zone-ref') zoneRef: any;
+  $zone: Observable<LUZ_File>;
+  @Input('zone-ref') zoneRef: DB_ZoneTable;
 
-  constructor(private route: ActivatedRoute, private luJsonService: LuJsonService) { }
+  constructor(
+    private luCoreData: LuCoreDataService) { }
 
   @Input() set path(value: string) {
     this.getZone(value);
   }
 
-  ngOnInit() {
-    this.zone_id = this.route.snapshot.params['id'];
-  }
+  ngOnInit() {}
 
   getZone(path: string): void
   {
-  	this.luJsonService.getJsonResource("maps/", path, "map")
-      .subscribe(zone => this.zone = zone);
+    this.$zone = this.luCoreData.getMap<LUZ_File>(path);
   }
 
   selectPath(path: any)

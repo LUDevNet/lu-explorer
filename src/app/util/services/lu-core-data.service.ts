@@ -50,6 +50,10 @@ export class LuCoreDataService {
     };
   }
 
+  getMap<T>(path: string): Observable<T> {
+    return this.get(`v0/maps/${path.toLowerCase()}.json`);
+  }
+
   getLocaleSubtree<T>(key: string): Observable<{[key: string]: T}> {
     return this.get(`v0/locale/${key.replace('_', '/')}/$all`);
   }

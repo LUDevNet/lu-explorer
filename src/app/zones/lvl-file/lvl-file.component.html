@@ -1,4 +1,4 @@
-<ng-container *ngIf="scene">
+<ng-container *ngIf="$scene | async; let scene">
   <h2>Scene {{ ref.name }}</h2>
   <ng-container *ngFor="let chnk of scene.chunks">
     <ng-container [ngSwitch]="chnk._type">

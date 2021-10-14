@@ -1,11 +1,41 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LuJsonService } from '../../services';
+import { LuCoreDataService, LuJsonService } from '../../services';
 
 interface Object {
   data: Observable<any>,
   obj: any,
+}
+
+export class LvlChunk1000 {
+  _type = 1000;
+
+  version: number;
+  value_1: number;
+}
+
+export class LvlChunk2000 {
+  _type = 2000;
+}
+
+export interface LvlChunk {
+  _type: 1000 | 2000 | 2001 | 2002;
+
+  // 1000
+  version?: number;
+  value_1?: number;
+
+  // 2000
+  floats?: any[];
+  ids?: any[];
+  sky?: string[];
+
+  // 2001
+  objects?: any[];
+}
+export interface LvlFile {
+  chunks: LvlChunk[];
 }
 
 @Component({
@@ -16,14 +46,17 @@ interface Object {
 export class LvlFileComponent implements OnInit {
 
   @Input() ref: any;
-  scene: any;
+  $scene: Observable<LvlFile>;
   selected_object: any;
   selected_object_data: Observable<any>;
   obj_id: number | undefined;
   zone_id: number;
   scene_id: number;
 
-  constructor(private route: ActivatedRoute, private luJsonService: LuJsonService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private luJsonService: LuJsonService,
+    private luCoreData: LuCoreDataService) { }
 
   ngOnInit() {
     this.getScene();
@@ -32,8 +65,7 @@ export class LvlFileComponent implements OnInit {
 
   getScene(): void
   {
-    this.luJsonService.getJsonResource("maps/", this.ref.path, "map")
-      .subscribe(scene => this.scene = scene);
+    this.$scene = this.luCoreData.getMap(this.ref.path);
   }
 
   selectObject(map: any)

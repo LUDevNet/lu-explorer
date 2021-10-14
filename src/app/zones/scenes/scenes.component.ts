@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { LuJsonService } from '../../services';
+import { LuCoreDataService, LuJsonService } from '../../services';
+import { LUZ_File } from '../luz-file/luz-file.component';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class ScenesComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private luCoreData: LuCoreDataService,
     private luJsonService: LuJsonService
   ) { }
 
@@ -40,7 +42,9 @@ export class ScenesComponent implements OnInit {
   {
     let dir = file.substring(0, file.lastIndexOf("/") + 1);
     this.sc_id = +this.route.snapshot.paramMap.get('sc');
-    this.luJsonService.getJsonResource("maps/", file, "map")
+    
+    
+    this.luCoreData.getMap<LUZ_File>(file)
       .subscribe(zone => this.scenes = zone.scenes
         .filter(sc => sc.id === this.sc_id).map(sc => this.toRef(sc, dir)));
   }
