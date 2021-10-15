@@ -4,7 +4,7 @@ import { ReplaySubject, Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../services';
-import { component_names } from '../../components';
+import { component_names } from '../../defs/components';
 import { DB_ObjectRef_ByComponent } from '../../cdclient';
 
 @Component({

@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DB_ObjectRef_ByComponent } from '../../../cdclient';
-import { DESTRUCTIBLE_COMPONENT_ID } from '../../../components';
+import { DESTRUCTIBLE_COMPONENT_ID } from '../../../defs/components';
 import { LuJsonService } from '../../../services';
 
 @Component({

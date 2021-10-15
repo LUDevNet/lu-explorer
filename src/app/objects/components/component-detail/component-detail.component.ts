@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ObjectPod } from '../../../cdclient';
-import { component_names } from '../../../components';
+import { component_names } from '../../../defs/components';
 
 @Component({
   selector: 'app-component-detail',

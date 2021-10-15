@@ -1,23 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { DB_Behavior, DB_BehaviorTemplate } from '../../cdclient';
+import { DB_Behavior } from '../../cdclient';
+import { Rev_Behavior } from '../../defs/api';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 
 declare var vis: any;
 
-
-interface Behavior {
-  template: DB_BehaviorTemplate,
-  parameters: {[key: string]: number},
-}
-
-interface Rev_Behavior {
-  uses: number[],
-  used_by: number[],
-  skill: number[],
-  _embedded: {[key: string]: Behavior}
-}
 
 @Component({
   selector: 'app-behavior-detail-alt',

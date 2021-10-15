@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LuJsonService, LuLocaleService } from '../../services';
-import { component_names } from '../../components';
+import { component_names } from '../../defs/components';
 
 @Component({
   selector: 'app-components-index',
@@ -16,9 +16,10 @@ export class ObjectComponentsIndexComponent implements OnInit {
   constructor(private luJsonService: LuJsonService,private luLocaleService: LuLocaleService) { }
 
   ngOnInit() {
-    this.luJsonService
-      .getObjectComponents()
-      .subscribe(this.processObjectComponents.bind(this));
+    alert("FIXME: components-index");
+    //this.luJsonService
+    //  .getObjectComponents()
+    //  .subscribe(this.processObjectComponents.bind(this));
   }
 
   processObjectComponents(data: any) {

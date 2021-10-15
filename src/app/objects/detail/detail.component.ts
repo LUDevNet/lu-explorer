@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { LuJsonService, LuLocaleService } from '../../services';
-import { component_names } from '../../components';
+import { component_names } from '../../defs/components';
 import { APIObject } from '../../util/services/lu-json.service';
 
 @Component({

@@ -17,13 +17,16 @@ export class LuLocaleService {
 
   constructor(private luJsonService: LuJsonService, private luCoreDataService: LuCoreDataService) { }
 
+  /*
   getLocaleTable(table: string): Observable<any> {
     if (!(table in this.tables)) {
       this.tables[table] = this.luJsonService.getLocale(table);
     }
     return this.tables[table];
   }
+  */
 
+  /*
   getLocalePage(table: string, page: number): Observable<any> {
     if (!(table in this.pages)) {
       this.pages[table] = {};
@@ -34,6 +37,7 @@ export class LuLocaleService {
     }
     return this.pages[table][pageKey];
   }
+  */
 
   getLocaleEntry(table: string, id: number): Observable<any> {
     return this.luCoreDataService.getLocaleSubtree(`${table}_${id}`)

@@ -54,26 +54,18 @@ export class LuJsonService {
 
   private apiUrl;
   private tablesUrl;
-  private localeUrl;
-  private scriptsUrl;
   private behaviorBaseUrl;
-  private skillBaseUrl;
-  private renderBaseUrl;
   private scriptBaseUrl;
   private physicsBaseUrl;
   private itemBaseUrl;
   private lootMatrixBaseUrl;
   private lootTableBaseUrl;
-  private iconsBaseUrl;
   private packBaseUrl;
   private precondBaseUrl;
   private objectsBaseUrl;
-  private objectsByTypeUrl;
   private objectsByComponentUrl;
   private zonesBaseUrl;
-  private zonesIndexUrl;
-  private accIndexUrl;
-
+  
   private jsonStore;
 
   constructor(
@@ -86,13 +78,9 @@ export class LuJsonService {
     this.apiUrl = "/lu-json/";
 
     this.tablesUrl = "tables/";
-    this.localeUrl = "locale/";
-    this.scriptsUrl = "scripts/";
     this.behaviorBaseUrl = "behaviors/";
     this.objectsBaseUrl = "objects/";
 
-    this.skillBaseUrl = this.tablesUrl + "SkillBehavior/";
-    this.renderBaseUrl = this.tablesUrl + "RenderComponent/";
     this.scriptBaseUrl = this.tablesUrl + "ScriptComponent/";
     this.physicsBaseUrl = this.tablesUrl + "PhysicsComponent/";
     this.itemBaseUrl = this.tablesUrl + "ItemComponent/";
@@ -101,18 +89,14 @@ export class LuJsonService {
     this.packBaseUrl = this.tablesUrl + "PackageComponent/";
     this.precondBaseUrl = this.tablesUrl + "Preconditions/";
     this.zonesBaseUrl = this.tablesUrl + "ZoneTable/";
-    this.iconsBaseUrl = this.tablesUrl + "Icons/";
-    this.objectsByTypeUrl = this.objectsBaseUrl + "groupBy/type/";
     this.objectsByComponentUrl = this.objectsBaseUrl + "groupBy/component/";
-    this.zonesIndexUrl = this.zonesBaseUrl + "index";
-    this.accIndexUrl = this.tablesUrl + "AccessoryDefaultLoc/index";
   }
 
   private log(message: string) {
     this.messageService.add('LuJsonService: ' + message);
   }
 
-  makeRequest(url: string, method: string, wrapResult: boolean = false): Observable<any> {
+  /*makeRequest(url: string, method: string, wrapResult: boolean = false): Observable<any> {
     if (!this.jsonStore.hasOwnProperty(url)) {
       let httpRequest = this.http.get(this.apiUrl + url + '.json')
         .pipe(
@@ -125,7 +109,7 @@ export class LuJsonService {
       this.jsonStore[url] = responseSubject;
     }
     return this.jsonStore[url];
-  }
+  }*/
 
   /**
    * Handle Http operation that failed.
@@ -170,11 +154,13 @@ export class LuJsonService {
     return this.luCoreDataService.getSingleTableEntry<DB_RenderComponent>('RenderComponent', id);
   }
 
-  getBehavior(id: number): Observable<DB_Behavior> {
+  /*
+    getBehavior(id: number): Observable<DB_Behavior> {
     // TODO: paged
     let page = Math.floor(id / 1024);
     return this.makeRequest(this.behaviorBaseUrl + page + "/" + id, `getBehavior(${id})`);
   }
+  */
 
   getSkill(id: number): Observable<DB_SkillBehavior> {
     return this.luCoreDataService.getSingleTableEntry<DB_SkillBehavior>("SkillBehavior", id);
@@ -274,20 +260,27 @@ export class LuJsonService {
     return this.luCoreDataService.getRevEntry('object_types', type);
   }
 
+  /*
   getObjectComponents(): Observable<any> {
     return this.makeRequest(this.objectsByComponentUrl + "index", `getObjectComponents()`);
-  }
+  }*/
 
   getObjectComponent(component: number): Observable<DB_ObjectRef_ByComponent[]> {
-    return this.makeRequest(this.objectsByComponentUrl + component, `getObjectComponent(${component})`);
+    alert("TODO");
+    //return this.makeRequest(this.objectsByComponentUrl + component, `getObjectComponent(${component})`);
+    return of([]);
   }
 
   getDestructibleComponentsByFaction(): Observable<Record<string, number[]>> {
-    return this.makeRequest(this.tablesUrl + "DestructibleComponent/byFaction", `getDestructibleComponentsByFaction`);
+    alert("TODO");
+    //return this.makeRequest(this.tablesUrl + "DestructibleComponent/byFaction", `getDestructibleComponentsByFaction`);
+    return of({});
   }
 
   getRebuildComponentsByActivityID(): Observable<Record<string, number[]>> {
-    return this.makeRequest(this.tablesUrl + "RebuildComponent/byActivityID", `getRebuildComponentsByActivityID`);
+    alert("TODO");
+        //return this.makeRequest(this.tablesUrl + "RebuildComponent/byActivityID", `getRebuildComponentsByActivityID`);
+    return of({});
   }
 
   getBrickColors(): Observable<DB_BrickColors[]> {
@@ -315,17 +308,19 @@ export class LuJsonService {
     }
   }
 
-  getLocale(table: string): Observable<any> {
-    return this.getJsonResource("locale/" + table + "/", "index", "locale");
-  }
+  //getLocale(table: string): Observable<any> {
+  //  return this.getJsonResource("locale/" + table + "/", "index", "locale");
+  //}
 
-  getLocalePage(table: string, page: number) {
-    return this.getJsonResource("locale/" + table + "/", String(page), "locale page");
-  }
+  //getLocalePage(table: string, page: number) {
+  //  return this.getJsonResource("locale/" + table + "/", String(page), "locale page");
+  //}
 
+  /*
   getMissionsByType(): Observable<DB_MissionsByType> {
     return this.getJsonResource("tables/Missions/groupBy/", "type", "missions");
   }
+  */
 
   getActivityRewards(id: number): Observable<ActivityRewardsPod> {
     return this.luCoreDataService.getTableEntry<DB_ActivityRewards>("ActivityRewards", id)
@@ -344,9 +339,11 @@ export class LuJsonService {
     return this.getFactions().pipe(map(factions => factions.find(v => v.faction == index)));
   }
 
+  /*
   getJsonResource(prefix: string, url: string, type: string): Observable<any> {
     return this.makeRequest(prefix + url.toLowerCase(), `get${type}(${url})`);
   }
+  */
 
   getJsonData(url: string, id: number, type: string): Observable<any> {
     return this.luCoreDataService.getSingleTableEntry(type, id);
