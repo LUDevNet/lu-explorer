@@ -3,7 +3,7 @@ import { ReplaySubject, Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../../services';
-import { DB_VendorComponent } from '../../../cdclient';
+import { DB_VendorComponent } from '../../../../defs/cdclient';
 
 @Component({
   selector: 'app-vendor-component',

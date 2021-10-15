@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { LuJsonService } from '../../services';
-import { DB_LevelProgressionLookup } from '../../cdclient';
+import { DB_LevelProgressionLookup } from '../../../defs/cdclient';
 
 @Component({
   selector: 'app-level-progression',

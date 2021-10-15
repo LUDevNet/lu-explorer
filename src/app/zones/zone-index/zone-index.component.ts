@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DB_ZoneTable } from '../../cdclient';
+import { DB_ZoneTable } from '../../../defs/cdclient';
 import { LuJsonService } from '../../services';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DB_Missions } from '../../cdclient';
+import { DB_Missions } from '../../../defs/cdclient';
 
 import { LuJsonService, LuLocaleService } from '../../services';
 

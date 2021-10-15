@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DB_RewardCodes } from '../../cdclient';
+import { DB_RewardCodes } from '../../../defs/cdclient';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 import { ObjectsByComponentComponent } from '../by-component/by-component.component';
 

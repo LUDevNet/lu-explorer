@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { LuCoreDataService } from '../../services';
-import { DB_ObjectRef_ByType } from '../../cdclient';
+import { DB_ObjectRef_ByType } from '../../../defs/cdclient';
 
 interface ObjectsByTypeEmbedded {
   objects: {[key: number]: {id: number, name: number}};

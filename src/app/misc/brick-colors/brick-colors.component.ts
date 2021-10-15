@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DB_BrickColors } from '../../cdclient';
+import { DB_BrickColors } from '../../../defs/cdclient';
 
 import { LuJsonService } from '../../services';
 

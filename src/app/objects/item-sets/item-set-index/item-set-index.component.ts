@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { LuJsonService, LuLocaleService } from '../../../services';
-import { DB_ItemSets_Ref } from '../../../cdclient';
+import { DB_ItemSets_Ref } from '../../../../defs/cdclient';
 
 @Component({
   selector: 'app-item-set-index',

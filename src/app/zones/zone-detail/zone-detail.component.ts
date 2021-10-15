@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { LuJsonService } from '../../services';
-import { DB_ZoneTable } from '../../cdclient';
+import { DB_ZoneTable } from '../../../defs/cdclient';
 
 
 @Component({

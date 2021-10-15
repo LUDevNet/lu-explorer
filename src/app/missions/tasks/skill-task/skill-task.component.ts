@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DB_MissionTasks } from '../../../cdclient';
+import { DB_MissionTasks } from '../../../../defs/cdclient';
 
 @Component({
   selector: 'app-skill-task',

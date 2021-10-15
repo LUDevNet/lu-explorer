@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { LuJsonService, LuLocaleService } from '../../../services';
-import { DB_ItemSets } from '../../../cdclient';
+import { DB_ItemSets } from '../../../../defs/cdclient';
 
 @Component({
   selector: 'app-item-set-detail',

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ReplaySubject, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { LuJsonService } from '../../../services';
-import { DB_mapItemTypes, DB_ItemComponent, DB_BrickColors, DB_brickAttributes } from '../../../cdclient';
+import { DB_mapItemTypes, DB_ItemComponent, DB_BrickColors, DB_brickAttributes } from '../../../../defs/cdclient';
 
 @Component({
   selector: 'app-item-component',

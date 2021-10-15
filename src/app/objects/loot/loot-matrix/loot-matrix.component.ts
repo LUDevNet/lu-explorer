@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DB_LootMatrix } from '../../../cdclient';
+import { DB_LootMatrix } from '../../../../defs/cdclient';
 
 import { LuJsonService } from '../../../services';
 

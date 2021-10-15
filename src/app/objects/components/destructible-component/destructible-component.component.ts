@@ -3,7 +3,7 @@ import { ReplaySubject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../../services';
-import { DB_DestructibleComponent } from '../../../cdclient';
+import { DB_DestructibleComponent } from '../../../../defs/cdclient';
 
 @Component({
   selector: 'app-destructible-component',

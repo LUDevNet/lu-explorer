@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterState } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DB_BrickIDTable } from '../../cdclient';
+import { DB_BrickIDTable } from '../../../defs/cdclient';
 
 import { LuJsonService, LuLocaleService } from '../../services';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { LuJsonService, LuLocaleService } from '../../services';
-import { DB_brickAttributes } from '../../cdclient';
+import { DB_brickAttributes } from '../../../defs/cdclient';
 
 @Component({
   selector: 'app-brick-attributes',

@@ -3,7 +3,7 @@ import { ReplaySubject, Observable } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../../services';
-import { DB_ItemSetSkills } from '../../../cdclient';
+import { DB_ItemSetSkills } from '../../../../defs/cdclient';
 
 @Component({
   selector: 'app-item-set-skill-set',

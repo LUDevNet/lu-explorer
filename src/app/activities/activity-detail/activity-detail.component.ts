@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { ActivityRewardsPod, DB_Activities, DB_ActivityRewards } from '../../cdclient';
+import { ActivityRewardsPod, DB_Activities, DB_ActivityRewards } from '../../../defs/cdclient';
 
 import { LuLocaleService, LuJsonService } from '../../services';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';

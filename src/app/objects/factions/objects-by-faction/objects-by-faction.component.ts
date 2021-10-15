@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DB_ObjectRef_ByComponent } from '../../../cdclient';
+import { DB_ObjectRef_ByComponent } from '../../../../defs/cdclient';
 import { DESTRUCTIBLE_COMPONENT_ID } from '../../../../defs/components';
 import { LuJsonService } from '../../../services';
 

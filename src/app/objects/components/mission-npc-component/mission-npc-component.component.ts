@@ -3,7 +3,7 @@ import { ReplaySubject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../../services';
-import { DB_MissionNPCComponent } from '../../../cdclient';
+import { DB_MissionNPCComponent } from '../../../../defs/cdclient';
 
 @Component({
   selector: 'app-mission-npc-component',

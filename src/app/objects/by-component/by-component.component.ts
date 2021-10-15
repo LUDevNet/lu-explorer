@@ -5,7 +5,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../services';
 import { component_names } from '../../../defs/components';
-import { DB_ObjectRef_ByComponent } from '../../cdclient';
+import { DB_ObjectRef_ByComponent } from '../../../defs/cdclient';
 
 @Component({
   selector: 'app-by-component',

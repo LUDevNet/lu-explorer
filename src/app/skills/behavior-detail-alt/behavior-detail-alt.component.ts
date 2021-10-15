@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { DB_Behavior } from '../../cdclient';
+import { DB_Behavior } from '../../../defs/cdclient';
 import { Rev_Behavior } from '../../../defs/api';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 

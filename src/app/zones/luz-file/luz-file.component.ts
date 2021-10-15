@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DB_ZoneTable } from '../../cdclient';
+import { DB_ZoneTable } from '../../../defs/cdclient';
 
 import { LuCoreDataService } from '../../services';
-import { Position, Quaternion, Vector3f } from '../../zone';
+import { Position, Quaternion, Vector3f } from '../../../defs/zone';
 
 const mapHScale = 128;
 const mapVScale = 128;

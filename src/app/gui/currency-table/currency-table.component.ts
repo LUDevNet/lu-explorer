@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CurrencyTablePod, DB_CurrencyTable } from '../../cdclient';
+import { CurrencyTablePod, DB_CurrencyTable } from '../../../defs/cdclient';
 import { LuJsonService } from '../../services';
 
 @Component({

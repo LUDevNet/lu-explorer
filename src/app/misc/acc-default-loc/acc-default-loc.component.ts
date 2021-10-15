@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LuJsonService } from '../../services';
-import { DB_AccessoryDefaultLoc } from '../../cdclient';
+import { DB_AccessoryDefaultLoc } from '../../../defs/cdclient';
 
 @Component({
   selector: 'app-acc-default-loc',

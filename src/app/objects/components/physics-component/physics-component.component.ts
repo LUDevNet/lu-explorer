@@ -3,7 +3,7 @@ import { ReplaySubject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../../services';
-import { DB_PhysicsComponent } from '../../../cdclient';
+import { DB_PhysicsComponent } from '../../../../defs/cdclient';
 
 
 @Component({

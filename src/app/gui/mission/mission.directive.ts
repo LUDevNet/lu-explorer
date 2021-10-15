@@ -1,7 +1,7 @@
 import { Directive, Input } from "@angular/core";
 import { MissionComponent } from "./mission.component";
 import { LuJsonService, LuLocaleService } from "../../services";
-import { DB_Missions } from "../../cdclient";
+import { DB_Missions } from "../../../defs/cdclient";
 
 @Directive({
   selector: "lux-mission[luxFetch]"

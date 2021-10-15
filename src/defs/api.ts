@@ -1,4 +1,4 @@
-import { DB_BehaviorTemplate } from "../app/cdclient";
+import { DB_BehaviorTemplate } from "./cdclient";
 
 export interface Behavior {
     template: DB_BehaviorTemplate,

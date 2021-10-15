@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DB_BrickColors } from '../../cdclient';
+import { DB_BrickColors } from '../../../defs/cdclient';
 
 @Pipe({name: 'replace'})
 export class ReplacePipe implements PipeTransform {

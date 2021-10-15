@@ -3,7 +3,7 @@ import { ReplaySubject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../../services';
-import { DB_InventoryComponent } from '../../../cdclient';
+import { DB_InventoryComponent } from '../../../../defs/cdclient';
 import { Optional } from '../../../util/services/lu-json.service';
 
 @Component({

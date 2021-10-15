@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { DB_BaseCombatAIComponent } from '../../../cdclient';
+import { DB_BaseCombatAIComponent } from '../../../../defs/cdclient';
 import { LuJsonService } from '../../../services';
 
 @Component({

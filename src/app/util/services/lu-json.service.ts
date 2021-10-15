@@ -26,7 +26,7 @@ import {
   DB_ZoneTable,
   DB_ActivityRewards,
   DB_MissionTasks,
-} from '../../cdclient';
+} from '../../../defs/cdclient';
 
 import { LuCoreDataService } from './lu-core-data.service';
 

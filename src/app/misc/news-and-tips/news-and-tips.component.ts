@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DB_WhatsCoolNewsAndTips } from '../../cdclient';
+import { DB_WhatsCoolNewsAndTips } from '../../../defs/cdclient';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 
 interface Locale_WhatsCoolNewsAndTips {
