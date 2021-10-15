@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Observable, ReplaySubject } from 'rxjs';
 import { DB_Activities, DB_ActivityRewards, DB_ObjectRef_ByComponent } from '../cdclient';
-import { QUICK_BUILD_COMPONENT_ID, REBUILD_COMPONENT_ID, SCRIPTED_ACTIVITY_COMPONENT_ID } from '../defs/components';
+import { QUICK_BUILD_COMPONENT_ID, REBUILD_COMPONENT_ID, SCRIPTED_ACTIVITY_COMPONENT_ID } from '../../defs/components';
 
 import { LuJsonService, LuLocaleService } from '../services';
 import { LuCoreDataService } from '../util/services/lu-core-data.service';

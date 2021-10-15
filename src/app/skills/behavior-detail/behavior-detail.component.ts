@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, ReplaySubject } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
 
-import { Behavior, Rev_Behavior } from '../../defs/api';
+import { Behavior } from '../../../defs/api';
 
 @Component({
   selector: 'app-behavior-detail',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LuJsonService, LuLocaleService } from '../../services';
-import { component_names } from '../../defs/components';
+import { component_names } from '../../../defs/components';
 
 @Component({
   selector: 'app-components-index',

@@ -9,7 +9,7 @@ import { ObjectsByComponentComponent } from './by-component/by-component.compone
 import { ObjectComponentsIndexComponent } from './components-index/components-index.component';
 import { ObjectDetailComponent } from './detail/detail.component';
 import { ObjectsComponent } from './objects.component';
-import { component_names } from '../defs/components';
+import { component_names } from '../../defs/components';
 import { WhatsCoolItemsComponent } from './whats-cool-items/whats-cool-items.component';
 import { RewardCodesComponent } from './reward-codes/reward-codes.component';
 

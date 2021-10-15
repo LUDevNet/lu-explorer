@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { DB_Behavior } from '../../cdclient';
-import { Rev_Behavior } from '../../defs/api';
+import { Rev_Behavior } from '../../../defs/api';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 
 declare var vis: any;
