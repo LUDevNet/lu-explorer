@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { UtilModule } from '../util/util.module';
 
-import { MissionsComponent } from './missions.component';
+import { MissionsSearchComponent } from './search/missions.component';
 import { MissionsByTypeComponent } from './by-type/by-type.component';
 import { MissionsBySubtypeComponent } from './by-subtype/by-subtype.component';
 import { MissionDetailComponent } from './detail/detail.component';
@@ -18,7 +18,7 @@ import { GuiModule } from '../gui/gui.module';
 
 @NgModule({
   declarations: [
-    MissionsComponent,
+    MissionsSearchComponent,
     MissionsByTypeComponent,
     MissionsBySubtypeComponent,
     MissionDetailComponent,

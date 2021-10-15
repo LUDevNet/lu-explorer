@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 
-import { LuCoreDataService, LuJsonService, LuLocaleService } from '../services';
+import { LuCoreDataService, LuJsonService, LuLocaleService } from '../../services';
 
 interface Locale_Mission {
   name?: string;
@@ -14,7 +14,7 @@ type MissionDict = {[key: string]: Locale_Mission};
   templateUrl: './missions.component.html',
   styleUrls: ['./missions.component.css']
 })
-export class MissionsComponent implements OnInit {
+export class MissionsSearchComponent implements OnInit {
 
   missions: MissionDict = {};
   filteredMissions: MissionDict = {};
