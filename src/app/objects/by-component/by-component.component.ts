@@ -97,4 +97,9 @@ export class ObjectsByComponentComponent implements OnInit {
     //return (diff == 0) ? a.id - b.id : diff;
   }
 
+  getName(lot: number): string {
+    let obj = this.objects[lot];
+    return obj ? obj.name : "[unnamed]";
+  }
+
 }

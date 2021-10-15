@@ -11,7 +11,7 @@
     <ng-container  *ngFor="let comp of $components | async">
       <tr *ngFor="let lot of comp.lots">
         <td>{{comp.id}}</td>
-        <td><a routerLink="/objects/{{lot}}">{{objects[lot].name}}</a></td>
+        <td><a routerLink="/objects/{{lot}}">{{getName(lot)}}</a></td>
         <td><a routerLink="/objects/{{lot}}/{{component_id}}">{{lot}}</a></td>
       </tr>
     </ng-container>

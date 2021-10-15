@@ -17,10 +17,10 @@ interface Locale_ActivityRewards {
 })
 export class ActivitiesComponent implements OnInit {
 
-  $objectsWithScriptedActivity: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
-  $objectsWithRebuild: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
-  $objectsWithQuickBuild: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
-  $rebuildByActivityID: ReplaySubject<Record<string, number[]>> = new ReplaySubject(1);
+  //$objectsWithScriptedActivity: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
+  //$objectsWithRebuild: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
+  //$objectsWithQuickBuild: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
+  //$rebuildByActivityID: ReplaySubject<Record<string, number[]>> = new ReplaySubject(1);
   activities: DB_Activities[];
   activityNames: any;
 
@@ -31,10 +31,10 @@ export class ActivitiesComponent implements OnInit {
     this.luJsonService
       .getSingleTable("Activities")
       .subscribe(this.processActivitiesIndex.bind(this));
-    this.luJsonService.getObjectComponent(SCRIPTED_ACTIVITY_COMPONENT_ID).subscribe(this.$objectsWithScriptedActivity);
-    this.luJsonService.getObjectComponent(REBUILD_COMPONENT_ID).subscribe(this.$objectsWithRebuild);
-    this.luJsonService.getObjectComponent(QUICK_BUILD_COMPONENT_ID).subscribe(this.$objectsWithQuickBuild);
-    this.luJsonService.getRebuildComponentsByActivityID().subscribe(this.$rebuildByActivityID);
+    //this.luJsonService.getObjectComponent(SCRIPTED_ACTIVITY_COMPONENT_ID).subscribe(this.$objectsWithScriptedActivity);
+    //this.luJsonService.getObjectComponent(REBUILD_COMPONENT_ID).subscribe(this.$objectsWithRebuild);
+    //this.luJsonService.getObjectComponent(QUICK_BUILD_COMPONENT_ID).subscribe(this.$objectsWithQuickBuild);
+    //this.luJsonService.getRebuildComponentsByActivityID().subscribe(this.$rebuildByActivityID);
   }
 
   $activityRewards(id: number): Observable<DB_ActivityRewards[]> {

@@ -260,29 +260,6 @@ export class LuJsonService {
     return this.luCoreDataService.getRevEntry('object_types', type);
   }
 
-  /*
-  getObjectComponents(): Observable<any> {
-    return this.makeRequest(this.objectsByComponentUrl + "index", `getObjectComponents()`);
-  }*/
-
-  getObjectComponent(component: number): Observable<DB_ObjectRef_ByComponent[]> {
-    alert("TODO");
-    //return this.makeRequest(this.objectsByComponentUrl + component, `getObjectComponent(${component})`);
-    return of([]);
-  }
-
-  getDestructibleComponentsByFaction(): Observable<Record<string, number[]>> {
-    alert("TODO");
-    //return this.makeRequest(this.tablesUrl + "DestructibleComponent/byFaction", `getDestructibleComponentsByFaction`);
-    return of({});
-  }
-
-  getRebuildComponentsByActivityID(): Observable<Record<string, number[]>> {
-    alert("TODO");
-        //return this.makeRequest(this.tablesUrl + "RebuildComponent/byActivityID", `getRebuildComponentsByActivityID`);
-    return of({});
-  }
-
   getBrickColors(): Observable<DB_BrickColors[]> {
     return this.getSingleTable<DB_BrickColors>('BrickColors');
   }

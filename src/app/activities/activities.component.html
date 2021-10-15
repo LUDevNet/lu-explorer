@@ -5,60 +5,62 @@
 <h2>Activities &amp; Quickbuilds</h2>
 
 <div class="table-responsive">
-  <ng-container *luxVar="$rebuildByActivityID | async; let rebuildByActivity">
+  <!--<ng-container *luxVar="$rebuildByActivityID | async; let rebuildByActivity">
     <ng-container *luxVar="$objectsWithRebuild | async | group:'comp_val'; let objectsRebuild">
       <ng-container *luxVar="$objectsWithQuickBuild | async | group:'comp_val'; let objectsQuickBuild">
-        <table *luxVar="$objectsWithScriptedActivity | async | group:'comp_val'; let objectsScriptedActivity">
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>ScriptedActivity</th>
-            <th>Quick Build</th>
-          </tr>
-          <tr *ngFor="let activity of activities">
-            <td>{{activity.ActivityID}}</td>
-            <td>
-              <a routerLink="/activities/{{activity.ActivityID}}">
-                <ng-container *luxVar="localize(activity) | async | elem: 'ActivityName'; let name">
-                  <span *ngIf="name; else rewardName">{{name}}</span>
-                  <ng-template #rewardName>
-                    <ng-container *ngIf="$activityRewards(activity.ActivityID) | async; let rewards">
-                      {{ commonPrefix(rewards, "description") }}
-                    </ng-container>
-                  </ng-template>
-                </ng-container>
-              </a>
-            </td>
-            <td>
-              <ng-container *ngIf="objectsScriptedActivity && objectsScriptedActivity[activity.ActivityID]; let objs">
-                <a class="activity-obj" routerLink="/objects/{{obj.id}}" *ngFor="let obj of objs">
-                  {{obj.id}} {{obj.name}}
+        <ng-container *luxVar="$objectsWithScriptedActivity | async | group:'comp_val'; let objectsScriptedActivity">-->
+          <table>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <!--<th>ScriptedActivity</th>
+              <th>Quick Build</th>-->
+            </tr>
+            <tr *ngFor="let activity of activities">
+              <td>{{activity.ActivityID}}</td>
+              <td>
+                <a routerLink="/activities/{{activity.ActivityID}}">
+                  <ng-container *luxVar="localize(activity) | async | elem: 'ActivityName'; let name">
+                    <span *ngIf="name; else rewardName">{{name}}</span>
+                    <ng-template #rewardName>
+                      <ng-container *ngIf="$activityRewards(activity.ActivityID) | async; let rewards">
+                        {{ commonPrefix(rewards, "description") }}
+                      </ng-container>
+                    </ng-template>
+                  </ng-container>
                 </a>
-              </ng-container>
-            </td>
-            <td>
-              <ng-container *ngIf="rebuildByActivity | elem: activity.ActivityID; let rebuild_list">
-                <dl>
-                <ng-container *ngFor="let rebuild_id of rebuild_list">
-                  <ng-container *ngIf="objectsRebuild[rebuild_id]; let rebuild">
-                    <dt>Rebuild #{{rebuild_id}}</dt>
-                    <dd *ngFor="let obj of rebuild">
-                      <a routerLink="/objects/{{obj.id}}">{{ obj.name }}</a>
-                    </dd>
-                  </ng-container>
-                  <ng-container *ngIf="objectsQuickBuild[rebuild_id]; let rebuild">
-                    <dt>QuickBuild #{{rebuild_id}}</dt>
-                    <dd *ngFor="let obj of rebuild">
-                      <a routerLink="/objects/{{obj.id}}">{{ obj.name }}</a>
-                    </dd>
-                  </ng-container>
+              </td>
+              <!--<td>
+                <ng-container *ngIf="objectsScriptedActivity && objectsScriptedActivity[activity.ActivityID]; let objs">
+                  <a class="activity-obj" routerLink="/objects/{{obj.id}}" *ngFor="let obj of objs">
+                    {{obj.id}} {{obj.name}}
+                  </a>
                 </ng-container>
-              </dl>
-              </ng-container>
-            </td>
-          </tr>
-        </table>
+              </td>
+              <td>
+                <ng-container *ngIf="rebuildByActivity | elem: activity.ActivityID; let rebuild_list">
+                  <dl>
+                    <ng-container *ngFor="let rebuild_id of rebuild_list">
+                      <ng-container *ngIf="objectsRebuild[rebuild_id]; let rebuild">
+                        <dt>Rebuild #{{rebuild_id}}</dt>
+                        <dd *ngFor="let obj of rebuild">
+                          <a routerLink="/objects/{{obj.id}}">{{ obj.name }}</a>
+                        </dd>
+                      </ng-container>
+                      <ng-container *ngIf="objectsQuickBuild[rebuild_id]; let rebuild">
+                        <dt>QuickBuild #{{rebuild_id}}</dt>
+                        <dd *ngFor="let obj of rebuild">
+                          <a routerLink="/objects/{{obj.id}}">{{ obj.name }}</a>
+                        </dd>
+                      </ng-container>
+                    </ng-container>
+                  </dl>
+                </ng-container>
+              </td>-->
+            </tr>
+          </table>
+        <!--</ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
+  </ng-container>-->
 </div>

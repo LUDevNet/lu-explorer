@@ -20,8 +20,8 @@ export class ObjectsByFactionComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.pipe(map(p => p.get('id'))).subscribe(this.$id);
-    this.luJsonService.getObjectComponent(DESTRUCTIBLE_COMPONENT_ID).subscribe(this.$objectsWithDestructible);
-    this.luJsonService.getDestructibleComponentsByFaction().subscribe(this.$destructibleByFaction);
+    //this.luJsonService.getObjectComponent(DESTRUCTIBLE_COMPONENT_ID).subscribe(this.$objectsWithDestructible);
+    //this.luJsonService.getDestructibleComponentsByFaction().subscribe(this.$destructibleByFaction);
   }
 
 }
