@@ -5,8 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
-    "gh-build": "ng build --prod --base-href=/lu-explorer/",
+    "build": "ng build --configuration production",
+    "gh-build": "ng build --configuration production --base-href=/lu-explorer/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
