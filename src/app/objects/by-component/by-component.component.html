@@ -8,11 +8,13 @@
 
 <div class="table-responsive">
   <table>
-    <tr *ngFor="let object of objects | async">
-      <td>{{object.id}}</td>
-      <td><a routerLink="/objects/{{object.id}}">{{object.name ? object.name : '[Unnamed]'}}</a></td>
-      <td><a routerLink="/objects/{{object.id}}/{{component_id}}">{{object.comp_val}}</a></td>
-    </tr>
+    <ng-container  *ngFor="let comp of $components | async">
+      <tr *ngFor="let lot of comp.lots">
+        <td>{{comp.id}}</td>
+        <td><a routerLink="/objects/{{lot}}">{{objects[lot].name}}</a></td>
+        <td><a routerLink="/objects/{{lot}}/{{component_id}}">{{lot}}</a></td>
+      </tr>
+    </ng-container>
   </table>
 </div>
 

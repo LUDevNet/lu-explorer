@@ -11,3 +11,17 @@ export interface Rev_Behavior {
     skill: number[],
     _embedded: { [key: string]: Behavior }
 }
+
+export interface ComponentTypeSingle {
+    lots: number[]
+}
+
+export type ObjectsRefDict = Record<number, {name: string}>;
+export interface Rev_ComponentType {
+    components: Record<number, ComponentTypeSingle>;
+    _embedded: { objects: ObjectsRefDict };
+}
+
+export interface Rev_ComponentTypes {
+    components: number[];
+}
