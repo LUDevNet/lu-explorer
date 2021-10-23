@@ -1,6 +1,6 @@
-<section *ngIf="lootmatrix">
+<section *ngIf="$lootmatrix | async; let lootmatrix">
   <dl>
-    <ng-container *ngFor="let entry of lootmatrix.elements">
+    <ng-container *ngFor="let entry of lootmatrix">
     <dt>
       {{ entry.percent | pc }} chance of {{entry.minToDrop | to: entry.maxToDrop}}
       item(s) of LootTableIndex
@@ -11,9 +11,9 @@
     </dt>
     <dd *ngIf="entry.flagID">flagID: {{entry.flagID}}</dd>
     <dd *ngIf="entry.gate_version">Only available with feature <code>{{entry.gate_version}}</code></dd>
-    <dd *ngIf="entry.LootTableIndex | data:'lootTable' | async | elem:'elements'; let table">
+    <dd *ngIf="getLootTable(entry.LootTableIndex) | async; let table">
       <ng-container *ngIf="table | limit:5; let show">
-        <lux-gui-item [id]="entry['itemid']" *ngFor="let entry of show"></lux-gui-item>
+        <lux-gui-item [id]="entry.itemid" *ngFor="let entry of show"></lux-gui-item>
       </ng-container>
       <a class="more" *ngIf="table.length > 5" [routerLink]="['/objects/loot/table', entry.LootTableIndex ]">
         MORE

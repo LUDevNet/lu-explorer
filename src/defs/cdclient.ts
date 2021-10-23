@@ -119,7 +119,7 @@ export class DB_Factions {
   enemyList: string; // TEXT
 }
 
-export class DB_LootMatrixElement {
+export class DB_LootMatrix {
   id: number;
   percent: number;
   minToDrop: number;
@@ -130,8 +130,12 @@ export class DB_LootMatrixElement {
   gate_version: string;
 }
 
-export class DB_LootMatrix {
-  elements: DB_LootMatrixElement[];
+export class DB_LootTable {
+  itemid: number; // INTEGER
+  LootTableIndex: number; // INTEGER
+  id: number; // INTEGER
+  MissionDrop: boolean; // BOOLEAN
+  sortPriority: number; // INTEGER
 }
 
 export class DB_LevelProgressionLookup {

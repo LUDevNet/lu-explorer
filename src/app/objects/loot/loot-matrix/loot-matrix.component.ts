@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DB_LootMatrix } from '../../../../defs/cdclient';
+import { Observable, ReplaySubject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { DB_LootMatrix, DB_LootTable } from '../../../../defs/cdclient';
 
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 
 @Component({
   selector: 'app-loot-matrix',
@@ -10,19 +12,21 @@ import { LuJsonService } from '../../../services';
 })
 export class LootMatrixComponent implements OnInit {
 
-  @Input() id: number;
-  lootmatrix: DB_LootMatrix;
+  @Input() set id(v: number) {
+    this.$id.next(v);
+  };
 
-  constructor(private luJsonService: LuJsonService) { }
+  $id: ReplaySubject<number> = new ReplaySubject(1);
+  $lootmatrix: Observable<DB_LootMatrix[]>;
+
+  constructor(private luCoreData: LuCoreDataService) { }
 
   ngOnInit() {
-  	this.loadLootMatrix();
+    this.$lootmatrix = this.$id.pipe(switchMap(id => this.luCoreData.getTableEntry<DB_LootMatrix>("LootMatrix", id)));
   }
 
-  loadLootMatrix():void
-  {
-    this.luJsonService.getLootMatrix(this.id)
-      .subscribe(lm => this.lootmatrix = lm);
+  getLootTable(index: number): Observable<DB_LootTable[]> {
+    return this.luCoreData.getRevEntry("loot_table_index", index).pipe(map(x => x['loot_table']))
   }
 
 }

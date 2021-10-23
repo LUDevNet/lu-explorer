@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DB_LootTable } from '../../../../defs/cdclient';
 import { LuJsonService } from '../../../services';
 
 @Component({
@@ -31,11 +32,11 @@ export class LootTableIndexComponent implements OnInit {
       .subscribe(this.processLootTableIndex.bind(this));
   }
 
-  processLootTableIndex(lootTable: any) {
-     this.loot_table = lootTable.elements.sort(this.sortLootTableEntry.bind(this))
+  processLootTableIndex(lootTable: { loot_table: DB_LootTable[] }) {
+    this.loot_table = lootTable.loot_table.sort(this.sortLootTableEntry.bind(this))
   }
 
-  sortLootTableEntry(a,b): number {
+  sortLootTableEntry(a, b): number {
     return a.sortPriority - b.sortPriority;
   }
 

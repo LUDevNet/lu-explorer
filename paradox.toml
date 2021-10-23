@@ -1,7 +1,7 @@
 [general]
 port = 3030
 public = false
-domain = "localhost"
+domain = "127.0.0.1:3030"
 
 [data]
 lu_res_cache = "../lu-res"

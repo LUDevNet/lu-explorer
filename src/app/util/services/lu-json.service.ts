@@ -26,6 +26,8 @@ import {
   DB_ZoneTable,
   DB_ActivityRewards,
   DB_MissionTasks,
+  DB_LootMatrix,
+  DB_LootTable,
 } from '../../../defs/cdclient';
 
 import { LuCoreDataService } from './lu-core-data.service';
@@ -65,7 +67,7 @@ export class LuJsonService {
   private objectsBaseUrl;
   private objectsByComponentUrl;
   private zonesBaseUrl;
-  
+
   private jsonStore;
 
   constructor(
@@ -228,12 +230,8 @@ export class LuJsonService {
     return this.getPagedJsonData(this.tablesUrl + "RebuildComponent/", id, 'RebuildComponent');
   }
 
-  getLootTableGroupByIndex(id: number): Observable<any> {
-    return this.getPagedJsonData(this.lootTableBaseUrl + "groupBy/LootTableIndex/", id, 'LootTableGroupByIndex');
-  }
-
-  getLootMatrix(id: number): Observable<any> {
-    return this.getPagedJsonData(this.lootMatrixBaseUrl, id, 'LootMatrix');
+  getLootTableGroupByIndex(id: number): Observable<{ loot_table: DB_LootTable[] }> {
+    return this.luCoreDataService.getRevEntry('loot_table_index', id)
   }
 
   getNpcIcon(id: number): Observable<any> {
@@ -328,8 +326,6 @@ export class LuJsonService {
 
   getPagedJsonData(url: string, id: number, type: string, rethrowError: boolean = false): Observable<any> {
     return this.luCoreDataService.getSingleTableEntry(type, id);
-    //let page = Math.floor(id / 256);
-    //return this.makeRequest(url + page + "/" + id, `getPaged${type}(${id})`, rethrowError);
   }
 
 }
