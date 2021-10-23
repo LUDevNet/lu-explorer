@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DB_Missions } from '../../../defs/cdclient';
+import { DB_Missions, DB_MissionTasks } from '../../../defs/cdclient';
 
 import { LuJsonService, LuLocaleService } from '../../services';
 
@@ -45,8 +45,8 @@ export class MissionDetailComponent implements OnInit {
     this.luLuLocaleService.getLocaleEntry("Missions", this.id).subscribe(entry => this.missionLocale = entry);
   }
 
-  processMissionTasks(tasks: any) {
-    let taskArray = tasks.tasks.filter(task => task);
+  processMissionTasks(tasks: DB_MissionTasks[]) {
+    let taskArray = tasks.filter(task => task);
     taskArray.forEach(task => this.luLuLocaleService
       .getLocaleEntry("MissionTasks", task.uid)
       .subscribe(entry => task.localizations = entry))
@@ -54,7 +54,20 @@ export class MissionDetailComponent implements OnInit {
   }
 
   anyChatBubble(texts: any): boolean {
-    return CHAT_BUBBLE_KEYS.some((key) => texts.hasOwnProperty(key));
+    return texts.hasOwnProperty('chat_state') || texts.hasOwnProperty('accept_chat_bubble');
+  }
+
+  getChatState(texts: any, id: number): string | null {
+    let prop: string | object = texts['chat_state'][id]
+    if (prop) {
+      return prop.hasOwnProperty('$value') ? prop['$value'] : prop;
+    }
+    return null;
+  }
+
+  getChatSubState(texts: any, id: number, key: string): string | null {
+    let prop: string | object = texts['chat_state'][id]
+    return prop ? prop[key] : undefined;
   }
 
 }
