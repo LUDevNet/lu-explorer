@@ -48,8 +48,15 @@ export class LuLocaleService {
     if (!this.credits) this.credits = this.luCoreDataService.getLocaleSubtree("UI_CREDITS"); // , "%[UI_CREDITS]"
     return this.credits.pipe(map(dict => {
       return value.replace(/%\[([0-9A-Z_]+)\]/g, (_match, key) => {
-        let shortKey = key.replace("UI_CREDITS_", "");
-        return dict[shortKey];
+        let shortKey: string = key.replace("UI_CREDITS_", "");
+        let ret = dict[shortKey];
+        if (!ret) {
+          let [first, rest] = shortKey.split('_', 2);
+          ret = dict[first];
+          console.log(first, rest, ret);
+          return ret ? ret[rest] : undefined;
+        }
+        return ret;
       });
     }));
   }

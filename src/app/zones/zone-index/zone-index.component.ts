@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DB_ZoneTable } from '../../../defs/cdclient';
+import { Locale_ZoneTable } from '../../../defs/locale';
 import { LuJsonService } from '../../services';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
-
-interface Locale_ZoneTable {
-  DisplayDescription: string;
-}
 
 @Component({
   selector: 'app-zone-index',

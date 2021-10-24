@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
 
-import { LuCoreDataService, LuJsonService, LuLocaleService } from '../../services';
+import { LuCoreDataService } from '../../services';
+import { Locale_Mission } from '../../../defs/locale';
 
-interface Locale_Mission {
-  name?: string;
-};
-type MissionDict = {[key: string]: Locale_Mission};
+type MissionDict = { [key: string]: Locale_Mission };
 
 @Component({
   selector: 'app-missions',
@@ -26,25 +22,21 @@ export class MissionsSearchComponent implements OnInit {
     this.getMissions();
   }
 
-  filter(obj: any, predicate: any, max_size: number)
-  {
-    let keys = Object.keys(obj).filter( key => predicate(obj[key]))
+  filter(obj: any, predicate: any, max_size: number) {
+    let keys = Object.keys(obj).filter(key => predicate(obj[key]))
     let to = Math.min(max_size, keys.length);
-    return keys.slice(0, to).reduce( (res, key) => (res[key] = obj[key], res), {});
+    return keys.slice(0, to).reduce((res, key) => (res[key] = obj[key], res), {});
   }
 
-  updateFilterList()
-  {
-    this.filteredMissions = Object.assign({},this.filter(this.missions, mission => mission.name.includes(this.needle), 100));
+  updateFilterList() {
+    this.filteredMissions = Object.assign({}, this.filter(this.missions, mission => mission.name.includes(this.needle), 100));
   }
 
-  getMissions():void
-  {
-  	this.luCoreData.getLocaleSubtree("Missions").subscribe(index => this.processMissionsLocale(index));
+  getMissions(): void {
+    this.luCoreData.getLocaleSubtree("Missions").subscribe(index => this.processMissionsLocale(index));
   }
 
-  processMissionsLocale(page: any):void
-  {
+  processMissionsLocale(page: any): void {
     this.missions = Object.assign({}, this.missions, page);
     this.updateFilterList();
   }

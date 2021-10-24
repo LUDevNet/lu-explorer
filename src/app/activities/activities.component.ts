@@ -2,14 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { DB_Activities, DB_ActivityRewards, DB_ObjectRef_ByComponent } from '../../defs/cdclient';
 import { QUICK_BUILD_COMPONENT_ID, REBUILD_COMPONENT_ID, SCRIPTED_ACTIVITY_COMPONENT_ID } from '../../defs/components';
+import { Locale_ActivityRewards } from '../../defs/locale';
 
 import { LuJsonService } from '../services';
 import { LuCoreDataService } from '../util/services/lu-core-data.service';
 
-
-interface Locale_ActivityRewards {
-  description?: string;
-}
 @Component({
   selector: 'app-activities',
   templateUrl: './activities.component.html',

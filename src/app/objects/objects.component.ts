@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
+import { Locale_Objects } from '../../defs/locale';
 
-import { LuJsonService, LuLocaleService } from '../services';
-
-interface Locale_Object {
-  name?: string;
-}
-type ObjectDict = {[key: string]: Locale_Object};
+type ObjectDict = { [key: string]: Locale_Objects };
 
 @Component({
   selector: 'app-objects',
@@ -20,7 +14,7 @@ export class ObjectsComponent implements OnInit {
   filteredObjects: ObjectDict = {};
   needle: string = "";
 
-  constructor(private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }
+  constructor() { }
 
   ngOnInit() {
     //this.getObjects();
@@ -41,7 +35,7 @@ export class ObjectsComponent implements OnInit {
 
   getObjects():void
   {
-  	this.luLocaleService.getLocaleTable("Objects").subscribe(index => this.processObjectIndex(index));
+    this.luLocaleService.getLocaleTable("Objects").subscribe(index => this.processObjectIndex(index));
   }
 
   processObjectIndex(index: any):void

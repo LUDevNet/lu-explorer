@@ -8,7 +8,7 @@
   <img *ngIf="object.HQ_valid" class="pull-right img-tag"
     src="/lu-res/textures/ui/missions/faction_logos/nexus-force.png" alt="This object is valid for NexusHQ"
     title="This object is valid for NexusHQ">
-  <h2>{{object.name | uppercase }} <small *ngIf="objectLocale">"{{objectLocale.name}}"</small></h2>
+  <h2>{{object.name | uppercase }} <small *ngIf="object.locStatus == 2">"{{objectLocale.name}}"</small></h2>
 
   <section class="clearfix">
     <blockquote *ngIf="object.description">
