@@ -10,6 +10,7 @@ import { SkillComponent } from './skill/skill.component';
 import { SkillsRoutingModule } from './skills-routing.module';
 import { SkillsComponent } from './skills.component';
 import { DescriptionUiComponent } from './description-ui/description-ui.component';
+import { GuiModule } from '../gui/gui.module';
 
 @NgModule({
   declarations: [
@@ -17,12 +18,13 @@ import { DescriptionUiComponent } from './description-ui/description-ui.componen
     BehaviorDetailAltComponent,
     SkillComponent,
     SkillsComponent,
-    DescriptionUiComponent
+    DescriptionUiComponent,
   ],
   imports: [
     CommonModule,
     UtilModule,
-    SkillsRoutingModule
+    SkillsRoutingModule,
+    GuiModule
   ]
 })
 export class SkillsModule { }
