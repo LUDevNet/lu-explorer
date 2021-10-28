@@ -4,6 +4,8 @@ public = false
 domain = "127.0.0.1:3030"
 
 [data]
+res = "../client/res"
+versions = "../versions"
 lu_res_cache = "../lu-res"
 lu_json_cache = "../lu-json"
 cdclient = "../client/res/cdclient.fdb"
