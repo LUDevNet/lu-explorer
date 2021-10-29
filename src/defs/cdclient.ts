@@ -180,7 +180,7 @@ export class DB_BrickColors {
 export class DB_ItemComponent {
   id: number; // INTEGER
   equipLocation: string; // TEXT
-  baseValue: number; // INTEGER
+  baseValue?: number; // INTEGER
   isKitPiece: boolean;
   rarity: number; // INTEGER
   itemType: number; // INTEGER

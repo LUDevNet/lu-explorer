@@ -24,6 +24,7 @@ import { MissiondisplayRewardComponent } from './missiondisplay-reward/missiondi
 import { BuffComponent } from './buff/buff.component';
 import { MissionComponent } from './mission/mission.component';
 import { MissionDirective } from './mission/mission.directive';
+import { CustomFlagComponent } from './custom-flag/custom-flag.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MissionDirective } from './mission/mission.directive';
     BuffComponent,
     MissionComponent,
     MissionDirective,
+    CustomFlagComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +54,7 @@ import { MissionDirective } from './mission/mission.directive';
   ],
   exports: [
     CoinsComponent,
+    CustomFlagComponent,
     ItemComponent, TooltipComponent, TooltipDirective, FactionListComponent, CurrencyTableComponent, PreconditionComponent,
     PreconditionTreeComponent,
     ItemRarityComponent,

@@ -5,19 +5,21 @@
   <a [href]="'components/011-item' | docs" target="_blank">Read more...</a>
 </p>
 <ng-container *ngIf="$component | async; else loading; let item">
-  <h4>
-    General
-    <code>baseValue</code>,
-    <code>stackSize</code>,
-    <code>rarity</code>,
-    <code>itemRating</code>
-  </h4>
-  <dl>
-    <dd>Base Value: <lux-coins [count]="item.baseValue"></lux-coins></dd>
-    <dd>Stack Size: {{item.stackSize}}</dd>
-    <dd>Rarity: <lux-item-rarity [rarity]="item.rarity"></lux-item-rarity> ({{item.rarity}})</dd>
-    <dd *ngIf="item.itemRating !== null">Rating: {{item.itemRating}}</dd>
-  </dl>
+  <section>
+    <h4 id="general">
+      General
+    </h4>
+    <lux-custom-flag *ngIf="item.baseValue !== null" name="baseValue">
+      <lux-coins [count]="item.baseValue"></lux-coins>
+    </lux-custom-flag>
+    <lux-custom-flag *ngIf="item.itemType !== null" name="itemType"
+      [meta]="describeItemType(($itemTypes | async | dict:'id')[item.itemType])">{{item.itemType}}</lux-custom-flag>
+    <lux-number-flag *ngIf="item.itemRating !== null" name="itemRating" [value]="item.itemRating"></lux-number-flag>
+    <lux-custom-flag *ngIf="item.rarity !== null" name="rarity"><!-- [meta]="item.rarity" -->
+      <lux-item-rarity [rarity]="item.rarity"></lux-item-rarity>
+    </lux-custom-flag>
+    <lux-number-flag *ngIf="item.stackSize !== null" name="stackSize" [value]="item.stackSize"></lux-number-flag>
+  </section>
 
   <section *ngIf="item.minNumRequired > 0">
     <p>
@@ -27,13 +29,6 @@
   </section>
 
   <section *ngIf="item.itemType" id="lego-brick-info">
-    <h4>ItemType (<code>itemType</code>)</h4>
-    <p>
-      This item has the following type:
-      <code>{{ ($itemTypes | async | dict:"id")[item.itemType]?.description || "&lt;unknown&gt;" }}</code>
-      ({{item.itemType}}).
-    </p>
-
     <section *ngIf="item.itemType == 1">
       <h5>LEGO Brick Info</h5>
       <p>
@@ -64,8 +59,8 @@
   <section *ngIf="item.currencyLOT || item.currencyCosts || item.altCurrencyCost">
     <h4>Currency</h4>
     <div *ngIf="item.currencyLOT">This items needs the following alternative currency to be bought
-        (<code>currencyLOT; altCurrencyCost</code>):<br>
-        <lux-gui-item [id]="item.currencyLOT" [amount]="item.altCurrencyCost"></lux-gui-item>
+      (<code>currencyLOT; altCurrencyCost</code>):<br>
+      <lux-gui-item [id]="item.currencyLOT" [amount]="item.altCurrencyCost"></lux-gui-item>
     </div>
     <p *ngIf="item.currencyCosts"><code>currencyCosts</code>: {{item.currencyCosts}}
       <!--<li *ngIf="item.altCurrencyCost"><code>altCurrencyCost</code>: {{item.altCurrencyCost}}</li>-->
@@ -123,16 +118,22 @@
 
   <section>
     <h4>Flags</h4>
-    <lux-simple-flag *ngIf="item.inLootTable !== null"  name="inLootTable" [value]="item.inLootTable"></lux-simple-flag>
-    <lux-simple-flag *ngIf="item.inVendor !== null"  name="inVendor" [value]="item.inVendor"></lux-simple-flag>
-    <lux-simple-flag *ngIf="item.isBOE !== null"  name="isBOE" [value]="item.isBOE" trueTitle="This item cannot be traded once it has been equipped (bound on equip)." falseTitle="This item is not bound on equip."></lux-simple-flag>
-    <lux-simple-flag *ngIf="item.isBOP !== null"  name="isBOP" [value]="item.isBOP" trueTitle="This item cannot be traded (bound on pickup)." falseTitle="This item is not bound on pickup."></lux-simple-flag>
-    <lux-simple-flag *ngIf="item.isKitPiece !== null"  name="isKitPiece" [value]="item.isKitPiece"></lux-simple-flag>
-    <lux-simple-flag *ngIf="item.isTwoHanded !== null"  name="isTwoHanded" [value]="item.isTwoHanded"></lux-simple-flag>
-    <lux-simple-flag *ngIf="item.isUnique !== null"  name="isUnique" [value]="item.isUnique"></lux-simple-flag>
-    <lux-simple-flag *ngIf="item.noEquipAnimation !== null"  name="noEquipAnimation" [value]="item.noEquipAnimation"></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.inLootTable !== null" name="inLootTable" [value]="item.inLootTable"></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.inVendor !== null" name="inVendor" [value]="item.inVendor"></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.isBOE !== null" name="isBOE" [value]="item.isBOE"
+      trueTitle="This item cannot be traded once it has been equipped (bound on equip)."
+      falseTitle="This item is not bound on equip."></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.isBOP !== null" name="isBOP" [value]="item.isBOP"
+      trueTitle="This item cannot be traded (bound on pickup)." falseTitle="This item is not bound on pickup.">
+    </lux-simple-flag>
+    <lux-simple-flag *ngIf="item.isKitPiece !== null" name="isKitPiece" [value]="item.isKitPiece"></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.isTwoHanded !== null" name="isTwoHanded" [value]="item.isTwoHanded"></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.isUnique !== null" name="isUnique" [value]="item.isUnique"></lux-simple-flag>
+    <lux-simple-flag *ngIf="item.noEquipAnimation !== null" name="noEquipAnimation" [value]="item.noEquipAnimation">
+    </lux-simple-flag>
     <lux-number-flag *ngIf="item.delResIndex != null" [value]="item.delResIndex" name="delResIndex"></lux-number-flag>
-    <lux-number-flag *ngIf="item.offsetGroupID != null" [value]="item.offsetGroupID" name="offsetGroupID"></lux-number-flag>
+    <lux-number-flag *ngIf="item.offsetGroupID != null" [value]="item.offsetGroupID" name="offsetGroupID">
+    </lux-number-flag>
   </section>
 
   <section>
@@ -144,10 +145,13 @@
   <section>
     <h4>Requirements</h4>
     <div style="margin-bottom: 0.5rem;">
-      <lux-number-flag *ngIf="item.reqAchievementID !== null" name="reqAchievementID" [value]="item.reqAchievementID"></lux-number-flag>
+      <lux-number-flag *ngIf="item.reqAchievementID !== null" name="reqAchievementID" [value]="item.reqAchievementID">
+      </lux-number-flag>
       <lux-number-flag *ngIf="item.reqFlagID !== null" name="reqFlagID" [value]="item.reqFlagID"></lux-number-flag>
-      <lux-number-flag *ngIf="item.reqSpecRank !== null" name="reqSpecRank" [value]="item.reqSpecRank"></lux-number-flag>
-      <lux-number-flag *ngIf="item.reqSpecialtyID !== null" name="reqSpecialtyID" [value]="item.reqSpecialtyID"></lux-number-flag>
+      <lux-number-flag *ngIf="item.reqSpecRank !== null" name="reqSpecRank" [value]="item.reqSpecRank">
+      </lux-number-flag>
+      <lux-number-flag *ngIf="item.reqSpecialtyID !== null" name="reqSpecialtyID" [value]="item.reqSpecialtyID">
+      </lux-number-flag>
     </div>
     <div *ngIf="item.reqPrecondition">
       <h5>Preconditions (<code>reqPrecondition == {{item.reqPrecondition}}</code>)</h5>

@@ -1,0 +1,5 @@
+<span class="flag-container" [class]="{'has-meta': !!meta }" [title]="title ? title : ''">
+    <ng-container *ngIf="meta"><span class="meta">{{meta}}</span><br></ng-container>
+    <span class="value"><ng-content></ng-content></span><br>
+    <span class="key">{{name}}</span>
+</span>
