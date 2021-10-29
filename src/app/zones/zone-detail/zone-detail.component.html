@@ -5,7 +5,9 @@
   </ul>
   <h2>{{ zone.DisplayDescription | uppercase }}</h2>
 
-  <img *ngIf="zoneGif(); let gif" [src]="gif | res" />
+  <div class="signage" [ngStyle]="getSignage()"></div>
+
+  <!--<img *ngIf="zoneGif(); let gif" [src]="gif | res" />-->
 
   <div *ngIf="zone.thumbnail">
     <h3>Thumbnail</h3>
