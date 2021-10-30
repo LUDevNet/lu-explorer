@@ -1,7 +1,7 @@
 <div *ngIf="response | async; else loading; let skillSet">
   <h4>With {{count}} Items ({{id}})</h4>
   <dl>
-    <ng-container *ngFor="let cast_skills of skillSet.set_skills | group:'SkillCastType' | keys">
+    <ng-container *ngFor="let cast_skills of skillSet | group:'SkillCastType' | keys">
       <dt>On <code>SkillCastType</code>: <app-skill-cast-type [castType]="num(cast_skills.key)"></app-skill-cast-type></dt>
       <dd *ngFor="let skill of cast_skills.value">
         <a routerLink="/skills/{{skill.SkillID}}">

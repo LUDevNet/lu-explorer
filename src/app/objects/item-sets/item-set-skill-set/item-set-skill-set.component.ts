@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ReplaySubject, Observable } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
 
-import { LuJsonService } from '../../../services';
 import { DB_ItemSetSkills } from '../../../../defs/cdclient';
+import { LuCoreDataService } from '../../../services';
 
 @Component({
   selector: 'app-item-set-skill-set',
@@ -14,7 +14,7 @@ export class ItemSetSkillSetComponent implements OnInit {
 
   _id: ReplaySubject<number>;
   __id: number;
-  response: Observable<{set_skills: DB_ItemSetSkills[]}>;
+  response: Observable<DB_ItemSetSkills[]>;
 
   @Input() count: number;
   @Input() set id(value: number) {
@@ -25,7 +25,7 @@ export class ItemSetSkillSetComponent implements OnInit {
     return this.__id;
   }
 
-  constructor(private luJsonService: LuJsonService) {
+  constructor(private luCoreData: LuCoreDataService) {
     this._id = new ReplaySubject(1);
   }
 
@@ -41,7 +41,7 @@ export class ItemSetSkillSetComponent implements OnInit {
   }
 
   mapToRequest(id) {
-    return this.luJsonService.getGeneric(id, 'ItemSetSkills', true);
+    return this.luCoreData.getTableEntry('ItemSetSkills', id);
   }
 
   num(v: any): number {
