@@ -1,13 +1,6 @@
-<ul class="breadcrumbs">
-  <li><a routerLink="/objects">Objects</a></li>
-  <li>Types</li>
-</ul>
-
-<h2>Objects</h2>
-
 <h3>Types</h3>
 
 <ul>
-  <li *ngFor="let type of types">
+  <li *ngFor="let type of ($types | async)">
     <a routerLink="/objects/types/{{type}}">{{type ? type : "[Unnamed]"}}</a></li>
 </ul>

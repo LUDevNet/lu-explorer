@@ -11,7 +11,8 @@ html
 {
   /*background: url(https://vignette.wikia.nocookie.net/legouniverse/images/a/a5/Davekang_legouniverse43.jpg/revision/latest/scale-to-width-down/1000?cb=20170203015651) no-repeat center center fixed;*/
   background-size: cover;
-  color: #fac117;
+  --lu-yellow: #fac117;
+  color: var(--lu-yellow);
   text-shadow: 2px 2px 0px #000;
 }
 

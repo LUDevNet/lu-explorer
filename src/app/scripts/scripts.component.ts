@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LuJsonService } from '../services';
+import { Observable } from 'rxjs';
+import { LuCoreDataService, LuJsonService } from '../services';
+import { LuaStmt } from './lua/lua';
 
 @Component({
   selector: 'app-scripts',
@@ -8,14 +10,12 @@ import { LuJsonService } from '../services';
 })
 export class ScriptsComponent implements OnInit {
 
-  index: any;
+  $index: Observable<LuaStmt>;
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private luCoreData: LuCoreDataService) { }
 
   ngOnInit() {
-    this.luJsonService
-      .getScript('index')
-      .subscribe(index => this.index = index)
+    this.$index = this.luCoreData.getScript('index');
   }
 
 }

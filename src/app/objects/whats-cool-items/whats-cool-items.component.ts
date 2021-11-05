@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DB_WhatsCoolItemSpotlight } from '../../cdclient';
+import { DB_WhatsCoolItemSpotlight } from '../../../defs/cdclient';
+import { Locale_WhatsCoolItemSpotlight } from '../../../defs/locale';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 
-interface Locale_WhatsCoolItemSpotlight {
-  description: string,
-}
 @Component({
   selector: 'lux-whats-cool-items',
   templateUrl: './whats-cool-items.component.html',
@@ -15,7 +13,7 @@ interface Locale_WhatsCoolItemSpotlight {
 export class WhatsCoolItemsComponent implements OnInit {
 
   $list: Observable<DB_WhatsCoolItemSpotlight[]>;
-  $loc: Observable<{[key: string]: Locale_WhatsCoolItemSpotlight}>;
+  $loc: Observable<{ [key: string]: Locale_WhatsCoolItemSpotlight }>;
 
   constructor(private luCoreData: LuCoreDataService) { }
 

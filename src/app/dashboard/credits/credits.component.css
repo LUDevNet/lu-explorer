@@ -1,0 +1,8 @@
+dt {
+    font-weight: bold;
+    color: var(--lu-yellow);
+}
+
+dd.name {
+    display: inline-block;
+}

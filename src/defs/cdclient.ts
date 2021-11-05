@@ -11,7 +11,7 @@ export class DB_ObjectRef_ByType {
 }
 
 export class DB_ItemSets_Ref {
-  id: number;
+  setID: number;
   rank: number;
 }
 
@@ -54,6 +54,16 @@ export interface DB_Objects {
   locStatus: number; // INTEGER
   gate_version: string; // TEXT
   HQ_valid: boolean; // BOOLEAN
+}
+
+export interface DB_ObjectSkills {
+
+}
+
+export interface DB_ComponentsRegistry {
+  id: number;
+  component_type: number;
+  component_id: number;
 }
 
 export class DB_Activities {
@@ -109,7 +119,7 @@ export class DB_Factions {
   enemyList: string; // TEXT
 }
 
-export class DB_LootMatrixElement {
+export class DB_LootMatrix {
   id: number;
   percent: number;
   minToDrop: number;
@@ -120,8 +130,12 @@ export class DB_LootMatrixElement {
   gate_version: string;
 }
 
-export class DB_LootMatrix {
-  elements: DB_LootMatrixElement[];
+export class DB_LootTable {
+  itemid: number; // INTEGER
+  LootTableIndex: number; // INTEGER
+  id: number; // INTEGER
+  MissionDrop: boolean; // BOOLEAN
+  sortPriority: number; // INTEGER
 }
 
 export class DB_LevelProgressionLookup {
@@ -166,7 +180,7 @@ export class DB_BrickColors {
 export class DB_ItemComponent {
   id: number; // INTEGER
   equipLocation: string; // TEXT
-  baseValue: number; // INTEGER
+  baseValue?: number; // INTEGER
   isKitPiece: boolean;
   rarity: number; // INTEGER
   itemType: number; // INTEGER
@@ -302,8 +316,7 @@ export class DB_RewardCodes {
   gate_version: string; // TEXT
 }
 
-export class DB_AccessoryDefaultLoc
-{
+export class DB_AccessoryDefaultLoc {
   Description: string;
   GroupID: number;
   Pos_X: number;
@@ -334,32 +347,28 @@ export class DB_BaseCombatAIComponent {
   ignoreParent: boolean; // BOOLEAN
 }
 
-export class DB_Behavior
-{
+export class DB_Behavior {
   behaviorID: number;
   effectHandle: string;
   effectID: number;
   templateID: number;
-  parameters: {[key: string]: number};
+  parameters: { [key: string]: number };
 }
 
-export class DB_BehaviorTemplate
-{
+export class DB_BehaviorTemplate {
   behaviorID: number;
   effectHandle: string;
   effectID: number;
   templateID: number;
 }
 
-export class DB_BehaviorParameter
-{
+export class DB_BehaviorParameter {
   behaviorID: number;
   parameterID: string;
   value: number;
 }
 
-export class DB_SkillBehavior
-{
+export class DB_SkillBehavior {
   skillID: number;
   locStatus: number;
   behaviorID: number;
@@ -381,8 +390,7 @@ export class DB_SkillBehavior
   cancelType: number;
 }
 
-export class DB_Icons
-{
+export class DB_Icons {
   IconID: number;
   IconPath: string;
   IconName: string;
@@ -533,7 +541,7 @@ export class DB_MissionTasks {
   largeTaskIconID: number; // INTEGER
   localize: boolean;
   gate_version: string;
-  localizations ?: any;
+  localizations?: any;
 }
 
 export class DB_WhatsCoolItemSpotlight {
@@ -551,4 +559,34 @@ export class DB_WhatsCoolNewsAndTips {
   localize: boolean; // BOOLEAN
   gate_version: string; // TEXT
   locStatus: number; // INTEGER
+}
+
+export interface DB_ZoneTable {
+  zoneID: number;
+  locStatus: number;
+  zoneName: string;
+  scriptID: number;
+  ghostdistance_min: number;
+  ghostdistance: number;
+  population_soft_cap: number;
+  population_hard_cap: number;
+  DisplayDescription: string;
+  mapFolder: string;
+  smashableMinDistance: number;
+  smashableMaxDistance: number;
+  mixerProgram: string;
+  clientPhysicsFramerate: string;
+  serverPhysicsFramerate: string;
+  zoneControlTemplate: number;
+  widthInChunks: number;
+  heightInChunks: number;
+  petsAllowed: boolean;
+  localize: boolean;
+  fZoneWeight: number;
+  thumbnail: string;
+  PlayerLoseCoinsOnDeath: boolean;
+  disableSaveLoc: boolean;
+  teamRadius: number;
+  gate_version: string;
+  mountsAllowed: boolean;
 }

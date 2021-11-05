@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DB_ObjectRef_ByComponent } from '../../../cdclient';
-import { DESTRUCTIBLE_COMPONENT_ID } from '../../../components';
+import { DB_ObjectRef_ByComponent } from '../../../../defs/cdclient';
+import { DESTRUCTIBLE_COMPONENT_ID } from '../../../../defs/components';
 import { LuJsonService } from '../../../services';
 
 @Component({
@@ -20,8 +20,8 @@ export class ObjectsByFactionComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.pipe(map(p => p.get('id'))).subscribe(this.$id);
-    this.luJsonService.getObjectComponent(DESTRUCTIBLE_COMPONENT_ID).subscribe(this.$objectsWithDestructible);
-    this.luJsonService.getDestructibleComponentsByFaction().subscribe(this.$destructibleByFaction);
+    //this.luJsonService.getObjectComponent(DESTRUCTIBLE_COMPONENT_ID).subscribe(this.$objectsWithDestructible);
+    //this.luJsonService.getDestructibleComponentsByFaction().subscribe(this.$destructibleByFaction);
   }
 
 }

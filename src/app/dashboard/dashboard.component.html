@@ -1,41 +1,44 @@
-<h2>Welcome to the LEGO Universe Explorer</h2>
+<h2>Welcome to the LU-Explorer</h2>
 
-<h3 id="disclaimer">Disclaimer</h3>
-<p>First and foremost: <strong>LEGO&reg; is a trademark of the LEGO Group of companies which does not sponsor, authorize
-    or
-    endorse this site.</strong>
-</p>
-<p>The data and assets on this site are presented purely for informational purposes. Do not use any of them for any
-  purpose that is commercial or otherwise incompatible with the <a target="_blank"
-    href="https://www.lego.com/en-us/legal/notices-and-policies/fair-play/">LEGO Fair Play Policy</a>
-</p>
+<section class="disclaimer">
+  <h3 id="disclaimer">Disclaimer</h3>
+  <p>First and foremost: <strong>LEGO&reg; is a trademark of <em>The LEGO Group</em> which does not sponsor,
+      authorize or endorse this site.</strong>
+  </p>
+  <p>The data and assets on this site are presented purely for informational purposes. Do not use any of them for any
+    purpose that is commercial or otherwise incompatible with the <a target="_blank"
+      href="https://www.lego.com/en-us/legal/notices-and-policies/fair-play/">LEGO Fair Play Policy</a>
+  </p>
+</section>
 <h3>What is this?</h3>
 <p>This web-application is designed to be an exhaustive resource on
   the content of the latest published version of the now discontinued
-  game <b>LEGO Universe</b>. It is implemented as a wiki-esque interface
-  to <a href="https://github.com/xiphoseer/lu-json">LU-JSON</a>, which is
-  a machine-readable and preprocessed export of the games' database and files.
-  The images that this app uses are taken from
-  <a href="https://github.com/xiphoseer/lu-res">LU-RES</a>, which mirrors the
-  game resources but in modern / web-compatible formats.
-</p>
-<p>
-  This unique approach means that LU-EXPLORER is able to replicate much
-  of the content that would otherwise only be available in the traditional wiki at
-  <a href="https://legouniverse.fandom.com">legouniverse.fandom.com</a>, and also
-  provide the necessary technical detail and metadata to understand how the systems
-  in the game worked.
+  game <strong>LEGO&reg; Universe</strong>. It is implemented using
+  a <a href="/api/">REST API</a> that serves data from a game client
+  in web-compatible formats. This unique approach means that LU-EXPLORER
+  is able to replicate the majority of the content that is available in the
+  traditional wiki at <a href="https://legouniverse.fandom.com">legouniverse.fandom.com</a>
+  in a way that's much closer to the original game mechanics.
 </p>
 <p>
   This project was created by <a href="https://xiphoseer.de">@Xiphoseer</a>
   and has a GitHub repository located at
   <a href="https://github.com/xiphoseer/lu-explorer">https://github.com/xiphoseer/lu-explorer</a>.
-  Feel free to report any issues or suggestions
-  <a href="https://github.com/xiphoseer/lu-explorer/issues/">there</a>.
+  Feel free to report any issues or suggestions on the
+  <a href="https://github.com/xiphoseer/lu-explorer/issues/">issue tracker</a>.
 </p>
 <p>
   Finally, none of this would have been possible without the amazing work by the folks
   at NetDevil and the LEGO Group, which are listed in the <a routerLink="/dashboard/credits">LU Credits</a>!
+</p>
+
+<h3>Basics</h3>
+<p>
+  <img class="img-tag" src="/lu-res/textures/ui/missions/faction_logos/nexus-force.png"
+    alt="This object is valid for NexusHQ" title="This object is valid for NexusHQ">
+  <span>Some pages are marked with the <em>Nexus Force Logo</em> to indicate that they were white-listed for
+    <a href="https://legouniverse.fandom.com/wiki/Nexus_HQ">Nexus HQ</a> section of <em>universe.lego.com</em>.
+  </span>
 </p>
 
 <lux-changelog></lux-changelog>

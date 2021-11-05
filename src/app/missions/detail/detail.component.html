@@ -6,13 +6,14 @@
       routerLink="/missions/type/{{mission.defined_type}}/subtype/{{mission.defined_subtype}}">{{mission.defined_subtype}}</a>
     <a *ngIf="mission && !mission.defined_subtype" routerLink="/missions/type/{{mission.defined_type}}">General</a>
   </li>
-  <li *ngIf="missionLocale">{{missionLocale.name}}</li>
+  <li><span *ngIf="mission && mission.locStatus; else id_breadcrumb">{{missionLocale.name}}</span></li>
+  <ng-template #id_breadcrumb>#{{mission && mission.id}}</ng-template>
 </ul>
 
 <app-group-icon *ngIf="mission" [name]="mission.defined_type"></app-group-icon>
 <h2>
   <ng-container *ngIf="mission && !mission.isMission; else headingElse">Achievement</ng-container> #{{id}} <small
-    *ngIf="missionLocale">"{{missionLocale.name}}"</small>
+    *ngIf="mission && mission.locStatus">"{{missionLocale.name}}"</small>
 </h2>
 <ng-template #headingElse>Mission</ng-template>
 
@@ -167,32 +168,32 @@
 <section *ngIf="mission && textsLocale && anyChatBubble(textsLocale)">
   <h4>Chat Bubbles</h4>
   <dl id="chat-bubbles">
-    <div *ngIf="textsLocale.chat_state_1">
-      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_1" [innerHTML]="textsLocale.chat_state_1"></blockquote></dt>
+    <div *ngIf="getChatState(textsLocale, 1); let text">
+      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_1" [innerHTML]="text"></blockquote></dt>
       <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when approached before the mission is offered.</dd>
     </div>
     <div *ngIf="textsLocale.accept_chat_bubble">
       <dt><blockquote class="chat-bubble" luxTooltip="accept_chat_bubble" [innerHTML]="textsLocale.accept_chat_bubble"></blockquote></dt>
       <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when the mission is accepted.</dd>
     </div>
-    <div *ngIf="textsLocale.chat_state_2">
-      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_2" [innerHTML]="textsLocale.chat_state_2"></blockquote></dt>
+    <div *ngIf="getChatState(textsLocale, 2); let text">
+      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_2" [innerHTML]="text"></blockquote></dt>
       <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when approached while the mission is in progress.</dd>
     </div>
-    <div *ngIf="textsLocale.chat_state_3">
-      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_3" [innerHTML]="textsLocale.chat_state_3"></blockquote></dt>
+    <div *ngIf="getChatState(textsLocale, 3); let text">
+      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_3" [innerHTML]="text"></blockquote></dt>
       <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when approached when the mission is ready to be completed.</dd>
     </div>
-    <div *ngIf="textsLocale.chat_state_3_turnin">
-      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_3_turnin" [innerHTML]="textsLocale.chat_state_3_turnin"></blockquote></dt>
+    <div *ngIf="getChatSubState(textsLocale, 3, 'turnin'); let text">
+      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_3_turnin" [innerHTML]="text"></blockquote></dt>
       <dd>Spoken by <lux-object [luxFetch]="mission.target_objectID"></lux-object> when approached when the mission is ready to be completed.</dd>
     </div>
-    <div *ngIf="textsLocale.chat_state_4">
-      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_4" [innerHTML]="textsLocale.chat_state_4"></blockquote></dt>
+    <div *ngIf="getChatState(textsLocale, 4); let text">
+      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_4" [innerHTML]="text"></blockquote></dt>
       <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when approached when the mission is complete.</dd>
     </div>
-    <div *ngIf="textsLocale.chat_state_4_turnin">
-      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_4_turnin" [innerHTML]="textsLocale.chat_state_4_turnin"></blockquote></dt>
+    <div *ngIf="getChatSubState(textsLocale, 4, 'turnin'); let text">
+      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_4_turnin" [innerHTML]="text"></blockquote></dt>
       <dd>Spoken by <lux-object [luxFetch]="mission.target_objectID"></lux-object> when approached when the mission is complete.</dd>
     </div>
   </dl>

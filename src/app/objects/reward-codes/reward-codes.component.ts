@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DB_RewardCodes } from '../../cdclient';
+import { DB_RewardCodes } from '../../../defs/cdclient';
+import { Locale_RewardCodes } from '../../../defs/locale';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 import { ObjectsByComponentComponent } from '../by-component/by-component.component';
 
@@ -9,11 +10,6 @@ type RewardCodeDict = { gate_version: string, codes: DB_RewardCodes[] }[];
 
 function codeSort(a: DB_RewardCodes, b: DB_RewardCodes) {
   return a.code.localeCompare(b.code);
-}
-
-interface Locale_RewardCodes {
-  subjectText: string,
-  bodyText: string,
 }
 
 @Component({

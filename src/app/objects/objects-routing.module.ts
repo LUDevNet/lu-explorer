@@ -9,21 +9,24 @@ import { ObjectsByComponentComponent } from './by-component/by-component.compone
 import { ObjectComponentsIndexComponent } from './components-index/components-index.component';
 import { ObjectDetailComponent } from './detail/detail.component';
 import { ObjectsComponent } from './objects.component';
-import { component_names } from '../components';
+import { component_names } from '../../defs/components';
 import { WhatsCoolItemsComponent } from './whats-cool-items/whats-cool-items.component';
 import { RewardCodesComponent } from './reward-codes/reward-codes.component';
 
 const objectsRoutes = [
   { path: 'item-sets', loadChildren: () => import('./item-sets/item-sets.module').then(m => m.ItemSetsModule) },
   { path: 'factions', loadChildren: () => import('./factions/factions.module').then(m => m.FactionsModule) },
-  { path: 'item-spotlight', component: WhatsCoolItemsComponent, data: {
-    title: "What's Cool: Item Spotlight"
-  } },
-  { path: 'reward-codes', component: RewardCodesComponent, data: {
-    title: "Reward codes"
-  } },
+  {
+    path: 'item-spotlight', component: WhatsCoolItemsComponent, data: {
+      title: "What's Cool: Item Spotlight"
+    }
+  },
+  {
+    path: 'reward-codes', component: RewardCodesComponent, data: {
+      title: "Reward codes"
+    }
+  },
   { path: 'loot/table/:id', component: LootTableComponent, data: { title: params => `LootTable #${params.id}` } },
-  { path: 'types', component: ObjectTypesIndexComponent, data: { title: "Object Types" } },
   {
     path: 'types/:type', component: ObjectsByTypeComponent, data: {
       title: params => `Objects (${params['type']})`
@@ -34,6 +37,7 @@ const objectsRoutes = [
       title: params => `Objects (${params['type']}; Page ${params['page']})`
     }
   },
+  { path: 'types', redirectTo: "/objects" },
   { path: 'components', component: ObjectComponentsIndexComponent, data: { title: "Components" } },
   {
     path: 'components/:component', component: ObjectsByComponentComponent, data: {

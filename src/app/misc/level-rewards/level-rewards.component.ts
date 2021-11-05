@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DB_Rewards } from '../../cdclient';
+import { DB_Rewards } from '../../../defs/cdclient';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 
 function sortRewards(a: DB_Rewards, b: DB_Rewards): number {

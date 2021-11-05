@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../services';
-import { DB_SkillBehavior } from '../../cdclient';
+import { DB_SkillBehavior } from '../../../defs/cdclient';
 
 @Component({
   selector: 'app-skill',

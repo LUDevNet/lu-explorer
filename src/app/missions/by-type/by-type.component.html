@@ -1,27 +1,31 @@
 <ul class="breadcrumbs">
   <li><a routerLink="/missions">Missions</a></li>
-  <li>{{defined_type}}</li>
+  <li>{{$defined_type | async}}</li>
 </ul>
 
-<h2>Missions <small>{{defined_type}}</small>
-  <app-group-icon [name]="defined_type"></app-group-icon>
-</h2>
+<section *luxVar="$defined_type | async; let defined_type">
+  <h2>Missions <small>{{defined_type}}</small>
+    <app-group-icon [name]="defined_type"></app-group-icon>
+  </h2>
 
-<section *ngIf="subtypes && subtypes.length > 0">
-  <h3>Subtypes</h3>
+  <ng-container *luxVar="$typeData | async; let data">
+    <section *ngIf="data.subtypes">
+      <h3>Subtypes</h3>
 
-  <ul>
-    <li *ngFor="let subtype of subtypes">
-      <a routerLink="/missions/type/{{defined_type}}/subtype/{{subtype}}">{{subtype}}</a>
-    </li>
-  </ul>
-</section>
+      <ul>
+        <li *ngFor="let subtype of data.subtypes">
+          <a routerLink="/missions/type/{{defined_type}}/subtype/{{subtype}}">{{subtype}}</a>
+        </li>
+      </ul>
+    </section>
 
-<section *ngIf="mission_ids && mission_ids.length > 0">
-  <h3>Missions</h3>
+    <section *ngIf="data.mission_ids">
+      <h3>Missions</h3>
 
-  <div class="mission-list">
-    <div class="mission-separator"></div>
-    <lux-mission [luxFetch]="mission_id" *ngFor="let mission_id of mission_ids"></lux-mission>
-  </div>
+      <div class="mission-list">
+        <div class="mission-separator"></div>
+        <lux-mission [luxFetch]="mission_id" *ngFor="let mission_id of data.mission_ids"></lux-mission>
+      </div>
+    </section>
+  </ng-container>
 </section>

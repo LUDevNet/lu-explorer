@@ -1,0 +1,77 @@
+.flag-container {
+    display: inline-block;
+    background: black;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+}
+
+.flag-container .meta {
+    font-size: smaller;
+    line-height: 24px;
+    font-weight: bold;
+}
+
+.flag-container.has-meta .value {
+    line-height: 40px;
+}
+
+.flag-container .value {
+    width: 64px;
+    margin: 0;
+    font-size: 30pt;
+    line-height: 64px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.flag-container .value img {
+    width: 48px;
+    margin-bottom: 5px;
+    vertical-align: middle;
+}
+
+.flag-container .key {
+    font-weight: bold;
+}
+
+@media(max-width: 500px) {
+    .flag-container {
+        display: block;
+        text-align: left;
+        /*padding: 0 10px;*/
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .flag-container::after {
+        content: attr(title);
+        display: block;
+    }
+
+    .flag-container br {
+        display: none;
+    }
+
+    .flag-container .meta {
+        margin-right: 0.3em;
+        vertical-align: middle;
+        font-size: 18pt;
+        line-height: 30px;
+    }
+
+    .flag-container .value {
+        width: 24px;
+        margin-right: 0.3em;
+        vertical-align: middle;
+        font-size: 25pt;
+        line-height: 30px;
+    }
+
+    .flag-container .value img {
+        width: 32px;
+        margin: 0 0.3em 0 0;
+        vertical-align: bottom;
+    }
+}

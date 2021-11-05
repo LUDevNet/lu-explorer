@@ -3,13 +3,17 @@
         <section *ngFor="let section of iter(creditsRoot.children)">
             <ng-container *ngFor="let sectionChild of iter(section.children)">
                 <h1 *ngIf="sectionChild.localName == 'title'">{{sectionChild.textContent | trans | async }}</h1>
-                <section *ngIf="sectionChild.localName == 'subsection'">
+                <dl *ngIf="sectionChild.localName == 'subsection'">
                     <ng-container *ngFor="let subsectionChild of iter(sectionChild.children)">
-                        <h3 *ngIf="subsectionChild.localName == 'title'">{{subsectionChild.textContent | trans | async }}</h3>
-                        <p *ngIf="subsectionChild.localName == 'name'">{{subsectionChild.textContent}}</p>
-                        <p *ngIf="subsectionChild.localName == 'textBlock'">{{subsectionChild.textContent | trans | async }}</p>
+                        <dt *ngIf="subsectionChild.localName == 'title'">{{subsectionChild.textContent | trans | async
+                            }}</dt>
+                        <dd class="name" *ngIf="subsectionChild.localName == 'name'">{{subsectionChild.textContent}}
+                        </dd>
+                        <dd class="textBlock" *ngIf="subsectionChild.localName == 'textBlock'">
+                            <p>{{subsectionChild.textContent | trans | async }}</p>
+                        </dd>
                     </ng-container>
-                </section>
+                </dl>
             </ng-container>
         </section>
     </ng-container>

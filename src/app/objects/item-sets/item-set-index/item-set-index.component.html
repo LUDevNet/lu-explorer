@@ -13,10 +13,10 @@ provide some additional skills per equipped item of that set.
 <section id="item-set-index" *ngIf="table | async; else loading; let sets">
   <table>
     <tr *ngFor="let set of sets">
-      <td>{{set.id}}</td>
+      <td>{{set.setID}}</td>
       <td>
-        <a routerLink="/objects/item-sets/{{set.id}}">
-          {{set.id | loc:'ItemSets' | async | elem:'kitName' | default:'[Unnamed]'}}
+        <a routerLink="/objects/item-sets/{{set.setID}}">
+          {{set.setID | loc:'ItemSets' | async | elem:'kitName' | default:'[Unnamed]'}}
           <span *ngIf="set.rank > 0">(Rank {{set.rank}})</span>
           Item Set
         </a>

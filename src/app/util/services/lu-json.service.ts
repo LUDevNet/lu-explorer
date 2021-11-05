@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject, Observable, of } from 'rxjs';
+import { ReplaySubject, Observable, of, zip } from 'rxjs';
 import { catchError, find, map, tap } from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -21,9 +21,16 @@ import {
   CurrencyTablePod,
   DB_mapShaders,
   DB_Objects,
-} from '../../cdclient';
+  DB_ObjectSkills,
+  DB_ComponentsRegistry,
+  DB_ZoneTable,
+  DB_ActivityRewards,
+  DB_MissionTasks,
+  DB_LootMatrix,
+  DB_LootTable,
+} from '../../../defs/cdclient';
 
-import { ZoneDetail } from '../../zone';
+import { LuCoreDataService } from './lu-core-data.service';
 
 export class Optional<T> {
   data: T;
@@ -49,44 +56,33 @@ export class LuJsonService {
 
   private apiUrl;
   private tablesUrl;
-  private localeUrl;
-  private scriptsUrl;
   private behaviorBaseUrl;
-  private skillBaseUrl;
-  private renderBaseUrl;
   private scriptBaseUrl;
   private physicsBaseUrl;
   private itemBaseUrl;
   private lootMatrixBaseUrl;
   private lootTableBaseUrl;
-  private iconsBaseUrl;
   private packBaseUrl;
   private precondBaseUrl;
   private objectsBaseUrl;
-  private objectsByTypeUrl;
   private objectsByComponentUrl;
   private zonesBaseUrl;
-  private zonesIndexUrl;
-  private accIndexUrl;
 
   private jsonStore;
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private luCoreDataService: LuCoreDataService) {
 
     this.jsonStore = {};
 
     this.apiUrl = "/lu-json/";
 
     this.tablesUrl = "tables/";
-    this.localeUrl = "locale/";
-    this.scriptsUrl = "scripts/";
     this.behaviorBaseUrl = "behaviors/";
     this.objectsBaseUrl = "objects/";
 
-    this.skillBaseUrl = this.tablesUrl + "SkillBehavior/";
-    this.renderBaseUrl = this.tablesUrl + "RenderComponent/";
     this.scriptBaseUrl = this.tablesUrl + "ScriptComponent/";
     this.physicsBaseUrl = this.tablesUrl + "PhysicsComponent/";
     this.itemBaseUrl = this.tablesUrl + "ItemComponent/";
@@ -95,18 +91,14 @@ export class LuJsonService {
     this.packBaseUrl = this.tablesUrl + "PackageComponent/";
     this.precondBaseUrl = this.tablesUrl + "Preconditions/";
     this.zonesBaseUrl = this.tablesUrl + "ZoneTable/";
-    this.iconsBaseUrl = this.tablesUrl + "Icons/";
-    this.objectsByTypeUrl = this.objectsBaseUrl + "groupBy/type/";
     this.objectsByComponentUrl = this.objectsBaseUrl + "groupBy/component/";
-    this.zonesIndexUrl = this.zonesBaseUrl + "index";
-    this.accIndexUrl = this.tablesUrl + "AccessoryDefaultLoc/index";
   }
 
   private log(message: string) {
     this.messageService.add('LuJsonService: ' + message);
   }
 
-  makeRequest(url: string, method: string, wrapResult: boolean = false): Observable<any> {
+  /*makeRequest(url: string, method: string, wrapResult: boolean = false): Observable<any> {
     if (!this.jsonStore.hasOwnProperty(url)) {
       let httpRequest = this.http.get(this.apiUrl + url + '.json')
         .pipe(
@@ -119,7 +111,7 @@ export class LuJsonService {
       this.jsonStore[url] = responseSubject;
     }
     return this.jsonStore[url];
-  }
+  }*/
 
   /**
    * Handle Http operation that failed.
@@ -152,40 +144,46 @@ export class LuJsonService {
     return this.getSingleTable("AccessoryDefaultLoc");
   }
 
-  getZones(): Observable<ZoneDetail[]> {
-    return this.getSingleTable("ZoneTable");
+  getZones(): Observable<DB_ZoneTable[]> {
+    return this.getSingleTable<DB_ZoneTable>("ZoneTable");
   }
 
-  getZone(id: number): Observable<ZoneDetail> {
-    return this.makeRequest(this.zonesBaseUrl + id, 'getZone');
+  getZone(id: number): Observable<DB_ZoneTable> {
+    return this.luCoreDataService.getSingleTableEntry('ZoneTable', id);
   }
 
   getRenderComponent(id: number): Observable<DB_RenderComponent> {
-    // TODO: paged
-    let page = Math.floor(id / 256);
-    return this.makeRequest(this.renderBaseUrl + page + "/" + id, 'getRenderComponent');
+    return this.luCoreDataService.getSingleTableEntry<DB_RenderComponent>('RenderComponent', id);
   }
 
-  getBehavior(id: number): Observable<DB_Behavior> {
+  /*
+    getBehavior(id: number): Observable<DB_Behavior> {
     // TODO: paged
     let page = Math.floor(id / 1024);
     return this.makeRequest(this.behaviorBaseUrl + page + "/" + id, `getBehavior(${id})`);
   }
+  */
 
   getSkill(id: number): Observable<DB_SkillBehavior> {
-    return this.makeRequest(this.skillBaseUrl + id, `getSkill(${id})`);
+    return this.luCoreDataService.getSingleTableEntry<DB_SkillBehavior>("SkillBehavior", id);
   }
 
   getIcon(id: number): Observable<DB_Icons> {
-    return this.makeRequest(this.iconsBaseUrl + id, `getIcon(${id})`);
+    return this.luCoreDataService.getSingleTableEntry<DB_Icons>("Icons", id);
   }
 
   getObject(id: number): Observable<any> {
-    // TODO: double paged
-    let fold_a = Math.floor(id / 256);
-    let fold_b = Math.floor(fold_a / 256);
-    let url = this.objectsBaseUrl + fold_b + "/" + fold_a + "/" + id;
-    return this.makeRequest(url, `getObject(${id})`);
+    const obj = this.luCoreDataService.getTableEntry<DB_Objects>('Objects', id);
+    const cr = this.luCoreDataService.getTableEntry<DB_ComponentsRegistry>('ComponentsRegistry', id);
+    const skills = this.luCoreDataService.getTableEntry<DB_ObjectSkills>('ObjectSkills', id);
+    return zip(obj, cr, skills).pipe(map(([obj, comp, skills]) => {
+      let components = {};
+      comp.forEach(x => { components[x.component_type] = x.component_id; });
+      return Object.assign(obj[0], {
+        components,
+        skills
+      })
+    }));
   }
 
   getPackageComponent(id: number): Observable<any> {
@@ -232,12 +230,8 @@ export class LuJsonService {
     return this.getPagedJsonData(this.tablesUrl + "RebuildComponent/", id, 'RebuildComponent');
   }
 
-  getLootTableGroupByIndex(id: number): Observable<any> {
-    return this.getPagedJsonData(this.lootTableBaseUrl + "groupBy/LootTableIndex/", id, 'LootTableGroupByIndex');
-  }
-
-  getLootMatrix(id: number): Observable<any> {
-    return this.getPagedJsonData(this.lootMatrixBaseUrl, id, 'LootMatrix');
+  getLootTableGroupByIndex(id: number): Observable<{ loot_table: DB_LootTable[] }> {
+    return this.luCoreDataService.getRevEntry('loot_table_index', id)
   }
 
   getNpcIcon(id: number): Observable<any> {
@@ -245,39 +239,23 @@ export class LuJsonService {
   }
 
   getMission(id: number): Observable<any> {
-    return this.getPagedJsonData(this.tablesUrl + "Missions/", id, 'Mission');
+    return this.getPagedJsonData(this.tablesUrl + "Missions/", id, 'Missions');
   }
 
-  getMissionTasks(id: number): Observable<any> {
-    return this.getPagedJsonData(this.tablesUrl + "MissionTasks/", id, 'MissionTasks');
+  getMissionTasks(id: number): Observable<DB_MissionTasks[]> {
+    return this.luCoreDataService.getTableEntry<DB_MissionTasks>('MissionTasks', id);
   }
 
   getMissionText(id: number): Observable<any> {
     return this.getPagedJsonData(this.tablesUrl + "MissionText/", id, 'MissionText');
   }
 
-  getObjectTypes(): Observable<any> {
-    return this.makeRequest(this.objectsByTypeUrl + "index", `getObjectTypes()`);
+  getObjectTypes(): Observable<string[]> {
+    return this.luCoreDataService.getRev('object_types');
   }
 
-  getObjectType(type: string): Observable<any> {
-    return this.makeRequest(this.objectsByTypeUrl + type, `getObjectType(${type})`);
-  }
-
-  getObjectComponents(): Observable<any> {
-    return this.makeRequest(this.objectsByComponentUrl + "index", `getObjectComponents()`);
-  }
-
-  getObjectComponent(component: number): Observable<DB_ObjectRef_ByComponent[]> {
-    return this.makeRequest(this.objectsByComponentUrl + component, `getObjectComponent(${component})`);
-  }
-
-  getDestructibleComponentsByFaction(): Observable<Record<string, number[]>> {
-    return this.makeRequest(this.tablesUrl + "DestructibleComponent/byFaction", `getDestructibleComponentsByFaction`);
-  }
-
-  getRebuildComponentsByActivityID(): Observable<Record<string, number[]>> {
-    return this.makeRequest(this.tablesUrl + "RebuildComponent/byActivityID", `getRebuildComponentsByActivityID`);
+  getObjectType(type: string): Observable<number[]> {
+    return this.luCoreDataService.getRevEntry('object_types', type);
   }
 
   getBrickColors(): Observable<DB_BrickColors[]> {
@@ -293,9 +271,7 @@ export class LuJsonService {
   }
 
   getSingleTable<T>(table: string): Observable<T[]> {
-    return this
-      .makeRequest(this.tablesUrl + table + "/index", `getSingleTable(${table})`)
-      .pipe(map(tbl => tbl['_embedded'][table]));
+    return this.luCoreDataService.getTableEntry(table, "all")
   }
 
   getGeneric<T>(id: number, table: string, paged: boolean): Observable<T> {
@@ -307,28 +283,27 @@ export class LuJsonService {
     }
   }
 
-  getLocale(table: string): Observable<any> {
-    return this.getJsonResource("locale/" + table + "/", "index", "locale");
-  }
+  //getLocale(table: string): Observable<any> {
+  //  return this.getJsonResource("locale/" + table + "/", "index", "locale");
+  //}
 
-  getLocalePage(table: string, page: number) {
-    return this.getJsonResource("locale/" + table + "/", String(page), "locale page");
-  }
+  //getLocalePage(table: string, page: number) {
+  //  return this.getJsonResource("locale/" + table + "/", String(page), "locale page");
+  //}
 
+  /*
   getMissionsByType(): Observable<DB_MissionsByType> {
     return this.getJsonResource("tables/Missions/groupBy/", "type", "missions");
   }
+  */
 
   getActivityRewards(id: number): Observable<ActivityRewardsPod> {
-    return this.getGeneric(id, "ActivityRewards", true);
+    return this.luCoreDataService.getTableEntry<DB_ActivityRewards>("ActivityRewards", id)
+      .pipe(map(x => Object.assign({ activity_rewards: x })));
   }
 
   getCurrencyIndex(id: number): Observable<CurrencyTablePod> {
     return this.getGeneric(id, "CurrencyTable", true);
-  }
-
-  getScript(path: string): Observable<any> {
-    return this.getJsonResource(this.scriptsUrl, path, "Script");
   }
 
   getFactions(): Observable<DB_Factions[]> {
@@ -339,17 +314,18 @@ export class LuJsonService {
     return this.getFactions().pipe(map(factions => factions.find(v => v.faction == index)));
   }
 
+  /*
   getJsonResource(prefix: string, url: string, type: string): Observable<any> {
     return this.makeRequest(prefix + url.toLowerCase(), `get${type}(${url})`);
   }
+  */
 
   getJsonData(url: string, id: number, type: string): Observable<any> {
-    return this.makeRequest(url + id, `get${type}(${id})`);
+    return this.luCoreDataService.getSingleTableEntry(type, id);
   }
 
   getPagedJsonData(url: string, id: number, type: string, rethrowError: boolean = false): Observable<any> {
-    let page = Math.floor(id / 256);
-    return this.makeRequest(url + page + "/" + id, `getPaged${type}(${id})`, rethrowError);
+    return this.luCoreDataService.getSingleTableEntry(type, id);
   }
 
 }

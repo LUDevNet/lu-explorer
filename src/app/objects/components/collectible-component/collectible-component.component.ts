@@ -3,7 +3,7 @@ import { ReplaySubject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../../services';
-import { DB_CollectibleComponent } from '../../../cdclient';
+import { DB_CollectibleComponent } from '../../../../defs/cdclient';
 
 @Component({
   selector: 'app-collectible-component',

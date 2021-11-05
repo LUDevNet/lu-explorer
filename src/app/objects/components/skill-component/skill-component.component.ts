@@ -3,7 +3,7 @@ import { ReplaySubject, from, Observable } from 'rxjs';
 import { map, combineAll, switchMap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../../services';
-import { DB_SkillBehavior, SkillRef } from '../../../cdclient';
+import { DB_SkillBehavior, SkillRef } from '../../../../defs/cdclient';
 
 interface Skill {
   ref: SkillRef;

@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 
 import { LuJsonService } from '../../services';
-import { DB_Icons } from '../../cdclient';
+import { DB_Icons } from '../../../defs/cdclient';
+import { Observable } from 'rxjs';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-icon',
@@ -12,18 +14,18 @@ export class IconComponent implements OnInit {
   private _iconID: number;
   @Input() width: string = '64px';
   @Input() caption: boolean = true;
-  icon: DB_Icons;
+  $icon: Observable<DB_Icons>;
 
   get iconID(): number { return this._iconID; }
 
   @Input() set iconID(value: number) {
     this._iconID = value;
     if (this.iconID != undefined) {
-      this.luJsonService.getIcon(this.iconID).subscribe(icon => this.icon = icon);
+      this.$icon = this.luJsonService.getIcon(this.iconID);
     }
   }
 
-  constructor(private luJsonService: LuJsonService) {
+  constructor(private luJsonService: LuJsonService, private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {

@@ -3,8 +3,8 @@
 </ul>
 <h2>Zone Index</h2>
 <ul class="zones">
-  <li *ngFor="let zone of zones">
-    <a routerLink="/zones/{{zone.zoneID}}">{{zone.DisplayDescription}}</a>
-    <span class="badge">{{zone.zoneID}}</span>
+  <li *ngFor="let item of ($zones | async | keyvalue)">
+    <a routerLink="/zones/{{item.key}}">{{item.value.DisplayDescription}}</a>
+    <span class="badge">{{item.key}}</span>
   </li>
 </ul>

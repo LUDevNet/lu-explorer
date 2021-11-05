@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import { DB_Factions } from '../../../cdclient';
+import { DB_Factions } from '../../../../defs/cdclient';
 import { LuJsonService } from '../../../services';
 
 @Component({

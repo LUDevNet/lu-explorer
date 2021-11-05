@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DB_mapShaders } from '../../cdclient';
+import { DB_mapShaders } from '../../../defs/cdclient';
 import { LuJsonService } from '../../util/util.module';
 
 @Component({

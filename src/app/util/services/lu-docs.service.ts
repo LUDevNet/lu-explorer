@@ -8,7 +8,7 @@ export class LuDocsService {
   baseUrl: string;
 
   constructor() {
-    this.baseUrl = '/lu-docs/';
+    this.baseUrl = 'https://docs.lu-dev.net/';
   }
 
   link(path: string): string {

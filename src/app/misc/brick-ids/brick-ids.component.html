@@ -16,7 +16,7 @@
             <td><img class="brick-icon" [src]="'/lu-res/textures/ui/bricks/dds/m' + brick.LEGOBrickID + '.png'"></td>
             <td>{{brick.LEGOBrickID}}</td>
             <td><a routerLink="/objects/{{brick.NDObjectID}}">{{brick.NDObjectID}}</a></td>
-            <td>{{objects[brick.NDObjectID+'']?.name}}</td>
+            <td>{{brick.NDObjectID | loc:'Objects' | async | elem: "name"}}</td>
           </tr>
         </ng-container>
       </ng-container>

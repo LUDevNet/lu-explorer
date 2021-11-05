@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DB_Preconditions } from '../../cdclient';
+import { DB_Preconditions } from '../../../defs/cdclient';
 import { LuJsonService, LuLocaleService } from '../../services';
 
 interface PreconditionsLocale {

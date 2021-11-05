@@ -1,24 +1,63 @@
 # LuExplorer
 
-## TODO
-
-* Figure out why some MissionTasks are null?
-* What does 'taskParam1' for an ObtainItem task?
-* Add locStatus, localized to mission tasks
-* Add links to racing mission tasks
-* Figure out what the ids in quickbuild tasks are
-* Investigate QuickBuild vs Minigame in mission 1434
-* Investigate emote rewards in Mission 1750
-* Mission Texts offerNPCIcon
-* display MissionTasks localization (e.g. Mission 282)
-
 ## General
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
-## Development server
+## Prerequisites
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- [`git`](https://git-scm.com/)
+- [`npm`](https://npmjs.com) to build the app
+- [`cargo`](https://doc.rust-lang.org/cargo/) to build the API server
+- A copy of a LEGO Universe client.
+
+## Development setup
+
+Generally, LU-Explorer needs a datasource, which is provided by the [Paradox Server](https://github.com/xiphoseer/lu-res-api-server). That server provides the data from the game database to the web interface, which makes it a core
+component of this app.
+
+This needs a `paradox.toml` config file in the working directory – a minimal example is provided [here](https://github.com/Xiphoseer/lu-explorer/blob/main/paradox.toml). The most important part is to point the `explorer_spa` key to the `docs` folder in this repo and the `cdclient` and `locale` key to a copy of `CDClient.fdb` and `locale.xml` respectively.
+
+1. install `npm` and `cargo` (via <https://rustup.rs>)
+2. install the API server binary with
+
+   ```shell
+   $ cargo install --git https://github.com/Xiphoseer/lu-res-api-server.git --branch main
+   ```
+3. Then, clone this repo and create `lu-res` and `client` folders next to it
+
+   ```shell
+   $ git clone https://github.com/Xiphoseer/lu-explorer.git
+   $ mkdir lu-res client
+   ```
+4. Put at least `locale/locale.xml` and `res/cdclient.fdb` from an LU client into this `client` folder
+5. You can now build the `lu-explorer` web-app continuously with
+   ```shell
+   $ cd lu-explorer
+   $ npm install
+   $ ng build --watch
+   ```
+6. Finally, run the API server, which will also serve the web-app
+   ```shell
+   $ RUST_LOG=info paradox-server
+   ```
+
+For now, you need to restart that server whenever you change the `lu-explorer` source.
+([Issue #1](https://github.com/Xiphoseer/lu-res-api-server/issues/1))
+
+## Minimal setup
+
+The alternative is to:
+
+1. point `data.apiUrl` in `src/environments/environment.ts` to an existing API server.
+2. point `/lu-res` in `src/proxy.conf.json` to a matching version of `lu-res`.
+
+Then run
+
+```shell
+$ npm install
+$ ng serve
+```
 
 ## Code scaffolding
 
@@ -26,9 +65,9 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `docs/` directory. Use the `--prod` flag for a production build. For building to github pages also use `--base-href=/lu-explorer/`.
+Run `ng build` to build the project. The build artifacts will be stored in the `docs/` directory. Use the `--configuration production` flag for a production build. For building to github pages also use `--base-href=/lu-explorer/`.
 
-Usually, the `ng build --prod --build-optimizer --base-href=/lu-explorer/` command is used.
+Usually, the `ng build --configuration production` command is used.
 
 ## Running unit tests
 
@@ -41,7 +80,3 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-## Release
-
-`git push origin (git subtree split --prefix docs gh-pages):gh-pages --force`

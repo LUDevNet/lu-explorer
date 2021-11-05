@@ -3,9 +3,16 @@ import { ActivatedRoute } from '@angular/router';
 import { ReplaySubject, Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
-import { LuJsonService } from '../../services';
-import { component_names } from '../../components';
-import { DB_ObjectRef_ByComponent } from '../../cdclient';
+import { LuCoreDataService, LuJsonService } from '../../services';
+import { component_names } from '../../../defs/components';
+import { DB_ObjectRef_ByComponent } from '../../../defs/cdclient';
+import { ComponentTypeSingle, ObjectsRefDict, Rev_ComponentType } from '../../../defs/api';
+import { ThrowStmt } from '@angular/compiler';
+
+interface ByComponent {
+  id: number;
+  lots: number[];
+}
 
 @Component({
   selector: 'app-by-component',
@@ -19,15 +26,17 @@ export class ObjectsByComponentComponent implements OnInit {
   page_count: number = -1;
   component_id: number = -1;
   component_name: string = "[Unnamed]";
-  objects: Observable<DB_ObjectRef_ByComponent[]>;
+  $components: Observable<ByComponent[]>;
   count: Observable<number[]>;
+
+  objects: ObjectsRefDict = {};
 
   constructor(
     private route: ActivatedRoute,
-    private luJsonService: LuJsonService) {}
+    private luCoreData: LuCoreDataService) {}
 
   ngOnInit() {
-    this.objects = this.route.paramMap
+    this.$components = this.route.paramMap
       .pipe(map(this.mapRouteInfo),tap(this.tapRef.bind(this)),switchMap(this.loadDataObservable.bind(this)))
   }
 
@@ -50,27 +59,47 @@ export class ObjectsByComponentComponent implements OnInit {
     }
   }
 
-  loadDataObservable(ref) {
-    return this.luJsonService
-      .getObjectComponent(ref.id)
-      .pipe(tap(this.setPageCounters.bind(this, ref)), map(this.processData.bind(this, ref)));
+  loadDataObservable(ref): Observable<ByComponent[]> {
+    return this.luCoreData
+      .getRevEntry<Rev_ComponentType>('component_types', ref.id)
+      .pipe(
+        tap(this.setPageCounters.bind(this)),
+        tap(this.setObjects.bind(this)),
+        map(this.processData.bind(this, ref)));
   }
 
-  setPageCounters(ref, data) {
-    this.page_count = Math.ceil(data.length / this.page_size);
+  setObjects(data: Rev_ComponentType) {
+    this.objects = data._embedded.objects;
   }
 
-  processData(ref, data) {
-    let sorted = data.sort(this.sortObjectComponentRefs);
+  setPageCounters(data: Rev_ComponentType) {
+    let total = Object.keys(data.components).length;
+    this.page_count = Math.ceil(total / this.page_size);
+  }
+
+  processData(ref, data: Rev_ComponentType) {
+    let list: ByComponent[] = Object.entries(data.components).map(([a,b]) => {
+      return {
+        id: Number(a),
+        lots: b.lots,
+      }
+    });
+    let sorted = list.sort(this.sortObjectComponentRefs);
     let from = this.page_size * ref.page;
     let to = from + this.page_size;
     return sorted.slice(from, to);
   }
 
 
-  sortObjectComponentRefs(a,b) {
-    let diff = a.comp_val - b.comp_val;
-    return (diff == 0) ? a.id - b.id : diff;
+  sortObjectComponentRefs(a: ByComponent, b: ByComponent): number {
+    let diff = Number(a.id) - Number(b.id);
+    return diff;
+    //return (diff == 0) ? a.id - b.id : diff;
+  }
+
+  getName(lot: number): string {
+    let obj = this.objects[lot];
+    return obj ? obj.name : "[unnamed]";
   }
 
 }

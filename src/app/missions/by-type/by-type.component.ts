@@ -1,8 +1,15 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, zip } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 import { LuJsonService, LuLocaleService } from '../../services';
+import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 
+interface TypeData {
+  subtypes?: string[];
+  mission_ids?: number[];
+}
 @Component({
   selector: 'app-by-type',
   templateUrl: './by-type.component.html',
@@ -10,52 +17,15 @@ import { LuJsonService, LuLocaleService } from '../../services';
 })
 export class MissionsByTypeComponent implements OnInit {
 
-  mission_ids: Array<number> = [];
-  mission_names: any = {};
-  defined_type: string = "";
-  subtypes: Array<string> = [];
+  $defined_type: Observable<string>;
+  $typeData: Observable<TypeData>;
 
-  constructor(private router: Router, private route: ActivatedRoute,
-  	private luJsonService: LuJsonService, private luLocaleService: LuLocaleService,
-    private ref: ChangeDetectorRef) { }
+  constructor(private route: ActivatedRoute, private luCoreDataService: LuCoreDataService) { }
 
   ngOnInit() {
-    this.defined_type = this.route.snapshot.paramMap.get('type');
-    this.getMissionNames();
-    this.getMissions();
+    this.$defined_type = this.route.paramMap.pipe(map(map => map.get('type')));
+    this.$typeData = this.$defined_type.pipe(switchMap(name => {
+      return this.luCoreDataService.getRevEntry<TypeData>('mission_types', name);
+    }));
   }
-
-  getMissions(): void
-  {
-    this.luJsonService.getMissionsByType().subscribe(missions => this.processMissions(missions));
-  }
-
-  processMissions(missions): void
-  {
-    let type_missions = missions[this.defined_type];
-
-    this.subtypes = Object.keys(type_missions).filter(x => x);
-    this.mission_ids = type_missions[""];
-
-    //this.ref.detectChanges();
-  }
-
-  getMissionNames():void
-  {
-  	this.luLocaleService.getLocaleTable("Missions").subscribe(index => this.processMissionNameIndex(index));
-  }
-
-  processMissionNameIndex(index: any):void
-  {
-    for (let page of index.pages)
-    {
-      this.luLocaleService.getLocalePage("Missions", page).subscribe(page => this.processMissionNamesPage(page));
-    }
-  }
-
-  processMissionNamesPage(page: any):void
-  {
-    this.mission_names = Object.assign({}, this.mission_names, page);
-  }
-
 }

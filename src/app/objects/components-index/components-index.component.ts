@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LuJsonService, LuLocaleService } from '../../services';
-import { component_names } from '../../components';
+import { LuCoreDataService } from '../../services';
+import { component_names } from '../../../defs/components';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Rev_ComponentTypes } from '../../../defs/api';
 
 @Component({
   selector: 'app-components-index',
@@ -10,26 +13,19 @@ import { component_names } from '../../components';
 })
 export class ObjectComponentsIndexComponent implements OnInit {
 
-  components: any;
-  component_names: any;
+  $components: Observable<number[]>;
 
-  constructor(private luJsonService: LuJsonService,private luLocaleService: LuLocaleService) { }
+  constructor(private luCoreData: LuCoreDataService) { }
 
   ngOnInit() {
-    this.luJsonService
-      .getObjectComponents()
-      .subscribe(this.processObjectComponents.bind(this));
-  }
-
-  processObjectComponents(data: any) {
-    this.components = data['components'].sort(this.sortCompIds.bind(this));
+    this.$components = this.luCoreData.getRev<Rev_ComponentTypes>('component_types').pipe(map(x => x.components));
   }
 
   sortCompIds(a,b): number {
     return (+a) - (+b);
   }
 
-  getCompName(id: string) {
+  getCompName(id: number) {
     if (component_names.hasOwnProperty(id)) {
       return component_names[id];
     } else {

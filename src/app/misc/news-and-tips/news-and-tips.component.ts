@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DB_WhatsCoolNewsAndTips } from '../../cdclient';
+import { DB_WhatsCoolNewsAndTips } from '../../../defs/cdclient';
+import { Locale_WhatsCoolNewsAndTips } from '../../../defs/locale';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
-
-interface Locale_WhatsCoolNewsAndTips {
-  storyTitle: string,
-  text: string,
-};
 
 @Component({
   selector: 'lux-news-and-tips',

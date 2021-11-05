@@ -14,10 +14,10 @@ import { UtilModule } from './util/util.module';
 import { MiscModule } from './misc/misc.module';
 import { SerializeModule } from './serialize/serialize.module';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { environment } from '../environments/environment';
+// import { AngularFireModule } from '@angular/fire';
+// import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+// import { AngularFirestoreModule } from '@angular/fire/firestore';
+// import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -32,9 +32,9 @@ import { environment } from '../environments/environment';
     SerializeModule,
     UtilModule,
     MiscModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAnalyticsModule,
-    AngularFirestoreModule
+    // AngularFireModule.initializeApp(environment.firebase),
+    // AngularFireAnalyticsModule,
+    // AngularFirestoreModule
   ],
   providers: [
     LuJsonService,

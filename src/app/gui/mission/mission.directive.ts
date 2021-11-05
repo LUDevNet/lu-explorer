@@ -1,7 +1,7 @@
 import { Directive, Input } from "@angular/core";
 import { MissionComponent } from "./mission.component";
 import { LuJsonService, LuLocaleService } from "../../services";
-import { DB_Missions } from "../../cdclient";
+import { DB_Missions } from "../../../defs/cdclient";
 
 @Directive({
   selector: "lux-mission[luxFetch]"
@@ -23,7 +23,9 @@ export class MissionDirective {
     this.missionComponent.isMission = mission.isMission;
     this.missionComponent.sortOrder = -mission.isMission * 10000 + mission.UISortOrder;
     if (mission.isMission) {
-      this.luJson.getMissionTasks(this.missionComponent.id).subscribe(x => this.missionComponent.iconID = x.tasks[0].largeTaskIconID);
+      this.luJson.getMissionTasks(this.missionComponent.id).subscribe(x => {
+        this.missionComponent.iconID = x[0].largeTaskIconID
+      });
     } else {
       this.missionComponent.iconID = mission.missionIconID;
     }

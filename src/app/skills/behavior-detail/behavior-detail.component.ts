@@ -1,10 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, ReplaySubject } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
 
-import { LuJsonService } from '../../services';
-import { DB_Behavior } from '../../cdclient';
+import { Behavior } from '../../../defs/api';
 
 @Component({
   selector: 'app-behavior-detail',
@@ -13,35 +9,15 @@ import { DB_Behavior } from '../../cdclient';
 })
 export class BehaviorDetailComponent implements OnInit {
 
-  _behavior: Observable<DB_Behavior>;
-  _id: ReplaySubject<number>;
-  __id: number;
-
-  @Input() set behaviorID(value: number) {
-    this._id.next(value);
-  }
-
-  get behaviorID (): number {
-    return this.__id;
-  }
+  @Input() behaviors: Record<number, Behavior>;
+  @Input() behaviorID: number;
 
   active: boolean = false;
   hidden: boolean = true;
 
-  constructor(
-    private route: ActivatedRoute,
-    private luJsonService: LuJsonService
-    ) {
-      this._id = new ReplaySubject(1);
-      this._behavior = this._id.pipe(
-        tap(id => this.__id = id),
-        switchMap(id => this.luJsonService.getBehavior(id))
-      )
-    }
+  constructor() {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   toggle(): void
   {

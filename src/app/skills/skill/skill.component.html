@@ -9,7 +9,12 @@
     <app-description-ui [template]="texts['descriptionUI']"></app-description-ui>
   </ng-container>
   <h3>Behavior</h3>
-  <app-behavior-detail [behaviorID]="skill.behaviorID"></app-behavior-detail>
+  <p>
+    <a routerLink="/skills/behaviors/{{skill.behaviorID}}">
+      <lux-number-flag [value]="skill.behaviorID" name="behaviorID"></lux-number-flag>
+    </a>
+  </p>
+  <!--<app-behavior-detail [behaviorID]="skill.behaviorID"></app-behavior-detail>-->
   <h3>Details</h3>
   <app-data-table [table]="skill"></app-data-table>
 </div>

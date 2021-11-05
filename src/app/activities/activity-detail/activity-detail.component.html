@@ -6,7 +6,7 @@
 <img *ngIf="activity && activity.leaderboardType == 1" class="header" src="/lu-res/ui/ingame/instancelobby_i68.png"
   title="This activity is (likely) a race" />
 
-<h2>Activity #{{activity_id}} <small *ngIf="activity_loc">"{{activity_loc.ActivityName}}"</small></h2>
+<h2>Activity #{{activity_id}} <small *ngIf="activity.locStatus == 2">"{{activity_loc.ActivityName}}"</small></h2>
 
 <ul *ngIf="activity">
   <li *ngIf="activity.instanceMapID">
@@ -73,9 +73,9 @@
     <ng-container *ngIf="reward">
       <h4>{{reward.description}} ({{reward.ActivityRewardIndex}})</h4>
       <p>
-        Required Rating: {{reward.activityRating}}<br>
-        Challenge Rating: {{reward.ChallengeRating}}<br>
-        CurrencyIndex: {{reward.CurrencyIndex}}
+        <lux-number-flag name="activityRating" [value]="reward.activityRating"></lux-number-flag>
+        <lux-number-flag name="ChallengeRating" [value]="reward.ChallengeRating"></lux-number-flag>
+        <lux-number-flag name="CurrencyIndex" [value]="reward.CurrencyIndex"></lux-number-flag>
       </p>
       <lux-currency-table *ngIf="reward.CurrencyIndex" [id]="reward.CurrencyIndex" [level]="reward.ChallengeRating">
       </lux-currency-table>

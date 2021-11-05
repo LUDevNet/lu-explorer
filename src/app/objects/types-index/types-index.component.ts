@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { LuJsonService, LuLocaleService } from '../../services';
 
 @Component({
@@ -8,12 +9,12 @@ import { LuJsonService, LuLocaleService } from '../../services';
 })
 export class ObjectTypesIndexComponent implements OnInit {
 
-  types: any;
+  $types: Observable<string[]>;
 
   constructor(private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }
 
   ngOnInit() {
-    this.luJsonService.getObjectTypes().subscribe(data => this.types = data['types']);
+    this.$types = this.luJsonService.getObjectTypes();
   }
 
 }

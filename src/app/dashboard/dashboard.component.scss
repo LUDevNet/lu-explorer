@@ -1,0 +1,36 @@
+.faction-banners {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.faction-banners > img {
+    flex: 1 1 auto;
+    max-width: 256px;
+}
+
+.img-tag {
+    vertical-align: middle;
+}
+
+.disclaimer {
+    h3 {
+        border-bottom: none;
+        margin-bottom: 0.2rem;
+        text-transform: uppercase;
+    }
+
+    p {
+        margin: 0.2rem 0;
+    }
+
+    a {
+        color: white;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    background-color: darkred;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}

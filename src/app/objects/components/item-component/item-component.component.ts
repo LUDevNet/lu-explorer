@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ReplaySubject, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { LuJsonService } from '../../../services';
-import { DB_mapItemTypes, DB_ItemComponent, DB_BrickColors, DB_brickAttributes } from '../../../cdclient';
+import { DB_mapItemTypes, DB_ItemComponent, DB_BrickColors, DB_brickAttributes, DB_InventoryItem } from '../../../../defs/cdclient';
 
 @Component({
   selector: 'app-item-component',
@@ -42,5 +42,9 @@ export class ItemComponentComponent {
 
   some(val: number): boolean {
     return val == 0 || Boolean(val);
+  }
+
+  describeItemType(ty?: DB_mapItemTypes): string {
+    return ty ? `"${ty.description}"` : '<unknown>';
   }
 }

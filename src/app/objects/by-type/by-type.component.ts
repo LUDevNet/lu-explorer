@@ -1,10 +1,19 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ReplaySubject, Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
-import { LuJsonService, LuLocaleService } from '../../services';
-import { DB_ObjectRef_ByType } from '../../cdclient';
+import { LuCoreDataService } from '../../services';
+import { DB_ObjectRef_ByType } from '../../../defs/cdclient';
+
+interface ObjectsByTypeEmbedded {
+  objects: {[key: number]: {id: number, name: number}};
+}
+
+interface ObjectsByType {
+  object_ids: number[];
+  _embedded: ObjectsByTypeEmbedded;
+}
 
 @Component({
   selector: 'app-by-type',
@@ -21,14 +30,14 @@ export class ObjectsByTypeComponent implements OnInit {
   count: Observable<number[]>;
 
   constructor(
-    private luJsonService: LuJsonService,
+    private luCoreData: LuCoreDataService,
     private route: ActivatedRoute,
     private cd: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
     this.objects = this.route.paramMap
-      .pipe(map(this.mapRouteInfo),tap(this.tapRef.bind(this)),switchMap(this.loadDataObservable.bind(this)))
+      .pipe(map(this.mapRouteInfo), tap(this.tapRef.bind(this)), switchMap(this.loadDataObservable.bind(this)))
     this.objects.subscribe(x => this.cd.detectChanges());
   }
 
@@ -36,23 +45,27 @@ export class ObjectsByTypeComponent implements OnInit {
     let type = map.get('type');
     if (map.has('page')) {
       let page = map.get('page');
-      return {type: type, page: +page};
+      return { type: type, page: +page };
     } else {
-      return {type: type, page: 0};
+      return { type: type, page: 0 };
     }
   }
 
   tapRef(ref) {
-    console.log(ref);
     this.type = ref.type;
     this.page = ref.page;
     this.cd.detectChanges();
   }
 
   loadDataObservable(ref) {
-    return this.luJsonService
-      .getObjectType(ref.type)
-      .pipe(tap(this.setPageCounters.bind(this, ref)), map(this.processData.bind(this, ref)));
+    return this.luCoreData.getRevEntry<ObjectsByType>('object_types', ref.type)
+      .pipe(
+        map((v: ObjectsByType) => v.object_ids.map(id => {
+          return { id, name: v._embedded.objects[id].name };
+        })),
+        tap(this.setPageCounters.bind(this, ref)),
+        map(this.processData.bind(this, ref))
+      );
   }
 
   setPageCounters(ref, data) {
@@ -64,11 +77,10 @@ export class ObjectsByTypeComponent implements OnInit {
     let from = this.page_size * ref.page;
     let to = from + this.page_size;
     let page = sorted.slice(from, to);
-    console.log(page);
     return page;
   }
 
-  sortObjectTypeRefs(a,b) {
+  sortObjectTypeRefs(a, b) {
     return a.id - b.id;
   }
 
