@@ -113,14 +113,10 @@
       <dt *ngIf="mission.isChoiceReward">and one of:</dt>
       <dt *ngIf="!mission.isChoiceReward">and all of:</dt>
       <dd>
-        <lux-gui-item *ngIf="mission.reward_item1 > -1" [id]="mission.reward_item1" [amount]="mission.reward_item1_count">
-        </lux-gui-item>
-        <lux-gui-item *ngIf="mission.reward_item2 > -1" [id]="mission.reward_item2" [amount]="mission.reward_item2_count">
-        </lux-gui-item>
-        <lux-gui-item *ngIf="mission.reward_item3 > -1" [id]="mission.reward_item3" [amount]="mission.reward_item3_count">
-        </lux-gui-item>
-        <lux-gui-item *ngIf="mission.reward_item4 > -1" [id]="mission.reward_item4" [amount]="mission.reward_item4_count">
-        </lux-gui-item>
+        <lux-slot *ngIf="mission.reward_item1 > -1" [luxFetch]="mission.reward_item1" [count]="mission.reward_item1_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item2 > -1" [luxFetch]="mission.reward_item2" [count]="mission.reward_item2_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item3 > -1" [luxFetch]="mission.reward_item3" [count]="mission.reward_item3_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item4 > -1" [luxFetch]="mission.reward_item4" [count]="mission.reward_item4_count"></lux-slot>
         <lux-slot *ngIf="mission.reward_maxhealth > 0" icon="/lu-res/textures/ui/rewards/maxheart.png" [count]="mission.reward_maxhealth" luxTooltip="Life Point"></lux-slot>
         <lux-slot *ngIf="mission.reward_maximagination > 0" icon="/lu-res/textures/ui/rewards/maximagination.png" [count]="mission.reward_maximagination" luxTooltip="Imagination Point"></lux-slot>
         <lux-slot *ngIf="mission.reward_maxinventory > 0" icon="/lu-res/textures/ui/rewards/maxinventory.png" [count]="mission.reward_maxinventory" luxTooltip="Extra Backpack Space"></lux-slot>
@@ -146,14 +142,10 @@
       <dt *ngIf="mission.isChoiceReward">and one of:</dt>
       <dt *ngIf="!mission.isChoiceReward">and all of:</dt>
       <dd>
-        <lux-gui-item *ngIf="mission.reward_item1_repeatable > -1" [id]="mission.reward_item1_repeatable"
-          [amount]="mission.reward_item1_repeat_count"></lux-gui-item>
-        <lux-gui-item *ngIf="mission.reward_item2_repeatable > -1" [id]="mission.reward_item2_repeatable"
-          [amount]="mission.reward_item2_repeat_count"></lux-gui-item>
-        <lux-gui-item *ngIf="mission.reward_item3_repeatable > -1" [id]="mission.reward_item3_repeatable"
-          [amount]="mission.reward_item3_repeat_count"></lux-gui-item>
-        <lux-gui-item *ngIf="mission.reward_item4_repeatable > -1" [id]="mission.reward_item4_repeatable"
-          [amount]="mission.reward_item4_repeat_count"></lux-gui-item>
+        <lux-slot *ngIf="mission.reward_item1_repeatable > -1" [luxFetch]="mission.reward_item1_repeatable" [count]="mission.reward_item1_repeat_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item2_repeatable > -1" [luxFetch]="mission.reward_item2_repeatable" [count]="mission.reward_item2_repeat_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item3_repeatable > -1" [luxFetch]="mission.reward_item3_repeatable" [count]="mission.reward_item3_repeat_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item4_repeatable > -1" [luxFetch]="mission.reward_item4_repeatable" [count]="mission.reward_item4_repeat_count"></lux-slot>
       </dd>
     </dl>
   </section>

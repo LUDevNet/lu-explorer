@@ -59,7 +59,7 @@
 <section *ngIf="activity.optionalCostLOT">
   <h4>Optional Cost <small>(<code>optionalCost{{ '\{LOT,Count\}' }}</code>)</small></h4>
   <p>The player needs to hand in the following item(s) to participate:</p>
-  <lux-gui-item [id]="activity.optionalCostLOT" [amount]="activity.optionalCostCount"></lux-gui-item>
+  <lux-slot [luxFetch]="activity.optionalCostLOT" [count]="activity.optionalCostCount"></lux-slot>
 </section>
 
 <section>

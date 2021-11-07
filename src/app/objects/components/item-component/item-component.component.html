@@ -60,7 +60,7 @@
     <h4>Currency</h4>
     <div *ngIf="item.currencyLOT">This items needs the following alternative currency to be bought
       (<code>currencyLOT; altCurrencyCost</code>):<br>
-      <lux-gui-item [id]="item.currencyLOT" [amount]="item.altCurrencyCost"></lux-gui-item>
+      <lux-slot [luxFetch]="item.currencyLOT" [count]="item.altCurrencyCost"></lux-slot>
     </div>
     <p *ngIf="item.currencyCosts"><code>currencyCosts</code>: {{item.currencyCosts}}
       <!--<li *ngIf="item.altCurrencyCost"><code>altCurrencyCost</code>: {{item.altCurrencyCost}}</li>-->

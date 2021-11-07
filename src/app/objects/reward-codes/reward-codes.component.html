@@ -10,7 +10,7 @@
     <div>
         <div *ngFor="let code of code_group.codes">
             <div class="item">
-                <lux-gui-item [id]="code.attachmentLOT"></lux-gui-item>
+                <lux-slot [luxFetch]="code.attachmentLOT"></lux-slot>
             </div>
             <div class="code-desc" *ngIf="loc(code.id) | async; let code_loc; else no_loc">
                 <h4>{{code_loc.subjectText}} <code>{{code.code}}</code></h4>

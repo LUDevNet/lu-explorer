@@ -10,7 +10,7 @@
             <h3 *ngIf="v.key !== ''">Feature Gate <code>{{v.key}}</code></h3>
             <div class="item" *ngFor="let item of v.value">
                 <span class="left">
-                    <lux-gui-item [id]="item.itemID"></lux-gui-item>
+                    <lux-slot [luxFetch]="item.itemID"></lux-slot>
                 </span>
                 <blockquote class="cool">{{(loc(item.id) | async).description}}</blockquote>
             </div>

@@ -20,7 +20,7 @@
                 <td>{{reward.MissionID}}</td>
                 <td>{{reward.RewardType}} ({{typeName(reward.RewardType)}})</td>
                 <td [ngSwitch]="reward.RewardType">
-                    <lux-gui-item *ngSwitchCase="0" [amount]="reward.count" [id]="reward.value"></lux-gui-item>
+                    <lux-slot *ngSwitchCase="0" [count]="reward.count" [luxFetch]="reward.value"></lux-slot>
                     <lux-buff *ngSwitchCase="4" kind="maxinventory" [value]="reward.value"></lux-buff>
                     <lux-buff *ngSwitchCase="9" kind="speed" [value]="reward.value"></lux-buff>
                     <lux-buff *ngSwitchCase="11" kind="heart" [value]="reward.value"></lux-buff>

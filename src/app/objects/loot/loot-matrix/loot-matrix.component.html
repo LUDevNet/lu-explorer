@@ -13,7 +13,7 @@
     <dd *ngIf="entry.gate_version">Only available with feature <code>{{entry.gate_version}}</code></dd>
     <dd *ngIf="getLootTable(entry.LootTableIndex) | async; let table">
       <ng-container *ngIf="table | limit:5; let show">
-        <lux-gui-item [id]="entry.itemid" *ngFor="let entry of show"></lux-gui-item>
+        <lux-slot [luxFetch]="entry.itemid" *ngFor="let entry of show"></lux-slot>
       </ng-container>
       <a class="more" *ngIf="table.length > 5" [routerLink]="['/objects/loot/table', entry.LootTableIndex ]">
         MORE

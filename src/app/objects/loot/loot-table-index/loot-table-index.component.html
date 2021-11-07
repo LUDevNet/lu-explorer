@@ -1,6 +1,6 @@
 <ul *ngIf="loot_table">
   <li *ngFor="let entry of loot_table">
-    <lux-gui-item [id]="entry.itemid"></lux-gui-item>
+    <lux-slot [luxFetch]="entry.itemid"></lux-slot>
     <span *ngIf="entry.MissionDrop"> [MissionDrop]</span>
     (sortPriority: {{entry.sortPriority}};
     id: {{entry.id}})

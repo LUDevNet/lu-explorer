@@ -23,7 +23,7 @@
   </ul>
   <section>
     <h3>Items</h3>
-    <lux-gui-item *ngFor="let itemID of set.itemIDs.split(',')" [id]="itemID.trim() | num"></lux-gui-item>
+    <lux-slot *ngFor="let itemID of set.itemIDs.split(',')" [luxFetch]="itemID.trim() | num"></lux-slot>
   </section>
   <h3>Skill Set</h3>
   <p>
