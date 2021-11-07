@@ -4,7 +4,7 @@
     {{inventory.$error}}
   </div>
   <ng-template #content>
-    <lux-slot *ngFor="let item of inventory.data.items" [luxFetch]="item.itemid" [count]="item.count"
+    <lux-slot *ngFor="let item of inventory.data.items" [luxFetchItem]="item.itemid" [count]="item.count"
       [equipped]="item.equip"></lux-slot>
   </ng-template>
 </ng-container>
