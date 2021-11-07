@@ -124,10 +124,10 @@
         <lux-slot *ngIf="mission.reward_maxwidget > 0" icon="/lu-res/textures/ui/rewards/maxwidget.png" [count]="mission.reward_maxwidget" luxTooltip="Extra Behavior Space"></lux-slot>
         <lux-slot *ngIf="mission.reward_maxwallet > 0" icon="/lu-res/textures/ui/rewards/maxwallet.png" [count]="mission.reward_maxwallet" luxTooltip="Extra Wallet Space"></lux-slot>
         <lux-slot *ngIf="mission.reward_bankinventory > 0" icon="/lu-res/textures/ui/rewards/maxbank.png" [count]="mission.reward_bankinventory" luxTooltip="Extra Vault Space"></lux-slot>
-        <lux-slot *ngIf="mission.reward_emote > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote}}"></lux-slot>
-        <lux-slot *ngIf="mission.reward_emote2 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote2}}"></lux-slot>
-        <lux-slot *ngIf="mission.reward_emote3 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote3}}"></lux-slot>
-        <lux-slot *ngIf="mission.reward_emote4 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote4}}"></lux-slot>
+        <lux-slot *ngIf="mission.reward_emote && mission.reward_emote > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote}}"></lux-slot>
+        <lux-slot *ngIf="mission.reward_emote2 && mission.reward_emote2 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote2}}"></lux-slot>
+        <lux-slot *ngIf="mission.reward_emote3 && mission.reward_emote3 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote3}}"></lux-slot>
+        <lux-slot *ngIf="mission.reward_emote4 && mission.reward_emote4 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote4}}"></lux-slot>
       </dd>
     </dl>
   </section>
