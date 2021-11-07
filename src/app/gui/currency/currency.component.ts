@@ -7,8 +7,8 @@ import { Component, Input, OnInit } from "@angular/core";
 })
 export class CurrencyComponent implements OnInit {
   @Input() count: number;
-  image: string;
-  title: string;
+  @Input() image: string;
+  @Input() title: string;
 
   constructor() { }
 

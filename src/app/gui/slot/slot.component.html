@@ -1,4 +1,4 @@
 <a [routerLink]="link">
-  <img class="icon" [src]="icon"/>
-  <span class="count" *ngIf="count > 1">{{count}}</span>
+  <img *ngIf="icon" class="icon" [src]="icon"/>
+  <span *ngIf="count > 1" class="count">{{count}}</span>
 </a>

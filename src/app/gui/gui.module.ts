@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ItemComponent } from './item/item.component';
+import { ItemDirective } from './item/item.directive';
+import { ItemTooltipComponent } from './item-tooltip/item-tooltip.component';
 import { UtilModule } from '../util/util.module';
 import { RouterModule } from '@angular/router';
 import { CoinsComponent } from './coins/coins.component';
+import { CurrencyComponent } from './currency/currency.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { TooltipDirective } from './tooltip.directive';
 import { FactionListComponent } from './faction-list/faction-list.component';
@@ -29,7 +31,14 @@ import { CustomFlagComponent } from './custom-flag/custom-flag.component';
 @NgModule({
   declarations: [
     CoinsComponent,
-    ItemComponent, TooltipComponent, TooltipDirective, FactionListComponent, CurrencyTableComponent, PreconditionComponent,
+    CurrencyComponent,
+    ItemDirective,
+    ItemTooltipComponent,
+    TooltipComponent,
+    TooltipDirective,
+    FactionListComponent,
+    CurrencyTableComponent,
+    PreconditionComponent,
     ItemRarityComponent,
     SimpleFlagComponent,
     ColorFlagComponent,
@@ -55,7 +64,14 @@ import { CustomFlagComponent } from './custom-flag/custom-flag.component';
   exports: [
     CoinsComponent,
     CustomFlagComponent,
-    ItemComponent, TooltipComponent, TooltipDirective, FactionListComponent, CurrencyTableComponent, PreconditionComponent,
+    CurrencyComponent,
+    ItemDirective,
+    ItemTooltipComponent,
+    TooltipComponent,
+    TooltipDirective,
+    FactionListComponent,
+    CurrencyTableComponent,
+    PreconditionComponent,
     PreconditionTreeComponent,
     ItemRarityComponent,
     SimpleFlagComponent,
