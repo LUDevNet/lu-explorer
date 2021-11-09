@@ -18,7 +18,7 @@
     margin-left: 0;
 }
 
-.mission-rewards ::ng-deep lux-slot {
+.mission-rewards lux-slot {
     background-image: url("../../../assets/ui/mission_i35.png");
     background-color: unset;
 }

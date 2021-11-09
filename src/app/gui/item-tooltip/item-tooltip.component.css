@@ -1,5 +1,9 @@
-.tooltip-title {
+:host {
     display: block;
+    width: 200px;
+}
+
+.title {
     padding: 5px;
     background: rgba(85, 85, 85, 0.6);
     border-radius: 12px;
@@ -7,5 +11,4 @@
     text-align: center;
     margin-top: 3px;
     margin-bottom: 3px;
-		width: 200px;
 }

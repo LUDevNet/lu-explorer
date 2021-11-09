@@ -1,11 +1,11 @@
-import { ApplicationRef, ComponentFactory, ComponentFactoryResolver, ComponentRef, Directive, ElementRef, EmbeddedViewRef, HostListener, Injector, Input, ReflectiveInjector, Renderer2, TemplateRef, Type, ViewContainerRef } from '@angular/core';
+import { ApplicationRef, ComponentFactory, ComponentFactoryResolver, ComponentRef, Directive, ElementRef, EmbeddedViewRef, HostListener, Injector, Input, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
 import { TooltipComponent } from './tooltip/tooltip.component';
 
 @Directive({
   selector: '[luxTooltip]'
 })
 export class TooltipDirective {
-  @Input('luxTooltip') content: string | TemplateRef<any> /*| Type<any>*/;
+  @Input('luxTooltip') content: string | TemplateRef<any> | ComponentRef<any>;
 
   private embeddedViewRef?: EmbeddedViewRef<TooltipComponent>;
   private componentRef: ComponentRef<TooltipComponent>;
@@ -68,12 +68,8 @@ export class TooltipDirective {
       return [this.embeddedViewRef.rootNodes];
     }
 
-    // Else it's a component
-    const factory = this.resolver.resolveComponentFactory(this.content);
-    const componentRef = factory.create(this.injector);
-    // In earlier versions, you may need to add this line
-    // this.appRef.attachView(componentRef.hostView);
-    return [[componentRef.location.nativeElement]];
+    // Else it's a component ref
+    return [[this.content.location.nativeElement]];
   }
 
   @HostListener('mouseout', ['$event.toElement', '$event.relatedTarget'])
