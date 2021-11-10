@@ -1,6 +1,3 @@
-<h4>{{task.uid}}: UseConsumable Task (9)</h4>
-The player needs to consume {{task.targetValue}} of the following item(s):
-<a routerLink="/objects/{{task.target}}">{{task.target}}</a><!--
---><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
--->, <a routerLink="/objects/{{target}}">{{target}}</a>
-</ng-container>
+<h4>{{task.uid}}: UseItem Task (9)</h4>
+The player needs to use the following item:
+<div><lux-slot [luxFetchItem]="task.target" [count]="task.targetValue"></lux-slot></div>
