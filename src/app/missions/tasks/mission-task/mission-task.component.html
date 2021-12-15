@@ -1,6 +1,12 @@
 <h4>{{task.uid}}: MissionComplete Task (16)</h4>
-The player needs to fulfill all of the following missions:
-<a routerLink="/missions/{{task.target}}">{{task.target}}</a><!--
---><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
--->, <a routerLink="/missions/{{target}}">{{target}}</a>
+The player needs to complete
+<ng-container *ngIf="task.targetGroup; else singleMission">
+  any <b luxTooltip="targetValue">{{task.targetValue}}</b> of the following missions:
+  <a routerLink="/missions/{{task.target}}">{{task.target}}</a><!--
+  --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
+  -->, <a routerLink="/missions/{{target}}">{{target}}</a>
+  </ng-container>.
 </ng-container>
+<ng-template #singleMission>
+the mission <br><lux-mission [luxFetch]="task.target"></lux-mission>
+</ng-template>
