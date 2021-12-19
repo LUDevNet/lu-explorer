@@ -20,7 +20,26 @@
       <td>{{color.factoryValid}}</td>
       <td>{{color.legopaletteid}}</td>
       <td>{{color.validCharacters}}</td>
-      <td>{{color.validTypes | bits}}</td>
+      <td>
+        <ng-container [ngSwitch]="color.validTypes">
+          <ng-container *ngSwitchCase="0">Invalid</ng-container>
+          <ng-container *ngSwitchCase="1">Accessories</ng-container>
+          <ng-container *ngSwitchCase="2">Shirts</ng-container>
+          <ng-container *ngSwitchCase="3">Pants</ng-container>
+          <ng-container *ngSwitchCase="4">Hair</ng-container>
+          <ng-container *ngSwitchCase="5">Accessories, Shirts</ng-container>
+          <ng-container *ngSwitchCase="6">Accessories, Pants</ng-container>
+          <ng-container *ngSwitchCase="7">Accessories, Hair</ng-container>
+          <ng-container *ngSwitchCase="8">Shirts, Pants</ng-container>
+          <ng-container *ngSwitchCase="9">Shirts, Hair</ng-container>
+          <ng-container *ngSwitchCase="10">Pants, Hair</ng-container>
+          <ng-container *ngSwitchCase="11">Accessories, Shirts, Pants</ng-container>
+          <ng-container *ngSwitchCase="12">Accessories, Shirts, Hair</ng-container>
+          <ng-container *ngSwitchCase="13">Shirts, Pants, Hair</ng-container>
+          <ng-container *ngSwitchCase="14">All Bindpoints</ng-container>
+          <ng-container *ngSwitchCase="15">Accessories, Pants, Hair</ng-container>
+        </ng-container> ({{color.validTypes}})
+      </td>
     </tr>
   </table>
 </div>
