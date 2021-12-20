@@ -6,14 +6,14 @@
       routerLink="/missions/type/{{mission.defined_type}}/subtype/{{mission.defined_subtype}}">{{mission.defined_subtype}}</a>
     <a *ngIf="mission && !mission.defined_subtype" routerLink="/missions/type/{{mission.defined_type}}">General</a>
   </li>
-  <li><span *ngIf="mission && mission.locStatus; else id_breadcrumb">{{missionLocale.name}}</span></li>
+  <li><span *ngIf="mission && mission.locStatus; else id_breadcrumb">{{missionLocale && missionLocale.name}}</span></li>
   <ng-template #id_breadcrumb>#{{mission && mission.id}}</ng-template>
 </ul>
 
 <app-group-icon *ngIf="mission" [name]="mission.defined_type"></app-group-icon>
 <h2>
   <ng-container *ngIf="mission && !mission.isMission; else headingElse">Achievement</ng-container> #{{id}} <small
-    *ngIf="mission && mission.locStatus">"{{missionLocale.name}}"</small>
+    *ngIf="mission && mission.locStatus">"{{missionLocale && missionLocale.name}}"</small>
 </h2>
 <ng-template #headingElse>Mission</ng-template>
 
