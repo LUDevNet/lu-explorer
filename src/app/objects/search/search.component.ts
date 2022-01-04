@@ -1,9 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { TouchSequence } from 'selenium-webdriver';
-import { Locale_Objects } from '../../locale';
 import { SearchService, Search_Object } from '../../util/services/search.service';
+import Index from 'flexsearch/dist/module/index.js';
 
 export interface BasicSearchResult {
   field: string,
@@ -28,6 +27,7 @@ class SearchState {
   term: string;
   results: Search_Object[];
   keys: Set<number>;
+  field_index: number = 0;
   offset: number = 0;
   hasMore: boolean;
 
@@ -36,24 +36,24 @@ class SearchState {
     this.results = []
     this.keys = new Set();
     this.offset = 0;
+    this.field_index = 0;
     this.hasMore = false;
   }
 
-  pushBatch(result: BasicSearchResult[], docs: Docs) {
-    this.offset += BATCH_SIZE;
-    this.hasMore = false;
-    for (let res of result) {
-      console.log("Loading batch field", res.field, "size", res.result.length);
-      if (res.result.length == BATCH_SIZE) {
-        this.hasMore = true;
-      }
-      for (let id of res.result) {
-        if (!this.keys.has(id)) {
-          this.keys.add(id);
-          const doc = docs.get(id);
-          console.log("push result", )
-          this.results.push(doc);
-        }
+  pushBatch(result: number[], docs: Docs, wasLimit: number) {
+    console.log("result: ", result)
+    if (result.length == wasLimit) {
+      this.offset += wasLimit;
+    } else {
+      this.offset = 0;
+      this.field_index += 1;
+    }
+    this.hasMore = this.field_index < 6; // FIXME: 
+    for (let id of result) {
+      if (!this.keys.has(id)) {
+        this.keys.add(id);
+        const doc = docs.get(id) || { id: id, name: "FIXME" };
+        this.results.push(doc);
       }
     }
   }
@@ -69,6 +69,7 @@ export class ObjectsSearchComponent implements OnInit {
   query: Subject<string> = new Subject();
 
   state: SearchState;
+  indices: Index[];
 
   interactionObserver: IntersectionObserver;
 
@@ -80,11 +81,24 @@ export class ObjectsSearchComponent implements OnInit {
     this.search.loadObjectSearch();
     this.search.$object_index_ready.subscribe(x => this.ready = x)
     this.query.pipe(debounceTime(200)).subscribe(term => {
-      const result = this.findObject(term, 0);
       const newState = new SearchState(term);
-      newState.pushBatch(result, this.search.objects);
+      let count = 0;
+      while (count < BATCH_SIZE && newState.field_index < 6) {
+        const limit = BATCH_SIZE - count;
+        const result = this.findObject(term, 0, 0, limit);
+        count += result.length;
+        newState.pushBatch(result, this.search.objects, limit);
+      }
       this.state = newState;
     });
+    this.indices = [
+      this.search.obj_index_locale_name,
+      this.search.obj_index_db_name,
+      this.search.obj_index_db_display_name,
+      this.search.obj_index_locale_description,
+      this.search.obj_index_db_description,
+      this.search.obj_index_db_internal_notes,
+    ];
   }
 
   ngAfterViewInit() {
@@ -101,15 +115,22 @@ export class ObjectsSearchComponent implements OnInit {
     console.log("Loading more");
     const state = this.state;
     state.hasMore = false;
-    let batch = this.findObject(state.term, state.offset);
-    state.pushBatch(batch, this.search.objects);
+    let count = 0;
+    while (count < BATCH_SIZE && state.field_index < 6) {
+      const limit = BATCH_SIZE - count
+      let batch = this.findObject(state.term, state.offset, state.field_index, limit);
+      count += batch.length;
+      state.pushBatch(batch, this.search.objects, limit);
+    }
   }
 
   updateSearch(event: Event) {
     this.query.next((event.target as HTMLInputElement).value);
   }
 
-  findObject(term: string, offset: number): BasicSearchResult[] {
-    return this.search.object_index.search(term, { limit: BATCH_SIZE, offset: offset });
+  findObject(term: string, offset: number, field_index: number, limit: number): number[] {
+    console.log("find object", term, offset, field_index, limit);
+    let index = this.indices[field_index];
+    return index ? index.search(term, { limit, offset: offset }) : [];
   }
 }
