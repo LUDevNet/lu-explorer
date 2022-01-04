@@ -8,6 +8,7 @@ export interface Locale_Mission {
 
 export interface Locale_Objects {
     name?: string;
+    description?: string,
 }
 
 export interface Locale_RewardCodes {

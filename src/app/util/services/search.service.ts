@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Locale_Objects } from '../../locale';
+import { Locale_Objects } from '../../../defs/locale'
 import { LuCoreDataService } from './lu-core-data.service';
 import Index from 'flexsearch/dist/module/index.js';
 import { ReplaySubject } from 'rxjs';

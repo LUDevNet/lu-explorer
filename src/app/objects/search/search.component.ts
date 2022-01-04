@@ -3,7 +3,7 @@ import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { SearchService, Search_Object } from '../../util/services/search.service';
 import Index from 'flexsearch/dist/module/index.js';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface BasicSearchResult {
   field: string,
