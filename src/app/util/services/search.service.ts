@@ -39,7 +39,7 @@ export class SearchService {
   obj_loaded: boolean = false;
 
   constructor(private luCoreData: LuCoreDataService) {
-    const index_options = { tokenize: 'full' };
+    const index_options = { tokenize: 'forward', language: 'en' };
     this.obj_index_locale_name = new Index(index_options);
     this.obj_index_locale_description = new Index(index_options);
     this.obj_index_db_name = new Index(index_options);
@@ -49,9 +49,10 @@ export class SearchService {
     this.$object_index_ready = new ReplaySubject(1);
   }
 
-  loadObjectSearch() {
+  /** Initialize search, return true if it's already initialized, false otherwise */
+  loadObjectSearch(): boolean {
     if (this.obj_load > 0) {
-      return;
+      return true;
     }
     this.obj_load += 1;
     this.luCoreData.getLocaleSubtree<Locale_Objects>("Objects").subscribe(x => {
@@ -86,6 +87,7 @@ export class SearchService {
       }
       this.checkComplete();
     });
+    return false;
   }
 
   checkComplete() {
