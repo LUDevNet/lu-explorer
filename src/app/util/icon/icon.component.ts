@@ -3,7 +3,6 @@ import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { LuJsonService } from '../../services';
 import { DB_Icons } from '../../../defs/cdclient';
 import { Observable } from 'rxjs';
-import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-icon',

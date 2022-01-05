@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { UtilModule } from './util/util.module';
 import { MiscModule } from './misc/misc.module';
 import { SerializeModule } from './serialize/serialize.module';
+import { SearchService } from './util/services/search.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SerializeModule } from './serialize/serialize.module';
     MessageService,
     LuLocaleService,
     LuDocsService,
+    SearchService,
     Title,
   ],
   bootstrap: [AppComponent]

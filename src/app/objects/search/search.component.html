@@ -1,0 +1,24 @@
+<ul class="breadcrumbs">
+    <li><a routerLink="/objects">Objects</a></li>
+    <li>Search</li>
+</ul>
+<section>
+    <h3>Search</h3>
+    <p><strong>Note:</strong> The search index takes a few seconds to initialize</p>
+    <div class="query">
+        <input class="search-box" [class.enabled]="ready" type="text" (input)="updateSearch($event)" #input>
+        &nbsp;&nbsp;&nbsp;
+        <span *ngIf="!ready">Loading search index...</span>
+    </div>
+    <h4>Results</h4>
+    <section *ngIf="state">
+        <div class="result" *ngFor="let doc of state.results">
+            <b><a routerLink="/objects/{{doc.id}}">Object #{{doc.id}}: {{doc.name}}</a></b>
+            <p>{{doc.description}}</p>
+        </div>
+        <div *ngIf="state.results.length == 0">
+            <em>No results</em>
+        </div>
+    </section>
+    <a (click)="loadMore()" [hidden]="!state || !state.hasMore" #more>Load more...</a>
+</section>
