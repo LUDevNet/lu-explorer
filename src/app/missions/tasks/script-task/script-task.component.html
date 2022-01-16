@@ -8,5 +8,5 @@ This task is controlled by a script!
     </ng-container>
   </li>
   <li>Value: {{task.targetValue}}</li>
-  <li>Param: {{task.taskParam1}}</li>
+  <li *ngIf="task.taskParam1 !== null">Param: {{task.taskParam1}}</li>
 </ul>

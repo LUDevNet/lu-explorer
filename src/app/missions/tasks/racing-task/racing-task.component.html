@@ -15,15 +15,19 @@
   </span>
   <span *ngSwitchCase="4">
     complete <b luxTooltip="targetValue">any {{task.targetValue}}</b> of the following missions:
-    <ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
-      <a routerLink="/missions/{{target}}">{{target}}</a>,
-    </ng-container>
+    <ul class="inline-ul">
+      <li *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
+        <a routerLink="/missions/{{target}}">{{target}}</a>
+      </li>
+    </ul>
   </span>
   <span *ngSwitchCase="5">
     complete <b luxTooltip="targetValue">any {{task.targetValue}}</b> of the following missions:
-    <ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
-      <a routerLink="/missions/{{target}}">{{target}}</a>,
-    </ng-container>
+    <ul class="inline-ul">
+      <li *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
+        <a routerLink="/missions/{{target}}">{{target}}</a>
+      </li>
+    </ul>
   </span>
   <span *ngSwitchCase="6">
     swap out every module on their car in a single modular build session (excluding chassis).
@@ -43,8 +47,8 @@
   </span>
   <span *ngSwitchCase="13">
     enter
-    <ng-container *ngTemplateOutlet="zones"></ng-container>
-    <b luxTooltip="targetValue">{{task.targetValue}}</b> times.
+    <ng-container *ngTemplateOutlet="zones"></ng-container>&nbsp;
+		<b luxTooltip="targetValue">{{task.targetValue}}</b> times.
   </span>
   <span *ngSwitchCase="14">
     win <b luxTooltip="targetValue">{{task.targetValue}}</b> races in
@@ -52,9 +56,11 @@
   </span>
   <span *ngSwitchCase="15">
     win <b luxTooltip="targetValue">{{task.targetValue}}</b> races in <b>each</b> of the zones
-    <ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
-      <a routerLink="/zones/{{target}}">{{target}}</a>,
-    </ng-container>.
+    <ul class="inline-ul">
+      <li *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
+        <a routerLink="/zones/{{target}}">{{target}}</a>
+      </li>
+    </ul>.
   </span>
   <span *ngSwitchCase="16">
     finish in last place in <b luxTooltip="targetValue">{{task.targetValue}}</b> races in
@@ -62,9 +68,11 @@
   </span>
   <span *ngSwitchCase="17">
     smash <b luxTooltip="targetValue">{{task.targetValue}}</b> of the object(s)
-    <ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
-      <lux-object [luxFetch]="target | num"></lux-object>,
-    </ng-container>
+    <ul class="inline-ul">
+      <li *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
+        <lux-object [luxFetch]="target | num"></lux-object>
+      </li>
+    </ul>
   </span>
   <ng-template #zones>
     <ng-container *ngIf="task.target; else zonesPlural">
@@ -73,9 +81,11 @@
     </ng-container>
     <ng-template #zonesPlural>
       any of the zones
-      <ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
-        <a routerLink="/zones/{{target}}">{{target}}</a>,
-      </ng-container>
+      <ul class="inline-ul">
+        <li *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
+          <a routerLink="/zones/{{target}}">{{target}}</a>
+        </li>
+      </ul>
     </ng-template>
   </ng-template>
 </p>

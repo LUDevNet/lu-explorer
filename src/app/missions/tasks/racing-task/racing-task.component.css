@@ -1,0 +1,14 @@
+.inline-ul {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+.inline-ul > li {
+    display: inline;
+}
+
+.inline-ul > li + li::before {
+    display: inline;
+    content: ", ";
+}
