@@ -1,4 +1,8 @@
 <h4>{{task.uid}}: UseEmote Task (5)</h4>
-The player needs to use the emote #{{task.taskParam1}} near
-an object of template
-<a routerLink="/objects/{{task.target}}">{{task.target}}</a>
+The player needs to use any one of the following emotes
+<ul class="item-list">
+  <li *ngFor="let target of task.taskParam1 ? task.taskParam1.split(',') : []">
+    <lux-slot icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{target}}"></lux-slot>
+  </li>
+</ul>
+near <lux-object [luxFetch]="task.target"></lux-object>.

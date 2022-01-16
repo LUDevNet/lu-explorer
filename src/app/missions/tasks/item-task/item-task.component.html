@@ -1,39 +1,20 @@
-<h4>{{task.uid}}: ObtainItem Task (11)</h4>
+<h4>{{task.uid}}: Gather Task (11)</h4>
 <p>
-  The player needs to obtain {{task.targetValue}} of
-  <span *ngIf="task.taskParam1 | bitset:2">
-    the item <a routerLink="/objects/{{task.target}}">{{task.target}}</a>
-  </span>
-  <span *ngIf="task.taskParam1 | bitset:2 | not">
-    the items <a routerLink="/objects/{{task.target}}">{{task.target}}</a>
-    <ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-    -->, <a routerLink="/objects/{{target}}">{{target}}</a><!--
-    --></ng-container>
-  </span>
+  <ng-container *ngIf="task.targetGroup; else singleItem">
+    The player needs to obtain <b>any {{task.targetValue}}</b> of the following items:
+    <ul class="item-list">
+      <li>
+        <lux-slot [luxFetchItem]="task.target"></lux-slot>
+      </li>
+      <li *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
+        <lux-slot [luxFetchItem]="target | num"></lux-slot>
+      </li>
+    </ul>
+  </ng-container>
+  <ng-template #singleItem>
+    The player needs to obtain:
+    <lux-slot class="single-item" [luxFetchItem]="task.target" [count]="task.targetValue"></lux-slot>
+  </ng-template>
 </p>
-<dl *ngIf="task.targetGroup && task.taskParam1 | bitset:2">
-  <dt>The player needs to obtain the item by smashing objects of type(s):</dt>
-  <dd *ngFor="let target of task.targetGroup.split(',')">
-    Object <a routerLink="/objects/{{target}}">{{target}}</a>
-  </dd>
-</dl>
-<ul>
-  <li *ngIf="task.taskParam1 | bitset:1">
-    The item is not consumed on mission turnin
-  </li>
-  <li *ngIf="task.taskParam1 | bitset:1 | not">
-    The item is consumed on mission turnin
-  </li>
-  <li *ngIf="task.taskParam1 | bitset:2">
-    Something 2?
-  </li>
-  <li *ngIf="task.taskParam1 | bitset:2 | not">
-    Not something 2?
-  </li>
-  <li *ngIf="task.taskParam1 | bitset:4">
-    The item needs to be equipped (???)
-  </li>
-  <li *ngIf="task.taskParam1 | bitset:4 | not">
-    The item does not need to be equipped (???)
-  </li>
-</ul>
+<lux-simple-flag name="keepItem" [value]="(task.taskParam1 | bitset:1) && (task.taskParam1 | bitset:2 | not)" trueTitle="The item is not consumed on mission turnin." falseTitle="The item is consumed on mission turnin."></lux-simple-flag>
+<lux-simple-flag name="neverLowerCount" [value]="task.taskParam1 | bitset:4" trueTitle="Losing items does not affect the total." falseTitle="Losing items decreases the total."></lux-simple-flag>
