@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { DB_Behavior } from '../../../defs/cdclient';
 import { Rev_Behavior } from '../../../defs/api';
@@ -16,7 +16,6 @@ declare var vis: any;
 export class BehaviorDetailAltComponent implements OnInit {
   id: number;
 
-  selectedBehaviorID: number;
   nodes: any[] = [];
   edges: any[] = [];
   behaviors: any = {};
@@ -32,6 +31,7 @@ export class BehaviorDetailAltComponent implements OnInit {
   errors: number[] = [];
 
   constructor(private route: ActivatedRoute,
+    private router: Router,
     private luCoreData: LuCoreDataService) {
   }
 
@@ -316,6 +316,8 @@ export class BehaviorDetailAltComponent implements OnInit {
       this.nodes.push({ id: this.id, label: String(this.id), level: 0 });
       this.process(this.id, 0);
       this.redraw();
+      this.selectedBehavior = this.behaviors[this.route.snapshot.paramMap.get('selected')];
+      this.network.selectNodes([this.selectedBehavior.behaviorID]);
     });
   }
 
@@ -325,15 +327,6 @@ export class BehaviorDetailAltComponent implements OnInit {
       this.network = undefined;
     }
 
-    let i = 0;
-    let m = 1;
-    let d = 1;
-    while (d > 0) {
-      d = this.nodes.filter(node => node.level === i).length;
-      m = Math.max(d, m);
-      i++;
-    }
-
     var data = {
       nodes: this.nodes,
       edges: this.edges
@@ -341,7 +334,7 @@ export class BehaviorDetailAltComponent implements OnInit {
 
     var options = {
       width: '100%',
-      height: m * (900 / i) + 'px',
+      height: '100%',
       nodes: {
         font: {
           size: 30,
@@ -406,11 +399,10 @@ export class BehaviorDetailAltComponent implements OnInit {
 
   select(params: any): void {
     if (params.nodes.length > 0) {
+      this.router.navigate(['..', params.nodes[0]], { relativeTo: this.route });
       this.selectedBehavior = this.behaviors[params.nodes[0]];
-      this.selectedBehaviorID = params.nodes[0];
     } else {
       this.selectedBehavior = undefined;
-      this.selectedBehaviorID = undefined;
     }
   }
 

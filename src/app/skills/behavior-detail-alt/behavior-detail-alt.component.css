@@ -1,8 +1,27 @@
-#mynetwork
-{
-	color: #000;
+#mynetwork {
+    color: #000;
+    background-color: transparent;
+    height: 80vh;
 }
 
 .skill-link + .skill-link::before {
-	content: ", ";
+    content: ", ";
+}
+
+@media(min-width: 800px) {
+    #behavior-pane {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #behavior-inspector {
+        flex: 1;
+        height: 80vh;
+        min-width: 300px;
+        overflow-y: auto;
+    }
+
+    #mynetwork {
+        flex: 10;
+    }
 }

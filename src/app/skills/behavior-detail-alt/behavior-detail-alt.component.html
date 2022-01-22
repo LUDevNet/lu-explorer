@@ -6,33 +6,37 @@
   </p>
   <hr>
 </section>
-<div id="mynetwork"></div>
-<table *ngIf="selectedBehavior">
-  <tr>
-    <th>Key</th>
-    <th>Value</th>
-  </tr>
-  <tr>
-    <td>behaviorID</td>
-    <td>{{selectedBehaviorID}}</td>
-  </tr>
-  <tr>
-    <td>templateID</td>
-    <td>{{selectedBehavior.templateID}}</td>
-  </tr>
-  <tr>
-    <td>effectID</td>
-    <td>{{selectedBehavior.effectID}}</td>
-  </tr>
-  <tr>
-    <td>effectHandle</td>
-    <td>{{selectedBehavior.effectHandle}}</td>
-  </tr>
-  <tr *ngFor="let entry of selectedBehavior.parameters | keys">
-    <td>{{entry.key}}</td>
-    <td>{{entry.value}}</td>
-  </tr>
-</table>
+<div id="behavior-pane">
+  <div id="mynetwork"></div>
+  <div id="behavior-inspector">
+    <table *ngIf="selectedBehavior">
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>behaviorID</td>
+        <td>{{selectedBehavior.behaviorID}}</td>
+      </tr>
+      <tr>
+        <td>templateID</td>
+        <td>{{selectedBehavior.templateID}}</td>
+      </tr>
+      <tr>
+        <td>effectID</td>
+        <td>{{selectedBehavior.effectID}}</td>
+      </tr>
+      <tr>
+        <td>effectHandle</td>
+        <td>{{selectedBehavior.effectHandle}}</td>
+      </tr>
+      <tr *ngFor="let entry of selectedBehavior.parameters | keys">
+        <td>{{entry.key}}</td>
+        <td>{{entry.value}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
 <div *ngIf="errors.length > 0">
   Failed to fetch data for behavior nodes:
   <ul>
