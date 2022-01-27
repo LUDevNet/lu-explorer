@@ -14,9 +14,9 @@ object<ng-container *ngIf="task.targetValue > 1">s</ng-container>
   </ng-container>
 </ng-container>
 <ng-template #objComponents >
-  <lux-object [luxFetch]="task.target"></lux-object>
+  <a [luxFetchObject]="task.target"></a>
   <ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-    -->, <lux-object [luxFetch]="target | num"></lux-object>
+    -->, <a [luxFetchObject]="target | num"></a>
   </ng-container>
 </ng-template><!--
 -->.

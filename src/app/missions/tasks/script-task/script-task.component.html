@@ -2,9 +2,9 @@
 This task is controlled by a script!
 <ul>
   <li>Target<ng-container *ngIf="task.targetGroup">s</ng-container>:
-    <lux-object [luxFetch]="task.target"></lux-object><!--
+    <a [luxFetchObject]="task.target"></a><!--
     --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-    -->, <lux-object [luxFetch]="target | num"></lux-object>
+    -->, <a [luxFetchObject]="target | num"></a>
     </ng-container>
   </li>
   <li>Value: {{task.targetValue}}</li>
