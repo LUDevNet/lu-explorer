@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { PaginationComponent } from './pagination/pagination.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { GithubSpaComponent } from './github-spa/github-spa.component';
-import { IconComponent } from './icon/icon.component';
 
 import { ArraySortPipe, ArraySortNumPipe, DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, LimitPipe, NonNullPipe, RangePipe, RemovePipe, MaxUpToPipe, ArrKeysPipe, KeySetPipe, ParamSetPipe, AsArrayPipe } from './pipes/data.pipe';
 import { BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe, DivCeilPipe } from './pipes/logical.pipe';
@@ -25,7 +24,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
 
 @NgModule({
   declarations: [
-    PaginationComponent, DataTableComponent, GithubSpaComponent, IconComponent,
+    PaginationComponent, DataTableComponent, GithubSpaComponent,
     DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, ArrKeysPipe, NonNullPipe, RangePipe, RemovePipe, LimitPipe, ArraySortPipe, ArraySortNumPipe, MaxUpToPipe,
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe, DivCeilPipe,
     KeySetPipe, ParamSetPipe, AsArrayPipe,
@@ -40,7 +39,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
     RouterModule.forChild([])
   ],
   exports: [
-    PaginationComponent, DataTableComponent, GithubSpaComponent, IconComponent,
+    PaginationComponent, DataTableComponent, GithubSpaComponent,
     DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, ArrKeysPipe, NonNullPipe, RangePipe, RemovePipe, ArraySortPipe, ArraySortNumPipe,
     LimitPipe, MaxUpToPipe, KeySetPipe, ParamSetPipe, AsArrayPipe,
     BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe, DivCeilPipe,

@@ -1,7 +1,7 @@
 <a routerLink="/missions/{{id}}" [luxTooltip]="displayTooltip">
   <div [class]="isMission ? 'mission' : 'achievement'" >
     <div class="slot" [class.complete]="status == 4">
-      <app-icon class="icon" width="100%" [iconID]="iconID"></app-icon>
+      <img class="icon" [luxFetchIcon]="iconID">
       <span *ngIf="status != 2 && status != 4" class="status">status {{status}}</span>
     </div>
     <div class="title">{{title}}</div>

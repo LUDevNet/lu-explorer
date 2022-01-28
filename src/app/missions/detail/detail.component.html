@@ -196,7 +196,7 @@
 		<ng-container *ngIf="mission">
 			<ng-container *ngIf="mission.isMission; else achievementTooltip">
 				<dt class="mission-tooltip" luxTooltip="completion_succeed_tip">
-					<app-icon class="mission-tooltip-icon" *ngIf="text" [iconID]="text.turnInIconID"></app-icon>
+					<img class="mission-tooltip-icon" *ngIf="text" [luxFetchIcon]="text.turnInIconID">
 					<img class="mission-tooltip-arrow" src="/lu-res/ui/ingame/missioncompletemessage_ic.png" alt="" />
 					<img class="mission-tooltip-arrow" src="/lu-res/ui/ingame/missioncompletemessage_ic.png" alt="" style="opacity: 0.75;" />
 					<img class="mission-tooltip-arrow" src="/lu-res/ui/ingame/missioncompletemessage_ic.png" alt="" style="opacity: 0.5;" />
@@ -205,7 +205,7 @@
 			</ng-container>
 			<ng-template #achievementTooltip>
 				<dt class="achievement-tooltip" luxTooltip="completion_succeed_tip">
-					<app-icon class="achievement-tooltip-icon" [iconID]="mission.missionIconID"></app-icon>
+					<img class="achievement-tooltip-icon" [luxFetchIcon]="mission.missionIconID">
 					<blockquote *ngIf="textsLocale && textsLocale.completion_succeed_tip" class="achievement-tooltip-text" [innerHTML]="textsLocale.completion_succeed_tip"></blockquote>
 				</dt>
 			</ng-template>

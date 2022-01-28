@@ -1,6 +1,0 @@
-<ng-container *ngIf="$icon | async; let icon">
-    <img *ngIf="icon && icon.IconPath" class="icon" [style.max-width]="width"
-    src="/lu-res/textures/ui/{{(icon.IconPath | lowercase) | replace:'dds$':'png' }}"
-    [title]="(icon && caption && icon.IconName) ? icon.IconName : ''"
-    [alt]="(icon && caption && icon.IconName) ? icon.IconName : ''"/>
-</ng-container>

@@ -1,6 +1,6 @@
 <section class="mission-task" [ngSwitch]="task.taskType">
   <div class="task-icon">
-    <app-icon [iconID]="task.IconID" [caption]="false"></app-icon>
+    <img [luxFetchIcon]="task.IconID" style="max-width: 64px">
   </div>
   <div class="task-description">
     <app-smash-task *ngSwitchCase="0" [task]="task"></app-smash-task>

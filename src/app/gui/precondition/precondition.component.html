@@ -1,5 +1,5 @@
 <div class="precondition" *ngIf="$precondition | async; let precondition">
-    <app-icon class="icon" *ngIf="precondition.iconID" [iconID]="precondition.iconID"></app-icon>
+    <img class="icon" *ngIf="precondition.iconID" [luxFetchIcon]="precondition.iconID" style="max-width: 64px">
     <div>
         <ng-container [ngSwitch]="precondition.type">
             <div *ngSwitchCase="0">Item Equipped</div>

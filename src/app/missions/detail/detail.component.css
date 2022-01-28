@@ -60,13 +60,14 @@
     background-image: url("/lu-res/ui/ingame/achievements_i1e.png");
     background-size: 130% 175%;
     display: flex;
-		max-width: 256px;
+    max-width: 256px;
     padding: 0.5rem;
     padding-left: 1rem;
 }
 
 .achievement-tooltip-icon {
     align-self: center;
+    margin-bottom: 5px;
 }
 
 .achievement-tooltip-text {
@@ -75,7 +76,7 @@
     color: black;
     font-size: 1.1rem;
     font-weight: bold;
-		line-height: 1rem;
+    line-height: 1rem;
 }
 
 .mission-tooltip {
@@ -86,9 +87,9 @@
 }
 
 .mission-tooltip-icon {
-    align-self: end;
-    height: 57px;
     margin-right: 2px;
+    margin-bottom: -7px;
+    width: 64px;
 }
 
 .mission-tooltip-arrow {
