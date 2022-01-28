@@ -1,8 +1,9 @@
 import { ApplicationRef, ComponentFactoryResolver, Directive, ElementRef, HostListener, Injector, Input, Renderer2 } from "@angular/core";
 import { LocationStrategy } from "@angular/common";
 import { ActivatedRoute, Router, RouterLinkWithHref } from "@angular/router";
-import { LuJsonService } from "../../services";
+import { LuCoreDataService } from "../../services";
 import { TooltipDirective } from "../tooltip.directive";
+import { DB_Objects } from "../../../defs/cdclient";
 
 @Directive({
   selector: "a[luxFetchObject]"
@@ -13,11 +14,11 @@ export class ObjectDirective extends RouterLinkWithHref {
   @Input("luxFetchObject") set id(id: number) {
     this.routerLink = "/objects/"+id;
     this.element.nativeElement.textContent = `#${id}`;
-    this.luJson.getObject(id).subscribe(this.onObject.bind(this));
+    this.luCoreData.getSingleTableEntry("Objects", id).subscribe(this.onObject.bind(this));
   }
 
   constructor(
-    private luJson: LuJsonService,
+    private luCoreData: LuCoreDataService,
     private element: ElementRef<HTMLAnchorElement>,
     router: Router,
     route: ActivatedRoute,
@@ -31,7 +32,7 @@ export class ObjectDirective extends RouterLinkWithHref {
     this.tooltipDirective = new TooltipDirective(element, applicationRef, renderer, injector, resolver);
   }
 
-  onObject(object: any) {
+  onObject(object: DB_Objects) {
     if (object.displayName) {
       this.element.nativeElement.textContent = object.displayName;
     } else if (object.name) {
