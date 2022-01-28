@@ -20,7 +20,6 @@ import { BuffFlagComponent } from './buff-flag/buff-flag.component';
 import { ReputationComponent } from './reputation/reputation.component';
 import { UscoreComponent } from './uscore/uscore.component';
 import { SlotComponent } from './slot/slot.component';
-import { ObjectComponent } from './object/object.component';
 import { ObjectDirective } from './object/object.directive';
 import { MissiondisplayRewardComponent } from './missiondisplay-reward/missiondisplay-reward.component';
 import { BuffComponent } from './buff/buff.component';
@@ -48,7 +47,6 @@ import { CustomFlagComponent } from './custom-flag/custom-flag.component';
     ReputationComponent,
     UscoreComponent,
     SlotComponent,
-    ObjectComponent,
     ObjectDirective,
     MissiondisplayRewardComponent,
     BuffComponent,
@@ -82,7 +80,6 @@ import { CustomFlagComponent } from './custom-flag/custom-flag.component';
     ReputationComponent,
     UscoreComponent,
     SlotComponent,
-    ObjectComponent,
     ObjectDirective,
     MissiondisplayRewardComponent,
     MissionComponent,

@@ -70,7 +70,7 @@
     smash <b luxTooltip="targetValue">{{task.targetValue}}</b> of the object(s)
     <ul class="inline-ul">
       <li *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
-        <lux-object [luxFetch]="target | num"></lux-object>
+        <a [luxFetchObject]="target | num"></a>
       </li>
     </ul>
   </span>

@@ -162,31 +162,31 @@
   <dl id="chat-bubbles">
     <div *ngIf="getChatState(textsLocale, 1); let text">
       <dt><blockquote class="chat-bubble" luxTooltip="chat_state_1" [innerHTML]="text"></blockquote></dt>
-      <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when approached before the mission is offered.</dd>
+      <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when approached before the mission is offered.</dd>
     </div>
     <div *ngIf="textsLocale.accept_chat_bubble">
       <dt><blockquote class="chat-bubble" luxTooltip="accept_chat_bubble" [innerHTML]="textsLocale.accept_chat_bubble"></blockquote></dt>
-      <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when the mission is accepted.</dd>
+      <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when the mission is accepted.</dd>
     </div>
     <div *ngIf="getChatState(textsLocale, 2); let text">
       <dt><blockquote class="chat-bubble" luxTooltip="chat_state_2" [innerHTML]="text"></blockquote></dt>
-      <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when approached while the mission is in progress.</dd>
+      <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when approached while the mission is in progress.</dd>
     </div>
     <div *ngIf="getChatState(textsLocale, 3); let text">
       <dt><blockquote class="chat-bubble" luxTooltip="chat_state_3" [innerHTML]="text"></blockquote></dt>
-      <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when approached when the mission is ready to be completed.</dd>
+      <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when approached when the mission is ready to be completed.</dd>
     </div>
     <div *ngIf="getChatSubState(textsLocale, 3, 'turnin'); let text">
       <dt><blockquote class="chat-bubble" luxTooltip="chat_state_3_turnin" [innerHTML]="text"></blockquote></dt>
-      <dd>Spoken by <lux-object [luxFetch]="mission.target_objectID"></lux-object> when approached when the mission is ready to be completed.</dd>
+      <dd>Spoken by <a [luxFetchObject]="mission.target_objectID"></a> when approached when the mission is ready to be completed.</dd>
     </div>
     <div *ngIf="getChatState(textsLocale, 4); let text">
       <dt><blockquote class="chat-bubble" luxTooltip="chat_state_4" [innerHTML]="text"></blockquote></dt>
-      <dd>Spoken by <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when approached when the mission is complete.</dd>
+      <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when approached when the mission is complete.</dd>
     </div>
     <div *ngIf="getChatSubState(textsLocale, 4, 'turnin'); let text">
       <dt><blockquote class="chat-bubble" luxTooltip="chat_state_4_turnin" [innerHTML]="text"></blockquote></dt>
-      <dd>Spoken by <lux-object [luxFetch]="mission.target_objectID"></lux-object> when approached when the mission is complete.</dd>
+      <dd>Spoken by <a [luxFetchObject]="mission.target_objectID"></a> when approached when the mission is complete.</dd>
     </div>
   </dl>
 </section>
@@ -227,19 +227,19 @@
   <dl id="mission-dialogs">
     <div *ngIf="textsLocale.in_progress">
       <dt><blockquote class="mission-dialog" luxTooltip="in_progress" [innerHTML]="textsLocale.in_progress"></blockquote></dt>
-      <dd>Displayed when interacting with <lux-object [luxFetch]="mission.offer_objectID"></lux-object> while the mission is in progress, as well when selecting the mission in the passport.</dd>
+      <dd>Displayed when interacting with <a [luxFetchObject]="mission.offer_objectID"></a> while the mission is in progress, as well when selecting the mission in the passport.</dd>
     </div>
     <div *ngIf="textsLocale.offer">
       <dt><blockquote class="mission-dialog" luxTooltip="offer" [innerHTML]="textsLocale.offer"></blockquote></dt>
-      <dd>Displayed when interacting with <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when the mission is available.</dd>
+      <dd>Displayed when interacting with <a [luxFetchObject]="mission.offer_objectID"></a> when the mission is available.</dd>
     </div>
     <div *ngIf="textsLocale.offer_repeatable">
       <dt><blockquote class="mission-dialog" luxTooltip="offer_repeatable" [innerHTML]="textsLocale.offer_repeatable"></blockquote></dt>
-      <dd>Displayed when interacting with <lux-object [luxFetch]="mission.offer_objectID"></lux-object> when the mission is again available after the mission has already been completed.</dd>
+      <dd>Displayed when interacting with <a [luxFetchObject]="mission.offer_objectID"></a> when the mission is again available after the mission has already been completed.</dd>
     </div>
     <div *ngIf="textsLocale.ready_to_complete">
       <dt><blockquote class="mission-dialog" luxTooltip="ready_to_complete" [innerHTML]="textsLocale.ready_to_complete"></blockquote></dt>
-      <dd>Displayed when interacting with <lux-object [luxFetch]="mission.target_objectID"></lux-object> when the mission is ready to be completed.</dd>
+      <dd>Displayed when interacting with <a [luxFetchObject]="mission.target_objectID"></a> when the mission is ready to be completed.</dd>
     </div>
   </dl>
 </ng-container>
