@@ -1,5 +1,13 @@
 <h4>{{task.uid}}: <a href="https://lu-docs.readthedocs.io/en/latest/game-mechanics/mission-system.html#useskill-10"
         target="_blank">UseSkill Task
         (10)</a></h4>
-The player needs to trigger {{task.targetValue}} of the skill(s)
+The player needs to use any of the skill(s)
 <span class="skill-link" *ngFor="let skill of skills()"><a routerLink="/skills/{{skill}}">{{skill}}</a></span>
+<ng-container *ngIf="task.target && !task.targetGroup"> on the object <a [luxFetchObject]="task.target"></a></ng-container>
+<ng-container *ngIf="task.target && task.targetGroup"> on any of the objects
+	<a [luxFetchObject]="task.target"></a>
+	<ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
+    -->, <a [luxFetchObject]="target | num"></a>
+  </ng-container>
+</ng-container><!--
+!-->&nbsp;<b luxTooltip="targetValue">{{task.targetValue}}</b> times.
