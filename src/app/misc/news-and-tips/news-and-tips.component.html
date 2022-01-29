@@ -14,7 +14,7 @@
             <h3 *ngIf="v.key === ''">No Feature Gate</h3>
             <h3 *ngIf="v.key !== ''">Feature Gate <code>{{v.key}}</code></h3>
             <div [id]="item.gate_version ? 'fg-'+item.gate_version : 'no-fg'" class="item" *ngFor="let item of v.value">
-                <app-icon [iconID]="item.iconID" width="100%" *ngIf="item.iconID"></app-icon>
+                <img [luxFetchIcon]="item.iconID" *ngIf="item.iconID">
                 <h4>{{(loc(item.id) | async).storyTitle}}</h4>
                 <p>{{(loc(item.id) | async).text}}</p>
             </div>

@@ -20,7 +20,7 @@
         </td>
         <td>{{entry.value.ref.AICombatWeight}}</td>
         <td>
-          <app-icon [width]="'32px'" [iconID]="entry.value.skill.skillIcon"></app-icon>
+          <img style="max-width: 32px; margin-bottom: 0;" [luxFetchIcon]="entry.value.skill.skillIcon">
         </td>
         <td>
           {{entry.value.skill.imaginationcost}}

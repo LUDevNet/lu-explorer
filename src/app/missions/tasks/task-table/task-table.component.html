@@ -23,9 +23,9 @@
       <td>{{task.targetValue}}</td>
       <td>{{task.taskParam1}}</td>
       <td><app-image [path]="task.largeTaskIcon"></app-image></td>
-      <td><app-icon [iconID]="task.IconID"></app-icon></td>
+      <td><img style="max-width: 64px" [luxFetchIcon]="task.IconID"></td>
       <td>{{task.uid}}</td>
-      <td><app-icon [iconID]="task.largeTaskIconID"></app-icon></td>
+      <td><img style="max-width: 64px" [luxFetchIcon]="task.largeTaskIconID"></td>
       <td>{{task.localize}}</td>
       <td>{{task.gate_version}}</td>
     </tr>

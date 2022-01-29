@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IconDirective } from './icon/icon.directive';
 import { ItemDirective } from './item/item.directive';
 import { ItemTooltipComponent } from './item-tooltip/item-tooltip.component';
 import { UtilModule } from '../util/util.module';
@@ -31,6 +32,7 @@ import { CustomFlagComponent } from './custom-flag/custom-flag.component';
   declarations: [
     CoinsComponent,
     CurrencyComponent,
+    IconDirective,
     ItemDirective,
     ItemTooltipComponent,
     TooltipComponent,
@@ -63,6 +65,7 @@ import { CustomFlagComponent } from './custom-flag/custom-flag.component';
     CoinsComponent,
     CustomFlagComponent,
     CurrencyComponent,
+    IconDirective,
     ItemDirective,
     ItemTooltipComponent,
     TooltipComponent,
