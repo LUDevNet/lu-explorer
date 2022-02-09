@@ -7,7 +7,7 @@ RUN npm ci
 RUN npx ng build --configuration production
 
 FROM rust:1.58.1-buster
-COPY --from=builder /app/docs /usr/src/explorer/docs
+COPY --from=builder /app/dist /usr/src/explorer/dist
 
 WORKDIR /usr/src/paradox-server
 COPY docker-paradox.toml paradox.toml
