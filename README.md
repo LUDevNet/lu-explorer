@@ -59,6 +59,24 @@ $ npm install
 $ ng serve
 ```
 
+## Docker Setup
+
+
+1. Build:
+  `docker build -t paradox-server`
+2. Deploy:
+
+Replace the paths on the left of the mappings to reflect your system:
+```docker
+  docker run -it --rm \
+    --name paradox-server \
+    -v /path/to/client:/luclient \
+    -v /path/to/client:/usr/src/paradox-server/client \
+    -v /path/to/cache:/cache/lu-res \
+    -p 3030:3030 \
+    paradox-server
+```
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
