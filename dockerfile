@@ -6,7 +6,7 @@ RUN git clone https://github.com/Xiphoseer/lu-explorer.git .
 RUN npm ci
 RUN npx ng build --configuration production
 
-FROM rust:1.58.1-buster
+FROM rust:1.58.1-bullseye
 COPY --from=builder /app/dist /dist
 
 WORKDIR /usr/src/paradox-server
