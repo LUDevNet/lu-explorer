@@ -1,11 +1,11 @@
 [general]
 port = 3030
-public = false
-domain = "localhost"
+public = true
+domain = "DOMAIN"
 
 [data]
 cdclient = "/luclient/res/cdclient.fdb"
 locale = "/luclient/locale/locale.xml"
-explorer_spa = "/usr/src/explorer/docs"
+explorer_spa = "/dist"
 lu_res_cache = "/cache/lu-res"
 lu_json_cache = "/cache/lu-json"
