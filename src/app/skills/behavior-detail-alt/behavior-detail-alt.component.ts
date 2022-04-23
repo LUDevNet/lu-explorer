@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { DB_Behavior } from '../../../defs/cdclient';
 import { Rev_Behavior } from '../../../defs/api';
+import { behaviorTypes } from '../../../defs/behaviors';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 
 declare var vis: any;

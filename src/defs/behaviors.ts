@@ -5,7 +5,7 @@ interface BehaviorType {
     children?: Record<string, string> | boolean | "seq";
 };
 
-const behaviorTypes: BehaviorType[] = [
+export const behaviorTypes: BehaviorType[] = [
     null, // 0
     { // 1
         name: "BasicAttack",
