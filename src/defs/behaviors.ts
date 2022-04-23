@@ -34,7 +34,7 @@ const behaviorTypes: BehaviorType[] = [
         image: "textures/ui/inventory/skills/skills_flaming_arrow.png",
     },
     { // 5
-        name: "Heal"
+        name: "Heal",
     },
     { // 6
         name: "Movement\nSwitch",
@@ -57,23 +57,29 @@ const behaviorTypes: BehaviorType[] = [
         name: "Play Effect",
         image: "textures/ui/inventory/skills/disco_ball.png",
     },
-    null, // 9
-    null, // 10
-    null, // 11
+    { // 9
+        name: "Immunity",
+    },
+    { // 10
+        name: "Damage Buff",
+    },
+    { // 11
+        name: "Damage Absorption",
+    },
     { // 12
         name: "OverTime",
         image: "textures/ui/inventory/skills/spark_thrower.png",
         children: {
-            'action': ''
+            'action': '',
         }
     },
     { // 13
-        name: "Imagination"
+        name: "Imagination",
     },
     { // 14
-        name: "TargetCaster",
+        name: "Target Caster",
         children: {
-            'action': ''
+            'action': '',
         }
     },
     { // 15
@@ -84,7 +90,7 @@ const behaviorTypes: BehaviorType[] = [
         name: "Duration",
         image: "textures/ui/inventory/skills/spark_thrower.png",
         children: {
-            'action': ''
+            'action': '',
         }
     },
     { // 17
@@ -98,26 +104,38 @@ const behaviorTypes: BehaviorType[] = [
             'action': '',
         }
     },
-    null, // 19
-    null, // 20
-    null, // 21
+    { // 19
+        name: "Car Boost",
+    },
+    { // 20
+        name: "Fall Speed",
+    },
+    { // 21
+        name: "Shield",
+    },
     { // 22
         name: "Repair Armor",
     },
     { // 23
         name: "Speed",
     },
-    null, // 24
+    { // 24
+        name: "Dark Inspiration",
+    },
     { // 25
         name: "LootBuff",
         image: "textures/ui/inventory/skills/skills_lucky.png",
     },
-    null, // 26
+    { // 26
+        name: "Venture Vision",
+    },
     { // 27
         name: "Spawn",
         image: "textures/ui/inventory/skills/crabby.png",
     },
-    null, // 28
+    { // 28
+        name: "LayBrick",
+    },
     { // 29
         name: "Switch",
         children: {
@@ -126,19 +144,27 @@ const behaviorTypes: BehaviorType[] = [
         }
     },
     { // 30
-        name: "Buff"
+        name: "Buff",
     },
-    null, // 31
+    { // 31
+        name: "Skill Event",
+    },
     { // 32
         name: "Skill\nEvent",
     },
-    null, // 33
+    { // 33
+        name: "Consume Item",
+    },
     { // 34
         name: "Skill Cast\nFailed",
         image: "textures/ui/inventory/skills/skills_marks_the_spot.png",
     },
-    null, // 35
-    null, // 36
+    { // 35
+        name: "Imitation\nSkunkStink",
+    },
+    { // 36
+        name: "Change\nIdleFlags",
+    },
     { // 37
         name: "ApplyBuff",
         image: "textures/ui/inventory/skills/skills_health_buff.png",
@@ -170,7 +196,7 @@ const behaviorTypes: BehaviorType[] = [
     { // 43
         name: "ChargeUp",
         children: {
-            'action': null
+            'action': ''
         }
     },
     { // 44
@@ -181,7 +207,7 @@ const behaviorTypes: BehaviorType[] = [
         name: "Start",
         image: "textures/ui/inventory/skills/skills_freebuild.png",
         children: {
-            'action': null
+            'action': ''
         }
     },
     { // 46
@@ -192,9 +218,15 @@ const behaviorTypes: BehaviorType[] = [
         name: "AlterChainDelay",
         image: "textures/ui/inventory/skills/spark_thrower.png",
     },
-    null, // 48
-    null, // 49
-    null, // 50
+    { // 48
+        name: "Camera",
+    },
+    { // 49
+        name: "Remove\nBuff",
+    },
+    { // 50
+        name: "Grab",
+    },
     { // 51
         name: "ModularBuild",
         image: "textures/ui/inventory/hats/thinking_hat.png",
@@ -212,11 +244,11 @@ const behaviorTypes: BehaviorType[] = [
     { // 54
         name: "Verify",
         children: {
-            action: ''
+            action: '',
         }
     },
     { // 55
-        name: "Taunt"
+        name: "Taunt",
     },
     { // 56
         name: "AirMovement",
@@ -228,9 +260,32 @@ const behaviorTypes: BehaviorType[] = [
             timeout_action: 'timeout',
         }
     },
-    null, // 57
+    { // 57
+        name: "Spawn\nQuickbuild",
+    },
     { // 58
-        name: "PullToPoint",
+        name: "PullTo\nPoint",
         image: "textures/ui/inventory/skills/skills_snap_trap.png",
+    },
+    { // 59
+        name: "Property\nRotate",
+    },
+    { // 60
+        name: "Damage\nReduction",
+    },
+    { // 61
+        name: "Property\nTeleport",
+    },
+    { // 62
+        name: "Clear\nTarget",
+    },
+    { // 63
+        name: "Take\nPicture",
+    },
+    { // 64
+        name: "Mount",
+    },
+    { // 65
+        name: "Skill\nSet",
     }
 ];
