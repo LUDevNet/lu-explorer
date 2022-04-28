@@ -3,6 +3,8 @@ interface BehaviorType {
     image?: string;
     shape?: "circle",
     children?: Record<string, string> | boolean | "seq";
+    parents?: Record<string, string>;
+    skills?: Record<string, string>;
 };
 
 export const behaviorTypes: BehaviorType[] = [
@@ -11,9 +13,9 @@ export const behaviorTypes: BehaviorType[] = [
         name: "BasicAttack",
         image: "textures/ui/inventory/skills/knight_blade.png",
         children: {
-            'on_success': 'success',
-            'on_fail_armor': 'fail armor',
-            'on_fail_blocked': 'fail blocked'
+            on_success: 'success',
+            on_fail_armor: 'fail armor',
+            on_fail_blocked: 'fail blocked',
         },
     },
     { // 2
@@ -22,6 +24,7 @@ export const behaviorTypes: BehaviorType[] = [
         children: {
             'action': '',
             'blocked action': 'blocked',
+            'miss action': 'miss',
         }
     },
     { // 3
@@ -39,18 +42,18 @@ export const behaviorTypes: BehaviorType[] = [
     { // 6
         name: "Movement\nSwitch",
         children: {
-            'jump_action': 'jump',
-            'double_jump_action': 'double jump',
-            'falling_action': 'falling',
-            'ground_action': 'ground',
-            'jetpack_action': 'jetpack',
+            jump_action: 'jump',
+            double_jump_action: 'double jump',
+            falling_action: 'falling',
+            ground_action: 'ground',
+            jetpack_action: 'jetpack',
         }
     },
     { // 7
         name: "AreaOfEffect",
         image: "textures/ui/inventory/skills/bubble_generator.png",
         children: {
-            'action': ''
+            action: ''
         }
     },
     { // 8
@@ -69,7 +72,7 @@ export const behaviorTypes: BehaviorType[] = [
     { // 12
         name: "OverTime",
         image: "textures/ui/inventory/skills/spark_thrower.png",
-        children: {
+        skills: {
             'action': '',
         }
     },
@@ -79,18 +82,21 @@ export const behaviorTypes: BehaviorType[] = [
     { // 14
         name: "Target Caster",
         children: {
-            'action': '',
+            action: '',
         }
     },
     { // 15
         name: "Stun",
         image: "textures/ui/inventory/skills/bonedaddy.png",
+        children: {
+            action: '',
+        }
     },
     { // 16
         name: "Duration",
         image: "textures/ui/inventory/skills/spark_thrower.png",
         children: {
-            'action': '',
+            action: '',
         }
     },
     { // 17
@@ -101,11 +107,15 @@ export const behaviorTypes: BehaviorType[] = [
         name: "AttackDelay",
         image: "textures/ui/inventory/skills/turtle_rush.png",
         children: {
-            'action': '',
+            action: '',
         }
     },
     { // 19
         name: "Car Boost",
+        children: {
+            action: '',
+            action_failed: 'failed',
+        }
     },
     { // 20
         name: "Fall Speed",
@@ -121,6 +131,9 @@ export const behaviorTypes: BehaviorType[] = [
     },
     { // 24
         name: "Dark Inspiration",
+        children: {
+            action: '',
+        }
     },
     { // 25
         name: "LootBuff",
@@ -132,6 +145,9 @@ export const behaviorTypes: BehaviorType[] = [
     { // 27
         name: "Spawn",
         image: "textures/ui/inventory/skills/crabby.png",
+        children: {
+            spawn_fail_action: 'spawn fail',
+        }
     },
     { // 28
         name: "LayBrick",
@@ -139,8 +155,8 @@ export const behaviorTypes: BehaviorType[] = [
     { // 29
         name: "Switch",
         children: {
-            'action_true': 'true',
-            'action_false': 'false',
+            action_true: 'true',
+            action_false: 'false',
         }
     },
     { // 30
@@ -154,6 +170,9 @@ export const behaviorTypes: BehaviorType[] = [
     },
     { // 33
         name: "Consume Item",
+        children: {
+            action_consumed: 'consumed', // TODO verify
+        }
     },
     { // 34
         name: "Skill Cast\nFailed",
@@ -180,9 +199,9 @@ export const behaviorTypes: BehaviorType[] = [
     { // 40
         name: "ForceMovement",
         children: {
-            "hit_action": 'hit',
-            "hit_action_enemy": 'hit enemy',
-            "timeout_action": 'timeout',
+            hit_action: 'hit',
+            hit_action_enemy: 'hit enemy',
+            timeout_action: 'timeout',
         }
     },
     { // 41
@@ -196,7 +215,7 @@ export const behaviorTypes: BehaviorType[] = [
     { // 43
         name: "ChargeUp",
         children: {
-            'action': ''
+            action: ''
         }
     },
     { // 44
@@ -207,16 +226,21 @@ export const behaviorTypes: BehaviorType[] = [
         name: "Start",
         image: "textures/ui/inventory/skills/skills_freebuild.png",
         children: {
-            'action': ''
+            action: ''
         }
     },
     { // 46
         name: "End",
-        // FIXME: add parent connection
+        parents: {
+            start_action: 'start',
+        }
     },
     { // 47
         name: "AlterChainDelay",
         image: "textures/ui/inventory/skills/spark_thrower.png",
+        parents: {
+            chain_action: 'chain'
+        }
     },
     { // 48
         name: "Camera",
@@ -245,6 +269,7 @@ export const behaviorTypes: BehaviorType[] = [
         name: "Verify",
         children: {
             action: '',
+            blocked_action: 'blocked',
         }
     },
     { // 55
@@ -262,6 +287,9 @@ export const behaviorTypes: BehaviorType[] = [
     },
     { // 57
         name: "Spawn\nQuickbuild",
+        children: {
+            spawn_fail_action: 'spawn fail',
+        }
     },
     { // 58
         name: "PullTo\nPoint",
@@ -278,6 +306,9 @@ export const behaviorTypes: BehaviorType[] = [
     },
     { // 62
         name: "Clear\nTarget",
+        children: {
+            action: '',
+        }
     },
     { // 63
         name: "Take\nPicture",
