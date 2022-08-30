@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ReplaySubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
-import { LuCoreDataService, LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../services';
 import { component_names } from '../../../defs/components';
-import { DB_ObjectRef_ByComponent } from '../../../defs/cdclient';
-import { ComponentTypeSingle, ObjectsRefDict, Rev_ComponentType } from '../../../defs/api';
-import { ThrowStmt } from '@angular/compiler';
+import { ObjectsRefDict, Rev_ComponentType } from '../../../defs/api';
 
 interface ByComponent {
   id: number;

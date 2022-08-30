@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { LuJsonService } from '../../../services';
 import { Observable, ReplaySubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { DB_mapShaders, DB_RenderComponent } from '../../../../defs/cdclient';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-render-component',
