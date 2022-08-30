@@ -19,6 +19,7 @@ import { GuiModule } from '../gui/gui.module';
 import { WhatsCoolItemsComponent } from './whats-cool-items/whats-cool-items.component';
 import { RewardCodesComponent } from './reward-codes/reward-codes.component';
 import { ObjectsSearchComponent } from './search/search.component';
+import { DeletionRestrictionsComponent } from './deletion-restrictions/deletion-restrictions.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ObjectsSearchComponent } from './search/search.component';
     WhatsCoolItemsComponent,
     RewardCodesComponent,
     ObjectsSearchComponent,
+    DeletionRestrictionsComponent,
   ],
   imports: [
     CommonModule,

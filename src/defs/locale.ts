@@ -11,6 +11,10 @@ export interface Locale_Objects {
     description?: string,
 }
 
+export interface Locale_DeletionRestrictions {
+    failureReason?: String,
+}
+
 export interface Locale_RewardCodes {
     subjectText: string,
     bodyText: string,

@@ -505,6 +505,16 @@ export class DB_InventoryComponent {
   items: DB_InventoryItem[];
 }
 
+export class DB_DeletionRestrictions {
+  id: number; // INTEGER
+  restricted: boolean; // BOOLEAN
+  ids: string; // TEXT
+  checkType: number; // INTEGER
+  localize: boolean; // BOOLEAN
+  locStatus: number; // INTEGER
+  gate_version?: string; // TEXT
+}
+
 export class DB_DestructibleComponent {
   id: number; // INTEGER
   faction: number; // INTEGER

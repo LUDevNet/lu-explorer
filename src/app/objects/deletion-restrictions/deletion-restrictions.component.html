@@ -1,0 +1,35 @@
+<ul class="breadcrumbs">
+    <li><a routerLink="/objects">Objects</a></li>
+    <li>Deletion Restrictions</li>
+</ul>
+<h2>Deletion Restrictions</h2>
+
+<div class="table-responsive" *ngIf="$deletionRestrictions | async; let deletionRestrictions">
+    <table *luxVar="$deletionRestrictionsLocale | async; let locale">
+        <tr>
+            <th>ID</th>
+            <th>restricted</th>
+            <th>ids</th>
+            <th>checkType</th>
+            <th>localize</th>
+            <th>locStatus</th>
+            <th>gate_version</th>
+            <th>failureReason</th>
+        </tr>
+        <tr *ngFor="let row of deletionRestrictions">
+            <td>{{row.id}}</td>
+            <td>{{row.restricted}}</td>
+            <td *ngIf="row.checkType == 0">
+                <lux-slot *ngFor="let itemID of split(row.ids)" [luxFetchItem]="itemID"></lux-slot>
+            </td>
+            <td *ngIf="row.checkType != 0">
+                {{split(row.ids) | json}}
+            </td>
+            <td>{{row.checkType}}</td>
+            <td>{{row.localize}}</td>
+            <td>{{row.locStatus}}</td>
+            <td>{{row.gate_version}}</td>
+            <td *ngIf="locale">{{(locale[row.id])?.failureReason}}</td>
+        </tr>
+    </table>
+</div>
