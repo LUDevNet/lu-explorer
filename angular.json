@@ -134,7 +134,6 @@
       }
     }
   },
-  "defaultProject": "lu-explorer",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "lux",
@@ -143,5 +142,8 @@
     "@schematics/angular:directive": {
       "prefix": "lux"
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

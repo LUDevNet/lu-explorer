@@ -15,7 +15,7 @@ import { ShadersComponent } from './shaders/shaders.component';
 import { NewsAndTipsComponent } from './news-and-tips/news-and-tips.component';
 import { LevelRewardsComponent } from './level-rewards/level-rewards.component';
 
-const miscRoutes = [
+const miscRoutes: Routes = [
   { path: '', component: MiscComponent, children: [
     { path: 'acc-default-loc', component: AccDefaultLocComponent, data: { title: "Default Accessory Locations"} },
     { path: 'brick-attributes', component: BrickAttributesComponent, data: { title: "Brick Attributes"} },
