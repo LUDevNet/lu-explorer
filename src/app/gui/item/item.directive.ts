@@ -44,7 +44,11 @@ export class ItemDirective extends TooltipDirective {
 
     const renderId = object.components["2"];
     if (renderId) {
-      this.luCoreData.getSingleTableEntry<DB_RenderComponent>("RenderComponent", renderId).subscribe(x => this.slotComponent.icon = "/lu-res/textures/ui/" + x.icon_asset.toLowerCase().replace(/dds$/, "png"));
+      this.luCoreData.getSingleTableEntry<DB_RenderComponent>("RenderComponent", renderId).subscribe(x => {
+        if (x.icon_asset && !x.icon_asset.endsWith('tga')) {
+          this.slotComponent.icon = "/lu-res/textures/ui/" + x.icon_asset.toLowerCase().replace(/dds$/, "png")
+        }
+      });
     }
 
     this.itemTooltipRef.changeDetectorRef.detectChanges();

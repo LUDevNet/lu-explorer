@@ -7,14 +7,7 @@ import { APIObject } from '../../util/services/lu-json.service';
 import { Locale_Objects } from '../../../defs/locale';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-interface Rev_Objects_ItemComponent {
-  currency_lot: number[];
-}
-
-interface Rev_Objects {
-  item_component: Rev_Objects_ItemComponent;
-}
+import { Rev_Objects } from '../../../defs/api';
 
 @Component({
   selector: 'app-object-detail',
@@ -50,7 +43,8 @@ export class ObjectDetailComponent implements OnInit {
   }
 
   loadObject(object: APIObject): void {
-    if (object && this.component != "other" && !this.component_id && object.hasOwnProperty('components')) {
+    const special = ["used-by"].includes(this.component);
+    if (object && !special && !this.component_id && object.hasOwnProperty('components')) {
       let keys = Object.keys(object.components);
       if (keys.length > 0) {
         this.component_id = +keys[0];
@@ -63,9 +57,4 @@ export class ObjectDetailComponent implements OnInit {
   getName(id: number) {
     return component_names[id];
   }
-
-  $lotsForItemComponent(id: number): Observable<number[]> {
-    return this.luCoreDataService.getRevEntry<{lots: number[]}>('component_types/11', id).pipe(map((x) => x.lots));
-  }
-
 }

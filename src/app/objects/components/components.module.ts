@@ -28,6 +28,7 @@ import { GuiModule } from '../../gui/gui.module';
 import { FactionTriggerComponentComponent } from './faction-trigger-component/faction-trigger-component.component';
 import { BaseCombatAiComponentComponent } from './base-combat-ai-component/base-combat-ai-component.component';
 import { MinifigComponentComponent } from './minifig-component/minifig-component.component';
+import { UsedByComponent } from './used-by/used-by.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MinifigComponentComponent } from './minifig-component/minifig-component
     ComponentDetailComponent,
     FactionTriggerComponentComponent,
     BaseCombatAiComponentComponent,
-    MinifigComponentComponent
+    MinifigComponentComponent,
+    UsedByComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,8 @@ import { MinifigComponentComponent } from './minifig-component/minifig-component
     RouterModule.forChild([])
   ],
   exports: [
-    ComponentDetailComponent
+    ComponentDetailComponent,
+    UsedByComponent,
   ]
 })
 export class ComponentsModule { }

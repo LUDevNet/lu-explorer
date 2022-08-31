@@ -210,10 +210,6 @@ export class LuJsonService {
     return this.getPagedJsonData(this.tablesUrl + "CollectibleComponent/", id, 'CollectibleComponent');
   }
 
-  getInventoryComponent(id: number): Observable<Optional<any>> {
-    return this.getPagedJsonData(this.tablesUrl + "InventoryComponent/", id, 'InventoryComponent', true);
-  }
-
   getPhysicsComponent(id: number): Observable<any> {
     return this.getPagedJsonData(this.physicsBaseUrl, id, 'PhysicsComponent');
   }
@@ -283,20 +279,6 @@ export class LuJsonService {
     }
   }
 
-  //getLocale(table: string): Observable<any> {
-  //  return this.getJsonResource("locale/" + table + "/", "index", "locale");
-  //}
-
-  //getLocalePage(table: string, page: number) {
-  //  return this.getJsonResource("locale/" + table + "/", String(page), "locale page");
-  //}
-
-  /*
-  getMissionsByType(): Observable<DB_MissionsByType> {
-    return this.getJsonResource("tables/Missions/groupBy/", "type", "missions");
-  }
-  */
-
   getActivityRewards(id: number): Observable<ActivityRewardsPod> {
     return this.luCoreDataService.getTableEntry<DB_ActivityRewards>("ActivityRewards", id)
       .pipe(map(x => Object.assign({ activity_rewards: x })));
@@ -313,12 +295,6 @@ export class LuJsonService {
   getFaction(index: number): Observable<DB_Factions> {
     return this.getFactions().pipe(map(factions => factions.find(v => v.faction == index)));
   }
-
-  /*
-  getJsonResource(prefix: string, url: string, type: string): Observable<any> {
-    return this.makeRequest(prefix + url.toLowerCase(), `get${type}(${url})`);
-  }
-  */
 
   getJsonData(url: string, id: number, type: string): Observable<any> {
     return this.luCoreDataService.getSingleTableEntry(type, id);

@@ -1,12 +1,7 @@
 <h3>Inventory Component ({{id}})</h3>
 <ng-container *ngIf="component | async; else loading; let inventory">
-  <div class="error" *ngIf="inventory.$error; else content">
-    {{inventory.$error}}
-  </div>
-  <ng-template #content>
-    <lux-slot *ngFor="let item of inventory.data.items" [luxFetchItem]="item.itemid" [count]="item.count"
-      [equipped]="item.equip"></lux-slot>
-  </ng-template>
+  <lux-slot *ngFor="let item of inventory" [luxFetchItem]="item.itemid" [count]="item.count"
+    [equipped]="item.equip"></lux-slot>
 </ng-container>
 <ng-template #loading>
   Loading...
