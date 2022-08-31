@@ -17,6 +17,7 @@ export interface Rev_Objects_ItemComponent {
 }
 
 export interface Rev_Objects {
+    item_sets: number[];
     item_component: Rev_Objects_ItemComponent;
     inventory_component: number[];
 }

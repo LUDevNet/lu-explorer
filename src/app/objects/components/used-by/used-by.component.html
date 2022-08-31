@@ -21,3 +21,12 @@
         </div>
     </section>
 </ng-container>
+<ng-container *ngIf="rev.item_sets; let is">
+    <section *ngIf="is.length > 0">
+        <h4>Item Sets</h4>
+        <span *ngFor="let id of is">
+            <a [routerLink]="['/objects', 'item-sets', id]">Item Set #{{id}}
+                <span *ngIf="id | loc:'ItemSets' | async; let l">({{l['kitName']}})</span></a>
+        </span>
+    </section>
+</ng-container>
