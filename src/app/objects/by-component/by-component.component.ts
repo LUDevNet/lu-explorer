@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
@@ -10,6 +10,16 @@ import { ObjectsRefDict, Rev_ComponentType } from '../../../defs/api';
 interface ByComponent {
   id: number;
   lots: number[];
+}
+
+class RouteInfo {
+  id: number;
+  page: number
+
+  constructor(map: ParamMap) {
+    this.id = +map.get('component');
+    this.page = +(map.get('page') || 0);
+  }
 }
 
 @Component({
@@ -31,33 +41,19 @@ export class ObjectsByComponentComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private luCoreData: LuCoreDataService) {}
+    private luCoreData: LuCoreDataService) { }
 
   ngOnInit() {
-    this.$components = this.route.paramMap
-      .pipe(map(this.mapRouteInfo),tap(this.tapRef.bind(this)),switchMap(this.loadDataObservable.bind(this)))
+    const $routeInfo = this.route.paramMap.pipe(map((map) => new RouteInfo(map)));
+    $routeInfo.subscribe((ref: RouteInfo) => {
+      this.component_id = ref.id;
+      this.component_name = component_names[ref.id] || "[Unnamed]";
+      this.page = ref.page;
+    });
+    this.$components = $routeInfo.pipe(switchMap(this.loadDataObservable.bind(this)))
   }
 
-  mapRouteInfo(map) {
-    let comp_id_str = map.get('component');
-    if (map.has('page')) {
-      let page = map.get('page');
-      return {id: +comp_id_str, page: +page};
-    } else {
-      return {id: +comp_id_str, page: 0};
-    }
-  }
-
-  tapRef(ref) {
-    this.component_id = ref.id;
-    this.page = ref.page;
-    let comp_id_str = String(ref.id);
-    if (component_names.hasOwnProperty(comp_id_str)) {
-      this.component_name = component_names[ref.id];
-    }
-  }
-
-  loadDataObservable(ref): Observable<ByComponent[]> {
+  loadDataObservable(ref: RouteInfo): Observable<ByComponent[]> {
     return this.luCoreData
       .getRevEntry<Rev_ComponentType>('component_types', ref.id)
       .pipe(
@@ -75,8 +71,8 @@ export class ObjectsByComponentComponent implements OnInit {
     this.page_count = Math.ceil(total / this.page_size);
   }
 
-  processData(ref, data: Rev_ComponentType) {
-    let list: ByComponent[] = Object.entries(data.components).map(([a,b]) => {
+  processData(ref: RouteInfo, data: Rev_ComponentType): ByComponent[] {
+    let list: ByComponent[] = Object.entries(data.components).map(([a, b]) => {
       return {
         id: Number(a),
         lots: b.lots,
@@ -88,16 +84,12 @@ export class ObjectsByComponentComponent implements OnInit {
     return sorted.slice(from, to);
   }
 
-
   sortObjectComponentRefs(a: ByComponent, b: ByComponent): number {
-    let diff = Number(a.id) - Number(b.id);
-    return diff;
-    //return (diff == 0) ? a.id - b.id : diff;
+    return Number(a.id) - Number(b.id);
   }
 
   getName(lot: number): string {
     let obj = this.objects[lot];
     return obj ? obj.name : "[unnamed]";
   }
-
 }

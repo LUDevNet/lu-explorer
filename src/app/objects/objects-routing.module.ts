@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LootTableComponent } from './loot/loot-table/loot-table.component';
-
-import { ObjectTypesIndexComponent } from './types-index/types-index.component';
 import { ObjectsByTypeComponent } from './by-type/by-type.component';
 import { ObjectsByComponentComponent } from './by-component/by-component.component';
 import { ObjectComponentsIndexComponent } from './components-index/components-index.component';
@@ -15,7 +13,7 @@ import { RewardCodesComponent } from './reward-codes/reward-codes.component';
 import { ObjectsSearchComponent } from './search/search.component';
 import { DeletionRestrictionsComponent } from './deletion-restrictions/deletion-restrictions.component';
 
-const objectsRoutes = [
+const objectsRoutes: Routes = [
   { path: 'item-sets', loadChildren: () => import('./item-sets/item-sets.module').then(m => m.ItemSetsModule) },
   { path: 'factions', loadChildren: () => import('./factions/factions.module').then(m => m.FactionsModule) },
   {
