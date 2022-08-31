@@ -25,11 +25,29 @@
           <a [routerLink]="['/objects', object_id, entry.key]">{{getName(entry.key)}}
             <span class="pull-right">#{{entry.value}} ({{entry.key}})</span></a>
         </li>
+        <li [class.active]="component == 'other'"><a [routerLink]="['/objects', object_id, 'other']">Used by
+        </a></li>
       </ul>
     </div>
     <div class="sidemenu-content">
-      <app-component-detail [id]="object.components[component_id]" [component_id]="component_id" [object]="object">
+      <app-component-detail *ngIf="component_id" [id]="object.components[component_id]" [component_id]="component_id" [object]="object">
       </app-component-detail>
+      <div *ngIf="component == 'other'">
+        <h3>Used by</h3>
+        <p>This tab lists other database entries that refer to this object</p>
+        <ng-container *ngIf="$rev | async; let rev">
+          <section *ngIf="rev.item_component; let it">
+            <h4>Item Components (11)</h4>
+            <div *ngIf="it.currency_lot; let curr">
+              <h5>As additional currency</h5>
+              <span *ngFor="let id of curr">
+                {{id}}
+                <lux-slot *ngFor="let itemID of $lotsForItemComponent(id) | async" [luxFetchItem]="itemID"></lux-slot>
+              </span>
+            </div>
+          </section>
+        </ng-container>
+      </div>
     </div>
   </div>
 
