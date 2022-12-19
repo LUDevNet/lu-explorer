@@ -15,16 +15,6 @@ export class DB_ItemSets_Ref {
   rank: number;
 }
 
-export class SkillRef {
-  skillID: number;
-  AICombatWeight: number;
-  castOnType: number;
-}
-
-export class ObjectPod {
-  skills?: SkillRef[];
-}
-
 export class ActivityRewardsPod {
   activity_rewards: DB_ActivityRewards[];
 }
@@ -57,7 +47,10 @@ export interface DB_Objects {
 }
 
 export interface DB_ObjectSkills {
-
+  objectTemplate: number;
+  skillID: number;
+  AICombatWeight: number;
+  castOnType: number;
 }
 
 export interface DB_ComponentsRegistry {
@@ -142,6 +135,12 @@ export class DB_LevelProgressionLookup {
   id: number; // INT
   requiredUScore: number; // INT
   BehaviorEffect: string;
+}
+
+export class DB_mapIcon {
+  LOT: number;
+  iconID: number;
+  iconState: number;
 }
 
 export class DB_mapItemTypes {
