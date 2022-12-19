@@ -28,7 +28,7 @@ export class ObjectDirective extends RouterLink {
     injector: Injector,
     resolver: ComponentFactoryResolver
   ) {
-    super(router, route, locationStrategy);
+    super(router, route, "-1", renderer, element, locationStrategy);
     this.tooltipDirective = new TooltipDirective(element, applicationRef, renderer, injector, resolver);
   }
 
