@@ -428,16 +428,12 @@ export class DB_Preconditions {
   gate_version: string; // TEXT
 }
 
-export class DB_NPCMission {
+export class DB_MissionNPCComponent {
   id: number; // INTEGER
   missionID: number; // INTEGER
   offersMission: boolean;
   acceptsMission: boolean;
   gate_version: string; // TEXT
-}
-
-export class DB_MissionNPCComponent {
-  missions: DB_NPCMission[];
 }
 
 export class DB_Missions {

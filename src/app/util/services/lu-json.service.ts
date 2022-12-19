@@ -202,10 +202,6 @@ export class LuJsonService {
     return this.getPagedJsonData(this.tablesUrl + "ModuleComponent/", id, 'ModuleComponent');
   }
 
-  getMissionNPCComponent(id: number): Observable<any> {
-    return this.getPagedJsonData(this.tablesUrl + "MissionNPCComponent/", id, 'MissionNPCComponent');
-  }
-
   getCollectibleComponent(id: number): Observable<any> {
     return this.getPagedJsonData(this.tablesUrl + "CollectibleComponent/", id, 'CollectibleComponent');
   }

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 import { DB_MissionNPCComponent } from '../../../../defs/cdclient';
 
 @Component({
@@ -14,7 +14,7 @@ export class MissionNpcComponentComponent implements OnInit {
 
   _id: ReplaySubject<number>;
   __id: number;
-  component: ReplaySubject<DB_MissionNPCComponent>;
+  $component: ReplaySubject<DB_MissionNPCComponent[]>;
 
   @Input() set id(value: number) {
     this._id.next(value);
@@ -24,14 +24,14 @@ export class MissionNpcComponentComponent implements OnInit {
     return this.__id;
   }
 
-  constructor(private luJsonService: LuJsonService) {
+  constructor(private luCoreData: LuCoreDataService) {
     this._id = new ReplaySubject(1);
-    this.component = new ReplaySubject(1);
+    this.$component = new ReplaySubject(1);
 
     this._id.pipe(
       tap(id => this.__id = id),
-      switchMap(ref => this.luJsonService.getMissionNPCComponent(ref))
-    ).subscribe(this.component);
+      switchMap(ref => this.luCoreData.getTableEntry<DB_MissionNPCComponent>("MissionNPCComponent", ref))
+    ).subscribe(this.$component);
   }
 
   ngOnInit() {
