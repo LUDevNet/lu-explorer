@@ -1,8 +1,25 @@
-.map {
-  background-color: #333;
-  max-width: 40rem;
+
+#map-pane {
+    display: flex;
+    height: 80vh;
 }
 
-.path_point {
-  overflow-y: auto;
+#map-inspector {
+    flex: 4;
+    overflow-y: auto;
+    padding-left: 0.5rem;
+}
+
+#map {
+    background-color: #000000;
+    flex: 6;
+}
+
+.stacked-strings {
+    display: inline-block;
+}
+
+.stacked-strings > blockquote {
+    margin-top: 0;
+    margin-bottom: 0.2rem;
 }

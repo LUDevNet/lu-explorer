@@ -1,0 +1,66 @@
+<button (click)="onBackClick()">Back</button>
+<button (click)="onUpClick()">Up</button>
+<ng-container [ngSwitch]="path.type">
+  <div *ngSwitchCase="0">
+    <h3>Movement: {{path.name}}</h3>
+  </div>
+  <div *ngSwitchCase="1">
+    <h3>Moving Platform: {{path.name}}</h3>
+    <ul>
+      <li>travel_sound: {{path.travel_sound}}</li>
+    </ul>
+  </div>
+  <div *ngSwitchCase="2">
+    <h3>Property: {{path.name}}</h3>
+    <ul>
+      <li>value_1: {{path.value_1}}</li>
+      <li>price: {{path.price}}</li>
+      <li>rental_time: {{path.rental_time}}</li>
+      <li>zone: <a routerLink="/zones/{{path.zone}}">{{path.zone}}</a></li>
+      <li>name: {{path.name}}</li>
+      <li>description: {{path.description}}</li>
+      <li>value_2: {{path.value_2}}</li>
+      <li>clone_limit: {{path.clone_limit}}</li>
+      <li>reputation_multiplier: {{path.reputation_multiplier}}</li>
+      <li>rental_time_unit: {{path.rental_time_unit}}</li>
+      <li>req_achievement: {{path.req_achievement}}</li>
+      <li>player_coord: <app-v3f [v3f]="path.player_coord"></app-v3f></li>
+      <li>max_building_height: {{path.max_building_height}}</li>
+    </ul>
+  </div>
+  <div *ngSwitchCase="3">
+    <h3>Camera: {{path.name}}</h3>
+    <ul>
+      <li>next_path: {{path.next_path}}</li>
+      <li>value_1: {{path.value_1}}</li>
+    </ul>
+  </div>
+  <div *ngSwitchCase="4">
+    <h3>Spawner: {{path.name}}</h3>
+    <ul>
+      <li>spawned_lot: <a routerLink="/objects/{{path.spawned_lot}}">{{path.spawned_lot}}</a></li>
+      <li>respawn_time: {{path.respawn_time}}</li>
+      <li>max_to_spawn: {{path.max_to_spawn}}</li>
+      <li>number_to_maintain: {{path.number_to_maintain}}</li>
+      <li>object_id: {{path.object_id}}</li>
+      <li>activate_on_load: {{path.activate_on_load}}</li>
+    </ul>
+  </div>
+  <div *ngSwitchCase="5">
+    <h3>Showcase: {{path.name}}</h3>
+  </div>
+  <div *ngSwitchCase="6">
+    <h3>Race: {{path.name}}</h3>
+  </div>
+  <div *ngSwitchCase="7">
+    <h3>Rail: {{path.name}}</h3>
+  </div>
+  <span>behavior: {{path.behavior}} </span>
+  <span>value_1: {{path.value_1}}</span>
+</ng-container>
+<h4>Waypoints</h4>
+<ul id="waypoints-list">
+  <li *ngFor="let point of path.waypoints | keys">
+    <a routerLink="./{{point.key}}">{{point.key}}</a>
+  </li>
+</ul>

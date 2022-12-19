@@ -38,7 +38,7 @@
           <div class="sidemenu">
             <ul class="scroll-30">
               <li *ngFor="let obj of chnk.objects" [class.active]="obj_id === obj.id">
-                <a [routerLink]="['/zones', zone_id, scene_id, obj.id]">{{objID(obj.id)}}
+                <a [routerLink]="['/zones', zone_id, 'scenes', scene_id, obj.id]">{{objID(obj.id)}}
                   <span class="pull-right">LOT {{obj.lot}}</span></a>
                 </li>
             </ul>

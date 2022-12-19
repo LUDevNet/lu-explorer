@@ -9,6 +9,10 @@ import { ZoneIndexComponent } from './zone-index/zone-index.component';
 import { ZoneDetailComponent } from './zone-detail/zone-detail.component';
 import { ScenesComponent } from './scenes/scenes.component';
 import { LuzFileComponent } from './luz-file/luz-file.component';
+import { LuzOverviewComponent } from './luz-overview/luz-overview.component';
+import { LuzPathComponent } from './luz-path/luz-path.component';
+import { LuzPathsComponent } from './luz-paths/luz-paths.component';
+import { LuzPathWaypointComponent } from './luz-path-waypoint/luz-path-waypoint.component';
 import { LvlFileComponent } from './lvl-file/lvl-file.component';
 import { ObjInstanceComponent } from './obj-instance/obj-instance.component';
 import { GuiModule } from '../gui/gui.module';
@@ -19,6 +23,10 @@ import { GuiModule } from '../gui/gui.module';
     ZoneDetailComponent,
     ScenesComponent,
     LuzFileComponent,
+    LuzOverviewComponent,
+    LuzPathComponent,
+    LuzPathsComponent,
+    LuzPathWaypointComponent,
     LvlFileComponent,
     ObjInstanceComponent
   ],

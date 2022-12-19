@@ -6,6 +6,8 @@
     background-repeat: no-repeat;
     animation: 2s step-start infinite signage;
     border-radius: 30px;
+    
+    float: right;
 }
 
 @keyframes signage {

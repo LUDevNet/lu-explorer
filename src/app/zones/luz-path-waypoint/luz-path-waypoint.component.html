@@ -1,0 +1,57 @@
+<button (click)="onBackClick()">Back</button>
+<button (click)="onUpClick()">Up</button>
+<button (click)="onPrevClick()">Prev</button>
+<button (click)="onNextClick()">Next</button>
+
+<h3>{{path.name}} - Waypoint #{{index}} of {{path.waypoints.length}}</h3>
+<ng-container [ngSwitch]="path.type">
+  <ul *ngSwitchCase="0">
+    <li>pos: <app-v3f [v3f]="waypoint.pos"></app-v3f></li>
+  </ul>
+  <ul *ngSwitchCase="1">
+    <li>pos: <app-pos [pos]="waypoint.pos"></app-pos></li>
+    <li>lock_player: {{waypoint.lock_player}}</li>
+    <li>speed: {{waypoint.speed}}</li>
+    <li>wait: {{waypoint.wait}}</li>
+    <li>depart_sound: {{waypoint.depart_sound}}</li>
+    <li>arrive_sound: {{waypoint.arrive_sound}}</li>
+  </ul>
+  <ul *ngSwitchCase="2">
+    <li>pos: <app-v3f [v3f]="waypoint"></app-v3f></li>
+  </ul>
+  <ul *ngSwitchCase="3">
+    <li>pos: <app-v3f [v3f]="waypoint.pos"></app-v3f></li>
+    <li>value_1: {{+waypoint.value_1.toFixed(3)}}</li>
+    <li>value_2: {{+waypoint.value_2.toFixed(3)}}</li>
+    <li>value_3: {{+waypoint.value_3.toFixed(3)}}</li>
+    <li>value_4: {{+waypoint.value_4.toFixed(3)}}</li>
+    <li>time: {{waypoint.time}}</li>
+    <li>value_5: {{waypoint.value_5}}</li>
+    <li>tension: {{waypoint.tension}}</li>
+    <li>continuity: {{waypoint.continuity}}</li>
+    <li>bias: {{waypoint.bias}}</li>
+  </ul>
+  <ul *ngSwitchCase="4">
+    <li>pos: <app-pos [pos]="waypoint.pos"></app-pos></li>
+  </ul>
+  <ul *ngSwitchCase="5">
+    <li>pos: {{waypoint | json}}</li>
+  </ul>
+  <ul *ngSwitchCase="6">
+    <li>pos: <app-pos [pos]="waypoint.pos"></app-pos></li>
+    <li>value_1: {{waypoint.value_1}}</li>
+    <li>value_2: {{waypoint.value_2}}</li>
+    <li>value_3: {{waypoint.value_3}}</li>
+    <li>value_4: {{waypoint.value_4}}</li>
+    <li>value_5: {{waypoint.value_5}}</li>
+  </ul>
+  <ul *ngSwitchCase="7">
+    <li>pos: <app-pos [pos]="waypoint.pos"></app-pos></li>
+    <li>value_1: {{waypoint.value_1}}</li>
+    <li>value_2: {{waypoint.value_2}}</li>
+    <li>value_3: {{waypoint.value_3}}</li>
+    <li>value_4: {{waypoint.value_4}}</li>
+    <li>value_5: {{waypoint.value_5}}</li>
+  </ul>
+</ng-container>
+<app-data-table [table]="waypoint.config"></app-data-table>

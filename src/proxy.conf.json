@@ -1,15 +1,18 @@
 
 {
   "/lu-docs": {
-    "target": "http://localhost:8000",
-    "secure": false
+    "target": "https://lu.lcdruniverse.org",
+    "secure": false,
+    "changeOrigin": true
   },
   "/lu-json": {
-    "target": "http://localhost:8000",
-    "secure": false
+    "target": "https://lu.lcdruniverse.org",
+    "secure": false,
+    "changeOrigin": true
   },
   "/lu-res": {
-    "target": "http://localhost:8000",
-    "secure": false
+    "target": "https://lu.lcdruniverse.org",
+    "secure": false,
+    "changeOrigin": true
   }
 }

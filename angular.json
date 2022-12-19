@@ -23,6 +23,7 @@
               "src/404.html"
             ],
             "styles": [
+              "node_modules/leaflet/dist/leaflet.css",
               "src/styles.css"
             ],
             "scripts": [
@@ -84,6 +85,7 @@
               "node_modules/vis/dist/vis.min.js"
             ],
             "styles": [
+              "node_modules/leaflet/dist/leaflet.css",
               "src/styles.css"
             ],
             "assets": [

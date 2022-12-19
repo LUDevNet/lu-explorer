@@ -18,8 +18,9 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     onSameUrlNavigation: 'reload',
-    anchorScrolling: 'enabled'
-})],
+    anchorScrolling: 'enabled',
+    paramsInheritanceStrategy: 'always',
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

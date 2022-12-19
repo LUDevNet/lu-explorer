@@ -1,0 +1,13 @@
+<button (click)="onBackClick()">Back</button>
+<button (click)="onUpClick()">Up</button>
+<div class="sidemenu-pane">
+  <div class="sidemenu">
+    <ul>
+      <li *ngFor="let path of this.luzService.luz.paths">
+        <a routerLink="./{{path.name}}">{{path.name}}
+          <span class="pull-right">{{path.path_version}}/{{path.type}}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
