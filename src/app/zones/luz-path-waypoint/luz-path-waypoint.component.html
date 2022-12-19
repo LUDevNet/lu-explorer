@@ -2,6 +2,7 @@
 <button (click)="onUpClick()">Up</button>
 <button (click)="onPrevClick()">Prev</button>
 <button (click)="onNextClick()">Next</button>
+
 <h3>{{path.name}} - Waypoint #{{index}} of {{path.waypoints.length}}</h3>
 <ng-container [ngSwitch]="path.type">
   <ul *ngSwitchCase="0">

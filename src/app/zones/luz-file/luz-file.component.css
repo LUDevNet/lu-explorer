@@ -7,9 +7,19 @@
 #map-inspector {
     flex: 4;
     overflow-y: auto;
+    padding-left: 0.5rem;
 }
 
 #map {
-    background-color: transparent;
+    background-color: #000000;
     flex: 6;
+}
+
+.stacked-strings {
+    display: inline-block;
+}
+
+.stacked-strings > blockquote {
+    margin-top: 0;
+    margin-bottom: 0.2rem;
 }

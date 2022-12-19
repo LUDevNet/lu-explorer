@@ -1,3 +1,20 @@
+<div class="table-responsive" *ngIf="$luz | async; let luz">
+  <lux-number-flag [value]="luz.world_id" [name]="'world_id'"></lux-number-flag>
+  <lux-number-flag [value]="luz.version" [name]="'version'"></lux-number-flag>
+  <lux-number-flag [value]="luz.revision" [name]="'revision'"></lux-number-flag>
+  <div class="stacked-strings">
+    <blockquote *ngIf="luz.map_name">
+      <strong>map_name:</strong> {{luz.map_name}}
+    </blockquote>
+    <blockquote *ngIf="luz.map_filename">
+      <strong>map_filename:</strong> {{luz.map_filename}}
+    </blockquote>
+    <blockquote *ngIf="luz.map_description">
+      <strong>map_description:</strong> {{luz.map_description}}
+    </blockquote>
+  </div>
+</div>
+<h4>Map</h4>
 <div id="map-pane">
   <div id="map" #map ></div>
   <div id="map-inspector">
@@ -5,26 +22,6 @@
   </div>
 </div>
 <ng-container *ngIf="$luz | async; let luz">
-  <div class="table-responsive">
-    <table>
-      <tr>
-        <th>version</th>
-        <td>{{luz.version}}</td>
-        <th>world_id</th>
-        <td>{{luz.world_id}}</td>
-        <th>map_name</th>
-        <td>{{luz.map_name}}</td>
-      </tr>
-      <tr>
-        <th>revision</th>
-        <td>{{luz.revision}}</td>
-        <th>map_filename</th>
-        <td>{{luz.map_filename}}</td>
-        <th>map_description</th>
-        <td>{{luz.map_description}}</td>
-      </tr>
-    </table>
-  </div>
   <h4>Scenes</h4>
   <div style="max-height: 30rem; overflow-y: auto;">
     <table>

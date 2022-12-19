@@ -1,6 +1,5 @@
 import { Component, ElementRef, Injectable, Input, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DB_ZoneTable } from '../../../defs/cdclient';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as leaflet from "leaflet";
 
@@ -91,6 +90,17 @@ export interface LUZ_File {
   version: number;
   world_id: number;
 };
+
+const PATH_TYPE_NAMES = [
+  "NPCs",
+  "Platforms",
+  "Property Boundaries",
+  "Cameras",
+  "Spawners",
+  "Build Areas",
+  "Race Tracks",
+  "Rails"
+]
 
 @Injectable()
 export class LuzService {
@@ -238,7 +248,7 @@ export class LuzFileComponent {
     });
 
     let debugGrid = new DebugGrid();
-    this.map.addLayer(debugGrid);
+    //this.map.addLayer(debugGrid);
 
     const origin = leaflet.marker([0, 0], {icon: this.getIcon("ui/minimap/pet_dig")});
     origin.bindTooltip("Origin");
@@ -262,13 +272,15 @@ export class LuzFileComponent {
     }
 
     for (let i = 0; i < pathLayerGroups.length; i++) {
-      this.layerGroups["Paths: "+i] = pathLayerGroups[i];
+      this.layerGroups[`Paths: ${PATH_TYPE_NAMES[i]}`] = pathLayerGroups[i];
     }
 
     let layerMaps = {};
     for (const key in this.layerGroups) {
       layerMaps[key] = leaflet.layerGroup(this.layerGroups[key]);
-      layerMaps[key].addTo(this.map);
+      if (key != "Debug") {
+        layerMaps[key].addTo(this.map);
+      }
     }
     leaflet.control.layers(null, layerMaps).addTo(this.map);
   }
