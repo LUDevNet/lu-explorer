@@ -71,6 +71,8 @@ Replace the paths on the left of the mappings to reflect your system:
   docker run -it --rm \
     --name paradox-server \
     -e DOMAIN=your.domain.tld \
+    -e USERNAME=<username> \
+    -e PASSWORD=<password> \
     -v /path/to/client:/luclient \
     -v /path/to/cache:/cache/lu-res \
     -p 3030:3030 \

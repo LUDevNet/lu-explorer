@@ -4,8 +4,19 @@ public = true
 domain = "DOMAIN"
 
 [data]
+res = "/luclient/res"
+versions = "/versions"
 cdclient = "/luclient/res/cdclient.fdb"
 locale = "/luclient/locale/locale.xml"
 explorer_spa = "/dist"
 lu_res_cache = "/cache/lu-res"
 lu_json_cache = "/cache/lu-json"
+
+[auth.basic]
+USERNAME = "PASSWORD"
+
+[auth]
+user_agents = [
+    "Discordbot/",
+    "Macintosh; Intel Mac OS X 11.6; rv:92.0"
+]
