@@ -14,6 +14,10 @@ export class IconDirective {
   }
 
   onIcon(icon: DB_Icons) {
+    if (!icon) {
+      console.warn("Called img[luxFetchIcon] with a null icon");
+      return;
+    }
     this.element.nativeElement.src = "/lu-res/textures/ui/"+icon.IconPath.toLowerCase().replace(/dds$/, "png");
     if (icon.IconName) {
       this.element.nativeElement.title = icon.IconName;
