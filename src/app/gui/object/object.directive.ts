@@ -1,6 +1,6 @@
 import { ApplicationRef, ComponentFactoryResolver, Directive, ElementRef, HostListener, Injector, Input, Renderer2 } from "@angular/core";
 import { LocationStrategy } from "@angular/common";
-import { ActivatedRoute, Router, RouterLinkWithHref } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { LuCoreDataService } from "../../services";
 import { TooltipDirective } from "../tooltip.directive";
 import { DB_Objects } from "../../../defs/cdclient";
@@ -8,7 +8,7 @@ import { DB_Objects } from "../../../defs/cdclient";
 @Directive({
   selector: "a[luxFetchObject]"
 })
-export class ObjectDirective extends RouterLinkWithHref {
+export class ObjectDirective extends RouterLink {
   private tooltipDirective: TooltipDirective;
 
   @Input("luxFetchObject") set id(id: number) {
@@ -28,7 +28,7 @@ export class ObjectDirective extends RouterLinkWithHref {
     injector: Injector,
     resolver: ComponentFactoryResolver
   ) {
-    super(router, route, locationStrategy);
+    super(router, route, "-1", renderer, element, locationStrategy);
     this.tooltipDirective = new TooltipDirective(element, applicationRef, renderer, injector, resolver);
   }
 
