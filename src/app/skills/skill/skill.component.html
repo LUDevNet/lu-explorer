@@ -8,19 +8,14 @@
     <b>UI Description (<code>descriptionUI</code>):</b>
     <app-description-ui [template]="texts['descriptionUI']"></app-description-ui>
   </ng-container>
-  <h3>Behavior</h3>
-  <p>
-    <a routerLink="/skills/behaviors/{{skill.behaviorID}}">
-      <lux-number-flag [value]="skill.behaviorID" name="behaviorID"></lux-number-flag>
-    </a>
-  </p>
-  <!--<app-behavior-detail [behaviorID]="skill.behaviorID"></app-behavior-detail>-->
   <section>
     <h3>Flags</h3>
 
     <lux-number-flag *ngIf="skill.skillID !== null" [value]="skill.skillID" name="skillID"></lux-number-flag>
     <lux-number-flag *ngIf="skill.locStatus !== null" [value]="skill.locStatus" name="locStatus"></lux-number-flag>
-    <lux-number-flag *ngIf="skill.behaviorID !== null" [value]="skill.behaviorID" name="behaviorID"></lux-number-flag>
+    <a routerLink="/skills/behaviors/{{skill.behaviorID}}">
+      <lux-number-flag [value]="skill.behaviorID" name="behaviorID"></lux-number-flag>
+    </a>
     <lux-number-flag *ngIf="skill.imaginationcost !== null" [value]="skill.imaginationcost" name="imaginationcost"></lux-number-flag>
     <lux-number-flag *ngIf="skill.cooldowngroup !== null" [value]="skill.cooldowngroup" name="cooldowngroup"></lux-number-flag>
     <lux-number-flag *ngIf="skill.cooldown !== null" [value]="skill.cooldown" name="cooldown"></lux-number-flag>
