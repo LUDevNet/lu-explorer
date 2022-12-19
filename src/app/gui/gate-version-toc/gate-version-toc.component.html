@@ -1,0 +1,9 @@
+<nav class="toc">
+    <h4>Table of Contents</h4>
+    <ol>
+        <li *ngFor="let gate of list.sort()">
+            <a *ngIf="gate === ''" routerLink="." fragment="no-fg">No Feature Gate</a>
+            <a *ngIf="gate !== ''" routerLink="." fragment="fg-{{gate}}">Feature Gate <code>{{gate}}</code></a>
+        </li>
+    </ol>
+</nav>

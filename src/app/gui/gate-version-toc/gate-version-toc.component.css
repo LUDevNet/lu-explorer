@@ -1,7 +1,11 @@
-.item {
+.toc {
     border: 2px solid black;
     background-color: #080808;
     padding: 1rem;
     margin-bottom: 1rem;
-    border-radius: 1rem;
+    display: block;
+}
+
+.toc a {
+    display: block;
 }

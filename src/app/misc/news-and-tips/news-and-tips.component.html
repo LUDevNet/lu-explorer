@@ -1,19 +1,11 @@
 <section>
     <h2>What's cool: News and Tips</h2>
     <section *ngIf="$list | async; let list; else loading">
-        <nav class="toc">
-            <h4>Table of Contents</h4>
-            <ol>
-                <li *ngFor="let gate of (list | paramset:'gate_version' | as_array).sort()">
-                    <a *ngIf="gate === ''" routerLink="." fragment="no-fg">No Feature Gate</a>
-                    <a *ngIf="gate !== ''" routerLink="." fragment="fg-{{gate}}">Feature Gate <code>{{gate}}</code></a>
-                </li>
-            </ol>
-        </nav>
-        <section *ngFor="let v of list | group:'gate_version' | keys | sort:'key'">
+        <lux-gate-version-toc [list]="list | paramset:'gate_version' | as_array"></lux-gate-version-toc>
+        <section [id]="v.key | toc:'fg'" *ngFor="let v of list | group:'gate_version' | keys | sort:'key'">
             <h3 *ngIf="v.key === ''">No Feature Gate</h3>
             <h3 *ngIf="v.key !== ''">Feature Gate <code>{{v.key}}</code></h3>
-            <div [id]="item.gate_version ? 'fg-'+item.gate_version : 'no-fg'" class="item" *ngFor="let item of v.value">
+            <div class="item" *ngFor="let item of v.value">
                 <img [luxFetchIcon]="item.iconID" *ngIf="item.iconID">
                 <h4>{{(loc(item.id) | async).storyTitle}}</h4>
                 <p>{{(loc(item.id) | async).text}}</p>
