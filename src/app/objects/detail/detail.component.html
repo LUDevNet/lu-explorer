@@ -1,49 +1,60 @@
-<div *ngIf="object">
-  <ul class="breadcrumbs">
+<div>
+  <ul class="breadcrumbs" *ngIf="$object | async; else bgloading; let object">
     <li><a routerLink="/objects">Objects</a></li>
     <li><a routerLink="/objects/types/{{object.type}}">{{object.type}}</a></li>
     <li>{{object.name || "[Unnamed]" }}</li>
   </ul>
+  <ng-template #bgloading>
+    <ul class="breadcrumbs">
+      <li><a routerLink="/objects">Objects</a></li>
+      <li>Object #{{object_id}}</li>
+    </ul>
+  </ng-template>
 
-  <img *ngIf="object.HQ_valid" class="pull-right img-tag"
-    src="/lu-res/textures/ui/missions/faction_logos/nexus-force.png" alt="This object is valid for NexusHQ"
-    title="This object is valid for NexusHQ">
-  <h2>{{object.name | uppercase }} <small *ngIf="object.locStatus == 2 && objectLocale">"{{objectLocale.name}}"</small>
+  <ng-container *ngIf="$object | async; let object">
+    <img *ngIf="object.HQ_valid" class="pull-right img-tag"
+      src="/lu-res/textures/ui/missions/faction_logos/nexus-force.png" alt="This object is valid for NexusHQ"
+      title="This object is valid for NexusHQ">
+  </ng-container>
+
+  <h2 *ngIf="$object | async; let object">{{object.name | uppercase }} <small *ngIf="object.locStatus == 2 && objectLocale">"{{objectLocale.name}}"</small>
   </h2>
 
-  <section class="clearfix">
+  <section *ngIf="$object | async; let object" class="clearfix">
     <blockquote *ngIf="object.description">
       {{object.description}}
     </blockquote>
     <div class="clearfix"></div>
   </section>
 
-  <div class="sidemenu-pane" *ngIf="object.components">
-    <div class="sidemenu scroll-30">
-      <h3>Components</h3>
-      <ul>
-        <li *ngFor="let entry of object.components | arrkeys" [class.active]="component_id == entry.key">
-          <a [routerLink]="['/objects', object_id, entry.key]">{{getName(entry.key)}}
-            <span class="pull-right">#{{entry.value}} ({{entry.key}})</span></a>
-        </li>
-        <li [class.active]="component == 'used-by'"><a [routerLink]="['/objects', object_id, 'used-by']">Used by
-          </a></li>
-      </ul>
-    </div>
-    <div class="sidemenu-content">
-      <app-component-detail *ngIf="component_id" [id]="object.components[component_id]" [component_id]="component_id"
-        [object]="object">
-      </app-component-detail>
-      <div *ngIf="component == 'used-by'">
-        <lux-used-by *ngIf="$rev | async; let rev" [rev]="rev"></lux-used-by>
+  <ng-container *ngIf="$components | async; let components">
+    <div class="sidemenu-pane">
+      <div class="sidemenu scroll-30">
+        <h3>Components</h3>
+        <ul>
+          <li *ngFor="let entry of components" [class.active]="component_id == entry.component_type">
+            <a [routerLink]="['/objects', object_id, entry.component_type]">{{getName(entry.component_type)}}
+              <span class="pull-right">#{{entry.component_id}} ({{entry.component_type}})</span></a>
+          </li>
+          <li [class.active]="component == 'used-by'"><a [routerLink]="['/objects', object_id, 'used-by']">Used by
+            </a></li>
+        </ul>
+      </div>
+      <div class="sidemenu-content" *luxVar="components | dict:'component_type'; let component_dict">
+        <app-component-detail *ngIf="component_id" [id]="component_dict[component_id].component_id" [component_id]="component_id"
+          [skills]="$skills | async">
+        </app-component-detail>
+        <div *ngIf="component == 'used-by'">
+          <lux-used-by *ngIf="$rev | async; let rev" [rev]="rev"></lux-used-by>
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 
-  <section *ngIf="object.icons?.length > 0">
+  <section *ngIf="$icons | async; let icons">
     <h2>Icons</h2>
     <table>
-      <tr *ngFor="let icon of object.icons">
+      <tr *ngFor="let icon of icons">
         <td>{{icon.iconState}}</td>
         <td>{{icon.iconID}}</td>
         <td>
@@ -53,23 +64,25 @@
     </table>
   </section>
 
-  <h2>Details</h2>
-  <blockquote *ngIf="object.name !== null"><b>name</b>: {{object.name}}</blockquote>
-  <blockquote *ngIf="object.type !== null"><b>type</b>: {{object.type}}</blockquote>
-  <blockquote *ngIf="object.description !== null"><b>description</b>: {{object.description}}</blockquote>
-  <blockquote *ngIf="object.displayName !== null"><b>displayName</b>: {{object.displayName}}</blockquote>
-  <blockquote *ngIf="object._internalNotes !== null"><b>_internalNotes</b>: {{object._internalNotes}}</blockquote>
-  <blockquote *ngIf="object.gate_version !== null"><b>gate_version</b>: {{object.gate_version}}</blockquote>
+  <ng-container *ngIf="$object | async; let object">
+    <h2>Details</h2>
+    <blockquote *ngIf="object.name !== null"><b>name</b>: {{object.name}}</blockquote>
+    <blockquote *ngIf="object.type !== null"><b>type</b>: {{object.type}}</blockquote>
+    <blockquote *ngIf="object.description !== null"><b>description</b>: {{object.description}}</blockquote>
+    <blockquote *ngIf="object.displayName !== null"><b>displayName</b>: {{object.displayName}}</blockquote>
+    <blockquote *ngIf="object._internalNotes !== null"><b>_internalNotes</b>: {{object._internalNotes}}</blockquote>
+    <blockquote *ngIf="object.gate_version !== null"><b>gate_version</b>: {{object.gate_version}}</blockquote>
 
-  <h3>Flags</h3>
-  <lux-simple-flag *ngIf="object.placeable !== null" name="placeable" [value]="object.placeable"></lux-simple-flag>
-  <lux-simple-flag *ngIf="object.nametag !== null" name="nametag" [value]="object.nametag"></lux-simple-flag>
-  <lux-simple-flag *ngIf="object.HQ_valid !== null" name="HQ_valid" [value]="object.HQ_valid"></lux-simple-flag>
+    <h3>Flags</h3>
+    <lux-simple-flag *ngIf="object.placeable !== null" name="placeable" [value]="object.placeable"></lux-simple-flag>
+    <lux-simple-flag *ngIf="object.nametag !== null" name="nametag" [value]="object.nametag"></lux-simple-flag>
+    <lux-simple-flag *ngIf="object.HQ_valid !== null" name="HQ_valid" [value]="object.HQ_valid"></lux-simple-flag>
 
-  <lux-simple-flag *ngIf="object.localize !== null" name="localize" [value]="object.localize"></lux-simple-flag>
-  <lux-number-flag *ngIf="object.locStatus !== null" name="locStatus" [value]="object.locStatus"></lux-number-flag>
-  <lux-number-flag *ngIf="object.npcTemplateID !== null" name="npcTemplateID" [value]="object.npcTemplateID">
-  </lux-number-flag>
-  <lux-number-flag *ngIf="object.interactionDistance !== null" name="interactionDistance"
-    [value]="object.interactionDistance"></lux-number-flag>
+    <lux-simple-flag *ngIf="object.localize !== null" name="localize" [value]="object.localize"></lux-simple-flag>
+    <lux-number-flag *ngIf="object.locStatus !== null" name="locStatus" [value]="object.locStatus"></lux-number-flag>
+    <lux-number-flag *ngIf="object.npcTemplateID !== null" name="npcTemplateID" [value]="object.npcTemplateID">
+    </lux-number-flag>
+    <lux-number-flag *ngIf="object.interactionDistance !== null" name="interactionDistance"
+      [value]="object.interactionDistance"></lux-number-flag>
+  </ng-container>
 </div>

@@ -3,10 +3,10 @@ import { ReplaySubject, from, Observable } from 'rxjs';
 import { map, combineAll, switchMap } from 'rxjs/operators';
 
 import { LuJsonService } from '../../../services';
-import { DB_SkillBehavior, SkillRef } from '../../../../defs/cdclient';
+import { DB_ObjectSkills, DB_SkillBehavior } from '../../../../defs/cdclient';
 
 interface Skill {
-  ref: SkillRef;
+  ref: DB_ObjectSkills;
   skill: DB_SkillBehavior;
 };
 
@@ -19,19 +19,19 @@ export class SkillComponentComponent implements OnInit {
 
   _id: number;
   skills: Observable<{[id: number]: Skill}>;
-  skill_ref: ReplaySubject<SkillRef[]>;
+  skill_ref: ReplaySubject<DB_ObjectSkills[]>;
 
   constructor(
     private luJsonService: LuJsonService) {
 
-    this.skill_ref = new ReplaySubject<SkillRef[]>(1);
+    this.skill_ref = new ReplaySubject<DB_ObjectSkills[]>(1);
     this.skills = this.skill_ref
       .pipe(
         switchMap(this.mapRef.bind(this))
       )
   }
 
-  mapRef(ref_list: SkillRef[] = []) {
+  mapRef(ref_list: DB_ObjectSkills[] = []) {
     return from(ref_list)
       .pipe(
         map(ref => {
@@ -57,7 +57,7 @@ export class SkillComponentComponent implements OnInit {
     return this._id;
   }
 
-  @Input() set oskills(ref_list: SkillRef[]) {
+  @Input() set oskills(ref_list: DB_ObjectSkills[]) {
     this.skill_ref.next(ref_list);
   }
 

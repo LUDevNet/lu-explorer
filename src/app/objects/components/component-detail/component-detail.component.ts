@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ObjectPod } from '../../../../defs/cdclient';
+import { DB_ObjectSkills } from '../../../../defs/cdclient';
 import { component_names } from '../../../../defs/components';
 
 @Component({
@@ -11,7 +11,7 @@ export class ComponentDetailComponent implements OnInit {
 
   @Input() id: number;
   @Input() component_id: number;
-  @Input() object: ObjectPod;
+  @Input() skills: DB_ObjectSkills[];
 
   constructor() { }
 
