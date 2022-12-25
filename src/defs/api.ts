@@ -36,6 +36,10 @@ export interface Rev_FactionById_Embedded {
     destructible_components: Record<number, ComponentTypeSingle>
 }
 
+export interface Rev_CooldownGroup {
+    skills: number[]
+}
+
 export interface ComponentTypeSingle {
     lots: number[]
 }

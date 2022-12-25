@@ -1,0 +1,11 @@
+<ul class="breadcrumbs">
+    <li><a href="/skills">Skills</a></li>
+    <li><a href="/skills/cooldowngroups">Cooldown Groups</a></li>
+    <li>#{{ $id | async }}</li>
+</ul>
+<section>
+    <h2>Cooldown Group #{{ $id | async }}</h2>
+    <ul *ngIf="$cooldowngroup | async; let group">
+        <li *ngFor="let skill_id of group.skills"><a href="/skills/{{skill_id}}">Skill #{{skill_id}}</a></li>
+    </ul>
+</section>

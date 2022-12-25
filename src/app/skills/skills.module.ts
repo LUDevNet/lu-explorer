@@ -12,6 +12,8 @@ import { SkillsComponent } from './skills.component';
 import { DescriptionUiComponent } from './description-ui/description-ui.component';
 import { TasksModule } from '../missions/tasks/tasks.module';
 import { GuiModule } from '../gui/gui.module';
+import { CooldownGroupDetailComponent } from './cooldowngroups/detail/detail.component';
+import { CooldownGroupIndexComponent } from './cooldowngroups/index/index.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { GuiModule } from '../gui/gui.module';
     SkillComponent,
     SkillsComponent,
     DescriptionUiComponent,
+    CooldownGroupDetailComponent,
+    CooldownGroupIndexComponent,
   ],
   imports: [
     CommonModule,

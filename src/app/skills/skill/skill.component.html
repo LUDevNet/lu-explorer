@@ -17,7 +17,9 @@
       <lux-number-flag [value]="skill.behaviorID" name="behaviorID"></lux-number-flag>
     </a>
     <lux-number-flag *ngIf="skill.imaginationcost !== null" [value]="skill.imaginationcost" name="imaginationcost"></lux-number-flag>
-    <lux-number-flag *ngIf="skill.cooldowngroup !== null" [value]="skill.cooldowngroup" name="cooldowngroup"></lux-number-flag>
+    <a routerLink="/skills/cooldowngroups/{{skill.cooldowngroup}}">
+      <lux-number-flag *ngIf="skill.cooldowngroup !== null" [value]="skill.cooldowngroup" name="cooldowngroup"></lux-number-flag>
+    </a>
     <lux-number-flag *ngIf="skill.cooldown !== null" [value]="skill.cooldown" name="cooldown"></lux-number-flag>
     <lux-simple-flag *ngIf="skill.inNpcEditor !== null" [value]="skill.inNpcEditor" name="inNpcEditor"></lux-simple-flag>
     <lux-number-flag *ngIf="skill.skillIcon !== null" [value]="skill.skillIcon" name="skillIcon"></lux-number-flag>

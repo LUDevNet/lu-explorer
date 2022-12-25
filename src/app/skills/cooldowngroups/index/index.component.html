@@ -1,0 +1,16 @@
+<ul class="breadcrumbs">
+    <li><a href="/skills">Skills</a></li>
+    <li>Cooldown Groups</li>
+</ul>
+
+<section>
+    <h2>Cooldown Groups</h2>
+    <ul *ngIf="$cooldowngroups | async; let cooldowngroups; else loading">
+        <li *ngFor="let group of cooldowngroups">
+            <a href="/skills/cooldowngroups/{{group}}">Group #{{group}}</a>
+        </li>
+    </ul>
+</section>
+<ng-template #loading>
+    Loading...
+</ng-template>
