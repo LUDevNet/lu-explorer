@@ -4,24 +4,28 @@
 </ul>
 <h2>Reward codes</h2>
 
-<section *ngFor="let code_group of $code_groups | async">
-    <h3 *ngIf="code_group.gate_version !== ''">Gate: <code>{{code_group.gate_version}}</code></h3>
-    <h3 *ngIf="code_group.gate_version === ''">No Gate</h3>
-    <div>
-        <div *ngFor="let code of code_group.codes">
-            <div class="item">
-                <lux-slot [luxFetchItem]="code.attachmentLOT"></lux-slot>
-            </div>
-            <div class="code-desc" *ngIf="loc(code.id) | async; let code_loc; else no_loc">
-                <h4>{{code_loc.subjectText}} <code>{{code.code}}</code></h4>
-                <p>{{code_loc.bodyText}}</p>
-            </div>
-            <ng-template #no_loc>
-                <div class="code-desc">
-                    <h4><code>{{code.code}}</code></h4>
+<ng-container *luxVar="$code_groups | async; let code_groups">
+    <lux-gate-version-toc [list]="code_groups | paramset:'gate_version' | as_array"></lux-gate-version-toc>
+
+    <section [id]="code_group.gate_version | toc:'fg'" *ngFor="let code_group of code_groups">
+        <h3 *ngIf="code_group.gate_version !== ''">Feature Gate: <code>{{code_group.gate_version}}</code></h3>
+        <h3 *ngIf="code_group.gate_version === ''">No Feature Gate</h3>
+        <div>
+            <div *ngFor="let code of code_group.codes">
+                <div class="item">
+                    <lux-slot [luxFetchItem]="code.attachmentLOT"></lux-slot>
                 </div>
-            </ng-template>
-            <div class="clearfix"></div>
+                <div class="code-desc" *ngIf="loc(code.id) | async; let code_loc; else no_loc">
+                    <h4>{{code_loc.subjectText}} <code>{{code.code}}</code></h4>
+                    <p>{{code_loc.bodyText}}</p>
+                </div>
+                <ng-template #no_loc>
+                    <div class="code-desc">
+                        <h4><code>{{code.code}}</code></h4>
+                    </div>
+                </ng-template>
+                <div class="clearfix"></div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</ng-container>

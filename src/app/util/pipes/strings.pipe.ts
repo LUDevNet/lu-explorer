@@ -35,6 +35,14 @@ export class ToNumPipe implements PipeTransform {
   }
 }
 
+@Pipe({name: 'toc'})
+export class TocPipe implements PipeTransform {
+  transform(value: string, key: string) : string {
+    if (value == "" || value == null) return `no-${key}`;
+    return `${key}-${value}`
+  }
+}
+
 @Pipe({name: 'toRGBA'})
 export class ToRGBAPipe implements PipeTransform {
   transform(color: DB_BrickColors): string {
