@@ -26,6 +26,16 @@ export interface Rev_Objects {
     missions?: Rev_Objects_Missions;
 }
 
+export interface Rev_FactionById {
+    destructible_ids: number[],
+    destructible_list_ids: number[],
+    _embedded: Rev_FactionById_Embedded,
+}
+
+export interface Rev_FactionById_Embedded {
+    destructible_components: Record<number, ComponentTypeSingle>
+}
+
 export interface ComponentTypeSingle {
     lots: number[]
 }

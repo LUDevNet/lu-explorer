@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { DB_ObjectRef_ByComponent } from '../../../../defs/cdclient';
+import { map, switchMap } from 'rxjs/operators';
+import { Rev_FactionById } from '../../../../defs/api';
 import { DESTRUCTIBLE_COMPONENT_ID } from '../../../../defs/components';
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 
 @Component({
   selector: 'lux-objects-by-faction',
@@ -13,15 +13,12 @@ import { LuJsonService } from '../../../services';
 })
 export class ObjectsByFactionComponent implements OnInit {
   $id: ReplaySubject<string> = new ReplaySubject(1);
-  $objectsWithDestructible: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
-  $destructibleByFaction: ReplaySubject<Record<string, number[]>> = new ReplaySubject(1);
+  $faction: ReplaySubject<Rev_FactionById> = new ReplaySubject(1);
 
-  constructor(private route: ActivatedRoute, private luJsonService: LuJsonService) { }
+  constructor(private route: ActivatedRoute, private luCoreData: LuCoreDataService) { }
 
   ngOnInit(): void {
     this.route.paramMap.pipe(map(p => p.get('id'))).subscribe(this.$id);
-    //this.luJsonService.getObjectComponent(DESTRUCTIBLE_COMPONENT_ID).subscribe(this.$objectsWithDestructible);
-    //this.luJsonService.getDestructibleComponentsByFaction().subscribe(this.$destructibleByFaction);
+    this.$id.pipe(switchMap(id => this.luCoreData.getRevEntry<Rev_FactionById>('factions', id))).subscribe(this.$faction)
   }
-
 }
