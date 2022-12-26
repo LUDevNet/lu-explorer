@@ -32,3 +32,7 @@ export interface Locale_WhatsCoolItemSpotlight {
 export interface Locale_ZoneTable {
     DisplayDescription: string;
 }
+
+export interface Locale_MissionTasks {
+    description?: string;
+}

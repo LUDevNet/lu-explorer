@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DB_MissionTasks } from '../../../../defs/cdclient';
+import { MissionTasks } from '../../../../defs/util';
 
 @Component({
   selector: 'app-task-detail',
@@ -8,7 +8,7 @@ import { DB_MissionTasks } from '../../../../defs/cdclient';
 })
 export class TaskDetailComponent implements OnInit {
 
-  @Input() task: DB_MissionTasks;
+  @Input() task: MissionTasks;
 
   constructor() { }
 

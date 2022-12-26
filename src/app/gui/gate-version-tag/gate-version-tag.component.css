@@ -1,0 +1,16 @@
+.gate-version-tag {
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.3rem;
+}
+
+.gate-version-tag::before {
+    content: "🔒 "
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a {
+    margin-left: 0.5rem;
+}

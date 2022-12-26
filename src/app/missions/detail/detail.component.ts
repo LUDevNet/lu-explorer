@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { Rev_MissionById } from '../../../defs/api';
 import { DB_Missions, DB_MissionTasks } from '../../../defs/cdclient';
+import { MissionTasks } from '../../../defs/util';
 
-import { LuJsonService, LuLocaleService } from '../../services';
+import { LuCoreDataService, LuJsonService, LuLocaleService } from '../../services';
 
 const CHAT_BUBBLE_KEYS: string[] = [
   "chat_state_1",
@@ -19,38 +23,58 @@ const CHAT_BUBBLE_KEYS: string[] = [
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
-export class MissionDetailComponent implements OnInit {
+export class MissionDetailComponent implements OnInit, OnDestroy {
 
-  mission: DB_Missions;
+  $mission: Observable<DB_Missions | null>;
+  $rev: Observable<Rev_MissionById>;
   missionLocale: any;
-  tasks: any;
+  $tasks: Observable<MissionTasks[]>;
   tasksLocale: any;
   text: any;
   textsLocale: any;
   id: number;
 
-  constructor(private router: Router, private route: ActivatedRoute,
-  	private luJsonService: LuJsonService, private luLuLocaleService: LuLocaleService) { }
+  id_subscription: Subscription;
+  mission_subscription: Subscription;
+
+
+  constructor(
+    private route: ActivatedRoute,
+    private luCoreData: LuCoreDataService,
+    private luJsonService: LuJsonService,
+    private luLuLocaleService: LuLocaleService,
+  ) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(map => this.getMission(+map.get('id')));
+    let $id = this.route.paramMap.pipe(map(params => +params.get('id')));
+    this.$mission = $id.pipe(switchMap(id => this.luCoreData.getSingleTableEntry<DB_Missions>("Missions", id)));
+    this.$tasks = $id.pipe(
+      switchMap(id => this.luCoreData.getTableEntry<DB_MissionTasks>("MissionTasks", id)),
+      map(tasks => tasks.map(task => Object.assign(task, { $localizations: this.luCoreData.getLocaleSubtree(`MissionTasks_${task.uid}`) })))
+    );
+    this.$rev = $id.pipe(switchMap(id => this.luCoreData.getRevEntry<Rev_MissionById>("missions", id)));
+    this.id_subscription = $id.subscribe(this.getMission.bind(this));
   }
 
-  getMission(id: number):void {
-  	this.id = id;
-    this.luJsonService.getMission(this.id).subscribe(mission => this.mission = mission);
-    this.luJsonService.getMissionTasks(this.id).subscribe(this.processMissionTasks.bind(this));
+  ngOnDestroy(): void {
+    this.id_subscription.unsubscribe();
+    this.clearMissionSubscription();
+  }
+
+  clearMissionSubscription() {
+    if (this.mission_subscription) {
+      this.mission_subscription.unsubscribe();
+    }
+  }
+
+  getMission(id: number): void {
+    this.id = id;
+
+    this.clearMissionSubscription();
+    this.mission_subscription = new Subscription();
     this.luJsonService.getMissionText(this.id).subscribe(text => this.text = text);
     this.luLuLocaleService.getLocaleEntry("MissionText", this.id).subscribe(entry => this.textsLocale = entry);
     this.luLuLocaleService.getLocaleEntry("Missions", this.id).subscribe(entry => this.missionLocale = entry);
-  }
-
-  processMissionTasks(tasks: DB_MissionTasks[]) {
-    let taskArray = tasks.filter(task => task);
-    taskArray.forEach(task => this.luLuLocaleService
-      .getLocaleEntry("MissionTasks", task.uid)
-      .subscribe(entry => task.localizations = entry))
-    this.tasks = taskArray;
   }
 
   anyChatBubble(texts: any): boolean {
@@ -69,5 +93,4 @@ export class MissionDetailComponent implements OnInit {
     let prop: string | object = texts['chat_state'][id]
     return prop ? prop[key] : undefined;
   }
-
 }

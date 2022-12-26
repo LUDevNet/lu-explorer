@@ -28,6 +28,7 @@ import { MissionComponent } from './mission/mission.component';
 import { MissionDirective } from './mission/mission.directive';
 import { CustomFlagComponent } from './custom-flag/custom-flag.component';
 import { GateVersionTocComponent } from './gate-version-toc/gate-version-toc.component';
+import { GateVersionTagComponent } from './gate-version-tag/gate-version-tag.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { GateVersionTocComponent } from './gate-version-toc/gate-version-toc.com
     MissionDirective,
     CustomFlagComponent,
     GateVersionTocComponent,
+    GateVersionTagComponent,
   ],
   imports: [
     CommonModule,
@@ -90,6 +92,7 @@ import { GateVersionTocComponent } from './gate-version-toc/gate-version-toc.com
     MissionComponent,
     MissionDirective,
     GateVersionTocComponent,
+    GateVersionTagComponent,
   ],
 })
 export class GuiModule { }

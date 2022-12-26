@@ -2,6 +2,7 @@
   <div class="task-icon">
     <img [luxFetchIcon]="task.IconID" style="max-width: 64px">
   </div>
+  <lux-gate-version-tag [gate_version]="task.gate_version"></lux-gate-version-tag>
   <div class="task-description">
     <app-smash-task *ngSwitchCase="0" [task]="task"></app-smash-task>
     <app-script-task *ngSwitchCase="1" [task]="task"></app-script-task>
@@ -23,10 +24,9 @@
     <app-flag-task *ngSwitchCase="24" [task]="task"></app-flag-task>
     <app-property-task *ngSwitchCase="30" [task]="task"></app-property-task>
     <app-donation-task *ngSwitchCase="32" [task]="task"></app-donation-task>
-    <blockquote *ngIf="task.localizations">{{task.localizations.description}}</blockquote>
-    <p *ngIf="task.gate_version">
-      This task is only available with feature update / gate <code>{{task.gate_version}}</code>
-    </p>
+    <ng-container *ngIf="task.$localizations | async; let loc">
+      <blockquote *ngIf="loc.description">{{loc.description}}</blockquote>
+    </ng-container>
   </div>
   <div style="clear: left;"></div>
 </section>

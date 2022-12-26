@@ -142,6 +142,13 @@
     width: 500px;
 }
 
+.mission-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+}
+
 @media (max-width: 500px) {
     #mission-card {
         float: none;

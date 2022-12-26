@@ -32,8 +32,9 @@ export interface Rev_FactionById {
     _embedded: Rev_FactionById_Embedded,
 }
 
+
 export interface Rev_FactionById_Embedded {
-    destructible_components: Record<number, ComponentTypeSingle>
+    destructible_components: Rev_ByComponentId;
 }
 
 export interface Rev_CooldownGroup {
@@ -44,12 +45,30 @@ export interface ComponentTypeSingle {
     lots: number[]
 }
 
+export type Rev_ByComponentId = Record<number, ComponentTypeSingle>;
 export type ObjectsRefDict = Record<number, { name: string }>;
+
 export interface Rev_ComponentType {
-    components: Record<number, ComponentTypeSingle>;
+    components: Rev_ByComponentId;
     _embedded: { objects: ObjectsRefDict };
 }
 
 export interface Rev_ComponentTypes {
     components: number[];
+}
+
+export interface Rev_MissionById {
+    collectible_components: {
+        requirement_for: number[];
+    };
+    item_components: {
+        requirement_for: number[];
+    };
+    missions: {
+        prereq_for: number[];
+    };
+    _embedded: {
+        ItemComponent: Rev_ByComponentId;
+        CollectibleComponent: Rev_ByComponentId;
+    };
 }

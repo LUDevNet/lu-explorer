@@ -546,7 +546,6 @@ export class DB_MissionTasks {
   largeTaskIconID: number; // INTEGER
   localize: boolean;
   gate_version: string;
-  localizations?: any;
 }
 
 export class DB_WhatsCoolItemSpotlight {
