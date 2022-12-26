@@ -1,96 +1,67 @@
 <ul class="breadcrumbs">
   <li><a routerLink="/missions">Missions</a></li>
-  <li><a *ngIf="mission" routerLink="/missions/type/{{mission.defined_type}}">{{mission.defined_type}}</a></li>
-  <li>
-    <a *ngIf="mission && mission.defined_subtype"
+  <li><a *ngIf="$mission | async; let mission"
+      routerLink="/missions/type/{{mission.defined_type}}">{{mission.defined_type}}</a></li>
+  <li *ngIf="$mission | async; let mission">
+    <a *ngIf="mission.defined_subtype"
       routerLink="/missions/type/{{mission.defined_type}}/subtype/{{mission.defined_subtype}}">{{mission.defined_subtype}}</a>
-    <a *ngIf="mission && !mission.defined_subtype" routerLink="/missions/type/{{mission.defined_type}}">General</a>
+    <a *ngIf="!mission.defined_subtype" routerLink="/missions/type/{{mission.defined_type}}">General</a>
   </li>
-  <li><span *ngIf="mission && mission.locStatus; else id_breadcrumb">{{missionLocale && missionLocale.name}}</span></li>
-  <ng-template #id_breadcrumb>#{{mission && mission.id}}</ng-template>
+  <li *ngIf="$mission | async; let mission"><span *ngIf="mission.locStatus; else id_breadcrumb">{{missionLocale &&
+      missionLocale.name}}</span></li>
+  <ng-template #id_breadcrumb>#{{id}}</ng-template>
 </ul>
 
-<app-group-icon *ngIf="mission" [name]="mission.defined_type"></app-group-icon>
-<h2>
-  <ng-container *ngIf="mission && !mission.isMission; else headingElse">Achievement</ng-container> #{{id}} <small
-    *ngIf="mission && mission.locStatus">"{{missionLocale && missionLocale.name}}"</small>
+<app-group-icon *ngIf="$mission | async; let mission" [name]="mission.defined_type"></app-group-icon>
+<h2 *ngIf="$mission | async; let mission">
+  <ng-container *ngIf="!mission.isMission; else headingElse">Achievement</ng-container> #{{id}} <small
+    *ngIf="mission.locStatus">"{{missionLocale && missionLocale.name}}"</small>
+  <small>
+    <lux-gate-version-tag [gate_version]="mission.gate_version"></lux-gate-version-tag>
+  </small>
 </h2>
 <ng-template #headingElse>Mission</ng-template>
 
-<section id="mission-card" *ngIf="mission" class="card card-right clearfix">
-  <h3 id="general">General</h3>
-  <table style="min-width: initial;" *ngIf="mission">
-    <tr *ngIf="mission.isMission">
-      <td>offer_objectID</td>
-      <td>
-        <a *ngIf="mission.offer_objectID != -1" routerLink="/objects/{{mission.offer_objectID}}">
-          {{mission.offer_objectID}}
-        </a>
-        <span *ngIf="mission.offer_objectID == -1">None (-1)</span>
-      </td>
-    </tr>
-    <tr *ngIf="mission.isMission">
-      <td>target_objectID</td>
-      <td>
-        <a *ngIf="mission.target_objectID != -1" routerLink="/objects/{{mission.target_objectID}}">
-          {{mission.target_objectID}}
-        </a>
-        <span *ngIf="mission.target_objectID == -1">None (-1)</span>
-      </td>
-    </tr>
-    <tr>
-      <td>defined_type</td>
-      <td>
-        <a *ngIf="mission.defined_type" routerLink="/missions/type/{{mission.defined_type}}">
-          {{mission.defined_type}}
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <td>defined_subtype</td>
-      <td>
-        <a *ngIf="mission.defined_type"
-          routerLink="/missions/type/{{mission.defined_type}}/subtype/{{mission.defined_subtype}}">
-          {{mission.defined_subtype}}
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <td>LegoScore</td>
-      <td>{{mission.LegoScore}}</td>
-    </tr>
-    <tr>
-      <td>UISortOrder</td>
-      <td>{{mission.UISortOrder}}</td>
-    </tr>
-  </table>
-</section>
+<ng-container *ngIf="$mission | async; let mission">
+  <section id="flags">
+    <lux-simple-flag name="isMission" [value]="mission.isMission" trueTitle="This is a mission."
+      falseTitle="This is an achievement."></lux-simple-flag>
+    <lux-simple-flag name="repeatable" [value]="mission.repeatable"
+      trueTitle="The player can complete this multiple times."
+      falseTitle="The player can only complete this once."></lux-simple-flag>
+    <lux-simple-flag name="isRandom" [value]="mission.isRandom" trueTitle="This mission is part of a random pool."
+      falseTitle="This mission is not part of a random pool."></lux-simple-flag>
+    <lux-simple-flag name="isChoiceReward" [value]="mission.isChoiceReward"
+      trueTitle="The player must choose one of the reward items offered."
+      falseTitle="The player receives all rewards."></lux-simple-flag>
+    <lux-simple-flag name="inMOTD" [value]="mission.inMOTD" trueTitle="This may be a mission-of-the-day."
+      falseTitle="This may not be a mission-of-the-day."></lux-simple-flag>
+    <lux-number-flag *ngIf="mission.LegoScore" name="LegoScore" [value]="mission.LegoScore"></lux-number-flag>
+    <lux-number-flag *ngIf="mission.UISortOrder" name="UISortOrder" [value]="mission.UISortOrder"></lux-number-flag>
+    <a *ngIf="mission.offer_objectID > 0" href="/objects/{{mission.offer_objectID}}"><lux-number-flag
+        name="offer_objectID" [value]="mission.offer_objectID"></lux-number-flag></a>
+    <a *ngIf="mission.target_objectID > 0" href="/objects/{{mission.target_objectID}}"><lux-number-flag
+        name="target_objectID" [value]="mission.offer_objectID"></lux-number-flag></a>
+  </section>
 
-<section *ngIf="mission && mission.prereqMissionID">
-  <h3>Prerequisites</h3>
-  <div id="mission-prereqs">
-    <mission-ref-list [ref]="mission.prereqMissionID | condast"></mission-ref-list>
-  </div>
-</section>
+  <section *ngIf="mission.prereqMissionID">
+    <h3>Prerequisites</h3>
+    <div id="mission-prereqs">
+      <mission-ref-list [ref]="mission.prereqMissionID | condast"></mission-ref-list>
+    </div>
+  </section>
+</ng-container>
 
-<section id="flags" *ngIf="mission">
-  <h3>Flags</h3>
-  <lux-simple-flag name="isMission" [value]="mission.isMission" trueTitle="This is a mission." falseTitle="This is an achievement."></lux-simple-flag>
-  <lux-simple-flag name="repeatable" [value]="mission.repeatable" trueTitle="The player can complete this multiple times." falseTitle="The player can only complete this once."></lux-simple-flag>
-  <lux-simple-flag name="isRandom" [value]="mission.isRandom" trueTitle="This mission is part of a random pool." falseTitle="This mission is not part of a random pool."></lux-simple-flag>
-  <lux-simple-flag name="isChoiceReward" [value]="mission.isChoiceReward" trueTitle="The player must choose one of the reward items offered." falseTitle="The player receives all rewards."></lux-simple-flag>
-  <lux-simple-flag name="inMOTD" [value]="mission.inMOTD" trueTitle="This may be a mission-of-the-day." falseTitle="This may not be a mission-of-the-day."></lux-simple-flag>
-  <ul>
-    <li *ngIf="mission.gate_version">This task is only available with a feature update / gate
-      (<code>gate_version</code>):
-      <ul>
-        <li><code>{{mission.gate_version}}</code></li>
-      </ul>
-    </li>
-  </ul>
-</section>
+<ng-container *ngIf="$rev | async; let rev">
+  <section id="prereq-for" *ngIf="rev.missions && rev.missions.prereq_for; let list">
+    <h3>Prerequisite For</h3>
+    <div class="mission-list">
+      <lux-mission *ngFor="let id of list" [luxFetch]="id"></lux-mission>
+    </div>
+  </section>
+</ng-container>
 
-<section *ngIf="tasks">
+<section *ngIf="$tasks | async; let tasks">
   <h3>Tasks</h3>
 
   To complete this mission, the player needs to fulfill all of the
@@ -100,34 +71,56 @@
   <app-task-table [tasks]="tasks"></app-task-table>
 </section>
 
-<section *ngIf="mission">
+<section *ngIf="$mission | async; let mission">
   <h3>Rewards</h3>
   <section>
     <h4 *ngIf="mission.repeatable">On first completion</h4>
     <dl class="mission-rewards">
       <dd>
-        <lux-missiondisplay-reward [luxTooltip]="'reward_currency'" *ngIf="mission.reward_currency > 0" class="coins">{{mission.reward_currency}}</lux-missiondisplay-reward>
-        <lux-missiondisplay-reward [luxTooltip]="'LegoScore'" *ngIf="mission.LegoScore > 0" class="uscore">{{mission.LegoScore}}</lux-missiondisplay-reward>
-        <lux-missiondisplay-reward [luxTooltip]="'reward_reputation'" *ngIf="mission.reward_reputation > 0" class="reputation">{{mission.reward_reputation}}</lux-missiondisplay-reward>
+        <lux-missiondisplay-reward [luxTooltip]="'reward_currency'" *ngIf="mission.reward_currency > 0"
+          class="coins">{{mission.reward_currency}}</lux-missiondisplay-reward>
+        <lux-missiondisplay-reward [luxTooltip]="'LegoScore'" *ngIf="mission.LegoScore > 0"
+          class="uscore">{{mission.LegoScore}}</lux-missiondisplay-reward>
+        <lux-missiondisplay-reward [luxTooltip]="'reward_reputation'" *ngIf="mission.reward_reputation > 0"
+          class="reputation">{{mission.reward_reputation}}</lux-missiondisplay-reward>
       </dd>
       <dt *ngIf="mission.isChoiceReward">and one of:</dt>
       <dt *ngIf="!mission.isChoiceReward">and all of:</dt>
       <dd>
-        <lux-slot *ngIf="mission.reward_item1 > -1" [luxFetchItem]="mission.reward_item1" [count]="mission.reward_item1_count"></lux-slot>
-        <lux-slot *ngIf="mission.reward_item2 > -1" [luxFetchItem]="mission.reward_item2" [count]="mission.reward_item2_count"></lux-slot>
-        <lux-slot *ngIf="mission.reward_item3 > -1" [luxFetchItem]="mission.reward_item3" [count]="mission.reward_item3_count"></lux-slot>
-        <lux-slot *ngIf="mission.reward_item4 > -1" [luxFetchItem]="mission.reward_item4" [count]="mission.reward_item4_count"></lux-slot>
-        <lux-slot *ngIf="mission.reward_maxhealth > 0" icon="/lu-res/textures/ui/rewards/maxheart.png" [count]="mission.reward_maxhealth" luxTooltip="Life Point"></lux-slot>
-        <lux-slot *ngIf="mission.reward_maximagination > 0" icon="/lu-res/textures/ui/rewards/maximagination.png" [count]="mission.reward_maximagination" luxTooltip="Imagination Point"></lux-slot>
-        <lux-slot *ngIf="mission.reward_maxinventory > 0" icon="/lu-res/textures/ui/rewards/maxinventory.png" [count]="mission.reward_maxinventory" luxTooltip="Extra Backpack Space"></lux-slot>
-        <lux-slot *ngIf="mission.reward_maxmodel > 0" icon="/lu-res/textures/ui/rewards/maxmodel.png" [count]="mission.reward_maxmodel" luxTooltip="Extra Model Space"></lux-slot>
-        <lux-slot *ngIf="mission.reward_maxwidget > 0" icon="/lu-res/textures/ui/rewards/maxwidget.png" [count]="mission.reward_maxwidget" luxTooltip="Extra Behavior Space"></lux-slot>
-        <lux-slot *ngIf="mission.reward_maxwallet > 0" icon="/lu-res/textures/ui/rewards/maxwallet.png" [count]="mission.reward_maxwallet" luxTooltip="Extra Wallet Space"></lux-slot>
-        <lux-slot *ngIf="mission.reward_bankinventory > 0" icon="/lu-res/textures/ui/rewards/maxbank.png" [count]="mission.reward_bankinventory" luxTooltip="Extra Vault Space"></lux-slot>
-        <lux-slot *ngIf="mission.reward_emote && mission.reward_emote > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote}}"></lux-slot>
-        <lux-slot *ngIf="mission.reward_emote2 && mission.reward_emote2 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote2}}"></lux-slot>
-        <lux-slot *ngIf="mission.reward_emote3 && mission.reward_emote3 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote3}}"></lux-slot>
-        <lux-slot *ngIf="mission.reward_emote4 && mission.reward_emote4 > -1" icon="/lu-res/textures/ui/achievements/general_social.png" luxTooltip="Emote #{{mission.reward_emote4}}"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item1 > -1" [luxFetchItem]="mission.reward_item1"
+          [count]="mission.reward_item1_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item2 > -1" [luxFetchItem]="mission.reward_item2"
+          [count]="mission.reward_item2_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item3 > -1" [luxFetchItem]="mission.reward_item3"
+          [count]="mission.reward_item3_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item4 > -1" [luxFetchItem]="mission.reward_item4"
+          [count]="mission.reward_item4_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_maxhealth > 0" icon="/lu-res/textures/ui/rewards/maxheart.png"
+          [count]="mission.reward_maxhealth" luxTooltip="Life Point"></lux-slot>
+        <lux-slot *ngIf="mission.reward_maximagination > 0" icon="/lu-res/textures/ui/rewards/maximagination.png"
+          [count]="mission.reward_maximagination" luxTooltip="Imagination Point"></lux-slot>
+        <lux-slot *ngIf="mission.reward_maxinventory > 0" icon="/lu-res/textures/ui/rewards/maxinventory.png"
+          [count]="mission.reward_maxinventory" luxTooltip="Extra Backpack Space"></lux-slot>
+        <lux-slot *ngIf="mission.reward_maxmodel > 0" icon="/lu-res/textures/ui/rewards/maxmodel.png"
+          [count]="mission.reward_maxmodel" luxTooltip="Extra Model Space"></lux-slot>
+        <lux-slot *ngIf="mission.reward_maxwidget > 0" icon="/lu-res/textures/ui/rewards/maxwidget.png"
+          [count]="mission.reward_maxwidget" luxTooltip="Extra Behavior Space"></lux-slot>
+        <lux-slot *ngIf="mission.reward_maxwallet > 0" icon="/lu-res/textures/ui/rewards/maxwallet.png"
+          [count]="mission.reward_maxwallet" luxTooltip="Extra Wallet Space"></lux-slot>
+        <lux-slot *ngIf="mission.reward_bankinventory > 0" icon="/lu-res/textures/ui/rewards/maxbank.png"
+          [count]="mission.reward_bankinventory" luxTooltip="Extra Vault Space"></lux-slot>
+        <lux-slot *ngIf="mission.reward_emote && mission.reward_emote > -1"
+          icon="/lu-res/textures/ui/achievements/general_social.png"
+          luxTooltip="Emote #{{mission.reward_emote}}"></lux-slot>
+        <lux-slot *ngIf="mission.reward_emote2 && mission.reward_emote2 > -1"
+          icon="/lu-res/textures/ui/achievements/general_social.png"
+          luxTooltip="Emote #{{mission.reward_emote2}}"></lux-slot>
+        <lux-slot *ngIf="mission.reward_emote3 && mission.reward_emote3 > -1"
+          icon="/lu-res/textures/ui/achievements/general_social.png"
+          luxTooltip="Emote #{{mission.reward_emote3}}"></lux-slot>
+        <lux-slot *ngIf="mission.reward_emote4 && mission.reward_emote4 > -1"
+          icon="/lu-res/textures/ui/achievements/general_social.png"
+          luxTooltip="Emote #{{mission.reward_emote4}}"></lux-slot>
       </dd>
     </dl>
   </section>
@@ -136,16 +129,23 @@
     <h4>On repeats</h4>
     <dl class="mission-rewards">
       <dd>
-        <lux-missiondisplay-reward [luxTooltip]="'reward_currency_repeatable'" *ngIf="mission.reward_currency_repeatable > 0" class="coins">{{mission.reward_currency_repeatable}}</lux-missiondisplay-reward>
-        <lux-missiondisplay-reward [luxTooltip]="'LegoScore'" *ngIf="mission.LegoScore > 0" class="uscore">{{mission.LegoScore}}</lux-missiondisplay-reward>
+        <lux-missiondisplay-reward [luxTooltip]="'reward_currency_repeatable'"
+          *ngIf="mission.reward_currency_repeatable > 0"
+          class="coins">{{mission.reward_currency_repeatable}}</lux-missiondisplay-reward>
+        <lux-missiondisplay-reward [luxTooltip]="'LegoScore'" *ngIf="mission.LegoScore > 0"
+          class="uscore">{{mission.LegoScore}}</lux-missiondisplay-reward>
       </dd>
       <dt *ngIf="mission.isChoiceReward">and one of:</dt>
       <dt *ngIf="!mission.isChoiceReward">and all of:</dt>
       <dd>
-        <lux-slot *ngIf="mission.reward_item1_repeatable > -1" [luxFetchItem]="mission.reward_item1_repeatable" [count]="mission.reward_item1_repeat_count"></lux-slot>
-        <lux-slot *ngIf="mission.reward_item2_repeatable > -1" [luxFetchItem]="mission.reward_item2_repeatable" [count]="mission.reward_item2_repeat_count"></lux-slot>
-        <lux-slot *ngIf="mission.reward_item3_repeatable > -1" [luxFetchItem]="mission.reward_item3_repeatable" [count]="mission.reward_item3_repeat_count"></lux-slot>
-        <lux-slot *ngIf="mission.reward_item4_repeatable > -1" [luxFetchItem]="mission.reward_item4_repeatable" [count]="mission.reward_item4_repeat_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item1_repeatable > -1" [luxFetchItem]="mission.reward_item1_repeatable"
+          [count]="mission.reward_item1_repeat_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item2_repeatable > -1" [luxFetchItem]="mission.reward_item2_repeatable"
+          [count]="mission.reward_item2_repeat_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item3_repeatable > -1" [luxFetchItem]="mission.reward_item3_repeatable"
+          [count]="mission.reward_item3_repeat_count"></lux-slot>
+        <lux-slot *ngIf="mission.reward_item4_repeatable > -1" [luxFetchItem]="mission.reward_item4_repeatable"
+          [count]="mission.reward_item4_repeat_count"></lux-slot>
       </dd>
     </dl>
   </section>
@@ -157,91 +157,138 @@
 </section>
 
 <h3>Texts</h3>
-<section *ngIf="mission && textsLocale && anyChatBubble(textsLocale)">
-  <h4>Chat Bubbles</h4>
-  <dl id="chat-bubbles">
-    <div *ngIf="getChatState(textsLocale, 1); let text">
-      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_1" [innerHTML]="text"></blockquote></dt>
-      <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when approached before the mission is offered.</dd>
-    </div>
-    <div *ngIf="textsLocale.accept_chat_bubble">
-      <dt><blockquote class="chat-bubble" luxTooltip="accept_chat_bubble" [innerHTML]="textsLocale.accept_chat_bubble"></blockquote></dt>
-      <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when the mission is accepted.</dd>
-    </div>
-    <div *ngIf="getChatState(textsLocale, 2); let text">
-      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_2" [innerHTML]="text"></blockquote></dt>
-      <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when approached while the mission is in progress.</dd>
-    </div>
-    <div *ngIf="getChatState(textsLocale, 3); let text">
-      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_3" [innerHTML]="text"></blockquote></dt>
-      <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when approached when the mission is ready to be completed.</dd>
-    </div>
-    <div *ngIf="getChatSubState(textsLocale, 3, 'turnin'); let text">
-      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_3_turnin" [innerHTML]="text"></blockquote></dt>
-      <dd>Spoken by <a [luxFetchObject]="mission.target_objectID"></a> when approached when the mission is ready to be completed.</dd>
-    </div>
-    <div *ngIf="getChatState(textsLocale, 4); let text">
-      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_4" [innerHTML]="text"></blockquote></dt>
-      <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when approached when the mission is complete.</dd>
-    </div>
-    <div *ngIf="getChatSubState(textsLocale, 4, 'turnin'); let text">
-      <dt><blockquote class="chat-bubble" luxTooltip="chat_state_4_turnin" [innerHTML]="text"></blockquote></dt>
-      <dd>Spoken by <a [luxFetchObject]="mission.target_objectID"></a> when approached when the mission is complete.</dd>
-    </div>
-  </dl>
-</section>
-<div>
-	<h4>Completion Tooltip</h4>
-	<dl>
-		<ng-container *ngIf="mission">
-			<ng-container *ngIf="mission.isMission; else achievementTooltip">
-				<dt class="mission-tooltip" luxTooltip="completion_succeed_tip">
-					<img class="mission-tooltip-icon" *ngIf="text" [luxFetchIcon]="text.turnInIconID">
-					<img class="mission-tooltip-arrow" src="/lu-res/ui/ingame/missioncompletemessage_ic.png" alt="" />
-					<img class="mission-tooltip-arrow" src="/lu-res/ui/ingame/missioncompletemessage_ic.png" alt="" style="opacity: 0.75;" />
-					<img class="mission-tooltip-arrow" src="/lu-res/ui/ingame/missioncompletemessage_ic.png" alt="" style="opacity: 0.5;" />
-					<blockquote *ngIf="textsLocale && textsLocale.completion_succeed_tip" class="mission-tooltip-text" [innerHTML]="textsLocale.completion_succeed_tip"></blockquote>
-				</dt>
-			</ng-container>
-			<ng-template #achievementTooltip>
-				<dt class="achievement-tooltip" luxTooltip="completion_succeed_tip">
-					<img class="achievement-tooltip-icon" [luxFetchIcon]="mission.missionIconID">
-					<blockquote *ngIf="textsLocale && textsLocale.completion_succeed_tip" class="achievement-tooltip-text" [innerHTML]="textsLocale.completion_succeed_tip"></blockquote>
-				</dt>
-			</ng-template>
-		</ng-container>
-		<dd>Displayed once the player has completed all tasks.</dd>
-	</dl>
-</div>
-<ng-container *ngIf="mission && !mission.isMission && textsLocale">
-	<h4>Achievement Description</h4>
-  <dl>
-    <div *ngIf="textsLocale.description">
-      <dt><blockquote luxTooltip="description" [innerHTML]="textsLocale.description"></blockquote></dt>
-      <dd>Displayed in the passport as the achievement's description.</dd>
-    </div>
-	</dl>
+<ng-container *ngIf="$mission | async; let mission">
+  <section *ngIf="textsLocale && anyChatBubble(textsLocale)">
+    <h4>Chat Bubbles</h4>
+    <dl id="chat-bubbles">
+      <div *ngIf="getChatState(textsLocale, 1); let text">
+        <dt>
+          <blockquote class="chat-bubble" luxTooltip="chat_state_1" [innerHTML]="text"></blockquote>
+        </dt>
+        <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when approached before the mission is offered.
+        </dd>
+      </div>
+      <div *ngIf="textsLocale.accept_chat_bubble">
+        <dt>
+          <blockquote class="chat-bubble" luxTooltip="accept_chat_bubble" [innerHTML]="textsLocale.accept_chat_bubble">
+          </blockquote>
+        </dt>
+        <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when the mission is accepted.</dd>
+      </div>
+      <div *ngIf="getChatState(textsLocale, 2); let text">
+        <dt>
+          <blockquote class="chat-bubble" luxTooltip="chat_state_2" [innerHTML]="text"></blockquote>
+        </dt>
+        <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when approached while the mission is in
+          progress.
+        </dd>
+      </div>
+      <div *ngIf="getChatState(textsLocale, 3); let text">
+        <dt>
+          <blockquote class="chat-bubble" luxTooltip="chat_state_3" [innerHTML]="text"></blockquote>
+        </dt>
+        <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when approached when the mission is ready to be
+          completed.</dd>
+      </div>
+      <div *ngIf="getChatSubState(textsLocale, 3, 'turnin'); let text">
+        <dt>
+          <blockquote class="chat-bubble" luxTooltip="chat_state_3_turnin" [innerHTML]="text"></blockquote>
+        </dt>
+        <dd>Spoken by <a [luxFetchObject]="mission.target_objectID"></a> when approached when the mission is ready to be
+          completed.</dd>
+      </div>
+      <div *ngIf="getChatState(textsLocale, 4); let text">
+        <dt>
+          <blockquote class="chat-bubble" luxTooltip="chat_state_4" [innerHTML]="text"></blockquote>
+        </dt>
+        <dd>Spoken by <a [luxFetchObject]="mission.offer_objectID"></a> when approached when the mission is complete.
+        </dd>
+      </div>
+      <div *ngIf="getChatSubState(textsLocale, 4, 'turnin'); let text">
+        <dt>
+          <blockquote class="chat-bubble" luxTooltip="chat_state_4_turnin" [innerHTML]="text"></blockquote>
+        </dt>
+        <dd>Spoken by <a [luxFetchObject]="mission.target_objectID"></a> when approached when the mission is complete.
+        </dd>
+      </div>
+    </dl>
+  </section>
 </ng-container>
-<ng-container *ngIf="mission && mission.isMission && textsLocale">
-	<h4>Mission Dialogs</h4>
-  <dl id="mission-dialogs">
-    <div *ngIf="textsLocale.in_progress">
-      <dt><blockquote class="mission-dialog" luxTooltip="in_progress" [innerHTML]="textsLocale.in_progress"></blockquote></dt>
-      <dd>Displayed when interacting with <a [luxFetchObject]="mission.offer_objectID"></a> while the mission is in progress, as well when selecting the mission in the passport.</dd>
-    </div>
-    <div *ngIf="textsLocale.offer">
-      <dt><blockquote class="mission-dialog" luxTooltip="offer" [innerHTML]="textsLocale.offer"></blockquote></dt>
-      <dd>Displayed when interacting with <a [luxFetchObject]="mission.offer_objectID"></a> when the mission is available.</dd>
-    </div>
-    <div *ngIf="textsLocale.offer_repeatable">
-      <dt><blockquote class="mission-dialog" luxTooltip="offer_repeatable" [innerHTML]="textsLocale.offer_repeatable"></blockquote></dt>
-      <dd>Displayed when interacting with <a [luxFetchObject]="mission.offer_objectID"></a> when the mission is again available after the mission has already been completed.</dd>
-    </div>
-    <div *ngIf="textsLocale.ready_to_complete">
-      <dt><blockquote class="mission-dialog" luxTooltip="ready_to_complete" [innerHTML]="textsLocale.ready_to_complete"></blockquote></dt>
-      <dd>Displayed when interacting with <a [luxFetchObject]="mission.target_objectID"></a> when the mission is ready to be completed.</dd>
-    </div>
+<div>
+  <h4>Completion Tooltip</h4>
+  <dl>
+    <ng-container *ngIf="$mission | async; let mission">
+      <ng-container *ngIf="mission.isMission; else achievementTooltip">
+        <dt class="mission-tooltip" luxTooltip="completion_succeed_tip">
+          <img class="mission-tooltip-icon" *ngIf="text" [luxFetchIcon]="text.turnInIconID">
+          <img class="mission-tooltip-arrow" src="/lu-res/ui/ingame/missioncompletemessage_ic.png" alt="" />
+          <img class="mission-tooltip-arrow" src="/lu-res/ui/ingame/missioncompletemessage_ic.png" alt=""
+            style="opacity: 0.75;" />
+          <img class="mission-tooltip-arrow" src="/lu-res/ui/ingame/missioncompletemessage_ic.png" alt=""
+            style="opacity: 0.5;" />
+          <blockquote *ngIf="textsLocale && textsLocale.completion_succeed_tip" class="mission-tooltip-text"
+            [innerHTML]="textsLocale.completion_succeed_tip"></blockquote>
+        </dt>
+      </ng-container>
+      <ng-template #achievementTooltip>
+        <dt class="achievement-tooltip" luxTooltip="completion_succeed_tip">
+          <img class="achievement-tooltip-icon" [luxFetchIcon]="mission.missionIconID">
+          <blockquote *ngIf="textsLocale && textsLocale.completion_succeed_tip" class="achievement-tooltip-text"
+            [innerHTML]="textsLocale.completion_succeed_tip"></blockquote>
+        </dt>
+      </ng-template>
+    </ng-container>
+    <dd>Displayed once the player has completed all tasks.</dd>
   </dl>
+</div>
+<ng-container *ngIf="$mission | async; let mission">
+  <ng-container *ngIf="!mission.isMission && textsLocale">
+    <h4>Achievement Description</h4>
+    <dl>
+      <div *ngIf="textsLocale.description">
+        <dt>
+          <blockquote luxTooltip="description" [innerHTML]="textsLocale.description"></blockquote>
+        </dt>
+        <dd>Displayed in the passport as the achievement's description.</dd>
+      </div>
+    </dl>
+  </ng-container>
+  <ng-container *ngIf="mission.isMission && textsLocale">
+    <h4>Mission Dialogs</h4>
+    <dl id="mission-dialogs">
+      <div *ngIf="textsLocale.in_progress">
+        <dt>
+          <blockquote class="mission-dialog" luxTooltip="in_progress" [innerHTML]="textsLocale.in_progress">
+          </blockquote>
+        </dt>
+        <dd>Displayed when interacting with <a [luxFetchObject]="mission.offer_objectID"></a> while the mission is in
+          progress, as well when selecting the mission in the passport.</dd>
+      </div>
+      <div *ngIf="textsLocale.offer">
+        <dt>
+          <blockquote class="mission-dialog" luxTooltip="offer" [innerHTML]="textsLocale.offer"></blockquote>
+        </dt>
+        <dd>Displayed when interacting with <a [luxFetchObject]="mission.offer_objectID"></a> when the mission is
+          available.</dd>
+      </div>
+      <div *ngIf="textsLocale.offer_repeatable">
+        <dt>
+          <blockquote class="mission-dialog" luxTooltip="offer_repeatable" [innerHTML]="textsLocale.offer_repeatable">
+          </blockquote>
+        </dt>
+        <dd>Displayed when interacting with <a [luxFetchObject]="mission.offer_objectID"></a> when the mission is again
+          available after the mission has already been completed.</dd>
+      </div>
+      <div *ngIf="textsLocale.ready_to_complete">
+        <dt>
+          <blockquote class="mission-dialog" luxTooltip="ready_to_complete" [innerHTML]="textsLocale.ready_to_complete">
+          </blockquote>
+        </dt>
+        <dd>Displayed when interacting with <a [luxFetchObject]="mission.target_objectID"></a> when the mission is ready
+          to be completed.</dd>
+      </div>
+    </dl>
+  </ng-container>
 </ng-container>
 
 <h4>Details</h4>
@@ -250,4 +297,4 @@
 
 <h3>Details</h3>
 
-<app-data-table *ngIf="mission" [table]="mission"></app-data-table>
+<app-data-table *ngIf="$mission | async; let mission" [table]="mission"></app-data-table>
