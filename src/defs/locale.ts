@@ -36,3 +36,7 @@ export interface Locale_ZoneTable {
 export interface Locale_MissionTasks {
     description?: string;
 }
+
+export interface Locale_SkillBehavior {
+    name?: string;
+}

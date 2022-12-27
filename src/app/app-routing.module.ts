@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'missions', loadChildren: () => import('./missions/missions.module').then(m => m.MissionsModule) },
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: 'activities', loadChildren: () => import('./activities/activities.module').then(m => m.ActivitiesModule) },
+  { path: 'gate-versions', loadChildren: () => import('./gates/gates.module').then(m => m.GatesModule) },
   { path: '', component: GithubSpaComponent, pathMatch: 'full' }
 ];
 

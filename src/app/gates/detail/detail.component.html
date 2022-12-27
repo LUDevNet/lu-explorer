@@ -1,0 +1,94 @@
+<ul class="breadcrumbs">
+    <li><a href="/gate-versions">Feature Gates</a></li>
+    <li>{{$id | async}}</li>
+</ul>
+
+<section>
+    <h2>Feature Gate <small><code>{{$id | async}}</code></small></h2>
+
+    <ng-container *ngIf="$data | async; let data">
+        <div *ngIf="data.activities.length">
+            <h3>Activities</h3>
+            <p>{{data.activities.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.deletion_restrictions.length">
+            <h3>Deletion Restrictions</h3>
+            <p>{{data.deletion_restrictions.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.emotes.length">
+            <h3>Emotes</h3>
+            <p>{{data.emotes.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.loot_matrix.length">
+            <h3>Loot Matrices</h3>
+            <p>{{data.loot_matrix.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.item_sets.length">
+            <h3>Item Sets</h3>
+            <p>{{data.item_sets.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.missions.length">
+            <h3>Missions</h3>
+            <p class="mission-list">
+                <lux-mission *ngFor="let id of data.missions" [luxFetch]="id"></lux-mission>
+            </p>
+        </div>
+        <div *ngIf="data.mission_tasks.length">
+            <h3>Mission Tasks</h3>
+            <p>{{data.mission_tasks.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.objects.length">
+            <h3>Objects</h3>
+            <p><lux-slot [luxFetchItem]="lot" *ngFor="let lot of data.objects"></lux-slot></p>
+        </div>
+        <div *ngIf="data.player_statistics.length">
+            <h3>Player Statistics</h3>
+            <p>{{data.player_statistics.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.preconditions.length">
+            <h3>Preconditions</h3>
+            <p>{{data.preconditions.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.property_template.length">
+            <h3>Property Templates</h3>
+            <p>{{data.property_template.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.reward_codes.length">
+            <h3>Reward Codes</h3>
+            <p>{{data.reward_codes.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.speedchat_menu.length">
+            <h3>Speechat Menu</h3>
+            <p>{{data.speedchat_menu.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.skills.length">
+            <h3>Skills</h3>
+            <p>
+                <lux-slot *ngFor="let skillId of data.skills" [luxFetchSkill]="skillId"></lux-slot>
+            </p>
+        </div>
+        <div *ngIf="data.ug_behavior_sounds.length">
+            <h3>UG Behavior Sounds</h3>
+            <p>{{data.ug_behavior_sounds.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.whats_cool_item_spotlight.length">
+            <h3>What's Cool &mdash; Item Spotlight</h3>
+            <p>{{data.whats_cool_item_spotlight.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.whats_cool_news_and_tips.length">
+            <h3>What's Cool &mdash; News &amp; Tipps</h3>
+            <p>{{data.whats_cool_news_and_tips.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.zone_loading_tips.length">
+            <h3>Zone Loading Tips</h3>
+            <p>{{data.zone_loading_tips.join(", ")}}</p>
+        </div>
+        <div *ngIf="data.zones.length">
+            <h3>Zones</h3>
+            <ul class="inline">
+                <li *ngFor="let zoneId of data.zones">{{zoneId}}</li>
+            </ul>
+        </div>
+    </ng-container>
+
+</section>

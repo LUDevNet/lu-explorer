@@ -1,0 +1,10 @@
+<ul class="breadcrumbs">
+    <li>Feature Gates</li>
+</ul>
+<main>
+    <h2>Feature Gates</h2>
+    <ul>
+        <li *ngFor="let gate_version of $gate_versions | async">
+            <a href="/gate-versions/{{gate_version}}">{{gate_version}}</a></li>
+    </ul>
+</main>
