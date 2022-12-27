@@ -1,9 +1,3 @@
-.mission-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-}
-
 .mission-separator {
     break-before: always;
     break-after: always;

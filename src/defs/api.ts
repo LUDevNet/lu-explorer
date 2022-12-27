@@ -72,3 +72,25 @@ export interface Rev_MissionById {
         CollectibleComponent: Rev_ByComponentId;
     };
 }
+
+export interface Rev_GateVersion {
+    activities: number[];
+    deletion_restrictions: number[];
+    emotes: number[];
+    loot_matrix: number[];
+    item_sets: number[];
+    missions: number[];
+    mission_tasks: number[];
+    objects: number[];
+    player_statistics: number[];
+    preconditions: number[];
+    property_template: number[];
+    reward_codes: string[];
+    speedchat_menu: number[];
+    skills: number[];
+    ug_behavior_sounds: number[];
+    whats_cool_item_spotlight: number[];
+    whats_cool_news_and_tips: number[];
+    zone_loading_tips: number[];
+    zones: number[];
+}

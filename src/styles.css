@@ -401,3 +401,9 @@ button {
   margin: 0.2rem;
   cursor: pointer;
 }
+
+.mission-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
