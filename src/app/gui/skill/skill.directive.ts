@@ -53,13 +53,15 @@ export class SkillDirective extends TooltipDirective implements OnDestroy {
   }
 
   onLocale(loc: Locale_SkillBehavior) {
+    if (!loc) return;
     if (loc.name) {
       this.itemTooltipRef.instance.title = loc.name;
     }
     this.itemTooltipRef.changeDetectorRef.detectChanges();
   }
 
-  onSkillIcon(icon: DB_Icons) {
+  onSkillIcon(icon?: DB_Icons) {
+    if (!icon) return;
     this.slotComponent.icon = "/lu-res/textures/ui/" + icon.IconPath.toLowerCase().replace(/dds$/, "png");
   }
 
