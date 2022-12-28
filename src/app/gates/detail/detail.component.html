@@ -29,8 +29,19 @@
         </div>
         <div *ngIf="data.missions.length">
             <h3>Missions</h3>
-            <p class="mission-list">
+            <!--<p class="mission-list">
                 <lux-mission *ngFor="let id of data.missions" [luxFetch]="id"></lux-mission>
+            </p>-->
+            <p class="mission-list" *luxVar="$missions | async; let missions">
+                <ng-container *ngFor="let id of data.missions">
+                    <ng-container *luxVar="missions && missions[id]; let mission">
+                        <lux-mission [id]="id" [isMission]="mission && mission.isMission"
+                            [sortOrder]="sortOrderOf(mission)" [iconID]="iconIdOf(mission)"
+                            [tooltip]="'Mission #' + id">
+                            <!--<span *ngIf="missions">{{ | json}}</span>-->
+                        </lux-mission>
+                    </ng-container>
+                </ng-container>
             </p>
         </div>
         <div *ngIf="data.mission_tasks.length">
@@ -39,7 +50,8 @@
         </div>
         <div *ngIf="data.objects.length">
             <h3>Objects</h3>
-            <p><lux-slot [luxFetchItem]="lot" *ngFor="let lot of data.objects"></lux-slot></p>
+            <!--<p><lux-slot [luxFetchItem]="lot" *ngFor="let lot of data.objects"></lux-slot></p>-->
+            <p>{{data.objects.join(", ")}}</p>
         </div>
         <div *ngIf="data.player_statistics.length">
             <h3>Player Statistics</h3>
@@ -63,9 +75,10 @@
         </div>
         <div *ngIf="data.skills.length">
             <h3>Skills</h3>
-            <p>
+            <!--<p>
                 <lux-slot *ngFor="let skillId of data.skills" [luxFetchSkill]="skillId"></lux-slot>
-            </p>
+            </p>-->
+            <p>{{data.skills.join(", ")}}</p>
         </div>
         <div *ngIf="data.ug_behavior_sounds.length">
             <h3>UG Behavior Sounds</h3>

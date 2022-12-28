@@ -4,6 +4,7 @@ import { GateIndexComponent } from './index/index.component';
 import { GatesRoutingModule } from './gates-routing.module';
 import { GateDetailComponent } from './detail/detail.component';
 import { GuiModule } from '../gui/gui.module';
+import { UtilModule } from '../util/util.module';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { GuiModule } from '../gui/gui.module';
     CommonModule,
     GatesRoutingModule,
     GuiModule,
+    UtilModule,
   ]
 })
 export class GatesModule { }

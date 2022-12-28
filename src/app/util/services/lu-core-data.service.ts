@@ -34,6 +34,14 @@ export class LuCoreDataService {
     return this.cache[url];
   }
 
+  query(url: string, body: any): Observable<any | { $error: any }> {
+    return this.http.request("QUERY", this.apiUrl + url, {
+      body: JSON.stringify(body)
+    }).pipe(
+      catchError(this.handleError(url, { $error: null })),
+    )
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.
@@ -58,7 +66,7 @@ export class LuCoreDataService {
     return this.get(`v0/scripts/${path.toLowerCase()}.json`);
   }
 
-  getLocaleSubtree<T>(key: string): Observable<{[key: string]: T}> {
+  getLocaleSubtree<T>(key: string): Observable<{ [key: string]: T }> {
     return this.get(`v0/locale/${key.replace('_', '/')}/$all`);
   }
 
@@ -70,6 +78,10 @@ export class LuCoreDataService {
     return this.get(`v0/tables/${table}/${key}`);
   }
 
+  queryTableEntries<T>(table: string, keys: string[] | number[], columns: string[]): Observable<T[]> {
+    return this.query(`v0/tables/${table}/all`, { pks: keys, columns: columns });
+  }
+
   getSingleTableEntry<T>(table: string, key: string | number): Observable<T | null> {
     return this.getTableEntry<T>(table, key).pipe(map(x => x[0]));
   }
@@ -77,7 +89,7 @@ export class LuCoreDataService {
   getRev<T>(table: string): Observable<T> {
     return this.get(`v0/rev/${table}`);
   }
-  
+
   getRevEntry<T>(table: string, key: string | number): Observable<T> {
     return this.get(`v0/rev/${table}/${key}`);
   }
