@@ -1,4 +1,5 @@
 import { Component, HostBinding, Input } from "@angular/core";
+import { DB_Icons } from "../../../defs/cdclient";
 
 @Component({
   selector: "lux-mission",
@@ -8,7 +9,7 @@ import { Component, HostBinding, Input } from "@angular/core";
 export class MissionComponent {
   @Input() id: number;
   @Input() isMission: boolean = true;
-  @Input() iconID: number;
+  @Input() iconID: number | DB_Icons;
   @Input() title: string;
   @Input() tooltip: string;
   @HostBinding("style.order")

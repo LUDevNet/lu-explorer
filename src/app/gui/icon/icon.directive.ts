@@ -1,16 +1,21 @@
 import { ElementRef, Directive, Input } from "@angular/core";
 import { LuCoreDataService } from "../../services";
 import { DB_Icons } from "../../../defs/cdclient";
+import { first } from "rxjs/operators";
 
 @Directive({
   selector: "img[luxFetchIcon]"
 })
 export class IconDirective {
-  @Input("luxFetchIcon") set id(id: number) {
+  @Input("luxFetchIcon") set id(id: number | DB_Icons) {
     if (id != null) {
-      this.luCoreData.getSingleTableEntry("Icons", id).subscribe(this.onIcon.bind(this, id));
-    } else {
-      console.warn("Called img[luxFetchIcon] with a null icon");
+      if (typeof id === 'number') {
+        this.luCoreData.getSingleTableEntry("Icons", id)
+          .pipe(first())
+          .subscribe(this.onIcon.bind(this, id));
+      } else {
+        this.onIcon(id.IconID, id)
+      }
     }
   }
 

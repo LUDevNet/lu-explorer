@@ -39,7 +39,15 @@
         </div>
         <div *ngIf="data.missions.length">
             <h3>Missions</h3>
-            <p>{{data.missions.join(", ")}}</p>
+            <ul class="mission-list" *ngIf="$missions | async; let missions">
+                <ng-container *ngFor="let mission of missions">
+                    <li *luxVar="mission.$table | async; let m" [style.order]="mission.$sortOrder | async">
+                        <lux-mission [id]="mission.id" [isMission]="m ? m.isMission : true"
+                            [iconID]="mission.$missionIcon | async"></lux-mission>
+                        <!--{{mission.$table | async | json}}-->
+                    </li>
+                </ng-container>
+            </ul>
             <!--<p class="mission-list">
                 <lux-mission *ngFor="let id of data.missions" [luxFetch]="id"></lux-mission>
             </p>-->

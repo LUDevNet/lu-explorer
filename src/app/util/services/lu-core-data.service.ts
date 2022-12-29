@@ -85,8 +85,11 @@ export class LuCoreDataService {
     return this.get(`v0/tables/${table}/${key}`);
   }
 
-  queryTableEntries<T>(table: string, keys: string[] | number[], columns: string[]): Observable<T[]> {
-    if (!keys.length) return of([]);
+  queryTableEntries<T>(table: string, keys: string[] | number[], columns: (keyof T)[]): Observable<T[]> {
+    if (Array.isArray(keys) && !keys.length) {
+      console.warn(`Called queryTableEntries(${table}) with empty key set`);
+      return of([]);
+    }
     return this.query(`v0/tables/${table}/all`, { pks: keys, columns: columns });
   }
 

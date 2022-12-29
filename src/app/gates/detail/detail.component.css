@@ -11,7 +11,7 @@ ul.inline li + li::before {
     content: ", "
 }
 
-ul.item-set-list {
+ul.item-set-list, ul.mission-list {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
@@ -20,9 +20,12 @@ ul.item-set-list {
     padding-left: 0;
 }
 
-ul.item-set-list li {
+ul.item-set-list li, ul.mission-list li {
     display: inline-block;
-    width: 128px;
+}
+
+ul.item-set-list li {
+    max-width: 128px;
 }
 
 ul.item-set-list li a:hover {
