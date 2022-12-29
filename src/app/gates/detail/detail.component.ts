@@ -4,6 +4,7 @@ import { Observable, of, OperatorFunction } from 'rxjs';
 import { first, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { Rev_GateVersion } from '../../../defs/api';
 import { DB_Icons, DB_MissionTasks } from '../../../defs/cdclient';
+import { Locale_Mission } from '../../../defs/locale';
 import { LuCoreDataService } from '../../services';
 
 interface DB_Missions_Ref {
@@ -52,8 +53,6 @@ interface Locale_ItemSet {
   kitName?: string,
 }
 
-type Map_Locale_ItemSet = Record<number, Locale_ItemSet>;
-
 function toDict<T, K extends keyof T, V extends T[K] & number | string>(list: T[], key: K): Record<V, T> {
   let obj: Record<V, T> = Object.create({});
   for (const elem of list) {
@@ -94,6 +93,7 @@ class Mission {
     public id: number,
     public $table: Observable<DB_Missions_Ref | undefined>,
     public $missionIcon: Observable<DB_Icons | undefined>,
+    public $loc: Observable<Locale_Mission>,
   ) { }
 
   get $sortOrder(): Observable<number> {
@@ -141,7 +141,7 @@ function recToSet<K extends RecordKey, T, V>(f: (v: T) => V): OperatorFunction<R
     let set = new Set<V>();
     for (const val of Object.values(src)) {
       const v = f(val as T)
-      if(v) set.add(v);
+      if (v) set.add(v);
     }
     return set;
   }
@@ -164,10 +164,12 @@ export class GateDetailComponent implements OnInit {
 
   queryTableEntries<K extends (string[] | number[]), T>(table: string, columns: (keyof T)[]): OperatorFunction<K, T[]> {
     let cd = this.luCoreData;
-    function op(source: Observable<K>): Observable<T[]> {
-      return switchMap((data: K) => cd.queryTableEntries<T>(table, data, columns))(source)
-    }
-    return op;
+    return switchMap((data: K) => cd.queryTableEntries<T>(table, data, columns));
+  }
+
+  queryLocaleNum<L>(t: string, fields: string[]): OperatorFunction<number[], Record<number, L>> {
+    let cd = this.luCoreData;
+    return switchMap(data => cd.queryLocale<Record<number, L>>(t, data, fields));
   }
 
   icons(): OperatorFunction<number[], Record<number, DB_Icons>> {
@@ -186,6 +188,10 @@ export class GateDetailComponent implements OnInit {
       this.queryTableEntries<number[], DB_Missions_Ref>('Missions', MISSION_KEYS),
       mapToDict("id"),
       shareReplay(1)
+    );
+    let $missionsLocale = $missionIds.pipe(
+      this.queryLocaleNum<Locale_Mission>("Missions", ["name"]),
+      shareReplay(1),
     );
     let $missionIcons = $missionsTable.pipe(
       values(),
@@ -206,10 +212,11 @@ export class GateDetailComponent implements OnInit {
       shareReplay(1),
     );
     function iconForMission(m: DB_Missions_Ref): Observable<DB_Icons> {
-      // Achievement
       if (m && m.missionIconID && !m.isMission) {
+        // Achievement
         return $missionIcons.pipe(map(i => i[m.missionIconID]));
       } else if (m && m.isMission) {
+        // Mission
         return $firstMissionTasks.pipe(
           pick(m.id),
           switchMap(task => $firstMissionTasksIcons.pipe(pick(task.largeTaskIconID)))
@@ -223,20 +230,19 @@ export class GateDetailComponent implements OnInit {
       map(data => Array.from(data, id => {
         let $table = $missionsTable.pipe(pick(id), shareReplay(1));
         let $missionIcon = $table.pipe(switchMap(iconForMission));
-        return new Mission(id, $table, $missionIcon);
+        let $loc = $missionsLocale.pipe(pick(id), shareReplay(1));
+        return new Mission(id, $table, $missionIcon, $loc);
       }))
     );
 
-    let $itemSetsTable = this.$data.pipe(
-      map(d => d.item_sets),
+    let $itemSetIds = this.$data.pipe(map(d => d.item_sets));
+    let $itemSetsTable = $itemSetIds.pipe(
       this.queryTableEntries<number[], DB_ItemSets_Ref>('ItemSets', ITEM_SET_KEYS),
       mapToDict("setID"),
       shareReplay(1)
     )
-    let $itemSetsLocale = this.$data.pipe(
-      switchMap(data => {
-        return this.luCoreData.queryLocale<Map_Locale_ItemSet>("ItemSets", data.item_sets, ["kitName"]);
-      }),
+    let $itemSetsLocale = $itemSetIds.pipe(
+      this.queryLocaleNum<Locale_ItemSet>("ItemSets", ["kitName"]),
       shareReplay(1),
     );
     let $itemSetIcons = $itemSetsTable.pipe(
@@ -245,8 +251,7 @@ export class GateDetailComponent implements OnInit {
       this.icons(),
       shareReplay(1),
     );
-    this.$itemSets = this.$data.pipe(
-      map(data => data.item_sets),
+    this.$itemSets = $itemSetIds.pipe(
       map(data => Array.from(data, id => {
         let $table = $itemSetsTable.pipe(pick(id), shareReplay(1));
         let $icon = $table.pipe(switchMap(t => $itemSetIcons.pipe(pick(t.kitImage))));
