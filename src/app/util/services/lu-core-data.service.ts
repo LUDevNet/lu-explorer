@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, ReplaySubject } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, of, ReplaySubject, Subject } from 'rxjs';
+import { catchError, first, map, multicast, refCount, shareReplay } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
 export interface LocaleNode {
@@ -39,7 +39,9 @@ export class LuCoreDataService {
       body: JSON.stringify(body)
     }).pipe(
       catchError(this.handleError(url, { $error: null })),
-    )
+      first(),
+      shareReplay(1)
+    );
   }
 
   /**
@@ -70,6 +72,11 @@ export class LuCoreDataService {
     return this.get(`v0/locale/${key.replace('_', '/')}/$all`);
   }
 
+  queryLocale<T>(key: string, ...params: (string[] | number[])[]): Observable<T | {}> {
+    if (!params.length || params.some(x => !x.length)) return of({});
+    return this.query(`v0/locale/${key}`, params);
+  }
+
   getLocaleEntry(key: string): Observable<LocaleNode> {
     return this.get(`v0/locale/${key.replace('_', '/')}`);
   }
@@ -79,6 +86,7 @@ export class LuCoreDataService {
   }
 
   queryTableEntries<T>(table: string, keys: string[] | number[], columns: string[]): Observable<T[]> {
+    if (!keys.length) return of([]);
     return this.query(`v0/tables/${table}/all`, { pks: keys, columns: columns });
   }
 

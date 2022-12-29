@@ -9,7 +9,7 @@ import { GithubSpaComponent } from './github-spa/github-spa.component';
 import { ArraySortPipe, ArraySortNumPipe, DefaultPipe, DictPipe, ElementPipe, GroupPipe, KeysPipe, LimitPipe, NonNullPipe, RangePipe, RemovePipe, MaxUpToPipe, ArrKeysPipe, KeySetPipe, ParamSetPipe, AsArrayPipe } from './pipes/data.pipe';
 import { BitsPipe, BitSetPipe, BitAndPipe, BitOrPipe, BitShiftRightPipe, BitShiftLeftPipe, NotPipe, SomePipe, DivCeilPipe } from './pipes/logical.pipe';
 import { DatePipe, HtmlPipe, FixedNumPipe } from './pipes/output.pipe';
-import { DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe } from './pipes/service.pipe';
+import { DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe, IconPipe } from './pipes/service.pipe';
 import { ReplacePipe, PercentPipe, ToPipe, ToNumPipe, ToRGBAPipe, TocPipe } from './pipes/strings.pipe';
 import { PcPipe } from './pipes/pc.pipe';
 import { CondAstPipe } from './pipes/conditions.pipe';
@@ -31,7 +31,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
     DatePipe, HtmlPipe, FixedNumPipe,
     DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe,
     ReplacePipe, PercentPipe, ToPipe, ToNumPipe, ToRGBAPipe,
-    PcPipe, CondAstPipe, TocPipe,
+    PcPipe, CondAstPipe, TocPipe, IconPipe,
     LuxVarDirective,
   ],
   imports: [
@@ -46,7 +46,7 @@ export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
     DatePipe, HtmlPipe, FixedNumPipe,
     DocsPipe, ResourcePipe, LocalePipe, DataPipe, TranslatePipe,
     ReplacePipe, PercentPipe, ToPipe, ToNumPipe, ToRGBAPipe,
-    PcPipe, CondAstPipe, TocPipe,
+    PcPipe, CondAstPipe, TocPipe, IconPipe,
     LuxVarDirective,
   ]
 })

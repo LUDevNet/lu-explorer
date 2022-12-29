@@ -25,24 +25,35 @@
         </div>
         <div *ngIf="data.item_sets.length">
             <h3>Item Sets</h3>
-            <p>{{data.item_sets.join(", ")}}</p>
+            <ul class="item-set-list" *ngIf="$itemSets | async; let sets">
+                <li class="item-set-slot" *ngFor="let set of sets">
+                    <a href="/objects/item-sets/{{set.id}}">
+                        <div class="image" *luxVar="set.$icon | async; let icon">
+                            <img [src]="icon | icon">
+                        </div>
+                        <div class="title">#{{set.id}} <span *ngIf="set.$loc | async; let loc">{{loc?.kitName}}</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
         </div>
         <div *ngIf="data.missions.length">
             <h3>Missions</h3>
+            <p>{{data.missions.join(", ")}}</p>
             <!--<p class="mission-list">
                 <lux-mission *ngFor="let id of data.missions" [luxFetch]="id"></lux-mission>
             </p>-->
-            <p class="mission-list" *luxVar="$missions | async; let missions">
+            <!--<p class="mission-list" *luxVar="$missions | async; let missions">
                 <ng-container *ngFor="let id of data.missions">
                     <ng-container *luxVar="missions && missions[id]; let mission">
                         <lux-mission [id]="id" [isMission]="mission && mission.isMission"
                             [sortOrder]="sortOrderOf(mission)" [iconID]="iconIdOf(mission)"
                             [tooltip]="'Mission #' + id">
-                            <!--<span *ngIf="missions">{{ | json}}</span>-->
+                            //<span *ngIf="missions">{{ | json}}</span>
                         </lux-mission>
                     </ng-container>
                 </ng-container>
-            </p>
+            </p>-->
         </div>
         <div *ngIf="data.mission_tasks.length">
             <h3>Mission Tasks</h3>
