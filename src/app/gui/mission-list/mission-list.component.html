@@ -1,0 +1,9 @@
+<ul class="mission-list" *ngIf="$missions | async; let missions">
+    <ng-container *ngFor="let mission of missions">
+        <li *luxVar="mission.$table | async; let m" [style.order]="mission.$sortOrder | async">
+            <lux-mission [id]="mission.id" [isMission]="m ? m.isMission : false" [iconID]="mission.$missionIcon | async"
+                [title]="(mission.$loc | async)?.name"
+                [tooltip]="((m && !m.isMission) ? 'Achievement' : 'Mission') + ' #' + mission.id"></lux-mission>
+        </li>
+    </ng-container>
+</ul>

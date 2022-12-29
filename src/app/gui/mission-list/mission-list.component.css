@@ -1,0 +1,12 @@
+ul.mission-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+ul.mission-list li {
+    display: inline-block;
+}

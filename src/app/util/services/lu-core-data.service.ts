@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, ReplaySubject, Subject } from 'rxjs';
-import { catchError, first, map, multicast, refCount, shareReplay } from 'rxjs/operators';
+import { Observable, of, OperatorFunction, ReplaySubject } from 'rxjs';
+import { catchError, first, map, shareReplay, switchMap } from 'rxjs/operators';
+import { DB_Icons } from '../../../defs/cdclient';
+import { mapToDict } from '../../../defs/rx';
 import { environment } from '../../../environments/environment';
 
 export interface LocaleNode {
@@ -9,6 +11,12 @@ export interface LocaleNode {
   int_keys: number[],
   str_keys: string[],
 }
+
+const ICONS_KEYS: (keyof DB_Icons)[] = [
+  "IconID",
+  "IconPath",
+  "IconName",
+]
 
 @Injectable({
   providedIn: 'root'
@@ -103,5 +111,24 @@ export class LuCoreDataService {
 
   getRevEntry<T>(table: string, key: string | number): Observable<T> {
     return this.get(`v0/rev/${table}/${key}`);
+  }
+
+  // For RxJS
+  queryTableEntries$<K extends (string[] | number[]), T>(table: string, columns: (keyof T)[]): OperatorFunction<K, T[]> {
+    let cd = this;
+    return switchMap((data: K) => cd.queryTableEntries<T>(table, data, columns));
+  }
+
+  queryLocaleNum$<L>(t: string, fields: string[]): OperatorFunction<number[], Record<number, L>> {
+    let cd = this;
+    return switchMap(data => cd.queryLocale<Record<number, L>>(t, data, fields));
+  }
+
+  icons(): OperatorFunction<number[], Record<number, DB_Icons>> {
+    let queryIcons = this.queryTableEntries$<number[], DB_Icons>('Icons', ICONS_KEYS);
+    function iconsOp(source: Observable<number[]>): Observable<Record<number, DB_Icons>> {
+      return source.pipe(queryIcons, mapToDict("IconID"));
+    }
+    return iconsOp;
   }
 }
