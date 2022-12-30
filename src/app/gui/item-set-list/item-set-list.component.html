@@ -1,0 +1,11 @@
+<ul class="item-set-list" *ngIf="$itemSets | async; let sets">
+    <li class="item-set-slot" *ngFor="let set of sets">
+        <a href="/objects/item-sets/{{set.id}}">
+            <div class="image" *luxVar="set.$icon | async; let icon">
+                <img [src]="icon | icon">
+            </div>
+            <div class="title">#{{set.id}} <span *ngIf="set.$loc | async; let loc">{{loc?.kitName}}</span>
+            </div>
+        </a>
+    </li>
+</ul>

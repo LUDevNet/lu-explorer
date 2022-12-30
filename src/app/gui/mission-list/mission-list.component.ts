@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, ReplaySubject } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { DB_Icons, DB_MissionTasks } from '../../../defs/cdclient';
 import { Locale_Mission } from '../../../defs/locale';
@@ -52,10 +52,14 @@ class Mission {
 })
 export class MissionListComponent implements OnInit {
   @Input()
-  $missionIds: Observable<number[]>;
+  set ids(value: number[]) {
+    this.$missionIds.next(value);
+  }
+
+  $missionIds = new ReplaySubject<number[]>();
   $missions: Observable<Mission[]>;
 
-  constructor(private luCoreData: LuCoreDataService) {}
+  constructor(private luCoreData: LuCoreDataService) { }
 
   ngOnInit(): void {
     const cd = this.luCoreData;
