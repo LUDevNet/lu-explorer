@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { Rev_GateVersion } from '../../../defs/api';
-import { Locale_ZoneLoadingTips } from '../../../defs/locale';
+import { Locale_WhatsCoolNewsAndTips, Locale_ZoneLoadingTips } from '../../../defs/locale';
 import { mapArr, pick } from '../../../defs/rx';
 import { LuCoreDataService } from '../../services';
 
@@ -14,6 +14,12 @@ class ZoneLoadingTip {
     public $loc: Observable<Locale_ZoneLoadingTips>,
   ) { }
 }
+
+interface WhatsCoolNews {
+  id: number;
+  $loc: Observable<Locale_WhatsCoolNewsAndTips>;
+}
+
 @Component({
   selector: 'lux-gate-detail',
   templateUrl: './detail.component.html',
@@ -24,6 +30,7 @@ export class GateDetailComponent implements OnInit {
   $data: Observable<Rev_GateVersion | null>;
 
   $zoneLoadingTips: Observable<ZoneLoadingTip[]>;
+  $whatsCoolNews: Observable<WhatsCoolNews[]>;
 
   constructor(private route: ActivatedRoute, private luCoreData: LuCoreDataService) { }
 
@@ -39,6 +46,19 @@ export class GateDetailComponent implements OnInit {
     );
     this.$zoneLoadingTips = $zoneLoadingTipIds.pipe(
       mapArr(id => new ZoneLoadingTip(id, $zoneLoadingTipsLocale.pipe(pick(id))))
+    )
+
+    let $whatsCoolNewsIds = this.$data.pipe(map(data => data.whats_cool_news_and_tips));
+    let $whatsCoolNewsLoc = $whatsCoolNewsIds.pipe(
+      cd.queryLocaleNum$<Locale_WhatsCoolNewsAndTips>("WhatsCoolNewsAndTips", ["storyTitle", "text"]),
+    )
+    this.$whatsCoolNews = $whatsCoolNewsIds.pipe(
+      mapArr(id => {
+        return {
+          id,
+          $loc: $whatsCoolNewsLoc.pipe(pick(id)),
+        }
+      })
     )
   }
 }

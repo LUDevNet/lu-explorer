@@ -77,19 +77,20 @@
         </div>
         <div *ngIf="data.whats_cool_news_and_tips.length">
             <h3>What's Cool &mdash; News &amp; Tipps</h3>
-            <p>{{data.whats_cool_news_and_tips.join(", ")}}</p>
+            <ng-container *ngFor="let news of $whatsCoolNews | async">
+                <h4>#{{news.id}}: {{(news.$loc | async)?.storyTitle}}</h4>
+                <blockquote>{{(news.$loc | async)?.text}}</blockquote>
+            </ng-container>
         </div>
-        <div *ngIf="data.zone_loading_tips.length">
+        <div id="zone-loading-tips" *ngIf="data.zone_loading_tips.length">
             <h3>Zone Loading Tips</h3>
-            <ul class="zone-loading-tips">
-                <li *ngFor="let z of ($zoneLoadingTips | async)">
-                    <ng-container *luxVar="z.$loc | async; let loc">
-                        {{z.id}} <span *ngIf="loc?.title">"{{loc.title}}"</span>
-                        <blockquote *ngIf="loc?.tip1">{{loc.tip1}}</blockquote>
-                        <blockquote *ngIf="loc?.tip2">{{loc.tip2}}</blockquote>
-                    </ng-container>
-                </li>
-            </ul>
+            <ng-container *ngFor="let z of ($zoneLoadingTips | async)">
+                <ng-container *luxVar="z.$loc | async; let loc">
+                    <h4>#{{z.id}}: <span *ngIf="loc?.title">"{{loc.title}}"</span></h4>
+                    <blockquote *ngIf="loc?.tip1">{{loc.tip1}}</blockquote>
+                    <blockquote *ngIf="loc?.tip2">{{loc.tip2}}</blockquote>
+                </ng-container>
+            </ng-container>
         </div>
         <div *ngIf="data.zones.length">
             <h3>Zones</h3>

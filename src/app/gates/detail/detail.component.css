@@ -11,10 +11,14 @@ ul.inline li + li::before {
     content: ", "
 }
 
-.zone-loading-tips blockquote {
+#zone-loading-tips blockquote {
     margin-bottom: 0.1rem;
 }
 
-.zone-loading-tips li {
-    margin-bottom: 0.4rem;
+#zone-loading-tips blockquote + h4 {
+    margin-top: 0.8rem
+}
+
+#zone-loading-tips blockquote:last-child {
+    margin-bottom: 0.5rem;
 }
