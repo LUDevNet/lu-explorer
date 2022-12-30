@@ -1,4 +1,4 @@
 <div class="item-list">
-    <lux-slot *ngFor="let obj of objects" [link]="'/objects/' +obj.id" [luxTooltip]="obj.tooltip | async"
+    <lux-slot *ngFor="let obj of objects" [link]="'/objects/' +obj.id" [luxTooltip]="obj.tooltipComponentRef"
         [icon]="(obj.$renderComponent | async)?.icon_asset | icon"></lux-slot>
 </div>

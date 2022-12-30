@@ -1,6 +1,6 @@
-import { Component, ComponentRef, Input, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, createComponent, EnvironmentInjector, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import { map, shareReplay, switchMap } from 'rxjs/operators';
+import { first, map, shareReplay, switchMap } from 'rxjs/operators';
 import { DB_ComponentsRegistry, DB_RenderComponent } from '../../../defs/cdclient';
 import { RENDER_COMPONENT_ID } from '../../../defs/components';
 import { mapRec, mapToDict, mapToMultiDict, pick, values } from '../../../defs/rx';
@@ -20,20 +20,21 @@ const OBJECT_KEYS: Array<keyof DB_Objects_Ref> = [
 ];
 
 class GameObject {
+  tooltipComponentRef: ComponentRef<ItemTooltipComponent>;
+
   constructor(
     public id: number,
     public $table: Observable<DB_Objects_Ref>,
     public $renderComponent: Observable<DB_RenderComponent_Ref>,
-    private vcr: ViewContainerRef
-  ) { }
-
-  get tooltip(): Observable<ComponentRef<ItemTooltipComponent> | string> {
-    //let x = this.vcr.createComponent(ItemTooltipComponent);
-    //x.instance.id = this.id
-    return this.$table.pipe(map(o => {
+    environmentInjector: EnvironmentInjector,
+  ) {
+    this.tooltipComponentRef = createComponent(ItemTooltipComponent, { environmentInjector })
+    this.tooltipComponentRef.instance.id = id;
+    this.$table.pipe(first()).subscribe(o => {
       let title = o?.displayName || o?.name || "Object #" + this.id;
-      return title;
-    }));
+      this.tooltipComponentRef.instance.title = title;
+      this.tooltipComponentRef.changeDetectorRef.detectChanges();
+    })
   }
 }
 
@@ -67,7 +68,10 @@ export class ItemListComponent implements OnInit {
   $ids: ReplaySubject<number[]>;
   objects: GameObject[];
 
-  constructor(private luCoreData: LuCoreDataService, private vcr: ViewContainerRef) {
+  constructor(
+    private luCoreData: LuCoreDataService,
+    private environmentInjector: EnvironmentInjector,
+  ) {
     this.$ids = new ReplaySubject(1);
   }
 
@@ -95,7 +99,7 @@ export class ItemListComponent implements OnInit {
         id,
         $table.pipe(pick(id)),
         $rc,
-        this.vcr
+        this.environmentInjector,
       )
     })
   }
