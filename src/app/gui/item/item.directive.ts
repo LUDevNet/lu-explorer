@@ -1,8 +1,8 @@
-import { ApplicationRef, ComponentFactory, ComponentFactoryResolver, ComponentRef, ElementRef, Directive, Injector, Input, Renderer2 } from "@angular/core";
+import { ApplicationRef, ComponentRef, ElementRef, Directive, Injector, Input, Renderer2, createComponent, EnvironmentInjector } from "@angular/core";
 import { ItemTooltipComponent } from "../item-tooltip/item-tooltip.component";
 import { SlotComponent } from "../slot/slot.component";
 import { TooltipDirective } from "../tooltip.directive";
-import { LuCoreDataService, LuJsonService, LuLocaleService } from "../../services";
+import { LuCoreDataService, LuJsonService } from "../../services";
 import { DB_RenderComponent } from "../../../defs/cdclient";
 
 @Directive({
@@ -22,16 +22,14 @@ export class ItemDirective extends TooltipDirective {
     applicationRef: ApplicationRef,
     renderer: Renderer2,
     injector: Injector,
-    resolver: ComponentFactoryResolver,
+    environmentInjector: EnvironmentInjector,
     private luCoreData: LuCoreDataService,
     private luJson: LuJsonService,
-    private luLocale: LuLocaleService,
     private slotComponent: SlotComponent
   ) {
-    super(element, applicationRef, renderer, injector, resolver);
+    super(element, applicationRef, renderer, injector);
 
-    const itemTooltipFactory = resolver.resolveComponentFactory(ItemTooltipComponent);
-    this.itemTooltipRef = itemTooltipFactory.create(injector);
+    this.itemTooltipRef = createComponent(ItemTooltipComponent, { environmentInjector });
     this.content = this.itemTooltipRef;
   }
 

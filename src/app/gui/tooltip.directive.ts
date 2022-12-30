@@ -1,4 +1,4 @@
-import { ApplicationRef, ComponentFactory, ComponentFactoryResolver, ComponentRef, Directive, ElementRef, EmbeddedViewRef, HostListener, Injector, Input, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ApplicationRef, ComponentRef, Directive, ElementRef, EmbeddedViewRef, HostListener, Injector, Input, Renderer2, TemplateRef, Type, ViewContainerRef } from '@angular/core';
 import { TooltipComponent } from './tooltip/tooltip.component';
 
 @Directive({
@@ -9,15 +9,15 @@ export class TooltipDirective {
 
   private embeddedViewRef?: EmbeddedViewRef<TooltipComponent>;
   private componentRef: ComponentRef<TooltipComponent>;
-  private factory: ComponentFactory<TooltipComponent>;
+  private componentType: Type<TooltipComponent>;
   private configInjector: Injector;
 
   constructor(private element: ElementRef<HTMLElement>,
     private applicationRef: ApplicationRef,
     private renderer: Renderer2,
     private injector: Injector,
-    private resolver: ComponentFactoryResolver) {
-    this.factory = this.resolver.resolveComponentFactory(TooltipComponent);
+  ) {
+    this.componentType = TooltipComponent;
     this.configInjector = Injector.create({
       providers: [
         {
@@ -33,12 +33,13 @@ export class TooltipDirective {
 
   @HostListener('mouseenter')
   mouseenter() {
-    //console.log("enter");
     if (this.componentRef) return;
-    //console.log("enter!");
-
     this.componentRef = //
-    this.getRootViewContainerRef().createComponent(this.factory, 0, this.configInjector, this.generateNgContent());
+      this.getRootViewContainerRef().createComponent(this.componentType, {
+        index: 0,
+        injector: this.configInjector,
+        projectableNodes: this.generateNgContent(),
+      });
   }
 
   getRootViewContainerRef(): ViewContainerRef {
