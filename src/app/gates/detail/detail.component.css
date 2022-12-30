@@ -10,3 +10,11 @@ ul.inline li {
 ul.inline li + li::before {
     content: ", "
 }
+
+.zone-loading-tips blockquote {
+    margin-bottom: 0.1rem;
+}
+
+.zone-loading-tips li {
+    margin-bottom: 0.4rem;
+}

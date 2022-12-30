@@ -40,3 +40,9 @@ export interface Locale_MissionTasks {
 export interface Locale_SkillBehavior {
     name?: string;
 }
+
+export interface Locale_ZoneLoadingTips {
+    title?: string,
+    tip1?: string,
+    tip2?: string,
+}

@@ -81,13 +81,22 @@
         </div>
         <div *ngIf="data.zone_loading_tips.length">
             <h3>Zone Loading Tips</h3>
-            <p>{{data.zone_loading_tips.join(", ")}}</p>
+            <ul class="zone-loading-tips">
+                <li *ngFor="let z of ($zoneLoadingTips | async)">
+                    <ng-container *luxVar="z.$loc | async; let loc">
+                        {{z.id}} <span *ngIf="loc?.title">"{{loc.title}}"</span>
+                        <blockquote *ngIf="loc?.tip1">{{loc.tip1}}</blockquote>
+                        <blockquote *ngIf="loc?.tip2">{{loc.tip2}}</blockquote>
+                    </ng-container>
+                </li>
+            </ul>
         </div>
         <div *ngIf="data.zones.length">
             <h3>Zones</h3>
             <ul class="inline">
                 <li *ngFor="let zoneId of data.zones">
-                    <a href="/zones/{{zoneId}}">{{zoneId}}</a></li>
+                    <a href="/zones/{{zoneId}}">{{zoneId}}</a>
+                </li>
             </ul>
         </div>
     </ng-container>
