@@ -40,6 +40,7 @@ export class GateDetailComponent implements OnInit {
   $id: Observable<string>;
 
   $data: Observable<Rev_GateVersion | null>;
+  $objectIds: Observable<number[]>;
   $missionIds: Observable<number[]>;
   $itemSets: Observable<ItemSet[]>;
 
@@ -50,6 +51,7 @@ export class GateDetailComponent implements OnInit {
     this.$id = this.route.paramMap.pipe(map(p => p.get('id')));
     this.$data = this.$id.pipe(switchMap(id => this.luCoreData.getRevEntry<Rev_GateVersion>('gate-versions', id)));
     this.$missionIds = this.$data.pipe(map(d => d.missions));
+    this.$objectIds = this.$data.pipe(map(d => d.objects));
 
     let $itemSetIds = this.$data.pipe(map(d => d.item_sets));
     let $itemSetsTable = $itemSetIds.pipe(

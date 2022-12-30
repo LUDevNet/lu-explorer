@@ -124,11 +124,11 @@ export class LuCoreDataService {
     return switchMap(data => cd.queryLocale<Record<number, L>>(t, data, fields));
   }
 
+  queryIcons(): OperatorFunction<number[], DB_Icons[]> {
+    return this.queryTableEntries$<number[], DB_Icons>('Icons', ICONS_KEYS);
+  }
+
   icons(): OperatorFunction<number[], Record<number, DB_Icons>> {
-    let queryIcons = this.queryTableEntries$<number[], DB_Icons>('Icons', ICONS_KEYS);
-    function iconsOp(source: Observable<number[]>): Observable<Record<number, DB_Icons>> {
-      return source.pipe(queryIcons, mapToDict("IconID"));
-    }
-    return iconsOp;
+    return (source) => source.pipe(this.queryIcons(), mapToDict("IconID"));
   }
 }

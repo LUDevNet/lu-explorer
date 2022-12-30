@@ -31,6 +31,7 @@ import { GateVersionTocComponent } from './gate-version-toc/gate-version-toc.com
 import { GateVersionTagComponent } from './gate-version-tag/gate-version-tag.component';
 import { SkillDirective } from './skill/skill.directive';
 import { MissionListComponent } from './mission-list/mission-list.component';
+import { ItemListComponent } from './item-list/item-list.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { MissionListComponent } from './mission-list/mission-list.component';
     GateVersionTagComponent,
     SkillDirective,
     MissionListComponent,
+    ItemListComponent,
   ],
   imports: [
     CommonModule,
@@ -99,6 +101,7 @@ import { MissionListComponent } from './mission-list/mission-list.component';
     GateVersionTagComponent,
     SkillDirective,
     MissionListComponent,
+    ItemListComponent,
   ],
 })
 export class GuiModule { }

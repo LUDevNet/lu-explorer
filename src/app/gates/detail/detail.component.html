@@ -47,8 +47,7 @@
         </div>
         <div *ngIf="data.objects.length">
             <h3>Objects</h3>
-            <!--<p><lux-slot [luxFetchItem]="lot" *ngFor="let lot of data.objects"></lux-slot></p>-->
-            <p>{{data.objects.join(", ")}}</p>
+            <lux-item-list [ids]="data.objects"></lux-item-list>
         </div>
         <div *ngIf="data.player_statistics.length">
             <h3>Player Statistics</h3>
