@@ -1,4 +1,4 @@
-import { ApplicationRef, ComponentFactoryResolver, Directive, ElementRef, HostListener, Injector, Input, Renderer2 } from "@angular/core";
+import { ApplicationRef, Directive, ElementRef, HostListener, Injector, Input, Renderer2 } from "@angular/core";
 import { LocationStrategy } from "@angular/common";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { LuCoreDataService } from "../../services";
@@ -12,7 +12,7 @@ export class ObjectDirective extends RouterLink {
   private tooltipDirective: TooltipDirective;
 
   @Input("luxFetchObject") set id(id: number) {
-    this.routerLink = "/objects/"+id;
+    this.routerLink = "/objects/" + id;
     this.element.nativeElement.textContent = `#${id}`;
     this.luCoreData.getSingleTableEntry("Objects", id).subscribe(this.onObject.bind(this));
   }
@@ -26,10 +26,9 @@ export class ObjectDirective extends RouterLink {
     applicationRef: ApplicationRef,
     renderer: Renderer2,
     injector: Injector,
-    resolver: ComponentFactoryResolver
   ) {
     super(router, route, "-1", renderer, element, locationStrategy);
-    this.tooltipDirective = new TooltipDirective(element, applicationRef, renderer, injector, resolver);
+    this.tooltipDirective = new TooltipDirective(element, applicationRef, renderer, injector);
   }
 
   onObject(object: DB_Objects) {
@@ -50,7 +49,7 @@ export class ObjectDirective extends RouterLink {
     this.tooltipDirective.mouseenter();
   }
 
-   @HostListener('mouseout', ['$event.toElement', '$event.relatedTarget'])
+  @HostListener('mouseout', ['$event.toElement', '$event.relatedTarget'])
   mouseout(toElement, relatedTarget) {
     this.tooltipDirective.mouseout(toElement, relatedTarget);
   }
