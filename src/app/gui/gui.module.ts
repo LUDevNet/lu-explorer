@@ -32,6 +32,7 @@ import { GateVersionTagComponent } from './gate-version-tag/gate-version-tag.com
 import { SkillDirective } from './skill/skill.directive';
 import { MissionListComponent } from './mission-list/mission-list.component';
 import { ItemListComponent } from './item-list/item-list.component';
+import { SkillListComponent } from './skill-list/skill-list.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { ItemListComponent } from './item-list/item-list.component';
     SkillDirective,
     MissionListComponent,
     ItemListComponent,
+    SkillListComponent,
   ],
   imports: [
     CommonModule,
@@ -102,6 +104,7 @@ import { ItemListComponent } from './item-list/item-list.component';
     SkillDirective,
     MissionListComponent,
     ItemListComponent,
+    SkillListComponent,
   ],
 })
 export class GuiModule { }

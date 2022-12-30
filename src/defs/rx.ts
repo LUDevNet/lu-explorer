@@ -74,3 +74,7 @@ export function recToSet<K extends RecordKey, T, V>(f: (v: T) => V): OperatorFun
     }
     return map(mapper);
 }
+
+export function setValues<T>(): OperatorFunction<Set<T>, T[]> {
+    return map(s => Array.from(s.values()));
+}

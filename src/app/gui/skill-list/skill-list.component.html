@@ -1,0 +1,4 @@
+<div class="skill-list">
+    <lux-slot *ngFor="let skill of skills" link="/skills/{{skill.id}}" [icon]="skill.$icon | async | icon"
+        [luxTooltip]="(skill.$locale | async)?.name ?? ('Skill #' + skill.id)"></lux-slot>
+</div>

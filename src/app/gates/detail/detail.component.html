@@ -71,10 +71,7 @@
         </div>
         <div *ngIf="data.skills.length">
             <h3>Skills</h3>
-            <!--<p>
-                <lux-slot *ngFor="let skillId of data.skills" [luxFetchSkill]="skillId"></lux-slot>
-            </p>-->
-            <p>{{data.skills.join(", ")}}</p>
+            <lux-skill-list [ids]="data.skills"></lux-skill-list>
         </div>
         <div *ngIf="data.ug_behavior_sounds.length">
             <h3>UG Behavior Sounds</h3>
