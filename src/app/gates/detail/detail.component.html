@@ -9,7 +9,11 @@
     <ng-container *ngIf="$data | async; let data">
         <div *ngIf="data.activities.length">
             <h3>Activities</h3>
-            <p>{{data.activities.join(", ")}}</p>
+            <ul>
+                <li *ngFor="let actId of data.activities">
+                    <a href="/activities/{{actId}}">Activity #{{actId}}</a>
+                </li>
+            </ul>
         </div>
         <div *ngIf="data.deletion_restrictions.length">
             <h3>Deletion Restrictions</h3>
