@@ -86,7 +86,8 @@
         <div *ngIf="data.zones.length">
             <h3>Zones</h3>
             <ul class="inline">
-                <li *ngFor="let zoneId of data.zones">{{zoneId}}</li>
+                <li *ngFor="let zoneId of data.zones">
+                    <a href="/zones/{{zoneId}}">{{zoneId}}</a></li>
             </ul>
         </div>
     </ng-container>
