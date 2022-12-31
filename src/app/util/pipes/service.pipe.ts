@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { DB_Icons } from '../../../defs/cdclient';
 import { LuDocsService, LuResService, LuLocaleService, LuJsonService } from '../../services';
 
 @Pipe({ name: 'docs' })
@@ -17,8 +18,19 @@ export class ResourcePipe implements PipeTransform {
 
   constructor(private luRes: LuResService) { }
 
-  transform(value: string): any {
+  transform(value: string): string {
     return this.luRes.getResolvedResUrl(value);
+  }
+}
+
+@Pipe({ name: 'icon' })
+export class IconPipe implements PipeTransform {
+  constructor(private luRes: LuResService) { }
+
+  transform(value?: DB_Icons | string): string | null {
+    let icon_path = (typeof value === "string") ? value : value.IconPath;
+    let path = value ? icon_path.toLowerCase().replace(/dds$/, "png") : "inventory/unknown.png";
+    return this.luRes.getResolvedResUrl(`textures/ui/${path}`);
   }
 }
 

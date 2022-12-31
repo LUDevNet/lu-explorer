@@ -1,11 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DB_Preconditions } from '../../../defs/cdclient';
+import { Locale_Preconditions } from '../../../defs/locale';
 import { LuJsonService, LuLocaleService } from '../../services';
-
-interface PreconditionsLocale {
-  FailureReason: string,
-}
 
 @Component({
   selector: 'lux-precondition',
@@ -15,7 +12,7 @@ interface PreconditionsLocale {
 export class PreconditionComponent implements OnInit {
   private _id: number;
   $precondition: Observable<DB_Preconditions>;
-  $locale: Observable<PreconditionsLocale>;
+  $locale: Observable<Locale_Preconditions>;
 
   get id(): number { return this._id; }
 

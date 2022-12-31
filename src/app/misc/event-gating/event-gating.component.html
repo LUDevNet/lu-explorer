@@ -4,16 +4,13 @@
   <table *ngIf="table">
     <tr>
       <th>eventName</th>
-      <th>date_start / date_end</th>
+      <th>date_start</th>
+      <th>date_end</th>
     </tr>
-    <ng-container *ngFor="let date of table">
-      <tr>
-        <td rowspan="2">{{date.eventName}}</td>
-        <td>{{date.date_start | todate}}</td>
-      </tr>
-      <tr>
-        <td>{{date.date_end | todate}}</td>
-      </tr>
-    </ng-container>
+    <tr *ngFor="let date of table">
+      <td><a href="/gate-versions/{{date.eventName}}">{{date.eventName}}</a></td>
+      <td class="date">{{date.date_start | todate}}</td>
+      <td class="date">{{date.date_end | todate}}</td>
+    </tr>
   </table>
 </div>

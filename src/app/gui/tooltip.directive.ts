@@ -54,6 +54,11 @@ export class TooltipDirective {
   }
 
   generateNgContent() {
+    if (this.content === null) {
+      const element = this.renderer.createText("???");
+      return [[element]];
+    }
+
     if (typeof this.content === 'string') {
       const element = this.renderer.createText(this.content);
       return [[element]];

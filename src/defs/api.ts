@@ -85,7 +85,7 @@ export interface Rev_GateVersion {
     player_statistics: number[];
     preconditions: number[];
     property_template: number[];
-    reward_codes: string[];
+    reward_codes: number[];
     speedchat_menu: number[];
     skills: number[];
     ug_behavior_sounds: number[];

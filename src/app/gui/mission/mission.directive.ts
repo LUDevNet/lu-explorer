@@ -13,7 +13,7 @@ export class MissionDirective {
     this.missionComponent.title = `#${id}`;
     this.luJson.getMission(id).subscribe(this.onMission);
     this.luLocale.getLocaleEntry("Missions", id).subscribe(x => { if (x) { this.missionComponent.title = x.name; }});
-    this.luLocale.getLocaleEntry("MissionText", id).subscribe(this.onMissionText);
+    this.luLocale.getLocaleEntry("MissionText", id).subscribe(this.onMissionText.bind(this, id));
   }
 
   constructor(private luJson: LuJsonService, private luLocale: LuLocaleService, private missionComponent: MissionComponent) {
@@ -31,13 +31,17 @@ export class MissionDirective {
     }
   }
 
-  onMissionText = (missionText: any) => {
+  onMissionText = (id: number, missionText: any) => {
     if (missionText) {
       if (missionText.in_progress) {
         this.missionComponent.tooltip = missionText.in_progress;
       } else if (missionText.description) {
         this.missionComponent.tooltip = missionText.description;
+      } else {
+        this.missionComponent.tooltip = `Mission #${id}`;
       }
+    } else {
+      this.missionComponent.tooltip = `Mission #${id}`;
     }
   }
 }

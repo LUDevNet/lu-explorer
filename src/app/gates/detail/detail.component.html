@@ -6,10 +6,23 @@
 <section>
     <h2>Feature Gate <small><code>{{$id | async}}</code></small></h2>
 
+    <section *ngIf="$release | async; let r">
+        Part of <strong>Version {{r.major}}.{{r.current}}.{{r.minor}}</strong>
+        <blockquote *ngIf="r.description; let desc">{{desc}}</blockquote>
+    </section>
+
+    <section *ngIf="$event | async; let e">
+        Event from {{e.date_start | todate}} to {{e.date_end | todate}}
+    </section>
+
     <ng-container *ngIf="$data | async; let data">
         <div *ngIf="data.activities.length">
             <h3>Activities</h3>
-            <p>{{data.activities.join(", ")}}</p>
+            <ul>
+                <li *ngFor="let actId of data.activities">
+                    <a href="/activities/{{actId}}">Activity #{{actId}}</a>
+                </li>
+            </ul>
         </div>
         <div *ngIf="data.deletion_restrictions.length">
             <h3>Deletion Restrictions</h3>
@@ -25,13 +38,11 @@
         </div>
         <div *ngIf="data.item_sets.length">
             <h3>Item Sets</h3>
-            <p>{{data.item_sets.join(", ")}}</p>
+            <lux-item-set-list [ids]="data.item_sets"></lux-item-set-list>
         </div>
         <div *ngIf="data.missions.length">
             <h3>Missions</h3>
-            <p class="mission-list">
-                <lux-mission *ngFor="let id of data.missions" [luxFetch]="id"></lux-mission>
-            </p>
+            <lux-mission-list [ids]="data.missions"></lux-mission-list>
         </div>
         <div *ngIf="data.mission_tasks.length">
             <h3>Mission Tasks</h3>
@@ -39,7 +50,7 @@
         </div>
         <div *ngIf="data.objects.length">
             <h3>Objects</h3>
-            <p><lux-slot [luxFetchItem]="lot" *ngFor="let lot of data.objects"></lux-slot></p>
+            <lux-item-list [ids]="data.objects"></lux-item-list>
         </div>
         <div *ngIf="data.player_statistics.length">
             <h3>Player Statistics</h3>
@@ -47,15 +58,40 @@
         </div>
         <div *ngIf="data.preconditions.length">
             <h3>Preconditions</h3>
-            <p>{{data.preconditions.join(", ")}}</p>
+            <ul>
+                <li *ngFor="let p of $preconditions | async">
+                    {{p.id}}: {{(p.$loc | async)?.FailureReason}}
+                </li>
+            </ul>
         </div>
         <div *ngIf="data.property_template.length">
             <h3>Property Templates</h3>
-            <p>{{data.property_template.join(", ")}}</p>
+            <ul *luxVar="$propertyTemplates | async; let propertyTemplates">
+                <ng-container *ngFor="let p of propertyTemplates">
+                    <li *luxVar="p.$loc | async; let loc">#{{p.id}}: {{loc?.name}}
+                        <ul class="inline" style="display: inline" *ngIf="p.$row | async; let row">(<li
+                                *ngIf="row.mapID">Map: <a href="/zones/{{row.mapID}}">ID {{row.mapID}}</a></li>
+                            <li *ngIf="row.vendorMapID">Vendor Map: <a href="/zones/{{row.vendorMapID}}">ID
+                                    {{row.vendorMapID}}</a></li>)
+                        </ul>
+                        <br>{{loc?.description}}
+                    </li>
+                </ng-container>
+            </ul>
         </div>
         <div *ngIf="data.reward_codes.length">
             <h3>Reward Codes</h3>
-            <p>{{data.reward_codes.join(", ")}}</p>
+            <ul *ngIf="$rewardCodes | async; let rewardCodes">
+                <ng-container *ngFor="let r of rewardCodes">
+                    <li *luxVar="r.$loc | async; let loc">
+                        #{{r.id}}: <strong>{{loc?.subjectText}}</strong>&nbsp;<span
+                            *ngIf="r.$row | async; let row">(Code:
+                            <code>{{row.code}}</code> &ndash; Item: <a
+                                href="/objects/{{row.attachmentLOT}}">{{row.attachmentLOT}}</a>)</span><br>
+                        <em *ngIf="loc?.bodyText; let body">{{body}}</em>
+                    </li>
+                </ng-container>
+            </ul>
         </div>
         <div *ngIf="data.speedchat_menu.length">
             <h3>Speechat Menu</h3>
@@ -63,9 +99,7 @@
         </div>
         <div *ngIf="data.skills.length">
             <h3>Skills</h3>
-            <p>
-                <lux-slot *ngFor="let skillId of data.skills" [luxFetchSkill]="skillId"></lux-slot>
-            </p>
+            <lux-skill-list [ids]="data.skills"></lux-skill-list>
         </div>
         <div *ngIf="data.ug_behavior_sounds.length">
             <h3>UG Behavior Sounds</h3>
@@ -73,20 +107,35 @@
         </div>
         <div *ngIf="data.whats_cool_item_spotlight.length">
             <h3>What's Cool &mdash; Item Spotlight</h3>
-            <p>{{data.whats_cool_item_spotlight.join(", ")}}</p>
+            <ul *luxVar="$whatsCoolItems | async; let whatsCoolItems">
+                <li *ngFor="let i of whatsCoolItems">{{i.id}}: {{(i.$loc | async)?.description}}<br>
+                    <a *ngIf="i.$row | async; let row" href="/objects/{{row.itemID}}">Item #{{row.itemID}}</a>
+                </li>
+            </ul>
         </div>
         <div *ngIf="data.whats_cool_news_and_tips.length">
             <h3>What's Cool &mdash; News &amp; Tipps</h3>
-            <p>{{data.whats_cool_news_and_tips.join(", ")}}</p>
+            <ng-container *ngFor="let news of $whatsCoolNews | async">
+                <h4>#{{news.id}}: {{(news.$loc | async)?.storyTitle}}</h4>
+                <blockquote>{{(news.$loc | async)?.text}}</blockquote>
+            </ng-container>
         </div>
-        <div *ngIf="data.zone_loading_tips.length">
+        <div id="zone-loading-tips" *ngIf="data.zone_loading_tips.length">
             <h3>Zone Loading Tips</h3>
-            <p>{{data.zone_loading_tips.join(", ")}}</p>
+            <ng-container *ngFor="let z of ($zoneLoadingTips | async)">
+                <ng-container *luxVar="z.$loc | async; let loc">
+                    <h4>#{{z.id}}: <span *ngIf="loc?.title">"{{loc.title}}"</span></h4>
+                    <blockquote *ngIf="loc?.tip1">{{loc.tip1}}</blockquote>
+                    <blockquote *ngIf="loc?.tip2">{{loc.tip2}}</blockquote>
+                </ng-container>
+            </ng-container>
         </div>
         <div *ngIf="data.zones.length">
             <h3>Zones</h3>
             <ul class="inline">
-                <li *ngFor="let zoneId of data.zones">{{zoneId}}</li>
+                <li *ngFor="let zone of ($zones | async)">
+                    <a href="/zones/{{zone.id}}">{{zone.id}} {{(zone.$loc | async)?.DisplayDescription}}</a>
+                </li>
             </ul>
         </div>
     </ng-container>

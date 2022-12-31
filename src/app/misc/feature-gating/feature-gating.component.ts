@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DB_FeatureGating } from '../../../defs/cdclient';
 
-import { LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../services';
 
 @Component({
   selector: 'app-feature-gating',
@@ -11,28 +12,25 @@ export class FeatureGatingComponent implements OnInit {
 
   table: any[];
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private luCoreData: LuCoreDataService) { }
 
   ngOnInit() {
-  	this.getTable()
+    this.getTable()
   }
 
-  getTable(): void
-  {
-  	this.luJsonService.getSingleTable("FeatureGating").subscribe(this.processData.bind(this));
+  getTable(): void {
+    this.luCoreData.getTableEntry<DB_FeatureGating>("FeatureGating", "all").subscribe(this.processData.bind(this));
   }
 
-  processData(table: any)
-  {
+  processData(table: any) {
     this.table = table.sort(this.compareVersionsRev.bind(this));
   }
 
-  compareVersionsRev(a,b) : number {
-    return this.compareVersions(b,a);
+  compareVersionsRev(a, b): number {
+    return this.compareVersions(b, a);
   }
 
-  compareVersions(a,b): number
-  {
+  compareVersions(a, b): number {
 
     let compMajor = a.major - b.major;
     let compCurrent = a.current - b.current;

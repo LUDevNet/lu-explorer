@@ -1,3 +1,4 @@
+export const RENDER_COMPONENT_ID = 2;
 export const DESTRUCTIBLE_COMPONENT_ID = 7;
 export const SCRIPTED_ACTIVITY_COMPONENT_ID = 39;
 export const REBUILD_COMPONENT_ID = 12;
