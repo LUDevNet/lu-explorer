@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { Rev_GateVersion } from '../../../defs/api';
-import { DB_Preconditions, DB_PropertyTemplate, DB_RewardCodes, DB_WhatsCoolItemSpotlight } from '../../../defs/cdclient';
+import { DB_EventGating, DB_FeatureGating, DB_Preconditions, DB_PropertyTemplate, DB_RewardCodes, DB_WhatsCoolItemSpotlight } from '../../../defs/cdclient';
 import { LocaleTypePick, Locale_Preconditions, Locale_PropertyTemplate, Locale_RewardCodes, Locale_WhatsCoolItemSpotlight, Locale_WhatsCoolNewsAndTips, Locale_ZoneLoadingTips, Locale_ZoneTable } from '../../../defs/locale';
 import { mapArr, mapToDict, pick } from '../../../defs/rx';
 import { LuCoreDataService } from '../../services';
@@ -67,11 +67,22 @@ export class GateDetailComponent implements OnInit {
   $zones: Observable<Zone[]>;
   $rewardCodes: Observable<RewardCode[]>;
 
+  $release: Observable<DB_FeatureGating | undefined>;
+  $event: Observable<DB_EventGating | undefined>;
+
   constructor(private route: ActivatedRoute, private luCoreData: LuCoreDataService) { }
 
   ngOnInit(): void {
     const cd = this.luCoreData;
     this.$id = this.route.paramMap.pipe(map(p => p.get('id')));
+    this.$release = this.$id.pipe(
+      switchMap(id => cd.getSingleTableEntry<DB_FeatureGating>("FeatureGating", id)),
+      shareReplay(1),
+    );
+    this.$event = this.$id.pipe(
+      switchMap(id => cd.getSingleTableEntry<DB_EventGating>("EventGating", id)),
+      shareReplay(1),
+    );
     this.$data = this.$id.pipe(switchMap(id => this.luCoreData.getRevEntry<Rev_GateVersion>('gate-versions', id)));
 
     // Zone Loading Tips
@@ -187,5 +198,10 @@ export class GateDetailComponent implements OnInit {
       }),
       shareReplay(1),
     );
+  }
+
+  dateTime(n: number): string {
+    let d = new Date(n);
+    return d.toDateString();
   }
 }

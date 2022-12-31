@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DB_EventGating } from '../../../defs/cdclient';
 
-import { LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../services';
 
 @Component({
   selector: 'app-event-gating',
@@ -11,15 +12,14 @@ export class EventGatingComponent implements OnInit {
 
   table: any[];
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private luCoreData: LuCoreDataService) { }
 
   ngOnInit() {
-  	this.getTable()
+    this.getTable()
   }
 
-  getTable(): void
-  {
-  	this.luJsonService.getSingleTable("EventGating").subscribe(table => this.table = table);
+  getTable(): void {
+    this.luCoreData.getTableEntry<DB_EventGating>("EventGating", "all").subscribe(table => this.table = table);
   }
 
 }

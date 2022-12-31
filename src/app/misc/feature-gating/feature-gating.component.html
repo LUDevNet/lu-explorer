@@ -8,7 +8,7 @@
       <th>description</th>
     </tr>
     <tr *ngFor="let feature of table">
-      <td>{{feature.featureName}}</td>
+      <td><a href="/gate-versions/{{feature.featureName}}">{{feature.featureName}}</a></td>
       <td>{{feature.major}}.{{feature.current}}.{{feature.minor}}</td>
       <td>{{feature.description}}</td>
     </tr>

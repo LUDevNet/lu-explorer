@@ -373,6 +373,20 @@ export class DB_BehaviorParameter {
   value: number;
 }
 
+export class DB_EventGating {
+  eventName: string;
+  date_start: number;
+  date_end: number;
+}
+
+export class DB_FeatureGating {
+  featureName: string;
+  major: number;
+  current: number;
+  minor: number;
+  description?: string;
+}
+
 export class DB_SkillBehavior {
   skillID: number;
   locStatus: number;

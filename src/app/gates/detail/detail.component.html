@@ -6,6 +6,15 @@
 <section>
     <h2>Feature Gate <small><code>{{$id | async}}</code></small></h2>
 
+    <section *ngIf="$release | async; let r">
+        Part of <strong>Version {{r.major}}.{{r.current}}.{{r.minor}}</strong>
+        <blockquote *ngIf="r.description; let desc">{{desc}}</blockquote>
+    </section>
+
+    <section *ngIf="$event | async; let e">
+        Event from {{e.date_start | todate}} to {{e.date_end | todate}}
+    </section>
+
     <ng-container *ngIf="$data | async; let data">
         <div *ngIf="data.activities.length">
             <h3>Activities</h3>

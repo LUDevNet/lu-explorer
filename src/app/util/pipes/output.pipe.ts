@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({name: 'todate'})
 export class DatePipe implements PipeTransform {
   transform(value: number) : any {
-    return new Date(+value * 1000);
+    return (new Date(+value * 1000)).toLocaleDateString();
   }
 }
 
