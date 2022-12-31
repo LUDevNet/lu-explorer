@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { Rev_GateVersion } from '../../../defs/api';
-import { DB_Preconditions, DB_PropertyTemplate, DB_WhatsCoolItemSpotlight } from '../../../defs/cdclient';
-import { Locale_Preconditions, Locale_PropertyTemplate, Locale_WhatsCoolItemSpotlight, Locale_WhatsCoolNewsAndTips, Locale_ZoneLoadingTips, Locale_ZoneTable } from '../../../defs/locale';
+import { DB_Preconditions, DB_PropertyTemplate, DB_RewardCodes, DB_WhatsCoolItemSpotlight } from '../../../defs/cdclient';
+import { LocaleTypePick, Locale_Preconditions, Locale_PropertyTemplate, Locale_RewardCodes, Locale_WhatsCoolItemSpotlight, Locale_WhatsCoolNewsAndTips, Locale_ZoneLoadingTips, Locale_ZoneTable } from '../../../defs/locale';
 import { mapArr, mapToDict, pick } from '../../../defs/rx';
 import { LuCoreDataService } from '../../services';
 
@@ -44,6 +44,12 @@ interface WhatsCoolItem {
   $row: Observable<Pick<DB_WhatsCoolItemSpotlight, "id" | "itemID">>;
 }
 
+interface RewardCode {
+  id: number;
+  $loc: Observable<Locale_RewardCodes>;
+  $row: Observable<Pick<DB_RewardCodes, "id" | "code" | "attachmentLOT">>;
+}
+
 @Component({
   selector: 'lux-gate-detail',
   templateUrl: './detail.component.html',
@@ -59,6 +65,7 @@ export class GateDetailComponent implements OnInit {
   $whatsCoolItems: Observable<WhatsCoolItem[]>;
   $zoneLoadingTips: Observable<ZoneLoadingTip[]>;
   $zones: Observable<Zone[]>;
+  $rewardCodes: Observable<RewardCode[]>;
 
   constructor(private route: ActivatedRoute, private luCoreData: LuCoreDataService) { }
 
@@ -141,6 +148,23 @@ export class GateDetailComponent implements OnInit {
         let $row = $propertyTemplateRows.pipe(pick(id));
         return { id, $loc, $row };
       }),
+    );
+
+    // Reward Codes
+    let $rewardCodeIds = this.$data.pipe(map(data => data.reward_codes));
+    let $rewardCodesLoc = $rewardCodeIds.pipe(
+      cd.queryLocaleNum$("RewardCodes", ["bodyText", "subjectText"]),
+    );
+    let $rewardCodeRows = $rewardCodeIds.pipe(
+      cd.queryTableEntries$("RewardCodes", ["id", "code", "attachmentLOT"]),
+      mapToDict("id")
+    );
+    this.$rewardCodes = $rewardCodeIds.pipe(
+      mapArr(id => {
+        let $loc = $rewardCodesLoc.pipe(pick(id));
+        let $row = $rewardCodeRows.pipe(pick(id));
+        return { id, $loc, $row }
+      })
     );
 
     // What's Cool – Items

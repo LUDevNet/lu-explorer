@@ -72,7 +72,17 @@
         </div>
         <div *ngIf="data.reward_codes.length">
             <h3>Reward Codes</h3>
-            <p>{{data.reward_codes.join(", ")}}</p>
+            <ul *ngIf="$rewardCodes | async; let rewardCodes">
+                <ng-container *ngFor="let r of rewardCodes">
+                    <li *luxVar="r.$loc | async; let loc">
+                        #{{r.id}}: <strong>{{loc?.subjectText}}</strong>&nbsp;<span
+                            *ngIf="r.$row | async; let row">(Code:
+                            <code>{{row.code}}</code> &ndash; Item: <a
+                                href="/objects/{{row.attachmentLOT}}">{{row.attachmentLOT}}</a>)</span><br>
+                        <em *ngIf="loc?.bodyText; let body">{{body}}</em>
+                    </li>
+                </ng-container>
+            </ul>
         </div>
         <div *ngIf="data.speedchat_menu.length">
             <h3>Speechat Menu</h3>

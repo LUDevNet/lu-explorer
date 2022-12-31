@@ -65,6 +65,7 @@ export interface Locale {
     Missions: Record<number, Locale_Missions>,
     Preconditions: Record<number, Locale_Preconditions>,
     PropertyTemplate: Record<number, Locale_PropertyTemplate>,
+    RewardCodes: Record<number, Locale_RewardCodes>,
     SkillBehavior: Record<number, Locale_SkillBehavior>,
     WhatsCoolItemSpotlight: Record<number, Locale_WhatsCoolItemSpotlight>,
     WhatsCoolNewsAndTips: Record<number, Locale_WhatsCoolNewsAndTips>,
