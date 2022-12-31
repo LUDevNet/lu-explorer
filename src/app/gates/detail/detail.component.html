@@ -49,7 +49,11 @@
         </div>
         <div *ngIf="data.preconditions.length">
             <h3>Preconditions</h3>
-            <p>{{data.preconditions.join(", ")}}</p>
+            <ul>
+                <li *ngFor="let p of $preconditions | async">
+                    {{p.id}}: {{(p.$loc | async)?.FailureReason}}
+                </li>
+            </ul>
         </div>
         <div *ngIf="data.property_template.length">
             <h3>Property Templates</h3>

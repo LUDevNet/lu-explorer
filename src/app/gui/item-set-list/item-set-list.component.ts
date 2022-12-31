@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { DB_Icons } from '../../../defs/cdclient';
+import { LocaleField, Locale_ItemSets } from '../../../defs/locale';
 import { mapToDict, pick, values } from '../../../defs/rx';
 import { LuCoreDataService } from '../../services';
 
@@ -15,16 +16,12 @@ const ITEM_SET_KEYS: (keyof DB_ItemSets_Ref)[] = [
   "kitImage",
 ];
 
-interface Locale_ItemSet {
-  kitName?: string,
-}
-
 class ItemSet {
   constructor(
     public id: number,
     public $table: Observable<DB_ItemSets_Ref | undefined>,
     public $icon: Observable<DB_Icons | undefined>,
-    public $loc: Observable<Locale_ItemSet | undefined>
+    public $loc: Observable<Locale_ItemSets | undefined>
   ) { }
 }
 
@@ -51,8 +48,9 @@ export class ItemSetListComponent implements OnInit {
       mapToDict("setID"),
       shareReplay(1)
     )
+    type X = LocaleField<"ItemSets">
     let $itemSetsLocale = this.$itemSetIds.pipe(
-      cd.queryLocaleNum$<Locale_ItemSet>("ItemSets", ["kitName"]),
+      cd.queryLocaleNum$("ItemSets", ["kitName"]),
       shareReplay(1),
     );
     let $itemSetIcons = $itemSetsTable.pipe(

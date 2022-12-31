@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { shareReplay, switchMap, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { shareReplay, switchMap } from 'rxjs/operators';
 import { DB_Icons, DB_SkillBehavior } from '../../../defs/cdclient';
 import { Locale_SkillBehavior } from '../../../defs/locale';
-import { mapRec, mapToDict, pick, recToSet, setValues } from '../../../defs/rx';
+import { mapToDict, pick, recToSet, setValues } from '../../../defs/rx';
 import { LuCoreDataService } from '../../services';
 
 interface DB_SkillBehavior_Ref {
@@ -50,7 +50,9 @@ export class SkillListComponent implements OnInit {
       this.luCoreData.icons(),
       shareReplay(1),
     );
-    let $locale = this.luCoreData.queryLocale("SkillBehavior", this.ids, ["name"]);
+    let $locale = of(this.ids).pipe(
+      this.luCoreData.queryLocaleNum$("SkillBehavior", ["name"]),
+    );
     this.skills = Array.from(this.ids, id => {
       let $t = $table.pipe(pick(id));
       let $l = $locale.pipe(pick(id));

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, OperatorFunction, ReplaySubject } from 'rxjs';
 import { catchError, first, map, shareReplay, switchMap } from 'rxjs/operators';
 import { DB_Icons } from '../../../defs/cdclient';
+import { Locale, LocaleField, LocaleIndex, LocaleRecordPick } from '../../../defs/locale';
 import { mapToDict } from '../../../defs/rx';
 import { environment } from '../../../environments/environment';
 
@@ -80,8 +81,8 @@ export class LuCoreDataService {
     return this.get(`v0/locale/${key.replace('_', '/')}/$all`);
   }
 
-  queryLocale<T>(key: string, ...params: (string[] | number[])[]): Observable<T | {}> {
-    if (!params.length || params.some(x => !x.length)) return of({});
+  queryLocale<T>(key: string, ...params: (string | number)[][]): Observable<T> {
+    if (!params.length || params.some(x => !x.length)) return of({} as T);
     return this.query(`v0/locale/${key}`, params);
   }
 
@@ -119,9 +120,9 @@ export class LuCoreDataService {
     return switchMap((data: K) => cd.queryTableEntries<T>(table, data, columns));
   }
 
-  queryLocaleNum$<L>(t: string, fields: string[]): OperatorFunction<number[], Record<number, L>> {
+  queryLocaleNum$<K, F extends LocaleField<K>, R extends LocaleRecordPick<K, F>>(t: K & keyof Locale, fields: F[]): OperatorFunction<LocaleIndex<K>[], R> {
     let cd = this;
-    return switchMap(data => cd.queryLocale<Record<number, L>>(t, data, fields));
+    return switchMap(data => cd.queryLocale<R>(t, data, fields));
   }
 
   queryIcons(): OperatorFunction<number[], DB_Icons[]> {

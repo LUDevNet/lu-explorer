@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { DB_Icons, DB_MissionTasks } from '../../../defs/cdclient';
-import { Locale_Mission } from '../../../defs/locale';
+import { Locale_Missions } from '../../../defs/locale';
 import { mapRec, mapToDict, mapToMultiDict, pick, recToSet, values } from '../../../defs/rx';
 import { LuCoreDataService } from '../../services';
 
@@ -37,7 +37,7 @@ class Mission {
     public id: number,
     public $table: Observable<DB_Missions_Ref | undefined>,
     public $missionIcon: Observable<DB_Icons | undefined>,
-    public $loc: Observable<Locale_Mission>,
+    public $loc: Observable<Locale_Missions>,
   ) { }
 
   get $sortOrder(): Observable<number> {
@@ -69,7 +69,7 @@ export class MissionListComponent implements OnInit {
       shareReplay(1)
     );
     let $missionsLocale = this.$missionIds.pipe(
-      cd.queryLocaleNum$<Locale_Mission>("Missions", ["name"]),
+      cd.queryLocaleNum$("Missions", ["name"]),
       shareReplay(1),
     );
     let $missionIcons = $missionsTable.pipe(

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LuCoreDataService } from '../../services';
-import { Locale_Mission } from '../../../defs/locale';
+import { Locale_Missions } from '../../../defs/locale';
 
-type MissionDict = { [key: string]: Locale_Mission };
+type MissionDict = Record<string, Locale_Missions>;
 
 @Component({
   selector: 'app-missions',

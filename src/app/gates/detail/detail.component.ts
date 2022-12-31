@@ -3,8 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { Rev_GateVersion } from '../../../defs/api';
-import { Locale_WhatsCoolNewsAndTips, Locale_ZoneLoadingTips, Locale_ZoneTable } from '../../../defs/locale';
-import { mapArr, pick } from '../../../defs/rx';
+import { DB_Preconditions } from '../../../defs/cdclient';
+import { Locale_Preconditions, Locale_WhatsCoolNewsAndTips, Locale_ZoneLoadingTips, Locale_ZoneTable } from '../../../defs/locale';
+import { mapArr, mapToDict, pick } from '../../../defs/rx';
 import { LuCoreDataService } from '../../services';
 
 
@@ -25,6 +26,12 @@ interface Zone {
   $loc: Observable<Locale_ZoneTable>;
 }
 
+interface Precondition {
+  id: number;
+  $loc: Observable<Locale_Preconditions>;
+  $row: Observable<Pick<DB_Preconditions, "id">>;
+}
+
 @Component({
   selector: 'lux-gate-detail',
   templateUrl: './detail.component.html',
@@ -34,8 +41,9 @@ export class GateDetailComponent implements OnInit {
   $id: Observable<string>;
   $data: Observable<Rev_GateVersion | null>;
 
-  $zoneLoadingTips: Observable<ZoneLoadingTip[]>;
+  $preconditions: Observable<Precondition[]>;
   $whatsCoolNews: Observable<WhatsCoolNews[]>;
+  $zoneLoadingTips: Observable<ZoneLoadingTip[]>;
   $zones: Observable<Zone[]>;
 
   constructor(private route: ActivatedRoute, private luCoreData: LuCoreDataService) { }
@@ -58,7 +66,7 @@ export class GateDetailComponent implements OnInit {
     // What's Cool – News & Tips
     let $whatsCoolNewsIds = this.$data.pipe(map(data => data.whats_cool_news_and_tips));
     let $whatsCoolNewsLoc = $whatsCoolNewsIds.pipe(
-      cd.queryLocaleNum$<Locale_WhatsCoolNewsAndTips>("WhatsCoolNewsAndTips", ["storyTitle", "text"]),
+      cd.queryLocaleNum$("WhatsCoolNewsAndTips", ["storyTitle", "text"]),
     )
     this.$whatsCoolNews = $whatsCoolNewsIds.pipe(
       mapArr(id => {
@@ -72,13 +80,33 @@ export class GateDetailComponent implements OnInit {
     // Zones
     let $zoneIds = this.$data.pipe(map(data => data.zones));
     let $zonesLoc = $zoneIds.pipe(
-      cd.queryLocaleNum$<Locale_ZoneTable>("ZoneTable", ["DisplayDescription"]),
+      cd.queryLocaleNum$("ZoneTable", ["DisplayDescription"]),
     )
     this.$zones = $zoneIds.pipe(
       mapArr(id => {
         return {
           id,
           $loc: $zonesLoc.pipe(pick(id))
+        };
+      })
+    );
+
+    // Preconditions
+    let $preconditionIds = this.$data.pipe(map(data => data.preconditions));
+    let $preconditionsLoc = $preconditionIds.pipe(
+      cd.queryLocaleNum$("Preconditions", ["FailureReason"])
+    )
+    let $preconditionTable = $preconditionIds.pipe(
+      cd.queryTableEntries$<number[], DB_Preconditions>("Preconditions", ["id"]),
+      mapToDict("id"),
+      shareReplay(1),
+    );
+    this.$preconditions = $preconditionIds.pipe(
+      mapArr(id => {
+        return {
+          id,
+          $loc: $preconditionsLoc.pipe(pick(id)),
+          $row: $preconditionTable.pipe(pick(id)),
         };
       })
     );
