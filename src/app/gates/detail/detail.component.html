@@ -95,8 +95,8 @@
         <div *ngIf="data.zones.length">
             <h3>Zones</h3>
             <ul class="inline">
-                <li *ngFor="let zoneId of data.zones">
-                    <a href="/zones/{{zoneId}}">{{zoneId}}</a>
+                <li *ngFor="let zone of ($zones | async)">
+                    <a href="/zones/{{zone.id}}">{{zone.id}} {{(zone.$loc | async)?.DisplayDescription}}</a>
                 </li>
             </ul>
         </div>
