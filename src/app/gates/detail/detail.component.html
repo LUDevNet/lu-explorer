@@ -57,7 +57,18 @@
         </div>
         <div *ngIf="data.property_template.length">
             <h3>Property Templates</h3>
-            <p>{{data.property_template.join(", ")}}</p>
+            <ul *luxVar="$propertyTemplates | async; let propertyTemplates">
+                <ng-container *ngFor="let p of propertyTemplates">
+                    <li *luxVar="p.$loc | async; let loc">#{{p.id}}: {{loc?.name}}
+                        <ul class="inline" style="display: inline" *ngIf="p.$row | async; let row">(<li
+                                *ngIf="row.mapID">Map: <a href="/zones/{{row.mapID}}">ID {{row.mapID}}</a></li>
+                            <li *ngIf="row.vendorMapID">Vendor Map: <a href="/zones/{{row.vendorMapID}}">ID
+                                    {{row.vendorMapID}}</a></li>)
+                        </ul>
+                        <br>{{loc?.description}}
+                    </li>
+                </ng-container>
+            </ul>
         </div>
         <div *ngIf="data.reward_codes.length">
             <h3>Reward Codes</h3>

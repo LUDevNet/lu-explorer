@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { Rev_GateVersion } from '../../../defs/api';
-import { DB_Preconditions, DB_WhatsCoolItemSpotlight } from '../../../defs/cdclient';
-import { LocaleTypePick, Locale_Preconditions, Locale_WhatsCoolItemSpotlight, Locale_WhatsCoolNewsAndTips, Locale_ZoneLoadingTips, Locale_ZoneTable } from '../../../defs/locale';
+import { DB_Preconditions, DB_PropertyTemplate, DB_WhatsCoolItemSpotlight } from '../../../defs/cdclient';
+import { Locale_Preconditions, Locale_PropertyTemplate, Locale_WhatsCoolItemSpotlight, Locale_WhatsCoolNewsAndTips, Locale_ZoneLoadingTips, Locale_ZoneTable } from '../../../defs/locale';
 import { mapArr, mapToDict, pick } from '../../../defs/rx';
 import { LuCoreDataService } from '../../services';
 
@@ -32,6 +32,12 @@ interface Precondition {
   $row: Observable<Pick<DB_Preconditions, "id">>;
 }
 
+interface PropertyTemplate {
+  id: number;
+  $loc: Observable<Locale_PropertyTemplate>;
+  $row: Observable<Pick<DB_PropertyTemplate, "id" | "mapID" | "vendorMapID">>;
+}
+
 interface WhatsCoolItem {
   id: number;
   $loc: Observable<Pick<Locale_WhatsCoolItemSpotlight, "description">>;
@@ -48,6 +54,7 @@ export class GateDetailComponent implements OnInit {
   $data: Observable<Rev_GateVersion | null>;
 
   $preconditions: Observable<Precondition[]>;
+  $propertyTemplates: Observable<PropertyTemplate[]>;
   $whatsCoolNews: Observable<WhatsCoolNews[]>;
   $whatsCoolItems: Observable<WhatsCoolItem[]>;
   $zoneLoadingTips: Observable<ZoneLoadingTip[]>;
@@ -115,7 +122,25 @@ export class GateDetailComponent implements OnInit {
           $loc: $preconditionsLoc.pipe(pick(id)),
           $row: $preconditionTable.pipe(pick(id)),
         };
-      })
+      }),
+    );
+
+    // Property Templates
+    let $propertyTemplateIds = this.$data.pipe(map(data => data.property_template));
+    let $propertyTemplateLoc = $propertyTemplateIds.pipe(
+      cd.queryLocaleNum$("PropertyTemplate", ["name", "description"]),
+    );
+    let $propertyTemplateRows = $propertyTemplateIds.pipe(
+      cd.queryTableEntries$("PropertyTemplate", ["id", "mapID", "vendorMapID"]),
+      mapToDict("id"),
+      shareReplay(1),
+    );
+    this.$propertyTemplates = $propertyTemplateIds.pipe(
+      mapArr(id => {
+        let $loc = $propertyTemplateLoc.pipe(pick(id));
+        let $row = $propertyTemplateRows.pipe(pick(id));
+        return { id, $loc, $row };
+      }),
     );
 
     // What's Cool – Items
@@ -135,7 +160,8 @@ export class GateDetailComponent implements OnInit {
           $loc: $whatsCoolItemLoc.pipe(pick(id)),
           $row: $whatsCoolItemRows.pipe(pick(id)),
         }
-      })
+      }),
+      shareReplay(1),
     );
   }
 }

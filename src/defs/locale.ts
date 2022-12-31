@@ -55,10 +55,16 @@ export interface Locale_ItemSets {
     kitName?: string,
 }
 
+export interface Locale_PropertyTemplate {
+    name?: string,
+    description?: string,
+}
+
 export interface Locale {
     ItemSets: Record<number, Locale_ItemSets>,
     Missions: Record<number, Locale_Missions>,
     Preconditions: Record<number, Locale_Preconditions>,
+    PropertyTemplate: Record<number, Locale_PropertyTemplate>,
     SkillBehavior: Record<number, Locale_SkillBehavior>,
     WhatsCoolItemSpotlight: Record<number, Locale_WhatsCoolItemSpotlight>,
     WhatsCoolNewsAndTips: Record<number, Locale_WhatsCoolNewsAndTips>,

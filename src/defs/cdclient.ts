@@ -29,20 +29,26 @@ export class FactionsPod {
 
 // LU database definitions
 
-export interface DB_Objects {
+export interface IGateable {
+  gate_version?: string; // TEXT
+}
+
+export interface ILocalizable {
+  localize: boolean; // BOOLEAN
+  locStatus: number; // INTEGER
+}
+
+export interface DB_Objects extends IGateable, ILocalizable {
   id: number; // INTEGER
   name: string; // TEXT
   placeable: boolean; // BOOLEAN
   type: string; // TEXT
   description: string; // TEXT
-  localize: boolean; // BOOLEAN
   npcTemplateID: number; // INTEGER
   displayName: string; // TEXT
   interactionDistance: number; // FLOAT
   nametag: boolean; // BOOLEAN
   _internalNotes: string; // TEXT
-  locStatus: number; // INTEGER
-  gate_version: string; // TEXT
   HQ_valid: boolean; // BOOLEAN
 }
 
@@ -554,6 +560,26 @@ export class DB_WhatsCoolItemSpotlight {
   localize: boolean; // BOOLEAN
   gate_version: string; // TEXT
   locStatus: number; // INTEGER
+}
+
+export interface DB_PropertyTemplate extends IGateable, ILocalizable {
+  id: number; // INTEGER
+  mapID: number; // INTEGER
+  vendorMapID: number; // INTEGER
+  spawnName: string; // TEXT
+  type: number; // INTEGER
+  sizecode: number; // INTEGER
+  minimumPrice: number; // INTEGER
+  rentDuration: number; // INTEGER
+  path: string; // TEXT
+  cloneLimit: number; // INTEGER
+  durationType: number; // INTEGER
+  achievementRequired: number; // INTEGER
+  zoneX: number; // FLOAT
+  zoneY: number; // FLOAT
+  zoneZ: number; // FLOAT
+  maxBuildHeight: number; // FLOAT
+  reputationPerMinute: number; // INTEGER
 }
 
 export class DB_WhatsCoolNewsAndTips {

@@ -122,7 +122,10 @@ export class LuCoreDataService {
 
   queryLocaleNum$<K, F extends LocaleField<K>, R extends LocaleRecordPick<K, F>>(t: K & keyof Locale, fields: F[]): OperatorFunction<LocaleIndex<K>[], R> {
     let cd = this;
-    return switchMap(data => cd.queryLocale<R>(t, data, fields));
+    return (source) => source.pipe(
+      switchMap(data => cd.queryLocale<R>(t, data, fields)),
+      shareReplay(1),
+    );
   }
 
   queryIcons(): OperatorFunction<number[], DB_Icons[]> {
