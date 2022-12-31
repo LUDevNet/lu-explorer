@@ -56,13 +56,14 @@ export interface Locale_ItemSets {
 }
 
 export interface Locale {
-    Preconditions: Record<number, Locale_Preconditions>,
-    WhatsCoolNewsAndTips: Record<number, Locale_WhatsCoolNewsAndTips>,
     ItemSets: Record<number, Locale_ItemSets>,
+    Missions: Record<number, Locale_Missions>,
+    Preconditions: Record<number, Locale_Preconditions>,
+    SkillBehavior: Record<number, Locale_SkillBehavior>,
+    WhatsCoolItemSpotlight: Record<number, Locale_WhatsCoolItemSpotlight>,
+    WhatsCoolNewsAndTips: Record<number, Locale_WhatsCoolNewsAndTips>,
     ZoneLoadingTips: Record<number, Locale_ZoneLoadingTips>,
     ZoneTable: Record<number, Locale_ZoneTable>,
-    Missions: Record<number, Locale_Missions>,
-    SkillBehavior: Record<number, Locale_SkillBehavior>,
 }
 
 export type LocaleKeys = keyof Locale;

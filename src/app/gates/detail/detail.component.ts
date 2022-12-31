@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { Rev_GateVersion } from '../../../defs/api';
-import { DB_Preconditions } from '../../../defs/cdclient';
-import { Locale_Preconditions, Locale_WhatsCoolNewsAndTips, Locale_ZoneLoadingTips, Locale_ZoneTable } from '../../../defs/locale';
+import { DB_Preconditions, DB_WhatsCoolItemSpotlight } from '../../../defs/cdclient';
+import { LocaleTypePick, Locale_Preconditions, Locale_WhatsCoolItemSpotlight, Locale_WhatsCoolNewsAndTips, Locale_ZoneLoadingTips, Locale_ZoneTable } from '../../../defs/locale';
 import { mapArr, mapToDict, pick } from '../../../defs/rx';
 import { LuCoreDataService } from '../../services';
 
@@ -32,6 +32,12 @@ interface Precondition {
   $row: Observable<Pick<DB_Preconditions, "id">>;
 }
 
+interface WhatsCoolItem {
+  id: number;
+  $loc: Observable<Pick<Locale_WhatsCoolItemSpotlight, "description">>;
+  $row: Observable<Pick<DB_WhatsCoolItemSpotlight, "id" | "itemID">>;
+}
+
 @Component({
   selector: 'lux-gate-detail',
   templateUrl: './detail.component.html',
@@ -43,6 +49,7 @@ export class GateDetailComponent implements OnInit {
 
   $preconditions: Observable<Precondition[]>;
   $whatsCoolNews: Observable<WhatsCoolNews[]>;
+  $whatsCoolItems: Observable<WhatsCoolItem[]>;
   $zoneLoadingTips: Observable<ZoneLoadingTip[]>;
   $zones: Observable<Zone[]>;
 
@@ -108,6 +115,26 @@ export class GateDetailComponent implements OnInit {
           $loc: $preconditionsLoc.pipe(pick(id)),
           $row: $preconditionTable.pipe(pick(id)),
         };
+      })
+    );
+
+    // What's Cool – Items
+    let $whatsCoolItemIds = this.$data.pipe(map(data => data.whats_cool_item_spotlight));
+    let $whatsCoolItemRows = $whatsCoolItemIds.pipe(
+      cd.queryTableEntries$<number[], DB_WhatsCoolItemSpotlight>("WhatsCoolItemSpotlight", ["id", "itemID"]),
+      mapToDict("id"),
+      shareReplay(1)
+    );
+    let $whatsCoolItemLoc = $whatsCoolItemIds.pipe(
+      cd.queryLocaleNum$("WhatsCoolItemSpotlight", ["description"]),
+    );
+    this.$whatsCoolItems = $whatsCoolItemIds.pipe(
+      mapArr(id => {
+        return {
+          id,
+          $loc: $whatsCoolItemLoc.pipe(pick(id)),
+          $row: $whatsCoolItemRows.pipe(pick(id)),
+        }
       })
     );
   }

@@ -77,7 +77,11 @@
         </div>
         <div *ngIf="data.whats_cool_item_spotlight.length">
             <h3>What's Cool &mdash; Item Spotlight</h3>
-            <p>{{data.whats_cool_item_spotlight.join(", ")}}</p>
+            <ul *luxVar="$whatsCoolItems | async; let whatsCoolItems">
+                <li *ngFor="let i of whatsCoolItems">{{i.id}}: {{(i.$loc | async)?.description}}<br>
+                    <a *ngIf="i.$row | async; let row" href="/objects/{{row.itemID}}">Item #{{row.itemID}}</a>
+                </li>
+            </ul>
         </div>
         <div *ngIf="data.whats_cool_news_and_tips.length">
             <h3>What's Cool &mdash; News &amp; Tipps</h3>
