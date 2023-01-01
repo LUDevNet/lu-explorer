@@ -1,9 +1,11 @@
 name: Build the app
-on: ["pull_request"]
+on:
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: npm ci && npm run build
