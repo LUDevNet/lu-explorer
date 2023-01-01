@@ -12,12 +12,14 @@
     <small>
       {{id | loc:'ItemSets' | async | elem:'kitName' | default:'[Unnamed]' }}
       <span *ngIf="set.kitRank">(Rank {{set.kitRank}})</span>
+      <lux-gate-version-tag [gate_version]="set.gate_version"></lux-gate-version-tag>
     </small>
   </h2>
   <img [luxFetchIcon]="set.kitImage" width="256px">
   <h3>General</h3>
   <ul>
-    <li *ngIf="set.isForKitFaction()">This Kit belongs to the <span [className]="'color' + set.kitFaction()">{{set.kitFaction()}}</span> Faction
+    <li *ngIf="set.isForKitFaction()">This Kit belongs to the <span
+        [className]="'color' + set.kitFaction()">{{set.kitFaction()}}</span> Faction
       (<code>kitType == {{set.kitType}}</code>)</li>
     <li>This Kit is of Rank {{set.kitRank}} (<code>kitRank</code>)</li>
   </ul>

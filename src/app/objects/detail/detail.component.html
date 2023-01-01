@@ -17,7 +17,9 @@
       title="This object is valid for NexusHQ">
   </ng-container>
 
-  <h2 *ngIf="$object | async; let object">{{object.name | uppercase }} <small *ngIf="object.locStatus == 2 && objectLocale">"{{objectLocale.name}}"</small>
+  <h2 *ngIf="$object | async; let object">{{object.name | uppercase }} <small><span
+        *ngIf="object.locStatus == 2 && objectLocale">"{{objectLocale.name}}"</span>
+      <lux-gate-version-tag [gate_version]="object.gate_version"></lux-gate-version-tag></small>
   </h2>
 
   <section *ngIf="$object | async; let object" class="clearfix">
@@ -41,8 +43,8 @@
         </ul>
       </div>
       <div class="sidemenu-content" *luxVar="components | dict:'component_type'; let component_dict">
-        <app-component-detail *ngIf="component_id" [id]="component_dict[component_id].component_id" [component_id]="component_id"
-          [skills]="$skills | async">
+        <app-component-detail *ngIf="component_id" [id]="component_dict[component_id].component_id"
+          [component_id]="component_id" [skills]="$skills | async">
         </app-component-detail>
         <div *ngIf="component == 'used-by'">
           <lux-used-by *ngIf="$rev | async; let rev" [rev]="rev"></lux-used-by>

@@ -8,7 +8,8 @@
     <lux-gate-version-toc [list]="code_groups | paramset:'gate_version' | as_array"></lux-gate-version-toc>
 
     <section [id]="code_group.gate_version | toc:'fg'" *ngFor="let code_group of code_groups">
-        <h3 *ngIf="code_group.gate_version !== ''">Feature Gate: <code>{{code_group.gate_version}}</code></h3>
+        <h3 *ngIf="code_group.gate_version !== ''">Feature Gate: <small><lux-gate-version-tag
+                    [gate_version]="code_group.gate_version" [float]="false"></lux-gate-version-tag></small></h3>
         <h3 *ngIf="code_group.gate_version === ''">No Feature Gate</h3>
         <div>
             <div *ngFor="let code of code_group.codes">

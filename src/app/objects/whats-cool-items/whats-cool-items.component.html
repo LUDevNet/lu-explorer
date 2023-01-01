@@ -9,7 +9,9 @@
 
         <section [id]="v.key | toc:'fg'" *ngFor="let v of list | group:'gate_version' | keys">
             <h3 *ngIf="v.key === ''">No Feature Gate</h3>
-            <h3 *ngIf="v.key !== ''">Feature Gate <code>{{v.key}}</code></h3>
+            <h3 *ngIf="v.key !== ''">Feature Gate <small><lux-gate-version-tag [gate_version]="v.key"
+                        [float]="false"></lux-gate-version-tag></small>
+            </h3>
             <div class="item" *ngFor="let item of v.value">
                 <span class="left">
                     <lux-slot [luxFetchItem]="item.itemID"></lux-slot>
