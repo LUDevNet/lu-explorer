@@ -3,11 +3,11 @@
   <li>{{activity_id}}</li>
 </div>
 
-<img *ngIf="activity && activity.leaderboardType == 1" class="header" src="/lu-res/ui/ingame/instancelobby_i68.png"
+<img *ngIf="activity && (activity.leaderboardType == 1)" class="header" src="/lu-res/ui/ingame/instancelobby_i68.png"
   title="This activity is (likely) a race" />
 
-<h2>Activity #{{activity_id}} <small><span *ngIf="activity.locStatus == 2">"{{activity_loc.ActivityName}}"</span>
-    <lux-gate-version-tag [gate_version]="activity.gate_version"></lux-gate-version-tag></small></h2>
+<h2>Activity #{{activity_id}} <small><span *ngIf="activity?.locStatus == 2">"{{activity_loc.ActivityName}}"</span>
+    <lux-gate-version-tag [gate_version]="activity?.gate_version"></lux-gate-version-tag></small></h2>
 
 <ul *ngIf="activity">
   <li *ngIf="activity.instanceMapID">
@@ -34,41 +34,43 @@
     {{activity.CommunityActivityFlagID}}</li>
 </ul>
 
-<lux-number-flag *ngIf="activity.minTeams" name="Team(s)"
-  [value]="(activity.maxTeams != activity.minTeams) ? activity.minTeams + ' to ' + activity.maxTeams : activity.minTeams">
-</lux-number-flag>
-<lux-number-flag *ngIf="activity.minTeamSize" name="TeamSize"
-  [value]="(activity.maxTeamSize != activity.minTeamSize) ? activity.minTeamSize + ' to ' + activity.maxTeamSize : activity.minTeamSize">
-</lux-number-flag>
-<lux-number-flag *ngIf="activity.waitTime" [value]="activity.waitTime" name="waitTime (ms)"
-  title="Time in the lobby before starting"></lux-number-flag>
-<lux-number-flag *ngIf="activity.startDelay" [value]="activity.startDelay" name="startDelay (ms)"
-  title="Time until start after joining the activity"></lux-number-flag>
-<lux-simple-flag *ngIf="activity.noTeamLootOnDeath !== null" name="noTeamLootOnDeath"
-  [value]="activity.noTeamLootOnDeath" trueTitle="This activity does not give team loot on death"
-  falseTitle="This activity does give team loot on death"></lux-simple-flag>
-<lux-simple-flag *ngIf="activity.requiresUniqueData !== undefined" name="requiresUniqueData"
-  [value]="activity.requiresUniqueData" trueTitle="This activity requires unique data"
-  falseTitle="This activity does not require unique data"></lux-simple-flag>
-<lux-simple-flag *ngIf="activity.showUIRewards !== null" name="showUIRewards" [value]="activity.showUIRewards"
-  trueTitle="This activity shows rewards in the UI" falseTitle="This activity does not show rewards in the UI">
-</lux-simple-flag>
-<lux-number-flag *ngIf="activity.optionalPercentage" name="optionalPercentage"
-  [value]="activity.optionalPercentage | pc"></lux-number-flag>
-<lux-number-flag *ngIf="activity.locStatus" name="locStatus" [value]="activity.locStatus"></lux-number-flag>
+<section *ngIf="activity">
+  <lux-number-flag *ngIf="activity.minTeams" name="Team(s)"
+    [value]="(activity.maxTeams != activity.minTeams) ? activity.minTeams + ' to ' + activity.maxTeams : activity.minTeams">
+  </lux-number-flag>
+  <lux-number-flag *ngIf="activity.minTeamSize" name="TeamSize"
+    [value]="(activity.maxTeamSize != activity.minTeamSize) ? activity.minTeamSize + ' to ' + activity.maxTeamSize : activity.minTeamSize">
+  </lux-number-flag>
+  <lux-number-flag *ngIf="activity.waitTime" [value]="activity.waitTime" name="waitTime (ms)"
+    title="Time in the lobby before starting"></lux-number-flag>
+  <lux-number-flag *ngIf="activity.startDelay" [value]="activity.startDelay" name="startDelay (ms)"
+    title="Time until start after joining the activity"></lux-number-flag>
+  <lux-simple-flag *ngIf="activity.noTeamLootOnDeath !== null" name="noTeamLootOnDeath"
+    [value]="activity.noTeamLootOnDeath" trueTitle="This activity does not give team loot on death"
+    falseTitle="This activity does give team loot on death"></lux-simple-flag>
+  <lux-simple-flag *ngIf="activity.requiresUniqueData !== undefined" name="requiresUniqueData"
+    [value]="activity.requiresUniqueData" trueTitle="This activity requires unique data"
+    falseTitle="This activity does not require unique data"></lux-simple-flag>
+  <lux-simple-flag *ngIf="activity.showUIRewards !== null" name="showUIRewards" [value]="activity.showUIRewards"
+    trueTitle="This activity shows rewards in the UI" falseTitle="This activity does not show rewards in the UI">
+  </lux-simple-flag>
+  <lux-number-flag *ngIf="activity.optionalPercentage" name="optionalPercentage"
+    [value]="activity.optionalPercentage | pc"></lux-number-flag>
+  <lux-number-flag *ngIf="activity.locStatus" name="locStatus" [value]="activity.locStatus"></lux-number-flag>
+</section>
 
-<section *ngIf="activity.optionalCostLOT">
+<section *ngIf="activity?.optionalCostLOT">
   <h4>Optional Cost <small>(<code>optionalCost{{ '\{LOT,Count\}' }}</code>)</small></h4>
   <p>The player needs to hand in the following item(s) to participate:</p>
   <lux-slot [luxFetchItem]="activity.optionalCostLOT" [count]="activity.optionalCostCount"></lux-slot>
 </section>
 
-<section>
+<section *ngIf="activity">
   <h3>Details</h3>
-  <app-data-table [table]="activity" *ngIf="activity"></app-data-table>
+  <app-data-table [table]="activity"></app-data-table>
 </section>
 
-<section *ngIf="activity_rewards">
+<section *ngIf="activity_rewards?.activity_rewards?.length">
   <h3>Rewards</h3>
   <ng-container *ngFor="let reward of activity_rewards.activity_rewards">
     <ng-container *ngIf="reward">
