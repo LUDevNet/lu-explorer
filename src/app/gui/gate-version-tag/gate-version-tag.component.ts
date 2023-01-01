@@ -8,4 +8,6 @@ import { Component, Input } from '@angular/core';
 export class GateVersionTagComponent {
   @Input()
   gate_version?: string;
+  @Input()
+  float: boolean = true;
 }

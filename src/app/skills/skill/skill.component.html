@@ -1,6 +1,8 @@
 <div *ngIf="_skill | async; else loading; let skill">
   <img *ngIf="skill.skillIcon" class="pull-right img-tag" [luxFetchIcon]="skill.skillIcon">
-  <h2>Skill #{{id}}</h2>
+  <h2>Skill #{{id}}
+    <small><lux-gate-version-tag [gate_version]="skill.gate_version"></lux-gate-version-tag></small>
+  </h2>
   <ng-container *ngIf="skill.skillID | loc:'SkillBehavior' | async; let texts">
     <h3>Texts</h3>
     <b>Name (<code>name</code>):</b>
@@ -16,18 +18,25 @@
     <a routerLink="/skills/behaviors/{{skill.behaviorID}}">
       <lux-number-flag [value]="skill.behaviorID" name="behaviorID"></lux-number-flag>
     </a>
-    <lux-number-flag *ngIf="skill.imaginationcost !== null" [value]="skill.imaginationcost" name="imaginationcost"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.imaginationcost !== null" [value]="skill.imaginationcost"
+      name="imaginationcost"></lux-number-flag>
     <a routerLink="/skills/cooldowngroups/{{skill.cooldowngroup}}">
-      <lux-number-flag *ngIf="skill.cooldowngroup !== null" [value]="skill.cooldowngroup" name="cooldowngroup"></lux-number-flag>
+      <lux-number-flag *ngIf="skill.cooldowngroup !== null" [value]="skill.cooldowngroup"
+        name="cooldowngroup"></lux-number-flag>
     </a>
     <lux-number-flag *ngIf="skill.cooldown !== null" [value]="skill.cooldown" name="cooldown"></lux-number-flag>
-    <lux-simple-flag *ngIf="skill.inNpcEditor !== null" [value]="skill.inNpcEditor" name="inNpcEditor"></lux-simple-flag>
+    <lux-simple-flag *ngIf="skill.inNpcEditor !== null" [value]="skill.inNpcEditor"
+      name="inNpcEditor"></lux-simple-flag>
     <lux-number-flag *ngIf="skill.skillIcon !== null" [value]="skill.skillIcon" name="skillIcon"></lux-number-flag>
-    <lux-number-flag *ngIf="skill.oomBehaviorEffectID !== null" [value]="skill.oomBehaviorEffectID" name="oomBehaviorEffectID"></lux-number-flag>
-    <lux-number-flag *ngIf="skill.castTypeDesc !== null" [value]="skill.castTypeDesc" name="castTypeDesc"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.oomBehaviorEffectID !== null" [value]="skill.oomBehaviorEffectID"
+      name="oomBehaviorEffectID"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.castTypeDesc !== null" [value]="skill.castTypeDesc"
+      name="castTypeDesc"></lux-number-flag>
     <lux-number-flag *ngIf="skill.imBonusUI !== null" [value]="skill.imBonusUI" name="imBonusUI"></lux-number-flag>
-    <lux-number-flag *ngIf="skill.lifeBonusUI !== null" [value]="skill.lifeBonusUI" name="lifeBonusUI"></lux-number-flag>
-    <lux-number-flag *ngIf="skill.armorBonusUI !== null" [value]="skill.armorBonusUI" name="armorBonusUI"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.lifeBonusUI !== null" [value]="skill.lifeBonusUI"
+      name="lifeBonusUI"></lux-number-flag>
+    <lux-number-flag *ngIf="skill.armorBonusUI !== null" [value]="skill.armorBonusUI"
+      name="armorBonusUI"></lux-number-flag>
     <lux-number-flag *ngIf="skill.damageUI !== null" [value]="skill.damageUI" name="damageUI"></lux-number-flag>
     <lux-simple-flag *ngIf="skill.hideIcon !== null" [value]="skill.hideIcon" name="hideIcon"></lux-simple-flag>
     <lux-simple-flag *ngIf="skill.localize !== null" [value]="skill.localize" name="localize"></lux-simple-flag>
@@ -43,12 +52,12 @@
     <h4>UseSkill MissionTasks</h4>
     <p>The following mission tasks require you to cast this skill:</p>
     <dl>
-    <ng-container *ngFor="let task_id of rev_skill.mission_tasks">
-      <ng-container *ngIf="rev_skill._embedded.MissionTasks| elem: task_id.toString(); let task">
-        <dt>Mission <a routerLink="/missions/{{task.id}}">#{{task.id}}</a>:</dt>
-        <dd><app-task-detail [task]="task"></app-task-detail></dd>
+      <ng-container *ngFor="let task_id of rev_skill.mission_tasks">
+        <ng-container *ngIf="rev_skill._embedded.MissionTasks| elem: task_id.toString(); let task">
+          <dt>Mission <a routerLink="/missions/{{task.id}}">#{{task.id}}</a>:</dt>
+          <dd><app-task-detail [task]="task"></app-task-detail></dd>
+        </ng-container>
       </ng-container>
-    </ng-container>
     </dl>
   </section>
   <section *ngIf="rev_skill.objects.length > 0">

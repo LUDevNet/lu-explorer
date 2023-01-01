@@ -6,7 +6,8 @@
 <img *ngIf="activity && activity.leaderboardType == 1" class="header" src="/lu-res/ui/ingame/instancelobby_i68.png"
   title="This activity is (likely) a race" />
 
-<h2>Activity #{{activity_id}} <small *ngIf="activity.locStatus == 2">"{{activity_loc.ActivityName}}"</small></h2>
+<h2>Activity #{{activity_id}} <small><span *ngIf="activity.locStatus == 2">"{{activity_loc.ActivityName}}"</span>
+    <lux-gate-version-tag [gate_version]="activity.gate_version"></lux-gate-version-tag></small></h2>
 
 <ul *ngIf="activity">
   <li *ngIf="activity.instanceMapID">
