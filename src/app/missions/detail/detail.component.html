@@ -264,16 +264,16 @@
         <dd>Displayed when interacting with <a [luxFetchObject]="mission.offer_objectID"></a> while the mission is in
           progress, as well when selecting the mission in the passport.</dd>
       </div>
-      <div *ngIf="textsLocale.offer">
+      <div *ngIf="offerText(textsLocale); let text">
         <dt>
-          <blockquote class="mission-dialog" luxTooltip="offer" [innerHTML]="textsLocale.offer"></blockquote>
+          <blockquote class="mission-dialog" luxTooltip="offer" [innerHTML]="text"></blockquote>
         </dt>
         <dd>Displayed when interacting with <a [luxFetchObject]="mission.offer_objectID"></a> when the mission is
           available.</dd>
       </div>
-      <div *ngIf="textsLocale.offer_repeatable">
+      <div *ngIf="offerRepeatable(textsLocale); let text">
         <dt>
-          <blockquote class="mission-dialog" luxTooltip="offer_repeatable" [innerHTML]="textsLocale.offer_repeatable">
+          <blockquote class="mission-dialog" luxTooltip="offer_repeatable" [innerHTML]="text">
           </blockquote>
         </dt>
         <dd>Displayed when interacting with <a [luxFetchObject]="mission.offer_objectID"></a> when the mission is again

@@ -18,6 +18,17 @@ const CHAT_BUBBLE_KEYS: string[] = [
   "chat_state_4_turnin",
 ];
 
+interface LocaleAll_MissionText {
+  description?: string,
+  accept_chat_bubble?: string;
+  chat_state?: Record<number, string>;
+  completion_succeed_tip?: string;
+  in_progress?: string;
+  offer?: { $value: string, repeatable: string } | string;
+  offer_repeatable?: string,
+  ready_to_complete?: string;
+}
+
 @Component({
   selector: 'app-mission-detail',
   templateUrl: './detail.component.html',
@@ -31,7 +42,7 @@ export class MissionDetailComponent implements OnInit, OnDestroy {
   $tasks: Observable<MissionTasks[]>;
   tasksLocale: any;
   text: any;
-  textsLocale: any;
+  textsLocale: LocaleAll_MissionText;
   id: number;
 
   id_subscription: Subscription;
@@ -92,5 +103,17 @@ export class MissionDetailComponent implements OnInit, OnDestroy {
   getChatSubState(texts: any, id: number, key: string): string | null {
     let prop: string | object = texts['chat_state'][id]
     return prop ? prop[key] : undefined;
+  }
+
+  offerRepeatable(loc: LocaleAll_MissionText): string | null {
+    if (!loc) return null;
+    let offer = loc.offer;
+    return ((typeof offer == 'string') ? null : offer.repeatable) || loc.offer_repeatable;
+  }
+
+  offerText(loc: LocaleAll_MissionText): string | null {
+    if (!loc) return null;
+    let offer = loc.offer;
+    return (typeof offer == 'string') ? offer : offer?.$value;
   }
 }
