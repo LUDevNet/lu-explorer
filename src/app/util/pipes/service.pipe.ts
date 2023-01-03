@@ -67,7 +67,6 @@ export class DataPipe implements PipeTransform {
       renderComponent: x => this.luJson.getRenderComponent(x),
       lootTable: x => this.luJson.getLootTableGroupByIndex(x),
       faction: x => this.luJson.getFaction(x),
-      activityRewards: x => this.luJson.getActivityRewards(x),
     }[arg];
     return arg ? call(value) : of(null);
   }

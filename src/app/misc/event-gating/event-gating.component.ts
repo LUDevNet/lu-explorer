@@ -10,7 +10,7 @@ import { LuCoreDataService } from '../../services';
 })
 export class EventGatingComponent implements OnInit {
 
-  table: any[];
+  table: DB_EventGating[];
 
   constructor(private luCoreData: LuCoreDataService) { }
 
@@ -19,7 +19,7 @@ export class EventGatingComponent implements OnInit {
   }
 
   getTable(): void {
-    this.luCoreData.getTableEntry<DB_EventGating>("EventGating", "all").subscribe(table => this.table = table);
+    this.luCoreData.getFullTable("EventGating").subscribe(table => this.table = table);
   }
 
 }

@@ -6,8 +6,8 @@
 <h2>Item Sets</h2>
 
 <p>
-Item sets are collections of items that when worn in any combination
-provide some additional skills per equipped item of that set.
+  Item sets are collections of items that when worn in any combination
+  provide some additional skills per equipped item of that set.
 </p>
 
 <section id="item-set-index" *ngIf="table | async; else loading; let sets">
@@ -17,7 +17,7 @@ provide some additional skills per equipped item of that set.
       <td>
         <a routerLink="/objects/item-sets/{{set.setID}}">
           {{set.setID | loc:'ItemSets' | async | elem:'kitName' | default:'[Unnamed]'}}
-          <span *ngIf="set.rank > 0">(Rank {{set.rank}})</span>
+          <span *ngIf="set.kitRank > 0">(Rank {{set.kitRank}})</span>
           Item Set
         </a>
       </td>

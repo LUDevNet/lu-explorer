@@ -76,11 +76,11 @@ export class GateDetailComponent implements OnInit {
     const cd = this.luCoreData;
     this.$id = this.route.paramMap.pipe(map(p => p.get('id')));
     this.$release = this.$id.pipe(
-      switchMap(id => cd.getSingleTableEntry<DB_FeatureGating>("FeatureGating", id)),
+      switchMap(id => cd.getSingleTableEntry("FeatureGating", id)),
       shareReplay(1),
     );
     this.$event = this.$id.pipe(
-      switchMap(id => cd.getSingleTableEntry<DB_EventGating>("EventGating", id)),
+      switchMap(id => cd.getSingleTableEntry("EventGating", id)),
       shareReplay(1),
     );
     this.$data = this.$id.pipe(switchMap(id => this.luCoreData.getRevEntry<Rev_GateVersion>('gate-versions', id)));

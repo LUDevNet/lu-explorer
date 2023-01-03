@@ -19,7 +19,7 @@ export class WhatsCoolItemsComponent implements OnInit {
 
   ngOnInit(): void {
     const TABLE = "WhatsCoolItemSpotlight";
-    this.$list = this.luCoreData.getTableEntry<DB_WhatsCoolItemSpotlight>(TABLE, 'all');
+    this.$list = this.luCoreData.getTableEntry(TABLE, 'all');
     this.$loc = this.luCoreData.getLocaleSubtree<Locale_WhatsCoolItemSpotlight>(TABLE);
   }
 

@@ -58,9 +58,9 @@ export class MissionDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let $id = this.route.paramMap.pipe(map(params => +params.get('id')));
-    this.$mission = $id.pipe(switchMap(id => this.luCoreData.getSingleTableEntry<DB_Missions>("Missions", id)));
+    this.$mission = $id.pipe(switchMap(id => this.luCoreData.getSingleTableEntry("Missions", id)));
     this.$tasks = $id.pipe(
-      switchMap(id => this.luCoreData.getTableEntry<DB_MissionTasks>("MissionTasks", id)),
+      switchMap(id => this.luCoreData.getTableEntry("MissionTasks", id)),
       map(tasks => tasks.map(task => Object.assign(task, { $localizations: this.luCoreData.getLocaleSubtree(`MissionTasks_${task.uid}`) })))
     );
     this.$rev = $id.pipe(switchMap(id => this.luCoreData.getRevEntry<Rev_MissionById>("missions", id)));

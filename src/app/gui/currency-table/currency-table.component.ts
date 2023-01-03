@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CurrencyTablePod, DB_CurrencyTable } from '../../../defs/cdclient';
-import { LuJsonService } from '../../services';
+import { DB_CurrencyTable } from '../../../defs/cdclient';
+import { LuCoreDataService } from '../../services';
 
 @Component({
   selector: 'lux-currency-table',
@@ -23,18 +23,18 @@ export class CurrencyTableComponent implements OnInit {
     return this.currency_index;
   }
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit() {
   }
 
   getCurrencyIndex(id: number) {
-    this.luJsonService
-      .getCurrencyIndex(id)
+    this.coreData
+      .getTableEntry("CurrencyTable", id)
       .subscribe(this.processCurrencyIndex.bind(this))
   }
 
-  processCurrencyIndex(table: CurrencyTablePod) {
-    this.currency_table = table.currency_table;
+  processCurrencyIndex(table: DB_CurrencyTable[]) {
+    this.currency_table = table;
   }
 }

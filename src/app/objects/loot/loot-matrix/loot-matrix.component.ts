@@ -22,7 +22,7 @@ export class LootMatrixComponent implements OnInit {
   constructor(private luCoreData: LuCoreDataService) { }
 
   ngOnInit() {
-    this.$lootmatrix = this.$id.pipe(switchMap(id => this.luCoreData.getTableEntry<DB_LootMatrix>("LootMatrix", id)));
+    this.$lootmatrix = this.$id.pipe(switchMap(id => this.luCoreData.getTableEntry("LootMatrix", id)));
   }
 
   getLootTable(index: number): Observable<DB_LootTable[]> {

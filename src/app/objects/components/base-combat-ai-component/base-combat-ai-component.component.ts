@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { DB_BaseCombatAIComponent } from '../../../../defs/cdclient';
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService, LuJsonService } from '../../../services';
 
 @Component({
   selector: 'lux-base-combat-ai-component',
@@ -22,13 +22,13 @@ export class BaseCombatAiComponentComponent implements OnInit {
     return this._id;
   }
 
-  constructor(private luJsonService: LuJsonService) {
+  constructor(private coreData: LuCoreDataService) {
     this._ref = new ReplaySubject(1);
     this.$component = new ReplaySubject(1);
 
     this._ref.subscribe(id => this._id = id);
     this._ref.pipe(
-      switchMap(ref => this.luJsonService.getGeneric(ref, "BaseCombatAIComponent", true))
+      switchMap(ref => this.coreData.getSingleTableEntry("BaseCombatAIComponent", ref))
     ).subscribe(this.$component);
   }
 

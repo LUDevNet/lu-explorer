@@ -45,10 +45,10 @@ export class ObjectDetailComponent implements OnInit {
     this.object_id = id;
     this.$rev = this.luCoreDataService.getRevEntry("objects", id);
 
-    this.luCoreDataService.getSingleTableEntry<DB_Objects>('Objects', id).subscribe(this.$object)
-    this.luCoreDataService.getTableEntry<DB_ComponentsRegistry>('ComponentsRegistry', id).subscribe(this.$components)
-    this.luCoreDataService.getTableEntry<DB_ObjectSkills>('ObjectSkills', id).subscribe(this.$skills)
-    this.luCoreDataService.getTableEntry<DB_mapIcon>('mapIcon', id).subscribe(this.$icons)
+    this.luCoreDataService.getSingleTableEntry('Objects', id).subscribe(this.$object)
+    this.luCoreDataService.getTableEntry('ComponentsRegistry', id).subscribe(this.$components)
+    this.luCoreDataService.getTableEntry('ObjectSkills', id).subscribe(this.$skills)
+    this.luCoreDataService.getTableEntry('mapIcon', id).subscribe(this.$icons)
     this.luLocaleService.getLocaleEntry("Objects", id).subscribe(entry => this.objectLocale = entry);
   }
 

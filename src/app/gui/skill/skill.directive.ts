@@ -21,7 +21,7 @@ export class SkillDirective extends TooltipDirective implements OnDestroy {
     this.clear();
     this.itemTooltipRef.instance.id = id;
     this.itemTooltipRef.instance.title = `Skill #${id}`;
-    this.dataSubscription = this.luCoreData.getSingleTableEntry<DB_SkillBehavior>("SkillBehavior", id).subscribe(this.onSkill.bind(this));
+    this.dataSubscription = this.luCoreData.getSingleTableEntry("SkillBehavior", id).subscribe(this.onSkill.bind(this));
     this.locSubscription = this.luCoreData.getLocaleSubtree<Locale_SkillBehavior>("SkillBehavior_" + id).subscribe(this.onLocale.bind(this));
   }
 
@@ -66,7 +66,7 @@ export class SkillDirective extends TooltipDirective implements OnDestroy {
   onSkill(skill: DB_SkillBehavior | null) {
     if (!skill) return;
     if (skill.skillIcon > 0) {
-      this.iconSubscription = this.luCoreData.getSingleTableEntry<DB_Icons>("Icons", skill.skillIcon).subscribe(this.onSkillIcon.bind(this))
+      this.iconSubscription = this.luCoreData.getSingleTableEntry("Icons", skill.skillIcon).subscribe(this.onSkillIcon.bind(this))
       this.itemTooltipRef.changeDetectorRef.detectChanges();
     }
   }

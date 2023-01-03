@@ -1,26 +1,7 @@
 // Reference Classes
-export class DB_ObjectRef_ByComponent {
-  comp_val: number;
-  id: number;
-  name: string;
-}
-
 export class DB_ObjectRef_ByType {
   id: number;
   name: string;
-}
-
-export class DB_ItemSets_Ref {
-  setID: number;
-  rank: number;
-}
-
-export class ActivityRewardsPod {
-  activity_rewards: DB_ActivityRewards[];
-}
-
-export class CurrencyTablePod {
-  currency_table: DB_CurrencyTable[];
 }
 
 export class FactionsPod {
@@ -127,6 +108,30 @@ export class DB_LootMatrix {
   RarityTableIndex: number;
   flagID: number;
   gate_version: string;
+}
+
+export interface DB_MinifigComponent {
+  id: number; // INTEGER
+  head: number; // INTEGER
+  chest: number; // INTEGER
+  legs: number; // INTEGER
+  hairstyle: number; // INTEGER
+  haircolor: number; // INTEGER
+  chestdecal: number; // INTEGER
+  headcolor: number; // INTEGER
+  lefthand: number; // INTEGER
+  righthand: number; // INTEGER
+  eyebrowstyle: number; // INTEGER
+  eyesstyle: number; // INTEGER
+  mouthstyle: number; // INTEGER
+}
+
+export interface DB_MinifigDecals_Torsos {
+  ID: number; // INTEGER
+  High_path: string; // TEXT
+  CharacterCreateValid: boolean;
+  male: boolean;
+  female: boolean;
 }
 
 export class DB_LootTable {
@@ -321,6 +326,22 @@ export class DB_RewardCodes {
   gate_version: string; // TEXT
 }
 
+export interface DB_RocketLaunchpadControlComponent {
+  id: number; // INTEGER
+  targetZone: number; // INTEGER
+  defaultZoneID: number; // INTEGER
+  targetScene?: string; // TEXT
+  gmLevel: number; // INTEGER
+  playerAnimation: string; // TEXT
+  rocketAnimation: string; // TEXT
+  launchMusic?: string; // TEXT
+  useLaunchPrecondition: boolean
+  useAltLandingPrecondition: boolean
+  launchPrecondition?: string; // TEXT
+  altLandingPrecondition?: string; // TEXT
+  altLandingSpawnPointName?: string; // TEXT
+}
+
 export class DB_AccessoryDefaultLoc {
   Description: string;
   GroupID: number;
@@ -387,6 +408,17 @@ export class DB_FeatureGating {
   description?: string;
 }
 
+export interface DB_Release_Version {
+  ReleaseVersion: string; // TEXT
+  ReleaseDate: number; // BIGINT
+}
+
+export interface DB_ScriptComponent {
+  id: number; // INTEGER
+  script_name?: string; // TEXT
+  client_script_name?: string; // TEXT
+}
+
 export class DB_SkillBehavior {
   skillID: number;
   locStatus: number;
@@ -407,6 +439,16 @@ export class DB_SkillBehavior {
   localize: boolean;
   gate_version: string;
   cancelType: number;
+}
+
+export interface DB_SubscriptionPricing {
+  id: number; // INTEGER
+  countryCode: string; // TEXT
+  monthlyFeeGold: string; // TEXT
+  monthlyFeeSilver: string; // TEXT
+  monthlyFeeBronze: string; // TEXT
+  monetarySymbol: number; // INTEGER
+  symbolIsAppended: boolean,
 }
 
 export class DB_Icons {
@@ -445,6 +487,26 @@ export class DB_Preconditions {
   validContexts: number; // BIGINT
   locStatus: number; // INTEGER
   gate_version: string; // TEXT
+}
+
+export interface DB_ProximityMonitorComponent {
+  id: number; // INTEGER
+  Proximities: string; // TEXT
+  LoadOnClient: boolean;
+  LoadOnServer: boolean;
+}
+
+export interface DB_RebuildComponent {
+  id: number; // INTEGER
+  reset_time: number; // FLOAT
+  complete_time?: number; // FLOAT
+  take_imagination: number; // INTEGER
+  interruptible: boolean;
+  self_activator: boolean;
+  custom_modules?: string; // TEXT
+  activityID?: number; // INTEGER
+  post_imagination_cost?: number; // INTEGER
+  time_before_smash: number; // FLOAT
 }
 
 export class DB_MissionNPCComponent {
@@ -510,14 +572,49 @@ export class DB_Missions {
   reward_bankinventory: number;
 }
 
-export class DB_InventoryItem {
-  count: number;
-  equip: any;
-  itemid: number;
+export interface DB_ModuleComponent {
+  id: number; // INTEGER
+  partCode: number; // INTEGER
+  buildType: number; // INTEGER
+  xml: string; // VARCHAR
+  primarySoundGUID?: string; // TEXT
+  assembledEffectID?: number; // INTEGER
+}
+
+export interface DB_MovementAIComponent {
+  id: number; // INTEGER,
+  MovementType: string; // TEXT
+  WanderChance: number; // FLOAT
+  WanderDelayMin: number; // FLOAT
+  WanderDelayMax: number; // FLOAT
+  WanderSpeed: number; // FLOAT
+  WanderRadius: number; // FLOAT
+  attachedPath?: string; // TEXT
+}
+
+export interface DB_NpcIcons {
+  id: number; // INTEGER
+  color: number; // INTEGER
+  offset: number; // FLOAT
+  LOT: number; // INTEGER
+  Texture?: string; // TEXT
+  isClickable: boolean;
+  scale: number; // FLOAT
+  rotateToFace: boolean;
+  compositeHorizOffset?: number; // FLOAT
+  compositeVertOffset?: number; // FLOAT
+  compositeScale?: number; // FLOAT
+  compositeConnectionNode?: string; // TEXT
+  compositeLOTMultiMission?: number; // INTEGER
+  compositeLOTMultiMissionVentor?: number; // INTEGER
+  compositeIconTexture?: string; // TEXT
 }
 
 export class DB_InventoryComponent {
-  items: DB_InventoryItem[];
+  id: number;
+  count: number;
+  equip: any;
+  itemid: number;
 }
 
 export class DB_DeletionRestrictions {
@@ -566,6 +663,39 @@ export class DB_MissionTasks {
   largeTaskIconID: number; // INTEGER
   localize: boolean;
   gate_version: string;
+}
+
+export interface DB_MissionText extends ILocalizable, IGateable {
+  id: number;
+  story_icon?: string;
+  missionIcon?: string;
+  offerNPCIcon?: string;
+  IconID?: number;
+  state_1_anim?: string;
+  state_2_anim?: string;
+  state_3_anim?: string;
+  state_4_anim?: string;
+  state_3_turnin_anim?: string;
+  state_4_turnin_anim?: string;
+  onclick_anim?: string;
+  CinematicAccepted?: string;
+  CinematicAcceptedLeadin?: number; // FLOAT
+  CinematicCompleted?: string;
+  CinematicCompletedLeadin?: number; // FLOAT
+  CinematicRepeatable?: string;
+  CinematicRepeatableLeadin?: number; // FLOAT
+  CinematicRepeatableCompleted?: string;
+  CinematicRepeatableCompletedLeadin?: number; // FLOAT
+  AudioEventGUID_Interact?: string;
+  AudioEventGUID_OfferAccept?: string;
+  AudioEventGUID_OfferDeny?: string;
+  AudioEventGUID_Completed?: string;
+  AudioEventGUID_TurnIn?: string;
+  AudioEventGUID_Failed?: string;
+  AudioEventGUID_Progress?: string;
+  AudioMusicCue_OfferAccept?: string;
+  AudioMusicCue_TurnIn?: string;
+  turnInIconID?: number; // INTEGER
 }
 
 export class DB_WhatsCoolItemSpotlight {
@@ -634,3 +764,88 @@ export interface DB_ZoneTable {
   gate_version: string;
   mountsAllowed: boolean;
 }
+
+export interface DB_PackageComponent {
+  id: number,
+  LootMatrixIndex: number,
+  packageType: number,
+}
+
+export interface DB_PetComponent {
+  id: number; // Integer
+  minTameUpdateTime: number; // Float
+  maxTameUpdateTime: number; // Float
+  percentTameChance: number; // Float
+  tamability: number; // Float
+  elementType: number; // Integer
+  walkSpeed: number; // Float
+  runSpeed: number; // Float
+  sprintSpeed: number; // Float
+  idleTimeMin: number; // Float
+  idleTimeMax: number; // Float
+  petForm: number; // Integer
+  imaginationDrainRate: number; // Float
+  AudioMetaEventSet?: string; // Text
+  buffIDs?: string; // Text
+}
+
+export interface DB {
+  AccessoryDefaultLoc: DB_AccessoryDefaultLoc[],
+  Activities: DB_Activities[],
+  ActivityRewards: DB_ActivityRewards[],
+  BaseCombatAIComponent: DB_BaseCombatAIComponent[],
+  BrickColors: DB_BrickColors[],
+  BrickIDTable: DB_BrickIDTable[],
+  CollectibleComponent: DB_CollectibleComponent[],
+  ComponentsRegistry: DB_ComponentsRegistry[],
+  CurrencyTable: DB_CurrencyTable[],
+  DeletionRestrictions: DB_DeletionRestrictions[],
+  DestructibleComponent: DB_DestructibleComponent[],
+  EventGating: DB_EventGating[],
+  Factions: DB_Factions[],
+  FeatureGating: DB_FeatureGating[],
+  Icons: DB_Icons[],
+  InventoryComponent: DB_InventoryComponent[],
+  ItemComponent: DB_ItemComponent[],
+  ItemSets: DB_ItemSets[],
+  ItemSetSkills: DB_ItemSetSkills[],
+  LevelProgressionLookup: DB_LevelProgressionLookup[],
+  LootMatrix: DB_LootMatrix[],
+  MinifigComponent: DB_MinifigComponent[],
+  MinifigDecals_Torsos: DB_MinifigDecals_Torsos[];
+  Missions: DB_Missions[],
+  MissionTasks: DB_MissionTasks[],
+  MissionText: DB_MissionText[],
+  MissionNPCComponent: DB_MissionNPCComponent[],
+  ModuleComponent: DB_ModuleComponent[],
+  MovementAIComponent: DB_MovementAIComponent[],
+  NpcIcons: DB_NpcIcons[],
+  Objects: DB_Objects[],
+  ObjectSkills: DB_ObjectSkills[],
+  PackageComponent: DB_PackageComponent[],
+  PetComponent: DB_PetComponent[],
+  PhysicsComponent: DB_PhysicsComponent[],
+  Preconditions: DB_Preconditions[],
+  ProximityMonitorComponent: DB_ProximityMonitorComponent[],
+  RebuildComponent: DB_RebuildComponent[],
+  Release_Version: DB_Release_Version[],
+  RenderComponent: DB_RenderComponent[],
+  Rewards: DB_Rewards[],
+  RewardCodes: DB_RewardCodes[],
+  RocketLaunchpadControlComponent: DB_RocketLaunchpadControlComponent[],
+  ScriptComponent: DB_ScriptComponent[],
+  SkillBehavior: DB_SkillBehavior[],
+  SubscriptionPricing: DB_SubscriptionPricing[],
+  VendorComponent: DB_VendorComponent[],
+  WhatsCoolItemSpotlight: DB_WhatsCoolItemSpotlight[],
+  WhatsCoolNewsAndTips: DB_WhatsCoolNewsAndTips[],
+  ZoneTable: DB_ZoneTable[],
+  brickAttributes: DB_brickAttributes[],
+  mapShaders: DB_mapShaders[],
+  mapIcon: DB_mapIcon[],
+  mapItemTypes: DB_mapItemTypes[]
+}
+
+export type TableName = keyof DB;
+export type Table<K> = K extends keyof DB ? DB[K] extends DB[K & keyof DB] ? DB[K & TableName] : never : never;
+export type Row<K> = Table<K> extends Array<infer R> ? R : never;

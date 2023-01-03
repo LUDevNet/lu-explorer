@@ -3,7 +3,6 @@ import { ItemTooltipComponent } from "../item-tooltip/item-tooltip.component";
 import { SlotComponent } from "../slot/slot.component";
 import { TooltipDirective } from "../tooltip.directive";
 import { LuCoreDataService, LuJsonService } from "../../services";
-import { DB_RenderComponent } from "../../../defs/cdclient";
 
 @Directive({
   selector: "lux-slot[luxFetchItem]"
@@ -42,7 +41,7 @@ export class ItemDirective extends TooltipDirective {
 
     const renderId = object.components["2"];
     if (renderId) {
-      this.luCoreData.getSingleTableEntry<DB_RenderComponent>("RenderComponent", renderId).subscribe(x => {
+      this.luCoreData.getSingleTableEntry("RenderComponent", renderId).subscribe(x => {
         if (x.icon_asset && !x.icon_asset.endsWith('tga')) {
           this.slotComponent.icon = "/lu-res/textures/ui/" + x.icon_asset.toLowerCase().replace(/dds$/, "png")
         }

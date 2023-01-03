@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import { DB_Activities, DB_ActivityRewards, DB_ObjectRef_ByComponent } from '../../defs/cdclient';
+import { Rev_ComponentType } from '../../defs/api';
+import { DB_Activities, DB_ActivityRewards } from '../../defs/cdclient';
 import { QUICK_BUILD_COMPONENT_ID, REBUILD_COMPONENT_ID, SCRIPTED_ACTIVITY_COMPONENT_ID } from '../../defs/components';
 import { Locale_ActivityRewards } from '../../defs/locale';
 
-import { LuJsonService } from '../services';
 import { LuCoreDataService } from '../util/services/lu-core-data.service';
 
 @Component({
@@ -14,28 +14,27 @@ import { LuCoreDataService } from '../util/services/lu-core-data.service';
 })
 export class ActivitiesComponent implements OnInit {
 
-  //$objectsWithScriptedActivity: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
-  //$objectsWithRebuild: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
-  //$objectsWithQuickBuild: ReplaySubject<DB_ObjectRef_ByComponent[]> = new ReplaySubject(1);
+  $objectsWithScriptedActivity: ReplaySubject<Rev_ComponentType> = new ReplaySubject(1);
+  $objectsWithRebuild: ReplaySubject<Rev_ComponentType> = new ReplaySubject(1);
+  $objectsWithQuickBuild: ReplaySubject<Rev_ComponentType> = new ReplaySubject(1);
   //$rebuildByActivityID: ReplaySubject<Record<string, number[]>> = new ReplaySubject(1);
   activities: DB_Activities[];
   activityNames: any;
 
-  constructor(private luJsonService: LuJsonService, private luCoreDataService: LuCoreDataService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit() {
     this.activityNames = {};
-    this.luJsonService
-      .getSingleTable("Activities")
+    this.coreData.getFullTable("Activities")
       .subscribe(this.processActivitiesIndex.bind(this));
-    //this.luJsonService.getObjectComponent(SCRIPTED_ACTIVITY_COMPONENT_ID).subscribe(this.$objectsWithScriptedActivity);
-    //this.luJsonService.getObjectComponent(REBUILD_COMPONENT_ID).subscribe(this.$objectsWithRebuild);
-    //this.luJsonService.getObjectComponent(QUICK_BUILD_COMPONENT_ID).subscribe(this.$objectsWithQuickBuild);
+    this.coreData.getRevEntry("component_types", SCRIPTED_ACTIVITY_COMPONENT_ID).subscribe(this.$objectsWithScriptedActivity);
+    this.coreData.getRevEntry("component_types", REBUILD_COMPONENT_ID).subscribe(this.$objectsWithRebuild);
+    this.coreData.getRevEntry("component_types", QUICK_BUILD_COMPONENT_ID).subscribe(this.$objectsWithQuickBuild);
     //this.luJsonService.getRebuildComponentsByActivityID().subscribe(this.$rebuildByActivityID);
   }
 
   $activityRewards(id: number): Observable<DB_ActivityRewards[]> {
-    return this.luCoreDataService.getTableEntry<DB_ActivityRewards>("ActivityRewards", id);
+    return this.coreData.getTableEntry("ActivityRewards", id);
   }
 
   commonPrefix<T>(list: T[], key: keyof T): string {
@@ -75,7 +74,7 @@ export class ActivitiesComponent implements OnInit {
 
   localize(activity: DB_Activities): Observable<Locale_ActivityRewards> {
     if (activity.localize && activity.locStatus == 2) {
-      let o = this.luCoreDataService.getLocaleSubtree<Locale_ActivityRewards>(`Activities_${activity.ActivityID}`);
+      let o = this.coreData.getLocaleSubtree<Locale_ActivityRewards>(`Activities_${activity.ActivityID}`);
       return o;
     }
   }

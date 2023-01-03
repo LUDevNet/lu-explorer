@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterState } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DB_BrickIDTable } from '../../../defs/cdclient';
-
-import { LuJsonService, LuLocaleService } from '../../services';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 
 @Component({
@@ -20,7 +18,7 @@ export class BrickIdsComponent implements OnInit {
   objects: any = {};
   $page: Observable<number>;
 
-  constructor(private luJsonService: LuJsonService, private route: ActivatedRoute) {
+  constructor(private coreData: LuCoreDataService, private route: ActivatedRoute) {
     this.$page = this.route.params.pipe(map(p => Number(p.page || 0)));
   }
 
@@ -39,7 +37,7 @@ export class BrickIdsComponent implements OnInit {
   */
 
   getTable(): void {
-    this.$table = this.luJsonService.getSingleTable("BrickIDTable");
+    this.$table = this.coreData.getFullTable("BrickIDTable");
   }
 
   setSort(key: string) {

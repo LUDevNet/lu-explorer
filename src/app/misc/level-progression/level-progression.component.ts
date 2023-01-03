@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { LuJsonService } from '../../services';
+import { LuCoreDataService, LuJsonService } from '../../services';
 import { DB_LevelProgressionLookup } from '../../../defs/cdclient';
 
 @Component({
@@ -13,10 +13,10 @@ export class LevelProgressionComponent implements OnInit {
 
   table: Observable<DB_LevelProgressionLookup[]>;
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit() {
-    this.table = this.luJsonService.getSingleTable('LevelProgressionLookup');
+    this.table = this.coreData.getFullTable('LevelProgressionLookup');
   }
 
 }

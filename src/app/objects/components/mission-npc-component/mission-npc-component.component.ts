@@ -30,7 +30,7 @@ export class MissionNpcComponentComponent implements OnInit {
 
     this._id.pipe(
       tap(id => this.__id = id),
-      switchMap(ref => this.luCoreData.getTableEntry<DB_MissionNPCComponent>("MissionNPCComponent", ref))
+      switchMap(ref => this.luCoreData.getTableEntry("MissionNPCComponent", ref))
     ).subscribe(this.$component);
   }
 

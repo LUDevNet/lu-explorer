@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
+import { DB_InventoryComponent } from '../../../../defs/cdclient';
 
 import { LuCoreDataService } from '../../../services';
-import { DB_InventoryItem } from '../../../../defs/cdclient';
 
 @Component({
   selector: 'app-inventory-component',
@@ -14,7 +14,7 @@ export class InventoryComponentComponent implements OnInit {
 
   _id: ReplaySubject<number>;
   __id: number;
-  component: ReplaySubject<DB_InventoryItem[]>;
+  component: ReplaySubject<DB_InventoryComponent[]>;
 
   @Input() set id(value: number) {
     this._id.next(value);
@@ -34,6 +34,6 @@ export class InventoryComponentComponent implements OnInit {
     ).subscribe(this.component);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }

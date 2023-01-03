@@ -13,13 +13,13 @@ import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 export class NewsAndTipsComponent implements OnInit {
 
   $list: Observable<DB_WhatsCoolNewsAndTips[]>;
-  $loc: Observable<{[key: string]: Locale_WhatsCoolNewsAndTips}>;
+  $loc: Observable<{ [key: string]: Locale_WhatsCoolNewsAndTips }>;
 
   constructor(private luCoreData: LuCoreDataService) { }
 
   ngOnInit(): void {
     const TABLE = "WhatsCoolNewsAndTips";
-    this.$list = this.luCoreData.getTableEntry<DB_WhatsCoolNewsAndTips>(TABLE, 'all');
+    this.$list = this.luCoreData.getFullTable(TABLE);
     this.$loc = this.luCoreData.getLocaleSubtree<Locale_WhatsCoolNewsAndTips>(TABLE);
   }
 

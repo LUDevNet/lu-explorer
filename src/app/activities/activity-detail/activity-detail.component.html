@@ -70,21 +70,23 @@
   <app-data-table [table]="activity"></app-data-table>
 </section>
 
-<section *ngIf="activity_rewards?.activity_rewards?.length">
-  <h3>Rewards</h3>
-  <ng-container *ngFor="let reward of activity_rewards.activity_rewards">
-    <ng-container *ngIf="reward">
-      <h4>{{reward.description}} ({{reward.ActivityRewardIndex}})</h4>
-      <p>
-        <lux-number-flag name="activityRating" [value]="reward.activityRating"></lux-number-flag>
-        <lux-number-flag name="ChallengeRating" [value]="reward.ChallengeRating"></lux-number-flag>
-        <lux-number-flag name="CurrencyIndex" [value]="reward.CurrencyIndex"></lux-number-flag>
-      </p>
-      <lux-currency-table *ngIf="reward.CurrencyIndex" [id]="reward.CurrencyIndex" [level]="reward.ChallengeRating">
-      </lux-currency-table>
-      <ng-container *ngIf="reward.LootMatrixIndex">
-        <h5>LootMatrix ({{reward.LootMatrixIndex}})</h5>
-        <app-loot-matrix [id]="reward.LootMatrixIndex"></app-loot-matrix>
+<section *ngIf="$activityRewards | async; let activity_rewards">
+  <ng-container *ngIf="activity_rewards.length">
+    <h3>Rewards</h3>
+    <ng-container *ngFor="let reward of activity_rewards">
+      <ng-container *ngIf="reward">
+        <h4>{{reward.description}} ({{reward.ActivityRewardIndex}})</h4>
+        <p>
+          <lux-number-flag name="activityRating" [value]="reward.activityRating"></lux-number-flag>
+          <lux-number-flag name="ChallengeRating" [value]="reward.ChallengeRating"></lux-number-flag>
+          <lux-number-flag name="CurrencyIndex" [value]="reward.CurrencyIndex"></lux-number-flag>
+        </p>
+        <lux-currency-table *ngIf="reward.CurrencyIndex" [id]="reward.CurrencyIndex" [level]="reward.ChallengeRating">
+        </lux-currency-table>
+        <ng-container *ngIf="reward.LootMatrixIndex">
+          <h5>LootMatrix ({{reward.LootMatrixIndex}})</h5>
+          <app-loot-matrix [id]="reward.LootMatrixIndex"></app-loot-matrix>
+        </ng-container>
       </ng-container>
     </ng-container>
   </ng-container>

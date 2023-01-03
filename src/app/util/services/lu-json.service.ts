@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject, Observable, of, zip } from 'rxjs';
-import { catchError, find, map, tap } from 'rxjs/operators';
-
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import { MessageService } from './message.service';
-
+import { Observable, zip } from 'rxjs';
+import { map } from 'rxjs/operators';
 import {
   DB_Icons,
   DB_AccessoryDefaultLoc,
-  DB_Behavior,
   DB_SkillBehavior,
   DB_mapItemTypes,
   DB_BrickColors,
   DB_RenderComponent,
-  ActivityRewardsPod,
-  DB_ObjectRef_ByComponent,
   DB_Factions,
   DB_Preconditions,
-  CurrencyTablePod,
   DB_mapShaders,
   DB_Objects,
-  DB_ObjectSkills,
-  DB_ComponentsRegistry,
   DB_ZoneTable,
-  DB_ActivityRewards,
   DB_MissionTasks,
-  DB_LootMatrix,
   DB_LootTable,
+  TableName,
+  DB_PackageComponent,
+  DB_ItemComponent,
+  DB_ModuleComponent,
+  DB_CollectibleComponent,
+  DB_PhysicsComponent,
+  DB_ScriptComponent,
+  DB_NpcIcons,
+  DB_Missions,
+  DB_MissionText,
+  Table,
+  DB_CurrencyTable,
 } from '../../../defs/cdclient';
 
 import { LuCoreDataService } from './lu-core-data.service';
@@ -54,128 +53,36 @@ export interface DB_MissionsByType {
 @Injectable()
 export class LuJsonService {
 
-  private apiUrl;
-  private tablesUrl;
-  private behaviorBaseUrl;
-  private scriptBaseUrl;
-  private physicsBaseUrl;
-  private itemBaseUrl;
-  private lootMatrixBaseUrl;
-  private lootTableBaseUrl;
-  private packBaseUrl;
-  private precondBaseUrl;
-  private objectsBaseUrl;
-  private objectsByComponentUrl;
-  private zonesBaseUrl;
-
-  private jsonStore;
-
-  constructor(
-    private http: HttpClient,
-    private messageService: MessageService,
-    private luCoreDataService: LuCoreDataService) {
-
-    this.jsonStore = {};
-
-    this.apiUrl = "/lu-json/";
-
-    this.tablesUrl = "tables/";
-    this.behaviorBaseUrl = "behaviors/";
-    this.objectsBaseUrl = "objects/";
-
-    this.scriptBaseUrl = this.tablesUrl + "ScriptComponent/";
-    this.physicsBaseUrl = this.tablesUrl + "PhysicsComponent/";
-    this.itemBaseUrl = this.tablesUrl + "ItemComponent/";
-    this.lootMatrixBaseUrl = this.tablesUrl + "LootMatrix/";
-    this.lootTableBaseUrl = this.tablesUrl + "LootTable/";
-    this.packBaseUrl = this.tablesUrl + "PackageComponent/";
-    this.precondBaseUrl = this.tablesUrl + "Preconditions/";
-    this.zonesBaseUrl = this.tablesUrl + "ZoneTable/";
-    this.objectsByComponentUrl = this.objectsBaseUrl + "groupBy/component/";
-  }
-
-  private log(message: string) {
-    this.messageService.add('LuJsonService: ' + message);
-  }
-
-  /*makeRequest(url: string, method: string, wrapResult: boolean = false): Observable<any> {
-    if (!this.jsonStore.hasOwnProperty(url)) {
-      let httpRequest = this.http.get(this.apiUrl + url + '.json')
-        .pipe(
-          tap(data => console.log(`Completed ${method}`)),
-          map(x => wrapResult ? { data: x } : x),
-          catchError(this.handleError(method, undefined, wrapResult)),
-        )
-      let responseSubject = new ReplaySubject(1);
-      httpRequest.subscribe(responseSubject);
-      this.jsonStore[url] = responseSubject;
-    }
-    return this.jsonStore[url];
-  }*/
-
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T>(operation = 'operation', result?: T, wrapError: boolean = false) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error.message); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      if (wrapError) {
-        return of({ $error: `${operation} failed: ${error.message}` } as unknown as T);
-      }
-      return of(result as T);
-    };
-  }
-
-  clearJsonStore() {
-    this.jsonStore = {};
-  }
+  constructor(private coreData: LuCoreDataService) { }
 
   getAccessoryDefaultLoc(): Observable<DB_AccessoryDefaultLoc[]> {
     return this.getSingleTable("AccessoryDefaultLoc");
   }
 
   getZones(): Observable<DB_ZoneTable[]> {
-    return this.getSingleTable<DB_ZoneTable>("ZoneTable");
+    return this.getSingleTable("ZoneTable");
   }
 
   getZone(id: number): Observable<DB_ZoneTable> {
-    return this.luCoreDataService.getSingleTableEntry('ZoneTable', id);
+    return this.coreData.getSingleTableEntry('ZoneTable', id);
   }
 
   getRenderComponent(id: number): Observable<DB_RenderComponent> {
-    return this.luCoreDataService.getSingleTableEntry<DB_RenderComponent>('RenderComponent', id);
+    return this.coreData.getSingleTableEntry('RenderComponent', id);
   }
-
-  /*
-    getBehavior(id: number): Observable<DB_Behavior> {
-    // TODO: paged
-    let page = Math.floor(id / 1024);
-    return this.makeRequest(this.behaviorBaseUrl + page + "/" + id, `getBehavior(${id})`);
-  }
-  */
 
   getSkill(id: number): Observable<DB_SkillBehavior> {
-    return this.luCoreDataService.getSingleTableEntry<DB_SkillBehavior>("SkillBehavior", id);
+    return this.coreData.getSingleTableEntry("SkillBehavior", id);
   }
 
   getIcon(id: number): Observable<DB_Icons> {
-    return this.luCoreDataService.getSingleTableEntry<DB_Icons>("Icons", id);
+    return this.coreData.getSingleTableEntry("Icons", id);
   }
 
   getObject(id: number): Observable<any> {
-    const obj = this.luCoreDataService.getTableEntry<DB_Objects>('Objects', id);
-    const cr = this.luCoreDataService.getTableEntry<DB_ComponentsRegistry>('ComponentsRegistry', id);
-    const skills = this.luCoreDataService.getTableEntry<DB_ObjectSkills>('ObjectSkills', id);
+    const obj = this.coreData.getTableEntry('Objects', id);
+    const cr = this.coreData.getTableEntry('ComponentsRegistry', id);
+    const skills = this.coreData.getTableEntry('ObjectSkills', id);
     return zip(obj, cr, skills).pipe(map(([obj, comp, skills]) => {
       let components = {};
       comp.forEach(x => { components[x.component_type] = x.component_id; });
@@ -186,102 +93,97 @@ export class LuJsonService {
     }));
   }
 
-  getPackageComponent(id: number): Observable<any> {
-    return this.getJsonData(this.packBaseUrl, id, 'PackageComponent');
+  getPackageComponent(id: number): Observable<DB_PackageComponent> {
+    return this.coreData.getSingleTableEntry('PackageComponent', id);
   }
 
   getPrecondition(id: number): Observable<DB_Preconditions> {
-    return this.getJsonData(this.precondBaseUrl, id, 'Preconditions');
+    return this.coreData.getSingleTableEntry('Preconditions', id);
   }
 
-  getItemComponent(id: number): Observable<any> {
-    return this.getPagedJsonData(this.itemBaseUrl, id, 'ItemComponent');
+  getItemComponent(id: number): Observable<DB_ItemComponent> {
+    return this.coreData.getSingleTableEntry('ItemComponent', id);
   }
 
-  getModuleComponent(id: number): Observable<any> {
-    return this.getPagedJsonData(this.tablesUrl + "ModuleComponent/", id, 'ModuleComponent');
+  getModuleComponent(id: number): Observable<DB_ModuleComponent> {
+    return this.coreData.getSingleTableEntry('ModuleComponent', id);
   }
 
-  getCollectibleComponent(id: number): Observable<any> {
-    return this.getPagedJsonData(this.tablesUrl + "CollectibleComponent/", id, 'CollectibleComponent');
+  getCollectibleComponent(id: number): Observable<DB_CollectibleComponent> {
+    return this.coreData.getSingleTableEntry('CollectibleComponent', id);
   }
 
-  getPhysicsComponent(id: number): Observable<any> {
-    return this.getPagedJsonData(this.physicsBaseUrl, id, 'PhysicsComponent');
+  getPhysicsComponent(id: number): Observable<DB_PhysicsComponent> {
+    return this.coreData.getSingleTableEntry('PhysicsComponent', id);
   }
 
-  getScriptComponent(id: number): Observable<any> {
-    return this.getPagedJsonData(this.scriptBaseUrl, id, 'ScriptComponent');
+  getScriptComponent(id: number): Observable<DB_ScriptComponent> {
+    return this.coreData.getSingleTableEntry('ScriptComponent', id);
   }
 
   getDestructibleComponent(id: number): Observable<any> {
-    return this.getPagedJsonData(this.tablesUrl + "DestructibleComponent/", id, 'DestructibleComponent');
+    return this.coreData.getSingleTableEntry('DestructibleComponent', id);
   }
 
   getRebuildComponent(id: number): Observable<any> {
-    return this.getPagedJsonData(this.tablesUrl + "RebuildComponent/", id, 'RebuildComponent');
+    return this.coreData.getSingleTableEntry('RebuildComponent', id);
   }
 
   getLootTableGroupByIndex(id: number): Observable<{ loot_table: DB_LootTable[] }> {
-    return this.luCoreDataService.getRevEntry('loot_table_index', id)
+    return this.coreData.getRevEntry('loot_table_index', id)
   }
 
-  getNpcIcon(id: number): Observable<any> {
-    return this.getPagedJsonData(this.tablesUrl + "NpcIcons/", id, 'NpcIcons');
+  getNpcIcon(id: number): Observable<DB_NpcIcons> {
+    return this.coreData.getSingleTableEntry('NpcIcons', id);
   }
 
-  getMission(id: number): Observable<any> {
-    return this.getPagedJsonData(this.tablesUrl + "Missions/", id, 'Missions');
+  getMission(id: number): Observable<DB_Missions> {
+    return this.coreData.getSingleTableEntry('Missions', id);
   }
 
   getMissionTasks(id: number): Observable<DB_MissionTasks[]> {
-    return this.luCoreDataService.getTableEntry<DB_MissionTasks>('MissionTasks', id);
+    return this.coreData.getTableEntry('MissionTasks', id);
   }
 
-  getMissionText(id: number): Observable<any> {
-    return this.getPagedJsonData(this.tablesUrl + "MissionText/", id, 'MissionText');
+  getMissionText(id: number): Observable<DB_MissionText> {
+    return this.coreData.getSingleTableEntry('MissionText', id);
   }
 
   getObjectTypes(): Observable<string[]> {
-    return this.luCoreDataService.getRev('object_types');
+    return this.coreData.getRev('object_types');
   }
 
   getObjectType(type: string): Observable<number[]> {
-    return this.luCoreDataService.getRevEntry('object_types', type);
+    return this.coreData.getRevEntry('object_types', type);
   }
 
   getBrickColors(): Observable<DB_BrickColors[]> {
-    return this.getSingleTable<DB_BrickColors>('BrickColors');
+    return this.getSingleTable('BrickColors');
   }
 
   getShadersMap(): Observable<DB_mapShaders[]> {
-    return this.getSingleTable<DB_mapShaders>('mapShaders');
+    return this.getSingleTable('mapShaders');
   }
 
   getItemTypes(): Observable<DB_mapItemTypes[]> {
-    return this.getSingleTable<DB_mapItemTypes>('mapItemTypes');
+    return this.getSingleTable('mapItemTypes');
   }
 
-  getSingleTable<T>(table: string): Observable<T[]> {
-    return this.luCoreDataService.getTableEntry(table, "all")
+  getSingleTable<K>(table: K & TableName): Observable<Table<K>> {
+    return this.coreData.getTableEntry(table, "all")
   }
 
-  getGeneric<T>(id: number, table: string, paged: boolean): Observable<T> {
+  getGeneric<T>(id: number, table: TableName, paged: boolean): Observable<T> {
     if (paged) {
-      return this.getPagedJsonData(this.tablesUrl + table + "/", id, table);
+      return this.getPagedJsonData(id, table);
     }
     else {
-      return this.getJsonData(this.tablesUrl + table + "/", id, table);
+      return this.getJsonData(id, table);
     }
   }
 
-  getActivityRewards(id: number): Observable<ActivityRewardsPod> {
-    return this.luCoreDataService.getTableEntry<DB_ActivityRewards>("ActivityRewards", id)
-      .pipe(map(x => Object.assign({ activity_rewards: x })));
-  }
-
-  getCurrencyIndex(id: number): Observable<CurrencyTablePod> {
-    return this.getGeneric(id, "CurrencyTable", true);
+  getCurrencyIndex(id: number): Observable<DB_CurrencyTable[]> {
+    return this.coreData.getTableEntry("CurrencyTable", id);
   }
 
   getFactions(): Observable<DB_Factions[]> {
@@ -292,12 +194,12 @@ export class LuJsonService {
     return this.getFactions().pipe(map(factions => factions.find(v => v.faction == index)));
   }
 
-  getJsonData(url: string, id: number, type: string): Observable<any> {
-    return this.luCoreDataService.getSingleTableEntry(type, id);
+  getJsonData(id: number, type: TableName): Observable<any> {
+    return this.coreData.getSingleTableEntry(type, id);
   }
 
-  getPagedJsonData(url: string, id: number, type: string, rethrowError: boolean = false): Observable<any> {
-    return this.luCoreDataService.getSingleTableEntry(type, id);
+  getPagedJsonData(id: number, type: TableName): Observable<any> {
+    return this.coreData.getSingleTableEntry(type, id);
   }
 
 }

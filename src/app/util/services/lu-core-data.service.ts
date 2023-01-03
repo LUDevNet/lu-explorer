@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, OperatorFunction, ReplaySubject } from 'rxjs';
 import { catchError, first, map, shareReplay, switchMap } from 'rxjs/operators';
-import { DB_Icons } from '../../../defs/cdclient';
+import { DB, DB_Icons, Row, Table, TableName } from '../../../defs/cdclient';
 import { Locale, LocaleField, LocaleIndex, LocaleRecordPick } from '../../../defs/locale';
 import { mapToDict } from '../../../defs/rx';
 import { environment } from '../../../environments/environment';
@@ -77,8 +77,12 @@ export class LuCoreDataService {
     return this.get(`v0/scripts/${path.toLowerCase()}.json`);
   }
 
-  getLocaleSubtree<T>(key: string): Observable<{ [key: string]: T }> {
-    return this.get(`v0/locale/${key.replace('_', '/')}/$all`);
+  getLocaleSubtree<T>(key: string, ...ids: (string | number)[]): Observable<{ [key: string]: T }> {
+    let path = key.replace('_', '/');
+    for (const part of ids) {
+      path += `/${part}`;
+    }
+    return this.get(`v0/locale/${path}/$all`);
   }
 
   queryLocale<T>(key: string, ...params: (string | number)[][]): Observable<T> {
@@ -90,8 +94,12 @@ export class LuCoreDataService {
     return this.get(`v0/locale/${key.replace('_', '/')}`);
   }
 
-  getTableEntry<T>(table: string, key: string | number): Observable<T[]> {
+  getTableEntry<K>(table: K & TableName, key: string | number): Observable<Table<K>> {
     return this.get(`v0/tables/${table}/${key}`);
+  }
+
+  getFullTable<K>(table: K & TableName): Observable<Table<K>> {
+    return this.getTableEntry<K>(table, "all");
   }
 
   queryTableEntries<T>(table: string, keys: string[] | number[], columns: (keyof T)[]): Observable<T[]> {
@@ -102,8 +110,11 @@ export class LuCoreDataService {
     return this.query(`v0/tables/${table}/all`, { pks: keys, columns: columns });
   }
 
-  getSingleTableEntry<T>(table: string, key: string | number): Observable<T | null> {
-    return this.getTableEntry<T>(table, key).pipe(map(x => x[0]));
+  getSingleTableEntry<K>(table: K & keyof DB, key: string | number): Observable<Row<K & keyof DB> | null> {
+    function first(rows: Table<K>): Row<K & keyof DB> {
+      return rows[0] as Row<K & keyof DB>
+    }
+    return this.getTableEntry<K>(table, key).pipe(map(first as any));
   }
 
   getRev<T>(table: string): Observable<T> {
