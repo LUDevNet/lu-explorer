@@ -41,6 +41,11 @@ export interface Locale_MissionTasks {
     description?: string;
 }
 
+export interface Locale_MissionText {
+    in_progress?: string;
+    description?: string;
+}
+
 export interface Locale_SkillBehavior {
     name?: string;
 }
