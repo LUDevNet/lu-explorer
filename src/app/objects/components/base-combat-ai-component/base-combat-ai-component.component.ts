@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { DB_BaseCombatAIComponent } from '../../../../defs/cdclient';
-import { LuCoreDataService, LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 
 @Component({
   selector: 'lux-base-combat-ai-component',

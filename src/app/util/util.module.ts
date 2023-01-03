@@ -14,13 +14,12 @@ import { ReplacePipe, PercentPipe, ToPipe, ToNumPipe, ToRGBAPipe, TocPipe } from
 import { PcPipe } from './pipes/pc.pipe';
 import { CondAstPipe } from './pipes/conditions.pipe';
 
-import { LuJsonService } from './services/lu-json.service';
 import { LuResService } from './services/lu-res.service';
 import { LuDocsService } from './services/lu-docs.service';
 import { LuLocaleService } from './services/lu-locale.service';
 import { LuxVarDirective } from './lux-var.directive';
 
-export { LuJsonService, LuResService, LuDocsService, LuLocaleService };
+export { LuResService, LuDocsService, LuLocaleService };
 
 @NgModule({
   declarations: [

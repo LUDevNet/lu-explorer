@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ReplaySubject, from, Observable } from 'rxjs';
 import { map, combineAll, switchMap } from 'rxjs/operators';
 
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 import { DB_ObjectSkills, DB_SkillBehavior } from '../../../../defs/cdclient';
 
 interface Skill {
@@ -18,11 +18,11 @@ interface Skill {
 export class SkillComponentComponent implements OnInit {
 
   _id: number;
-  skills: Observable<{[id: number]: Skill}>;
+  skills: Observable<{ [id: number]: Skill }>;
   skill_ref: ReplaySubject<DB_ObjectSkills[]>;
 
   constructor(
-    private luJsonService: LuJsonService) {
+    private coreData: LuCoreDataService) {
 
     this.skill_ref = new ReplaySubject<DB_ObjectSkills[]>(1);
     this.skills = this.skill_ref
@@ -36,7 +36,7 @@ export class SkillComponentComponent implements OnInit {
       .pipe(
         map(ref => {
           let id = ref.skillID;
-          return this.luJsonService.getSkill(id)
+          return this.coreData.getSingleTableEntry("SkillBehavior", id)
             .pipe(map(data => {
               return { ref: ref, skill: data };
             }));

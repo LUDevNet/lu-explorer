@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { LuCoreDataService, LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../services';
 import { LUZ_File } from '../luz-file/luz-file.component';
 
 
@@ -20,7 +20,6 @@ export class ScenesComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private luCoreData: LuCoreDataService,
-    private luJsonService: LuJsonService
   ) { }
 
   ngOnInit() {
@@ -29,21 +28,19 @@ export class ScenesComponent implements OnInit {
 
   getZone(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
-    this.luJsonService.getZone(this.id)
+    this.luCoreData.getSingleTableEntry("ZoneTable", this.id)
       .subscribe(zone => { this.zone = zone; this.getZoneData(zone.zoneName); });
   }
 
-  toRef(sc: any, dir:string): any
-  {
-    return {name: sc.name, path: (dir + sc.filename)}
+  toRef(sc: any, dir: string): any {
+    return { name: sc.name, path: (dir + sc.filename) }
   }
 
-  getZoneData(file: string): void
-  {
+  getZoneData(file: string): void {
     let dir = file.substring(0, file.lastIndexOf("/") + 1);
     this.sc_id = +this.route.snapshot.paramMap.get('sc');
-    
-    
+
+
     this.luCoreData.getMap<LUZ_File>(file)
       .subscribe(zone => this.scenes = zone.scenes
         .filter(sc => sc.id === this.sc_id).map(sc => this.toRef(sc, dir)));

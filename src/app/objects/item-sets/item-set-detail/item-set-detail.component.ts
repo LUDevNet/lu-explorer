@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
-import { LuJsonService, LuLocaleService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 import { DB_ItemSets } from '../../../../defs/cdclient';
 
 @Component({
@@ -17,8 +17,7 @@ export class ItemSetDetailComponent implements OnInit {
   response: Observable<DB_ItemSets>;
 
   constructor(
-    private luJsonService: LuJsonService,
-    //private LuLocaleService: LuLocaleService,
+    private coreData: LuCoreDataService,
     private route: ActivatedRoute,
     private cd: ChangeDetectorRef,
   ) { }
@@ -36,7 +35,7 @@ export class ItemSetDetailComponent implements OnInit {
   }
 
   mapToRequest(id): Observable<DB_ItemSets> {
-    return this.luJsonService.getGeneric(id, 'ItemSets', false).pipe(map(x => Object.assign(new DB_ItemSets, x)));
+    return this.coreData.getSingleTableEntry('ItemSets', id).pipe(map(x => Object.assign(new DB_ItemSets, x)));
   }
 
   tapId(id) {

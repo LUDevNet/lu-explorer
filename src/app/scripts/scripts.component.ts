@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LuCoreDataService, LuJsonService } from '../services';
+import { LuCoreDataService } from '../services';
 import { LuaStmt } from './lua/lua';
 
 @Component({

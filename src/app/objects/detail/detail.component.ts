@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { LuCoreDataService, LuJsonService, LuLocaleService } from '../../services';
+import { LuCoreDataService, LuLocaleService } from '../../services';
 import { component_names } from '../../../defs/components';
-import { APIObject, Optional } from '../../util/services/lu-json.service';
 import { Locale_Objects } from '../../../defs/locale';
 import { Observable, ReplaySubject } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Rev_Objects } from '../../../defs/api';
 import { DB_ComponentsRegistry, DB_mapIcon, DB_Objects, DB_ObjectSkills } from '../../../defs/cdclient';
 

@@ -1,7 +1,7 @@
-import { InvokeFunctionExpr } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LuJsonService } from '../../services';
+import { DB_ComponentsRegistry, DB_Objects } from '../../../defs/cdclient';
+import { LuCoreDataService } from '../../services';
 
 const GENERAL_KEYS = [
   'loadOnClientOnly',
@@ -288,8 +288,11 @@ const KEYS = {
 export class ObjInstanceComponent implements OnInit {
   @Input() showGeneralSettings: boolean = true;
 
-  data: any;
-  dataAsync: Observable<any>;
+  //data: any;
+  //dataAsync: Observable<any>;
+  $components: Observable<DB_ComponentsRegistry[]>;
+  $data: Observable<DB_Objects>;
+
   settings: Object;
   usedSettings: Set<string>;
 
@@ -316,16 +319,17 @@ export class ObjInstanceComponent implements OnInit {
   proximityMonitorSettings?: object;
   propertyPlaqueSettings?: PropertyPlaqueSettings; // 113
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   @Input() set obj(value: any) {
     this.settings = value.settings;
-    this.dataAsync = this.luJsonService.getObject(value.lot);
-    this.dataAsync.subscribe(this.objData.bind(this));
+    this.$components = this.coreData.getTableEntry("ComponentsRegistry", value.lot);
+    this.$data = this.coreData.getSingleTableEntry("Objects", value.lot);
+    this.$components.subscribe(this.objData.bind(this));
   }
 
-  objData(value: any) {
-    this.data = value;
+  objData(components: DB_ComponentsRegistry[]) {
+    //this.data = value;
     this.usedSettings = new Set();
 
     let setters = {
@@ -372,8 +376,9 @@ export class ObjInstanceComponent implements OnInit {
     }
 
     // Remaining settings
-    Object.keys(this.data.components).forEach(key => {
-      const k = KEYS[key];
+    for (const component of components) {
+      const k = KEYS[component.component_type];
+      const key = component.component_id;
       if (k) {
         k.forEach(e => this.usedSettings.add(e));
         let data = {};
@@ -386,7 +391,7 @@ export class ObjInstanceComponent implements OnInit {
         console.log(key, sett);
         if (sett) sett(data);
       }
-    })
+    }
 
     this.remainingSettings = {};
     Object.entries(this.settings).forEach(arr => {

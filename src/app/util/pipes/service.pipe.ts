@@ -1,9 +1,8 @@
-import { AsyncPipe } from '@angular/common';
-import { ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { DB_Factions, DB_Icons } from '../../../defs/cdclient';
-import { LuDocsService, LuResService, LuLocaleService, LuJsonService, LuCoreDataService } from '../../services';
+import { Pipe, PipeTransform } from '@angular/core';
+import { Observable, of, zip } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { DB_Icons } from '../../../defs/cdclient';
+import { LuDocsService, LuResService, LuLocaleService, LuCoreDataService } from '../../services';
 
 @Pipe({ name: 'docs' })
 export class DocsPipe implements PipeTransform {
@@ -61,13 +60,27 @@ export class TranslatePipe implements PipeTransform {
 @Pipe({ name: 'data' })
 export class DataPipe implements PipeTransform {
 
-  constructor(private luJson: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
+
+  getObject(id: number): Observable<any> {
+    const obj = this.coreData.getTableEntry('Objects', id);
+    const cr = this.coreData.getTableEntry('ComponentsRegistry', id);
+    const skills = this.coreData.getTableEntry('ObjectSkills', id);
+    return zip(obj, cr, skills).pipe(map(([obj, comp, skills]) => {
+      let components = {};
+      comp.forEach(x => { components[x.component_type] = x.component_id; });
+      return Object.assign(obj[0], {
+        components,
+        skills
+      })
+    }));
+  }
 
   transform(value: number, arg: string): any {
     let call = {
-      object: x => this.luJson.getObject(x),
-      renderComponent: x => this.luJson.getRenderComponent(x),
-      lootTable: x => this.luJson.getLootTableGroupByIndex(x),
+      object: x => this.getObject(x),
+      renderComponent: x => this.coreData.getSingleTableEntry("RenderComponent", x),
+      lootTable: x => this.coreData.getRevEntry("loot_table_index", x),
     }[arg];
     return arg ? call(value) : of(null);
   }

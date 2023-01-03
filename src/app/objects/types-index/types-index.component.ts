@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LuJsonService, LuLocaleService } from '../../services';
+import { LuCoreDataService } from '../../services';
 
 @Component({
   selector: 'app-types-index',
@@ -11,10 +11,10 @@ export class ObjectTypesIndexComponent implements OnInit {
 
   $types: Observable<string[]>;
 
-  constructor(private luJsonService: LuJsonService, private luLocaleService: LuLocaleService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit() {
-    this.$types = this.luJsonService.getObjectTypes();
+    this.$types = this.coreData.getRev('object_types');
   }
 
 }

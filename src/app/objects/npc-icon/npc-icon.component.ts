@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../services';
 
 @Component({
   selector: 'app-npc-icon',
@@ -13,15 +13,14 @@ export class NpcIconComponent implements OnInit {
   @Input() width: string = '64px';
   icon: any;
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit() {
-  	this.getIcon();
+    this.getIcon();
   }
 
-  getIcon(): void
-  {
-  	this.luJsonService.getNpcIcon(this.id).subscribe(icon => this.icon = icon);
+  getIcon(): void {
+    this.coreData.getSingleTableEntry("NpcIcons", this.id).subscribe(icon => this.icon = icon);
   }
 
 }

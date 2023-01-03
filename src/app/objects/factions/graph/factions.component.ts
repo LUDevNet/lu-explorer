@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LuCoreDataService, LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 
 declare var vis: any;
 

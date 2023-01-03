@@ -2,14 +2,12 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
-
-import { LuJsonService } from '../../services';
 import { DB_MissionTasks, DB_SkillBehavior } from '../../../defs/cdclient';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 
 
 interface Rev_Skill_Embedded {
-  MissionTasks: {[key: number]: DB_MissionTasks}
+  MissionTasks: { [key: number]: DB_MissionTasks }
 }
 
 interface Rev_Skill {
@@ -32,9 +30,8 @@ export class SkillComponent implements OnInit {
   $rev_skill: Observable<Rev_Skill>;
 
   constructor(
-  	private route: ActivatedRoute,
-    private luJsonService: LuJsonService,
-    private luCoreDataService: LuCoreDataService,
+    private route: ActivatedRoute,
+    private coreData: LuCoreDataService,
     private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -44,7 +41,7 @@ export class SkillComponent implements OnInit {
         this.id = id;
         this.cd.detectChanges();
       }));
-    this._skill = $id.pipe(switchMap(id => this.luJsonService.getSkill(id)));
-    this.$rev_skill = $id.pipe(switchMap(id => this.luCoreDataService.getRevEntry<Rev_Skill>('skill_ids', id)));
+    this._skill = $id.pipe(switchMap(id => this.coreData.getSingleTableEntry("SkillBehavior", id)));
+    this.$rev_skill = $id.pipe(switchMap(id => this.coreData.getRevEntry<Rev_Skill>('skill_ids', id)));
   }
 }

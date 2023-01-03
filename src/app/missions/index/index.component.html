@@ -12,8 +12,7 @@
 
   <ul>
     <li *ngFor="let declared_subtype of declared_type.value">
-      <a *ngIf="declared_subtype != ''"
-        routerLink="/missions/type/{{declared_type.key}}/subtype/{{declared_subtype}}">
+      <a *ngIf="declared_subtype != ''" routerLink="/missions/type/{{declared_type.key}}/subtype/{{declared_subtype}}">
         {{declared_subtype}}
       </a>
       <a *ngIf="declared_subtype == ''" routerLink="/missions/type/{{declared_type.key}}">

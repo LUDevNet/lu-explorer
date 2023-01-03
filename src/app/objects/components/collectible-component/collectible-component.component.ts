@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 import { DB_CollectibleComponent } from '../../../../defs/cdclient';
 
 @Component({
@@ -24,13 +24,13 @@ export class CollectibleComponentComponent implements OnInit {
     return this._id;
   }
 
-  constructor(private luJsonService: LuJsonService) {
+  constructor(private coreData: LuCoreDataService) {
     this._ref = new ReplaySubject(1);
     this.component = new ReplaySubject(1);
 
     this._ref.subscribe(id => this._id = id);
     this._ref.pipe(
-      switchMap(ref => this.luJsonService.getCollectibleComponent(ref))
+      switchMap(ref => this.coreData.getSingleTableEntry("CollectibleComponent", ref))
     ).subscribe(this.component);
   }
 

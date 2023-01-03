@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { LuCoreDataService, LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../services';
 import { LuaStmt } from '../lua/lua';
 
 @Component({
@@ -31,7 +31,7 @@ export class ScriptFileComponent implements OnInit {
   }
 
   getLink(i: number, segment: string): Array<string> {
-    return ['/scripts'].concat(this.segments.slice(0,i + 1));
+    return ['/scripts'].concat(this.segments.slice(0, i + 1));
   }
 
 }

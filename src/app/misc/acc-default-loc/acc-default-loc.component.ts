@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../services';
 import { DB_AccessoryDefaultLoc } from '../../../defs/cdclient';
 
 @Component({
@@ -10,10 +10,10 @@ import { DB_AccessoryDefaultLoc } from '../../../defs/cdclient';
 })
 export class AccDefaultLocComponent implements OnInit {
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit() {
-  	this.luJsonService.getAccessoryDefaultLoc().subscribe(acc => this.acc = acc);
+    this.coreData.getFullTable("AccessoryDefaultLoc").subscribe(acc => this.acc = acc);
   }
 
   acc: DB_AccessoryDefaultLoc[];

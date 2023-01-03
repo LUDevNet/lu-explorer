@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DB_Release_Version } from '../../../defs/cdclient';
 
-import { LuCoreDataService, LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../services';
 
 @Component({
   selector: 'app-release-version',
