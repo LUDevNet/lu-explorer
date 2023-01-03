@@ -186,14 +186,6 @@ export class LuJsonService {
     return this.coreData.getTableEntry("CurrencyTable", id);
   }
 
-  getFactions(): Observable<DB_Factions[]> {
-    return this.getSingleTable("Factions");
-  }
-
-  getFaction(index: number): Observable<DB_Factions> {
-    return this.getFactions().pipe(map(factions => factions.find(v => v.faction == index)));
-  }
-
   getJsonData(id: number, type: TableName): Observable<any> {
     return this.coreData.getSingleTableEntry(type, id);
   }
@@ -201,5 +193,4 @@ export class LuJsonService {
   getPagedJsonData(id: number, type: TableName): Observable<any> {
     return this.coreData.getSingleTableEntry(type, id);
   }
-
 }

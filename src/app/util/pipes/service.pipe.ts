@@ -1,7 +1,9 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { DB_Icons } from '../../../defs/cdclient';
-import { LuDocsService, LuResService, LuLocaleService, LuJsonService } from '../../services';
+import { tap } from 'rxjs/operators';
+import { DB_Factions, DB_Icons } from '../../../defs/cdclient';
+import { LuDocsService, LuResService, LuLocaleService, LuJsonService, LuCoreDataService } from '../../services';
 
 @Pipe({ name: 'docs' })
 export class DocsPipe implements PipeTransform {
@@ -53,8 +55,8 @@ export class TranslatePipe implements PipeTransform {
   transform(value: string): Observable<string> {
     return this.luLocale.translate(value);
   }
-
 }
+
 
 @Pipe({ name: 'data' })
 export class DataPipe implements PipeTransform {
@@ -66,9 +68,7 @@ export class DataPipe implements PipeTransform {
       object: x => this.luJson.getObject(x),
       renderComponent: x => this.luJson.getRenderComponent(x),
       lootTable: x => this.luJson.getLootTableGroupByIndex(x),
-      faction: x => this.luJson.getFaction(x),
     }[arg];
     return arg ? call(value) : of(null);
   }
-
 }

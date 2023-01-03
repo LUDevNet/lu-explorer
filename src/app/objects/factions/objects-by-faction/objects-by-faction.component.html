@@ -7,21 +7,22 @@
         </ul>
 
         <h1>Faction #{{id}}</h1>
-        <section *ngIf="id | data:'faction' | async; let faction">
+        <section *ngIf="$factionRow | async; let faction">
             <h2>General</h2>
             <dl>
                 <dt>Faction (<code>factionList</code>;
-                    <code>factionListFriendly == {{faction['factionListFriendly']}}</code>):</dt>
+                    <code>factionListFriendly == {{faction.factionListFriendly}}</code>):
+                </dt>
                 <dd>
-                    <lux-faction-list [list]="faction['factionList']"></lux-faction-list>
+                    <lux-faction-list [list]="faction.factionList"></lux-faction-list>
                 </dd>
                 <dt>Enemies (<code>enemyList</code>):</dt>
                 <dd>
-                    <lux-faction-list [list]="faction['enemyList']"></lux-faction-list>
+                    <lux-faction-list [list]="faction.enemyList"></lux-faction-list>
                 </dd>
                 <dt>Friends (<code>friendList</code>):</dt>
                 <dd>
-                    <lux-faction-list [list]="faction['friendList']"></lux-faction-list>
+                    <lux-faction-list [list]="faction.friendList"></lux-faction-list>
                 </dd>
             </dl>
         </section>
