@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { Rev_MissionById } from '../../../defs/api';
 import { DB_Missions, DB_MissionText } from '../../../defs/cdclient';
 import { Locale_Missions, Locale_MissionTasks, Locale_MissionText } from '../../../defs/locale';
@@ -30,23 +30,25 @@ interface LocaleAll_MissionText {
   ready_to_complete?: string;
 }
 
+interface Mission {
+  $text: Observable<DB_MissionText>,
+  $textLocale: Observable<LocaleAll_MissionText>
+  $missionLocale: Observable<Locale_Missions>,
+}
+
 @Component({
   selector: 'app-mission-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
-export class MissionDetailComponent implements OnInit, OnDestroy {
+export class MissionDetailComponent implements OnInit {
 
   $mission: Observable<DB_Missions | null>;
   $rev: Observable<Rev_MissionById>;
-  missionLocale: Locale_Missions;
   $tasks: Observable<MissionTasks[]>;
-  text: DB_MissionText;
-  textsLocale: LocaleAll_MissionText;
   id: number;
 
-  id_subscription: Subscription;
-  mission_subscription: Subscription;
+  $data: Observable<Mission>;
 
 
   constructor(
@@ -56,34 +58,19 @@ export class MissionDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let $id = this.route.paramMap.pipe(map(params => +params.get('id')));
-    this.$mission = $id.pipe(switchMap(id => this.coreData.getSingleTableEntry("Missions", id)));
+    this.$mission = $id.pipe(switchMap(id => this.coreData.getSingleTableEntry("Missions", id)), shareReplay(1));
     this.$tasks = $id.pipe(
       switchMap(id => this.coreData.getTableEntry("MissionTasks", id)),
       map(tasks => tasks.map(task => Object.assign(task, { $localizations: this.coreData.getLocaleSubtree(`MissionTasks_${task.uid}`) })))
     );
     this.$rev = $id.pipe(switchMap(id => this.coreData.getRevEntry<Rev_MissionById>("missions", id)));
-    this.id_subscription = $id.subscribe(this.getMission.bind(this));
-  }
-
-  ngOnDestroy(): void {
-    this.id_subscription.unsubscribe();
-    this.clearMissionSubscription();
-  }
-
-  clearMissionSubscription() {
-    if (this.mission_subscription) {
-      this.mission_subscription.unsubscribe();
-    }
-  }
-
-  getMission(id: number): void {
-    this.id = id;
-
-    this.clearMissionSubscription();
-    this.mission_subscription = new Subscription();
-    this.coreData.getSingleTableEntry("MissionText", this.id).subscribe(text => this.text = text);
-    this.coreData.getLocaleSubtree("MissionText", this.id).subscribe(entry => this.textsLocale = entry);
-    this.coreData.getLocaleSubtree("Missions", this.id).subscribe(entry => this.missionLocale = entry);
+    this.$data = $id.pipe(map(id => {
+      return {
+        $text: this.coreData.getSingleTableEntry("MissionText", id),
+        $textLocale: this.coreData.getLocaleSubtree("MissionText", id),
+        $missionLocale: this.coreData.getLocaleSubtree("Missions", id),
+      }
+    }), shareReplay(1));
   }
 
   anyChatBubble(texts: any): boolean {

@@ -10,7 +10,7 @@ interface KeyValue<K, T> {
 export class KeysPipe implements PipeTransform {
   transform<V>(value: {[key: string]: V}): KeyValue<string, V>[] {
     let keys: KeyValue<string, V>[] = [];
-    for (let key in value) {
+    for (let key in Object.keys(value)) {
       keys.push({ key: key, value: value[key] });
     }
     return keys;
