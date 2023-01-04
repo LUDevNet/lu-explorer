@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ReplaySubject, Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 import { DB_VendorComponent } from '../../../../defs/cdclient';
 
 @Component({
@@ -25,7 +25,7 @@ export class VendorComponentComponent implements OnInit {
   }
 
 
-  constructor(private luJsonService: LuJsonService) {
+  constructor(private coreData: LuCoreDataService) {
     this._ref = new ReplaySubject(1);
     this.component = this._ref.pipe(tap(id => this._id = id), switchMap(this.query.bind(this)));
   }
@@ -33,8 +33,7 @@ export class VendorComponentComponent implements OnInit {
   ngOnInit() {
   }
 
-  query(id: number): Observable<DB_VendorComponent>
-  {
-  	return this.luJsonService.getGeneric(this.id, "VendorComponent", true)
+  query(id: number): Observable<DB_VendorComponent> {
+    return this.coreData.getSingleTableEntry("VendorComponent", this.id)
   }
 }

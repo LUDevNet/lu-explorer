@@ -3,7 +3,7 @@ import { NgModule }         from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }      from '@angular/forms';
 
-import { LuDocsService, LuJsonService, LuLocaleService } from './services';
+import { LuDocsService, LuLocaleService } from './services';
 import { MessageService } from './util/services/message.service';
 
 import { AppComponent } from './app.component';
@@ -30,7 +30,6 @@ import { SearchService } from './util/services/search.service';
     MiscModule,
   ],
   providers: [
-    LuJsonService,
     MessageService,
     LuLocaleService,
     LuDocsService,

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FactionsGraphComponent } from './graph/factions.component';
 import { ObjectsByFactionComponent } from './objects-by-faction/objects-by-faction.component';
 import { RouterModule } from '@angular/router';

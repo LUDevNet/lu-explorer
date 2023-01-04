@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { LuCoreDataService, LuJsonService, LuLocaleService } from '../../services';
+import { LuCoreDataService, LuLocaleService } from '../../services';
 import { component_names } from '../../../defs/components';
-import { APIObject, Optional } from '../../util/services/lu-json.service';
 import { Locale_Objects } from '../../../defs/locale';
 import { Observable, ReplaySubject } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Rev_Objects } from '../../../defs/api';
 import { DB_ComponentsRegistry, DB_mapIcon, DB_Objects, DB_ObjectSkills } from '../../../defs/cdclient';
 
@@ -45,10 +43,10 @@ export class ObjectDetailComponent implements OnInit {
     this.object_id = id;
     this.$rev = this.luCoreDataService.getRevEntry("objects", id);
 
-    this.luCoreDataService.getSingleTableEntry<DB_Objects>('Objects', id).subscribe(this.$object)
-    this.luCoreDataService.getTableEntry<DB_ComponentsRegistry>('ComponentsRegistry', id).subscribe(this.$components)
-    this.luCoreDataService.getTableEntry<DB_ObjectSkills>('ObjectSkills', id).subscribe(this.$skills)
-    this.luCoreDataService.getTableEntry<DB_mapIcon>('mapIcon', id).subscribe(this.$icons)
+    this.luCoreDataService.getSingleTableEntry('Objects', id).subscribe(this.$object)
+    this.luCoreDataService.getTableEntry('ComponentsRegistry', id).subscribe(this.$components)
+    this.luCoreDataService.getTableEntry('ObjectSkills', id).subscribe(this.$skills)
+    this.luCoreDataService.getTableEntry('mapIcon', id).subscribe(this.$icons)
     this.luLocaleService.getLocaleEntry("Objects", id).subscribe(entry => this.objectLocale = entry);
   }
 

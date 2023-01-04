@@ -1,7 +1,7 @@
 <h3>Skill Component ({{id}})</h3>
 
 <div class="table-responsive">
-  <table>
+  <table *ngIf="$skills | async; let skills">
     <tr>
       <th>ID</th>
       <th>castOnType</th>
@@ -12,30 +12,26 @@
       <th>Damage</th>
       <th>Behavior</th>
     </tr>
-    <ng-container *ngFor="let entry of (skills | async | keys)">
-      <tr>
-        <td><a routerLink="/skills/{{entry.key}}">{{entry.key}}</a></td>
+    <ng-container *ngFor="let sk of skills">
+      <tr *luxVar="sk?.skill | async; let skill">
+        <td><a routerLink="/skills/{{sk.ref.skillID}}">{{sk.ref.skillID}}</a></td>
         <td>
-          <app-skill-cast-type [castType]="entry.value.ref.castOnType"></app-skill-cast-type>
+          <app-skill-cast-type [castType]="sk.ref.castOnType"></app-skill-cast-type>
         </td>
-        <td>{{entry.value.ref.AICombatWeight}}</td>
+        <td>{{sk.ref.AICombatWeight}}</td>
         <td>
-          <img style="max-width: 32px; margin-bottom: 0;" [luxFetchIcon]="entry.value.skill.skillIcon">
+          <img *ngIf="skill" style="max-width: 32px; margin-bottom: 0;" [luxFetchIcon]="skill.skillIcon">
         </td>
-        <td>
-          {{entry.value.skill.imaginationcost}}
-        </td>
+        <td><span *ngIf="skill">{{skill.imaginationcost}}</span></td>
         <td class="skill-buffs">
-          <lux-buff [value]="entry.value.skill.lifeBonusUI" kind="heart"></lux-buff>
-          <lux-buff [value]="entry.value.skill.imBonusUI" kind="imagination"></lux-buff>
-          <lux-buff [value]="entry.value.skill.armorBonusUI" kind="armor"></lux-buff>
+          <lux-buff *ngIf="skill" [value]="skill.lifeBonusUI" kind="heart"></lux-buff>
+          <lux-buff *ngIf="skill" [value]="skill.imBonusUI" kind="imagination"></lux-buff>
+          <lux-buff *ngIf="skill" [value]="skill.armorBonusUI" kind="armor"></lux-buff>
         </td>
+        <td><span *ngIf="skill">{{skill.damageUI}}</span></td>
         <td>
-          {{entry.value.skill.damageUI}}
-        </td>
-        <td>
-          <a routerLink="/skills/behaviors/{{entry.value.skill.behaviorID}}">
-            {{entry.value.skill.behaviorID}}
+          <a *ngIf="skill" routerLink="/skills/behaviors/{{skill.behaviorID}}">
+            {{skill.behaviorID}}
           </a>
         </td>
       </tr>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DB_mapShaders } from '../../../defs/cdclient';
-import { LuJsonService } from '../../util/util.module';
+import { LuCoreDataService } from '../../services';
 
 @Component({
   selector: 'lux-shaders',
@@ -13,14 +13,14 @@ export class ShadersComponent implements OnInit {
   sort: string = 'id';
   $table: Observable<DB_mapShaders[]>;
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit() {
-  	this.getTable();
+    this.getTable();
   }
 
   getTable(): void {
-  	this.$table = this.luJsonService.getShadersMap();
+    this.$table = this.coreData.getFullTable("mapShaders");
   }
 
   setSort(key: string) {

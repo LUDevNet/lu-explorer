@@ -49,7 +49,7 @@ export function valueSet<K extends RecordKey, T>(): OperatorFunction<Record<K, T
 }
 
 export function mapArr<T, V>(f: (v: T) => V): OperatorFunction<T[], V[]> {
-    return map(data => Array.from(data, f).filter(v => v));
+    return map(data => data ? Array.from(data, f).filter(v => v) : null);
 }
 
 export function mapRec<K extends RecordKey, T, V>(f: (v: T) => V): OperatorFunction<Record<K, T>, Record<K, V>> {

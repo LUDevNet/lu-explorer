@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DB_SubscriptionPricing } from '../../../defs/cdclient';
 
-import { LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../services';
 
 @Component({
   selector: 'app-subscription-pricing',
@@ -9,21 +10,19 @@ import { LuJsonService } from '../../services';
 })
 export class SubscriptionPricingComponent implements OnInit {
 
-  table: any[];
+  table: DB_SubscriptionPricing[];
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit() {
-  	this.getTable()
+    this.getTable()
   }
 
-  getTable(): void
-  {
-  	this.luJsonService.getSingleTable("SubscriptionPricing").subscribe(this.processData.bind(this));
+  getTable(): void {
+    this.coreData.getFullTable("SubscriptionPricing").subscribe(this.processData.bind(this));
   }
 
-  processData(table: any)
-  {
+  processData(table: DB_SubscriptionPricing[]) {
     this.table = table;
   }
 

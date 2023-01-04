@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 
 @Component({
   selector: 'app-loot-table',
@@ -14,18 +14,16 @@ export class LootTableComponent implements OnInit {
   id: number;
 
   constructor(
-  	private route: ActivatedRoute,
-  	private luJsonService: LuJsonService) { }
+    private route: ActivatedRoute,
+    private coreData: LuCoreDataService) { }
 
   ngOnInit() {
-  	this.getLootTable();
+    this.getLootTable();
   }
 
-  getLootTable(): void
-  {
-  	this.id = +this.route.snapshot.paramMap.get('id');
-  	this.luJsonService.getLootTableGroupByIndex(this.id)
-  	  .subscribe(lootTable => this.lootTable = lootTable);
+  getLootTable(): void {
+    this.id = +this.route.snapshot.paramMap.get('id');
+    this.coreData.getRevEntry('loot_table_index', this.id)
+      .subscribe(lootTable => this.lootTable = lootTable);
   }
-
 }

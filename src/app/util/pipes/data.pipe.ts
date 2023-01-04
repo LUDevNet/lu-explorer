@@ -8,8 +8,8 @@ interface KeyValue<K, T> {
 // https://stackoverflow.com/questions/35534959/access-key-and-value-of-object-using-ngfor
 @Pipe({ name: 'keys' })
 export class KeysPipe implements PipeTransform {
-  transform<V>(value: {[key: string]: V}): KeyValue<string, V>[] {
-    let keys: KeyValue<string, V>[] = [];
+  transform<K extends string, V>(value: Record<K, V>): KeyValue<K, V>[] {
+    let keys: KeyValue<K, V>[] = [];
     for (let key in value) {
       keys.push({ key: key, value: value[key] });
     }
@@ -19,7 +19,7 @@ export class KeysPipe implements PipeTransform {
 
 @Pipe({ name: 'keyset' })
 export class KeySetPipe implements PipeTransform {
-  transform<V>(value: {[key: string]: V}): Set<string> {
+  transform<V>(value: { [key: string]: V }): Set<string> {
     let keyset: Set<string> = new Set();
     for (let key in value) {
       keyset.add(key);
@@ -30,7 +30,7 @@ export class KeySetPipe implements PipeTransform {
 
 @Pipe({ name: 'paramset' })
 export class ParamSetPipe implements PipeTransform {
-  transform(value: {[key: string]: any}, arg: string): Set<string> {
+  transform(value: { [key: string]: any }, arg: string): Set<string> {
     let keyset: Set<string> = new Set();
     for (let key in value) {
       keyset.add(value[key][arg] || "");
@@ -52,7 +52,7 @@ export class ArrKeysPipe implements PipeTransform {
 
 @Pipe({ name: 'dict' })
 export class DictPipe implements PipeTransform {
-  transform<T>(value: T[], arg: string): Record<any, T> {
+  transform<T>(value: T[], arg: keyof T): Record<any, T> {
     if (value == null) return null;
     let dict = {};
     for (var i = 0; i < value.length; i++) {
@@ -64,7 +64,7 @@ export class DictPipe implements PipeTransform {
 
 @Pipe({ name: 'group' })
 export class GroupPipe implements PipeTransform {
-  transform<T>(value: T[], arg: string): {[key: string]: T[]} {
+  transform<T>(value: T[], arg: string): { [key: string]: T[] } {
     if (value == null) return null;
     let dict = {};
     for (var i = 0; i < value.length; i++) {
@@ -131,7 +131,7 @@ export class RemovePipe implements PipeTransform {
 
 @Pipe({ name: 'nonnull' })
 export class NonNullPipe implements PipeTransform {
-  transform(value): any {
+  transform(value: { key: any, value: any }[]): any {
     return value.filter(obj => obj.value != undefined);
   }
 }

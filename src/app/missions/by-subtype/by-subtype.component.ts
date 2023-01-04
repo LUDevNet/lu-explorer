@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-
-import { LuJsonService, LuLocaleService } from '../../services';
 import { LuCoreDataService } from '../../util/services/lu-core-data.service';
 
 interface TypeKey {
@@ -56,7 +54,7 @@ export class MissionsBySubtypeComponent implements OnInit {
 
   getMissionNames():void
   {
-  	this.luLocaleService.getLocaleTable("Missions").subscribe(index => this.processMissionNameIndex(index));
+    this.luLocaleService.getLocaleTable("Missions").subscribe(index => this.processMissionNameIndex(index));
   }
 
   processMissionNameIndex(index: any):void

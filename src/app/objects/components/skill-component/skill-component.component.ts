@@ -1,14 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ReplaySubject, from, Observable } from 'rxjs';
-import { map, combineAll, switchMap } from 'rxjs/operators';
+import { map, combineAll, shareReplay } from 'rxjs/operators';
 
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 import { DB_ObjectSkills, DB_SkillBehavior } from '../../../../defs/cdclient';
+import { mapArr, mapToDict, pick } from '../../../../defs/rx';
 
 interface Skill {
   ref: DB_ObjectSkills;
-  skill: DB_SkillBehavior;
+  skill: Observable<DB_SkillBehavior_Ref>;
 };
+
+type DB_SkillBehavior_Ref = Pick<DB_SkillBehavior, "skillID" | "skillIcon" | "imaginationcost" | `${"life" | "im" | "armor"}BonusUI` | "damageUI" | "behaviorID">
 
 @Component({
   selector: 'app-skill-component',
@@ -18,35 +21,26 @@ interface Skill {
 export class SkillComponentComponent implements OnInit {
 
   _id: number;
-  skills: Observable<{[id: number]: Skill}>;
-  skill_ref: ReplaySubject<DB_ObjectSkills[]>;
+  $skills: Observable<Skill[]>;
+  $skillRef = new ReplaySubject<DB_ObjectSkills[]>(1);
 
   constructor(
-    private luJsonService: LuJsonService) {
+    private coreData: LuCoreDataService) {
 
-    this.skill_ref = new ReplaySubject<DB_ObjectSkills[]>(1);
-    this.skills = this.skill_ref
-      .pipe(
-        switchMap(this.mapRef.bind(this))
-      )
-  }
-
-  mapRef(ref_list: DB_ObjectSkills[] = []) {
-    return from(ref_list)
-      .pipe(
-        map(ref => {
-          let id = ref.skillID;
-          return this.luJsonService.getSkill(id)
-            .pipe(map(data => {
-              return { ref: ref, skill: data };
-            }));
-        }),
-        combineAll((...values) => {
-          var dict = {};
-          values.forEach(data => dict[data.ref.skillID] = data);
-          return dict;
-        })
-      )
+    this.$skillRef = new ReplaySubject<DB_ObjectSkills[]>(1);
+    let $skillIds = this.$skillRef.pipe(mapArr(sk => sk.skillID), shareReplay(1));
+    let $skillRows = $skillIds.pipe(
+      this.coreData.queryTableEntries$<number[], DB_SkillBehavior_Ref>("SkillBehavior", ["skillID", "skillIcon", "imaginationcost", "lifeBonusUI", "armorBonusUI", "imBonusUI", "damageUI", "behaviorID"]),
+      mapToDict("skillID"),
+    );
+    this.$skills = this.$skillRef.pipe(
+      mapArr(ref => {
+        return {
+          ref,
+          skill: $skillRows.pipe(pick(ref.skillID)),
+        };
+      })
+    );
   }
 
   @Input() set id(value: number) {
@@ -58,7 +52,7 @@ export class SkillComponentComponent implements OnInit {
   }
 
   @Input() set oskills(ref_list: DB_ObjectSkills[]) {
-    this.skill_ref.next(ref_list);
+    this.$skillRef.next(ref_list);
   }
 
   ngOnInit() { }

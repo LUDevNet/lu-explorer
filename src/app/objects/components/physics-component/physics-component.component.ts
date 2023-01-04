@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 import { DB_PhysicsComponent } from '../../../../defs/cdclient';
 
 
@@ -26,13 +26,13 @@ export class PhysicsComponentComponent implements OnInit {
     return this.__id;
   }
 
-  constructor(private luJsonService: LuJsonService) {
+  constructor(private coreData: LuCoreDataService) {
     this._id = new ReplaySubject(1);
     this.$component = new ReplaySubject(1);
 
     this._id.pipe(
       tap(id => this.__id = id),
-      switchMap(ref => this.luJsonService.getPhysicsComponent(ref))
+      switchMap(ref => this.coreData.getSingleTableEntry("PhysicsComponent", ref))
     ).subscribe(this.$component);
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { LuJsonService, LuLocaleService } from '../../services';
+import { LuCoreDataService } from '../../services';
 import { DB_brickAttributes } from '../../../defs/cdclient';
 
 @Component({
@@ -14,11 +14,10 @@ export class BrickAttributesComponent implements OnInit {
   table: Observable<DB_brickAttributes[]>;
 
   constructor(
-    private luJsonService: LuJsonService,
-    private luLocaleService: LuLocaleService) { }
+    private luCoreData: LuCoreDataService) { }
 
   ngOnInit() {
-    this.table = this.luJsonService.getSingleTable('brickAttributes');
+    this.table = this.luCoreData.getFullTable('brickAttributes');
   }
 
 }

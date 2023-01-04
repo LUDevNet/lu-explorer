@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 
 @Component({
   selector: 'app-rebuild-component',
@@ -11,16 +11,15 @@ export class RebuildComponentComponent implements OnInit {
   @Input() id: number;
   component: any;
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit() {
-  	this.getComponent();
+    this.getComponent();
   }
 
-  getComponent(): void
-  {
-  	this.luJsonService.getRebuildComponent(this.id)
-  	  .subscribe(component => this.component = component);
+  getComponent(): void {
+    this.coreData.getSingleTableEntry("RebuildComponent", this.id)
+      .subscribe(component => this.component = component);
   }
 
 }

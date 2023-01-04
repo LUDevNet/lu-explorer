@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../services';
 import { DB_ZoneTable } from '../../../defs/cdclient';
 
 const SIGNAGE_ZONES = [1001, 1100, 1149, 1150, 1151, 1200, 1201, 1250, 1251, 1260, 1300, 1350, 1351, 1400, 1450, 1451, 1600, 1800, 1900, 2000];
@@ -20,7 +20,7 @@ export class ZoneDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private luJsonService: LuJsonService,
+    private coreData: LuCoreDataService,
     private location: Location
   ) { }
 
@@ -35,7 +35,7 @@ export class ZoneDetailComponent implements OnInit {
     }
   }
 
-  getSignage(): {[klass: string]: any} {
+  getSignage(): { [klass: string]: any } {
     return (SIGNAGE_ZONES.includes(this.zone_id)) ? {
       "backgroundImage": `url('/lu-res/textures/ui/signage/${this.zone_id}.png')`
     } : { display: "none" };
@@ -43,6 +43,6 @@ export class ZoneDetailComponent implements OnInit {
 
   getZone(id: number): void {
     this.zone_id = id;
-    this.luJsonService.getZone(id).subscribe(zone => this.zone = zone);
+    this.coreData.getSingleTableEntry("ZoneTable", id).subscribe(zone => this.zone = zone);
   }
 }

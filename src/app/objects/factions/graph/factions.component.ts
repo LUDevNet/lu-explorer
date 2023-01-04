@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 
 declare var vis: any;
 
@@ -13,52 +13,44 @@ export class FactionsGraphComponent implements OnInit {
   table: any[];
   network: any;
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit() {
     this.getTable()
   }
 
-  getTable(): void
-  {
-    this.luJsonService.getFactions().subscribe(table => this.loadTable(table));
+  getTable(): void {
+    this.coreData.getFullTable("Factions").subscribe(table => this.loadTable(table));
   }
 
-  loadTable(table: any[]): void
-  {
+  loadTable(table: any[]): void {
     this.table = table;
 
     var container = document.getElementById('mynetwork');
 
     var nodes = [];
 
-    for (let node of this.table)
-    {
-      nodes.push({id: node.faction, label: `${node.faction}`});
+    for (let node of this.table) {
+      nodes.push({ id: node.faction, label: `${node.faction}` });
     }
 
     var edges = [];
 
-    for (let node of this.table)
-    {
+    for (let node of this.table) {
       /*for (let part of node.factionList.split(','))
       {
         edges.push({from: node.faction, to: +part});
       }*/
 
-      if (node.friendList)
-      {
-        for (let part of node.friendList.split(','))
-        {
-          edges.push({from: node.faction, to: +part, color: { color: '#00ff00', inherit: false}});
+      if (node.friendList) {
+        for (let part of node.friendList.split(',')) {
+          edges.push({ from: node.faction, to: +part, color: { color: '#00ff00', inherit: false } });
         }
       }
 
-      if (node.enemyList)
-      {
-        for (let part of node.enemyList.split(','))
-        {
-          edges.push({from: node.faction, to: +part, color: { color: '#ff0000', inherit: false}});
+      if (node.enemyList) {
+        for (let part of node.enemyList.split(',')) {
+          edges.push({ from: node.faction, to: +part, color: { color: '#ff0000', inherit: false } });
         }
       }
     }
@@ -77,7 +69,7 @@ export class FactionsGraphComponent implements OnInit {
         }
       },
       edges: {
-      	width: 5
+        width: 5
       }
     }
 
@@ -85,8 +77,7 @@ export class FactionsGraphComponent implements OnInit {
     this.network.on('select', params => this.select(params));
   }
 
-  select(params: any): void
-  {
+  select(params: any): void {
     console.log(params);
   }
 

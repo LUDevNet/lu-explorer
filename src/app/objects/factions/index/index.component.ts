@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { DB_Factions } from '../../../../defs/cdclient';
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 
 @Component({
   selector: 'lux-index',
@@ -11,10 +11,10 @@ import { LuJsonService } from '../../../services';
 export class IndexComponent implements OnInit {
   $factions: Observable<DB_Factions[]>;
 
-  constructor(private luJson: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit(): void {
-    this.$factions = this.luJson.getFactions();
+    this.$factions = this.coreData.getFullTable("Factions");
   }
 
 }

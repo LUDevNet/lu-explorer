@@ -25,7 +25,7 @@ export class RewardCodesComponent implements OnInit {
   constructor(private luCoreData: LuCoreDataService) { }
 
   ngOnInit(): void {
-    this.$code_groups = this.luCoreData.getTableEntry<DB_RewardCodes>("RewardCodes", "all").pipe(map(list => {
+    this.$code_groups = this.luCoreData.getTableEntry("RewardCodes", "all").pipe(map(list => {
       let dict: { [key: string]: DB_RewardCodes[] } = {};
       for (let code of list) {
         let gate = code.gate_version || '';

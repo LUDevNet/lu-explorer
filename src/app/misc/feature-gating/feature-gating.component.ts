@@ -10,7 +10,7 @@ import { LuCoreDataService } from '../../services';
 })
 export class FeatureGatingComponent implements OnInit {
 
-  table: any[];
+  table: DB_FeatureGating[];
 
   constructor(private luCoreData: LuCoreDataService) { }
 
@@ -19,19 +19,18 @@ export class FeatureGatingComponent implements OnInit {
   }
 
   getTable(): void {
-    this.luCoreData.getTableEntry<DB_FeatureGating>("FeatureGating", "all").subscribe(this.processData.bind(this));
+    this.luCoreData.getFullTable("FeatureGating").subscribe(this.processData.bind(this));
   }
 
-  processData(table: any) {
+  processData(table: DB_FeatureGating[]) {
     this.table = table.sort(this.compareVersionsRev.bind(this));
   }
 
-  compareVersionsRev(a, b): number {
+  compareVersionsRev(a: DB_FeatureGating, b: DB_FeatureGating): number {
     return this.compareVersions(b, a);
   }
 
-  compareVersions(a, b): number {
-
+  compareVersions(a: DB_FeatureGating, b: DB_FeatureGating): number {
     let compMajor = a.major - b.major;
     let compCurrent = a.current - b.current;
     let compMinor = a.minor - b.minor;

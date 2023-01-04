@@ -8,7 +8,7 @@
     <app-group-icon [name]="defined_type"></app-group-icon>
   </h2>
 
-  <ng-container *luxVar="$typeData | async; let data">
+  <ng-container *ngIf="$typeData | async; let data">
     <section *ngIf="data.subtypes">
       <h3>Subtypes</h3>
 

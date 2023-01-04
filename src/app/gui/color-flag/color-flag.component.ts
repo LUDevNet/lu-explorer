@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DB_BrickColors } from '../../../defs/cdclient';
-import { LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../services';
 
 @Component({
   selector: 'lux-color-flag',
@@ -15,10 +15,10 @@ export class ColorFlagComponent implements OnInit {
 
   $brickColors: Observable<DB_BrickColors[]>;
 
-  constructor(private luJson: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit(): void {
-    this.$brickColors = this.luJson.getBrickColors();
+    this.$brickColors = this.coreData.getFullTable("BrickColors");
   }
 
 }

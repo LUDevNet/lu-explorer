@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LuJsonService } from '../../../services';
-import { ReplaySubject, Observable } from 'rxjs';
+import { LuCoreDataService } from '../../../services';
+import { ReplaySubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -14,14 +14,14 @@ export class PackageComponentComponent implements OnInit {
   _id: number;
   component: ReplaySubject<any>;
 
-  constructor(private luJsonService: LuJsonService) {
+  constructor(private coreData: LuCoreDataService) {
     this._ref = new ReplaySubject<any>(1);
     this.component = new ReplaySubject<any>(1);
 
     this._ref.subscribe(id => this._id = id);
     this._ref.pipe(
-      switchMap(id => this.luJsonService.getPackageComponent(id))
-    ).subscribe(x => this.component.next(x));
+      switchMap(id => this.coreData.getSingleTableEntry("PackageComponent", id))
+    ).subscribe(this.component);
   }
 
   @Input() set id(value: number) {

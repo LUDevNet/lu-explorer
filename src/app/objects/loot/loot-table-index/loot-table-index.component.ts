@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DB_LootTable } from '../../../../defs/cdclient';
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 
 @Component({
   selector: 'app-loot-table-index',
@@ -21,14 +21,14 @@ export class LootTableIndexComponent implements OnInit {
     return this.loot_table_index;
   }
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit() {
   }
 
   loadLootTableIndex(id: number) {
-    this.luJsonService
-      .getLootTableGroupByIndex(id)
+    this.coreData
+      .getRevEntry('loot_table_index', id)
       .subscribe(this.processLootTableIndex.bind(this));
   }
 
@@ -39,5 +39,4 @@ export class LootTableIndexComponent implements OnInit {
   sortLootTableEntry(a, b): number {
     return a.sortPriority - b.sortPriority;
   }
-
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 
 @Component({
   selector: 'app-script-component',
@@ -25,15 +25,15 @@ export class ScriptComponentComponent implements OnInit {
     return this._component || {};
   }
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit() {
   }
 
   getComponent(id: number): void {
     this._component = undefined;
-  	this.luJsonService.getScriptComponent(id)
-  	  .subscribe(component => this._component = component);
+    this.coreData.getSingleTableEntry("ScriptComponent", id)
+      .subscribe(component => this._component = component);
   }
 
   link(path: string): string {

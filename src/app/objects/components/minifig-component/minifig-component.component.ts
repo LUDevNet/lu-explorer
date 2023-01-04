@@ -1,22 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
-import { LuJsonService } from '../../../services';
-
-interface DB_MinifigComponent {
-  id: number; // INTEGER
-  head: number; // INTEGER
-  chest: number; // INTEGER
-  legs: number; // INTEGER
-  hairstyle: number; // INTEGER
-  haircolor: number; // INTEGER
-  chestdecal: number; // INTEGER
-  headcolor: number; // INTEGER
-  lefthand: number; // INTEGER
-  righthand: number; // INTEGER
-  eyebrowstyle: number; // INTEGER
-  eyesstyle: number; // INTEGER
-  mouthstyle: number; // INTEGER
-}
+import { Observable } from 'rxjs';
+import { DB_MinifigComponent, DB_MinifigDecals_Torsos } from '../../../../defs/cdclient';
+import { LuCoreDataService } from '../../../services';
 
 @Component({
   selector: 'lux-minifig-component',
@@ -26,14 +11,14 @@ interface DB_MinifigComponent {
 export class MinifigComponentComponent implements OnInit, OnChanges {
   @Input() id;
   $component?: Observable<DB_MinifigComponent>;
-  $torso?: Observable<any>;
+  $torso?: Observable<DB_MinifigDecals_Torsos>;
 
-  constructor(private luJsonService: LuJsonService) { }
+  constructor(private coreData: LuCoreDataService) { }
 
   ngOnInit(): void {
-    this.$component = this.luJsonService.getGeneric(this.id, "MinifigComponent", true);
+    this.$component = this.coreData.getSingleTableEntry("MinifigComponent", this.id);
     this.$component.subscribe(minifig => {
-      this.$torso = this.luJsonService.getPagedJsonData('tables/MinifigDecals/Torsos/', minifig.chestdecal, "chestdecal");
+      this.$torso = this.coreData.getSingleTableEntry('MinifigDecals_Torsos', minifig.chestdecal);
     });
   }
 

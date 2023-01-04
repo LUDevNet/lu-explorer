@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LuCoreDataService, LuJsonService } from '../../services';
+import { LuCoreDataService } from '../../services';
 
 interface Object {
   data: Observable<any>,
@@ -55,7 +55,6 @@ export class LvlFileComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private luJsonService: LuJsonService,
     private luCoreData: LuCoreDataService) { }
 
   ngOnInit() {
@@ -63,13 +62,11 @@ export class LvlFileComponent implements OnInit {
     this.route.paramMap.subscribe(this.selectObject.bind(this))
   }
 
-  getScene(): void
-  {
+  getScene(): void {
     this.$scene = this.luCoreData.getMap(this.ref.path);
   }
 
-  selectObject(map: any)
-  {
+  selectObject(map: any) {
     console.log(map);
     this.zone_id = +map.get('id');
     this.scene_id = +map.get('sc');
@@ -93,7 +90,7 @@ export class LvlFileComponent implements OnInit {
   }
 
   objID(id) {
-    let mask = Math.pow(2,32);
+    let mask = Math.pow(2, 32);
     let prefix = String(id % mask);
     var flags = [];
     var m = Math.floor(id / mask);

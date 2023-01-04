@@ -17,7 +17,7 @@ export class DeletionRestrictionsComponent implements OnInit {
   $deletionRestrictionsLocale: Observable<Record<number, Locale_DeletionRestrictions>>;
 
   ngOnInit(): void {
-    this.$deletionRestrictions = this.coreData.getTableEntry<DB_DeletionRestrictions>('DeletionRestrictions', 'all');
+    this.$deletionRestrictions = this.coreData.getFullTable('DeletionRestrictions');
     this.$deletionRestrictionsLocale = this.coreData.getLocaleSubtree<Locale_DeletionRestrictions>('DeletionRestrictions');
   }
 

@@ -1,5 +1,5 @@
-<div>
-    <p>Name: <code *ngIf="data">{{ data.name }}</code></p>
+<div *luxVar="$components | async | dict:'component_id'; let components">
+    <p>Name: <code *ngIf="$data | async; let data">{{ data.name }}</code></p>
 
     <div *ngIf="showGeneralSettings && generalSettings as general">
         <h4>General Settings</h4>
@@ -48,7 +48,7 @@
     </div>
 
     <div *ngIf="renderSettings as render">
-        <h4>Render #{{data.components['2']}} (2)</h4>
+        <h4>Render #{{components['2']}} (2)</h4>
         <ul>
             <li *ngIf="render.renderDisabled">This object is not rendered (<code>renderDisabled == true</code>)</li>
             <li *ngIf="!render.renderDisabled">This object is rendered (<code>renderDisabled</code> not set)</li>
@@ -132,7 +132,7 @@
     </div>
 
     <div *ngIf="simplePhysicsSettings as simplePhysics">
-        <h4>SimplePhysics #{{data.components['3']}} (3)</h4>
+        <h4>SimplePhysics #{{components['3']}} (3)</h4>
         <ul>
             <li>This object has simple physics</li>
             <li *ngIf="simplePhysics.create_physics === true">The physics are created
@@ -167,20 +167,20 @@
     </div>
 
     <div *ngIf="scriptSettings as script">
-        <h4>Script #{{data.components['5']}} (5)</h4>
+        <h4>Script #{{components['5']}} (5)</h4>
         <p>This object has scripts attached</p>
         <app-data-table [table]="script"></app-data-table>
     </div>
 
     <div *ngIf="destructibleSettings as destructible">
-        <h4>Destructible #{{data.components['7']}} (7)</h4>
+        <h4>Destructible #{{components['7']}} (7)</h4>
         <ul>
             <li>This object can be destroyed</li>
         </ul>
     </div>
 
     <div *ngIf="spawnerSettings as spawner">
-        <h4>Spawner #{{data.components['10']}} (10)</h4>
+        <h4>Spawner #{{components['10']}} (10)</h4>
         <ul>
             <li>This object is a spawner that creates objects:
                 <ul>
@@ -245,19 +245,19 @@
     </div>
 
     <div *ngIf="itemSettings as item">
-        <h4>Item #{{data.components['11']}} (11)</h4>
+        <h4>Item #{{components['11']}} (11)</h4>
         <p>This object is an item</p>
     </div>
 
     <div *ngIf="collectibleSettings as collectible">
-        <h4>Collectible #{{data.components['23']}} (23)</h4>
+        <h4>Collectible #{{components['23']}} (23)</h4>
         <ul>
             <li>This object is a collectible</li>
         </ul>
     </div>
 
     <div *ngIf="propertySettings as property">
-        <h4>Property #{{data.components['36']}} (36)</h4>
+        <h4>Property #{{components['36']}} (36)</h4>
         <ul>
             <li>This object manages a property</li>
             <li *ngIf="property.propertyBordersLOT !== undefined">
@@ -275,13 +275,13 @@
     </div>
 
     <div *ngIf="scriptedActivitySettings as scriptedActivity">
-        <h4>ScriptedActivity #{{data.components['39']}} (39)</h4>
+        <h4>ScriptedActivity #{{components['39']}} (39)</h4>
         <p>This object manages a scripted activity</p>
         <app-data-table [table]="scriptedActivity"></app-data-table>
     </div>
 
     <div *ngIf="phantomPhysicsSettings as phantomPhysics">
-        <h4>PhantomPhysics #{{data.components['40']}} (40)</h4>
+        <h4>PhantomPhysics #{{components['40']}} (40)</h4>
         <p>This object has phantom physics</p>
 
         <ul>
@@ -311,7 +311,7 @@
     </div>
 
     <div *ngIf="propertyEntranceSettings as propertyEntrance">
-        <h4>PropertyEntrance #{{data.components['43']}} (43)</h4>
+        <h4>PropertyEntrance #{{components['43']}} (43)</h4>
         <ul>
             <li>This object can be used to enter &amp; leave a property</li>
             <li *ngIf="propertyEntrance.propertyLaunchPadOnPropertyMap === true">
@@ -331,12 +331,12 @@
     </div>
 
     <div *ngIf="propertyManagementSettings as propertyManagement">
-        <h4>PropertyManagement #{{data.components['45']}} (45)</h4>
+        <h4>PropertyManagement #{{components['45']}} (45)</h4>
         <p>This object can be used to manage a property</p>
     </div>
 
     <div *ngIf="soundAmbient3DSettings as soundAmbient3D">
-        <h4>SoundAmbient3D #{{data.components['56']}} (56)</h4>
+        <h4>SoundAmbient3D #{{components['56']}} (56)</h4>
         <ul>
             <li>This object produces 3D ambient sound</li>
             <li *ngIf="soundAmbient3D.NDAEG">
@@ -350,7 +350,7 @@
     </div>
 
     <div *ngIf="propertyVendorSettings as propertyVendor">
-        <h4>PropertyVendor #{{data.components['65']}} (65)</h4>
+        <h4>PropertyVendor #{{components['65']}} (65)</h4>
         <ul>
             <li>This object is a property vendor</li>
             <li *ngIf="propertyVendor.property_required_mission">
@@ -363,13 +363,13 @@
     </div>
 
     <div *ngIf="hfLightDirectionGadgetSettings as hfLightDirectionGadget">
-        <h4>HFLightDirectionGadget #{{data.components['66']}} (66)</h4>
+        <h4>HFLightDirectionGadget #{{components['66']}} (66)</h4>
         <p>This light direction gadget</p>
         <app-data-table [table]="hfLightDirectionGadget"></app-data-table>
     </div>
 
     <div *ngIf="rocketLaunchSettings as rocketLaunch">
-        <h4>RocketLaunch #{{data.components['67']}} (67)</h4>
+        <h4>RocketLaunch #{{components['67']}} (67)</h4>
         <p>This object is a rocket launchpad</p>
         <ul>
             <li><code>rocketLaunchMusic</code>
@@ -409,21 +409,21 @@
     </div>
 
     <div *ngIf="proximityMonitorSettings as proximityMonitor">
-        <h4>ProximityMonitor #{{data.components['78']}} (78)</h4>
+        <h4>ProximityMonitor #{{components['78']}} (78)</h4>
         <p>This object has a proximity monitor</p>
         <app-data-table [table]="proximityMonitor"></app-data-table>
     </div>
 
     <div *ngIf="propertyPlaqueSettings as propertyPlaque">
-        <h4>PropertyPlaque #{{data.components['113']}} (113)</h4>
+        <h4>PropertyPlaque #{{components['113']}} (113)</h4>
         <p>This object is a property plaque</p>
     </div>
 
-    <div>
+    <!--<div>
         <h4>Data</h4>
-        <p>Components: {{ (dataAsync | async)?.components | json }}</p>
-        <p>Data: {{ dataAsync | async | json }}</p>
-    </div>
+        <p *ngIf="components">Components: {{ components | json }}</p>
+        <p *ngIf="$data | async; let data">Data: {{ data | json }}</p>
+    </div>-->
     <div>
         <h4>Settings</h4>
         <app-data-table [table]="remainingSettings"></app-data-table>

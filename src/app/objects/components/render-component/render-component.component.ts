@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { LuJsonService } from '../../../services';
+import { LuCoreDataService } from '../../../services';
 import { Observable, ReplaySubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { DB_mapShaders, DB_RenderComponent } from '../../../../defs/cdclient';
@@ -16,12 +16,12 @@ export class RenderComponentComponent {
   _ref: ReplaySubject<number>;
   _id: number;
 
-  constructor(private luJsonService: LuJsonService) {
+  constructor(private coreData: LuCoreDataService) {
     this._ref = new ReplaySubject<number>(1);
     this._ref.subscribe(x => this._id = x);
     this.component = this._ref
-      .pipe(switchMap(val => this.luJsonService.getRenderComponent(val)))
-    this.$shaders = this.luJsonService.getShadersMap();
+      .pipe(switchMap(val => this.coreData.getSingleTableEntry("RenderComponent", val)))
+    this.$shaders = this.coreData.getFullTable("mapShaders");
   }
 
   @Input('id') set id(value: number) {

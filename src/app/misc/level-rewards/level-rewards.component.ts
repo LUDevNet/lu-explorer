@@ -23,7 +23,7 @@ export class LevelRewardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.$list = this.luCoreData
-      .getTableEntry<DB_Rewards>("Rewards", "all")
+      .getFullTable("Rewards")
       .pipe(map(x => x.sort(sortRewards)));
   }
 
