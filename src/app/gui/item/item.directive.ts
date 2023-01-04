@@ -15,7 +15,8 @@ export class ItemDirective extends TooltipDirective {
   @Input("luxFetchItem") set id(id: number) {
     this.slotComponent.link = `/objects/${id}`;
     this.itemTooltipRef.instance.id = id;
-    this.coreData.getTableEntry('Objects', id).subscribe(this.onObjectsRow.bind(this));
+    this.itemTooltipRef.instance.title = `[Unknown]`;
+    this.coreData.getSingleTableEntry('Objects', id).subscribe(this.onObjectsRow.bind(this));
     this.coreData.getTableEntry('ComponentsRegistry', id).subscribe(this.onObjectComponents.bind(this));
   }
 
@@ -35,11 +36,13 @@ export class ItemDirective extends TooltipDirective {
   }
 
   onObjectsRow(object: DB_Objects) {
+    console.log(object);
     if (object.displayName) {
       this.itemTooltipRef.instance.title = object.displayName;
     } else if (object.name) {
       this.itemTooltipRef.instance.title = object.name;
     }
+    this.itemTooltipRef.changeDetectorRef.detectChanges();
   }
 
   onObjectComponents(components: DB_ComponentsRegistry[]) {
