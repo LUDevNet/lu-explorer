@@ -13,7 +13,7 @@ export class MissionDirective {
     this.missionComponent.id = id;
     this.missionComponent.title = `#${id}`;
     this.coreData.getSingleTableEntry("Missions", id).subscribe(this.onMission);
-    this.coreData.getLocaleEntry(`Missions_${id}_name`).subscribe(x => { if (x) { this.missionComponent.title = x.value; } });
+    this.coreData.getLocaleEntry("Missions", id, "name").subscribe(x => { if (x) { this.missionComponent.title = x.value; } });
     this.coreData.getLocaleSubtree<Locale_MissionText>("MissionText", id).subscribe(this.onMissionText.bind(this, id));
   }
 

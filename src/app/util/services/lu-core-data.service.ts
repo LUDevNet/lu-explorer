@@ -78,7 +78,7 @@ export class LuCoreDataService {
   }
 
   getLocaleSubtree<T>(key: string, ...ids: (string | number)[]): Observable<{ [key: string]: T }> {
-    let path = key.replace('_', '/');
+    let path = key.replace(/_/g, '/');
     for (const part of ids) {
       path += `/${part}`;
     }
@@ -90,8 +90,8 @@ export class LuCoreDataService {
     return this.query(`v0/locale/${key}`, params);
   }
 
-  getLocaleEntry(key: string): Observable<LocaleNode> {
-    return this.get(`v0/locale/${key.replace('_', '/')}`);
+  getLocaleEntry(...key: (string | number)[]): Observable<LocaleNode> {
+    return this.get(`v0/locale/${key.join('/').replace(/_/g, '/')}`);
   }
 
   getTableEntry<K>(table: K & TableName, key: string | number): Observable<Table<K>> {
