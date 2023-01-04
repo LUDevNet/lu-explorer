@@ -21,8 +21,12 @@
         </ng-container>
       </ng-container>
     </table>
-    <app-pagination [count]="table.length | divceil:limit" [current]="$page | async" prefix="/misc/brick-ids">
-    </app-pagination>
+    <ng-container *luxVar="$page | async; let page">
+      <ng-container *luxVar="table.length | divceil:limit; let count">
+        <app-pagination [count]="count" [current]="page" prefix="/misc/brick-ids">
+        </app-pagination>
+      </ng-container>
+    </ng-container>
   </ng-container>
   <ng-template #loading>
     Loading...
