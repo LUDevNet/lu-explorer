@@ -1,0 +1,24 @@
+<section id="settings">
+    <h2>Settings</h2>
+    <p>
+        Current API URL: <code>{{$apiUrl | async}}</code>
+    </p>
+    <h3>Add new Backend</h3>
+    <table class="form">
+        <tr>
+            <th>Base URL</th>
+            <td><input type="text" [(ngModel)]="newBase"></td>
+        </tr>
+        <tr>
+            <th>Username</th>
+            <td><input type="text" [(ngModel)]="newUser"></td>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td><input type="password" [(ngModel)]="newPass"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button (click)="onSet()">Set</button></td>
+        </tr>
+    </table>
+</section>
