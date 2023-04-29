@@ -1,7 +1,8 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { filter, first, map, mergeMap } from 'rxjs/operators';
 
 function isFunction(functionToCheck) {
   return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
@@ -12,26 +13,32 @@ function isFunction(functionToCheck) {
   templateUrl: './app.component.html',
   styleUrls: ['../../node_modules/typeface-nunito/index.css', './app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'LU-Explorer';
+  subscriptions = new Subscription();
+
+  title$ = this.router.events.pipe(
+    filter(event => event instanceof NavigationEnd),
+    map(() => this.getChild(this.activatedRoute).snapshot),
+    map(route => {
+      const data = route.data;
+      return data.title ? (isFunction(data.title) ? data.title(route.params) : data.title) : "LU-Explorer";
+    }),
+  );
 
   constructor(private router: Router,
-    private viewContainerRef: ViewContainerRef,
     private activatedRoute: ActivatedRoute,
     private titleService: Title) {
-
   }
 
   ngOnInit() {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-    ).subscribe(() => {
-      const rt = this.getChild(this.activatedRoute);
-      rt.data.subscribe(data => {
-        let value = data.title ? (isFunction(data.title) ? data.title(rt.snapshot.params) : data.title) : "LU-Explorer";
-        this.titleService.setTitle(value + " | LU-Explorer")
-      });
-    });
+    this.subscriptions.add(this.title$.subscribe((value) => {
+      this.titleService.setTitle(value + " | LU-Explorer")
+    }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();  
   }
 
   getChild(activatedRoute: ActivatedRoute): ActivatedRoute {
