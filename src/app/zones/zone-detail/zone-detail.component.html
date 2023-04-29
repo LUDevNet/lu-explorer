@@ -1,4 +1,4 @@
-<div *ngIf="zone">
+<div *ngIf="zone$ | async; let zone">
   <ul class="breadcrumbs">
     <li><a routerLink="/zones">Zones</a></li>
     <li>{{zone.DisplayDescription}}</li>
@@ -7,8 +7,7 @@
     <small><lux-gate-version-tag [gate_version]="zone.gate_version"></lux-gate-version-tag></small>
   </h2>
 
-  <div class="signage" [ngStyle]="getSignage()"></div>
-  <!--<img *ngIf="zoneGif(); let gif" [src]="gif | res" />-->
+  <div class="signage" [ngStyle]="signage$ | async"></div>
 
   <div *ngIf="zone.thumbnail">
     <h3>Thumbnail</h3>
