@@ -3,6 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 
 import { LuCoreDataService } from '../../services';
 import { LUZ_File } from '../luz-file/luz-file.component';
+import { Observable, combineLatest } from 'rxjs';
+import { DB_ZoneTable } from '../../../defs/cdclient';
+import { map, switchMap } from 'rxjs/operators';
+
+type Ref = { name: string, path: string };
 
 
 @Component({
@@ -10,40 +15,26 @@ import { LUZ_File } from '../luz-file/luz-file.component';
   templateUrl: './scenes.component.html',
   styleUrls: ['./scenes.component.css']
 })
-export class ScenesComponent implements OnInit {
+export class ScenesComponent {
 
-  scenes: string[];
-  zone: any;
-  sc_id: number;
-  id: number;
+  scId$: Observable<number> = this.route.paramMap.pipe(map(params => +params.get('sc')));
+  id$: Observable<number> = this.route.paramMap.pipe(map(params => +params.get('id')));
+  zone$: Observable<DB_ZoneTable> = this.id$.pipe(switchMap(id => this.luCoreData.getSingleTableEntry("ZoneTable", id)));
+  luzPath$ = this.zone$.pipe(map(zone => zone.zoneName));
+  luzDir$ = this.luzPath$.pipe(map(file => file.substring(0, file.lastIndexOf("/") + 1)));
+  luz$ = this.luzPath$.pipe(switchMap(file => this.luCoreData.getMap<LUZ_File>(file)));
+  scenes$: Observable<Ref[]> = combineLatest([this.luzDir$, this.luz$, this.scId$]).pipe(
+    map(([dir, zone, sc_id]) => {
+      return zone.scenes.filter(sc => sc.id === sc_id).map(sc => this.toRef(sc, dir))
+    })
+  )
 
   constructor(
     private route: ActivatedRoute,
     private luCoreData: LuCoreDataService,
   ) { }
 
-  ngOnInit() {
-    this.getZone();
-  }
-
-  getZone(): void {
-    this.id = +this.route.snapshot.paramMap.get('id');
-    this.luCoreData.getSingleTableEntry("ZoneTable", this.id)
-      .subscribe(zone => { this.zone = zone; this.getZoneData(zone.zoneName); });
-  }
-
-  toRef(sc: any, dir: string): any {
+  toRef(sc: any, dir: string): Ref {
     return { name: sc.name, path: (dir + sc.filename) }
   }
-
-  getZoneData(file: string): void {
-    let dir = file.substring(0, file.lastIndexOf("/") + 1);
-    this.sc_id = +this.route.snapshot.paramMap.get('sc');
-
-
-    this.luCoreData.getMap<LUZ_File>(file)
-      .subscribe(zone => this.scenes = zone.scenes
-        .filter(sc => sc.id === this.sc_id).map(sc => this.toRef(sc, dir)));
-  }
-
 }

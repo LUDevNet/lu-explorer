@@ -1,8 +1,8 @@
-<ng-container *ngIf="scenes">
-  <ul class="breadcrumbs" *ngIf="zone">
+<ng-container *ngIf="scenes$ | async; let scenes">
+  <ul class="breadcrumbs" *ngIf="zone$ | async; let zone">
     <li><a routerLink="/zones">Zones</a></li>
-    <li><a routerLink="/zones/{{id}}">{{zone.DisplayDescription}}</a></li>
-    <li>Scenes #{{sc_id}}</li>
+    <li><a routerLink="/zones/{{id$ | async}}">{{zone.DisplayDescription}}</a></li>
+    <li>Scenes #{{scId$ | async}}</li>
   </ul>
   <app-lvl-file *ngFor="let sc of scenes" [ref]="sc">{{sc}}</app-lvl-file>
 </ng-container>
