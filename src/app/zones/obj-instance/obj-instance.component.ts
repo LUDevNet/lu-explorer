@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, Input } from '@angular/core';
+import { Observable, ReplaySubject, combineLatest } from 'rxjs';
 import { DB_ComponentsRegistry, DB_Objects } from '../../../defs/cdclient';
 import { LuCoreDataService } from '../../services';
+import { map, switchMap } from 'rxjs/operators';
 
 const GENERAL_KEYS = [
   'loadOnClientOnly',
@@ -280,19 +281,7 @@ const KEYS = {
   "113": PROPERTY_PLAQUE_KEYS,
 };
 
-@Component({
-  selector: 'app-obj-instance',
-  templateUrl: './obj-instance.component.html',
-  styleUrls: ['./obj-instance.component.css']
-})
-export class ObjInstanceComponent implements OnInit {
-  @Input() showGeneralSettings: boolean = true;
-
-  //data: any;
-  //dataAsync: Observable<any>;
-  $components: Observable<DB_ComponentsRegistry[]>;
-  $data: Observable<DB_Objects>;
-
+class ObjData {
   settings: Object;
   usedSettings: Set<string>;
 
@@ -319,17 +308,14 @@ export class ObjInstanceComponent implements OnInit {
   proximityMonitorSettings?: object;
   propertyPlaqueSettings?: PropertyPlaqueSettings; // 113
 
-  constructor(private coreData: LuCoreDataService) { }
-
-  @Input() set obj(value: any) {
-    this.settings = value.settings;
-    this.$components = this.coreData.getTableEntry("ComponentsRegistry", value.lot);
-    this.$data = this.coreData.getSingleTableEntry("Objects", value.lot);
-    this.$components.subscribe(this.objData.bind(this));
+  getSetting<T>(key: string, fallback: T): T {
+    this.usedSettings.add(key);
+    return this.settings.hasOwnProperty(key) ? this.settings[key] : fallback;
   }
 
-  objData(components: DB_ComponentsRegistry[]) {
+  constructor(components: DB_ComponentsRegistry[], settings: Object) {
     //this.data = value;
+    this.settings = settings;
     this.usedSettings = new Set();
 
     let setters = {
@@ -377,8 +363,9 @@ export class ObjInstanceComponent implements OnInit {
 
     // Remaining settings
     for (const component of components) {
+      console.log(component);
       const k = KEYS[component.component_type];
-      const key = component.component_id;
+      const key = component.component_type;
       if (k) {
         k.forEach(e => this.usedSettings.add(e));
         let data = {};
@@ -398,13 +385,42 @@ export class ObjInstanceComponent implements OnInit {
       if (!this.usedSettings.has(arr[0])) this.remainingSettings[arr[0]] = arr[1];
     })
   }
+}
 
-  getSetting<T>(key: string, fallback: T): T {
-    this.usedSettings.add(key);
-    return this.settings.hasOwnProperty(key) ? this.settings[key] : fallback;
-  }
+interface ObjInstance {
+  lot: number,
+  settings: Object,
+};
 
-  ngOnInit(): void {
+@Component({
+  selector: 'app-obj-instance',
+  templateUrl: './obj-instance.component.html',
+  styleUrls: ['./obj-instance.component.css']
+})
+export class ObjInstanceComponent {
+  @Input() showGeneralSettings: boolean = true;
+
+  private obj$ = new ReplaySubject<ObjInstance>(1);
+  componentRegistry$: Observable<DB_ComponentsRegistry[]> = this.obj$.pipe(
+    switchMap(obj => this.coreData.getTableEntry("ComponentsRegistry", obj.lot)),
+  );
+  $components: Observable<Record<number, number>> = this.componentRegistry$.pipe(
+    map(components => components.reduce((acc, c) => {
+      acc[c.component_type] = c.component_id;
+      return acc;
+    }, <{ [key: number]: number }>{}))
+  );
+  $data: Observable<DB_Objects> = this.obj$.pipe(
+    switchMap(obj => this.coreData.getSingleTableEntry("Objects", obj.lot))
+  );
+  $objData = combineLatest([this.componentRegistry$, this.obj$]).pipe(
+    map(([components, obj]) => new ObjData(components, obj.settings))
+  )
+
+  constructor(private coreData: LuCoreDataService) { }
+
+  @Input() set obj(value: ObjInstance) {
+    this.obj$.next(value);
   }
 
 }

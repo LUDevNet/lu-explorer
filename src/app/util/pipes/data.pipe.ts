@@ -52,7 +52,7 @@ export class ArrKeysPipe implements PipeTransform {
 
 @Pipe({ name: 'dict' })
 export class DictPipe implements PipeTransform {
-  transform<T>(value: T[], arg: keyof T): Record<any, T> {
+  transform<T, K extends keyof T>(value: T[], arg: K): Record<string | number, T> {
     if (value == null) return null;
     let dict = {};
     for (var i = 0; i < value.length; i++) {
