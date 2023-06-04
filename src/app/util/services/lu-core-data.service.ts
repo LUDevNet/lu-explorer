@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, OperatorFunction, ReplaySubject } from 'rxjs';
 import { catchError, first, map, shareReplay, switchMap } from 'rxjs/operators';
@@ -19,34 +19,87 @@ const ICONS_KEYS: (keyof DB_Icons)[] = [
   "IconName",
 ]
 
+export class ApiConfig {
+  base: string;
+  user?: string;
+  pass?: string;
+
+  constructor(options: {
+    base: string,
+    user?: string,
+    pass?: string,
+  }) {
+    this.base = options.base;
+    if (this.user != null && this.user.length > 0) {
+      this.user = options.user;
+      this.pass = options.pass;
+    }
+  }
+
+  get withCredentials(): boolean {
+    return this.user == null
+  }
+
+  headers(): { [header: string]: string | string[]; } {
+    if (this.user != null) {
+      return {
+        "Authorization": `Basic ${btoa(`${this.user}:${this.pass}`)}`
+      }
+    } else {
+      return {};
+    }
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class LuCoreDataService {
   // The base URL for this API
-  apiUrl: string = environment.data.apiUrl;
-  // The cache for the requests
-  cache: { [key: string]: ReplaySubject<any> } = {};
+  $apiUrl = new ReplaySubject<ApiConfig>(1);
 
-  constructor(private http: HttpClient) { }
+  // The cache for the requests
+  private cache: Map<string, ReplaySubject<any>> = new Map();
+
+  constructor(private http: HttpClient) {
+    this.$apiUrl.subscribe(cfg => {
+      console.log("saving", cfg)
+      localStorage.setItem("lu-explorer-cfg", JSON.stringify(cfg));
+    });
+    let cfg = localStorage.getItem("lu-explorer-cfg")
+    this.$apiUrl.next(new ApiConfig(cfg ? JSON.parse(cfg) : {
+      base: environment.data.apiUrl
+    }))
+  }
+
+  setApiUrl(base: string, user: string, pass: string) {
+    // FIXME: check for validity?
+    this.cache.clear();
+    this.$apiUrl.next(new ApiConfig({ base, user, pass }));
+  }
 
   get(url: string): Observable<any> {
-    if (!this.cache.hasOwnProperty(url)) {
-      let httpRequest = this.http.get(this.apiUrl + url)
+    if (!this.cache.has(url)) {
+      let httpRequest = this.$apiUrl.pipe(switchMap(cfg => this.http.get(cfg.base + url, {
+        headers: cfg.headers(),
+        withCredentials: cfg.withCredentials,
+      })))
         .pipe(
           catchError(this.handleError(url, { $error: null })),
         )
       let responseSubject = new ReplaySubject(1);
       httpRequest.subscribe(responseSubject);
-      this.cache[url] = responseSubject;
+      this.cache.set(url, responseSubject);
     }
-    return this.cache[url];
+    return this.cache.get(url);
   }
 
   query(url: string, body: any): Observable<any | { $error: any }> {
-    return this.http.request("QUERY", this.apiUrl + url, {
-      body: JSON.stringify(body)
-    }).pipe(
+    return this.$apiUrl.pipe(switchMap(cfg => this.http.request("QUERY", cfg.base + url, {
+      body: JSON.stringify(body),
+      headers: cfg.headers(),
+      withCredentials: cfg.withCredentials,
+    }))).pipe(
       catchError(this.handleError(url, { $error: null })),
       first(),
       shareReplay(1)

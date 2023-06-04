@@ -1,0 +1,16 @@
+#settings {
+    min-height: 10rem;
+}
+
+.form {
+    max-width: 20rem;
+}
+
+table.form {
+    min-width: auto;
+}
+
+tr button {
+    width: 100%;
+    margin: 0;
+}

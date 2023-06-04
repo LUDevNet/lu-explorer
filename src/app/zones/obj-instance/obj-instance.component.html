@@ -1,7 +1,9 @@
-<div *luxVar="$components | async | dict:'component_id'; let components">
+<div *luxVar="$components | async; let components">
+    {{components | json}}
+    <ng-container *luxVar="$objData | async; let objData">
     <p>Name: <code *ngIf="$data | async; let data">{{ data.name }}</code></p>
 
-    <div *ngIf="showGeneralSettings && generalSettings as general">
+    <div *ngIf="showGeneralSettings && objData.generalSettings as general">
         <h4>General Settings</h4>
         <ul>
             <li *ngIf="!general.loadSrvrOnly && !general.loadOnClientOnly">
@@ -47,7 +49,7 @@
         </ul>
     </div>
 
-    <div *ngIf="renderSettings as render">
+    <div *ngIf="objData.renderSettings as render">
         <h4>Render #{{components['2']}} (2)</h4>
         <ul>
             <li *ngIf="render.renderDisabled">This object is not rendered (<code>renderDisabled == true</code>)</li>
@@ -131,7 +133,7 @@
         </ul>
     </div>
 
-    <div *ngIf="simplePhysicsSettings as simplePhysics">
+    <div *ngIf="objData.simplePhysicsSettings as simplePhysics">
         <h4>SimplePhysics #{{components['3']}} (3)</h4>
         <ul>
             <li>This object has simple physics</li>
@@ -166,20 +168,20 @@
         </ul>
     </div>
 
-    <div *ngIf="scriptSettings as script">
+    <div *ngIf="objData.scriptSettings as script">
         <h4>Script #{{components['5']}} (5)</h4>
         <p>This object has scripts attached</p>
         <app-data-table [table]="script"></app-data-table>
     </div>
 
-    <div *ngIf="destructibleSettings as destructible">
+    <div *ngIf="objData.destructibleSettings as destructible">
         <h4>Destructible #{{components['7']}} (7)</h4>
         <ul>
             <li>This object can be destroyed</li>
         </ul>
     </div>
 
-    <div *ngIf="spawnerSettings as spawner">
+    <div *ngIf="objData.spawnerSettings as spawner">
         <h4>Spawner #{{components['10']}} (10)</h4>
         <ul>
             <li>This object is a spawner that creates objects:
@@ -239,24 +241,24 @@
             </li>
         </ul>
         <div class="spawner-inner">
-            <app-obj-instance [obj]="{'settings': remainingSettings, 'lot': spawner.spawntemplate}"
+            <app-obj-instance [obj]="{'settings': objData.remainingSettings, 'lot': spawner.spawntemplate}"
                 [showGeneralSettings]="false"></app-obj-instance>
         </div>
     </div>
 
-    <div *ngIf="itemSettings as item">
+    <div *ngIf="objData.itemSettings as item">
         <h4>Item #{{components['11']}} (11)</h4>
         <p>This object is an item</p>
     </div>
 
-    <div *ngIf="collectibleSettings as collectible">
+    <div *ngIf="objData.collectibleSettings as collectible">
         <h4>Collectible #{{components['23']}} (23)</h4>
         <ul>
             <li>This object is a collectible</li>
         </ul>
     </div>
 
-    <div *ngIf="propertySettings as property">
+    <div *ngIf="objData.propertySettings as property">
         <h4>Property #{{components['36']}} (36)</h4>
         <ul>
             <li>This object manages a property</li>
@@ -274,13 +276,13 @@
         </ul>
     </div>
 
-    <div *ngIf="scriptedActivitySettings as scriptedActivity">
+    <div *ngIf="objData.scriptedActivitySettings as scriptedActivity">
         <h4>ScriptedActivity #{{components['39']}} (39)</h4>
         <p>This object manages a scripted activity</p>
         <app-data-table [table]="scriptedActivity"></app-data-table>
     </div>
 
-    <div *ngIf="phantomPhysicsSettings as phantomPhysics">
+    <div *ngIf="objData.phantomPhysicsSettings as phantomPhysics">
         <h4>PhantomPhysics #{{components['40']}} (40)</h4>
         <p>This object has phantom physics</p>
 
@@ -310,7 +312,7 @@
         </ul>
     </div>
 
-    <div *ngIf="propertyEntranceSettings as propertyEntrance">
+    <div *ngIf="objData.propertyEntranceSettings as propertyEntrance">
         <h4>PropertyEntrance #{{components['43']}} (43)</h4>
         <ul>
             <li>This object can be used to enter &amp; leave a property</li>
@@ -330,12 +332,12 @@
         </ul>
     </div>
 
-    <div *ngIf="propertyManagementSettings as propertyManagement">
+    <div *ngIf="objData.propertyManagementSettings as propertyManagement">
         <h4>PropertyManagement #{{components['45']}} (45)</h4>
         <p>This object can be used to manage a property</p>
     </div>
 
-    <div *ngIf="soundAmbient3DSettings as soundAmbient3D">
+    <div *ngIf="objData.soundAmbient3DSettings as soundAmbient3D">
         <h4>SoundAmbient3D #{{components['56']}} (56)</h4>
         <ul>
             <li>This object produces 3D ambient sound</li>
@@ -349,7 +351,7 @@
         </ul>
     </div>
 
-    <div *ngIf="propertyVendorSettings as propertyVendor">
+    <div *ngIf="objData.propertyVendorSettings as propertyVendor">
         <h4>PropertyVendor #{{components['65']}} (65)</h4>
         <ul>
             <li>This object is a property vendor</li>
@@ -362,13 +364,13 @@
         </ul>
     </div>
 
-    <div *ngIf="hfLightDirectionGadgetSettings as hfLightDirectionGadget">
+    <div *ngIf="objData.hfLightDirectionGadgetSettings as hfLightDirectionGadget">
         <h4>HFLightDirectionGadget #{{components['66']}} (66)</h4>
         <p>This light direction gadget</p>
         <app-data-table [table]="hfLightDirectionGadget"></app-data-table>
     </div>
 
-    <div *ngIf="rocketLaunchSettings as rocketLaunch">
+    <div *ngIf="objData.rocketLaunchSettings as rocketLaunch">
         <h4>RocketLaunch #{{components['67']}} (67)</h4>
         <p>This object is a rocket launchpad</p>
         <ul>
@@ -408,13 +410,13 @@
         </ul>
     </div>
 
-    <div *ngIf="proximityMonitorSettings as proximityMonitor">
+    <div *ngIf="objData.proximityMonitorSettings as proximityMonitor">
         <h4>ProximityMonitor #{{components['78']}} (78)</h4>
         <p>This object has a proximity monitor</p>
         <app-data-table [table]="proximityMonitor"></app-data-table>
     </div>
 
-    <div *ngIf="propertyPlaqueSettings as propertyPlaque">
+    <div *ngIf="objData.propertyPlaqueSettings as propertyPlaque">
         <h4>PropertyPlaque #{{components['113']}} (113)</h4>
         <p>This object is a property plaque</p>
     </div>
@@ -426,6 +428,7 @@
     </div>-->
     <div>
         <h4>Settings</h4>
-        <app-data-table [table]="remainingSettings"></app-data-table>
+        <app-data-table [table]="objData.remainingSettings"></app-data-table>
     </div>
+    </ng-container>
 </div>
