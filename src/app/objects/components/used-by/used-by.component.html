@@ -1,26 +1,20 @@
 <h3>Used by</h3>
 <p>This tab lists other database entries that refer to this object</p>
-<ng-container *ngIf="rev.inventory_component; let inv">
-    <section *ngIf="inv.length > 0">
-        <h4>Inventory Components (17)</h4>
-        <span *ngFor="let id of inv">
-            {{id}}
-            <lux-slot *ngFor="let itemID of $lotsForComponent(id, 17) | async" [luxFetchItem]="itemID"></lux-slot>
-        </span>
-    </section>
-</ng-container>
-<ng-container *ngIf="rev.item_component; let it">
-    <section *ngIf="it.currency_lot && it.currency_lot.length > 0">
-        <h4>Item Components (11)</h4>
-        <div *ngIf="it.currency_lot.length > 0">
-            <h5>As additional currency</h5>
-            <span *ngFor="let id of it.currency_lot">
-                {{id}}
-                <lux-slot *ngFor="let itemID of $lotsForComponent(id, 11) | async" [luxFetchItem]="itemID"></lux-slot>
-            </span>
-        </div>
-    </section>
-</ng-container>
+<section *ngIf="inv && inv.length > 0">
+    <h4>Inventory Components (17)</h4>
+    <span *ngFor="let i of inv">
+        {{i.id}}
+        <lux-slot *ngFor="let itemID of i.lots$ | async" [luxFetchItem]="itemID"></lux-slot>
+    </span>
+</section>
+<section *ngIf="currency_lot && currency_lot.length > 0">
+    <h4>Item Components (11)</h4>
+    <h5>As additional currency</h5>
+    <span *ngFor="let cl of currency_lot">
+        {{cl.id}}
+        <lux-slot *ngFor="let itemID of cl.lots$| async" [luxFetchItem]="itemID"></lux-slot>
+    </span>
+</section>
 <ng-container *ngIf="rev.item_sets; let is">
     <section *ngIf="is.length > 0">
         <h4>Item Sets</h4>

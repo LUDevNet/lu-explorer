@@ -20,9 +20,9 @@ export interface Rev_Objects_Missions {
     reward_items?: number[];
 }
 export interface Rev_Objects {
-    item_sets: number[];
+    item_sets?: number[];
     item_component: Rev_Objects_ItemComponent;
-    inventory_component: number[];
+    inventory_component?: number[];
     missions?: Rev_Objects_Missions;
 }
 
