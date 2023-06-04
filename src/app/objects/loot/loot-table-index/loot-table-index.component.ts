@@ -33,6 +33,7 @@ export class LootTableIndexComponent implements OnInit {
   }
 
   processLootTableIndex(lootTable: { loot_table: DB_LootTable[] }) {
+    console.log(lootTable);
     this.loot_table = lootTable.loot_table.sort(this.sortLootTableEntry.bind(this))
   }
 

@@ -1,5 +1,15 @@
 <h3>Used by</h3>
 <p>This tab lists other database entries that refer to this object</p>
+<section *ngIf="loot_table && loot_table.length > 0">
+    <h4>Loot Tables</h4>
+    <div *ngFor="let i of loot_table">
+        <a [routerLink]="['/objects', 'loot', 'table', i.id]">{{i.id}}</a>:
+        <ng-container *ngIf="i.table$ | async; let table">
+            <span *ngFor="let matrix of table.loot_matrix">&nbsp;
+                <a [routerLink]="['/objects', 'loot', 'matrix', matrix.LootMatrixIndex]">{{matrix.LootMatrixIndex}}</a></span>
+        </ng-container>
+    </div>
+</section>
 <section *ngIf="inv && inv.length > 0">
     <h4>Inventory Components (17)</h4>
     <span *ngFor="let i of inv">

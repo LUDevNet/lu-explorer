@@ -1,0 +1,41 @@
+<ng-container *ngIf="destructible && destructible.length > 0">
+    <h4>Destroyable Component (7)</h4>
+    <ul>
+        <li *ngFor="let comp of destructible">
+            {{comp.id}}: <a *ngFor="let lot of (comp.lots$ | async)" [routerLink]="['/objects', lot, 7]">Object
+                #{{lot}}</a>
+        </li>
+    </ul>
+</ng-container>
+<ng-container *ngIf="vendor && vendor.length > 0">
+    <h4>Vendor Component (16)</h4>
+    <ul>
+        <li *ngFor="let comp of vendor">
+            {{comp.id}}: <a *ngFor="let lot of (comp.lots$ | async)" [routerLink]="['/objects', lot, 16]">Object
+                #{{lot}}</a>
+        </li>
+    </ul>
+</ng-container>
+<ng-container *ngIf="package && package.length > 0">
+    <h4>Package Component (53)</h4>
+    <ul>
+        <li *ngFor="let comp of package">
+            {{comp.id}}: <a *ngFor="let lot of (comp.lots$ | async)" [routerLink]="['/objects', lot, 53]">Object
+                #{{lot}}</a>
+        </li>
+    </ul>
+</ng-container>
+<ng-container *ngIf="matrix.components?.smashable; let smac">
+    <h4>Smashable Components</h4>
+    <ul>
+        <li *ngFor="let comp_id of smac">{{comp_id}}</li>
+    </ul>
+</ng-container>
+<ng-container *ngIf="matrix.activity_rewards; let activity_rewards">
+    <h4>Smashable Components</h4>
+    <ul>
+        <li *ngFor="let reward of activity_rewards | keyvalue">
+            <a [routerLink]="['/activities', reward.value]">Activity #{{reward.value}}</a>
+        </li>
+    </ul>
+</ng-container>

@@ -1,4 +1,4 @@
-import { DB_BehaviorTemplate } from "./cdclient";
+import { DB_BehaviorTemplate, DB_LootMatrix, DB_LootTable } from "./cdclient";
 
 export interface Behavior {
     template: DB_BehaviorTemplate,
@@ -24,6 +24,7 @@ export interface Rev_Objects {
     item_component: Rev_Objects_ItemComponent;
     inventory_component?: number[];
     missions?: Rev_Objects_Missions;
+    loot_table_index?: number[];
 }
 
 export interface Rev_FactionById {
@@ -93,4 +94,19 @@ export interface Rev_GateVersion {
     whats_cool_news_and_tips: number[];
     zone_loading_tips: number[];
     zones: number[];
+}
+
+export interface Rev_LootTableIndex {
+    loot_table: DB_LootTable[],
+    loot_matrix: DB_LootMatrix[],
+}
+
+export interface Rev_LootMatrix {
+    components?: {
+        destructible?: number[],
+        package?: number[],
+        smashable?: number[],
+        vendor?: number[],
+    },
+    activity_rewards?: { [key: number]: number },
 }

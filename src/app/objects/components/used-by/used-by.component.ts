@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Rev_Objects } from '../../../../defs/api';
+import { Rev_LootTableIndex, Rev_Objects } from '../../../../defs/api';
 import { LuCoreDataService } from '../../../services';
 
 @Component({
@@ -14,8 +14,9 @@ export class UsedByComponent implements OnInit, OnChanges {
   @Input()
   rev: Rev_Objects;
 
-  inv: { id: number, lots$: Observable<number[]> }[];
-  currency_lot: { id: number, lots$: Observable<number[] | null> }[];
+  inv?: { id: number, lots$: Observable<number[]> }[];
+  currency_lot?: { id: number, lots$: Observable<number[] | null> }[];
+  loot_table?: { id: number, table$: Observable<Rev_LootTableIndex> }[];
 
   constructor(private luCoreDataService: LuCoreDataService) { }
 
@@ -23,11 +24,8 @@ export class UsedByComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.inv = this.rev.inventory_component?.map(id => ({ id, lots$: this.$lotsForComponent(id, 17) }));
-    this.currency_lot = this.rev.item_component?.currency_lot.map(id => ({ id, lots$: this.$lotsForComponent(id, 17) }));
-  }
-
-  $lotsForComponent(id: number, cid: number): Observable<number[]> {
-    return this.luCoreDataService.getRevEntry<{ lots: number[] } | null>('component_types/' + cid, id).pipe(map((x) => x?.lots));
+    this.inv = this.luCoreDataService.lotsForComponentsOpt(this.rev.inventory_component, 17);
+    this.currency_lot = this.luCoreDataService.lotsForComponentsOpt(this.rev.item_component?.currency_lot, 11);
+    this.loot_table = this.rev?.loot_table_index.map(id => ({ id, table$: this.luCoreDataService.getRevEntry<Rev_LootTableIndex>('loot_table_index', id) }));
   }
 }

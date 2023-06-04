@@ -4,16 +4,20 @@ import { RouterModule } from '@angular/router';
 
 import { UtilModule } from '../../util/util.module';
 
-import { LootMatrixComponent } from './loot-matrix/loot-matrix.component';
+import { LootMatrixIndexComponent } from './loot-matrix-index/loot-matrix-index.component';
 import { LootTableComponent } from './loot-table/loot-table.component';
 import { LootTableIndexComponent } from './loot-table-index/loot-table-index.component';
 import { GuiModule } from '../../gui/gui.module';
+import { LootMatrixComponent } from './loot-matrix/loot-matrix.component';
+import { LootMatrixUsedByComponent } from './loot-matrix-used-by/loot-matrix-used-by.component';
 
 @NgModule({
   declarations: [
-    LootMatrixComponent,
+    LootMatrixIndexComponent,
     LootTableComponent,
-    LootTableIndexComponent
+    LootTableIndexComponent,
+    LootMatrixComponent,
+    LootMatrixUsedByComponent
   ],
   imports: [
     GuiModule,
@@ -22,7 +26,7 @@ import { GuiModule } from '../../gui/gui.module';
     RouterModule.forChild([])
   ],
   exports: [
-    LootMatrixComponent,
+    LootMatrixIndexComponent,
     LootTableComponent,
     LootTableIndexComponent
   ]

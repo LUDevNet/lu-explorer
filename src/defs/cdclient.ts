@@ -100,12 +100,13 @@ export class DB_Factions {
 }
 
 export class DB_LootMatrix {
-  id: number;
+  LootMatrixIndex: number;
   percent: number;
   minToDrop: number;
   maxToDrop: number;
   LootTableIndex: number;
   RarityTableIndex: number;
+  id: number;
   flagID: number;
   gate_version: string;
 }

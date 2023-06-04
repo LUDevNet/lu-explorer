@@ -6,6 +6,7 @@ import { DB, DB_Icons, Row, Table, TableName } from '../../../defs/cdclient';
 import { Locale, LocaleField, LocaleIndex, LocaleRecordPick } from '../../../defs/locale';
 import { mapToDict } from '../../../defs/rx';
 import { environment } from '../../../environments/environment';
+import { ComponentTypeSingle } from '../../../defs/api';
 
 export interface LocaleNode {
   value: string,
@@ -176,6 +177,18 @@ export class LuCoreDataService {
 
   getRevEntry<T>(table: string, key: string | number): Observable<T> {
     return this.get(`v0/rev/${table}/${key}`);
+  }
+
+  lotsForComponent(id: number, cid: number): Observable<number[]> {
+    return this.getRevEntry<ComponentTypeSingle | null>('component_types/' + cid, id).pipe(map((x) => x?.lots));
+  }
+
+  lotsForComponents(ids: number[], cid: number): {id: number, lots$:  Observable<number[]>}[] {
+    return ids.map(id => ({id, lots$: this.lotsForComponent(id, cid) }));
+  }
+
+  lotsForComponentsOpt(ids: number[] | null, cid: number): {id: number, lots$:  Observable<number[]>}[] | undefined {
+    return ids?.map(id => ({id, lots$: this.lotsForComponent(id, cid) }));
   }
 
   // For RxJS

@@ -37,7 +37,7 @@
   </section>
   <section *ngIf="destructible.LootMatrixIndex !== null">
     <h3>Drops (<code>LootMatrixIndex</code> #{{destructible.LootMatrixIndex}})</h3>
-    <app-loot-matrix [id]="destructible.LootMatrixIndex"></app-loot-matrix>
+    <lux-loot-matrix-index [id]="destructible.LootMatrixIndex"></lux-loot-matrix-index>
   </section>
 </ng-container>
 <ng-template #loading>
