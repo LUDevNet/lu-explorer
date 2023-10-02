@@ -1,4 +1,4 @@
-:host {
+a {
     background-color: #000;
     border-radius: 10px;
     box-sizing: border-box;
@@ -26,10 +26,10 @@
     right: 10px;
 }
 
-:host[ng-reflect-equipped=true] {
+.equipped {
     background-color: rgb(209, 111, 5);
 }
 
-:host[ng-reflect-equipped=true] .count {
+.equipped .count {
     color: #000;
 }
