@@ -32,6 +32,14 @@
             "aot": true
           },
           "configurations": {
+            "development": {
+              "optimization": false,
+              "namedChunks": true,
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "sourceMap": true
+            },
             "production": {
               "outputPath": "dist",
               "optimization": true,
@@ -54,12 +62,14 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": "production",
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "defaultConfiguration": "",
           "options": {
-            "browserTarget": "lu-explorer:build",
+            "browserTarget": "lu-explorer:build:development",
             "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
