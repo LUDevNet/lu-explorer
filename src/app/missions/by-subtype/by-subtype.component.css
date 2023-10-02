@@ -1,6 +1,5 @@
 .mission-separator {
-    break-before: always;
-    break-after: always;
+    flex-basis: 100%;
     height: 2rem;
     order: 0;
 }
