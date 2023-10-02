@@ -27,6 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
   );
 
   constructor(private router: Router,
+    public viewContainerRef: ViewContainerRef, // used by tooltips, do not remove
     private activatedRoute: ActivatedRoute,
     private titleService: Title) {
   }
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();  
+    this.subscriptions.unsubscribe();
   }
 
   getChild(activatedRoute: ActivatedRoute): ActivatedRoute {
