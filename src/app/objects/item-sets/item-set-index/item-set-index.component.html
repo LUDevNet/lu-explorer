@@ -11,18 +11,17 @@
 </p>
 
 <section id="item-set-index" *ngIf="table | async; else loading; let sets">
-  <table>
-    <tr *ngFor="let set of sets">
-      <td>{{set.setID}}</td>
-      <td>
-        <a routerLink="/objects/item-sets/{{set.setID}}">
+  <ul id="item-sets">
+    <li *ngFor="let set of sets" class="item-set">
+      <a routerLink="/objects/item-sets/{{set.setID}}">
+        <img width="192px" height="192px" src="/lu-res/textures/ui/inventory/unknown.png" [luxFetchIcon]="set.kitImage">
+        <div class="title">
           {{set.setID | loc:'ItemSets' | async | elem:'kitName' | default:'[Unnamed]'}}
-          <span *ngIf="set.kitRank > 0">(Rank {{set.kitRank}})</span>
-          Item Set
-        </a>
-      </td>
-    </tr>
-  </table>
+          <span *ngIf="set.kitRank > 0"><small>Rank</small> {{set.kitRank}}</span>
+        </div>
+      </a>
+    </li>
+  </ul>
 </section>
 <ng-template #loading>
   Loading...
