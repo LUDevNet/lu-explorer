@@ -8,12 +8,14 @@ import { LuCoreDataService } from '../../services';
 
 interface DB_ItemSets_Ref {
   setID: number;
-  kitImage?: number
+  kitImage?: number;
+  kitRank: number;
 }
 
 const ITEM_SET_KEYS: (keyof DB_ItemSets_Ref)[] = [
   "setID",
   "kitImage",
+  "kitRank",
 ];
 
 class ItemSet {

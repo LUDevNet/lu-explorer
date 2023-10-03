@@ -1,0 +1,7 @@
+<a routerLink="/objects/item-sets/{{id}}">
+  <img width="192px" height="192px" [src]="icon">
+  <div class="title">
+    {{name}}
+    <span *ngIf="rank > 0"><small>Rank</small> {{rank}}</span>
+  </div>
+</a>

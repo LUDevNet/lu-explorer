@@ -29,8 +29,17 @@ export class IconPipe implements PipeTransform {
   constructor(private luRes: LuResService) { }
 
   transform(value?: DB_Icons | string): string | null {
-    let icon_path = (typeof value === "string") ? value : value.IconPath;
-    let path = value ? icon_path.toLowerCase().replace(/dds$/, "png") : "inventory/unknown.png";
+    let path;
+    if (value === null || value === undefined) {
+      path = "inventory/unknown.png"
+    } else {
+      if (typeof value === "string") {
+        path = value;
+      } else {
+        path = value.IconPath;
+      }
+      path = path.toLowerCase().replace(/dds$/, "png");
+    }
     return this.luRes.getResolvedResUrl(`textures/ui/${path}`);
   }
 }
