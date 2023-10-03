@@ -31,7 +31,7 @@ export class ApiConfig {
     pass?: string,
   }) {
     this.base = options.base;
-    if (this.user != null && this.user.length > 0) {
+    if (options.user != null && options.user.length > 0) {
       this.user = options.user;
       this.pass = options.pass;
     }
