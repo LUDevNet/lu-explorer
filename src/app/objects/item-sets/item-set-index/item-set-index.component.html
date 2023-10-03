@@ -10,18 +10,8 @@
   provide some additional skills per equipped item of that set.
 </p>
 
-<section id="item-set-index" *ngIf="table | async; else loading; let sets">
-  <ul id="item-sets">
-    <li *ngFor="let set of sets" class="item-set">
-      <a routerLink="/objects/item-sets/{{set.setID}}">
-        <img width="192px" height="192px" src="/lu-res/textures/ui/inventory/unknown.png" [luxFetchIcon]="set.kitImage">
-        <div class="title">
-          {{set.setID | loc:'ItemSets' | async | elem:'kitName' | default:'[Unnamed]'}}
-          <span *ngIf="set.kitRank > 0"><small>Rank</small> {{set.kitRank}}</span>
-        </div>
-      </a>
-    </li>
-  </ul>
+<section>
+  <lux-item-set-list [ids]="[2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52]"></lux-item-set-list>
 </section>
 <ng-template #loading>
   Loading...

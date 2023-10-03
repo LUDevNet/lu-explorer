@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconDirective } from './icon/icon.directive';
 import { ItemDirective } from './item/item.directive';
+import { ItemSetComponent } from './item-set/item-set.component';
 import { ItemTooltipComponent } from './item-tooltip/item-tooltip.component';
 import { UtilModule } from '../util/util.module';
 import { RouterModule } from '@angular/router';
@@ -40,6 +41,7 @@ const COMPONENTS = [
   CurrencyComponent,
   IconDirective,
   ItemDirective,
+  ItemSetComponent,
   ItemTooltipComponent,
   TooltipComponent,
   TooltipDirective,

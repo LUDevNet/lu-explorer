@@ -1,0 +1,28 @@
+
+:host {
+  display: block;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 20px;
+  margin: 10px;
+  transition: transform 0.1s, filter 0.1s;
+}
+
+:host:hover {
+  transform: scale(105%);
+  filter: brightness(115%);
+}
+
+a {
+  display: block;
+}
+
+a:hover {
+  color: #fac117;
+  text-decoration: none;
+}
+
+.title {
+  text-align: center;
+  padding-bottom: 1rem;
+}
