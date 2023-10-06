@@ -9,10 +9,12 @@ import { DB_MissionTasks } from '../../../../defs/cdclient';
 export class RacingTaskComponent implements OnInit {
 
   @Input() task: DB_MissionTasks;
+  targetList: number[] = [];
 
   constructor() { }
 
   ngOnInit() {
+    this.targetList = this.task.targetGroup ? this.task.targetGroup.split(',').map(Number) : [];
   }
 
 }

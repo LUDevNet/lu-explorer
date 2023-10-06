@@ -68,6 +68,7 @@ export interface Locale_PropertyTemplate {
 export interface Locale {
     ItemSets: Record<number, Locale_ItemSets>,
     Missions: Record<number, Locale_Missions>,
+    MissionText: Record<number, Locale_MissionText>,
     Preconditions: Record<number, Locale_Preconditions>,
     PropertyTemplate: Record<number, Locale_PropertyTemplate>,
     RewardCodes: Record<number, Locale_RewardCodes>,

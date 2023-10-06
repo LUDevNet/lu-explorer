@@ -57,9 +57,7 @@
   <ng-container *ngIf="$rev | async; let rev">
     <section id="prereq-for" *ngIf="rev.missions && rev.missions.prereq_for; let list">
       <h3>Prerequisite For</h3>
-      <div class="mission-list">
-        <lux-mission *ngFor="let id of list" [luxFetch]="id"></lux-mission>
-      </div>
+      <lux-mission-list [ids]="list"></lux-mission-list>
     </section>
   </ng-container>
 

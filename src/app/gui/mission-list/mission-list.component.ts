@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { DB_Icons, DB_MissionTasks } from '../../../defs/cdclient';
-import { Locale_Missions } from '../../../defs/locale';
+import { Locale_Missions, Locale_MissionText } from '../../../defs/locale';
 import { mapRec, mapToDict, mapToMultiDict, pick, recToSet, values } from '../../../defs/rx';
 import { LuCoreDataService } from '../../services';
 
@@ -38,10 +38,11 @@ class Mission {
     public $table: Observable<DB_Missions_Ref | undefined>,
     public $missionIcon: Observable<DB_Icons | undefined>,
     public $loc: Observable<Locale_Missions>,
+    public $locText: Observable<Locale_MissionText>,
   ) { }
 
   get $sortOrder(): Observable<number> {
-    return this.$table.pipe(map(m => m ? -m.isMission * 10000 + m.UISortOrder : 0))
+    return this.$table.pipe(map(m => m ? -m.isMission * 10000 + m.UISortOrder + 1 : 0))
   }
 }
 
@@ -70,6 +71,10 @@ export class MissionListComponent implements OnInit {
     );
     let $missionsLocale = this.$missionIds.pipe(
       cd.queryLocaleNum$("Missions", ["name"]),
+      shareReplay(1),
+    );
+    let $missionTextLocale = this.$missionIds.pipe(
+      cd.queryLocaleNum$("MissionText", ["in_progress", "description"]),
       shareReplay(1),
     );
     let $missionIcons = $missionsTable.pipe(
@@ -109,7 +114,8 @@ export class MissionListComponent implements OnInit {
         let $table = $missionsTable.pipe(pick(id), shareReplay(1));
         let $missionIcon = $table.pipe(switchMap(iconForMission));
         let $loc = $missionsLocale.pipe(pick(id), shareReplay(1));
-        return new Mission(id, $table, $missionIcon, $loc);
+        let $locText = $missionTextLocale.pipe(pick(id), shareReplay(1));
+        return new Mission(id, $table, $missionIcon, $loc, $locText);
       }))
     );
   }

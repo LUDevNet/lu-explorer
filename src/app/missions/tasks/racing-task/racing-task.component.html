@@ -15,19 +15,11 @@
   </span>
   <span *ngSwitchCase="4">
     complete <b luxTooltip="targetValue">any {{task.targetValue}}</b> of the following missions:
-    <ul class="inline-ul">
-      <li *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
-        <a routerLink="/missions/{{target}}">{{target}}</a>
-      </li>
-    </ul>
+    <lux-mission-list [ids]="targetList"></lux-mission-list>
   </span>
   <span *ngSwitchCase="5">
     complete <b luxTooltip="targetValue">any {{task.targetValue}}</b> of the following missions:
-    <ul class="inline-ul">
-      <li *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
-        <a routerLink="/missions/{{target}}">{{target}}</a>
-      </li>
-    </ul>
+    <lux-mission-list [ids]="targetList"></lux-mission-list>
   </span>
   <span *ngSwitchCase="6">
     swap out every module on their car in a single modular build session (excluding chassis).

@@ -1,9 +1,10 @@
 <ul class="mission-list" *ngIf="$missions | async; let missions">
     <ng-container *ngFor="let mission of missions">
         <li *luxVar="mission.$table | async; let m" [style.order]="mission.$sortOrder | async">
-            <lux-mission [id]="mission.id" [isMission]="m ? m.isMission : false" [iconID]="mission.$missionIcon | async"
-                [title]="(mission.$loc | async)?.name"
-                [tooltip]="((m && !m.isMission) ? 'Achievement' : 'Mission') + ' #' + mission.id"></lux-mission>
+            <lux-mission [id]="mission.id" [isMission]="m ? m.isMission : true" [iconID]="mission.$missionIcon | async"
+                [title]="(mission.$loc | async)?.name | default:'&NewLine;&NewLine;'"
+                [tooltip]="(m && !m.isMission) ? ((mission.$locText | async)?.description | default:'Achievement #'+mission.id) : ((mission.$locText | async)?.in_progress | default:'Mission #'+mission.id)"></lux-mission>
         </li>
     </ng-container>
+    <li class="mission-separator"></li>
 </ul>
