@@ -22,10 +22,7 @@
     <section *ngIf="data.mission_ids">
       <h3>Missions</h3>
 
-      <div class="mission-list">
-        <div class="mission-separator"></div>
-        <lux-mission [luxFetch]="mission_id" *ngFor="let mission_id of data.mission_ids"></lux-mission>
-      </div>
+      <lux-mission-list [ids]="data.mission_ids"></lux-mission-list>
     </section>
   </ng-container>
 </section>

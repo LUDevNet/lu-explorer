@@ -54,7 +54,7 @@
     <dl>
       <ng-container *ngFor="let task_id of rev_skill.mission_tasks">
         <ng-container *ngIf="rev_skill._embedded.MissionTasks| elem: task_id.toString(); let task">
-          <dt>Mission <a routerLink="/missions/{{task.id}}">#{{task.id}}</a>:</dt>
+          <dt><lux-mission [luxFetch]="task.id"></lux-mission></dt>
           <dd><app-task-detail [task]="task"></app-task-detail></dd>
         </ng-container>
       </ng-container>

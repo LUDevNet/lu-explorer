@@ -1,7 +1,7 @@
 <h3>Collectible Component ({{id}})</h3>
 <ng-container *ngIf="component | async; else loading; let collectible">
-  <p>This object is a collectible for the mission
-    <a routerLink="/missions/{{collectible.requirement_mission}}">{{collectible.requirement_mission}}</a>
+  <p>This object is a collectible for the mission<br>
+    <lux-mission [luxFetch]="collectible.requirement_mission"></lux-mission>
   </p>
   <h4>Details</h4>
   <app-data-table [table]="collectible"></app-data-table>

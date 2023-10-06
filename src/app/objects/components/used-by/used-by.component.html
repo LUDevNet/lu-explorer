@@ -39,12 +39,7 @@
         <section *ngIf="it.length > 0">
             <h4>Missions</h4>
             <h5>Reward Items for</h5>
-            <ul>
-                <li *ngFor="let id of it">
-                    <a [routerLink]="['/missions', id]">Mission #{{id}}
-                        <span *ngIf="id | loc:'Missions' | async; let l">({{l['name']}})</span></a>
-                </li>
-            </ul>
+            <lux-mission-list [ids]="it"></lux-mission-list>
         </section>
     </ng-container>
 </ng-container>
