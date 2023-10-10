@@ -34,8 +34,12 @@ class ItemSet {
 })
 export class ItemSetListComponent implements OnInit {
   @Input()
-  set ids(value: number[]) {
-    this.$itemSetIds.next(value);
+  set ids(value: number[] | "all") {
+    if (value === "all") {
+      this.luCoreData.getFullTable("ItemSets").subscribe(elems => this.$itemSetIds.next(elems.map(elem => elem.setID)));
+    } else {
+      this.$itemSetIds.next(value);
+    }
   }
 
   private $itemSetIds = new ReplaySubject<number[]>(1);
