@@ -8,7 +8,5 @@
   <app-group-icon [name]="d.type"></app-group-icon>
   <h2>Missions <small>{{d.type}} - {{d.subtype}}</small></h2>
 
-  <ng-container *ngIf="$typeData | async; let data">
-    <lux-mission-list [ids]="data.mission_ids"></lux-mission-list>
-  </ng-container>
+  <lux-mission-list [where]="'defined_type = \''+d.type+'\' and defined_subtype = \''+d.subtype+'\''"></lux-mission-list>
 </section>

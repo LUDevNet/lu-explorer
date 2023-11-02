@@ -1,10 +1,30 @@
-<ul class="mission-list" *ngIf="$missions | async; let missions">
+<ul class="mission-list" *ngIf="'
+  select
+    m.id as id,
+    isMission,
+    i.IconPath,
+    name_en_US as name,
+    case isMission
+      when 0 then description_en_US
+      else in_progress_en_US
+    end tooltip
+  from
+    Missions m
+    left join MissionText mt on m.id = mt.id
+    left join Icons i on i.IconID =
+      case isMission
+        when 0 then missionIconID
+        else (select largeTaskIconID from MissionTasks mt where mt.id = m.id limit 1)
+      end '
+  +_where+'
+  order by
+    isMission desc,
+    UISortOrder
+  ' | query; let missions">
     <ng-container *ngFor="let mission of missions">
-        <li *luxVar="mission.$table | async; let m" [style.order]="mission.$sortOrder | async">
-            <lux-mission [id]="mission.id" [isMission]="m ? m.isMission : true" [iconID]="mission.$missionIcon | async"
-                [title]="(mission.$loc | async)?.name | default:'&NewLine;&NewLine;'"
-                [tooltip]="(m && !m.isMission) ? ((mission.$locText | async)?.description | default:'Achievement #'+mission.id) : ((mission.$locText | async)?.in_progress | default:'Mission #'+mission.id)"></lux-mission>
-        </li>
+      <li [style.order]="1 - mission.isMission">
+        <lux-mission [id]="+mission.id" [isMission]="((mission.isMission) == '1')" [title]="mission.name | default:(mission.isMission == '1' ? 'Mission' : 'Achievement')+' #'+mission.id" [icon]="mission.IconPath | icon" [tooltip]="mission.tooltip"></lux-mission>
+      </li>
     </ng-container>
     <li class="mission-separator"></li>
 </ul>
