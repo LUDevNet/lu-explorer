@@ -79,20 +79,84 @@ export class LuCoreDataService {
     this.$apiUrl.next(new ApiConfig({ base, user, pass }));
   }
 
-  get(url: string): Observable<any> {
+  get(url: string, responseType?: "text", cachedTransformation?: OperatorFunction<any, any>): Observable<any> {
     if (!this.cache.has(url)) {
       let httpRequest = this.$apiUrl.pipe(switchMap(cfg => this.http.get(cfg.base + url, {
         headers: cfg.headers(),
+        responseType: responseType as "json",
         withCredentials: cfg.withCredentials,
       })))
         .pipe(
           catchError(this.handleError(url, { $error: null })),
-        )
+        );
+      if (cachedTransformation != null) {
+        httpRequest = httpRequest.pipe(cachedTransformation);
+      }
       let responseSubject = new ReplaySubject(1);
       httpRequest.subscribe(responseSubject);
       this.cache.set(url, responseSubject);
     }
     return this.cache.get(url);
+  }
+
+  querySql(query: string): Observable<any[]> {
+    return this.get("v0/query/"+encodeURIComponent(query), "text", map(this.parseCsv));
+  }
+
+  private parseCsv(csv: string) {
+    let headers = [];
+    let haveHeaders = false;
+    let escapeMode = false;
+    let lastQuoteIndex = 0;
+    let rows = [];
+    let row = {};
+    let field = "";
+    let fieldIndex = 0;
+    for (let i = 0; i < csv.length; i++) {
+      if (csv[i] == "\"") {
+        escapeMode = !escapeMode;
+        if (lastQuoteIndex == i-1) {
+          // escaped quote (""), this one counts
+          field += "\"";
+        }
+        lastQuoteIndex = i;
+        continue;
+      }
+      if (!escapeMode) {
+        if (csv[i] == ",") {
+          if (!haveHeaders) {
+            headers.push(field);
+          } else {
+            if (lastQuoteIndex == 0 && field == "null") {
+              field = null;
+            }
+            row[headers[fieldIndex]] = field;
+          }
+          lastQuoteIndex = 0;
+          field = "";
+          fieldIndex += 1;
+          continue;
+        } else if (csv[i] == "\n") {
+          if (!haveHeaders) {
+            headers.push(field);
+            haveHeaders = true;
+          } else {
+            if (lastQuoteIndex == 0 && field == "null") {
+              field = null;
+            }
+            row[headers[fieldIndex]] = field;
+            rows.push(row);
+            row = {};
+          }
+          lastQuoteIndex = 0;
+          field = "";
+          fieldIndex = 0;
+          continue;
+        }
+      }
+      field += csv[i];
+    }
+    return rows;
   }
 
   query(url: string, body: any): Observable<any | { $error: any }> {
