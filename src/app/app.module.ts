@@ -1,5 +1,6 @@
 import { BrowserModule, Title }    from '@angular/platform-browser';
 import { NgModule }         from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }      from '@angular/forms';
 
@@ -34,6 +35,7 @@ import { SearchService } from './util/services/search.service';
     LuLocaleService,
     LuDocsService,
     SearchService,
+    AsyncPipe,
     Title,
   ],
   bootstrap: [AppComponent]

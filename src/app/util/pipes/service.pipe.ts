@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import { Observable, of, zip } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DB_Icons } from '../../../defs/cdclient';
@@ -92,5 +93,15 @@ export class DataPipe implements PipeTransform {
       lootTable: x => this.coreData.getRevEntry("loot_table_index", x),
     }[arg];
     return arg ? call(value) : of(null);
+  }
+}
+
+@Pipe({ name: 'query', pure: false })
+export class QueryPipe implements PipeTransform {
+
+  constructor(private luCoreData: LuCoreDataService, private asyncPipe: AsyncPipe) { }
+
+  transform(value: string): any[] {
+    return this.asyncPipe.transform(this.luCoreData.querySql(value));
   }
 }
