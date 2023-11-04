@@ -4,23 +4,38 @@
 </ul>
 <section>
     <h2>What's cool: Item Spotlight</h2>
-    <section *ngIf="$list | async; let list; else loading">
-        <lux-gate-version-toc [list]="list | paramset:'gate_version' | as_array"></lux-gate-version-toc>
+    <section *ngIf="'
+      select
+        gate_version,
+        itemID,
+        icon_asset,
+        description_en_US as description
+      from
+        WhatsCoolItemSpotlight w
+        join ComponentsRegistry c on c.id = w.itemID
+        join RenderComponent r on r.id = c.component_id
+      where
+        component_type = 2
+      order by w.id
+      ' | query | group:'gate_version';
+      let groups;
+      else loading">
+        <lux-gate-version-toc [list]="groups | keyset | as_array"></lux-gate-version-toc>
 
-        <section [id]="v.key | toc:'fg'" *ngFor="let v of list | group:'gate_version' | keys">
+        <section [id]="v.key | toc:'fg'" *ngFor="let v of groups | keys">
             <h3 *ngIf="v.key === ''">No Feature Gate</h3>
             <h3 *ngIf="v.key !== ''">Feature Gate <small><lux-gate-version-tag [gate_version]="v.key"
                         [float]="false"></lux-gate-version-tag></small>
             </h3>
-            <div class="item" *ngFor="let item of v.value">
+            <div class="item" *ngFor="let row of v.value">
                 <span class="left">
-                    <lux-slot [luxFetchItem]="item.itemID"></lux-slot>
+                    <lux-slot link="/objects/{{row.itemID}}" [icon]="row.icon_asset | icon" [luxItemTooltip]="row.itemID"></lux-slot>
                 </span>
-                <blockquote class="cool">{{(loc(item.id) | async).description}}</blockquote>
+                <blockquote class="cool" luxTooltip="description">{{row.description}}</blockquote>
             </div>
         </section>
     </section>
     <ng-template #loading>
-        Loading&ell;
+        Loading&mldr;
     </ng-template>
 </section>
