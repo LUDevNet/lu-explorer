@@ -1,22 +1,17 @@
-import { ApplicationRef, ComponentRef, ElementRef, Directive, Injector, Input, Renderer2, createComponent, EnvironmentInjector } from "@angular/core";
-import { ItemTooltipComponent } from "../item-tooltip/item-tooltip.component";
+import { ApplicationRef, ElementRef, Directive, Injector, Input, Renderer2, EnvironmentInjector } from "@angular/core";
+import { ItemTooltipDirective } from "../item-tooltip/item-tooltip.directive";
 import { SlotComponent } from "../slot/slot.component";
-import { TooltipDirective } from "../tooltip.directive";
 import { LuCoreDataService } from "../../services";
-import { DB_ComponentsRegistry, DB_Objects } from "../../../defs/cdclient";
+import { DB_ComponentsRegistry } from "../../../defs/cdclient";
 import { RENDER_COMPONENT_ID } from "../../../defs/components";
 
 @Directive({
   selector: "lux-slot[luxFetchItem]"
 })
-export class ItemDirective extends TooltipDirective {
-  private itemTooltipRef: ComponentRef<ItemTooltipComponent>;
-
+export class ItemDirective extends ItemTooltipDirective {
   @Input("luxFetchItem") set id(id: number) {
+    super.id = id;
     this.slotComponent.link = `/objects/${id}`;
-    this.itemTooltipRef.instance.id = id;
-    this.itemTooltipRef.instance.title = `[Unknown]`;
-    this.coreData.getSingleTableEntry('Objects', id).subscribe(this.onObjectsRow.bind(this));
     this.coreData.getTableEntry('ComponentsRegistry', id).subscribe(this.onObjectComponents.bind(this));
   }
 
@@ -26,23 +21,10 @@ export class ItemDirective extends TooltipDirective {
     renderer: Renderer2,
     injector: Injector,
     environmentInjector: EnvironmentInjector,
-    private coreData: LuCoreDataService,
+    protected coreData: LuCoreDataService,
     private slotComponent: SlotComponent
   ) {
-    super(element, applicationRef, renderer, injector);
-
-    this.itemTooltipRef = createComponent(ItemTooltipComponent, { environmentInjector });
-    this.content = this.itemTooltipRef;
-  }
-
-  onObjectsRow(object: DB_Objects) {
-    console.log(object);
-    if (object.displayName) {
-      this.itemTooltipRef.instance.title = object.displayName;
-    } else if (object.name) {
-      this.itemTooltipRef.instance.title = object.name;
-    }
-    this.itemTooltipRef.changeDetectorRef.detectChanges();
+    super(element, applicationRef, renderer, injector, environmentInjector, coreData);
   }
 
   onObjectComponents(components: DB_ComponentsRegistry[]) {
