@@ -36,7 +36,10 @@ export class ItemSetListComponent implements OnInit {
   @Input()
   set ids(value: number[] | "all") {
     if (value === "all") {
-      this.luCoreData.getFullTable("ItemSets").subscribe(elems => this.$itemSetIds.next(elems.map(elem => elem.setID)));
+      let subscription = this.luCoreData.getFullTable("ItemSets").subscribe(elems => {
+        this.$itemSetIds.next(elems.map(elem => elem.setID));
+        subscription.unsubscribe();
+      });
     } else {
       this.$itemSetIds.next(value);
     }
