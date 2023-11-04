@@ -4,6 +4,7 @@ import { IconDirective } from './icon/icon.directive';
 import { ItemDirective } from './item/item.directive';
 import { ItemSetComponent } from './item-set/item-set.component';
 import { ItemTooltipComponent } from './item-tooltip/item-tooltip.component';
+import { ItemTooltipDirective } from './item-tooltip/item-tooltip.directive';
 import { UtilModule } from '../util/util.module';
 import { RouterModule } from '@angular/router';
 import { CoinsComponent } from './coins/coins.component';
@@ -43,6 +44,7 @@ const COMPONENTS = [
   ItemDirective,
   ItemSetComponent,
   ItemTooltipComponent,
+  ItemTooltipDirective,
   TooltipComponent,
   TooltipDirective,
   FactionListComponent,
