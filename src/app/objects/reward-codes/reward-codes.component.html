@@ -4,27 +4,43 @@
 </ul>
 <h2>Reward codes</h2>
 
-<ng-container *luxVar="$code_groups | async; let code_groups">
-    <lux-gate-version-toc [list]="code_groups | paramset:'gate_version' | as_array"></lux-gate-version-toc>
+<ng-container *ngIf="'
+    select
+      gate_version,
+      attachmentLOT,
+      icon_asset,
+      code,
+      subjectText_en_US as subjectText,
+      bodyText_en_US as bodyText
+    from
+      RewardCodes rc
+      left join ComponentsRegistry c on c.id = rc.attachmentLOT
+      left join RenderComponent r on r.id = c.component_id
+    where
+      attachmentLOT is null
+      or component_type = 2
+    order by rc.code
+    ' | query | group:'gate_version';
+    let code_groups">
+    <lux-gate-version-toc [list]="code_groups | keyset | as_array"></lux-gate-version-toc>
 
-    <section [id]="code_group.gate_version | toc:'fg'" *ngFor="let code_group of code_groups">
-        <h3 *ngIf="code_group.gate_version !== ''">Feature Gate: <small><lux-gate-version-tag
-                    [gate_version]="code_group.gate_version" [float]="false"></lux-gate-version-tag></small></h3>
-        <h3 *ngIf="code_group.gate_version === ''">No Feature Gate</h3>
+    <section [id]="v.key | toc:'fg'" *ngFor="let v of code_groups | keys">
+        <h3 *ngIf="v.key === ''">No Feature Gate</h3>
+        <h3 *ngIf="v.key !== ''">Feature Gate: <small><lux-gate-version-tag
+                    [gate_version]="v.key" [float]="false"></lux-gate-version-tag></small>
+        </h3>
         <div>
-            <div *ngFor="let code of code_group.codes">
-                <div class="item">
-                    <lux-slot [luxFetchItem]="code.attachmentLOT"></lux-slot>
+            <div *ngFor="let row of v.value">
+                <div class="item" *ngIf="row.attachmentLOT">
+                    <lux-slot link="/objects/{{row.attachmentLOT}}" [icon]="row.icon_asset | icon" [luxItemTooltip]="row.attachmentLOT"></lux-slot>
                 </div>
-                <div class="code-desc" *ngIf="loc(code.id) | async; let code_loc; else no_loc">
-                    <h4>{{code_loc.subjectText}} <code>{{code.code}}</code></h4>
-                    <p>{{code_loc.bodyText}}</p>
+                <div class="code-desc">
+                    <h4>
+                        <span luxTooltip="subjectText">{{row.subjectText}}</span>
+                        <code luxTooltip="code">{{row.code}}</code>
+                    </h4>
+                    <p><span luxTooltip="bodyText">{{row.bodyText}}</span></p>
                 </div>
-                <ng-template #no_loc>
-                    <div class="code-desc">
-                        <h4><code>{{code.code}}</code></h4>
-                    </div>
-                </ng-template>
                 <div class="clearfix"></div>
             </div>
         </div>
