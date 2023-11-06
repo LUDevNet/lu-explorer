@@ -1,4 +1,12 @@
-<section *ngIf="table | async; else loading; let attributes">
+<section *ngIf="'
+  select
+    ID,
+    name_en_US as name,
+    icon_asset,
+    display_order,
+    locStatus
+  from brickAttributes
+  ' | query; else loading; let attributes">
   <h2>Brick Attributes</h2>
   <div class="table-responsive">
     <table>
@@ -12,7 +20,7 @@
       </tr>
       <tr *ngFor="let attribute of attributes">
         <td>{{attribute.ID}}</td>
-        <td>{{attribute.ID | loc:"brickAttributes" | async | elem:'name' }}</td>
+        <td>{{attribute.name}}</td>
         <td class="no-padding"><img class="no-margin" [src]="attribute.icon_asset | lowercase | replace:'dds':'png' | res"/></td>
         <td>{{attribute.icon_asset}}</td>
         <td>{{attribute.display_order}}</td>
