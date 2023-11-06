@@ -83,7 +83,7 @@ export class LuCoreDataService {
     if (!this.cache.has(url)) {
       let httpRequest = this.$apiUrl.pipe(switchMap(cfg => this.http.get(cfg.base + url, {
         headers: cfg.headers(),
-        responseType: responseType as "json",
+        responseType: responseType,
         withCredentials: cfg.withCredentials,
       })))
         .pipe(
