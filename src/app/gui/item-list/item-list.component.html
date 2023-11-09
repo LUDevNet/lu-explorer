@@ -1,4 +1,14 @@
-<div class="item-list">
-    <lux-slot *ngFor="let obj of objects" [link]="'/objects/' +obj.id" [luxTooltip]="obj.tooltipComponentRef"
-        [icon]="(obj.$renderComponent | async)?.icon_asset | icon"></lux-slot>
+<div class="item-list" *ngIf="'
+  select
+    c.id,
+    icon_asset
+  from
+    ComponentsRegistry c
+    left join RenderComponent r on r.id = c.component_id
+  where
+    component_type = 2
+    and ' + _where
+  | query; let items">
+  <lux-slot *ngFor="let item of items" [link]="'/objects/' +item.id" [luxItemTooltip]="item.id"
+    [icon]="item.icon_asset | icon"></lux-slot>
 </div>
