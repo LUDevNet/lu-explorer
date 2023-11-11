@@ -1,0 +1,25 @@
+<table>
+  <thead *ngIf="rows">
+    <tr class="header">
+      <th *ngFor="let col of rows[0] | keys" (click)="setOrderBy(col.key)">{{col.key}}</th>
+    </tr>
+  </thead>
+  <tbody #tbody>
+    <ng-content></ng-content>
+  </tbody>
+  <tbody *ngIf="tbody.children.length == 0">
+    <tr *ngFor="let row of rows">
+      <td *ngFor="let col of row | keys">{{col.value}}</td>
+    </tr>
+  </tbody>
+</table>
+<ng-container *ngIf="limit != null">
+  <ng-container *ngIf="'
+    select
+      ceil(count(*) / ' + limit + '.0) as page_count
+    from ' + from +
+    (where ? ' where ' + where : '')
+    | query; let count">
+    <app-pagination [count]="+count[0].page_count" [current]="page" prefix="../../"></app-pagination>
+  </ng-container>
+</ng-container>

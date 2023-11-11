@@ -1,0 +1,9 @@
+thead {
+  background-color: black;
+  position: sticky;
+  top: 0;
+}
+
+thead th {
+  padding: 1rem;
+}
