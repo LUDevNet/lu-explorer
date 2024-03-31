@@ -106,7 +106,7 @@ export class LuCoreDataService {
   private parseCsv(csv: string) {
     let headers = [];
     let haveHeaders = false;
-    let escapeMode = false;
+    let insideString = false;
     let lastQuoteIndex = 0;
     let rows = [];
     let row = {};
@@ -114,15 +114,15 @@ export class LuCoreDataService {
     let fieldIndex = 0;
     for (let i = 0; i < csv.length; i++) {
       if (csv[i] == "\"") {
-        escapeMode = !escapeMode;
-        if (lastQuoteIndex == i-1) {
+        insideString = !insideString;
+        if (insideString && lastQuoteIndex == i-1) {
           // escaped quote (""), this one counts
           field += "\"";
         }
         lastQuoteIndex = i;
         continue;
       }
-      if (!escapeMode) {
+      if (!insideString) {
         if (csv[i] == ",") {
           if (!haveHeaders) {
             headers.push(field);
