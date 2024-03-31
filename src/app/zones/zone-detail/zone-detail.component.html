@@ -7,7 +7,7 @@
     <small><lux-gate-version-tag [gate_version]="zone.gate_version"></lux-gate-version-tag></small>
   </h2>
 
-  <div class="signage" [ngStyle]="signage$ | async"></div>
+  <lux-signage class="signage" [id]="zone.zoneID"></lux-signage>
 
   <div *ngIf="zone.thumbnail">
     <h3>Thumbnail</h3>

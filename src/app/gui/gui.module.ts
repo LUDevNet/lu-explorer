@@ -9,6 +9,7 @@ import { UtilModule } from '../util/util.module';
 import { RouterModule } from '@angular/router';
 import { CoinsComponent } from './coins/coins.component';
 import { CurrencyComponent } from './currency/currency.component';
+import { SignageComponent } from './signage/signage.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { TooltipDirective } from './tooltip.directive';
 import { FactionListComponent } from './faction-list/faction-list.component';
@@ -45,6 +46,7 @@ const COMPONENTS = [
   ItemSetComponent,
   ItemTooltipComponent,
   ItemTooltipDirective,
+  SignageComponent,
   TooltipComponent,
   TooltipDirective,
   FactionListComponent,
