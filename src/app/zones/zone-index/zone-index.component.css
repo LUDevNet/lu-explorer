@@ -1,0 +1,21 @@
+.zones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+  justify-content: center;
+  padding: 0;
+  text-align: center;
+}
+
+.zones a {
+  display: block;
+  text-decoration: none;
+  transition: transform 0.1s, filter 0.1s;
+  width: 204px;
+}
+
+.zones a:hover {
+  color: var(--lu-yellow);
+  transform: scale(105%);
+  filter: brightness(115%);
+}

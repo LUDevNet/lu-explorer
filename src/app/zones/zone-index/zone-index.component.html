@@ -1,9 +1,27 @@
 <ul class="breadcrumbs">
   <li>Zones</li>
 </ul>
-<h2>Zone Index</h2>
-<ul class="zones">
-  <li *ngFor="let item of ($zones | async | keyvalue)">
-    <a routerLink="/zones/{{item.key}}">{{item.value.DisplayDescription}}</a>&nbsp;<span class="badge">{{item.key}}</span>
-  </li>
-</ul>
+<h2>Zones</h2>
+<ng-container *ngIf="'
+  select
+    zoneID in (1001, 1100, 1149, 1150, 1151, 1200, 1201, 1250, 1251, 1260, 1300, 1350, 1351, 1400, 1450, 1451, 1600, 1800, 1900, 2000) as hasSignage,
+    zoneID,
+    DisplayDescription_en_US as DisplayDescription
+  from ZoneTable
+  where DisplayDescription_en_US is not null and zoneName not like \'%removed%\'
+  order by hasSignage desc, ((zoneID-1) % 100 / -49)
+  ' | query | group:'hasSignage'; let zones">
+  <h3>Key Zones</h3>
+  <section class="zones">
+    <a *ngFor="let zone of zones[1]" routerLink="/zones/{{zone.zoneID}}">
+      <lux-signage [id]="zone.zoneID | num"></lux-signage>
+      <p>{{zone.DisplayDescription}}</p>
+    </a>
+  </section>
+  <h3>Other Zones</h3>
+  <section class="zones">
+    <a *ngFor="let zone of zones[0]" routerLink="/zones/{{zone.zoneID}}">
+      <p>{{zone.DisplayDescription}}</p>
+    </a>
+  </section>
+</ng-container>
