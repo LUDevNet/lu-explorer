@@ -1,0 +1,14 @@
+#sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+section {
+  width: 300px;
+}
+
+section li {
+  line-height: 1.5rem;
+}

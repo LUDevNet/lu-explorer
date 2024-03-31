@@ -6,18 +6,28 @@
   <small><a routerLink="/missions/search">[Search]</a></small>
 </h2>
 
-<section *ngFor="let declared_type of $mission_types | async | keys">
-  <app-group-icon [name]="declared_type.key"></app-group-icon>
-  <h3><a routerLink="/missions/type/{{declared_type.key}}">{{declared_type.key}}</a></h3>
+<div id="sections" *ngIf="'
+  select distinct
+    defined_type,
+    ifnull(defined_subtype, \'\') subtype
+  from Missions
+  order by
+    defined_type,
+    subtype
+  ' | query; let types">
+  <section *ngFor="let declared_type of types | group:'defined_type' | keys">
+    <app-group-icon [name]="declared_type.key"></app-group-icon>
+    <h3><a routerLink="/missions/type/{{declared_type.key}}">{{declared_type.key}}</a></h3>
 
-  <ul>
-    <li *ngFor="let declared_subtype of declared_type.value">
-      <a *ngIf="declared_subtype != ''" routerLink="/missions/type/{{declared_type.key}}/subtype/{{declared_subtype}}">
-        {{declared_subtype}}
-      </a>
-      <a *ngIf="declared_subtype == ''" routerLink="/missions/type/{{declared_type.key}}">
-        General
-      </a>
-    </li>
-  </ul>
-</section>
+    <ul>
+      <li *ngFor="let declared_subtype of declared_type.value">
+        <a *ngIf="declared_subtype.subtype != ''" routerLink="/missions/type/{{declared_type.key}}/subtype/{{declared_subtype.subtype}}">
+          {{declared_subtype.subtype}}
+        </a>
+        <a *ngIf="declared_subtype.subtype == ''" routerLink="/missions/type/{{declared_type.key}}">
+          General
+        </a>
+      </li>
+    </ul>
+  </section>
+</div>
