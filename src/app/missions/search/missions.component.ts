@@ -29,7 +29,8 @@ export class MissionsSearchComponent implements OnInit {
   }
 
   updateFilterList() {
-    this.filteredMissions = Object.assign({}, this.filter(this.missions, mission => mission.name.includes(this.needle), 100));
+    const needle = this.needle.toLowerCase();
+    this.filteredMissions = Object.assign({}, this.filter(this.missions, mission => mission.name.toLowerCase().includes(needle), 100));
   }
 
   getMissions(): void {
