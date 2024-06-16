@@ -1,0 +1,2309 @@
+schema {
+	query: Query
+}
+
+type AccessoryDefaultLoc {
+	GroupID: Int
+	Description: String
+	Pos_X: Float
+	Pos_Y: Float
+	Pos_Z: Float
+	Rot_X: Float
+	Rot_Y: Float
+	Rot_Z: Float
+}
+
+type ActivityRewards {
+	objectTemplate: Objects
+	ActivityRewardIndex: Int
+	activityRating: Int
+	LootMatrixIndex: LootMatrix
+	CurrencyIndex: Int
+	ChallengeRating: Int
+	description: String
+}
+
+type MissionEmail {
+	ID: Int
+	messageType: Int
+	notificationGroup: Int
+	missionID: Missions
+	attachmentLOT: Objects
+	localize: Int
+	locStatus: Int
+	gate_version: FeatureGating
+	announceText_loc: String
+	announceText_en_US: String
+	announceText_de_DE: String
+	announceText_en_GB: String
+	bodyText_loc: String
+	bodyText_en_US: String
+	bodyText_de_DE: String
+	bodyText_en_GB: String
+	senderName_loc: String
+	senderName_en_US: String
+	senderName_de_DE: String
+	senderName_en_GB: String
+	subjectText_loc: String
+	subjectText_en_US: String
+	subjectText_de_DE: String
+	subjectText_en_GB: String
+}
+
+type MissionPrereqs {
+	mission: Missions!
+	andGroup: Int!
+	prereqMission: Missions!
+	prereqMissionState: Int
+}
+
+type BrickColors {
+	id: Int
+	red: Float
+	green: Float
+	blue: Float
+	alpha: Float
+	legopaletteid: Int
+	description: String
+	validTypes: Int
+	validCharacters: Int
+	factoryValid: Int
+}
+
+type WhatsCoolItemSpotlight {
+	id: Int
+	itemID: Objects
+	localize: Int
+	gate_version: FeatureGating
+	locStatus: Int
+	description_loc: String
+	description_en_US: String
+	description_de_DE: String
+	description_en_GB: String
+}
+
+type TextLanguage {
+	TextID: Int
+	LanguageID: Int
+	Text: String
+}
+
+type MissionNPCComponent {
+	id: Int
+	missionID: Missions
+	offersMission: Int
+	acceptsMission: Int
+	gate_version: FeatureGating
+}
+
+type LUPExhibitModelData {
+	LOT: Objects
+	minXZ: Float
+	maxXZ: Float
+	maxY: Float
+	description: String
+	owner: String
+}
+
+type BehaviorParameter {
+	behaviorID: Int
+	parameterID: String
+	value: Float
+}
+
+type Emotes {
+	id: Int
+	animationName: String
+	iconFilename: String
+	channel: String
+	command: String
+	locked: Int
+	localize: Int
+	locStatus: Int
+	gate_version: FeatureGating
+	outputText_loc: String
+	outputText_en_US: String
+	outputText_de_DE: String
+	outputText_en_GB: String
+	Missions_reward_emote: [Missions!]!
+	Missions_reward_emote2: [Missions!]!
+	Missions_reward_emote3: [Missions!]!
+	Missions_reward_emote4: [Missions!]!
+	SpeedchatMenu: [SpeedchatMenu!]!
+	SpeedchatMenu_emoteId: [SpeedchatMenu!]!
+}
+
+type LootTableIndex {
+	LootTable: [LootTable!]!
+	LootTable_LootTableIndex: [LootTable!]!
+	LootTableIndex: Int
+}
+
+type Blueprints {
+	id: Int
+	name: String
+	description: String
+	accountid: Int
+	characterid: Int
+	price: Int
+	rating: Int
+	categoryid: Int
+	lxfpath: String
+	deleted: Int
+	created: Int
+	modified: Int
+}
+
+type mapShaders {
+	id: Int
+	label: String
+	gameValue: Int
+	priority: Int
+}
+
+type DBExclude {
+	table: String
+	column: String
+}
+
+type MinifigDecals_Torsos {
+	ID: Int
+	High_path: String
+	CharacterCreateValid: Int
+	male: Int
+	female: Int
+}
+
+type Objects {
+	MissionTaskObjects: [MissionTaskObjects!]!
+	MissionTaskObjects_object: [MissionTaskObjects!]!
+	BrickIDTable: [BrickIDTable!]!
+	BrickIDTable_NDObjectID: [BrickIDTable!]!
+	CelebrationParameters_backgroundObject: [CelebrationParameters!]!
+	CelebrationParameters_cameraPathLOT: [CelebrationParameters!]!
+	CurrencyDenominations: [CurrencyDenominations!]!
+	CurrencyDenominations_objectid: [CurrencyDenominations!]!
+	ActivityRewards: [ActivityRewards!]!
+	ActivityRewards_objectTemplate: [ActivityRewards!]!
+	InventoryComponent: [InventoryComponent!]!
+	InventoryComponent_itemid: [InventoryComponent!]!
+	JetPackPadComponent_lotBlocker: [JetPackPadComponent!]!
+	JetPackPadComponent_lotWarningVolume: [JetPackPadComponent!]!
+	LootTable: [LootTable!]!
+	LootTable_itemid: [LootTable!]!
+	LUPExhibitModelData: [LUPExhibitModelData!]!
+	LUPExhibitModelData_LOT: [LUPExhibitModelData!]!
+	mapIcon: [mapIcon!]!
+	mapIcon_LOT: [mapIcon!]!
+	ItemComponent_currencyLOT: [ItemComponent!]!
+	ItemComponent_commendationLOT: [ItemComponent!]!
+	MissionEmail: [MissionEmail!]!
+	MissionEmail_attachmentLOT: [MissionEmail!]!
+	Missions_offer_objectID: [Missions!]!
+	Missions_target_objectID: [Missions!]!
+	Missions_reward_item1: [Missions!]!
+	Missions_reward_item2: [Missions!]!
+	Missions_reward_item3: [Missions!]!
+	Missions_reward_item4: [Missions!]!
+	Missions_reward_item1_repeatable: [Missions!]!
+	Missions_reward_item2_repeatable: [Missions!]!
+	Missions_reward_item3_repeatable: [Missions!]!
+	Missions_reward_item4_repeatable: [Missions!]!
+	ModularBuildComponent: [ModularBuildComponent!]!
+	ModularBuildComponent_createdLOT: [ModularBuildComponent!]!
+	NpcIcons_LOT: [NpcIcons!]!
+	NpcIcons_compositeLOTMultiMission: [NpcIcons!]!
+	NpcIcons_compositeLOTMultiMissionVentor: [NpcIcons!]!
+	id: Int
+	name: String
+	placeable: Int
+	type: String
+	description: String
+	localize: Int
+	npcTemplateID: Int
+	displayName: String
+	interactionDistance: Float
+	nametag: Int
+	_internalNotes: String
+	locStatus: Int
+	gate_version: FeatureGating
+	HQ_valid: Int
+	description_loc: String
+	description_en_US: String
+	description_de_DE: String
+	description_en_GB: String
+	name_loc: String
+	name_en_US: String
+	name_de_DE: String
+	name_en_GB: String
+	itemComponent: ItemComponent
+	renderComponent: RenderComponent
+	ObjectSkills: [ObjectSkills!]!
+	ObjectSkills_objectTemplate: [ObjectSkills!]!
+	RebuildSections: [RebuildSections!]!
+	RebuildSections_objectID: [RebuildSections!]!
+	RewardCodes: [RewardCodes!]!
+	RewardCodes_attachmentLOT: [RewardCodes!]!
+	TamingBuildPuzzles_PuzzleModelLot: [TamingBuildPuzzles!]!
+	TamingBuildPuzzles_NPCLot: [TamingBuildPuzzles!]!
+	WhatsCoolItemSpotlight: [WhatsCoolItemSpotlight!]!
+	WhatsCoolItemSpotlight_itemID: [WhatsCoolItemSpotlight!]!
+}
+
+type PetNestComponent {
+	id: Int
+	ElementalType: Int
+}
+
+type brickAttributes {
+	ID: Int
+	icon_asset: String
+	display_order: Int
+	locStatus: Int
+	name_loc: String
+	name_en_US: String
+	name_de_DE: String
+	name_en_GB: String
+}
+
+type PropertyEntranceComponent {
+	id: Int
+	mapID: ZoneTable
+	propertyName: String
+	isOnProperty: Int
+	groupType: String
+}
+
+type Icons {
+	RenderComponent: [RenderComponent!]!
+	RenderComponent_IconID: [RenderComponent!]!
+	IconID: Int
+	IconPath: String
+	IconName: String
+	CelebrationParameters: [CelebrationParameters!]!
+	CelebrationParameters_iconID: [CelebrationParameters!]!
+	mapIcon: [mapIcon!]!
+	mapIcon_iconID: [mapIcon!]!
+	Missions: [Missions!]!
+	Missions_missionIconID: [Missions!]!
+	MissionTasks_IconID: [MissionTasks!]!
+	MissionTasks_largeTaskIconID: [MissionTasks!]!
+	MissionText_IconID: [MissionText!]!
+	MissionText_turnInIconID: [MissionText!]!
+	ProximityTypes: [ProximityTypes!]!
+	ProximityTypes_IconID: [ProximityTypes!]!
+	Preconditions: [Preconditions!]!
+	Preconditions_iconID: [Preconditions!]!
+	SkillBehavior: [SkillBehavior!]!
+	SkillBehavior_skillIcon: [SkillBehavior!]!
+	WhatsCoolNewsAndTips: [WhatsCoolNewsAndTips!]!
+	WhatsCoolNewsAndTips_iconID: [WhatsCoolNewsAndTips!]!
+}
+
+type ItemSets {
+	setID: Int
+	locStatus: Int
+	itemIDs: String
+	kitType: Int
+	kitRank: Int
+	kitImage: Int
+	skillSetWith2: Int
+	skillSetWith3: Int
+	skillSetWith4: Int
+	skillSetWith5: Int
+	skillSetWith6: Int
+	localize: Int
+	gate_version: String
+	kitID: Int
+	priority: Float
+	kitName_loc: String
+	kitName_en_US: String
+	kitName_de_DE: String
+	kitName_en_GB: String
+}
+
+type ObjectBehaviorXREF {
+	LOT: Int
+	behaviorID1: Int
+	behaviorID2: Int
+	behaviorID3: Int
+	behaviorID4: Int
+	behaviorID5: Int
+	type: Int
+}
+
+type RenderComponentWrapper {
+	id: Int
+	defaultWrapperAsset: String
+}
+
+type ControlSchemes {
+	control_scheme: Int
+	scheme_name: String
+	rotation_speed: Float
+	walk_forward_speed: Float
+	walk_backward_speed: Float
+	walk_strafe_speed: Float
+	walk_strafe_forward_speed: Float
+	walk_strafe_backward_speed: Float
+	run_backward_speed: Float
+	run_strafe_speed: Float
+	run_strafe_forward_speed: Float
+	run_strafe_backward_speed: Float
+	keyboard_zoom_sensitivity: Float
+	keyboard_pitch_sensitivity: Float
+	keyboard_yaw_sensitivity: Float
+	mouse_zoom_wheel_sensitivity: Float
+	x_mouse_move_sensitivity_modifier: Float
+	y_mouse_move_sensitivity_modifier: Float
+	freecam_speed_modifier: Float
+	freecam_slow_speed_multiplier: Float
+	freecam_fast_speed_multiplier: Float
+	freecam_mouse_modifier: Float
+	gamepad_pitch_rot_sensitivity: Float
+	gamepad_yaw_rot_sensitivity: Float
+	gamepad_trigger_sensitivity: Float
+	PossessableComponent: [PossessableComponent!]!
+	PossessableComponent_controlSchemeID: [PossessableComponent!]!
+}
+
+type DevModelBehaviors {
+	ModelID: Int
+	BehaviorID: Int
+}
+
+type BaseCombatAIComponent {
+	id: Int
+	behaviorType: Int
+	combatRoundLength: Float
+	combatRole: Int
+	minRoundLength: Float
+	maxRoundLength: Float
+	tetherSpeed: Float
+	pursuitSpeed: Float
+	combatStartDelay: Float
+	softTetherRadius: Float
+	hardTetherRadius: Float
+	spawnTimer: Float
+	tetherEffectID: Int
+	ignoreMediator: Int
+	aggroRadius: Float
+	ignoreStatReset: Int
+	ignoreParent: Int
+}
+
+type BrickIDTable {
+	NDObjectID: Objects
+	LEGOBrickID: Int
+}
+
+type LUPExhibitComponent {
+	id: Int
+	minXZ: Float
+	maxXZ: Float
+	maxY: Float
+	offsetX: Float
+	offsetY: Float
+	offsetZ: Float
+}
+
+type MinifigDecals_Legs {
+	ID: Int
+	High_path: String
+}
+
+type DestructibleComponent {
+	id: Int
+	faction: Factions
+	factionList: String
+	life: Int
+	imagination: Int
+	LootMatrixIndex: LootMatrix
+	CurrencyIndex: Int
+	level: Int
+	armor: Float
+	death_behavior: Int
+	isnpc: Int
+	attack_priority: Int
+	isSmashable: Int
+	difficultyLevel: Int
+}
+
+type SceneTable {
+	sceneID: Int
+	sceneName: String
+}
+
+type RenderComponentFlash {
+	id: Int
+	interactive: Int
+	animated: Int
+	nodeName: String
+	flashPath: String
+	elementName: String
+	_uid: Int
+}
+
+type ItemFoodData {
+	id: Int
+	element_1: Int
+	element_1_amount: Int
+	element_2: Int
+	element_2_amount: Int
+	element_3: Int
+	element_3_amount: Int
+	element_4: Int
+	element_4_amount: Int
+}
+
+type SpeedchatMenu {
+	id: Int
+	parentId: Int
+	emoteId: Emotes
+	imageName: String
+	localize: Int
+	locStatus: Int
+	gate_version: FeatureGating
+	menuText_loc: String
+	menuText_en_US: String
+	menuText_de_DE: String
+	menuText_en_GB: String
+}
+
+type JetPackPadComponent {
+	id: Int
+	xDistance: Float
+	yDistance: Float
+	warnDistance: Float
+	lotBlocker: Objects
+	lotWarningVolume: Objects
+}
+
+type mapIcon {
+	LOT: Objects
+	iconID: Icons
+	iconState: Int
+}
+
+type dtproperties {
+	id: Int
+	objectid: Int
+	property: String
+	value: String
+	uvalue: String
+	lvalue: String
+	version: Int
+}
+
+type LootTable {
+	LootMatrix: [LootMatrix!]!
+	LootMatrix_LootTableIndex: [LootMatrix!]!
+	itemid: Objects
+	LootTableIndex: LootTableIndex
+	id: Int
+	MissionDrop: Int
+	sortPriority: Int
+}
+
+type mapItemTypes {
+	id: Int
+	description: String
+	equipLocation: String
+	ItemComponent: [ItemComponent!]!
+	ItemComponent_itemType: [ItemComponent!]!
+}
+
+type MissionText {
+	id: Missions
+	story_icon: String
+	missionIcon: String
+	offerNPCIcon: String
+	IconID: Icons
+	state_1_anim: String
+	state_2_anim: String
+	state_3_anim: String
+	state_4_anim: String
+	state_3_turnin_anim: String
+	state_4_turnin_anim: String
+	onclick_anim: String
+	CinematicAccepted: String
+	CinematicAcceptedLeadin: Float
+	CinematicCompleted: String
+	CinematicCompletedLeadin: Float
+	CinematicRepeatable: String
+	CinematicRepeatableLeadin: Float
+	CinematicRepeatableCompleted: String
+	CinematicRepeatableCompletedLeadin: Float
+	AudioEventGUID_Interact: String
+	AudioEventGUID_OfferAccept: String
+	AudioEventGUID_OfferDeny: String
+	AudioEventGUID_Completed: String
+	AudioEventGUID_TurnIn: String
+	AudioEventGUID_Failed: String
+	AudioEventGUID_Progress: String
+	AudioMusicCue_OfferAccept: String
+	AudioMusicCue_TurnIn: String
+	turnInIconID: Icons
+	localize: Int
+	locStatus: Int
+	gate_version: FeatureGating
+	accept_chat_bubble_loc: String
+	accept_chat_bubble_en_US: String
+	accept_chat_bubble_de_DE: String
+	accept_chat_bubble_en_GB: String
+	chat_state_1_loc: String
+	chat_state_1_en_US: String
+	chat_state_1_de_DE: String
+	chat_state_1_en_GB: String
+	chat_state_2_loc: String
+	chat_state_2_en_US: String
+	chat_state_2_de_DE: String
+	chat_state_2_en_GB: String
+	chat_state_3_turnin_loc: String
+	chat_state_3_turnin_en_US: String
+	chat_state_3_turnin_de_DE: String
+	chat_state_3_turnin_en_GB: String
+	completion_succeed_tip_loc: String
+	completion_succeed_tip_en_US: String
+	completion_succeed_tip_de_DE: String
+	completion_succeed_tip_en_GB: String
+	in_progress_loc: String
+	in_progress_en_US: String
+	in_progress_de_DE: String
+	in_progress_en_GB: String
+	offer_loc: String
+	offer_en_US: String
+	offer_de_DE: String
+	offer_en_GB: String
+	ready_to_complete_loc: String
+	ready_to_complete_en_US: String
+	ready_to_complete_de_DE: String
+	ready_to_complete_en_GB: String
+	description_loc: String
+	description_en_US: String
+	description_de_DE: String
+	description_en_GB: String
+	chat_state_3_loc: String
+	chat_state_3_en_US: String
+	chat_state_3_de_DE: String
+	chat_state_3_en_GB: String
+	chat_state_4_loc: String
+	chat_state_4_en_US: String
+	chat_state_4_de_DE: String
+	chat_state_4_en_GB: String
+	chat_state_4_turnin_loc: String
+	chat_state_4_turnin_en_US: String
+	chat_state_4_turnin_de_DE: String
+	chat_state_4_turnin_en_GB: String
+	offer_repeatable_loc: String
+	offer_repeatable_en_US: String
+	offer_repeatable_de_DE: String
+	offer_repeatable_en_GB: String
+}
+
+type PhysicsComponent {
+	id: Int
+	static: Float
+	physics_asset: String
+	jump: Float
+	doublejump: Float
+	speed: Float
+	rotSpeed: Float
+	playerHeight: Float
+	playerRadius: Float
+	pcShapeType: Int
+	collisionGroup: Int
+	airSpeed: Float
+	boundaryAsset: String
+	jumpAirSpeed: Float
+	friction: Float
+	gravityVolumeAsset: String
+}
+
+type ReputationRewards {
+	repLevel: Int
+	sublevel: Int
+	reputation: Float
+}
+
+type RarityTable {
+	id: Int
+	randmax: Float
+	rarity: Int
+	RarityTableIndex: RarityTableIndex
+	SmashableChain: [SmashableChain!]!
+	SmashableChain_rarityTableIndex: [SmashableChain!]!
+}
+
+type MinifigDecals_Eyebrows {
+	ID: Int
+	High_path: String
+	Low_path: String
+	CharacterCreateValid: Int
+	male: Int
+	female: Int
+	MinifigComponent: [MinifigComponent!]!
+	MinifigComponent_eyebrowstyle: [MinifigComponent!]!
+}
+
+type CollectibleComponent {
+	id: Int
+	requirement_mission: Missions
+}
+
+type RocketLaunchpadControlComponent {
+	id: Int
+	targetZone: ZoneTable
+	defaultZoneID: ZoneTable
+	targetScene: String
+	gmLevel: Int
+	playerAnimation: String
+	rocketAnimation: String
+	launchMusic: String
+	useLaunchPrecondition: Int
+	useAltLandingPrecondition: Int
+	launchPrecondition: String
+	altLandingPrecondition: String
+	altLandingSpawnPointName: String
+}
+
+type PlayerFlags {
+	id: Int
+	SessionOnly: Int
+	OnlySetByServer: Int
+	SessionZoneOnly: Int
+}
+
+type SmashableChainIndex {
+	id: Int
+	targetGroup: String
+	description: String
+	continuous: Int
+}
+
+type PetAbilities {
+	id: Int
+	AbilityName: String
+	ImaginationCost: Int
+	locStatus: Int
+	DisplayName_loc: String
+	DisplayName_en_US: String
+	DisplayName_de_DE: String
+	DisplayName_en_GB: String
+}
+
+type mapAnimationPriorities {
+	id: Int
+	name: String
+	priority: Float
+}
+
+type RewardCodes {
+	id: Int
+	code: String
+	attachmentLOT: Objects
+	locStatus: Int
+	gate_version: FeatureGating
+	bodyText_loc: String
+	bodyText_en_US: String
+	bodyText_de_DE: String
+	bodyText_en_GB: String
+	subjectText_loc: String
+	subjectText_en_US: String
+	subjectText_de_DE: String
+	subjectText_en_GB: String
+}
+
+type RailActivatorComponent {
+	id: Int
+	startAnim: String
+	loopAnim: String
+	stopAnim: String
+	startSound: String
+	loopSound: String
+	stopSound: String
+	effectIDs: String
+	preconditions: String
+	playerCollision: Int
+	cameraLocked: Int
+	StartEffectID: String
+	StopEffectID: String
+	DamageImmune: Int
+	NoAggro: Int
+	ShowNameBillboard: Int
+}
+
+type PropertyTemplate {
+	id: Int
+	mapID: ZoneTable
+	vendorMapID: ZoneTable
+	spawnName: String
+	type: Int
+	sizecode: Int
+	minimumPrice: Int
+	rentDuration: Int
+	path: String
+	cloneLimit: Int
+	durationType: Int
+	achievementRequired: Int
+	zoneX: Float
+	zoneY: Float
+	zoneZ: Float
+	maxBuildHeight: Float
+	localize: Int
+	reputationPerMinute: Int
+	locStatus: Int
+	gate_version: FeatureGating
+	description_loc: String
+	description_en_US: String
+	description_de_DE: String
+	description_en_GB: String
+	name_loc: String
+	name_en_US: String
+	name_de_DE: String
+	name_en_GB: String
+}
+
+type AICombatRoles {
+	id: Int
+	preferredRole: Int
+	specifiedMinRangeNOUSE: Float
+	specifiedMaxRangeNOUSE: Float
+	specificMinRange: Float
+	specificMaxRange: Float
+}
+
+type MinifigDecals_Eyes {
+	ID: Int
+	High_path: String
+	Low_path: String
+	CharacterCreateValid: Int
+	male: Int
+	female: Int
+	MinifigComponent: [MinifigComponent!]!
+	MinifigComponent_eyesstyle: [MinifigComponent!]!
+}
+
+type MinifigDecals_Mouths {
+	ID: Int
+	High_path: String
+	Low_path: String
+	CharacterCreateValid: Int
+	male: Int
+	female: Int
+	MinifigComponent: [MinifigComponent!]!
+	MinifigComponent_mouthstyle: [MinifigComponent!]!
+}
+
+type mapTextureResource {
+	id: Int
+	texturepath: String
+	SurfaceType: Int
+}
+
+type Camera {
+	camera_name: String
+	pitch_angle_tolerance: Float
+	starting_zoom: Float
+	zoom_return_modifier: Float
+	pitch_return_modifier: Float
+	tether_out_return_modifier: Float
+	tether_in_return_multiplier: Float
+	verticle_movement_dampening_modifier: Float
+	return_from_incline_modifier: Float
+	horizontal_return_modifier: Float
+	yaw_behavior_speed_multiplier: Float
+	camera_collision_padding: Float
+	glide_speed: Float
+	fade_player_min_range: Float
+	min_movement_delta_tolerance: Float
+	min_glide_distance_tolerance: Float
+	look_forward_offset: Float
+	look_up_offset: Float
+	minimum_vertical_dampening_distance: Float
+	maximum_vertical_dampening_distance: Float
+	minimum_ignore_jump_distance: Float
+	maximum_ignore_jump_distance: Float
+	maximum_auto_glide_angle: Float
+	minimum_tether_glide_distance: Float
+	yaw_sign_correction: Float
+	set_1_look_forward_offset: Float
+	set_1_look_up_offset: Float
+	set_2_look_forward_offset: Float
+	set_2_look_up_offset: Float
+	set_0_speed_influence_on_dir: Float
+	set_1_speed_influence_on_dir: Float
+	set_2_speed_influence_on_dir: Float
+	set_0_angular_relaxation: Float
+	set_1_angular_relaxation: Float
+	set_2_angular_relaxation: Float
+	set_0_position_up_offset: Float
+	set_1_position_up_offset: Float
+	set_2_position_up_offset: Float
+	set_0_position_forward_offset: Float
+	set_1_position_forward_offset: Float
+	set_2_position_forward_offset: Float
+	set_0_FOV: Float
+	set_1_FOV: Float
+	set_2_FOV: Float
+	set_0_max_yaw_angle: Float
+	set_1_max_yaw_angle: Float
+	set_2_max_yaw_angle: Float
+	set_1_fade_in_camera_set_change: Int
+	set_1_fade_out_camera_set_change: Int
+	set_2_fade_in_camera_set_change: Int
+	set_2_fade_out_camera_set_change: Int
+	input_movement_scalar: Float
+	input_rotation_scalar: Float
+	input_zoom_scalar: Float
+	minimum_pitch_desired: Float
+	maximum_pitch_desired: Float
+	minimum_zoom: Float
+	maximum_zoom: Float
+	horizontal_rotate_tolerance: Float
+	horizontal_rotate_modifier: Float
+}
+
+type ModuleComponent {
+	id: Int
+	partCode: Int
+	buildType: Int
+	xml: String
+	primarySoundGUID: String
+	assembledEffectID: Int
+}
+
+type ActivityText {
+	activityID: Activities
+	type: String
+	localize: Int
+	locStatus: Int
+	gate_version: FeatureGating
+	broadcast_subjectText_loc: String
+	broadcast_subjectText_en_US: String
+	broadcast_subjectText_de_DE: String
+	broadcast_subjectText_en_GB: String
+	broadcast_text_loc: String
+	broadcast_text_en_US: String
+	broadcast_text_de_DE: String
+	broadcast_text_en_GB: String
+	mail_subjectText_loc: String
+	mail_subjectText_en_US: String
+	mail_subjectText_de_DE: String
+	mail_subjectText_en_GB: String
+	mail_text_loc: String
+	mail_text_en_US: String
+	mail_text_de_DE: String
+	mail_text_en_GB: String
+	hint10_text_loc: String
+	hint10_text_en_US: String
+	hint10_text_de_DE: String
+	hint10_text_en_GB: String
+	hint11_text_loc: String
+	hint11_text_en_US: String
+	hint11_text_de_DE: String
+	hint11_text_en_GB: String
+	hint1_text_loc: String
+	hint1_text_en_US: String
+	hint1_text_de_DE: String
+	hint1_text_en_GB: String
+	hint2_text_loc: String
+	hint2_text_en_US: String
+	hint2_text_de_DE: String
+	hint2_text_en_GB: String
+	hint3_text_loc: String
+	hint3_text_en_US: String
+	hint3_text_de_DE: String
+	hint3_text_en_GB: String
+	hint4_text_loc: String
+	hint4_text_en_US: String
+	hint4_text_de_DE: String
+	hint4_text_en_GB: String
+	hint5_text_loc: String
+	hint5_text_en_US: String
+	hint5_text_de_DE: String
+	hint5_text_en_GB: String
+	hint6_text_loc: String
+	hint6_text_en_US: String
+	hint6_text_de_DE: String
+	hint6_text_en_GB: String
+	hint7_text_loc: String
+	hint7_text_en_US: String
+	hint7_text_de_DE: String
+	hint7_text_en_GB: String
+	hint8_text_loc: String
+	hint8_text_en_US: String
+	hint8_text_de_DE: String
+	hint8_text_en_GB: String
+	hint9_text_loc: String
+	hint9_text_en_US: String
+	hint9_text_de_DE: String
+	hint9_text_en_GB: String
+}
+
+type Preconditions {
+	id: Int
+	type: Int
+	targetLOT: String
+	targetGroup: String
+	targetCount: Int
+	iconID: Icons
+	localize: Int
+	validContexts: Int
+	locStatus: Int
+	gate_version: FeatureGating
+	FailureReason_loc: String
+	FailureReason_en_US: String
+	FailureReason_de_DE: String
+	FailureReason_en_GB: String
+}
+
+type ScriptComponent {
+	id: Int
+	script_name: String
+	client_script_name: String
+}
+
+type UGBehaviorSounds {
+	id: Int
+	guid: String
+	localize: Int
+	locStatus: Int
+	gate_version: FeatureGating
+	name_loc: String
+	name_en_US: String
+	name_de_DE: String
+	name_en_GB: String
+}
+
+type WhatsCoolNewsAndTips {
+	id: Int
+	iconID: Icons
+	type: Int
+	localize: Int
+	gate_version: FeatureGating
+	locStatus: Int
+	storyTitle_loc: String
+	storyTitle_en_US: String
+	storyTitle_de_DE: String
+	storyTitle_en_GB: String
+	text_loc: String
+	text_en_US: String
+	text_de_DE: String
+	text_en_GB: String
+}
+
+type ModelBehavior {
+	id: Int
+	definitionXMLfilename: String
+}
+
+type AnimationIndex {
+	animationGroupID: Int
+	description: String
+	groupType: String
+}
+
+type RacingModuleComponent {
+	id: Int
+	topSpeed: Float
+	acceleration: Float
+	handling: Float
+	stability: Float
+	imagination: Float
+}
+
+type BuffParameters {
+	BuffID: BuffDefinitions
+	ParameterName: String
+	NumberValue: Float
+	StringValue: String
+	EffectID: Int
+}
+
+type RenderComponent {
+	id: Int
+	render_asset: String
+	icon_asset: String
+	IconID: Icons
+	shader_id: Int
+	effect1: Int
+	effect2: Int
+	effect3: Int
+	effect4: Int
+	effect5: Int
+	effect6: Int
+	animationGroupIDs: String
+	fade: Int
+	usedropshadow: Int
+	preloadAnimations: Int
+	fadeInTime: Float
+	maxShadowDistance: Float
+	ignoreCameraCollision: Int
+	renderComponentLOD1: Int
+	renderComponentLOD2: Int
+	gradualSnap: Int
+	animationFlag: Int
+	AudioMetaEventSet: String
+	billboardHeight: Float
+	chatBubbleOffset: Float
+	staticBillboard: Int
+	LXFMLFolder: String
+	attachIndicatorsToNode: Int
+	Objects: [Objects!]!
+	Objects_renderComponent: [Objects!]!
+}
+
+type RenderIconAssets {
+	id: Int
+	icon_asset: String
+	blank_column: String
+}
+
+type FlairTable {
+	id: Int
+	asset: String
+}
+
+type MotionFX {
+	id: Int
+	typeID: Int
+	slamVelocity: Float
+	addVelocity: Float
+	duration: Float
+	destGroupName: String
+	startScale: Float
+	endScale: Float
+	velocity: Float
+	distance: Float
+}
+
+type TrailEffects {
+	trailID: Int
+	textureName: String
+	blendmode: Int
+	cardlifetime: Float
+	colorlifetime: Float
+	minTailFade: Float
+	tailFade: Float
+	max_particles: Int
+	birthDelay: Float
+	deathDelay: Float
+	bone1: String
+	bone2: String
+	texLength: Float
+	texWidth: Float
+	startColorR: Float
+	startColorG: Float
+	startColorB: Float
+	startColorA: Float
+	middleColorR: Float
+	middleColorG: Float
+	middleColorB: Float
+	middleColorA: Float
+	endColorR: Float
+	endColorG: Float
+	endColorB: Float
+	endColorA: Float
+}
+
+type map_BlueprintCategory {
+	id: Int
+	description: String
+	enabled: Int
+}
+
+type EventGating {
+	eventName: String
+	date_start: Int
+	date_end: Int
+}
+
+type SurfaceType {
+	SurfaceType: Int
+	FootstepNDAudioMetaEventSetName: String
+}
+
+type ModularBuildComponent {
+	id: Int
+	buildType: Int
+	xml: String
+	createdLOT: Objects
+	createdPhysicsID: Int
+	AudioEventGUID_Snap: String
+	AudioEventGUID_Complete: String
+	AudioEventGUID_Present: String
+}
+
+type ObjectSkills {
+	objectTemplate: Objects
+	skillID: SkillBehavior
+	castOnType: Int
+	AICombatWeight: Int
+}
+
+type VendorComponent {
+	id: Int
+	buyScalar: Float
+	sellScalar: Float
+	refreshTimeSeconds: Float
+	LootMatrixIndex: LootMatrix
+}
+
+type MissionTasks {
+	MissionTaskObjects: [MissionTaskObjects!]!
+	MissionTaskObjects_missionTask: [MissionTaskObjects!]!
+	MissionTaskMissions: [MissionTaskMissions!]!
+	MissionTaskMissions_missionTask: [MissionTaskMissions!]!
+	id: Missions
+	locStatus: Int
+	taskType: Int
+	target: Int
+	targetGroup: String
+	targetValue: Int
+	taskParam1: String
+	largeTaskIcon: String
+	IconID: Icons
+	uid: Int
+	largeTaskIconID: Icons
+	localize: Int
+	gate_version: FeatureGating
+	description_loc: String
+	description_en_US: String
+	description_de_DE: String
+	description_en_GB: String
+}
+
+type SubscriptionPricing {
+	id: Int
+	countryCode: String
+	monthlyFeeGold: String
+	monthlyFeeSilver: String
+	monthlyFeeBronze: String
+	monetarySymbol: Int
+	symbolIsAppended: Int
+}
+
+type ProximityMonitorComponent {
+	id: Int
+	Proximities: String
+	LoadOnClient: Int
+	LoadOnServer: Int
+}
+
+type RebuildComponent {
+	id: Int
+	reset_time: Float
+	complete_time: Float
+	take_imagination: Int
+	interruptible: Int
+	self_activator: Int
+	custom_modules: String
+	activityID: Activities
+	post_imagination_cost: Int
+	time_before_smash: Float
+}
+
+type BuffDefinitions {
+	ID: Int
+	Priority: Float
+	UIIcon: String
+	BuffParameters: [BuffParameters!]!
+	BuffParameters_BuffID: [BuffParameters!]!
+}
+
+type sysdiagrams {
+	name: String
+	principal_id: Int
+	diagram_id: Int
+	version: Int
+	definition: String
+}
+
+type LevelProgressionLookup {
+	id: Int
+	requiredUScore: Int
+	BehaviorEffect: String
+}
+
+type TextDescription {
+	TextID: Int
+	TestDescription: String
+}
+
+type VehiclePhysics {
+	id: Int
+	hkxFilename: String
+	fGravityScale: Float
+	fMass: Float
+	fChassisFriction: Float
+	fMaxSpeed: Float
+	fEngineTorque: Float
+	fBrakeFrontTorque: Float
+	fBrakeRearTorque: Float
+	fBrakeMinInputToBlock: Float
+	fBrakeMinTimeToBlock: Float
+	fSteeringMaxAngle: Float
+	fSteeringSpeedLimitForMaxAngle: Float
+	fSteeringMinAngle: Float
+	fFwdBias: Float
+	fFrontTireFriction: Float
+	fRearTireFriction: Float
+	fFrontTireFrictionSlide: Float
+	fRearTireFrictionSlide: Float
+	fFrontTireSlipAngle: Float
+	fRearTireSlipAngle: Float
+	fWheelWidth: Float
+	fWheelRadius: Float
+	fWheelMass: Float
+	fReorientPitchStrength: Float
+	fReorientRollStrength: Float
+	fSuspensionLength: Float
+	fSuspensionStrength: Float
+	fSuspensionDampingCompression: Float
+	fSuspensionDampingRelaxation: Float
+	iChassisCollisionGroup: Int
+	fNormalSpinDamping: Float
+	fCollisionSpinDamping: Float
+	fCollisionThreshold: Float
+	fTorqueRollFactor: Float
+	fTorquePitchFactor: Float
+	fTorqueYawFactor: Float
+	fInertiaRoll: Float
+	fInertiaPitch: Float
+	fInertiaYaw: Float
+	fExtraTorqueFactor: Float
+	fCenterOfMassFwd: Float
+	fCenterOfMassUp: Float
+	fCenterOfMassRight: Float
+	fWheelHardpointFrontFwd: Float
+	fWheelHardpointFrontUp: Float
+	fWheelHardpointFrontRight: Float
+	fWheelHardpointRearFwd: Float
+	fWheelHardpointRearUp: Float
+	fWheelHardpointRearRight: Float
+	fInputTurnSpeed: Float
+	fInputDeadTurnBackSpeed: Float
+	fInputAccelSpeed: Float
+	fInputDeadAccelDownSpeed: Float
+	fInputDecelSpeed: Float
+	fInputDeadDecelDownSpeed: Float
+	fInputSlopeChangePointX: Float
+	fInputInitialSlope: Float
+	fInputDeadZone: Float
+	fAeroAirDensity: Float
+	fAeroFrontalArea: Float
+	fAeroDragCoefficient: Float
+	fAeroLiftCoefficient: Float
+	fAeroExtraGravity: Float
+	fBoostTopSpeed: Float
+	fBoostCostPerSecond: Float
+	fBoostAccelerateChange: Float
+	fBoostDampingChange: Float
+	fPowerslideNeutralAngle: Float
+	fPowerslideTorqueStrength: Float
+	iPowerslideNumTorqueApplications: Int
+	fImaginationTankSize: Float
+	fSkillCost: Float
+	fWreckSpeedBase: Float
+	fWreckSpeedPercent: Float
+	fWreckMinAngle: Float
+	AudioEventEngine: String
+	AudioEventSkid: String
+	AudioEventLightHit: String
+	AudioSpeedThresholdLightHit: Float
+	AudioTimeoutLightHit: Float
+	AudioEventHeavyHit: String
+	AudioSpeedThresholdHeavyHit: Float
+	AudioTimeoutHeavyHit: Float
+	AudioEventStart: String
+	AudioEventTreadConcrete: String
+	AudioEventTreadSand: String
+	AudioEventTreadWood: String
+	AudioEventTreadDirt: String
+	AudioEventTreadPlastic: String
+	AudioEventTreadGrass: String
+	AudioEventTreadGravel: String
+	AudioEventTreadMud: String
+	AudioEventTreadWater: String
+	AudioEventTreadSnow: String
+	AudioEventTreadIce: String
+	AudioEventTreadMetal: String
+	AudioEventTreadLeaves: String
+	AudioEventLightLand: String
+	AudioAirtimeForLightLand: Float
+	AudioEventHeavyLand: String
+	AudioAirtimeForHeavyLand: Float
+	bWheelsVisible: Int
+}
+
+type PetComponent {
+	id: Int
+	minTameUpdateTime: Float
+	maxTameUpdateTime: Float
+	percentTameChance: Float
+	tamability: Float
+	elementType: Int
+	walkSpeed: Float
+	runSpeed: Float
+	sprintSpeed: Float
+	idleTimeMin: Float
+	idleTimeMax: Float
+	petForm: Int
+	imaginationDrainRate: Float
+	AudioMetaEventSet: String
+	buffIDs: String
+}
+
+type ObjectBehaviors {
+	BehaviorID: Int
+	xmldata: String
+}
+
+type PossessableComponent {
+	id: Int
+	controlSchemeID: ControlSchemes
+	minifigAttachPoint: String
+	minifigAttachAnimation: String
+	minifigDetachAnimation: String
+	mountAttachAnimation: String
+	mountDetachAnimation: String
+	attachOffsetFwd: Float
+	attachOffsetRight: Float
+	possessionType: Int
+	wantBillboard: Int
+	billboardOffsetUp: Float
+	depossessOnHit: Int
+	hitStunTime: Float
+	skillSet: Int
+}
+
+type BehaviorEffect {
+	effectID: Int
+	effectType: String
+	effectName: String
+	trailID: Int
+	pcreateDuration: Float
+	animationName: String
+	attachToObject: Int
+	boneName: String
+	useSecondary: Int
+	cameraEffectType: Int
+	cameraDuration: Float
+	cameraFrequency: Float
+	cameraXAmp: Float
+	cameraYAmp: Float
+	cameraZAmp: Float
+	cameraRotFrequency: Float
+	cameraRoll: Float
+	cameraPitch: Float
+	cameraYaw: Float
+	AudioEventGUID: String
+	renderEffectType: Int
+	renderEffectTime: Float
+	renderStartVal: Float
+	renderEndVal: Float
+	renderDelayVal: Float
+	renderValue1: Float
+	renderValue2: Float
+	renderValue3: Float
+	renderRGBA: String
+	renderShaderVal: Int
+	motionID: Int
+	meshID: Int
+	meshDuration: Float
+	meshLockedNode: String
+}
+
+type LootMatrixIndex {
+	LootMatrixIndex: Int
+	inNpcEditor: Int
+	LootMatrix: [LootMatrix!]!
+	LootMatrix_LootMatrixIndex: [LootMatrix!]!
+}
+
+type VehicleStatMap {
+	id: Int
+	ModuleStat: String
+	HavokStat: String
+	HavokChangePerModuleStat: Float
+}
+
+type MovingPlatforms {
+	id: Int
+	platformIsSimpleMover: Int
+	platformMoveX: Float
+	platformMoveY: Float
+	platformMoveZ: Float
+	platformMoveTime: Float
+	platformStartAtEnd: Int
+	description: String
+}
+
+type MissionTaskMissions {
+	missionTask: MissionTasks!
+	mission: Missions!
+}
+
+type Factions {
+	DestructibleComponent: [DestructibleComponent!]!
+	DestructibleComponent_faction: [DestructibleComponent!]!
+	faction: Int
+	factionList: String
+	factionListFriendly: Int
+	friendList: String
+	enemyList: String
+}
+
+type SkillBehavior {
+	ItemSetSkills: [ItemSetSkills!]!
+	ItemSetSkills_SkillID: [ItemSetSkills!]!
+	ObjectSkills: [ObjectSkills!]!
+	ObjectSkills_skillID: [ObjectSkills!]!
+	skillID: Int
+	locStatus: Int
+	behaviorID: Int
+	imaginationcost: Int
+	cooldowngroup: Int
+	cooldown: Float
+	inNpcEditor: Int
+	skillIcon: Icons
+	oomSkillID: String
+	oomBehaviorEffectID: Int
+	castTypeDesc: Int
+	imBonusUI: Int
+	lifeBonusUI: Int
+	armorBonusUI: Int
+	damageUI: Int
+	hideIcon: Int
+	localize: Int
+	gate_version: FeatureGating
+	cancelType: Int
+	descriptionUI_loc: String
+	descriptionUI_en_US: String
+	descriptionUI_de_DE: String
+	descriptionUI_en_GB: String
+	name_loc: String
+	name_en_US: String
+	name_de_DE: String
+	name_en_GB: String
+}
+
+type Activities {
+	ActivityID: Int
+	locStatus: Int
+	instanceMapID: ZoneTable
+	minTeams: Int
+	maxTeams: Int
+	minTeamSize: Int
+	maxTeamSize: Int
+	waitTime: Int
+	startDelay: Int
+	requiresUniqueData: Int
+	leaderboardType: Int
+	localize: Int
+	optionalCostLOT: Int
+	optionalCostCount: Int
+	showUIRewards: Int
+	CommunityActivityFlagID: Int
+	gate_version: FeatureGating
+	noTeamLootOnDeath: Int
+	optionalPercentage: Float
+	ActivityName_loc: String
+	ActivityName_en_US: String
+	ActivityName_de_DE: String
+	ActivityName_en_GB: String
+	ActivityText: [ActivityText!]!
+	ActivityText_activityID: [ActivityText!]!
+	RebuildComponent: [RebuildComponent!]!
+	RebuildComponent_activityID: [RebuildComponent!]!
+}
+
+type SmashableComponent {
+	id: Int
+	LootMatrixIndex: LootMatrix
+}
+
+type TamingBuildPuzzles {
+	id: Int
+	PuzzleModelLot: Objects
+	NPCLot: Objects
+	ValidPiecesLXF: String
+	InvalidPiecesLXF: String
+	Difficulty: Int
+	Timelimit: Int
+	NumValidPieces: Int
+	TotalNumPieces: Int
+	ModelName: String
+	FullModelLXF: String
+	Duration: Float
+	imagCostPerBuild: Int
+}
+
+type Animations {
+	animationGroupID: Int
+	animation_type: String
+	animation_name: String
+	chance_to_play: Float
+	min_loops: Int
+	max_loops: Int
+	animation_length: Float
+	hideEquip: Int
+	ignoreUpperBody: Int
+	restartable: Int
+	face_animation_name: String
+	priority: Float
+	blendTime: Float
+}
+
+type NpcIcons {
+	id: Int
+	color: Int
+	offset: Float
+	LOT: Objects
+	Texture: String
+	isClickable: Int
+	scale: Float
+	rotateToFace: Int
+	compositeHorizOffset: Float
+	compositeVertOffset: Float
+	compositeScale: Float
+	compositeConnectionNode: String
+	compositeLOTMultiMission: Objects
+	compositeLOTMultiMissionVentor: Objects
+	compositeIconTexture: String
+}
+
+type SmashableElements {
+	elementID: Int
+	dropWeight: Int
+}
+
+type Rewards {
+	id: Int
+	LevelID: Int
+	MissionID: Int
+	RewardType: Int
+	value: Int
+	count: Int
+}
+
+type BehaviorTemplate {
+	behaviorID: Int
+	templateID: BehaviorTemplateName
+	effectID: Int
+	effectHandle: String
+}
+
+type SmashableChain {
+	chainIndex: Int
+	chainLevel: Int
+	lootMatrixID: LootMatrix
+	rarityTableIndex: RarityTable
+	currencyIndex: Int
+	currencyLevel: Int
+	smashCount: Int
+	timeLimit: Int
+	chainStepID: Int
+}
+
+type Release_Version {
+	ReleaseVersion: String
+	ReleaseDate: Int
+}
+
+type WorldConfig {
+	WorldConfigID: Int
+	pegravityvalue: Float
+	pebroadphaseworldsize: Float
+	pegameobjscalefactor: Float
+	character_rotation_speed: Float
+	character_walk_forward_speed: Float
+	character_walk_backward_speed: Float
+	character_walk_strafe_speed: Float
+	character_walk_strafe_forward_speed: Float
+	character_walk_strafe_backward_speed: Float
+	character_run_backward_speed: Float
+	character_run_strafe_speed: Float
+	character_run_strafe_forward_speed: Float
+	character_run_strafe_backward_speed: Float
+	global_cooldown: Float
+	characterGroundedTime: Float
+	characterGroundedSpeed: Float
+	globalImmunityTime: Float
+	character_max_slope: Float
+	defaultrespawntime: Float
+	mission_tooltip_timeout: Float
+	vendor_buy_multiplier: Float
+	pet_follow_radius: Float
+	character_eye_height: Float
+	flight_vertical_velocity: Float
+	flight_airspeed: Float
+	flight_fuel_ratio: Float
+	flight_max_airspeed: Float
+	fReputationPerVote: Float
+	nPropertyCloneLimit: Int
+	defaultHomespaceTemplate: Int
+	coins_lost_on_death_percent: Float
+	coins_lost_on_death_min: Int
+	coins_lost_on_death_max: Int
+	character_votes_per_day: Int
+	property_moderation_request_approval_cost: Int
+	property_moderation_request_review_cost: Int
+	propertyModRequestsAllowedSpike: Int
+	propertyModRequestsAllowedInterval: Int
+	propertyModRequestsAllowedTotal: Int
+	propertyModRequestsSpikeDuration: Int
+	propertyModRequestsIntervalDuration: Int
+	modelModerateOnCreate: Int
+	defaultPropertyMaxHeight: Float
+	reputationPerVoteCast: Float
+	reputationPerVoteReceived: Float
+	showcaseTopModelConsiderationBattles: Int
+	reputationPerBattlePromotion: Float
+	coins_lost_on_death_min_timeout: Float
+	coins_lost_on_death_max_timeout: Float
+	mail_base_fee: Int
+	mail_percent_attachment_fee: Float
+	propertyReputationDelay: Int
+	LevelCap: Int
+	LevelUpBehaviorEffect: String
+	CharacterVersion: Int
+	LevelCapCurrencyConversion: Int
+}
+
+type MissionTaskObjects {
+	missionTask: MissionTasks!
+	object: Objects!
+}
+
+type LanguageType {
+	LanguageID: Int
+	LanguageDescription: String
+}
+
+type CurrencyTable {
+	currencyIndex: Int
+	npcminlevel: Int
+	minvalue: Int
+	maxvalue: Int
+	id: Int
+}
+
+type ComponentsRegistry {
+	id: Int
+	component_type: Int
+	component_id: Int
+}
+
+type LootMatrix {
+	ActivityRewards: [ActivityRewards!]!
+	ActivityRewards_LootMatrixIndex: [ActivityRewards!]!
+	DestructibleComponent: [DestructibleComponent!]!
+	DestructibleComponent_LootMatrixIndex: [DestructibleComponent!]!
+	LootMatrixIndex: LootMatrixIndex
+	LootTableIndex: LootTable
+	RarityTableIndex: Int
+	percent: Float
+	minToDrop: Int
+	maxToDrop: Int
+	id: Int
+	flagID: Int
+	gate_version: FeatureGating
+	PackageComponent: [PackageComponent!]!
+	PackageComponent_LootMatrixIndex: [PackageComponent!]!
+	SmashableChain: [SmashableChain!]!
+	SmashableChain_lootMatrixID: [SmashableChain!]!
+	SmashableComponent: [SmashableComponent!]!
+	SmashableComponent_LootMatrixIndex: [SmashableComponent!]!
+	VendorComponent: [VendorComponent!]!
+	VendorComponent_LootMatrixIndex: [VendorComponent!]!
+}
+
+type CelebrationParameters {
+	id: Int
+	animation: String
+	backgroundObject: Objects
+	duration: Float
+	subText: String
+	mainText: String
+	iconID: Icons
+	celeLeadIn: Float
+	celeLeadOut: Float
+	cameraPathLOT: Objects
+	pathNodeName: String
+	ambientR: Float
+	ambientG: Float
+	ambientB: Float
+	directionalR: Float
+	directionalG: Float
+	directionalB: Float
+	specularR: Float
+	specularG: Float
+	specularB: Float
+	lightPositionX: Float
+	lightPositionY: Float
+	lightPositionZ: Float
+	blendTime: Float
+	fogColorR: Float
+	fogColorG: Float
+	fogColorB: Float
+	musicCue: String
+	soundGUID: String
+	mixerProgram: String
+}
+
+type RarityTableIndex {
+	RarityTable: [RarityTable!]!
+	RarityTable_RarityTableIndex: [RarityTable!]!
+	RarityTableIndex: Int
+}
+
+type ChoiceBuildComponent {
+	id: Int
+	selections: String
+	imaginationOverride: Int
+}
+
+type ZoneLoadingTips {
+	id: Int
+	zoneid: ZoneTable
+	imagelocation: String
+	localize: Int
+	gate_version: FeatureGating
+	locStatus: Int
+	weight: Int
+	targetVersion: FeatureGating
+	tip1_loc: String
+	tip1_en_US: String
+	tip1_de_DE: String
+	tip1_en_GB: String
+	tip2_loc: String
+	tip2_en_US: String
+	tip2_de_DE: String
+	tip2_en_GB: String
+	title_loc: String
+	title_en_US: String
+	title_de_DE: String
+	title_en_GB: String
+}
+
+type FeatureGating {
+	featureName: String
+	major: Int
+	current: Int
+	minor: Int
+	description: String
+	Activities: [Activities!]!
+	Activities_gate_version: [Activities!]!
+	ActivityText: [ActivityText!]!
+	ActivityText_gate_version: [ActivityText!]!
+	DeletionRestrictions: [DeletionRestrictions!]!
+	DeletionRestrictions_gate_version: [DeletionRestrictions!]!
+	Emotes: [Emotes!]!
+	Emotes_gate_version: [Emotes!]!
+	LootMatrix: [LootMatrix!]!
+	LootMatrix_gate_version: [LootMatrix!]!
+	MissionEmail: [MissionEmail!]!
+	MissionEmail_gate_version: [MissionEmail!]!
+	MissionNPCComponent: [MissionNPCComponent!]!
+	MissionNPCComponent_gate_version: [MissionNPCComponent!]!
+	Missions: [Missions!]!
+	Missions_gate_version: [Missions!]!
+	MissionTasks: [MissionTasks!]!
+	MissionTasks_gate_version: [MissionTasks!]!
+	MissionText: [MissionText!]!
+	MissionText_gate_version: [MissionText!]!
+	Objects: [Objects!]!
+	Objects_gate_version: [Objects!]!
+	PlayerStatistics: [PlayerStatistics!]!
+	PlayerStatistics_gate_version: [PlayerStatistics!]!
+	PropertyTemplate: [PropertyTemplate!]!
+	PropertyTemplate_gate_version: [PropertyTemplate!]!
+	RewardCodes: [RewardCodes!]!
+	RewardCodes_gate_version: [RewardCodes!]!
+	Preconditions: [Preconditions!]!
+	Preconditions_gate_version: [Preconditions!]!
+	SkillBehavior: [SkillBehavior!]!
+	SkillBehavior_gate_version: [SkillBehavior!]!
+	SpeedchatMenu: [SpeedchatMenu!]!
+	SpeedchatMenu_gate_version: [SpeedchatMenu!]!
+	UGBehaviorSounds: [UGBehaviorSounds!]!
+	UGBehaviorSounds_gate_version: [UGBehaviorSounds!]!
+	WhatsCoolItemSpotlight: [WhatsCoolItemSpotlight!]!
+	WhatsCoolItemSpotlight_gate_version: [WhatsCoolItemSpotlight!]!
+	WhatsCoolNewsAndTips: [WhatsCoolNewsAndTips!]!
+	WhatsCoolNewsAndTips_gate_version: [WhatsCoolNewsAndTips!]!
+	ZoneLoadingTips_gate_version: [ZoneLoadingTips!]!
+	ZoneLoadingTips_targetVersion: [ZoneLoadingTips!]!
+}
+
+type ItemSetSkills {
+	SkillSetID: Int
+	SkillID: SkillBehavior
+	SkillCastType: Int
+}
+
+type BehaviorTemplateName {
+	templateID: Int
+	name: String
+	BehaviorTemplate: [BehaviorTemplate!]!
+	BehaviorTemplate_templateID: [BehaviorTemplate!]!
+}
+
+type PackageComponent {
+	id: Int
+	LootMatrixIndex: LootMatrix
+	packageType: Int
+}
+
+type ProximityTypes {
+	id: Int
+	Name: String
+	Radius: Int
+	CollisionGroup: Int
+	PassiveChecks: Int
+	IconID: Icons
+	LoadOnClient: Int
+	LoadOnServer: Int
+}
+
+type CurrencyDenominations {
+	value: Int
+	objectid: Objects
+}
+
+type Missions {
+	MissionPrereqs_mission: [MissionPrereqs!]!
+	MissionPrereqs_prereqMission: [MissionPrereqs!]!
+	MissionTaskMissions: [MissionTaskMissions!]!
+	MissionTaskMissions_mission: [MissionTaskMissions!]!
+	CollectibleComponent: [CollectibleComponent!]!
+	CollectibleComponent_requirement_mission: [CollectibleComponent!]!
+	MissionEmail: [MissionEmail!]!
+	MissionEmail_missionID: [MissionEmail!]!
+	MissionNPCComponent: [MissionNPCComponent!]!
+	MissionNPCComponent_missionID: [MissionNPCComponent!]!
+	id: Int
+	defined_type: String
+	defined_subtype: String
+	UISortOrder: Int
+	offer_objectID: Objects
+	target_objectID: Objects
+	reward_currency: Int
+	LegoScore: Int
+	reward_reputation: Int
+	isChoiceReward: Int
+	reward_item1: Objects
+	reward_item1_count: Int
+	reward_item2: Objects
+	reward_item2_count: Int
+	reward_item3: Objects
+	reward_item3_count: Int
+	reward_item4: Objects
+	reward_item4_count: Int
+	reward_emote: Emotes
+	reward_emote2: Emotes
+	reward_emote3: Emotes
+	reward_emote4: Emotes
+	reward_maximagination: Int
+	reward_maxhealth: Int
+	reward_maxinventory: Int
+	reward_maxmodel: Int
+	reward_maxwidget: Int
+	reward_maxwallet: Int
+	repeatable: Int
+	reward_currency_repeatable: Int
+	reward_item1_repeatable: Objects
+	reward_item1_repeat_count: Int
+	reward_item2_repeatable: Objects
+	reward_item2_repeat_count: Int
+	reward_item3_repeatable: Objects
+	reward_item3_repeat_count: Int
+	reward_item4_repeatable: Objects
+	reward_item4_repeat_count: Int
+	time_limit: Int
+	isMission: Int
+	missionIconID: Icons
+	prereqMissionID: String
+	localize: Int
+	inMOTD: Int
+	cooldownTime: Int
+	isRandom: Int
+	randomPool: String
+	UIPrereqID: Int
+	gate_version: FeatureGating
+	HUDStates: String
+	locStatus: Int
+	reward_bankinventory: Int
+	name_loc: String
+	name_en_US: String
+	name_de_DE: String
+	name_en_GB: String
+	MissionTasks: [MissionTasks!]!
+	MissionTasks_id: [MissionTasks!]!
+	MissionText: [MissionText!]!
+	MissionText_id: [MissionText!]!
+}
+
+type ZoneTable {
+	Activities: [Activities!]!
+	Activities_instanceMapID: [Activities!]!
+	LUPZoneIDs: [LUPZoneIDs!]!
+	LUPZoneIDs_zoneID: [LUPZoneIDs!]!
+	PropertyEntranceComponent: [PropertyEntranceComponent!]!
+	PropertyEntranceComponent_mapID: [PropertyEntranceComponent!]!
+	PropertyTemplate_mapID: [PropertyTemplate!]!
+	PropertyTemplate_vendorMapID: [PropertyTemplate!]!
+	RocketLaunchpadControlComponent_targetZone: [RocketLaunchpadControlComponent!]!
+	RocketLaunchpadControlComponent_defaultZoneID: [RocketLaunchpadControlComponent!]!
+	ZoneLoadingTips: [ZoneLoadingTips!]!
+	ZoneLoadingTips_zoneid: [ZoneLoadingTips!]!
+	ZoneSummary: [ZoneSummary!]!
+	ZoneSummary_zoneID: [ZoneSummary!]!
+	zoneID: Int
+	locStatus: Int
+	zoneName: String
+	scriptID: Int
+	ghostdistance_min: Float
+	ghostdistance: Float
+	population_soft_cap: Int
+	population_hard_cap: Int
+	DisplayDescription: String
+	mapFolder: String
+	smashableMinDistance: Float
+	smashableMaxDistance: Float
+	mixerProgram: String
+	clientPhysicsFramerate: String
+	serverPhysicsFramerate: String
+	zoneControlTemplate: Int
+	widthInChunks: Int
+	heightInChunks: Int
+	petsAllowed: Int
+	localize: Int
+	fZoneWeight: Float
+	thumbnail: String
+	PlayerLoseCoinsOnDeath: Int
+	disableSaveLoc: Int
+	teamRadius: Float
+	gate_version: FeatureGating
+	mountsAllowed: Int
+	DisplayDescription_loc: String
+	DisplayDescription_en_US: String
+	DisplayDescription_de_DE: String
+	DisplayDescription_en_GB: String
+	summary_loc: String
+	summary_en_US: String
+	summary_de_DE: String
+	summary_en_GB: String
+}
+
+type DeletionRestrictions {
+	id: Int
+	restricted: Int
+	ids: String
+	checkType: Int
+	localize: Int
+	locStatus: Int
+	gate_version: FeatureGating
+	failureReason_loc: String
+	failureReason_en_US: String
+	failureReason_de_DE: String
+	failureReason_en_GB: String
+}
+
+type InventoryComponent {
+	id: Int
+	itemid: Objects
+	count: Int
+	equip: Int
+}
+
+type ExhibitComponent {
+	id: Int
+	length: Float
+	width: Float
+	height: Float
+	offsetX: Float
+	offsetY: Float
+	offsetZ: Float
+	fReputationSizeMultiplier: Float
+	fImaginationCost: Float
+}
+
+type ZoneSummary {
+	zoneID: ZoneTable
+	type: Int
+	value: Int
+	_uniqueID: Int
+}
+
+type ItemEggData {
+	id: Int
+	chassie_type_id: Int
+}
+
+type mapAssetType {
+	id: Int
+	label: String
+	pathdir: String
+	typelabel: String
+}
+
+type MinifigComponent {
+	id: Int
+	head: Int
+	chest: Int
+	legs: Int
+	hairstyle: Int
+	haircolor: Int
+	chestdecal: Int
+	headcolor: Int
+	lefthand: Int
+	righthand: Int
+	eyebrowstyle: MinifigDecals_Eyebrows
+	eyesstyle: MinifigDecals_Eyes
+	mouthstyle: MinifigDecals_Mouths
+}
+
+type LUPZoneIDs {
+	zoneID: ZoneTable
+}
+
+type ItemComponent {
+	id: Int
+	equipLocation: String
+	baseValue: Int
+	isKitPiece: Int
+	rarity: Int
+	itemType: mapItemTypes
+	itemInfo: Int
+	inLootTable: Int
+	inVendor: Int
+	isUnique: Int
+	isBOP: Int
+	isBOE: Int
+	reqFlagID: Int
+	reqSpecialtyID: Int
+	reqSpecRank: Int
+	reqAchievementID: Int
+	stackSize: Int
+	color1: Int
+	decal: Int
+	offsetGroupID: Int
+	buildTypes: Int
+	reqPrecondition: String
+	animationFlag: Int
+	equipEffects: Int
+	readyForQA: Int
+	itemRating: Int
+	isTwoHanded: Int
+	minNumRequired: Int
+	delResIndex: Int
+	currencyLOT: Objects
+	altCurrencyCost: Int
+	subItems: String
+	audioEventUse: String
+	noEquipAnimation: Int
+	commendationLOT: Objects
+	commendationCost: Int
+	audioEquipMetaEventSet: String
+	currencyCosts: String
+	ingredientInfo: String
+	locStatus: Int
+	forgeType: Int
+	SellMultiplier: Float
+	ingredientInfo_loc: String
+	ingredientInfo_en_US: String
+	ingredientInfo_de_DE: String
+	ingredientInfo_en_GB: String
+	Objects: [Objects!]!
+	Objects_itemComponent: [Objects!]!
+}
+
+type MovementAIComponent {
+	id: Int
+	MovementType: String
+	WanderChance: Float
+	WanderDelayMin: Float
+	WanderDelayMax: Float
+	WanderSpeed: Float
+	WanderRadius: Float
+	attachedPath: String
+}
+
+type mapRenderEffects {
+	id: Int
+	gameID: Int
+	description: String
+}
+
+type RebuildSections {
+	id: Int
+	rebuildID: Int
+	objectID: Objects
+	offset_x: Float
+	offset_y: Float
+	offset_z: Float
+	fall_angle_x: Float
+	fall_angle_y: Float
+	fall_angle_z: Float
+	fall_height: Float
+	requires_list: String
+	size: Int
+	bPlaced: Int
+}
+
+type PlayerStatistics {
+	statID: Int
+	sortOrder: Int
+	locStatus: Int
+	gate_version: FeatureGating
+	statStr_loc: String
+	statStr_en_US: String
+	statStr_de_DE: String
+	statStr_en_GB: String
+}
+
+type Query {
+	AccessoryDefaultLoc(GroupID: Int, Description: String, Pos_X: Float, Pos_Y: Float, Pos_Z: Float, Rot_X: Float, Rot_Y: Float, Rot_Z: Float): [AccessoryDefaultLoc]
+	ActivityRewards(objectTemplate: Objects, ActivityRewardIndex: Int, activityRating: Int, LootMatrixIndex: LootMatrix, CurrencyIndex: Int, ChallengeRating: Int, description: String): [ActivityRewards]
+	MissionEmail(ID: Int, messageType: Int, notificationGroup: Int, missionID: Missions, attachmentLOT: Objects, localize: Int, locStatus: Int, gate_version: FeatureGating, announceText_loc: String, announceText_en_US: String, announceText_de_DE: String, announceText_en_GB: String, bodyText_loc: String, bodyText_en_US: String, bodyText_de_DE: String, bodyText_en_GB: String, senderName_loc: String, senderName_en_US: String, senderName_de_DE: String, senderName_en_GB: String, subjectText_loc: String, subjectText_en_US: String, subjectText_de_DE: String, subjectText_en_GB: String): [MissionEmail]
+	MissionPrereqs(mission: Missions, andGroup: Int, prereqMission: Missions, prereqMissionState: Int): [MissionPrereqs]
+	BrickColors(id: Int, red: Float, green: Float, blue: Float, alpha: Float, legopaletteid: Int, description: String, validTypes: Int, validCharacters: Int, factoryValid: Int): [BrickColors]
+	WhatsCoolItemSpotlight(id: Int, itemID: Objects, localize: Int, gate_version: FeatureGating, locStatus: Int, description_loc: String, description_en_US: String, description_de_DE: String, description_en_GB: String): [WhatsCoolItemSpotlight]
+	TextLanguage(TextID: Int, LanguageID: Int, Text: String): [TextLanguage]
+	MissionNPCComponent(id: Int, missionID: Missions, offersMission: Int, acceptsMission: Int, gate_version: FeatureGating): [MissionNPCComponent]
+	LUPExhibitModelData(LOT: Objects, minXZ: Float, maxXZ: Float, maxY: Float, description: String, owner: String): [LUPExhibitModelData]
+	BehaviorParameter(behaviorID: Int, parameterID: String, value: Float): [BehaviorParameter]
+	Emotes(id: Int, animationName: String, iconFilename: String, channel: String, command: String, locked: Int, localize: Int, locStatus: Int, gate_version: FeatureGating, outputText_loc: String, outputText_en_US: String, outputText_de_DE: String, outputText_en_GB: String, Missions_reward_emote: [Missions!], Missions_reward_emote2: [Missions!], Missions_reward_emote3: [Missions!], Missions_reward_emote4: [Missions!], SpeedchatMenu: [SpeedchatMenu!], SpeedchatMenu_emoteId: [SpeedchatMenu!]): [Emotes]
+	LootTableIndex(LootTable: [LootTable!], LootTable_LootTableIndex: [LootTable!], LootTableIndex: Int): [LootTableIndex]
+	Blueprints(id: Int, name: String, description: String, accountid: Int, characterid: Int, price: Int, rating: Int, categoryid: Int, lxfpath: String, deleted: Int, created: Int, modified: Int): [Blueprints]
+	mapShaders(id: Int, label: String, gameValue: Int, priority: Int): [mapShaders]
+	DBExclude(table: String, column: String): [DBExclude]
+	MinifigDecals_Torsos(ID: Int, High_path: String, CharacterCreateValid: Int, male: Int, female: Int): [MinifigDecals_Torsos]
+	Objects(MissionTaskObjects: [MissionTaskObjects!], MissionTaskObjects_object: [MissionTaskObjects!], BrickIDTable: [BrickIDTable!], BrickIDTable_NDObjectID: [BrickIDTable!], CelebrationParameters_backgroundObject: [CelebrationParameters!], CelebrationParameters_cameraPathLOT: [CelebrationParameters!], CurrencyDenominations: [CurrencyDenominations!], CurrencyDenominations_objectid: [CurrencyDenominations!], ActivityRewards: [ActivityRewards!], ActivityRewards_objectTemplate: [ActivityRewards!], InventoryComponent: [InventoryComponent!], InventoryComponent_itemid: [InventoryComponent!], JetPackPadComponent_lotBlocker: [JetPackPadComponent!], JetPackPadComponent_lotWarningVolume: [JetPackPadComponent!], LootTable: [LootTable!], LootTable_itemid: [LootTable!], LUPExhibitModelData: [LUPExhibitModelData!], LUPExhibitModelData_LOT: [LUPExhibitModelData!], mapIcon: [mapIcon!], mapIcon_LOT: [mapIcon!], ItemComponent_currencyLOT: [ItemComponent!], ItemComponent_commendationLOT: [ItemComponent!], MissionEmail: [MissionEmail!], MissionEmail_attachmentLOT: [MissionEmail!], Missions_offer_objectID: [Missions!], Missions_target_objectID: [Missions!], Missions_reward_item1: [Missions!], Missions_reward_item2: [Missions!], Missions_reward_item3: [Missions!], Missions_reward_item4: [Missions!], Missions_reward_item1_repeatable: [Missions!], Missions_reward_item2_repeatable: [Missions!], Missions_reward_item3_repeatable: [Missions!], Missions_reward_item4_repeatable: [Missions!], ModularBuildComponent: [ModularBuildComponent!], ModularBuildComponent_createdLOT: [ModularBuildComponent!], NpcIcons_LOT: [NpcIcons!], NpcIcons_compositeLOTMultiMission: [NpcIcons!], NpcIcons_compositeLOTMultiMissionVentor: [NpcIcons!], id: Int, name: String, placeable: Int, type: String, description: String, localize: Int, npcTemplateID: Int, displayName: String, interactionDistance: Float, nametag: Int, _internalNotes: String, locStatus: Int, gate_version: FeatureGating, HQ_valid: Int, description_loc: String, description_en_US: String, description_de_DE: String, description_en_GB: String, name_loc: String, name_en_US: String, name_de_DE: String, name_en_GB: String, itemComponent: ItemComponent, renderComponent: RenderComponent, ObjectSkills: [ObjectSkills!], ObjectSkills_objectTemplate: [ObjectSkills!], RebuildSections: [RebuildSections!], RebuildSections_objectID: [RebuildSections!], RewardCodes: [RewardCodes!], RewardCodes_attachmentLOT: [RewardCodes!], TamingBuildPuzzles_PuzzleModelLot: [TamingBuildPuzzles!], TamingBuildPuzzles_NPCLot: [TamingBuildPuzzles!], WhatsCoolItemSpotlight: [WhatsCoolItemSpotlight!], WhatsCoolItemSpotlight_itemID: [WhatsCoolItemSpotlight!]): [Objects]
+	PetNestComponent(id: Int, ElementalType: Int): [PetNestComponent]
+	brickAttributes(ID: Int, icon_asset: String, display_order: Int, locStatus: Int, name_loc: String, name_en_US: String, name_de_DE: String, name_en_GB: String): [brickAttributes]
+	PropertyEntranceComponent(id: Int, mapID: ZoneTable, propertyName: String, isOnProperty: Int, groupType: String): [PropertyEntranceComponent]
+	Icons(RenderComponent: [RenderComponent!], RenderComponent_IconID: [RenderComponent!], IconID: Int, IconPath: String, IconName: String, CelebrationParameters: [CelebrationParameters!], CelebrationParameters_iconID: [CelebrationParameters!], mapIcon: [mapIcon!], mapIcon_iconID: [mapIcon!], Missions: [Missions!], Missions_missionIconID: [Missions!], MissionTasks_IconID: [MissionTasks!], MissionTasks_largeTaskIconID: [MissionTasks!], MissionText_IconID: [MissionText!], MissionText_turnInIconID: [MissionText!], ProximityTypes: [ProximityTypes!], ProximityTypes_IconID: [ProximityTypes!], Preconditions: [Preconditions!], Preconditions_iconID: [Preconditions!], SkillBehavior: [SkillBehavior!], SkillBehavior_skillIcon: [SkillBehavior!], WhatsCoolNewsAndTips: [WhatsCoolNewsAndTips!], WhatsCoolNewsAndTips_iconID: [WhatsCoolNewsAndTips!]): [Icons]
+	ItemSets(setID: Int, locStatus: Int, itemIDs: String, kitType: Int, kitRank: Int, kitImage: Int, skillSetWith2: Int, skillSetWith3: Int, skillSetWith4: Int, skillSetWith5: Int, skillSetWith6: Int, localize: Int, gate_version: String, kitID: Int, priority: Float, kitName_loc: String, kitName_en_US: String, kitName_de_DE: String, kitName_en_GB: String): [ItemSets]
+	ObjectBehaviorXREF(LOT: Int, behaviorID1: Int, behaviorID2: Int, behaviorID3: Int, behaviorID4: Int, behaviorID5: Int, type: Int): [ObjectBehaviorXREF]
+	RenderComponentWrapper(id: Int, defaultWrapperAsset: String): [RenderComponentWrapper]
+	ControlSchemes(control_scheme: Int, scheme_name: String, rotation_speed: Float, walk_forward_speed: Float, walk_backward_speed: Float, walk_strafe_speed: Float, walk_strafe_forward_speed: Float, walk_strafe_backward_speed: Float, run_backward_speed: Float, run_strafe_speed: Float, run_strafe_forward_speed: Float, run_strafe_backward_speed: Float, keyboard_zoom_sensitivity: Float, keyboard_pitch_sensitivity: Float, keyboard_yaw_sensitivity: Float, mouse_zoom_wheel_sensitivity: Float, x_mouse_move_sensitivity_modifier: Float, y_mouse_move_sensitivity_modifier: Float, freecam_speed_modifier: Float, freecam_slow_speed_multiplier: Float, freecam_fast_speed_multiplier: Float, freecam_mouse_modifier: Float, gamepad_pitch_rot_sensitivity: Float, gamepad_yaw_rot_sensitivity: Float, gamepad_trigger_sensitivity: Float, PossessableComponent: [PossessableComponent!], PossessableComponent_controlSchemeID: [PossessableComponent!]): [ControlSchemes]
+	DevModelBehaviors(ModelID: Int, BehaviorID: Int): [DevModelBehaviors]
+	BaseCombatAIComponent(id: Int, behaviorType: Int, combatRoundLength: Float, combatRole: Int, minRoundLength: Float, maxRoundLength: Float, tetherSpeed: Float, pursuitSpeed: Float, combatStartDelay: Float, softTetherRadius: Float, hardTetherRadius: Float, spawnTimer: Float, tetherEffectID: Int, ignoreMediator: Int, aggroRadius: Float, ignoreStatReset: Int, ignoreParent: Int): [BaseCombatAIComponent]
+	BrickIDTable(NDObjectID: Objects, LEGOBrickID: Int): [BrickIDTable]
+	LUPExhibitComponent(id: Int, minXZ: Float, maxXZ: Float, maxY: Float, offsetX: Float, offsetY: Float, offsetZ: Float): [LUPExhibitComponent]
+	MinifigDecals_Legs(ID: Int, High_path: String): [MinifigDecals_Legs]
+	DestructibleComponent(id: Int, faction: Factions, factionList: String, life: Int, imagination: Int, LootMatrixIndex: LootMatrix, CurrencyIndex: Int, level: Int, armor: Float, death_behavior: Int, isnpc: Int, attack_priority: Int, isSmashable: Int, difficultyLevel: Int): [DestructibleComponent]
+	SceneTable(sceneID: Int, sceneName: String): [SceneTable]
+	RenderComponentFlash(id: Int, interactive: Int, animated: Int, nodeName: String, flashPath: String, elementName: String, _uid: Int): [RenderComponentFlash]
+	ItemFoodData(id: Int, element_1: Int, element_1_amount: Int, element_2: Int, element_2_amount: Int, element_3: Int, element_3_amount: Int, element_4: Int, element_4_amount: Int): [ItemFoodData]
+	SpeedchatMenu(id: Int, parentId: Int, emoteId: Emotes, imageName: String, localize: Int, locStatus: Int, gate_version: FeatureGating, menuText_loc: String, menuText_en_US: String, menuText_de_DE: String, menuText_en_GB: String): [SpeedchatMenu]
+	JetPackPadComponent(id: Int, xDistance: Float, yDistance: Float, warnDistance: Float, lotBlocker: Objects, lotWarningVolume: Objects): [JetPackPadComponent]
+	mapIcon(LOT: Objects, iconID: Icons, iconState: Int): [mapIcon]
+	dtproperties(id: Int, objectid: Int, property: String, value: String, uvalue: String, lvalue: String, version: Int): [dtproperties]
+	LootTable(LootMatrix: [LootMatrix!], LootMatrix_LootTableIndex: [LootMatrix!], itemid: Objects, LootTableIndex: LootTableIndex, id: Int, MissionDrop: Int, sortPriority: Int): [LootTable]
+	mapItemTypes(id: Int, description: String, equipLocation: String, ItemComponent: [ItemComponent!], ItemComponent_itemType: [ItemComponent!]): [mapItemTypes]
+	MissionText(id: Missions, story_icon: String, missionIcon: String, offerNPCIcon: String, IconID: Icons, state_1_anim: String, state_2_anim: String, state_3_anim: String, state_4_anim: String, state_3_turnin_anim: String, state_4_turnin_anim: String, onclick_anim: String, CinematicAccepted: String, CinematicAcceptedLeadin: Float, CinematicCompleted: String, CinematicCompletedLeadin: Float, CinematicRepeatable: String, CinematicRepeatableLeadin: Float, CinematicRepeatableCompleted: String, CinematicRepeatableCompletedLeadin: Float, AudioEventGUID_Interact: String, AudioEventGUID_OfferAccept: String, AudioEventGUID_OfferDeny: String, AudioEventGUID_Completed: String, AudioEventGUID_TurnIn: String, AudioEventGUID_Failed: String, AudioEventGUID_Progress: String, AudioMusicCue_OfferAccept: String, AudioMusicCue_TurnIn: String, turnInIconID: Icons, localize: Int, locStatus: Int, gate_version: FeatureGating, accept_chat_bubble_loc: String, accept_chat_bubble_en_US: String, accept_chat_bubble_de_DE: String, accept_chat_bubble_en_GB: String, chat_state_1_loc: String, chat_state_1_en_US: String, chat_state_1_de_DE: String, chat_state_1_en_GB: String, chat_state_2_loc: String, chat_state_2_en_US: String, chat_state_2_de_DE: String, chat_state_2_en_GB: String, chat_state_3_turnin_loc: String, chat_state_3_turnin_en_US: String, chat_state_3_turnin_de_DE: String, chat_state_3_turnin_en_GB: String, completion_succeed_tip_loc: String, completion_succeed_tip_en_US: String, completion_succeed_tip_de_DE: String, completion_succeed_tip_en_GB: String, in_progress_loc: String, in_progress_en_US: String, in_progress_de_DE: String, in_progress_en_GB: String, offer_loc: String, offer_en_US: String, offer_de_DE: String, offer_en_GB: String, ready_to_complete_loc: String, ready_to_complete_en_US: String, ready_to_complete_de_DE: String, ready_to_complete_en_GB: String, description_loc: String, description_en_US: String, description_de_DE: String, description_en_GB: String, chat_state_3_loc: String, chat_state_3_en_US: String, chat_state_3_de_DE: String, chat_state_3_en_GB: String, chat_state_4_loc: String, chat_state_4_en_US: String, chat_state_4_de_DE: String, chat_state_4_en_GB: String, chat_state_4_turnin_loc: String, chat_state_4_turnin_en_US: String, chat_state_4_turnin_de_DE: String, chat_state_4_turnin_en_GB: String, offer_repeatable_loc: String, offer_repeatable_en_US: String, offer_repeatable_de_DE: String, offer_repeatable_en_GB: String): [MissionText]
+	PhysicsComponent(id: Int, static: Float, physics_asset: String, jump: Float, doublejump: Float, speed: Float, rotSpeed: Float, playerHeight: Float, playerRadius: Float, pcShapeType: Int, collisionGroup: Int, airSpeed: Float, boundaryAsset: String, jumpAirSpeed: Float, friction: Float, gravityVolumeAsset: String): [PhysicsComponent]
+	ReputationRewards(repLevel: Int, sublevel: Int, reputation: Float): [ReputationRewards]
+	RarityTable(id: Int, randmax: Float, rarity: Int, RarityTableIndex: RarityTableIndex, SmashableChain: [SmashableChain!], SmashableChain_rarityTableIndex: [SmashableChain!]): [RarityTable]
+	MinifigDecals_Eyebrows(ID: Int, High_path: String, Low_path: String, CharacterCreateValid: Int, male: Int, female: Int, MinifigComponent: [MinifigComponent!], MinifigComponent_eyebrowstyle: [MinifigComponent!]): [MinifigDecals_Eyebrows]
+	CollectibleComponent(id: Int, requirement_mission: Missions): [CollectibleComponent]
+	RocketLaunchpadControlComponent(id: Int, targetZone: ZoneTable, defaultZoneID: ZoneTable, targetScene: String, gmLevel: Int, playerAnimation: String, rocketAnimation: String, launchMusic: String, useLaunchPrecondition: Int, useAltLandingPrecondition: Int, launchPrecondition: String, altLandingPrecondition: String, altLandingSpawnPointName: String): [RocketLaunchpadControlComponent]
+	PlayerFlags(id: Int, SessionOnly: Int, OnlySetByServer: Int, SessionZoneOnly: Int): [PlayerFlags]
+	SmashableChainIndex(id: Int, targetGroup: String, description: String, continuous: Int): [SmashableChainIndex]
+	PetAbilities(id: Int, AbilityName: String, ImaginationCost: Int, locStatus: Int, DisplayName_loc: String, DisplayName_en_US: String, DisplayName_de_DE: String, DisplayName_en_GB: String): [PetAbilities]
+	mapAnimationPriorities(id: Int, name: String, priority: Float): [mapAnimationPriorities]
+	RewardCodes(id: Int, code: String, attachmentLOT: Objects, locStatus: Int, gate_version: FeatureGating, bodyText_loc: String, bodyText_en_US: String, bodyText_de_DE: String, bodyText_en_GB: String, subjectText_loc: String, subjectText_en_US: String, subjectText_de_DE: String, subjectText_en_GB: String): [RewardCodes]
+	RailActivatorComponent(id: Int, startAnim: String, loopAnim: String, stopAnim: String, startSound: String, loopSound: String, stopSound: String, effectIDs: String, preconditions: String, playerCollision: Int, cameraLocked: Int, StartEffectID: String, StopEffectID: String, DamageImmune: Int, NoAggro: Int, ShowNameBillboard: Int): [RailActivatorComponent]
+	PropertyTemplate(id: Int, mapID: ZoneTable, vendorMapID: ZoneTable, spawnName: String, type: Int, sizecode: Int, minimumPrice: Int, rentDuration: Int, path: String, cloneLimit: Int, durationType: Int, achievementRequired: Int, zoneX: Float, zoneY: Float, zoneZ: Float, maxBuildHeight: Float, localize: Int, reputationPerMinute: Int, locStatus: Int, gate_version: FeatureGating, description_loc: String, description_en_US: String, description_de_DE: String, description_en_GB: String, name_loc: String, name_en_US: String, name_de_DE: String, name_en_GB: String): [PropertyTemplate]
+	AICombatRoles(id: Int, preferredRole: Int, specifiedMinRangeNOUSE: Float, specifiedMaxRangeNOUSE: Float, specificMinRange: Float, specificMaxRange: Float): [AICombatRoles]
+	MinifigDecals_Eyes(ID: Int, High_path: String, Low_path: String, CharacterCreateValid: Int, male: Int, female: Int, MinifigComponent: [MinifigComponent!], MinifigComponent_eyesstyle: [MinifigComponent!]): [MinifigDecals_Eyes]
+	MinifigDecals_Mouths(ID: Int, High_path: String, Low_path: String, CharacterCreateValid: Int, male: Int, female: Int, MinifigComponent: [MinifigComponent!], MinifigComponent_mouthstyle: [MinifigComponent!]): [MinifigDecals_Mouths]
+	mapTextureResource(id: Int, texturepath: String, SurfaceType: Int): [mapTextureResource]
+	Camera(camera_name: String, pitch_angle_tolerance: Float, starting_zoom: Float, zoom_return_modifier: Float, pitch_return_modifier: Float, tether_out_return_modifier: Float, tether_in_return_multiplier: Float, verticle_movement_dampening_modifier: Float, return_from_incline_modifier: Float, horizontal_return_modifier: Float, yaw_behavior_speed_multiplier: Float, camera_collision_padding: Float, glide_speed: Float, fade_player_min_range: Float, min_movement_delta_tolerance: Float, min_glide_distance_tolerance: Float, look_forward_offset: Float, look_up_offset: Float, minimum_vertical_dampening_distance: Float, maximum_vertical_dampening_distance: Float, minimum_ignore_jump_distance: Float, maximum_ignore_jump_distance: Float, maximum_auto_glide_angle: Float, minimum_tether_glide_distance: Float, yaw_sign_correction: Float, set_1_look_forward_offset: Float, set_1_look_up_offset: Float, set_2_look_forward_offset: Float, set_2_look_up_offset: Float, set_0_speed_influence_on_dir: Float, set_1_speed_influence_on_dir: Float, set_2_speed_influence_on_dir: Float, set_0_angular_relaxation: Float, set_1_angular_relaxation: Float, set_2_angular_relaxation: Float, set_0_position_up_offset: Float, set_1_position_up_offset: Float, set_2_position_up_offset: Float, set_0_position_forward_offset: Float, set_1_position_forward_offset: Float, set_2_position_forward_offset: Float, set_0_FOV: Float, set_1_FOV: Float, set_2_FOV: Float, set_0_max_yaw_angle: Float, set_1_max_yaw_angle: Float, set_2_max_yaw_angle: Float, set_1_fade_in_camera_set_change: Int, set_1_fade_out_camera_set_change: Int, set_2_fade_in_camera_set_change: Int, set_2_fade_out_camera_set_change: Int, input_movement_scalar: Float, input_rotation_scalar: Float, input_zoom_scalar: Float, minimum_pitch_desired: Float, maximum_pitch_desired: Float, minimum_zoom: Float, maximum_zoom: Float, horizontal_rotate_tolerance: Float, horizontal_rotate_modifier: Float): [Camera]
+	ModuleComponent(id: Int, partCode: Int, buildType: Int, xml: String, primarySoundGUID: String, assembledEffectID: Int): [ModuleComponent]
+	ActivityText(activityID: Activities, type: String, localize: Int, locStatus: Int, gate_version: FeatureGating, broadcast_subjectText_loc: String, broadcast_subjectText_en_US: String, broadcast_subjectText_de_DE: String, broadcast_subjectText_en_GB: String, broadcast_text_loc: String, broadcast_text_en_US: String, broadcast_text_de_DE: String, broadcast_text_en_GB: String, mail_subjectText_loc: String, mail_subjectText_en_US: String, mail_subjectText_de_DE: String, mail_subjectText_en_GB: String, mail_text_loc: String, mail_text_en_US: String, mail_text_de_DE: String, mail_text_en_GB: String, hint10_text_loc: String, hint10_text_en_US: String, hint10_text_de_DE: String, hint10_text_en_GB: String, hint11_text_loc: String, hint11_text_en_US: String, hint11_text_de_DE: String, hint11_text_en_GB: String, hint1_text_loc: String, hint1_text_en_US: String, hint1_text_de_DE: String, hint1_text_en_GB: String, hint2_text_loc: String, hint2_text_en_US: String, hint2_text_de_DE: String, hint2_text_en_GB: String, hint3_text_loc: String, hint3_text_en_US: String, hint3_text_de_DE: String, hint3_text_en_GB: String, hint4_text_loc: String, hint4_text_en_US: String, hint4_text_de_DE: String, hint4_text_en_GB: String, hint5_text_loc: String, hint5_text_en_US: String, hint5_text_de_DE: String, hint5_text_en_GB: String, hint6_text_loc: String, hint6_text_en_US: String, hint6_text_de_DE: String, hint6_text_en_GB: String, hint7_text_loc: String, hint7_text_en_US: String, hint7_text_de_DE: String, hint7_text_en_GB: String, hint8_text_loc: String, hint8_text_en_US: String, hint8_text_de_DE: String, hint8_text_en_GB: String, hint9_text_loc: String, hint9_text_en_US: String, hint9_text_de_DE: String, hint9_text_en_GB: String): [ActivityText]
+	Preconditions(id: Int, type: Int, targetLOT: String, targetGroup: String, targetCount: Int, iconID: Icons, localize: Int, validContexts: Int, locStatus: Int, gate_version: FeatureGating, FailureReason_loc: String, FailureReason_en_US: String, FailureReason_de_DE: String, FailureReason_en_GB: String): [Preconditions]
+	ScriptComponent(id: Int, script_name: String, client_script_name: String): [ScriptComponent]
+	UGBehaviorSounds(id: Int, guid: String, localize: Int, locStatus: Int, gate_version: FeatureGating, name_loc: String, name_en_US: String, name_de_DE: String, name_en_GB: String): [UGBehaviorSounds]
+	WhatsCoolNewsAndTips(id: Int, iconID: Icons, type: Int, localize: Int, gate_version: FeatureGating, locStatus: Int, storyTitle_loc: String, storyTitle_en_US: String, storyTitle_de_DE: String, storyTitle_en_GB: String, text_loc: String, text_en_US: String, text_de_DE: String, text_en_GB: String): [WhatsCoolNewsAndTips]
+	ModelBehavior(id: Int, definitionXMLfilename: String): [ModelBehavior]
+	AnimationIndex(animationGroupID: Int, description: String, groupType: String): [AnimationIndex]
+	RacingModuleComponent(id: Int, topSpeed: Float, acceleration: Float, handling: Float, stability: Float, imagination: Float): [RacingModuleComponent]
+	BuffParameters(BuffID: BuffDefinitions, ParameterName: String, NumberValue: Float, StringValue: String, EffectID: Int): [BuffParameters]
+	RenderComponent(id: Int, render_asset: String, icon_asset: String, IconID: Icons, shader_id: Int, effect1: Int, effect2: Int, effect3: Int, effect4: Int, effect5: Int, effect6: Int, animationGroupIDs: String, fade: Int, usedropshadow: Int, preloadAnimations: Int, fadeInTime: Float, maxShadowDistance: Float, ignoreCameraCollision: Int, renderComponentLOD1: Int, renderComponentLOD2: Int, gradualSnap: Int, animationFlag: Int, AudioMetaEventSet: String, billboardHeight: Float, chatBubbleOffset: Float, staticBillboard: Int, LXFMLFolder: String, attachIndicatorsToNode: Int, Objects: [Objects!], Objects_renderComponent: [Objects!]): [RenderComponent]
+	RenderIconAssets(id: Int, icon_asset: String, blank_column: String): [RenderIconAssets]
+	FlairTable(id: Int, asset: String): [FlairTable]
+	MotionFX(id: Int, typeID: Int, slamVelocity: Float, addVelocity: Float, duration: Float, destGroupName: String, startScale: Float, endScale: Float, velocity: Float, distance: Float): [MotionFX]
+	TrailEffects(trailID: Int, textureName: String, blendmode: Int, cardlifetime: Float, colorlifetime: Float, minTailFade: Float, tailFade: Float, max_particles: Int, birthDelay: Float, deathDelay: Float, bone1: String, bone2: String, texLength: Float, texWidth: Float, startColorR: Float, startColorG: Float, startColorB: Float, startColorA: Float, middleColorR: Float, middleColorG: Float, middleColorB: Float, middleColorA: Float, endColorR: Float, endColorG: Float, endColorB: Float, endColorA: Float): [TrailEffects]
+	map_BlueprintCategory(id: Int, description: String, enabled: Int): [map_BlueprintCategory]
+	EventGating(eventName: String, date_start: Int, date_end: Int): [EventGating]
+	SurfaceType(SurfaceType: Int, FootstepNDAudioMetaEventSetName: String): [SurfaceType]
+	ModularBuildComponent(id: Int, buildType: Int, xml: String, createdLOT: Objects, createdPhysicsID: Int, AudioEventGUID_Snap: String, AudioEventGUID_Complete: String, AudioEventGUID_Present: String): [ModularBuildComponent]
+	ObjectSkills(objectTemplate: Objects, skillID: SkillBehavior, castOnType: Int, AICombatWeight: Int): [ObjectSkills]
+	VendorComponent(id: Int, buyScalar: Float, sellScalar: Float, refreshTimeSeconds: Float, LootMatrixIndex: LootMatrix): [VendorComponent]
+	MissionTasks(MissionTaskObjects: [MissionTaskObjects!], MissionTaskObjects_missionTask: [MissionTaskObjects!], MissionTaskMissions: [MissionTaskMissions!], MissionTaskMissions_missionTask: [MissionTaskMissions!], id: Missions, locStatus: Int, taskType: Int, target: Int, targetGroup: String, targetValue: Int, taskParam1: String, largeTaskIcon: String, IconID: Icons, uid: Int, largeTaskIconID: Icons, localize: Int, gate_version: FeatureGating, description_loc: String, description_en_US: String, description_de_DE: String, description_en_GB: String): [MissionTasks]
+	SubscriptionPricing(id: Int, countryCode: String, monthlyFeeGold: String, monthlyFeeSilver: String, monthlyFeeBronze: String, monetarySymbol: Int, symbolIsAppended: Int): [SubscriptionPricing]
+	ProximityMonitorComponent(id: Int, Proximities: String, LoadOnClient: Int, LoadOnServer: Int): [ProximityMonitorComponent]
+	RebuildComponent(id: Int, reset_time: Float, complete_time: Float, take_imagination: Int, interruptible: Int, self_activator: Int, custom_modules: String, activityID: Activities, post_imagination_cost: Int, time_before_smash: Float): [RebuildComponent]
+	BuffDefinitions(ID: Int, Priority: Float, UIIcon: String, BuffParameters: [BuffParameters!], BuffParameters_BuffID: [BuffParameters!]): [BuffDefinitions]
+	sysdiagrams(name: String, principal_id: Int, diagram_id: Int, version: Int, definition: String): [sysdiagrams]
+	LevelProgressionLookup(id: Int, requiredUScore: Int, BehaviorEffect: String): [LevelProgressionLookup]
+	TextDescription(TextID: Int, TestDescription: String): [TextDescription]
+	VehiclePhysics(id: Int, hkxFilename: String, fGravityScale: Float, fMass: Float, fChassisFriction: Float, fMaxSpeed: Float, fEngineTorque: Float, fBrakeFrontTorque: Float, fBrakeRearTorque: Float, fBrakeMinInputToBlock: Float, fBrakeMinTimeToBlock: Float, fSteeringMaxAngle: Float, fSteeringSpeedLimitForMaxAngle: Float, fSteeringMinAngle: Float, fFwdBias: Float, fFrontTireFriction: Float, fRearTireFriction: Float, fFrontTireFrictionSlide: Float, fRearTireFrictionSlide: Float, fFrontTireSlipAngle: Float, fRearTireSlipAngle: Float, fWheelWidth: Float, fWheelRadius: Float, fWheelMass: Float, fReorientPitchStrength: Float, fReorientRollStrength: Float, fSuspensionLength: Float, fSuspensionStrength: Float, fSuspensionDampingCompression: Float, fSuspensionDampingRelaxation: Float, iChassisCollisionGroup: Int, fNormalSpinDamping: Float, fCollisionSpinDamping: Float, fCollisionThreshold: Float, fTorqueRollFactor: Float, fTorquePitchFactor: Float, fTorqueYawFactor: Float, fInertiaRoll: Float, fInertiaPitch: Float, fInertiaYaw: Float, fExtraTorqueFactor: Float, fCenterOfMassFwd: Float, fCenterOfMassUp: Float, fCenterOfMassRight: Float, fWheelHardpointFrontFwd: Float, fWheelHardpointFrontUp: Float, fWheelHardpointFrontRight: Float, fWheelHardpointRearFwd: Float, fWheelHardpointRearUp: Float, fWheelHardpointRearRight: Float, fInputTurnSpeed: Float, fInputDeadTurnBackSpeed: Float, fInputAccelSpeed: Float, fInputDeadAccelDownSpeed: Float, fInputDecelSpeed: Float, fInputDeadDecelDownSpeed: Float, fInputSlopeChangePointX: Float, fInputInitialSlope: Float, fInputDeadZone: Float, fAeroAirDensity: Float, fAeroFrontalArea: Float, fAeroDragCoefficient: Float, fAeroLiftCoefficient: Float, fAeroExtraGravity: Float, fBoostTopSpeed: Float, fBoostCostPerSecond: Float, fBoostAccelerateChange: Float, fBoostDampingChange: Float, fPowerslideNeutralAngle: Float, fPowerslideTorqueStrength: Float, iPowerslideNumTorqueApplications: Int, fImaginationTankSize: Float, fSkillCost: Float, fWreckSpeedBase: Float, fWreckSpeedPercent: Float, fWreckMinAngle: Float, AudioEventEngine: String, AudioEventSkid: String, AudioEventLightHit: String, AudioSpeedThresholdLightHit: Float, AudioTimeoutLightHit: Float, AudioEventHeavyHit: String, AudioSpeedThresholdHeavyHit: Float, AudioTimeoutHeavyHit: Float, AudioEventStart: String, AudioEventTreadConcrete: String, AudioEventTreadSand: String, AudioEventTreadWood: String, AudioEventTreadDirt: String, AudioEventTreadPlastic: String, AudioEventTreadGrass: String, AudioEventTreadGravel: String, AudioEventTreadMud: String, AudioEventTreadWater: String, AudioEventTreadSnow: String, AudioEventTreadIce: String, AudioEventTreadMetal: String, AudioEventTreadLeaves: String, AudioEventLightLand: String, AudioAirtimeForLightLand: Float, AudioEventHeavyLand: String, AudioAirtimeForHeavyLand: Float, bWheelsVisible: Int): [VehiclePhysics]
+	PetComponent(id: Int, minTameUpdateTime: Float, maxTameUpdateTime: Float, percentTameChance: Float, tamability: Float, elementType: Int, walkSpeed: Float, runSpeed: Float, sprintSpeed: Float, idleTimeMin: Float, idleTimeMax: Float, petForm: Int, imaginationDrainRate: Float, AudioMetaEventSet: String, buffIDs: String): [PetComponent]
+	ObjectBehaviors(BehaviorID: Int, xmldata: String): [ObjectBehaviors]
+	PossessableComponent(id: Int, controlSchemeID: ControlSchemes, minifigAttachPoint: String, minifigAttachAnimation: String, minifigDetachAnimation: String, mountAttachAnimation: String, mountDetachAnimation: String, attachOffsetFwd: Float, attachOffsetRight: Float, possessionType: Int, wantBillboard: Int, billboardOffsetUp: Float, depossessOnHit: Int, hitStunTime: Float, skillSet: Int): [PossessableComponent]
+	BehaviorEffect(effectID: Int, effectType: String, effectName: String, trailID: Int, pcreateDuration: Float, animationName: String, attachToObject: Int, boneName: String, useSecondary: Int, cameraEffectType: Int, cameraDuration: Float, cameraFrequency: Float, cameraXAmp: Float, cameraYAmp: Float, cameraZAmp: Float, cameraRotFrequency: Float, cameraRoll: Float, cameraPitch: Float, cameraYaw: Float, AudioEventGUID: String, renderEffectType: Int, renderEffectTime: Float, renderStartVal: Float, renderEndVal: Float, renderDelayVal: Float, renderValue1: Float, renderValue2: Float, renderValue3: Float, renderRGBA: String, renderShaderVal: Int, motionID: Int, meshID: Int, meshDuration: Float, meshLockedNode: String): [BehaviorEffect]
+	LootMatrixIndex(LootMatrixIndex: Int, inNpcEditor: Int, LootMatrix: [LootMatrix!], LootMatrix_LootMatrixIndex: [LootMatrix!]): [LootMatrixIndex]
+	VehicleStatMap(id: Int, ModuleStat: String, HavokStat: String, HavokChangePerModuleStat: Float): [VehicleStatMap]
+	MovingPlatforms(id: Int, platformIsSimpleMover: Int, platformMoveX: Float, platformMoveY: Float, platformMoveZ: Float, platformMoveTime: Float, platformStartAtEnd: Int, description: String): [MovingPlatforms]
+	MissionTaskMissions(missionTask: MissionTasks, mission: Missions): [MissionTaskMissions]
+	Factions(DestructibleComponent: [DestructibleComponent!], DestructibleComponent_faction: [DestructibleComponent!], faction: Int, factionList: String, factionListFriendly: Int, friendList: String, enemyList: String): [Factions]
+	SkillBehavior(ItemSetSkills: [ItemSetSkills!], ItemSetSkills_SkillID: [ItemSetSkills!], ObjectSkills: [ObjectSkills!], ObjectSkills_skillID: [ObjectSkills!], skillID: Int, locStatus: Int, behaviorID: Int, imaginationcost: Int, cooldowngroup: Int, cooldown: Float, inNpcEditor: Int, skillIcon: Icons, oomSkillID: String, oomBehaviorEffectID: Int, castTypeDesc: Int, imBonusUI: Int, lifeBonusUI: Int, armorBonusUI: Int, damageUI: Int, hideIcon: Int, localize: Int, gate_version: FeatureGating, cancelType: Int, descriptionUI_loc: String, descriptionUI_en_US: String, descriptionUI_de_DE: String, descriptionUI_en_GB: String, name_loc: String, name_en_US: String, name_de_DE: String, name_en_GB: String): [SkillBehavior]
+	Activities(ActivityID: Int, locStatus: Int, instanceMapID: ZoneTable, minTeams: Int, maxTeams: Int, minTeamSize: Int, maxTeamSize: Int, waitTime: Int, startDelay: Int, requiresUniqueData: Int, leaderboardType: Int, localize: Int, optionalCostLOT: Int, optionalCostCount: Int, showUIRewards: Int, CommunityActivityFlagID: Int, gate_version: FeatureGating, noTeamLootOnDeath: Int, optionalPercentage: Float, ActivityName_loc: String, ActivityName_en_US: String, ActivityName_de_DE: String, ActivityName_en_GB: String, ActivityText: [ActivityText!], ActivityText_activityID: [ActivityText!], RebuildComponent: [RebuildComponent!], RebuildComponent_activityID: [RebuildComponent!]): [Activities]
+	SmashableComponent(id: Int, LootMatrixIndex: LootMatrix): [SmashableComponent]
+	TamingBuildPuzzles(id: Int, PuzzleModelLot: Objects, NPCLot: Objects, ValidPiecesLXF: String, InvalidPiecesLXF: String, Difficulty: Int, Timelimit: Int, NumValidPieces: Int, TotalNumPieces: Int, ModelName: String, FullModelLXF: String, Duration: Float, imagCostPerBuild: Int): [TamingBuildPuzzles]
+	Animations(animationGroupID: Int, animation_type: String, animation_name: String, chance_to_play: Float, min_loops: Int, max_loops: Int, animation_length: Float, hideEquip: Int, ignoreUpperBody: Int, restartable: Int, face_animation_name: String, priority: Float, blendTime: Float): [Animations]
+	NpcIcons(id: Int, color: Int, offset: Float, LOT: Objects, Texture: String, isClickable: Int, scale: Float, rotateToFace: Int, compositeHorizOffset: Float, compositeVertOffset: Float, compositeScale: Float, compositeConnectionNode: String, compositeLOTMultiMission: Objects, compositeLOTMultiMissionVentor: Objects, compositeIconTexture: String): [NpcIcons]
+	SmashableElements(elementID: Int, dropWeight: Int): [SmashableElements]
+	Rewards(id: Int, LevelID: Int, MissionID: Int, RewardType: Int, value: Int, count: Int): [Rewards]
+	BehaviorTemplate(behaviorID: Int, templateID: BehaviorTemplateName, effectID: Int, effectHandle: String): [BehaviorTemplate]
+	SmashableChain(chainIndex: Int, chainLevel: Int, lootMatrixID: LootMatrix, rarityTableIndex: RarityTable, currencyIndex: Int, currencyLevel: Int, smashCount: Int, timeLimit: Int, chainStepID: Int): [SmashableChain]
+	Release_Version(ReleaseVersion: String, ReleaseDate: Int): [Release_Version]
+	WorldConfig(WorldConfigID: Int, pegravityvalue: Float, pebroadphaseworldsize: Float, pegameobjscalefactor: Float, character_rotation_speed: Float, character_walk_forward_speed: Float, character_walk_backward_speed: Float, character_walk_strafe_speed: Float, character_walk_strafe_forward_speed: Float, character_walk_strafe_backward_speed: Float, character_run_backward_speed: Float, character_run_strafe_speed: Float, character_run_strafe_forward_speed: Float, character_run_strafe_backward_speed: Float, global_cooldown: Float, characterGroundedTime: Float, characterGroundedSpeed: Float, globalImmunityTime: Float, character_max_slope: Float, defaultrespawntime: Float, mission_tooltip_timeout: Float, vendor_buy_multiplier: Float, pet_follow_radius: Float, character_eye_height: Float, flight_vertical_velocity: Float, flight_airspeed: Float, flight_fuel_ratio: Float, flight_max_airspeed: Float, fReputationPerVote: Float, nPropertyCloneLimit: Int, defaultHomespaceTemplate: Int, coins_lost_on_death_percent: Float, coins_lost_on_death_min: Int, coins_lost_on_death_max: Int, character_votes_per_day: Int, property_moderation_request_approval_cost: Int, property_moderation_request_review_cost: Int, propertyModRequestsAllowedSpike: Int, propertyModRequestsAllowedInterval: Int, propertyModRequestsAllowedTotal: Int, propertyModRequestsSpikeDuration: Int, propertyModRequestsIntervalDuration: Int, modelModerateOnCreate: Int, defaultPropertyMaxHeight: Float, reputationPerVoteCast: Float, reputationPerVoteReceived: Float, showcaseTopModelConsiderationBattles: Int, reputationPerBattlePromotion: Float, coins_lost_on_death_min_timeout: Float, coins_lost_on_death_max_timeout: Float, mail_base_fee: Int, mail_percent_attachment_fee: Float, propertyReputationDelay: Int, LevelCap: Int, LevelUpBehaviorEffect: String, CharacterVersion: Int, LevelCapCurrencyConversion: Int): [WorldConfig]
+	MissionTaskObjects(missionTask: MissionTasks, object: Objects): [MissionTaskObjects]
+	LanguageType(LanguageID: Int, LanguageDescription: String): [LanguageType]
+	CurrencyTable(currencyIndex: Int, npcminlevel: Int, minvalue: Int, maxvalue: Int, id: Int): [CurrencyTable]
+	ComponentsRegistry(id: Int, component_type: Int, component_id: Int): [ComponentsRegistry]
+	LootMatrix(ActivityRewards: [ActivityRewards!], ActivityRewards_LootMatrixIndex: [ActivityRewards!], DestructibleComponent: [DestructibleComponent!], DestructibleComponent_LootMatrixIndex: [DestructibleComponent!], LootMatrixIndex: LootMatrixIndex, LootTableIndex: LootTable, RarityTableIndex: Int, percent: Float, minToDrop: Int, maxToDrop: Int, id: Int, flagID: Int, gate_version: FeatureGating, PackageComponent: [PackageComponent!], PackageComponent_LootMatrixIndex: [PackageComponent!], SmashableChain: [SmashableChain!], SmashableChain_lootMatrixID: [SmashableChain!], SmashableComponent: [SmashableComponent!], SmashableComponent_LootMatrixIndex: [SmashableComponent!], VendorComponent: [VendorComponent!], VendorComponent_LootMatrixIndex: [VendorComponent!]): [LootMatrix]
+	CelebrationParameters(id: Int, animation: String, backgroundObject: Objects, duration: Float, subText: String, mainText: String, iconID: Icons, celeLeadIn: Float, celeLeadOut: Float, cameraPathLOT: Objects, pathNodeName: String, ambientR: Float, ambientG: Float, ambientB: Float, directionalR: Float, directionalG: Float, directionalB: Float, specularR: Float, specularG: Float, specularB: Float, lightPositionX: Float, lightPositionY: Float, lightPositionZ: Float, blendTime: Float, fogColorR: Float, fogColorG: Float, fogColorB: Float, musicCue: String, soundGUID: String, mixerProgram: String): [CelebrationParameters]
+	RarityTableIndex(RarityTable: [RarityTable!], RarityTable_RarityTableIndex: [RarityTable!], RarityTableIndex: Int): [RarityTableIndex]
+	ChoiceBuildComponent(id: Int, selections: String, imaginationOverride: Int): [ChoiceBuildComponent]
+	ZoneLoadingTips(id: Int, zoneid: ZoneTable, imagelocation: String, localize: Int, gate_version: FeatureGating, locStatus: Int, weight: Int, targetVersion: FeatureGating, tip1_loc: String, tip1_en_US: String, tip1_de_DE: String, tip1_en_GB: String, tip2_loc: String, tip2_en_US: String, tip2_de_DE: String, tip2_en_GB: String, title_loc: String, title_en_US: String, title_de_DE: String, title_en_GB: String): [ZoneLoadingTips]
+	FeatureGating(featureName: String, major: Int, current: Int, minor: Int, description: String, Activities: [Activities!], Activities_gate_version: [Activities!], ActivityText: [ActivityText!], ActivityText_gate_version: [ActivityText!], DeletionRestrictions: [DeletionRestrictions!], DeletionRestrictions_gate_version: [DeletionRestrictions!], Emotes: [Emotes!], Emotes_gate_version: [Emotes!], LootMatrix: [LootMatrix!], LootMatrix_gate_version: [LootMatrix!], MissionEmail: [MissionEmail!], MissionEmail_gate_version: [MissionEmail!], MissionNPCComponent: [MissionNPCComponent!], MissionNPCComponent_gate_version: [MissionNPCComponent!], Missions: [Missions!], Missions_gate_version: [Missions!], MissionTasks: [MissionTasks!], MissionTasks_gate_version: [MissionTasks!], MissionText: [MissionText!], MissionText_gate_version: [MissionText!], Objects: [Objects!], Objects_gate_version: [Objects!], PlayerStatistics: [PlayerStatistics!], PlayerStatistics_gate_version: [PlayerStatistics!], PropertyTemplate: [PropertyTemplate!], PropertyTemplate_gate_version: [PropertyTemplate!], RewardCodes: [RewardCodes!], RewardCodes_gate_version: [RewardCodes!], Preconditions: [Preconditions!], Preconditions_gate_version: [Preconditions!], SkillBehavior: [SkillBehavior!], SkillBehavior_gate_version: [SkillBehavior!], SpeedchatMenu: [SpeedchatMenu!], SpeedchatMenu_gate_version: [SpeedchatMenu!], UGBehaviorSounds: [UGBehaviorSounds!], UGBehaviorSounds_gate_version: [UGBehaviorSounds!], WhatsCoolItemSpotlight: [WhatsCoolItemSpotlight!], WhatsCoolItemSpotlight_gate_version: [WhatsCoolItemSpotlight!], WhatsCoolNewsAndTips: [WhatsCoolNewsAndTips!], WhatsCoolNewsAndTips_gate_version: [WhatsCoolNewsAndTips!], ZoneLoadingTips_gate_version: [ZoneLoadingTips!], ZoneLoadingTips_targetVersion: [ZoneLoadingTips!]): [FeatureGating]
+	ItemSetSkills(SkillSetID: Int, SkillID: SkillBehavior, SkillCastType: Int): [ItemSetSkills]
+	BehaviorTemplateName(templateID: Int, name: String, BehaviorTemplate: [BehaviorTemplate!], BehaviorTemplate_templateID: [BehaviorTemplate!]): [BehaviorTemplateName]
+	PackageComponent(id: Int, LootMatrixIndex: LootMatrix, packageType: Int): [PackageComponent]
+	ProximityTypes(id: Int, Name: String, Radius: Int, CollisionGroup: Int, PassiveChecks: Int, IconID: Icons, LoadOnClient: Int, LoadOnServer: Int): [ProximityTypes]
+	CurrencyDenominations(value: Int, objectid: Objects): [CurrencyDenominations]
+	Missions(MissionPrereqs_mission: [MissionPrereqs!], MissionPrereqs_prereqMission: [MissionPrereqs!], MissionTaskMissions: [MissionTaskMissions!], MissionTaskMissions_mission: [MissionTaskMissions!], CollectibleComponent: [CollectibleComponent!], CollectibleComponent_requirement_mission: [CollectibleComponent!], MissionEmail: [MissionEmail!], MissionEmail_missionID: [MissionEmail!], MissionNPCComponent: [MissionNPCComponent!], MissionNPCComponent_missionID: [MissionNPCComponent!], id: Int, defined_type: String, defined_subtype: String, UISortOrder: Int, offer_objectID: Objects, target_objectID: Objects, reward_currency: Int, LegoScore: Int, reward_reputation: Int, isChoiceReward: Int, reward_item1: Objects, reward_item1_count: Int, reward_item2: Objects, reward_item2_count: Int, reward_item3: Objects, reward_item3_count: Int, reward_item4: Objects, reward_item4_count: Int, reward_emote: Emotes, reward_emote2: Emotes, reward_emote3: Emotes, reward_emote4: Emotes, reward_maximagination: Int, reward_maxhealth: Int, reward_maxinventory: Int, reward_maxmodel: Int, reward_maxwidget: Int, reward_maxwallet: Int, repeatable: Int, reward_currency_repeatable: Int, reward_item1_repeatable: Objects, reward_item1_repeat_count: Int, reward_item2_repeatable: Objects, reward_item2_repeat_count: Int, reward_item3_repeatable: Objects, reward_item3_repeat_count: Int, reward_item4_repeatable: Objects, reward_item4_repeat_count: Int, time_limit: Int, isMission: Int, missionIconID: Icons, prereqMissionID: String, localize: Int, inMOTD: Int, cooldownTime: Int, isRandom: Int, randomPool: String, UIPrereqID: Int, gate_version: FeatureGating, HUDStates: String, locStatus: Int, reward_bankinventory: Int, name_loc: String, name_en_US: String, name_de_DE: String, name_en_GB: String, MissionTasks: [MissionTasks!], MissionTasks_id: [MissionTasks!], MissionText: [MissionText!], MissionText_id: [MissionText!]): [Missions]
+	ZoneTable(Activities: [Activities!], Activities_instanceMapID: [Activities!], LUPZoneIDs: [LUPZoneIDs!], LUPZoneIDs_zoneID: [LUPZoneIDs!], PropertyEntranceComponent: [PropertyEntranceComponent!], PropertyEntranceComponent_mapID: [PropertyEntranceComponent!], PropertyTemplate_mapID: [PropertyTemplate!], PropertyTemplate_vendorMapID: [PropertyTemplate!], RocketLaunchpadControlComponent_targetZone: [RocketLaunchpadControlComponent!], RocketLaunchpadControlComponent_defaultZoneID: [RocketLaunchpadControlComponent!], ZoneLoadingTips: [ZoneLoadingTips!], ZoneLoadingTips_zoneid: [ZoneLoadingTips!], ZoneSummary: [ZoneSummary!], ZoneSummary_zoneID: [ZoneSummary!], zoneID: Int, locStatus: Int, zoneName: String, scriptID: Int, ghostdistance_min: Float, ghostdistance: Float, population_soft_cap: Int, population_hard_cap: Int, DisplayDescription: String, mapFolder: String, smashableMinDistance: Float, smashableMaxDistance: Float, mixerProgram: String, clientPhysicsFramerate: String, serverPhysicsFramerate: String, zoneControlTemplate: Int, widthInChunks: Int, heightInChunks: Int, petsAllowed: Int, localize: Int, fZoneWeight: Float, thumbnail: String, PlayerLoseCoinsOnDeath: Int, disableSaveLoc: Int, teamRadius: Float, gate_version: FeatureGating, mountsAllowed: Int, DisplayDescription_loc: String, DisplayDescription_en_US: String, DisplayDescription_de_DE: String, DisplayDescription_en_GB: String, summary_loc: String, summary_en_US: String, summary_de_DE: String, summary_en_GB: String): [ZoneTable]
+	DeletionRestrictions(id: Int, restricted: Int, ids: String, checkType: Int, localize: Int, locStatus: Int, gate_version: FeatureGating, failureReason_loc: String, failureReason_en_US: String, failureReason_de_DE: String, failureReason_en_GB: String): [DeletionRestrictions]
+	InventoryComponent(id: Int, itemid: Objects, count: Int, equip: Int): [InventoryComponent]
+	ExhibitComponent(id: Int, length: Float, width: Float, height: Float, offsetX: Float, offsetY: Float, offsetZ: Float, fReputationSizeMultiplier: Float, fImaginationCost: Float): [ExhibitComponent]
+	ZoneSummary(zoneID: ZoneTable, type: Int, value: Int, _uniqueID: Int): [ZoneSummary]
+	ItemEggData(id: Int, chassie_type_id: Int): [ItemEggData]
+	mapAssetType(id: Int, label: String, pathdir: String, typelabel: String): [mapAssetType]
+	MinifigComponent(id: Int, head: Int, chest: Int, legs: Int, hairstyle: Int, haircolor: Int, chestdecal: Int, headcolor: Int, lefthand: Int, righthand: Int, eyebrowstyle: MinifigDecals_Eyebrows, eyesstyle: MinifigDecals_Eyes, mouthstyle: MinifigDecals_Mouths): [MinifigComponent]
+	LUPZoneIDs(zoneID: ZoneTable): [LUPZoneIDs]
+	ItemComponent(id: Int, equipLocation: String, baseValue: Int, isKitPiece: Int, rarity: Int, itemType: mapItemTypes, itemInfo: Int, inLootTable: Int, inVendor: Int, isUnique: Int, isBOP: Int, isBOE: Int, reqFlagID: Int, reqSpecialtyID: Int, reqSpecRank: Int, reqAchievementID: Int, stackSize: Int, color1: Int, decal: Int, offsetGroupID: Int, buildTypes: Int, reqPrecondition: String, animationFlag: Int, equipEffects: Int, readyForQA: Int, itemRating: Int, isTwoHanded: Int, minNumRequired: Int, delResIndex: Int, currencyLOT: Objects, altCurrencyCost: Int, subItems: String, audioEventUse: String, noEquipAnimation: Int, commendationLOT: Objects, commendationCost: Int, audioEquipMetaEventSet: String, currencyCosts: String, ingredientInfo: String, locStatus: Int, forgeType: Int, SellMultiplier: Float, ingredientInfo_loc: String, ingredientInfo_en_US: String, ingredientInfo_de_DE: String, ingredientInfo_en_GB: String, Objects: [Objects!], Objects_itemComponent: [Objects!]): [ItemComponent]
+	MovementAIComponent(id: Int, MovementType: String, WanderChance: Float, WanderDelayMin: Float, WanderDelayMax: Float, WanderSpeed: Float, WanderRadius: Float, attachedPath: String): [MovementAIComponent]
+	mapRenderEffects(id: Int, gameID: Int, description: String): [mapRenderEffects]
+	RebuildSections(id: Int, rebuildID: Int, objectID: Objects, offset_x: Float, offset_y: Float, offset_z: Float, fall_angle_x: Float, fall_angle_y: Float, fall_angle_z: Float, fall_height: Float, requires_list: String, size: Int, bPlaced: Int): [RebuildSections]
+	PlayerStatistics(statID: Int, sortOrder: Int, locStatus: Int, gate_version: FeatureGating, statStr_loc: String, statStr_en_US: String, statStr_de_DE: String, statStr_en_GB: String): [PlayerStatistics]
+}

@@ -99,6 +99,10 @@ export class LuCoreDataService {
     return this.cache.get(url);
   }
 
+  queryGraphQl<T>(query: string): Observable<T> {
+    return this.get("v0/graphql/"+encodeURIComponent(query));
+  }
+
   querySql(query: string): Observable<any[]> {
     return this.get("v0/query/"+encodeURIComponent(query), "text", map(this.parseCsv));
   }

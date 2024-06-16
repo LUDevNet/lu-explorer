@@ -9,7 +9,8 @@
     "gh-build": "ng build --configuration production --base-href=/lu-explorer/",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "private": true,
   "dependencies": {
@@ -21,10 +22,10 @@
     "@angular/platform-browser": "15.0.4",
     "@angular/platform-browser-dynamic": "15.0.4",
     "@angular/router": "15.0.4",
+    "@types/leaflet": "^1.7.1",
     "core-js": "^2.6.12",
     "flexsearch": "^0.7.21",
     "leaflet": "^1.7.1",
-    "@types/leaflet": "^1.7.1",
     "rxjs": "^6.6.7",
     "tslib": "^2.2.0",
     "typeface-nunito": "0.0.72",
@@ -37,6 +38,8 @@
     "@angular/cli": "15.0.4",
     "@angular/compiler-cli": "15.0.4",
     "@angular/language-service": "15.0.4",
+    "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/typescript-apollo-angular": "4.0.0",
     "@types/jasmine": "^3.6.9",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.20.7",
@@ -51,6 +54,6 @@
     "protractor": "~7.0.0",
     "ts-node": "~4.1.0",
     "tslint": "~6.1.0",
-    "typescript": "4.8.4"
+    "typescript": "^4.8.4"
   }
 }
