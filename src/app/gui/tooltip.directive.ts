@@ -33,7 +33,7 @@ export class TooltipDirective {
 
   @HostListener('mouseenter')
   mouseenter() {
-    if (this.componentRef) return;
+    if (this.componentRef || this.content === null) return;
     this.componentRef = //
       this.getRootViewContainerRef().createComponent(this.componentType, {
         index: 0,
@@ -54,11 +54,6 @@ export class TooltipDirective {
   }
 
   generateNgContent() {
-    if (this.content === null) {
-      const element = this.renderer.createText("???");
-      return [[element]];
-    }
-
     if (typeof this.content === 'string') {
       const element = this.renderer.createText(this.content);
       return [[element]];

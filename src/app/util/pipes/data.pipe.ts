@@ -114,7 +114,7 @@ export class ElementPipe implements PipeTransform {
 
 @Pipe({ name: 'default' })
 export class DefaultPipe implements PipeTransform {
-  transform(value: Object, arg: string): any {
+  transform<T>(value: T, arg: T): T {
     return value == null ? arg : value;
   }
 }

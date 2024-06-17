@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FetchIconDirective } from './icon/fetchIcon.directive';
+import { FetchItemDirective } from './item/fetchItem.directive';
+import { FetchObjectDirective } from './object/fetchObject.directive';
 import { IconDirective } from './icon/icon.directive';
 import { ItemDirective } from './item/item.directive';
 import { ItemSetComponent } from './item-set/item-set.component';
@@ -41,6 +44,9 @@ import { ItemSetListComponent } from './item-set-list/item-set-list.component';
 const COMPONENTS = [
   CoinsComponent,
   CurrencyComponent,
+  FetchIconDirective,
+  FetchItemDirective,
+  FetchObjectDirective,
   IconDirective,
   ItemDirective,
   ItemSetComponent,
