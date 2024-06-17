@@ -1,0 +1,7 @@
+fragment missionPrereq on MissionPrereqs {
+	andGroup
+	prereqMissionState
+	prereqMission {
+		...mission
+	}
+}

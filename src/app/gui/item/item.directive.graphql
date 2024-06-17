@@ -1,0 +1,6 @@
+fragment item on Objects {
+	id
+	renderComponent {
+		icon_asset
+	}
+}

@@ -1,0 +1,18 @@
+fragment mission on Missions {
+	id
+	isMission
+	UISortOrder
+	name_loc
+	MissionText {
+		in_progress_loc
+		description_loc
+	}
+	MissionTasks {
+		largeTaskIconID {
+			IconPath
+		}
+	}
+	missionIconID {
+		IconPath
+	}
+}

@@ -1,0 +1,7 @@
+fragment object on Objects {
+	id
+	displayName
+	name
+	description
+	_internalNotes
+}

@@ -1,0 +1,4 @@
+fragment icon on Icons {
+	IconName
+	IconPath
+}

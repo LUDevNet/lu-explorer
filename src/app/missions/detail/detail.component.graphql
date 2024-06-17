@@ -1,0 +1,111 @@
+query MissionDetail($id: Int) {
+	Missions(id: $id) {
+		name_loc
+		defined_type
+		defined_subtype
+		locStatus
+		isMission
+		gate_version {
+			featureName
+		}
+		repeatable
+		isRandom
+		isChoiceReward
+		inMOTD
+		LegoScore
+		UISortOrder
+		offer_objectID {
+			...object
+		}
+		target_objectID {
+			...object
+		}
+		repeatable
+		reward_currency
+		reward_currency_repeatable
+		reward_item1 {
+			...item
+		}
+		reward_item2 {
+			...item
+		}
+		reward_item3 {
+			...item
+		}
+		reward_item4 {
+			...item
+		}
+		reward_item1_repeatable {
+			...item
+		}
+		reward_item2_repeatable {
+			...item
+		}
+		reward_item3_repeatable {
+			...item
+		}
+		reward_item4_repeatable {
+			...item
+		}
+		reward_item1_count
+		reward_item2_count
+		reward_item3_count
+		reward_item4_count
+		reward_item1_repeat_count
+		reward_item2_repeat_count
+		reward_item3_repeat_count
+		reward_item4_repeat_count
+		reward_emote {
+			id
+		}
+		reward_emote2 {
+			id
+		}
+		reward_emote3 {
+			id
+		}
+		reward_emote4 {
+			id
+		}
+		reward_maxhealth
+		reward_maximagination
+		reward_maxinventory
+		reward_maxmodel
+		reward_maxwidget
+		reward_maxwallet
+		reward_reputation
+		reward_bankinventory
+		missionIconID {
+			...icon
+		}
+		MissionTasks {
+			...missionTask
+		}
+		MissionPrereqs_mission {
+			...missionPrereq
+		}
+		MissionPrereqs_prereqMission {
+			mission {
+				...mission
+			}
+		}
+	}
+	MissionText(id: $id) {
+		accept_chat_bubble_loc
+		chat_state_1_loc
+		chat_state_2_loc
+		chat_state_3_loc
+		chat_state_3_turnin_loc
+		chat_state_4_loc
+		chat_state_4_turnin_loc
+		completion_succeed_tip_loc
+		description_loc
+		in_progress_loc
+		offer_loc
+		offer_repeatable_loc
+		ready_to_complete_loc
+		turnInIconID {
+			...icon
+		}
+	}
+}

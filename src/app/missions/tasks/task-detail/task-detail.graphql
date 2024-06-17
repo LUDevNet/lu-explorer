@@ -1,0 +1,32 @@
+fragment missionTask on MissionTasks {
+	taskType
+	target
+	targetGroup
+	targetValue
+	taskParam1
+	uid
+	gate_version {
+    featureName
+	}
+	description_loc
+	IconID {
+		...icon
+	}
+	MissionTaskObjects {
+		object {
+			id
+			displayName
+			name
+			description
+			_internalNotes
+			renderComponent {
+				icon_asset
+			}
+		}
+	}
+	MissionTaskMissions {
+		mission {
+			...mission
+		}
+	}
+}
