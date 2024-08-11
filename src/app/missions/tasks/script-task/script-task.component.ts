@@ -1,18 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DB_MissionTasks } from '../../../../defs/cdclient';
+import { Component, Input } from '@angular/core';
+import { MissionTaskFragment } from "generated/graphql";
 
 @Component({
   selector: 'app-script-task',
   templateUrl: './script-task.component.html',
   styleUrls: ['./script-task.component.css']
 })
-export class ScriptTaskComponent implements OnInit {
-
-  @Input() task: DB_MissionTasks;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class ScriptTaskComponent {
+  @Input() task: MissionTaskFragment;
 }

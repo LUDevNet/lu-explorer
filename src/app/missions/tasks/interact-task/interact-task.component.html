@@ -6,8 +6,8 @@ The player needs to interact <b luxTooltip="targetValue">{{task.targetValue}}</b
 <ng-template #singleType>
   of the following type:
 </ng-template>
-<a [luxFetchObject]="task.target"></a>
-<ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-  !-->, <a [luxFetchObject]="target | num"></a>
-</ng-container><!--
-!-->.
+<ul class="inline-ul">
+  <li *ngFor="let obj of task.MissionTaskObjects">
+    <a [luxObject]="obj.object"></a>
+  </li>
+</ul>.

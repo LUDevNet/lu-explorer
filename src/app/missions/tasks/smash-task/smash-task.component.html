@@ -7,16 +7,8 @@ object<ng-container *ngIf="task.targetValue > 1">s</ng-container>
 <ng-template #singleType>
   of the following type:
 </ng-template>
-<ng-container *ngIf="task.targetGroup && task.targetGroup.length > 70; else objComponents">
-  <a routerLink="/objects/{{task.target}}">{{task.target}}</a>
-  <ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-  -->, <a routerLink="/objects/{{target}}">{{target}}</a>
-  </ng-container>
-</ng-container>
-<ng-template #objComponents >
-  <a [luxFetchObject]="task.target"></a>
-  <ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-    -->, <a [luxFetchObject]="target | num"></a>
-  </ng-container>
-</ng-template><!--
--->.
+<ul class="inline-ul">
+  <li *ngFor="let obj of task.MissionTaskObjects">
+    <a [luxObject]="obj.object"></a>
+  </li>
+</ul>.
