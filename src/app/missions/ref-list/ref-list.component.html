@@ -1,22 +1,29 @@
-<span *ngIf="ref.type == 'lit'">
-  <lux-mission [luxFetch]="ref.value"></lux-mission>
-</span>
-<span *ngIf="ref.type == ':'">
-  <lux-mission [luxFetch]="ref.value.id" [status]="ref.value.status"></lux-mission>
-</span>
-<div *ngIf="ref.type == '|'">
-  <p>Any of</p>
-  <ul>
-    <li *ngFor="let item of ref.value">
-      <mission-ref-list [ref]="item"></mission-ref-list>
-    </li>
-  </ul>
+<div *ngIf="prereqs | group:'andGroup' | keys; let andGroups">
+  <ng-container *ngIf="andGroups.length == 1">
+    <ng-container *ngTemplateOutlet="andInner; context: {'andGroup': andGroups[0]}"></ng-container>
+  </ng-container>
+  <ng-container *ngIf="andGroups.length > 1">
+    <p>All of</p>
+    <ul>
+      <li *ngFor="let andGroup of andGroups">
+        <ng-container *ngTemplateOutlet="andInner; context: {'andGroup': andGroup}"></ng-container>
+      </li>
+    </ul>
+  </ng-container>
 </div>
-<div *ngIf="ref.type == ','">
-  <p>All of</p>
-  <ul>
-    <li *ngFor="let item of ref.value">
-      <mission-ref-list [ref]="item"></mission-ref-list>
-    </li>
-  </ul>
-</div>
+
+<ng-template #andInner let-andGroup="andGroup">
+  <div>
+    <ng-container *ngIf="andGroup.value.length == 1">
+      <lux-mission [mission]="andGroup.value[0].prereqMission" [status]="andGroup.value[0].prereqMissionState | default:4"></lux-mission>
+    </ng-container>
+    <ng-container *ngIf="andGroup.value.length > 1">
+      <p>Any of</p>
+      <ul>
+        <li *ngFor="let prereq of andGroup.value">
+          <lux-mission [mission]="prereq.prereqMission" [status]="prereq.prereqMissionState | default:4"></lux-mission>
+        </li>
+      </ul>
+    </ng-container>
+  </div>
+</ng-template>

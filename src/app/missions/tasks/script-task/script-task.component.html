@@ -1,11 +1,13 @@
 <h4>{{task.uid}}: Script Task (1)</h4>
 This task is controlled by a script!
 <ul>
-  <li>Target<ng-container *ngIf="task.targetGroup">s</ng-container>:
-    <a [luxFetchObject]="task.target"></a><!--
-    --><ng-container *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []"><!--
-    -->, <a [luxFetchObject]="target | num"></a>
-    </ng-container>
+  <li>
+    Target<ng-container *ngIf="task.MissionTaskObjects.length > 1">s</ng-container>:
+    <ul class="inline-ul">
+      <li *ngFor="let obj of task.MissionTaskObjects">
+        <a [luxObject]="obj.object"></a>
+      </li>
+    </ul>
   </li>
   <li>Value: {{task.targetValue}}</li>
   <li *ngIf="task.taskParam1 !== null">Param: {{task.taskParam1}}</li>

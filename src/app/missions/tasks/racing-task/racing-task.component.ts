@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DB_MissionTasks } from '../../../../defs/cdclient';
+import { MissionFragment, MissionTaskFragment } from "generated/graphql";
 
 @Component({
   selector: 'app-racing-task',
@@ -7,14 +7,14 @@ import { DB_MissionTasks } from '../../../../defs/cdclient';
   styleUrls: ['./racing-task.component.css']
 })
 export class RacingTaskComponent implements OnInit {
-
-  @Input() task: DB_MissionTasks;
+  @Input() task: MissionTaskFragment;
   targetList: number[] = [];
-
-  constructor() { }
 
   ngOnInit() {
     this.targetList = this.task.targetGroup ? this.task.targetGroup.split(',').map(Number) : [];
   }
 
+  mapMissions(missions: {mission?: MissionFragment}[]) : MissionFragment[] {
+    return missions.map(x => x.mission);
+  }
 }

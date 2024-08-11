@@ -1,8 +1,10 @@
 <section class="mission-task" [ngSwitch]="task.taskType">
   <div class="task-icon">
-    <img [luxFetchIcon]="task.IconID" style="max-width: 64px">
+    <img style="max-width: 64px"
+      *ngIf="task.IconID; let x"
+      [luxIcon]="x">
   </div>
-  <lux-gate-version-tag [gate_version]="task.gate_version"></lux-gate-version-tag>
+  <lux-gate-version-tag [gate_version]="task.gate_version?.featureName"></lux-gate-version-tag>
   <div class="task-description">
     <app-smash-task *ngSwitchCase="0" [task]="task"></app-smash-task>
     <app-script-task *ngSwitchCase="1" [task]="task"></app-script-task>
@@ -24,9 +26,7 @@
     <app-flag-task *ngSwitchCase="24" [task]="task"></app-flag-task>
     <app-property-task *ngSwitchCase="30" [task]="task"></app-property-task>
     <app-donation-task *ngSwitchCase="32" [task]="task"></app-donation-task>
-    <ng-container *ngIf="task.$localizations | async; let loc">
-      <blockquote *ngIf="loc.description">{{loc.description}}</blockquote>
-    </ng-container>
+    <blockquote *ngIf="task.description_loc">{{task.description_loc}}</blockquote>
   </div>
   <div style="clear: left;"></div>
 </section>

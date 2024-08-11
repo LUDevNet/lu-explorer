@@ -1,21 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DB_MissionTasks } from '../../../../defs/cdclient';
+import { Component, Input } from '@angular/core';
+import { MissionFragment, MissionTaskFragment } from "generated/graphql";
 
 @Component({
   selector: 'app-mission-task',
   templateUrl: './mission-task.component.html',
   styleUrls: ['./mission-task.component.css']
 })
-export class MissionTaskComponent implements OnInit {
+export class MissionTaskComponent {
+  @Input() task: MissionTaskFragment;
 
-  @Input() task: DB_MissionTasks;
-  missionList: number[] = [];
-
-  constructor() { }
-
-  ngOnInit() {
-    this.missionList = this.task.targetGroup ? this.task.targetGroup.split(',').map(Number) : [];
-    this.missionList.push(this.task.target);
+  mapMissions(missions: {mission?: MissionFragment}[]) : MissionFragment[] {
+    return missions.map(x => x.mission);
   }
-
 }

@@ -1,18 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DB_MissionTasks } from '../../../../defs/cdclient';
+import { Component, Input } from '@angular/core';
+import { MissionTaskFragment } from "generated/graphql";
 
 @Component({
   selector: 'app-property-task',
   templateUrl: './property-task.component.html',
   styleUrls: ['./property-task.component.css']
 })
-export class PropertyTaskComponent implements OnInit {
-
-  @Input() task: DB_MissionTasks;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class PropertyTaskComponent {
+  @Input() task: MissionTaskFragment;
 }

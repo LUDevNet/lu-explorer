@@ -1,18 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DB_MissionTasks } from '../../../../defs/cdclient';
+import { Component, Input } from '@angular/core';
+import { MissionTaskFragment } from "generated/graphql";
 
 @Component({
   selector: 'app-minigame-task',
   templateUrl: './minigame-task.component.html',
   styleUrls: ['./minigame-task.component.css']
 })
-export class MinigameTaskComponent implements OnInit {
-
-  @Input() task: DB_MissionTasks;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class MinigameTaskComponent {
+  @Input() task: MissionTaskFragment;
 }

@@ -1,19 +1,16 @@
 <h4>{{task.uid}}: Gather Task (11)</h4>
 <p>
-  <ng-container *ngIf="task.targetGroup; else singleItem">
+  <ng-container *ngIf="task.MissionTaskObjects.length > 1; else singleItem">
     The player needs to obtain <b>any {{task.targetValue}}</b> of the following items:
     <ul class="item-list">
-      <li>
-        <lux-slot [luxFetchItem]="task.target"></lux-slot>
-      </li>
-      <li *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
-        <lux-slot [luxFetchItem]="target | num"></lux-slot>
+      <li *ngFor="let x of task.MissionTaskObjects">
+        <lux-slot [luxItem]="x.object"></lux-slot>
       </li>
     </ul>
   </ng-container>
   <ng-template #singleItem>
-    The player needs to obtain:
-    <lux-slot class="single-item" [luxFetchItem]="task.target" [count]="task.targetValue"></lux-slot>
+    The player needs to obtain:<br>
+    <lux-slot [luxItem]="task.MissionTaskObjects[0].object" [count]="task.targetValue"></lux-slot>
   </ng-template>
 </p>
 <lux-simple-flag name="keepItem" [value]="(task.taskParam1 | bitset:1) && (task.taskParam1 | bitset:2 | not)" trueTitle="The item is not consumed on mission turnin." falseTitle="The item is consumed on mission turnin."></lux-simple-flag>

@@ -15,11 +15,11 @@
   </span>
   <span *ngSwitchCase="4">
     complete <b luxTooltip="targetValue">any {{task.targetValue}}</b> of the following missions:
-    <lux-mission-list [ids]="targetList"></lux-mission-list>
+    <lux-mission-list [missions]="mapMissions(task.MissionTaskMissions)"></lux-mission-list>
   </span>
   <span *ngSwitchCase="5">
     complete <b luxTooltip="targetValue">any {{task.targetValue}}</b> of the following missions:
-    <lux-mission-list [ids]="targetList"></lux-mission-list>
+    <lux-mission-list [missions]="mapMissions(task.MissionTaskMissions)"></lux-mission-list>
   </span>
   <span *ngSwitchCase="6">
     swap out every module on their car in a single modular build session (excluding chassis).
@@ -61,8 +61,8 @@
   <span *ngSwitchCase="17">
     smash <b luxTooltip="targetValue">{{task.targetValue}}</b> of the object(s)
     <ul class="inline-ul">
-      <li *ngFor="let target of task.targetGroup ? task.targetGroup.split(',') : []">
-        <a [luxFetchObject]="target | num"></a>
+      <li *ngFor="let obj of task.MissionTaskObjects">
+        <a [luxObject]="obj.object"></a>
       </li>
     </ul>
   </span>

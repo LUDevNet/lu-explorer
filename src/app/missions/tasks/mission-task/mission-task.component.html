@@ -1,9 +1,9 @@
 <h4>{{task.uid}}: MissionComplete Task (16)</h4>
 The player needs to complete
-<ng-container *ngIf="task.targetGroup; else singleMission">
+<ng-container *ngIf="task.MissionTaskMissions.length > 1; else singleMission">
   any <b luxTooltip="targetValue">{{task.targetValue}}</b> of the following missions:
-  <lux-mission-list [ids]="missionList"></lux-mission-list>
 </ng-container>
 <ng-template #singleMission>
-the mission <br><lux-mission [luxFetch]="task.target"></lux-mission>
+  the mission
 </ng-template>
+<lux-mission-list [missions]="mapMissions(task.MissionTaskMissions)"></lux-mission-list>

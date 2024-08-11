@@ -1,18 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DB_MissionTasks } from '../../../../defs/cdclient';
+import { Component, Input } from '@angular/core';
+import { MissionTaskFragment } from "generated/graphql";
 
 @Component({
   selector: 'app-reputation-task',
   templateUrl: './reputation-task.component.html',
   styleUrls: ['./reputation-task.component.css']
 })
-export class ReputationTaskComponent implements OnInit {
-
-  @Input() task: DB_MissionTasks;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class ReputationTaskComponent {
+  @Input() task: MissionTaskFragment;
 }
